@@ -1,10 +1,29 @@
-import React from "react"
+import React, {useState} from "react"
 import styled from "styled-components"
+import PricingInput from "./PricingInput"
 
-const Modal = () => {
+
+const Modal = (props) => {
+ // 토글
+ const [toggle, setToggle] = useState(true)
+
+ // 토글 핸들러
+ const toggleBtnHandle = () => {
+   setToggle(!toggle)
+ }
+
+ const handleModal = () => {
+   props.setModalOn(false)
+ }
+
   return (
     <Background>
       <Content>
+        <button onClick={handleModal}>모달끄기</button>
+        <button>가격책정</button>
+        <button>상품등록</button>
+        <button>이의제기</button>
+        <PricingInput/>
       </Content>
     </Background>
   )
