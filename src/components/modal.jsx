@@ -20,7 +20,6 @@ const Modal = (props) => {
     <Background>
       <Content>
         <button onClick={handleModal}>모달끄기</button>
-        <button>가격책정</button>
         <button>상품등록</button>
         <button>이의제기</button>
         <PricingInput/>
