@@ -1,15 +1,17 @@
-import React from "react";
+import React, { useState } from "react";
 import { useDispatch } from "react-redux";
 import styled from "styled-components";
-import { __SignUp } from "../redux/modules/LoginSlice";
+import { __SignUp, __emailCheck } from "../redux/modules/LoginSlice";
 import { useNavigate } from "react-router-dom";
 import useInput from "../hook/useInput";
 
 const SignUp = () => {
   const dispatch = useDispatch();
   const navigate = useNavigate();
+  const [emailCheckTF, setEmailCheckTF] = useState(false);
   const initialstate = {
     email: "",
+    emailCheck: "",
     nickname: "",
     password: "",
     passwordCheck: "",
@@ -17,6 +19,7 @@ const SignUp = () => {
 
   //커스텀훅 useInput 사용
   const [input, setInput, changeInputHandler] = useInput(initialstate);
+  const emailCheckData = localStorage.getItem("emailCheckData");
 
   const SubmitHandler = (e) => {
     e.preventDefault();
@@ -28,6 +31,11 @@ const SignUp = () => {
     ) {
       return alert("입력을 확인하세요.");
     }
+    if (emailCheckTF === true) {
+      if (input.emailCheck !== emailCheckData) {
+        return alert("인증번호가 일치하지 않습니다.");
+      }
+    }
     if (input.password !== input.passwordCheck) {
       return alert("비밀번호가 일치하지 않습니다.");
     }
@@ -35,23 +43,42 @@ const SignUp = () => {
     setInput(initialstate);
   };
 
+  const emailCheckHandler = () => {
+    dispatch(__emailCheck(input.email));
+    setEmailCheckTF(true);
+  };
+
   return (
     <StWrapper>
       <StSignupBox>
-        <StImgBox />
-        <StInputBox
-          type="text"
-          name="email"
-          value={input.email}
-          onChange={changeInputHandler}
-          placeholder="ID"
-        />
+        <Div>
+          <StInputBox2
+            type="text"
+            name="email"
+            value={input.email}
+            onChange={changeInputHandler}
+            placeholder="Email"
+          />
+          <StInputButton onClick={emailCheckHandler}>
+            인증번호 발송
+          </StInputButton>
+        </Div>
+        {emailCheckTF && (
+          <StInputBox
+            type="text"
+            name="emailCheck"
+            value={input.emailCheck}
+            onChange={changeInputHandler}
+            placeholder="이메일 메일인증"
+          />
+        )}
+
         <StInputBox
           type="text"
           name="nickname"
           value={input.nickname}
           onChange={changeInputHandler}
-          placeholder="사용자 이름"
+          placeholder="Nickname"
         />
 
         <StInputBox
@@ -59,16 +86,16 @@ const SignUp = () => {
           name="password"
           value={input.password}
           onChange={changeInputHandler}
-          placeholder="비밀번호"
+          placeholder="Password"
         />
         <StInputBox
           type="text"
           name="passwordCheck"
           value={input.passwordCheck}
           onChange={changeInputHandler}
-          placeholder="비밀번호확인"
+          placeholder="PasswordCheck"
         />
-        <StButton onClick={SubmitHandler}>가입</StButton>
+        <StButton onClick={SubmitHandler}>회원가입</StButton>
 
         <StLoginBox>
           <h5>계정이 있으신가요?</h5>
@@ -108,12 +135,35 @@ const StSignupBox = styled.div`
   flex-direction: column;
 `;
 
-const StImgBox = styled.div`
-  background-image: url("https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcQ4jKAVNgwwCGBxuMlIQEeiCrNIZm2JA-D_-g&usqp=CAU");
-  background-size: 100% 100%;
-  height: 130px;
-  width: 75%;
-  margin-bottom: 50px;
+const Div = styled.div`
+  width: 84%;
+  display: flex;
+  justify-content: space-evenly;
+`;
+const StInputBox2 = styled.input`
+  background-color: #fafafa;
+  border: 1px solid #dbdbdb;
+  border-radius: 5px;
+  &:focus,
+  &:active {
+    outline: none;
+  }
+  width: 40%;
+  height: 40px;
+  margin-top: 10px;
+  padding-left: 10px;
+`;
+const StInputButton = styled.button`
+  background-color: #fafafa;
+  border: 1px solid #dbdbdb;
+  border-radius: 5px;
+  &:focus,
+  &:active {
+    outline: none;
+  }
+  width: 30%;
+  height: 40px;
+  margin-top: 10px;
 `;
 
 const StInputBox = styled.input`

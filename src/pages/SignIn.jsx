@@ -4,6 +4,7 @@ import { __Signin } from "../redux/modules/LoginSlice";
 import { useNavigate } from "react-router-dom";
 import styled from "styled-components";
 import useInput from "../hook/useInput";
+import KakaoLogin from "../components/KakaoLogin";
 
 const SignIn = () => {
   const initialState = {
@@ -30,12 +31,11 @@ const SignIn = () => {
     <StWrapper>
       <StSignupBox>
         <StLoginBox>
-          <StImgBox />
           <StInputBox
             type="text"
             name="email"
             onChange={ChangeInputHandler}
-            placeholder="email"
+            placeholder="EMAIL"
             value={input.email}
           />
           <StInputBox
@@ -46,14 +46,19 @@ const SignIn = () => {
             value={input.password}
           />
           <StButton onClick={onSubmitHandler}>로그인</StButton>
-          계정이 없으신가요?
-          <StSignupBox
-            onClick={() => {
-              navigate("/signup");
-            }}
-          >
-            가입하기
-          </StSignupBox>
+          <br />
+          <div>
+            계정이 없으신가요?
+            <text
+              onClick={() => {
+                navigate("/signup");
+              }}
+            >
+              가입하기
+            </text>
+          </div>
+          <br />
+          <KakaoLogin />
         </StLoginBox>
       </StSignupBox>
     </StWrapper>
@@ -83,19 +88,11 @@ const StLoginBox = styled.div`
   flex-direction: column;
 `;
 
-const StImgBox = styled.div`
-  width: 60%;
-  background-image: url("https://blog.kakaocdn.net/dn/SjvFN/btreg3CYQb2/3uu6ofxOgBcoTDzEU1s6q0/img.png");
-  background-size: 100% 100%;
-  height: 230px;
-`;
-
 const StSignupBox = styled.div`
   width: 400px;
   margin-top: 30px;
   height: 10vh;
   background-color: white;
-  border-top: 1px solid #bababa;
   display: flex;
   justify-content: center;
   text-align: center;
