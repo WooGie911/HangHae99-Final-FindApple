@@ -1,8 +1,11 @@
 import React from 'react'
+import Header from "../components/Header"
 
 const ObjectionUpdate = () => {
   return (
-    <div>ObjectionUpdate</div>
+    <div>
+      <Header/>
+      ObjectionUpdate</div>
   )
 }
 

@@ -5,6 +5,7 @@ import useImgUpload from "../hook/useImageUpload";
 import { useDispatch } from 'react-redux';
 import styled from "styled-components"
 import photoIMG from "../assets/photoIMG.png"
+import Header from "../components/Header"
 
 
 const MypageUpdate = () => {
@@ -44,6 +45,7 @@ const MypageUpdate = () => {
 
   return (
     <div>
+      <Header/>
       <h1>회원 정보 수정</h1>
       <label htmlFor="imgFile">
             <input
