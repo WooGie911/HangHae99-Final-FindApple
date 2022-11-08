@@ -13,6 +13,7 @@ import ObjectionDetail from "../pages/ObjectionDetail";
 import Mypage from "../pages/Mypage";
 import MypageUpdate from "../pages/MypageUpdate";
 import Main from "../pages/Main";
+import Redirect from "../components/Redirect";
 
 const Router = () => {
   return (
@@ -56,6 +57,11 @@ const Router = () => {
 
         {/* main 페이지 이동하기 */}
         <Route path="/" element={<Main />} />
+
+        <Route
+          path="https://localhost:3000/kakaoLogin"
+          element={<Redirect />}
+        />
       </Routes>
     </BrowserRouter>
   );
