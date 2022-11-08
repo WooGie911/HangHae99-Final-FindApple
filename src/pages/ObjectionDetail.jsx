@@ -1,8 +1,11 @@
 import React from 'react'
+import Header from "../components/Header"
 
 const ObjectionDetail = () => {
   return (
-    <div>ObjectionDetail</div>
+    <div>
+      <Header/>
+      ObjectionDetail</div>
   )
 }
 

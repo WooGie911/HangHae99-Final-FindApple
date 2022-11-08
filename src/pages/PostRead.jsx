@@ -1,8 +1,11 @@
 import React from 'react'
+import Header from "../components/Header"
 
 const PostRead = () => {
   return (
-    <div>PostRead</div>
+    <div>
+      <Header/>
+      PostRead</div>
   )
 }
 

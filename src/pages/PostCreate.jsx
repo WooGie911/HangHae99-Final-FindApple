@@ -1,8 +1,11 @@
 import React from 'react'
+import Header from "../components/Header"
 
 const PostCreate = () => {
   return (
-    <div>PostCreate</div>
+    <div>
+      <Header/>
+      PostCreate</div>
   )
 }
 
