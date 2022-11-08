@@ -1,7 +1,9 @@
-import React from "react";
+import React from 'react'
 
 const MypageUpdate = () => {
-  return <div>MypageUpdate</div>;
-};
+  return (
+    <div>MypageUpdate</div>
+  )
+}
 
-export default MypageUpdate;
+export default MypageUpdate

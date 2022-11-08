@@ -1,7 +1,9 @@
-import React from "react";
+import React from 'react'
 
 const PostCreate = () => {
-  return <div>PostCreate</div>;
-};
+  return (
+    <div>PostCreate</div>
+  )
+}
 
-export default PostCreate;
+export default PostCreate

@@ -1,7 +1,9 @@
-import React from "react";
+import React from 'react'
 
 const ObjectionDetail = () => {
-  return <div>ObjectionDetail</div>;
-};
+  return (
+    <div>ObjectionDetail</div>
+  )
+}
 
-export default ObjectionDetail;
+export default ObjectionDetail

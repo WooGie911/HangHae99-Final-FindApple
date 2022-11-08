@@ -1,7 +1,9 @@
-import React from "react";
+import React from 'react'
 
 const ObjectionRead = () => {
-  return <div>ObjectionRead</div>;
-};
+  return (
+    <div>ObjectionRead</div>
+  )
+}
 
-export default ObjectionRead;
+export default ObjectionRead

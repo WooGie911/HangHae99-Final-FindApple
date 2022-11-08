@@ -1,7 +1,9 @@
-import React from "react";
+import React from 'react'
 
 const ObjectionCreate = () => {
-  return <div>ObjectionCreate</div>;
-};
+  return (
+    <div>ObjectionCreate</div>
+  )
+}
 
-export default ObjectionCreate;
+export default ObjectionCreate

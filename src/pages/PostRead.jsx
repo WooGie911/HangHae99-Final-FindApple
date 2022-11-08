@@ -1,7 +1,9 @@
-import React from "react";
+import React from 'react'
 
 const PostRead = () => {
-  return <div>PostRead</div>;
-};
+  return (
+    <div>PostRead</div>
+  )
+}
 
-export default PostRead;
+export default PostRead
