@@ -381,8 +381,11 @@ const PricingInput = () => {
 
       )
       }
+
+      <div>측정가격</div>
       
-      
+      <button>가격책정</button>
+
     </div>
   )
 }
