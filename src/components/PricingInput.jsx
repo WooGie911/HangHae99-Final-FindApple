@@ -9,14 +9,16 @@ const PricingInput = () => {
   return (
     <div>
       <select name="category" onChange={onChangeHandler}>
-        <option value="카테고리 선택"></option>
-        <option value="MacBook">Macbook</option>
-        <option value="iPhone">iPhone</option>
+        <option value={"category"}>Category</option>
+        <option value={"MacBook"}>Macbook</option>
+        <option value={"iPhone"}>iPhone</option>
         
       </select>
-      {/* 모델명, 배터리 사이클, 메모리, 디스크 용량, 키보드방식, 애플케어플러스 보증 기간 */}
-      {tag === "MacBook" ? (
-        <Select value="model">
+      {/* 론리&& 연산자로 해결하기*/}
+      {tag === "MacBook" && (
+        <div>
+        <Select>
+                <option>맥북 기종</option>
                 <option value="1293">맥북 12인치 2015년형 </option>
                 <option value="1294">맥북 12인치 2016년형 </option>
                 <option value="1295">맥북 12인치 2017년형 </option>
@@ -217,7 +219,6 @@ const PricingInput = () => {
                 <option value="1982">맥북프로 13인치 2020년 MYDC2KH/A MYD92KH/A Apple M1 3.2GHz 8GB 512GB 실버 그레이 터치바</option>
                 <option value="1984">맥북에어 13인치 2020년 MGN93KH/A MGN63KH/A MGND3KH/A Apple M1 3.2GHz 8GB 256GB 실버 그레이 골드</option>
                 <option value="1985">맥북에어 13인치 2020년 MGNA3KH/A MGN73KH/A MGNE3KH/A Apple M1 3.2GHz 8GB 512GB 실버 그레이 골드</option>
-                
                 <option value="4640">APPLE 2022 맥북프로13 MNEQ3KH/A</option>
                 <option value="4641">APPLE 2022 맥북프로13 MNEJ3KH/A </option>
                 <option value="4642">APPLE 2022 맥북프로13 MNEP3KH/A </option>
@@ -242,10 +243,44 @@ const PricingInput = () => {
                 <option value="4664">APPLE 2021 맥북프로16 MK193KH/A </option>          
 
         </Select>
-      ):
-      tag === "iPhone"
+        배터리 사이클<input placeholder='배터리 사이클을 입력해주세요' />
+      <Select>
+        <option>메모리</option>
+        <option value="4">4GB</option>
+        <option value="8">8GB</option>
+        <option value="16">16GB</option>
+        <option value="24">24GB</option>
+        <option value="32">32GB</option>
+        <option value="64">64GB</option>
+        <option value="128">128GB</option>                                        
+      </Select>
+
+      <Select>
+        <option>SSD 용량</option>
+        <option value="128">128GB</option>
+        <option value="256">256GB</option>
+        <option value="512">512GB</option>
+        <option value="1">1TB</option>
+        <option value="2">2TB</option>
+        <option value="4">4TB</option>
+        <option value="8">8TB</option>                                        
+      </Select>
+      <Select>
+        <option>키보드 형태</option>
+        <option value="나비식">나비식</option>
+        <option value="가위식">가위식</option>                                       
+      </Select>
+
+      애플케어 보증기간<input type="date" />
+
+      </div>
+
+      )}
+      {tag === "iPhone" && 
       (
+        <div>
         <Select>
+          <option value="choice">아이폰 기종</option>
           <option value="1687">아이폰5</option>
           <option value="1688">아이폰5S</option>
           <option value="1689">아이폰6</option>
@@ -328,10 +363,25 @@ const PricingInput = () => {
           <option value="1888">아이폰 12 프로 맥스 256GB</option>
           <option value="1889">아이폰 12 프로 맥스 512GB</option>
         </Select>
+      배터리 성능상태<input placeholder="%를 제외하고 입력해주세요"/>
+      <Select>
+        <option>액정 상태</option>
+        <option value="A">A</option>
+        <option value="B">B</option>
+        <option value="C">C</option>
+      </Select>
+      <Select>
+        <option>기스 상태</option>
+        <option value="A">A</option>
+        <option value="B">B</option>
+        <option value="C">C</option>
+      </Select>      
+      애플케어 보증기간<input type="date" />
+        </div>
 
       )
       }
-
+      
       
     </div>
   )
@@ -340,6 +390,7 @@ const PricingInput = () => {
 export default PricingInput
 
 const Select = styled.select`
-height: 500px;
+width: 300px;
+height: 50px;
 overflow: auto;
 `

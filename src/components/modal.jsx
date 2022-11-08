@@ -52,6 +52,6 @@ const Content = styled.div`
   top: 25%;
   left: 100%;
   overflow: none;
-  background: #141414;
+  background: gray;
   box-shadow: 0px 4px 8px #eee;
 `
