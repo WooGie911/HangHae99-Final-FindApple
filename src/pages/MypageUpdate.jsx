@@ -32,6 +32,9 @@ const MypageUpdate = () => {
     navigate("/mypage")
   }
 
+// const {profile} = useSelector((state) => state.login)
+
+
   return (
     <div
       style={{
@@ -51,6 +54,7 @@ const MypageUpdate = () => {
           display: "none"
         }}
       />
+      {/* 아래 내용만 데이터 받으면 div를 사진으로 바꿔서 사용할 것 */}
       <div
         style={{
           height: "200px",

@@ -111,6 +111,28 @@ export const __SignUp = createAsyncThunk(
   }
 );
 
+export const __UserProfile = createAsyncThunk(
+  "Login/__UserProfile",
+  async (payload, thunkAPI) => {
+    try{
+    const data = await axios.get("/api/mypage")
+  }catch (error){
+    return thunkAPI.rejectWithValue(error);
+  }
+}
+)
+
+export const __UserProfileEdit = createAsyncThunk(
+  "Login/__UserProfileEdit",
+  async (payload, thunkAPI) => {
+    try{
+    const data = await axios.put("/api/mypage/edit")
+  }catch (error){
+    return thunkAPI.rejectWithValue(error);
+  }
+}
+)
+
 const LoginSlice = createSlice({
   name: "Login",
   initialState,
@@ -138,6 +160,30 @@ const LoginSlice = createSlice({
       state.user = action.payload;
     },
     [__SignUp.rejected]: (state, action) => {
+      state.isLoading = false;
+      state.error = action.payload;
+    },
+    //__UserProfile
+    [__UserProfile.pending]: (state) => {
+      state.isLoading = true;
+    },
+    [__UserProfile.fulfilled]: (state, action) => {
+      state.isLoading = false;
+      state.user = action.payload;
+    },
+    [__UserProfile.rejected]: (state, action) => {
+      state.isLoading = false;
+      state.error = action.payload;
+    },
+    //__UserProfileEdit
+    [__UserProfile.pending]: (state) => {
+      state.isLoading = true;
+    },
+    [__UserProfile.fulfilled]: (state, action) => {
+      state.isLoading = false;
+      state.user = action.payload;
+    },
+    [__UserProfile.rejected]: (state, action) => {
       state.isLoading = false;
       state.error = action.payload;
     },

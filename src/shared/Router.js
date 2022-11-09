@@ -15,7 +15,9 @@ import MypageUpdate from "../pages/MypageUpdate";
 import Main from "../pages/Main";
 import Redirect from "../components/Redirect";
 import SellerPage from "../pages/SellerPage";
-
+import MyCart from "../pages/MyCart";
+import MyObjection from "../pages/MyObjection";
+import MyPost from "../pages/MyPost";
 
 const Router = () => {
   return (
@@ -62,6 +64,15 @@ const Router = () => {
         
         {/* 판매자 페이지 이동하기 */}
         <Route path="/sellerpage" element={<SellerPage />} />        
+
+        {/* 찜하기 페이지 이동하기 */}
+        <Route path="/mycart" element={<MyCart />} />  
+
+         {/* 내 이의제기 페이지 이동하기 */}
+         <Route path="/myobjection" element={<MyObjection />} />        
+
+         {/* 내 이의제기 페이지 이동하기 */}
+         <Route path="/mypost" element={<MyPost />} />   
 
         <Route
           path="https://localhost:3000/kakaoLogin"
