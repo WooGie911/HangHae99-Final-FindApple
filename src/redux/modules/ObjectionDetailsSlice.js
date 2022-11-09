@@ -12,14 +12,17 @@ export const __getObjectionDetail = createAsyncThunk(
   "objectionDetails/__getPostDetail",
   async (payload, thunkAPI) => {
     try {
-      const data = await axios.get(`https://jkk.p-e.kr/api/post/${payload}`, {
-        headers: {
-          "Content-Type": `application/json`,
-          Authorization: accessToken,
-          RefreshToken: refreshToken,
-          "Cache-Control": "no-cache",
-        },
-      });
+      const data = await axios.get(
+        `https://jkk.p-e.kr/api/issue/detail/${payload}`,
+        {
+          headers: {
+            "Content-Type": `application/json`,
+            Authorization: accessToken,
+            RefreshToken: refreshToken,
+            "Cache-Control": "no-cache",
+          },
+        }
+      );
       //   console.log("__getPostDetail", data.data.data);
       // console.log("response", data);
       return thunkAPI.fulfillWithValue(data.data.data);
@@ -40,7 +43,7 @@ export const __addObjectionComment = createAsyncThunk(
       //console.log(payload)
       // payload를 데이터를 넣어줄때까지 실행하지 하지않겠다. //비동기
       const data = await axios.post(
-        `https://jkk.p-e.kr/api/comment/${payload.id}`,
+        `https://jkk.p-e.kr/api/issues-comment/${payload.issuesId}`,
         // JSON.stringify(payload.comment),
         payload.comment,
         {
@@ -69,7 +72,7 @@ export const __deleteObjectionComment = createAsyncThunk(
       console.log(payload);
       // payload를 데이터를 넣어줄때까지 실행하지 하지않겠다. //비동기
       const data = await axios.delete(
-        `https://jkk.p-e.kr/api/comment/${payload}`,
+        `https://jkk.p-e.kr/api/issues-comment/${payload}`,
         {
           headers: {
             "Content-Type": `application/json`,
@@ -96,7 +99,7 @@ export const __editObjectionComment = createAsyncThunk(
     try {
       console.log(payload);
       const data = await axios.put(
-        `https://jkk.p-e.kr/api/comment/${payload.id}`,
+        `https://jkk.p-e.kr/api/issues-comment/${payload.id}`,
         JSON.stringify(payload.comment),
         {
           headers: {

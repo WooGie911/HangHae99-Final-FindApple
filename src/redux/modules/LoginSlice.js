@@ -111,6 +111,39 @@ export const __SignUp = createAsyncThunk(
   }
 );
 
+//로그아웃
+export const __logout = createAsyncThunk(
+  "members/__logout",
+  async (payload, thunkAPI) => {
+    try {
+      await axios
+        .get(`${process.env.REACT_APP_SERVER}/api/logout`, {
+          headers: {
+            Authorization: accessToken,
+            RefreshToken: refreshToken,
+            "Cache-Control": "no-cache",
+          },
+        })
+        .then((res) => {
+          if (res.data.statusCode === 200) {
+            localStorage.clear();
+            alert("로그아웃 되었습니다");
+            window.location.replace("/");
+          }
+        })
+        .catch((error) => {
+          if (error.response.data.statusCode === 400) {
+            localStorage.clear();
+            alert("로그아웃 되었습니다");
+            window.location.replace("/");
+          }
+        });
+    } catch (error) {
+      return thunkAPI.rejectWithValue(error);
+    }
+  }
+);
+
 const LoginSlice = createSlice({
   name: "Login",
   initialState,
