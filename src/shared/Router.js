@@ -14,6 +14,8 @@ import Mypage from "../pages/Mypage";
 import MypageUpdate from "../pages/MypageUpdate";
 import Main from "../pages/Main";
 import Redirect from "../components/Redirect";
+import SellerPage from "../pages/SellerPage";
+
 
 const Router = () => {
   return (
@@ -57,6 +59,9 @@ const Router = () => {
 
         {/* main 페이지 이동하기 */}
         <Route path="/" element={<Main />} />
+        
+        {/* 판매자 페이지 이동하기 */}
+        <Route path="/sellerpage" element={<SellerPage />} />        
 
         <Route
           path="https://localhost:3000/kakaoLogin"
