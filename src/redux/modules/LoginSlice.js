@@ -11,9 +11,11 @@ const refreshToken = localStorage.getItem("Refresh_Token");
 export const __emailCheck = createAsyncThunk(
   "posts/__emailCheck",
   async (payload, thunkAPI) => {
+    console.log("payload", payload);
     try {
       const data = await axios.post(
-        `${process.env.REACT_APP_SERVER}/api/post`,
+        `${process.env.REACT_APP_SERVER}/api/member/signup/mail-confirm`,
+        `https://study.o-r.kr:8080/api/member/signup/mail-confirm`,
         payload
       );
       // console.log("data", data);
@@ -26,11 +28,11 @@ export const __emailCheck = createAsyncThunk(
     }
   }
 );
-
+//http://43.201.116.82
 export const __kakaoLogin = (code) => {
   return function (dispatch, getState) {
     axios
-      .get(`http://43.201.116.82/user/kakao/callback?code=${code}`)
+      .get(`https://study.o-r.kr:8080/api/member/kakao?code=${code}`)
       .then((res) => {
         console.log("넘어온 토큰값", res); // 토큰이 넘어올 것임
         const Access_Token = res.data.accessToken;
@@ -53,7 +55,8 @@ export const __Signin = createAsyncThunk(
     try {
       console.log(payload);
       const data = await axios.post(
-        `${process.env.REACT_APP_SERVER}/api/member/login`,
+        `https://study.o-r.kr:8080/api/member/login`,
+        // `${process.env.REACT_APP_SERVER}/api/member/login`,
         payload
       );
       console.log(data);
@@ -62,7 +65,7 @@ export const __Signin = createAsyncThunk(
         window.localStorage.setItem("Access_Token", data.headers.authorization);
         window.localStorage.setItem("Refresh_Token", data.headers.refresh);
         alert("로그인 성공");
-        window.location.replace("/main");
+        window.location.replace("/");
       }
       console.log("로그인 응답", data);
       return thunkAPI.fulfillWithValue(data.data);
@@ -89,10 +92,11 @@ export const __SignUp = createAsyncThunk(
     try {
       console.log(payload);
       const data = await axios
-        .post(`${process.env.REACT_APP_SERVER}/api/member/signup`, payload)
+        .post(`https://study.o-r.kr:8080/api/member/signup`, payload)
+        // .post(`${process.env.REACT_APP_SERVER}/api/member/signup`, payload)
 
         .then((response) => {
-          console.log("회원가입response", response.data.msg);
+          console.log("회원가입response", response);
           alert(`${response.data.msg}`);
           if (response.data.msg == "회원가입이 완료되었습니다.") {
             window.location.replace("/");
@@ -116,24 +120,28 @@ export const __SignUp = createAsyncThunk(
 export const __UserProfile = createAsyncThunk(
   "Login/__UserProfile",
   async (payload, thunkAPI) => {
-    try{
-    const data = await axios.get(`${process.env.REACT_APP_SERVER}/api/mypage`)
-  }catch (error){
-    return thunkAPI.rejectWithValue(error);
+    try {
+      const data = await axios.get(
+        `${process.env.REACT_APP_SERVER}/api/mypage`
+      );
+    } catch (error) {
+      return thunkAPI.rejectWithValue(error);
+    }
   }
-}
-)
+);
 
 export const __UserProfileEdit = createAsyncThunk(
   "Login/__UserProfileEdit",
   async (payload, thunkAPI) => {
-    try{
-    const data = await axios.put(`${process.env.REACT_APP_SERVER}/api/mypage/edit`)
-  }catch (error){
-    return thunkAPI.rejectWithValue(error);
+    try {
+      const data = await axios.put(
+        `${process.env.REACT_APP_SERVER}/api/mypage/edit`
+      );
+    } catch (error) {
+      return thunkAPI.rejectWithValue(error);
+    }
   }
-}
-)
+);
 //로그아웃
 export const __logout = createAsyncThunk(
   "members/__logout",

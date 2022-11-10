@@ -1,12 +1,33 @@
-import React from 'react'
-import Header from "../components/Header"
+import React, { useEffect } from "react";
+import Header from "../components/Header";
+import PostList from "../components/PostList";
+import { useDispatch, useSelector } from "react-redux";
+import { useParams } from "react-router-dom";
+import {
+  __getObjection,
+  __searchObjection,
+} from "../redux/modules/ObjectionsSlice";
+import PostSearch from "../components/PostSearch";
 
 const ObjectionRead = () => {
-  return (
-    <div>
-      <Header/>
-      ObjectionRead</div>
-  )
-}
+  const params = useParams();
+  console.log("params.category", params.category);
+  const dispatch = useDispatch();
+  const { posts } = useSelector((state) => state.objections);
 
-export default ObjectionRead
+  useEffect(() => {
+    dispatch(__getObjection);
+  }, []);
+
+  return (
+    <>
+      <Header />
+      <div>ObjectionRead</div>
+
+      <PostSearch __search={__searchObjection} />
+      <PostList posts={posts} />
+    </>
+  );
+};
+
+export default ObjectionRead;

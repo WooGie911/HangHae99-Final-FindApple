@@ -10,8 +10,9 @@ const refreshToken = localStorage.getItem("Refresh_Token");
 console.log(accessToken);
 console.log(refreshToken);
 
-export const __getObjection = createAsyncThunk(
-  "objections/__getObjection",
+//검색기능 미완성
+export const __searchObjection = createAsyncThunk(
+  "posts/__searchObjection",
   async (payload, thunkAPI) => {
     try {
       const data = await axios.get(`${process.env.REACT_APP_SERVER}/api/post`, {
@@ -22,6 +23,31 @@ export const __getObjection = createAsyncThunk(
           "Cache-Control": "no-cache",
         },
       });
+      // console.log("data", data);
+      console.log("__searchPost", data);
+      return thunkAPI.fulfillWithValue(data.data.data);
+    } catch (error) {
+      console.log("error", error);
+      return thunkAPI.rejectWithValue(error);
+    }
+  }
+);
+
+export const __getObjection = createAsyncThunk(
+  "objections/__getObjection",
+  async (payload, thunkAPI) => {
+    try {
+      const data = await axios.get(
+        `${process.env.REACT_APP_SERVER}/api/issues`,
+        {
+          headers: {
+            "Content-Type": `application/json`,
+            Authorization: accessToken,
+            RefreshToken: refreshToken,
+            "Cache-Control": "no-cache",
+          },
+        }
+      );
       // console.log("data", data);
       console.log("__getObjection", data);
       return thunkAPI.fulfillWithValue(data.data.data);
@@ -38,7 +64,7 @@ export const __addObjection = createAsyncThunk(
     try {
       await axios
         .post(
-          `${process.env.REACT_APP_SERVER}/api/post`,
+          `${process.env.REACT_APP_SERVER}/api/issue`,
           payload,
           // {
           //   headers: {
@@ -73,7 +99,7 @@ export const __deleteObjection = createAsyncThunk(
   async (payload, thunkAPI) => {
     try {
       const data = await axios.delete(
-        `${process.env.REACT_APP_SERVER}/api/post/${payload}`,
+        `${process.env.REACT_APP_SERVER}/api/issue/${payload}`,
         {
           headers: {
             "Content-Type": `application/json`,
@@ -98,7 +124,7 @@ export const __editObjection = createAsyncThunk(
     console.log("payload", payload);
     try {
       const data = await axios.put(
-        `${process.env.REACT_APP_SERVER}/api/post/${payload.postId}`,
+        `${process.env.REACT_APP_SERVER}/api/issue/${payload.postId}`,
         payload.formData,
         {
           headers: {
@@ -149,6 +175,19 @@ const ObjectionsSlice = createSlice({
   initialState,
   reducers: {},
   extraReducers: {
+    //__searchObjection
+    [__searchObjection.pending]: (state) => {
+      state.isLoading = true;
+    },
+    [__searchObjection.fulfilled]: (state, action) => {
+      state.isLoading = false;
+      state.posts = action.payload;
+    },
+    [__searchObjection.rejected]: (state, action) => {
+      state.isLoading = false;
+      state.error = action.payload;
+    },
+
     //__getObjection
     [__getObjection.pending]: (state) => {
       state.isLoading = true;

@@ -31,19 +31,27 @@ const SignUp = () => {
     ) {
       return alert("입력을 확인하세요.");
     }
-    if (emailCheckTF === true) {
-      if (input.emailCheck !== emailCheckData) {
-        return alert("인증번호가 일치하지 않습니다.");
-      }
-    }
+    // if (emailCheckTF === true) {
+    //   if (input.emailCheck !== emailCheckData) {
+    //     return alert("인증번호가 일치하지 않습니다.");
+    //   }
+    // }
     if (input.password !== input.passwordCheck) {
       return alert("비밀번호가 일치하지 않습니다.");
     }
-    dispatch(__SignUp(input));
+    const AAA = {
+      email: input.email,
+      nickname: input.nickname,
+      password: input.password,
+    };
+    dispatch(__SignUp(AAA));
+    console.log(AAA);
+    // dispatch(__SignUp(input));
     setInput(initialstate);
   };
 
   const emailCheckHandler = () => {
+    console.log(input.email);
     dispatch(__emailCheck(input.email));
     setEmailCheckTF(true);
   };
