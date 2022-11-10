@@ -1,6 +1,6 @@
 import React from "react";
 import { useDispatch } from "react-redux";
-import useInput from "../hooks/useInput";
+import useInput from "../hook/useInput";
 
 const CommentCreate = (props) => {
   const dispatch = useDispatch();

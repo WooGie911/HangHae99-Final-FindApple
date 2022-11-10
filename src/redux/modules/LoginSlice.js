@@ -6,6 +6,9 @@ const initialState = {
   comment: [],
 };
 
+const accessToken = localStorage.getItem("Access_Token");
+const refreshToken = localStorage.getItem("Refresh_Token");
+
 export const __emailCheck = createAsyncThunk(
   "posts/__emailCheck",
   async (payload, thunkAPI) => {
