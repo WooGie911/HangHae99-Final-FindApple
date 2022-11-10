@@ -18,8 +18,8 @@ const Mypage = () => {
   const myobjection = () => {
     navigate("/myobjection")
   }
-  const mycart = () => {
-    navigate("/mycart")
+  const mylike = () => {
+    navigate("/mylike")
   }
   const dispatch = useDispatch()
   // const {profile} = useSelector((state) => state.login)
@@ -36,7 +36,7 @@ const Mypage = () => {
     <button onClick={myobjection}>이의제기</button>
     </div>
     <div>
-    <button onClick={mycart}>찜하기</button>
+    <button onClick={mylike}>찜하기</button>
     </div>
     <div>
       <button onClick={mypageupdate}>정보수정</button>

@@ -5,7 +5,7 @@ const MyLike = () => {
   return (
     <div>
       <Header/>
-      MyCart</div>
+      MyLike</div>
   )
 }
 
