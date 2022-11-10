@@ -1,12 +1,14 @@
-import React from 'react'
-import Header from "../components/Header"
+import React from "react";
+import Header from "../components/Header";
+import PostsCreate from "../components/PostsCreate";
 
 const PostCreate = () => {
   return (
     <div>
-      <Header/>
-      PostCreate</div>
-  )
-}
+      <Header />
+      <PostsCreate />
+    </div>
+  );
+};
 
-export default PostCreate
+export default PostCreate;

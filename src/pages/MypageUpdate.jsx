@@ -14,6 +14,11 @@ const MypageUpdate = () => {
   const imageUploader = React.useRef(null);
   const [photo, setPhoto] = useState(null);
   // 사진을 저장하는 로직이 없었다.
+  const navigate = useNavigate();
+  const dispatch = useDispatch();
+  const onClickHandler = () => {
+    navigate("/mypage");
+  };
 
   const handleImageUpload = e => {
     const [file] = e.target.files;
@@ -93,6 +98,7 @@ const nicknameEdit = () => {
       <input size='medium' style={{ marginTop: '20px' }} onChange={writeHandle} name='nickname' value={write.nickname || ""}  placeholder='변경하실 닉네임을 입력하세요' />
       <div>
         <button onClick={nicknameEdit}>변경</button>
+
         <button onClick={onClickHandler}>이전으로</button>
       </div>
       <Header /> 

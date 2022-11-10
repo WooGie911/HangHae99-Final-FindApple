@@ -95,6 +95,7 @@ export const __editPost = createAsyncThunk(
   async (payload, thunkAPI) => {
     console.log("payload", payload);
     try {
+      console.log(payload)
       const data = await axios.put(
         `${process.env.REACT_APP_SERVER}/api/post/${payload.postId}`,
         payload.formData,
@@ -118,8 +119,8 @@ export const __editPost = createAsyncThunk(
   }
 );
 
-export const __heartPost = createAsyncThunk(
-  "posts/__heartPost",
+export const __CartPost = createAsyncThunk(
+  "posts/__CartPost",
   async (payload, thunkAPI) => {
     try {
       const data = await axios.get(
@@ -196,13 +197,13 @@ const PostsSlice = createSlice({
     [__editPost.fulfilled]: (state, action) => {
       state.isLoading = false;
 
-      const indexId = state.posts.findIndex((post) => {
+      const paramId = state.posts.findIndex((post) => {
         if (post.postId == action.payload.postId) {
           return true;
         }
         return false;
       });
-      state.posts[indexId] = action.payload;
+      state.posts[paramId] = action.payload;
 
       state.posts = [...state.posts];
     },
@@ -210,14 +211,14 @@ const PostsSlice = createSlice({
       state.isLoading = false;
       state.error = action.payload;
     },
-    //__heartPost
-    [__heartPost.pending]: (state) => {
+    //__CartPost
+    [__CartPost.pending]: (state) => {
       state.isLoading = true;
     },
-    [__heartPost.fulfilled]: (state, action) => {
+    [__CartPost.fulfilled]: (state, action) => {
       state.isLoading = false;
     },
-    [__heartPost.rejected]: (state, action) => {
+    [__CartPost.rejected]: (state, action) => {
       state.isLoading = false;
       state.error = action.payload;
     },
