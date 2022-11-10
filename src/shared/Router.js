@@ -29,7 +29,7 @@ const Router = () => {
         <Route path="/postcreate" element={<PostCreate />} />
 
         {/* 게시글 홈으로 이동하기 */}
-        <Route path="/postread" element={<PostRead />} />
+        <Route path="/PostRead" element={<PostRead />} />
 
         {/* 게시글 업데이트로 이동하기 */}
         <Route path="/postupdate" element={<PostUpdate />} />

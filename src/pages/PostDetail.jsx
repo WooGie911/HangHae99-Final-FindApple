@@ -1,12 +1,13 @@
-import React from 'react'
-import Header from "../components/Header"
+import React from "react";
+import Header from "../components/Header";
 
 const PostDetail = () => {
   return (
     <div>
-      <Header/>
-      PostDetail</div>
-  )
-}
+      <Header />
+      <PostDetail />
+    </div>
+  );
+};
 
-export default PostDetail
+export default PostDetail;
