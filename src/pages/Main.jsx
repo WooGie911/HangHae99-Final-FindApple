@@ -1,25 +1,16 @@
 import React from "react";
 
-
 import { useDispatch, useSelector } from "react-redux";
-import { useNavigate, useParams } from "react-router-dom";
-
+import { useNavigate } from "react-router-dom";
 
 const Main = () => {
   const dispatch = useDispatch();
   const navigate = useNavigate();
   return (
-
     <>
       <div>Main</div>
       <br />
-      <div
-        onClick={() => {
-          navigate("/postread/All");
-        }}
-      >
-        전체보기
-      </div>
+
       <div
         onClick={() => {
           navigate("/postread/MacBook");
@@ -42,8 +33,31 @@ const Main = () => {
 
         <div>추천상품 리스트업</div>
       </div>
-    </>
+      <br />
+      <div
+        onClick={() => {
+          navigate("/postread/All");
+        }}
+      >
+        검색
+      </div>
 
+      <div
+        onClick={() => {
+          navigate("/objectionread");
+        }}
+      >
+        이의제기
+      </div>
+
+      <div
+        onClick={() => {
+          navigate("/mypage");
+        }}
+      >
+        마이페이지
+      </div>
+    </>
   );
 };
 

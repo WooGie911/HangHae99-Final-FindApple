@@ -8,6 +8,29 @@ const initialState = {
 const accessToken = localStorage.getItem("Access_Token");
 const refreshToken = localStorage.getItem("Refresh_Token");
 
+//검색기능 미완성
+export const __searchPost = createAsyncThunk(
+  "posts/__searchPost",
+  async (payload, thunkAPI) => {
+    try {
+      const data = await axios.get(`${process.env.REACT_APP_SERVER}/api/post`, {
+        headers: {
+          "Content-Type": `application/json`,
+          Authorization: accessToken,
+          RefreshToken: refreshToken,
+          "Cache-Control": "no-cache",
+        },
+      });
+      // console.log("data", data);
+      console.log("__searchPost", data);
+      return thunkAPI.fulfillWithValue(data.data.data);
+    } catch (error) {
+      console.log("error", error);
+      return thunkAPI.rejectWithValue(error);
+    }
+  }
+);
+
 export const __getPost = createAsyncThunk(
   "posts/__getPost",
   async (payload, thunkAPI) => {
@@ -95,7 +118,7 @@ export const __editPost = createAsyncThunk(
   async (payload, thunkAPI) => {
     console.log("payload", payload);
     try {
-      console.log(payload)
+      console.log(payload);
       const data = await axios.put(
         `${process.env.REACT_APP_SERVER}/api/post/${payload.postId}`,
         payload.formData,
@@ -149,6 +172,19 @@ const PostsSlice = createSlice({
 
   reducers: {},
   extraReducers: {
+    //__searchPost
+    [__searchPost.pending]: (state) => {
+      state.isLoading = true;
+    },
+    [__searchPost.fulfilled]: (state, action) => {
+      state.isLoading = false;
+      state.posts = action.payload;
+    },
+    [__searchPost.rejected]: (state, action) => {
+      state.isLoading = false;
+      state.error = action.payload;
+    },
+
     //__getPost
     [__getPost.pending]: (state) => {
       state.isLoading = true;
