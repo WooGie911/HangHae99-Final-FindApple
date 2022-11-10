@@ -1,14 +1,15 @@
-import React, { useEffect, useState } from "react";
+import React from "react";
 import { useDispatch, useSelector } from "react-redux";
 import { __getPost } from "../redux/modules/PostsSlice";
+import { useNavigate } from "react-router-dom";
 
 const PostList = () => {
-  const dispatch = useDispatch();
+  const navigate = useNavigate();
   const { posts } = useSelector((state) => state.posts);
 
-  useEffect(() => {
-    dispatch(__getPost);
-  }, []);
+  // useEffect(() => {
+  //   dispatch(__getPost);
+  // }, []);
   return (
     <>
       <div>PostList</div>
