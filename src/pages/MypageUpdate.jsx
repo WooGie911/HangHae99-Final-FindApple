@@ -1,111 +1,109 @@
-import React, { useRef, useState } from "react";
-import { useNavigate } from "react-router-dom";
+import React, {useRef, useState, useEffect} from 'react'
+import { useNavigate } from 'react-router-dom'
 import useInput from "../hook/useInput";
-import useImgUpload from "../hook/useImageUpload";
-import { useDispatch } from "react-redux";
-import styled from "styled-components";
-import photoIMG from "../assets/photoIMG.png";
-import Header from "../components/Header";
+import { useDispatch } from 'react-redux';
+import styled from "styled-components"
+import photoIMG from "../assets/photoIMG.png"
+import Header from "../components/Header"
+import { useSelector } from 'react-redux'
+import {__UserProfileEdit} from '../redux/modules/LoginSlice'
+
 
 const MypageUpdate = () => {
+  const uploadedImage = React.useRef(null);
+  const imageUploader = React.useRef(null);
+  const [photo, setPhoto] = useState(null);
+  // 사진을 저장하는 로직이 없었다.
   const navigate = useNavigate();
   const dispatch = useDispatch();
   const onClickHandler = () => {
     navigate("/mypage");
   };
 
-  const [write, setWrite, writeHandle] = useInput({
-    nickname: "",
-  });
-
-  //이미지 업로드 훅
-  const [files, fileUrls, uploadHandle] = useImgUpload(1, true, 0.3, 1000);
-
-  //이미지 업로드 인풋돔 선택 훅
-  const imgRef = useRef();
-  //submit
-  const writeSubmit = () => {
-    //request로 날릴 폼데이터
-    const formData = new FormData();
-
-    //폼 데이터에 파일 담기
-    if (files.length > 0) {
-      files.forEach((file) => {
-        formData.append("images", file);
-      });
-    } else {
-      formData.append("images", null);
+  const handleImageUpload = e => {
+    const [file] = e.target.files;
+    if (file) {
+      const reader = new FileReader();
+      const { current } = uploadedImage;
+      current.file = file;
+      reader.onload = e => {
+        current.src = e.target.result;
+      };
+      reader.readAsDataURL(file);
+      setPhoto(file)
     }
-
-    //폼 데이터에 글작성 데이터 넣기
-    formData.append("post");
   };
+  const [write, setWrite, writeHandle] = useInput({
+    nickname : "",
+  });
+  const navigate = useNavigate()
+  const onClickHandler = () => {
+    navigate("/mypage")
+  }
+const dispatch = useDispatch()
+// const {profile} = useSelector((state) => state.login)
+
+  //get 해오기
+  useEffect(() => {
+    dispatch(__UserProfileEdit);
+  }, [dispatch]);
+
+const nicknameEdit = () => {
+  // 백엔드와 협의 필요
+  // const formData = new FormData();
+  // formData.append("nickname", write.nickname);
+  // formData.append("profileImage", photo)
+  // const Fdata = {formData: formData};
+  // dispatch(__UserProfileEdit(Fdata));
+  //  setEdit(false);
+}
 
   return (
-    <div>
-      <Header />
-      <h1>회원 정보 수정</h1>
-      <label htmlFor="imgFile">
-        <input
-          type="file"
-          style={{ display: "none" }}
-          accept="image/*"
-          id="imgFile"
-          name="imgFile"
-          multiple
-          onChange={uploadHandle}
-          ref={imgRef}
-        />
-        <StImgUploadBtn
-          type="button"
-          onClick={() => {
-            imgRef.current.click();
+    <div
+      style={{
+        display: "flex",
+        flexDirection: "column",
+        alignItems: "center",
+        justifyContent: "center"
+      }}
+    >
+      <input
+        type="file"
+        accept="image/*"
+        onChange={handleImageUpload}
+        ref={imageUploader}
+        style={{
+          display: "none"
+        }}
+      />
+      {/* 아래 내용만 데이터 받으면 div를 사진으로 바꿔서 사용할 것 */}
+      <div
+        style={{
+          height: "200px",
+          width: "200px",
+          border: "1px dashed black"
+        }}
+        onClick={() => imageUploader.current.click()}
+      >
+        <img
+          ref={uploadedImage}
+          style={{
+            width: "200px",
+            height: "200px",
+            position: "absolute"
           }}
-        >
-          <img
-            src={photoIMG}
-            style={{ width: "200px", marginTop: "10px" }}
-          ></img>
-          <div className="preview">
-            {
-              /*previews map쓸곳*/
-              fileUrls.map((val, i) => {
-                return <StPreviewImg src={val} alt="프로필 이미지" key={i} />;
-              })
-            }
-          </div>
-        </StImgUploadBtn>
-      </label>
-      <div>
-        <Input
-          size="large"
-          onChange={writeHandle}
-          name="nickname"
-          value={write.nickname || ""}
-          type="text"
-          placeholder="닉네임을 변경하세요."
         />
       </div>
+      프로필 사진을 바꾸시려면 눌러주세요
+      <input size='medium' style={{ marginTop: '20px' }} onChange={writeHandle} name='nickname' value={write.nickname || ""}  placeholder='변경하실 닉네임을 입력하세요' />
       <div>
-        <button>변경완료</button>
+        <button onClick={nicknameEdit}>변경</button>
+
         <button onClick={onClickHandler}>이전으로</button>
       </div>
+      <Header /> 
     </div>
   );
-};
+}
 
-export default MypageUpdate;
-
-const StPreviewImg = styled.img`
-  width: 220px;
-  height: 220px;
-  border-radius: 1rem;
-`;
-
-const StImgUploadBtn = styled.button`
-  border: none;
-`;
-
-const Input = styled.input`
-  width: 200px;
-`;
+export default MypageUpdate
