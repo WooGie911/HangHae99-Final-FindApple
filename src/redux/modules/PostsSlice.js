@@ -119,8 +119,8 @@ export const __editPost = createAsyncThunk(
   }
 );
 
-export const __heartPost = createAsyncThunk(
-  "posts/__heartPost",
+export const __CartPost = createAsyncThunk(
+  "posts/__CartPost",
   async (payload, thunkAPI) => {
     try {
       const data = await axios.get(
@@ -211,14 +211,14 @@ const PostsSlice = createSlice({
       state.isLoading = false;
       state.error = action.payload;
     },
-    //__heartPost
-    [__heartPost.pending]: (state) => {
+    //__CartPost
+    [__CartPost.pending]: (state) => {
       state.isLoading = true;
     },
-    [__heartPost.fulfilled]: (state, action) => {
+    [__CartPost.fulfilled]: (state, action) => {
       state.isLoading = false;
     },
-    [__heartPost.rejected]: (state, action) => {
+    [__CartPost.rejected]: (state, action) => {
       state.isLoading = false;
       state.error = action.payload;
     },

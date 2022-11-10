@@ -6,6 +6,9 @@ const initialState = {
   comment: [],
 };
 
+const accessToken = localStorage.getItem("Access_Token");
+const refreshToken = localStorage.getItem("Refresh_Token");
+
 export const __emailCheck = createAsyncThunk(
   "posts/__emailCheck",
   async (payload, thunkAPI) => {
@@ -106,6 +109,39 @@ export const __SignUp = createAsyncThunk(
       }
       //입력 형식에 맞지 않는 예외처리 메시지 (이메일형식, 비밀번호 형식)
       window.alert(error.response.data[0].message);
+      return thunkAPI.rejectWithValue(error);
+    }
+  }
+);
+
+//로그아웃
+export const __logout = createAsyncThunk(
+  "members/__logout",
+  async (payload, thunkAPI) => {
+    try {
+      await axios
+        .get(`${process.env.REACT_APP_SERVER}/api/logout`, {
+          headers: {
+            Authorization: accessToken,
+            RefreshToken: refreshToken,
+            "Cache-Control": "no-cache",
+          },
+        })
+        .then((res) => {
+          if (res.data.statusCode === 200) {
+            localStorage.clear();
+            alert("로그아웃 되었습니다");
+            window.location.replace("/");
+          }
+        })
+        .catch((error) => {
+          if (error.response.data.statusCode === 400) {
+            localStorage.clear();
+            alert("로그아웃 되었습니다");
+            window.location.replace("/");
+          }
+        });
+    } catch (error) {
       return thunkAPI.rejectWithValue(error);
     }
   }

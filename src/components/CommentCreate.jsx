@@ -1,37 +1,43 @@
 import React from "react";
 import { useDispatch } from "react-redux";
-import { __addPostComment } from "../redux/modules/commentSlice";
-import useInput from "../hooks/useInput";
 
-const CommentCreate = () => {
-  const contentId = useParams();
+import useInput from "../hook/useInput";
+
+const CommentCreate = (props) => {
   const dispatch = useDispatch();
-
   const initialState = { comment: "" };
   const [comments, setComments, onChangeInputHandler] = useInput(initialState);
 
-  // 댓글 작성
-  const onAddCommentButtonHandler = (event) => {
-    event.preventDefault();
-    const obj = {
-      id: contentId.id,
-      comment,
+  const onClickAddButton = (e) => {
+    e.preventDefault();
+    const Fdata = {
+      id: props.postId,
+      comment: { comment: comments.comment },
     };
-    if (comment.comment.trim() === "") {
-      return alert("모든 항목을 입력해주세요.");
+    if (comments.comment.trim() === "") {
+      return alert("댓글을 입력하세요.");
     }
-    dispatch(__insertComment(obj));
-    setComment({
-      comment: "",
-    });
-    // window.location.replace(`/detail/${Id}`)
+    dispatch(props.__addComment(Fdata));
+    setComments(initialState);
   };
+  return (
+    <>
+      <div>CommentCreate</div>
 
-  // 댓글 삭제 버튼
-  const onDeleteButton = (id) => {
-    dispatch(__deleteComment(id));
-  };
+      <div>
+        <input
+          placeholder="댓글 달기..."
+          value={comments.comment || ""}
+          name="comment"
+          type="text"
+          onChange={onChangeInputHandler}
+        />
 
-  return <div>CommentCreate</div>;
+        <button onClick={onClickAddButton}>등록</button>
+      </div>
+    </>
+  );
 };
+
+
 export default CommentCreate;
