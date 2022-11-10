@@ -1,11 +1,13 @@
-import React from 'react'
+import React, {useEffect} from 'react'
 import Header from "../components/Header"
 import styled from "styled-components"
+import { useDispatch } from 'react-redux'
 import { useNavigate } from 'react-router-dom'
 import { useSelector } from 'react-redux'
+import {__UserProfile} from '../redux/modules/LoginSlice'
+
 
 const Mypage = () => {
-  // const {profile} = useSelector((state) => state.login)
   const navigate = useNavigate()
   const mypageupdate = () => {
     navigate("/mypageupdate")
@@ -19,6 +21,12 @@ const Mypage = () => {
   const mycart = () => {
     navigate("/mycart")
   }
+  const dispatch = useDispatch()
+  // const {profile} = useSelector((state) => state.login)
+    //get 해오기
+    useEffect(() => {
+      dispatch(__UserProfile);
+    }, [dispatch]);
   return (
     <div><Header/>
     <div>

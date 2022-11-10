@@ -53,4 +53,5 @@ const Content = styled.div`
   overflow: none;
   background: gray;
   box-shadow: 0px 4px 8px #eee;
+  z-index: 999;
 `

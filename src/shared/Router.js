@@ -15,7 +15,7 @@ import MypageUpdate from "../pages/MypageUpdate";
 import Main from "../pages/Main";
 import Redirect from "../components/Redirect";
 import SellerPage from "../pages/SellerPage";
-import MyCart from "../pages/MyCart";
+import MyLike from "../pages/MyLike";
 import MyObjection from "../pages/MyObjection";
 import MyPost from "../pages/MyPost";
 
@@ -66,7 +66,7 @@ const Router = () => {
         <Route path="/sellerpage" element={<SellerPage />} />        
 
         {/* 찜하기 페이지 이동하기 */}
-        <Route path="/mycart" element={<MyCart />} />  
+        <Route path="/mylike" element={<MyLike />} />  
 
          {/* 내 이의제기 페이지 이동하기 */}
          <Route path="/myobjection" element={<MyObjection />} />        

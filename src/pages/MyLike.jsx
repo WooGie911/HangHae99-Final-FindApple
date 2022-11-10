@@ -1,7 +1,7 @@
 import React from 'react'
 import Header from "../components/Header"
 
-const MyCart = () => {
+const MyLike = () => {
   return (
     <div>
       <Header/>
@@ -9,4 +9,4 @@ const MyCart = () => {
   )
 }
 
-export default MyCart
+export default MyLike
