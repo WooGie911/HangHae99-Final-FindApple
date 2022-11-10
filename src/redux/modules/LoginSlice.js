@@ -5,7 +5,6 @@ const initialState = {
   post: [{}],
   comment: [],
 };
-
 const accessToken = localStorage.getItem("Access_Token");
 const refreshToken = localStorage.getItem("Refresh_Token");
 
@@ -118,7 +117,7 @@ export const __UserProfile = createAsyncThunk(
   "Login/__UserProfile",
   async (payload, thunkAPI) => {
     try{
-    const data = await axios.get("/api/mypage")
+    const data = await axios.get(`${process.env.REACT_APP_SERVER}/api/mypage`)
   }catch (error){
     return thunkAPI.rejectWithValue(error);
   }
@@ -129,7 +128,7 @@ export const __UserProfileEdit = createAsyncThunk(
   "Login/__UserProfileEdit",
   async (payload, thunkAPI) => {
     try{
-    const data = await axios.put("/api/mypage/edit")
+    const data = await axios.put(`${process.env.REACT_APP_SERVER}/api/mypage/edit`)
   }catch (error){
     return thunkAPI.rejectWithValue(error);
   }

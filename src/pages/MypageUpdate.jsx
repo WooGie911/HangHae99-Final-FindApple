@@ -36,11 +36,7 @@ const MypageUpdate = () => {
   const [write, setWrite, writeHandle] = useInput({
     nickname : "",
   });
-  const navigate = useNavigate()
-  const onClickHandler = () => {
-    navigate("/mypage")
-  }
-const dispatch = useDispatch()
+ 
 // const {profile} = useSelector((state) => state.login)
 
   //get 해오기
