@@ -1,12 +1,15 @@
 import React from "react";
 
+
 import { useDispatch, useSelector } from "react-redux";
 import { useNavigate, useParams } from "react-router-dom";
+
 
 const Main = () => {
   const dispatch = useDispatch();
   const navigate = useNavigate();
   return (
+
     <>
       <div>Main</div>
       <br />
@@ -40,6 +43,7 @@ const Main = () => {
         <div>추천상품 리스트업</div>
       </div>
     </>
+
   );
 };
 

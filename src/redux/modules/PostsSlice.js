@@ -95,6 +95,7 @@ export const __editPost = createAsyncThunk(
   async (payload, thunkAPI) => {
     console.log("payload", payload);
     try {
+      console.log(payload)
       const data = await axios.put(
         `${process.env.REACT_APP_SERVER}/api/post/${payload.postId}`,
         payload.formData,
@@ -196,13 +197,13 @@ const PostsSlice = createSlice({
     [__editPost.fulfilled]: (state, action) => {
       state.isLoading = false;
 
-      const indexId = state.posts.findIndex((post) => {
+      const paramId = state.posts.findIndex((post) => {
         if (post.postId == action.payload.postId) {
           return true;
         }
         return false;
       });
-      state.posts[indexId] = action.payload;
+      state.posts[paramId] = action.payload;
 
       state.posts = [...state.posts];
     },

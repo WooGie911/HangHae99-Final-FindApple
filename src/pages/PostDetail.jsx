@@ -1,5 +1,6 @@
 import React from "react";
 import Header from "../components/Header";
+
 import { useNavigate } from "react-router-dom";
 import { useDispatch, useSelector } from "react-redux";
 import CommentCreate from "../components/CommentCreate";
@@ -9,6 +10,7 @@ import {
   __addPostComment,
   __deletePostComment,
 } from "../redux/modules/PostDetailsSlice";
+
 
 const PostDetail = () => {
   const navigate = useNavigate();
@@ -29,6 +31,7 @@ const PostDetail = () => {
   };
 
   return (
+
     <>
       <Header />
       <div>PostDetail</div>
@@ -63,6 +66,7 @@ const PostDetail = () => {
         </button>
       </div>
     </>
+
   );
 };
 

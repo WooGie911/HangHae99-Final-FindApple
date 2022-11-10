@@ -1,3 +1,4 @@
+
 import React, { useEffect } from "react";
 import Header from "../components/Header";
 import PostList from "../components/PostList";
@@ -28,6 +29,7 @@ const PostRead = () => {
   }, []);
 
   return (
+
     <>
       <Header />
       <div>PostRead</div>
@@ -45,6 +47,7 @@ const PostRead = () => {
       </div>
       <PostList />
     </>
+
   );
 };
 
