@@ -62,8 +62,8 @@ export const __Signin = createAsyncThunk(
       console.log(data);
 
       if (data.status === 200 || data.status === 201) {
-        window.localStorage.setItem("Access_Token", data.headers.authorization);
-        window.localStorage.setItem("Refresh_Token", data.headers.refresh);
+        window.localStorage.setItem("Access_Token", data.data.accessToken);
+        window.localStorage.setItem("Refresh_Token", data.data.refreshToken);
         alert("로그인 성공");
         window.location.replace("/");
       }
