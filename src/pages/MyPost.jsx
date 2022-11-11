@@ -8,7 +8,7 @@ const MyPost = () => {
   console.log(posts)
   const dispatch = useDispatch()
   useEffect(() => {
-    dispatch(__getMyPost)
+    dispatch(__getMyPost())
   }, [])
   return (
     <div>

@@ -7,7 +7,7 @@ const MyObjection = () => {
   console.log(objections)
   const dispatch = useDispatch()
   useEffect(() => {
-    dispatch(__getMyObjection)
+    dispatch(__getMyObjection())
   }, [])
   return (
     <div>

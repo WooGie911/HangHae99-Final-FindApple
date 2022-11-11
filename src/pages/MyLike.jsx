@@ -8,7 +8,7 @@ const MyLike = () => {
   console.log(likes)
   const dispatch = useDispatch()
   useEffect(() => {
-    dispatch(__getMyLike)
+    dispatch(__getMyLike())
   }, [])
   return (
     <div>
