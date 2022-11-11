@@ -4,8 +4,8 @@ import { useSelector, useDispatch } from 'react-redux'
 import { __getMyPost } from '../redux/modules/MypageSlice'
 
 const MyPost = () => {
-  const {mypage} = useSelector((state) => state.mypage)
-  console.log(mypage)
+  const {posts} = useSelector((state) => state.mypage)
+  console.log(posts)
   const dispatch = useDispatch()
   useEffect(() => {
     dispatch(__getMyPost)
@@ -15,12 +15,12 @@ const MyPost = () => {
       <Header/>
       MyPost
       {
-        mypage.length > 0 && (
+        posts.length > 0 && (
           <>
-        {mypage.map((item) => {
+        {posts.map((post) => {
         return <div>
-          {item.image}
-          {item.title}
+          {post.image}
+          {post.title}
         </div>
       })}
           </>

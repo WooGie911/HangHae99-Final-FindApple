@@ -4,6 +4,7 @@ import axios from "axios";
 const initialState = {
   posts: [],
   objections: [],
+  likes : []
 };
 
 const accessToken = localStorage.getItem("Access_Token");
@@ -13,7 +14,7 @@ export const __getMyPost = createAsyncThunk(
   "mypage/__getMyPost",
   async(payload, thunkAPI) => {
     try {
-      const data = await axios.get(`${process.env.REACT_APP_SERVER}/api/mypage`,{
+      const data = await axios.get(`${process.env.REACT_APP_SERVER}/api/myinfo/post`,{
         headers: {
           "Content-Type": `application/json`,
           Authorization: accessToken,
@@ -32,7 +33,7 @@ export const __getMyObjection = createAsyncThunk(
   "mypage/__getMyObjection",
   async(payload, thunkAPI) => {
     try {
-      const data = await axios.get(`${process.env.REACT_APP_SERVER}/api/mypage`,{
+      const data = await axios.get(`${process.env.REACT_APP_SERVER}/api/myinfo/issue`,{
         headers: {
           "Content-Type": `application/json`,
           Authorization: accessToken,
@@ -51,7 +52,7 @@ export const __getMyLike = createAsyncThunk(
   "mypage/__getMyLike",
   async(payload, thunkAPI) => {
     try {
-      const data = await axios.get(`${process.env.REACT_APP_SERVER}/api/mypage`,{
+      const data = await axios.get(`${process.env.REACT_APP_SERVER}/api/myinfo/likes`,{
         headers: {
           "Content-Type": `application/json`,
           Authorization: accessToken,
@@ -78,7 +79,7 @@ const MypageSlice = createSlice({
 },
 [__getMyPost.fulfilled]: (state, action) => {
   state.isLoading = false;
-  state.mypage = action.payload;
+  state.posts = action.payload;
 },
 [__getMyPost.rejected]: (state, action) => {
   state.isLoading = false;
@@ -90,7 +91,7 @@ const MypageSlice = createSlice({
 },
 [__getMyObjection.fulfilled]: (state, action) => {
   state.isLoading = false;
-  state.mypage = action.payload;
+  state.objections = action.payload;
 },
 [__getMyObjection.rejected]: (state, action) => {
   state.isLoading = false;
@@ -102,7 +103,7 @@ const MypageSlice = createSlice({
 },
 [__getMyLike.fulfilled]: (state, action) => {
   state.isLoading = false;
-  state.mypage = action.payload;
+  state.likes = action.payload;
 },
 [__getMyLike.rejected]: (state, action) => {
   state.isLoading = false;

@@ -4,8 +4,8 @@ import { useSelector, useDispatch } from 'react-redux'
 import { __getMyLike } from '../redux/modules/MypageSlice'
 
 const MyLike = () => {
-  const {mypage} = useSelector((state) => state.mypage)
-  console.log(mypage)
+  const {likes} = useSelector((state) => state.mypage)
+  console.log(likes)
   const dispatch = useDispatch()
   useEffect(() => {
     dispatch(__getMyLike)
@@ -15,12 +15,12 @@ const MyLike = () => {
       <Header/>
       MyLike
       {
-        mypage !== undefined && (
+        likes.length > 0 && (
           <>
-        {mypage.map((item) => {
+        {likes.map((like) => {
         return <div>
-          {item.image}
-          {item.title}
+          {like.image}
+          {like.title}
         </div>
       })}
           </>

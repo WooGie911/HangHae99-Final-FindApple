@@ -3,8 +3,8 @@ import Header from "../components/Header"
 import { useSelector, useDispatch } from 'react-redux'
 import {__getMyObjection} from '../redux/modules/MypageSlice'
 const MyObjection = () => {
-  const {mypage} = useSelector((state) => state.mypage)
-  console.log(mypage)
+  const {objections} = useSelector((state) => state.mypage)
+  console.log(objections)
   const dispatch = useDispatch()
   useEffect(() => {
     dispatch(__getMyObjection)
@@ -14,12 +14,12 @@ const MyObjection = () => {
       <Header/>
       MyObjection
       {
-        mypage !== undefined && (
+        objections.length > 0 && (
           <>
-                {mypage.map((item) => {
+                {objections.map((objection) => {
         return <div>
-          {item.image}
-          {item.title}
+          {objection.image}
+          {objection.title}
         </div>
       })}
           </>
