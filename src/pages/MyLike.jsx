@@ -1,26 +1,26 @@
 import React, {useEffect} from 'react'
 import Header from "../components/Header"
 import { useSelector, useDispatch } from 'react-redux'
-import { __getPost } from '../redux/modules/PostsSlice'
+import { __getMyLike } from '../redux/modules/MypageSlice'
 
 const MyLike = () => {
-  const {posts} = useSelector((state) => state.posts)
-  console.log(posts)
+  const {mypage} = useSelector((state) => state.mypage)
+  console.log(mypage)
   const dispatch = useDispatch()
   useEffect(() => {
-    dispatch(__getPost)
+    dispatch(__getMyLike)
   }, [])
   return (
     <div>
       <Header/>
       MyLike
       {
-        posts.length > 0 && (
+        mypage !== undefined && (
           <>
-        {posts.map((post) => {
+        {mypage.map((item) => {
         return <div>
-          {post.image}
-          {post.title}
+          {item.image}
+          {item.title}
         </div>
       })}
           </>
