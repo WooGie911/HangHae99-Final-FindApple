@@ -22,13 +22,17 @@ const Mypage = () => {
     navigate("/mylike")
   }
   const dispatch = useDispatch()
-  // const {profile} = useSelector((state) => state.login)
+  const {user} = useSelector((state) => state.Login)
     //get 해오기
     useEffect(() => {
-      dispatch(__UserProfile);
+      dispatch(__UserProfile());
     }, [dispatch]);
   return (
     <div><Header/>
+    <div>
+      {user.nickname}
+      {user.image}
+    </div>
     <div>
     <button onClick={mypost}>내가 올린 게시글</button>
     </div>

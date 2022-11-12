@@ -34,7 +34,9 @@ const MypageUpdate = () => {
     }
   };
   const [write, setWrite, writeHandle] = useInput({
+    email : "",
     nickname : "",
+    password : "",
   });
  
 // const {profile} = useSelector((state) => state.login)
@@ -46,12 +48,20 @@ const MypageUpdate = () => {
 
 const nicknameEdit = () => {
   // 백엔드와 협의 필요
-  // const formData = new FormData();
-  // formData.append("nickname", write.nickname);
-  // formData.append("profileImage", photo)
-  // const Fdata = {formData: formData};
-  // dispatch(__UserProfileEdit(Fdata));
-  //  setEdit(false);
+  const formData = new FormData();
+  formData.append("image", photo)
+  const obj = {
+    // 임시
+    // 나중에 이미지 url을 받아서 뿌려야 함.
+    email : write.email,
+    nickname : write.nickname,
+    password : write.password
+  }
+  formData.append(
+    "memberReqDto",
+    new Blob([JSON.stringify(obj)], {type : "application/json"})
+  );
+  dispatch(__UserProfileEdit(formData));
 }
 
   return (
