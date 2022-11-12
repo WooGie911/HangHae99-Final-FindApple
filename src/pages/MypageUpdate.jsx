@@ -34,9 +34,10 @@ const MypageUpdate = () => {
     }
   };
   const [write, setWrite, writeHandle] = useInput({
-    email : "",
-    nickname : "",
-    password : "",
+        // 임시 : 정수님 코드 확인 필요
+    email : "damin1@naver.com",
+    nickname : "damin1",
+    password : "damin1234",
   });
  
 // const {profile} = useSelector((state) => state.login)

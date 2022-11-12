@@ -133,7 +133,7 @@ export const __UserProfile = createAsyncThunk(
         }
       );
       console.log(data)
-      return thunkAPI.fulfillWithValue(data);
+      return thunkAPI.fulfillWithValue(data.data);
     } catch (error) {
       return thunkAPI.rejectWithValue(error);
     }
