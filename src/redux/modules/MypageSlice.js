@@ -17,12 +17,12 @@ export const __getMyPost = createAsyncThunk(
       const data = await axios.get(`${process.env.REACT_APP_SERVER}/api/myinfo/post`,{
         headers: {
           "Content-Type": `application/json`,
-          Authorization: accessToken,
-          RefreshToken: refreshToken,
+          Access_Token: accessToken,
+          Refresh_Token: refreshToken,
           "Cache-Control": "no-cache",
         }
       })
-      return thunkAPI.fulfillWithValue(data.data.data);
+      return thunkAPI.fulfillWithValue(data.data.myPostList);
     } catch(error){
       return thunkAPI.rejectWithValue(error);
     }
@@ -36,12 +36,12 @@ export const __getMyObjection = createAsyncThunk(
       const data = await axios.get(`${process.env.REACT_APP_SERVER}/api/myinfo/issue`,{
         headers: {
           "Content-Type": `application/json`,
-          Authorization: accessToken,
-          RefreshToken: refreshToken,
+          Access_Token: accessToken,
+          Refresh_Token: refreshToken,
           "Cache-Control": "no-cache",
         }
       })
-      return thunkAPI.fulfillWithValue(data.data.data);
+      return thunkAPI.fulfillWithValue(data.data.myIssuesList);
     } catch(error){
       return thunkAPI.rejectWithValue(error);
     }
@@ -55,8 +55,8 @@ export const __getMyLike = createAsyncThunk(
       const data = await axios.get(`${process.env.REACT_APP_SERVER}/api/myinfo/likes`,{
         headers: {
           "Content-Type": `application/json`,
-          Authorization: accessToken,
-          RefreshToken: refreshToken,
+          Access_Token: accessToken,
+          Refresh_Token: refreshToken,
           "Cache-Control": "no-cache",
         }
       })
