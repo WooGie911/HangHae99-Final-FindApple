@@ -19,20 +19,20 @@ const Header = () => {
       >
         HOME
       </h1>
-      <Span
+      <h2
         onClick={() => {
-          navigate("/postread");
+          navigate("/postread/macbook");
         }}
       >
         MacBook
-      </Span>
-      <Span
+      </h2>
+      <h2
         onClick={() => {
-          navigate("/postread");
+          navigate("/postread/iphone");
         }}
       >
         iPhone
-      </Span>
+      </h2>
       <button
         onClick={() => {
           navigate("/signin");

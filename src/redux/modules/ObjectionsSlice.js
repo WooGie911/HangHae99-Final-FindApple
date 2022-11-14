@@ -18,8 +18,8 @@ export const __searchObjection = createAsyncThunk(
       const data = await axios.get(`${process.env.REACT_APP_SERVER}/api/post`, {
         headers: {
           "Content-Type": `application/json`,
-          Authorization: accessToken,
-          RefreshToken: refreshToken,
+          Access_Token: accessToken,
+          Refresh_Token: refreshToken,
           "Cache-Control": "no-cache",
         },
       });
@@ -42,8 +42,8 @@ export const __getObjection = createAsyncThunk(
         {
           headers: {
             "Content-Type": `application/json`,
-            Authorization: accessToken,
-            RefreshToken: refreshToken,
+            Access_Token: accessToken,
+            Refresh_Token: refreshToken,
             "Cache-Control": "no-cache",
           },
         }
@@ -63,26 +63,14 @@ export const __addObjection = createAsyncThunk(
   async (payload, thunkAPI) => {
     try {
       await axios
-        .post(
-          `${process.env.REACT_APP_SERVER}/api/issue`,
-          payload,
-          // {
-          //   headers: {
-          //     "Content-Type": `application/json`,
-          //     Authorization: accessToken,
-          //     RefreshToken: refreshToken,
-          //     "Cache-Control": "no-cache",
-          //   },
-          // }
-          {
-            headers: {
-              enctype: "multipart/form-data",
-              Authorization: accessToken,
-              RefreshToken: refreshToken,
-              "Cache-Control": "no-cache",
-            },
-          }
-        )
+        .post(`${process.env.REACT_APP_SERVER}/api/issue`, payload, {
+          headers: {
+            enctype: "multipart/form-data",
+            Access_Token: accessToken,
+            Refresh_Token: refreshToken,
+            "Cache-Control": "no-cache",
+          },
+        })
         .then((response) => {
           console.log("response", response);
           return thunkAPI.fulfillWithValue(response.data.data);
@@ -103,8 +91,8 @@ export const __deleteObjection = createAsyncThunk(
         {
           headers: {
             "Content-Type": `application/json`,
-            Authorization: accessToken,
-            RefreshToken: refreshToken,
+            Access_Token: accessToken,
+            Refresh_Token: refreshToken,
             "Cache-Control": "no-cache",
           },
         }
@@ -128,10 +116,9 @@ export const __editObjection = createAsyncThunk(
         payload.formData,
         {
           headers: {
-            // "Content-Type": `application/json`,
-            enctype: "multipart/form-data",
-            Authorization: accessToken,
-            RefreshToken: refreshToken,
+            "Content-Type": `application/json`,
+            Access_Token: accessToken,
+            Refresh_Token: refreshToken,
             "Cache-Control": "no-cache",
           },
         }
@@ -155,8 +142,8 @@ export const __heartObjection = createAsyncThunk(
         {
           headers: {
             "Content-Type": `application/json`,
-            Authorization: accessToken,
-            RefreshToken: refreshToken,
+            Access_Token: accessToken,
+            Refresh_Token: refreshToken,
             "Cache-Control": "no-cache",
           },
         }

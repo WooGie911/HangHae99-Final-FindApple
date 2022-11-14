@@ -5,24 +5,29 @@ import { useDispatch, useSelector } from "react-redux";
 import { useParams } from "react-router-dom";
 import { __getPost, __searchPost } from "../redux/modules/PostsSlice";
 import PostSearch from "../components/PostSearch";
+import { __getPostDetail } from "../redux/modules/PostDetailsSlice";
 
 const PostRead = () => {
   const params = useParams();
-  console.log("params.category", params.category);
   const dispatch = useDispatch();
-  const { posts } = useSelector((state) => state.posts);
+  const posts = useSelector((state) => state.posts.posts);
 
   useEffect(() => {
-    dispatch(__getPost);
-  }, []);
+    dispatch(__getPost(params.category));
+  }, [params]);
 
   return (
     <>
       <Header />
       <div>PostRead</div>
+      <div>{params.category}</div>
 
       <PostSearch __search={__searchPost} />
-      <PostList posts={posts} />
+      <PostList
+        posts={posts}
+        detail={"PostDetail"}
+        __getDetail={__getPostDetail}
+      />
     </>
   );
 };

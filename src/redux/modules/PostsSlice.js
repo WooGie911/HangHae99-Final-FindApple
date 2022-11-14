@@ -7,6 +7,8 @@ const initialState = {
 
 const accessToken = localStorage.getItem("Access_Token");
 const refreshToken = localStorage.getItem("Refresh_Token");
+console.log("accessToken", accessToken);
+console.log("refreshToken", refreshToken);
 
 //검색기능 미완성
 export const __searchPost = createAsyncThunk(
@@ -16,14 +18,13 @@ export const __searchPost = createAsyncThunk(
       const data = await axios.get(`${process.env.REACT_APP_SERVER}/api/post`, {
         headers: {
           "Content-Type": `application/json`,
-          Authorization: accessToken,
-          RefreshToken: refreshToken,
+          Access_Token: accessToken,
+          Refresh_Token: refreshToken,
           "Cache-Control": "no-cache",
         },
       });
-      // console.log("data", data);
       console.log("__searchPost", data);
-      return thunkAPI.fulfillWithValue(data.data.data);
+      return thunkAPI.fulfillWithValue(data.data);
     } catch (error) {
       console.log("error", error);
       return thunkAPI.rejectWithValue(error);
@@ -35,17 +36,18 @@ export const __getPost = createAsyncThunk(
   "posts/__getPost",
   async (payload, thunkAPI) => {
     try {
-      const data = await axios.get(`${process.env.REACT_APP_SERVER}/api/post`, {
-        headers: {
-          "Content-Type": `application/json`,
-          Authorization: accessToken,
-          RefreshToken: refreshToken,
-          "Cache-Control": "no-cache",
-        },
-      });
-      // console.log("data", data);
-      console.log("__getPost", data);
-      return thunkAPI.fulfillWithValue(data.data.data);
+      const data = await axios.get(
+        `${process.env.REACT_APP_SERVER}/api/post/category/${payload}`,
+        {
+          headers: {
+            "Content-Type": `application/json`,
+            Access_Token: accessToken,
+            Refresh_Token: refreshToken,
+            "Cache-Control": "no-cache",
+          },
+        }
+      );
+      return thunkAPI.fulfillWithValue(data.data);
     } catch (error) {
       console.log("error", error);
       return thunkAPI.rejectWithValue(error);
@@ -58,26 +60,14 @@ export const __addPost = createAsyncThunk(
   async (payload, thunkAPI) => {
     try {
       await axios
-        .post(
-          `${process.env.REACT_APP_SERVER}/api/post`,
-          payload,
-          // {
-          //   headers: {
-          //     "Content-Type": `application/json`,
-          //     Authorization: accessToken,
-          //     RefreshToken: refreshToken,
-          //     "Cache-Control": "no-cache",
-          //   },
-          // }
-          {
-            headers: {
-              enctype: "multipart/form-data",
-              Authorization: accessToken,
-              RefreshToken: refreshToken,
-              "Cache-Control": "no-cache",
-            },
-          }
-        )
+        .post(`${process.env.REACT_APP_SERVER}/api/post`, payload, {
+          headers: {
+            enctype: "multipart/form-data",
+            Access_Token: accessToken,
+            Refresh_Token: refreshToken,
+            "Cache-Control": "no-cache",
+          },
+        })
         .then((response) => {
           console.log("response", response);
           return thunkAPI.fulfillWithValue(response.data.data);
@@ -92,19 +82,20 @@ export const __addPost = createAsyncThunk(
 export const __deletePost = createAsyncThunk(
   "posts/__deletePost",
   async (payload, thunkAPI) => {
+    console.log(payload);
     try {
       const data = await axios.delete(
         `${process.env.REACT_APP_SERVER}/api/post/${payload}`,
         {
           headers: {
             "Content-Type": `application/json`,
-            Authorization: accessToken,
-            RefreshToken: refreshToken,
+            Access_Token: accessToken,
+            Refresh_Token: refreshToken,
             "Cache-Control": "no-cache",
           },
         }
       );
-      console.log("response", data);
+      console.log("딜리트 response", data);
       return thunkAPI.fulfillWithValue(payload);
     } catch (error) {
       console.log("error", error);
@@ -124,15 +115,13 @@ export const __editPost = createAsyncThunk(
         payload.formData,
         {
           headers: {
-            // "Content-Type": `application/json`,
             enctype: "multipart/form-data",
-            Authorization: accessToken,
-            RefreshToken: refreshToken,
+            Access_Token: accessToken,
+            Refresh_Token: refreshToken,
             "Cache-Control": "no-cache",
           },
         }
       );
-      // console.log("data", data.data);
       console.log("response", data);
       return thunkAPI.fulfillWithValue(data.data.data);
     } catch (error) {
@@ -151,8 +140,8 @@ export const __CartPost = createAsyncThunk(
         {
           headers: {
             "Content-Type": `application/json`,
-            Authorization: accessToken,
-            RefreshToken: refreshToken,
+            Access_Token: accessToken,
+            Refresh_Token: refreshToken,
             "Cache-Control": "no-cache",
           },
         }

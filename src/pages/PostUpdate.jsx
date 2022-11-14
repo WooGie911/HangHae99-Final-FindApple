@@ -5,20 +5,21 @@ import { __editPost } from "../redux/modules/PostsSlice";
 import useInput from "../hook/useInput";
 import useImageUpload from "../hook/useImageUpload";
 import { useSelector } from "react-redux";
-import PricingInput from "../components/PricingInput";
+import PricingText from "../components/PricingText";
+import { useParams } from "react-router-dom";
 
-const PostUpdate = ({ paramId }) => {
+const PostUpdate = () => {
+  const paramId = useParams();
   const dispatch = useDispatch();
-  const imgRef = useRef();
-  const posts = useSelector((state) => state.posts.posts);
   const [files, fileUrls, uploadHandle] = useImageUpload(5, true, 0.3, 1000);
+  const imgRef = useRef();
+  const posts = useSelector((state) => state.details.posts);
   const [delImg, setDelImg] = useState([]);
-  const [upInput, setUpInput, upInputHandle] = useInput({ posts });
+  const [updateInput, setUpdateInput, updateInputHandle] = useInput(posts);
 
   const updateSubmit = () => {
     //request로 날릴 폼데이터
     const formData = new FormData();
-
     //폼 데이터에 파일 담기
     if (files.length > 0) {
       files.forEach((file) => {
@@ -28,12 +29,12 @@ const PostUpdate = ({ paramId }) => {
       formData.append("images", null);
     }
     //폼 데이터에 글작성 데이터 넣기
-    formData.append("post", JSON.stringify(upInput.title));
+    formData.append("post", JSON.stringify(updateInput.title));
 
     formData.append("imageId", delImg);
 
     const obj = {
-      id: paramId,
+      id: paramId.id,
       contentInfo: formData,
     };
     //Api 날리기
@@ -48,22 +49,22 @@ const PostUpdate = ({ paramId }) => {
   return (
     <div>
       <Header />
-      <PricingInput />
+      <PricingText Data={posts} />
 
       <div>
         title:
         <input
-          onChange={upInputHandle}
+          onChange={updateInputHandle}
           name="title"
-          value={upInput.title || ""}
+          value={updateInput.title || ""}
           type="text"
           placeholder="제목을 입력하세요."
         />
         content
         <input
-          onChange={upInputHandle}
+          onChange={updateInputHandle}
           name="content"
-          value={upInput.content || ""}
+          value={updateInput.content || ""}
           type="text"
           placeholder="내용을 입력하세요."
         />

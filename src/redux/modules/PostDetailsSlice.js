@@ -2,7 +2,7 @@ import { createAsyncThunk, createSlice } from "@reduxjs/toolkit";
 import axios from "axios";
 
 const initialState = {
-  post: [],
+  posts: [],
 };
 
 const accessToken = localStorage.getItem("Access_Token");
@@ -17,13 +17,13 @@ export const __getPostDetail = createAsyncThunk(
         {
           headers: {
             "Content-Type": `application/json`,
-            Authorization: accessToken,
-            RefreshToken: refreshToken,
+            Access_Token: accessToken,
+            Refresh_Token: refreshToken,
             "Cache-Control": "no-cache",
           },
         }
       );
-      console.log("__getPostDetail", data.data.data);
+      console.log("__getPostDetail", data);
       // console.log("response", data);
       return thunkAPI.fulfillWithValue(data.data.data);
     } catch (error) {
@@ -35,20 +35,16 @@ export const __getPostDetail = createAsyncThunk(
 
 export const __addPostComment = createAsyncThunk(
   "details/__addPostComment",
-  // async 는 프로미스에 새로운 신문법이다. // 언제끝나는지 알려준다.
   async (payload, thunkAPI) => {
     try {
-      //console.log(payload)
-      // payload를 데이터를 넣어줄때까지 실행하지 하지않겠다. //비동기
       const data = await axios.post(
         `${process.env.REACT_APP_SERVER}/api/comment/${payload.id}`,
-        // JSON.stringify(payload.comment),
         payload.comment,
         {
           headers: {
             "Content-Type": `application/json`,
-            Authorization: accessToken,
-            RefreshToken: refreshToken,
+            Access_Token: accessToken,
+            Refresh_Token: refreshToken,
             "Cache-Control": "no-cache",
           },
         }
@@ -74,8 +70,8 @@ export const __deletePostComment = createAsyncThunk(
         {
           headers: {
             "Content-Type": `application/json`,
-            Authorization: accessToken,
-            RefreshToken: refreshToken,
+            Access_Token: accessToken,
+            Refresh_Token: refreshToken,
             "Cache-Control": "no-cache",
           },
         }
@@ -102,8 +98,8 @@ export const __editPostComment = createAsyncThunk(
         {
           headers: {
             "Content-Type": `application/json`,
-            Authorization: accessToken,
-            RefreshToken: refreshToken,
+            Access_Token: accessToken,
+            Refresh_Token: refreshToken,
             "Cache-Control": "no-cache",
           },
         }
@@ -129,7 +125,7 @@ const PostDetailSlice = createSlice({
     },
     [__getPostDetail.fulfilled]: (state, action) => {
       state.isLoading = false;
-      state.post = action.payload;
+      state.posts = action.payload;
       // console.log("state.post", state.post);
     },
     [__getPostDetail.rejected]: (state, action) => {
@@ -144,7 +140,7 @@ const PostDetailSlice = createSlice({
     },
     [__addPostComment.fulfilled]: (state, action) => {
       state.isLoading = false;
-      state.post.commentList.push(action.payload);
+      state.posts.commentList.push(action.payload);
     },
     [__addPostComment.rejected]: (state, action) => {
       state.isLoading = false;
@@ -156,7 +152,7 @@ const PostDetailSlice = createSlice({
     },
     [__deletePostComment.fulfilled]: (state, action) => {
       state.isLoading = false;
-      state.post.commentList = state.post.commentList.filter(
+      state.posts.commentList = state.posts.commentList.filter(
         (comment) => comment.commentId !== action.payload
       );
     },

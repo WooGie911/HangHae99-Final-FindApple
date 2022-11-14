@@ -17,14 +17,12 @@ export const __getObjectionDetail = createAsyncThunk(
         {
           headers: {
             "Content-Type": `application/json`,
-            Authorization: accessToken,
-            RefreshToken: refreshToken,
+            Access_Token: accessToken,
+            Refresh_Token: refreshToken,
             "Cache-Control": "no-cache",
           },
         }
       );
-      //   console.log("__getPostDetail", data.data.data);
-      // console.log("response", data);
       return thunkAPI.fulfillWithValue(data.data.data);
     } catch (error) {
       console.log("error", error);
@@ -37,7 +35,6 @@ export const __getObjectionDetail = createAsyncThunk(
 
 export const __addObjectionComment = createAsyncThunk(
   "objectionDetails/__addObjectionComment",
-  // async 는 프로미스에 새로운 신문법이다. // 언제끝나는지 알려준다.
   async (payload, thunkAPI) => {
     try {
       //console.log(payload)
@@ -49,8 +46,8 @@ export const __addObjectionComment = createAsyncThunk(
         {
           headers: {
             "Content-Type": `application/json`,
-            Authorization: accessToken,
-            RefreshToken: refreshToken,
+            Access_Token: accessToken,
+            Refresh_Token: refreshToken,
             "Cache-Control": "no-cache",
           },
         }
@@ -76,8 +73,8 @@ export const __deleteObjectionComment = createAsyncThunk(
         {
           headers: {
             "Content-Type": `application/json`,
-            Authorization: accessToken,
-            RefreshToken: refreshToken,
+            Access_Token: accessToken,
+            Refresh_Token: refreshToken,
             "Cache-Control": "no-cache",
           },
         }
@@ -104,8 +101,8 @@ export const __editObjectionComment = createAsyncThunk(
         {
           headers: {
             "Content-Type": `application/json`,
-            Authorization: accessToken,
-            RefreshToken: refreshToken,
+            Access_Token: accessToken,
+            Refresh_Token: refreshToken,
             "Cache-Control": "no-cache",
           },
         }

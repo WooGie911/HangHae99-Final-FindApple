@@ -30,7 +30,7 @@ const Modal = (props) => {
         </button>
         <button
           onClick={() => {
-            navigate("/objectionread");
+            navigate("/objectioncreate");
           }}
         >
           이의제기

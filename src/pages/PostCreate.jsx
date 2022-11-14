@@ -1,13 +1,16 @@
 import React from "react";
 import Header from "../components/Header";
 import PostsCreate from "../components/PostsCreate";
+import { __addPost } from "../redux/modules/PostsSlice";
 
 const PostCreate = () => {
   return (
-    <div>
+    <>
       <Header />
-      <PostsCreate />
-    </div>
+      <div>PostCreate</div>
+
+      <PostsCreate __addData={__addPost} />
+    </>
   );
 };
 
