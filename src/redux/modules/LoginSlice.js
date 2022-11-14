@@ -31,6 +31,7 @@ export const __emailCheck = createAsyncThunk(
 export const __kakaoLogin = createAsyncThunk(
   "posts/__kakaoLogin",
   async (code, thunkAPI) => {
+    console.log(code)
     try {
       const res = await axios
       .get(`${process.env.REACT_APP_SERVER}/api/member/kakao?code=${code}`);
@@ -128,7 +129,6 @@ export const __UserProfile = createAsyncThunk(
           }
         }
       );
-      console.log(data)
       return thunkAPI.fulfillWithValue(data.data);
     } catch (error) {
       return thunkAPI.rejectWithValue(error);

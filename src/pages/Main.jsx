@@ -2,6 +2,7 @@ import React, {useEffect} from "react";
 
 import { useDispatch, useSelector } from "react-redux";
 import { useNavigate } from "react-router-dom";
+import { __UserProfile } from "../redux/modules/LoginSlice";
 
 const Main = () => {
   const {user} = useSelector((state) => state.Login)
@@ -11,7 +12,9 @@ const Main = () => {
   const refreshToken = localStorage.getItem("Refresh_Token");
   // const nickname = localStorage.getItem("nickname");
   // const profileIMG = localStorage.getItem("profileIMG");
-
+  useEffect(() => {
+    dispatch(__UserProfile());
+  }, [dispatch]);
   return (
     <>
       <div>Main</div>
@@ -23,6 +26,7 @@ const Main = () => {
           marginTop: "-20px",
           width: "300px",
           height: "300px",
+          borderRadius: "50%"
         }}
       />
 
