@@ -27,7 +27,7 @@ const SellerPage = () => {
             <>
             <div>{seller.image}</div>
             <div>{seller.title}</div>
-            <div>{seller.product}</div>
+            {/* <div>{seller.product}</div> */}
             <div>{seller.price}</div>
             </>
           )

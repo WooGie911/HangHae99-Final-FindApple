@@ -12,6 +12,7 @@ const refreshToken = localStorage.getItem("Refresh_Token");
 export const __getSellerinfo = createAsyncThunk(
   "sellerpage/__getSellerinfo",
   async(payload, thunkAPI) => {
+    console.log(payload)
     try {
       const data = await axios.get(`${process.env.REACT_APP_SERVER}/api/myinfo/seller/${payload}`,{
         headers: {
