@@ -26,7 +26,8 @@ const PostDetail = () => {
   //게시글 삭제
   const onDeleteHandler = (payload) => {
     dispatch(__deletePost(payload));
-    navigate("/postread/all");
+    window.location.replace("/postread/all");
+    //   navigate("/postread/all");
   };
 
   return (

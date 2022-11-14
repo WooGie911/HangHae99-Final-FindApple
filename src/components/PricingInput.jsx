@@ -1,5 +1,6 @@
 import React, { useState } from "react";
 import styled from "styled-components";
+import PostsCreate from "./PostsCreate";
 
 const PricingInput = (props) => {
   const [tag, setTag] = useState("");
@@ -16,7 +17,7 @@ const PricingInput = (props) => {
         <option value={"iphone"}>iphone</option>
       </select>
       {/* 론리&& 연산자로 해결하기*/}
-      {tag === "macbook" && (
+      {props.State.category === "macbook" && (
         <div>
           <Select>
             <option>맥북 기종</option>
@@ -579,7 +580,7 @@ const PricingInput = (props) => {
           <input type="date" />
         </div>
       )}
-      {tag === "iphone" && (
+      {props.State.category === "iphone" && (
         <div>
           <Select>
             <option value="choice">아이폰 기종</option>

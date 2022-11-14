@@ -6,7 +6,6 @@ import { useNavigate } from "react-router-dom";
 const PostList = ({ posts, detail, __getDetail }) => {
   const navigate = useNavigate();
   const dispatch = useDispatch();
-  console.log("posts 데이터", posts);
   const onClickHandler = (data) => {
     dispatch(__getDetail(data));
     navigate(`/${detail}/${data}`);
