@@ -46,6 +46,13 @@ const MypageUpdate = () => {
     dispatch(__UserProfileEdit);
   }, [dispatch]);
 
+// const {user} = useSeletor((state) => state.Login)
+// console.log(user)
+//  const profileIMG = user.profileImg
+//  const onSubmitHandler = () => {
+//   imageUploader.current.click()
+// }
+
 const nicknameEdit = () => {
   // 백엔드와 협의 필요
   const formData = new FormData();
@@ -62,14 +69,8 @@ const nicknameEdit = () => {
     new Blob([JSON.stringify(obj)], {type : "application/json"})
   );
   dispatch(__UserProfileEdit(formData));
+  //   navigate("/mypage")
 }
-// const {user} = useSeletor((state) => state.Login)
-// console.log(user)
-//  const profileIMG = user.img
-//  const onSubmitHandler = () => {
-//   imageUploader.current.click()
-//   navigate("/mypage")
-// }
 
   return (
     <div
