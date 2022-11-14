@@ -16,14 +16,14 @@ const MyPost = () => {
       MyPost
       {
         posts.length > 0 && (
-          <>
+          <div>
         {posts.map((post) => {
-        return <div>
+        return <div key={post.postId}>
           {post.image}
           {post.title}
         </div>
       })}
-          </>
+          </div>
         )
       }
 
