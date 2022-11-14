@@ -34,24 +34,42 @@ const MypageUpdate = () => {
     }
   };
   const [write, setWrite, writeHandle] = useInput({
-    nickname : "",
+        // 임시 : 정수님 코드 확인 필요
+    email : "damin1@naver.com",
+    nickname : "damin1",
+    password : "damin1234",
   });
  
-// const {profile} = useSelector((state) => state.login)
 
   //get 해오기
   useEffect(() => {
     dispatch(__UserProfileEdit);
   }, [dispatch]);
 
+// const {user} = useSeletor((state) => state.Login)
+// console.log(user)
+//  const profileIMG = user.profileImg
+//  const onSubmitHandler = () => {
+//   imageUploader.current.click()
+// }
+
 const nicknameEdit = () => {
   // 백엔드와 협의 필요
-  // const formData = new FormData();
-  // formData.append("nickname", write.nickname);
-  // formData.append("profileImage", photo)
-  // const Fdata = {formData: formData};
-  // dispatch(__UserProfileEdit(Fdata));
-  //  setEdit(false);
+  const formData = new FormData();
+  formData.append("image", photo)
+  const obj = {
+    // 임시
+    // 나중에 이미지 url을 받아서 뿌려야 함.
+    email : write.email,
+    nickname : write.nickname,
+    password : write.password
+  }
+  formData.append(
+    "memberReqDto",
+    new Blob([JSON.stringify(obj)], {type : "application/json"})
+  );
+  dispatch(__UserProfileEdit(formData));
+  //   navigate("/mypage")
 }
 
   return (
@@ -73,6 +91,13 @@ const nicknameEdit = () => {
         }}
       />
       {/* 아래 내용만 데이터 받으면 div를 사진으로 바꿔서 사용할 것 */}
+      {/* <img src={ProfileIMG} style={{
+          height: "200px",
+          width: "200px",
+          border: "1px dashed black",
+          border-radius : "50%"
+        }}
+        onClick={onSubmitHandler} /> */}
       <div
         style={{
           height: "200px",
