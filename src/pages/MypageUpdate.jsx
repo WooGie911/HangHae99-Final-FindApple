@@ -40,7 +40,6 @@ const MypageUpdate = () => {
     password : "damin1234",
   });
  
-// const {profile} = useSelector((state) => state.login)
 
   //get 해오기
   useEffect(() => {
@@ -64,6 +63,13 @@ const nicknameEdit = () => {
   );
   dispatch(__UserProfileEdit(formData));
 }
+// const {user} = useSeletor((state) => state.Login)
+// console.log(user)
+//  const profileIMG = user.img
+//  const onSubmitHandler = () => {
+//   imageUploader.current.click()
+//   navigate("/mypage")
+// }
 
   return (
     <div
@@ -84,6 +90,13 @@ const nicknameEdit = () => {
         }}
       />
       {/* 아래 내용만 데이터 받으면 div를 사진으로 바꿔서 사용할 것 */}
+      {/* <img src={ProfileIMG} style={{
+          height: "200px",
+          width: "200px",
+          border: "1px dashed black",
+          border-radius : "50%"
+        }}
+        onClick={onSubmitHandler} /> */}
       <div
         style={{
           height: "200px",

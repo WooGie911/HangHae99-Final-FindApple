@@ -30,9 +30,9 @@ const Mypage = () => {
   return (
     <div><Header/>
     <div>
-      <img src={user.profileImg} />
-      {user.nickname}
-      {user.email}
+      <div><img src={user.profileImg} /></div>
+      <div>{user.nickname}</div>
+      <div>{user.email}</div>
     </div>
     <div>
     <button onClick={mypost}>내가 올린 게시글</button>
