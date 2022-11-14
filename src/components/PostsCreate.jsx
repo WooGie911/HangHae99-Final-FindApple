@@ -1,13 +1,13 @@
 import React, { useRef, useState, useEffect } from "react";
 import Header from "./Header";
-import { __addPost } from "../redux/modules/PostsSlice";
+
 import useInput from "../hook/useInput";
 import useImgUpload from "../hook/useImageUpload";
 import { useDispatch } from "react-redux";
 import { useNavigate } from "react-router-dom";
 import PricingInput from "./PricingInput";
 
-const PostsCreate = () => {
+const PostsCreate = (props) => {
   const dispatch = useDispatch();
   const navigate = useNavigate();
   const [write, setWrite, writeHandle] = useInput({
@@ -21,44 +21,54 @@ const PostsCreate = () => {
   });
 
   //이미지 업로드 훅
-  const [files, fileUrls, uploadHandle] = useImgUpload(5, true, 0.3, 1000);
+  const [files, fileUrls, uploadHandle] = useImgUpload(5, true, 0.5, 1000);
 
   //이미지 업로드 인풋돔 선택 훅
   const imgRef = useRef();
 
   //submit
   const writeSubmit = () => {
-    //request로 날릴 폼데이터
+    // request로 날릴 폼데이터
     const formData = new FormData();
 
-    //폼 데이터에 파일 담기
+    // 폼 데이터에 파일 담기
     if (files.length > 0) {
       files.forEach((file) => {
-        formData.append("images", write.image);
+        formData.append("multipartFiles", file);
       });
     } else {
-      formData.append("images", null);
+      formData.append("multipartFiles", null);
     }
 
-    //폼 데이터에 글작성 데이터 넣기
+    // 폼 데이터에 글작성 데이터 넣기
+    const objects = {
+      title: write.title,
+      category: write.category,
+      expectPrice: 1000,
+      userPrice: 2000,
+      content: write.content,
+    };
     formData.append(
-      "post",
-      JSON.stringify({
-        content: write.content,
-        title: write.title,
-      })
+      "postReqDto",
+      new Blob([JSON.stringify(objects)], { type: "application/json" })
+      // objects
     );
-    //나중에 안되면 바꿔야됨*****************
 
     //Api 날리기
-    dispatch(__addPost(formData));
+    dispatch(props.__addData(formData));
     //navigate("/PostRead");
-    console.log("폼데이터", write);
+    console.log("폼데이터", formData);
+    console.log("files", files);
+    console.log("objects", objects);
   };
 
   return (
     <div>
-      <PricingInput />
+      <PricingInput
+        State={write}
+        setState={setWrite}
+        stateHandle={writeHandle}
+      />
 
       <div>
         title:
@@ -69,7 +79,7 @@ const PostsCreate = () => {
           type="text"
           placeholder="제목을 입력하세요."
         />
-        content
+        content:
         <input
           onChange={writeHandle}
           name="content"

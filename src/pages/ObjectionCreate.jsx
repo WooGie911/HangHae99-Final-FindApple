@@ -1,12 +1,17 @@
-import React from 'react'
-import Header from "../components/Header"
+import React from "react";
+import Header from "../components/Header";
+import PostsCreate from "../components/PostsCreate";
+import { __addObjection } from "../redux/modules/ObjectionsSlice";
 
 const ObjectionCreate = () => {
   return (
-    <div>
-      <Header/>
-      ObjectionCreate</div>
-  )
-}
+    <>
+      <Header />
+      <div>ObjectionCreate</div>
 
-export default ObjectionCreate
+      <PostsCreate __addData={__addObjection} />
+    </>
+  );
+};
+
+export default ObjectionCreate;

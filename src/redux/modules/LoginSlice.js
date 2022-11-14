@@ -4,6 +4,7 @@ import axios from "axios";
 const initialState = {
   post: [{}],
   comment: [],
+  user: {},
 };
 const accessToken = localStorage.getItem("Access_Token");
 const refreshToken = localStorage.getItem("Refresh_Token");
@@ -15,10 +16,8 @@ export const __emailCheck = createAsyncThunk(
     try {
       const data = await axios.post(
         `${process.env.REACT_APP_SERVER}/api/member/signup/mail-confirm`,
-        `https://study.o-r.kr:8080/api/member/signup/mail-confirm`,
         payload
       );
-      // console.log("data", data);
       console.log("__emailCheck", data);
       localStorage.setItem("emailCheckData", data.data);
       return thunkAPI.fulfillWithValue(data.data.data);
@@ -28,15 +27,18 @@ export const __emailCheck = createAsyncThunk(
     }
   }
 );
-//http://43.201.116.82
+
 export const __kakaoLogin = (code) => {
   return function (dispatch, getState) {
+    console.log(code);
     axios
-      .get(`https://study.o-r.kr:8080/api/member/kakao?code=${code}`)
+      .get(`${process.env.REACT_APP_SERVER}/api/member/kakao?code=${code}`)
       .then((res) => {
         console.log("넘어온 토큰값", res); // 토큰이 넘어올 것임
-        const Access_Token = res.data.accessToken;
-        localStorage.setItem("token", Access_Token);
+        window.localStorage.setItem("Access_Token", res.data.accessToken);
+        window.localStorage.setItem("Refresh_Token", res.data.refreshToken);
+        window.localStorage.setItem("nickname", res.data.nickname);
+        window.localStorage.setItem("profileIMG", res.data.avatarUrl);
         // 토큰 받았고 로그인됐으니 메인으로 화면 전환시켜줌
         window.location.replace("/");
       })
@@ -55,15 +57,14 @@ export const __Signin = createAsyncThunk(
     try {
       console.log(payload);
       const data = await axios.post(
-        `https://study.o-r.kr:8080/api/member/login`,
-        // `${process.env.REACT_APP_SERVER}/api/member/login`,
+        `${process.env.REACT_APP_SERVER}/api/member/login`,
         payload
       );
       console.log(data);
 
       if (data.status === 200 || data.status === 201) {
-        window.localStorage.setItem("Access_Token", data.headers.authorization);
-        window.localStorage.setItem("Refresh_Token", data.headers.refresh);
+        window.localStorage.setItem("Access_Token", data.data.accessToken);
+        window.localStorage.setItem("Refresh_Token", data.data.refreshToken);
         alert("로그인 성공");
         window.location.replace("/");
       }
@@ -92,8 +93,7 @@ export const __SignUp = createAsyncThunk(
     try {
       console.log(payload);
       const data = await axios
-        .post(`https://study.o-r.kr:8080/api/member/signup`, payload)
-        // .post(`${process.env.REACT_APP_SERVER}/api/member/signup`, payload)
+        .post(`${process.env.REACT_APP_SERVER}/api/member/signup`, payload)
 
         .then((response) => {
           console.log("회원가입response", response);
@@ -106,11 +106,9 @@ export const __SignUp = createAsyncThunk(
       console.log("회원가입응답", data);
     } catch (error) {
       console.log("error", error);
-      //이미 존재하는 데이터 예외처리 (아이디, 닉네임)
       if (error.response.data.message !== undefined) {
         return window.alert(error.response.data.message);
       }
-      //입력 형식에 맞지 않는 예외처리 메시지 (이메일형식, 비밀번호 형식)
       window.alert(error.response.data[0].message);
       return thunkAPI.rejectWithValue(error);
     }
@@ -150,8 +148,8 @@ export const __logout = createAsyncThunk(
       await axios
         .get(`${process.env.REACT_APP_SERVER}/api/logout`, {
           headers: {
-            Authorization: accessToken,
-            RefreshToken: refreshToken,
+            Access_Token: accessToken,
+            Refresh_Token: refreshToken,
             "Cache-Control": "no-cache",
           },
         })

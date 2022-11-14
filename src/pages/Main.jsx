@@ -6,21 +6,46 @@ import { useNavigate } from "react-router-dom";
 const Main = () => {
   const dispatch = useDispatch();
   const navigate = useNavigate();
+  const accessToken = localStorage.getItem("Access_Token");
+  const refreshToken = localStorage.getItem("Refresh_Token");
+  const nickname = localStorage.getItem("nickname");
+  const profileIMG = localStorage.getItem("profileIMG");
+
   return (
     <>
       <div>Main</div>
       <br />
 
+      <img
+        src={profileIMG}
+        style={{
+          marginTop: "-20px",
+          width: "300px",
+          height: "300px",
+        }}
+      />
+
+      <br />
+      <div>{nickname}</div>
+      <br />
       <div
         onClick={() => {
-          navigate("/postread/MacBook");
+          localStorage.clear();
+        }}
+      >
+        로그아웃
+      </div>
+
+      <div
+        onClick={() => {
+          navigate("/postread/macbook");
         }}
       >
         MacBook
       </div>
       <div
         onClick={() => {
-          navigate("/postread/iPhone");
+          navigate("/postread/iphone");
         }}
       >
         iPhone
@@ -36,7 +61,7 @@ const Main = () => {
       <br />
       <div
         onClick={() => {
-          navigate("/postread/All");
+          navigate("/postread/all");
         }}
       >
         검색

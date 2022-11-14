@@ -1,7 +1,7 @@
 import React from "react";
 import Header from "../components/Header";
 
-import { useNavigate } from "react-router-dom";
+import { useNavigate, useParams } from "react-router-dom";
 import { useDispatch, useSelector } from "react-redux";
 import CommentCreate from "../components/CommentCreate";
 import CommentList from "../components/CommentList";
@@ -11,12 +11,12 @@ import {
   __deletePostComment,
 } from "../redux/modules/PostDetailsSlice";
 
-
 const PostDetail = () => {
   const navigate = useNavigate();
   const dispatch = useDispatch();
-  const post = useSelector((state) => state.details.post);
-  const commentList = useSelector((state) => state.comment.post.commentList);
+  const params = useParams();
+  const { posts } = useSelector((state) => state.details);
+  // const { comments } = useSelector((state) => state.details.posts);
 
   //찜하기
   const onCartButton = (payload) => {
@@ -26,47 +26,45 @@ const PostDetail = () => {
   //게시글 삭제
   const onDeleteHandler = (payload) => {
     dispatch(__deletePost(payload));
-    navigate("-1");
-    // window.location.replace("/Main");
+    navigate("/postread/all");
   };
 
   return (
-
     <>
       <Header />
       <div>PostDetail</div>
-      <button onClick={onCartButton(post.postId)}>찜</button>
-      <button onClick={() => navigate("/postupdate")}> 수정하기</button>
+      <button onClick={() => onCartButton(posts.postId)}>찜</button>
+      <button onClick={() => navigate(`/postupdate/${posts.postId}`)}>
+        수정하기
+      </button>
       <div>
-        <div>post.title</div>
-
-        {post.images !== undefined &&
-          post.images.map((item) => {
-            return <img src={item.image} key={item.imageId} />;
+        <div>{posts.title}</div>
+        {posts.images !== undefined &&
+          posts.images.map((item, index) => {
+            return <img src={item.image} key={index} />;
           })}
-        <div>post.expectPrice</div>
-        <div>post.userPrice</div>
-        <div>post.content</div>
+        <div>{posts.expectPrice}</div>
+        <div>{posts.userPrice}</div>
+        <div>{posts.content}</div>
       </div>
 
       <CommentList
         __deleteComment={__deletePostComment}
-        commentList={commentList}
+        commentList={posts.comments}
       />
       <CommentCreate __addComment={__addPostComment} />
 
       <div>
-        <button onClick={() => navigate("-1")}>이전으로</button>
+        <button onClick={() => navigate(-1)}>이전으로</button>
         <button
           onClick={() => {
-            onDeleteHandler(post.postId);
+            onDeleteHandler(params.id);
           }}
         >
           글삭제
         </button>
       </div>
     </>
-
   );
 };
 

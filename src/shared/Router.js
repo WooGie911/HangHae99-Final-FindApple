@@ -36,9 +36,8 @@ const Router = () => {
 
         <Route path="/postread/:category" element={<PostRead />} />
 
-
         {/* 게시글 업데이트로 이동하기 */}
-        <Route path="/postupdate" element={<PostUpdate />} />
+        <Route path="/postupdate/:id" element={<PostUpdate />} />
 
         {/* 포스트리스트 카드별 상세보기 페이지로 이동하기 */}
         <Route path="/PostDetail/:id" element={<PostDetail />} />
@@ -63,23 +62,20 @@ const Router = () => {
 
         {/* main 페이지 이동하기 */}
         <Route path="/" element={<Main />} />
-        
+
         {/* 판매자 페이지 이동하기 */}
-        <Route path="/sellerpage" element={<SellerPage />} />        
+        <Route path="/sellerpage" element={<SellerPage />} />
 
         {/* 찜하기 페이지 이동하기 */}
-        <Route path="/mylike" element={<MyLike />} />  
+        <Route path="/mylike" element={<MyLike />} />
 
-         {/* 내 이의제기 페이지 이동하기 */}
-         <Route path="/myobjection" element={<MyObjection />} />        
+        {/* 내 이의제기 페이지 이동하기 */}
+        <Route path="/myobjection" element={<MyObjection />} />
 
-         {/* 내 이의제기 페이지 이동하기 */}
-         <Route path="/mypost" element={<MyPost />} />   
+        {/* 내 이의제기 페이지 이동하기 */}
+        <Route path="/mypost" element={<MyPost />} />
 
-        <Route
-          path="https://localhost:3000/kakaoLogin"
-          element={<Redirect />}
-        />
+        <Route path="/KAKAO" element={<Redirect />} />
       </Routes>
     </BrowserRouter>
   );
