@@ -2,7 +2,9 @@ import { createAsyncThunk, createSlice } from "@reduxjs/toolkit";
 import axios from "axios";
 
 const initialState = {
-  seller: {},
+  myPostList : [],
+  sellerInfoDto : {}
+
 };
 
 const accessToken = localStorage.getItem("Access_Token");
@@ -12,7 +14,6 @@ const refreshToken = localStorage.getItem("Refresh_Token");
 export const __getSellerinfo = createAsyncThunk(
   "sellerpage/__getSellerinfo",
   async(payload, thunkAPI) => {
-    console.log(payload)
     try {
       const data = await axios.get(`${process.env.REACT_APP_SERVER}/api/myinfo/seller/${payload}`,{
         headers: {
@@ -22,7 +23,8 @@ export const __getSellerinfo = createAsyncThunk(
           "Cache-Control": "no-cache",
         }
       })
-      return thunkAPI.fulfillWithValue(data.data.data);
+      console.log(data);
+      return thunkAPI.fulfillWithValue(data.data);
     } catch(error){
       return thunkAPI.rejectWithValue(error);
     }
@@ -42,7 +44,8 @@ const SellerSlice = createSlice({
 },
 [__getSellerinfo.fulfilled]: (state, action) => {
   state.isLoading = false;
-  state.seller = action.payload;
+  state.myPostList = action.payload.myPostList;
+  state.sellerInfoDto = action.payload.sellerInfoDto
 },
 [__getSellerinfo.rejected]: (state, action) => {
   state.isLoading = false;

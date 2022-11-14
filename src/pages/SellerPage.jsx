@@ -3,32 +3,39 @@ import Header from "../components/Header"
 import { useSelector } from 'react-redux'
 import { __getSellerinfo} from '../redux/modules/SellerSlice'
 import { useDispatch } from 'react-redux'
+import { useParams } from 'react-router-dom'
 
 const SellerPage = () => {
-  const {seller} = useSelector((state) => state.sellerpage)
-  console.log(seller)
+  const {myPostList, sellerInfoDto} = useSelector((state) => state.sellerpage)
+  const params = useParams()
   const dispatch = useDispatch()
+  const nickname = params.nickname
   useEffect(() => {
-    dispatch(__getSellerinfo(seller.nickname))
-  }, [])
+    dispatch(__getSellerinfo(params.nickname))
+  }, [nickname])
   return (
     <div>
       <Header/>
-      <div>판매자 프로필
-      {seller.profileImg}
-      </div>
+      <img src={sellerInfoDto.profileImg}/>
       <div>판매자 닉네임</div>
-      {seller.nickname}
+      {sellerInfoDto.nickname}
       <div>판매자 이메일</div>
-      {seller.email}
+      {sellerInfoDto.email}
       <div>물건 리스트
         {
-          seller !== undefined && (
+          myPostList !== undefined && (
             <>
-            <div>{seller.image}</div>
-            <div>{seller.title}</div>
-            {/* <div>{seller.product}</div> */}
-            <div>{seller.price}</div>
+            {myPostList.map((mypost) => {
+              return (
+                <div key={mypost.postId}>
+                {/* <div>{myPostList.image}</div> */}
+                <div>{mypost.title}</div>
+                {/* <div>{myPostList.product}</div> */}
+                <div>{mypost.userPrice}</div>
+                </div>
+              )
+            })}
+
             </>
           )
         }
