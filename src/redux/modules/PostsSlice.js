@@ -7,8 +7,6 @@ const initialState = {
 
 const accessToken = localStorage.getItem("Access_Token");
 const refreshToken = localStorage.getItem("Refresh_Token");
-console.log("accessToken", accessToken);
-console.log("refreshToken", refreshToken);
 
 //검색기능 미완성
 export const __searchPost = createAsyncThunk(

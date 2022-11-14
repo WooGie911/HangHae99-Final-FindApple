@@ -39,5 +39,4 @@ const CommentCreate = (props) => {
   );
 };
 
-
 export default CommentCreate;

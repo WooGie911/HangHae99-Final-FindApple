@@ -24,14 +24,20 @@ const PostList = ({ posts, detail, __getDetail }) => {
                 }}
               >
                 <div>
-                  <img
-                    src={post.images}
-                    style={{
-                      marginTop: "-20px",
-                      width: "300px",
-                      height: "300px",
-                    }}
-                  />
+                  {post.images &&
+                    post.images.map((item) => {
+                      return (
+                        <img
+                          key={item.id}
+                          src={item.imgUrl}
+                          style={{
+                            marginTop: "-20px",
+                            width: "300px",
+                            height: "300px",
+                          }}
+                        />
+                      );
+                    })}
                 </div>
                 <br />
                 <div>
