@@ -1,15 +1,16 @@
-import React from "react";
+import React, {useEffect} from "react";
 
 import { useDispatch, useSelector } from "react-redux";
 import { useNavigate } from "react-router-dom";
 
 const Main = () => {
+  const {user} = useSelector((state) => state.Login)
   const dispatch = useDispatch();
   const navigate = useNavigate();
   const accessToken = localStorage.getItem("Access_Token");
   const refreshToken = localStorage.getItem("Refresh_Token");
-  const nickname = localStorage.getItem("nickname");
-  const profileIMG = localStorage.getItem("profileIMG");
+  // const nickname = localStorage.getItem("nickname");
+  // const profileIMG = localStorage.getItem("profileIMG");
 
   return (
     <>
@@ -17,7 +18,7 @@ const Main = () => {
       <br />
 
       <img
-        src={profileIMG}
+        src={user.profileImg}
         style={{
           marginTop: "-20px",
           width: "300px",
@@ -26,7 +27,7 @@ const Main = () => {
       />
 
       <br />
-      <div>{nickname}</div>
+      <div>{user.nickname}</div>
       <br />
       <div
         onClick={() => {
