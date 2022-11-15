@@ -7,6 +7,7 @@ import { useParams } from 'react-router-dom'
 
 const SellerPage = () => {
   const {myPostList, sellerInfoDto} = useSelector((state) => state.sellerpage)
+  console.log(myPostList);
   const {memberId} = useParams()
   // params, router 접근
   const dispatch = useDispatch()
@@ -16,19 +17,25 @@ const SellerPage = () => {
   return (
     <div>
       <Header/>
-      <img src={sellerInfoDto.profileImg}/>
-      <div>판매자 닉네임</div>
-      {sellerInfoDto.nickname}
-      <div>판매자 이메일</div>
-      {sellerInfoDto.email}
+      {
+        sellerInfoDto !== undefined && (
+          <>
+              <img src={sellerInfoDto.profileImg}/>
+              <div>판매자 닉네임</div>
+              {sellerInfoDto.nickname}
+              <div>판매자 이메일</div>
+              {sellerInfoDto.email}   
+          </>
+        )
+      }
       <div>물건 리스트
         {
-          myPostList !== undefined && (
+          myPostList.length > 0 && (
             <>
             {myPostList.map((mypost) => {
               return (
                 <div key={mypost.postId}>
-                {/* <div>{myPostList.image}</div> */}
+                <img src={mypost.images[0].imgUrl}/>
                 <div>{mypost.title}</div>
                 {/* <div>{myPostList.product}</div> */}
                 <div>{mypost.userPrice}</div>

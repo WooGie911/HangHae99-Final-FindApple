@@ -19,8 +19,9 @@ const MyPost = () => {
           <div>
         {posts.map((post) => {
         return <div key={post.postId}>
-          {post.image}
-          {post.title}
+          <img src={post.images[0].imgUrl}/>
+          <div>{post.title}</div>
+          <div>{post.userPrice}</div>
         </div>
       })}
           </div>
