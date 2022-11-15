@@ -120,13 +120,14 @@ export const __UserProfile = createAsyncThunk(
   async (payload, thunkAPI) => {
     try {
       const data = await axios.get(
-        `${process.env.REACT_APP_SERVER}/api/myinfo`,{
+        `${process.env.REACT_APP_SERVER}/api/myinfo`,
+        {
           headers: {
             "Content-Type": `application/json`,
             Access_Token: accessToken,
             Refresh_Token: refreshToken,
             "Cache-Control": "no-cache",
-          }
+          },
         }
       );
       return thunkAPI.fulfillWithValue(data.data);
@@ -139,19 +140,21 @@ export const __UserProfile = createAsyncThunk(
 export const __UserProfileEdit = createAsyncThunk(
   "Login/__UserProfileEdit",
   async (payload, thunkAPI) => {
-    console.log(payload)
+    console.log(payload);
     try {
       const data = await axios.patch(
-        `${process.env.REACT_APP_SERVER}/api/myinfo/edit`, payload, {
+        `${process.env.REACT_APP_SERVER}/api/myinfo/edit`,
+        payload,
+        {
           headers: {
             enctype: "multipart/form-data",
             Access_Token: accessToken,
             // Refresh_Token: refreshToken,
             "Cache-Control": "no-cache",
-          }
+          },
         }
       );
-      console.log(data)
+      console.log(data);
     } catch (error) {
       return thunkAPI.rejectWithValue(error);
     }
