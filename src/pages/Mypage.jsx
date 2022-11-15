@@ -31,7 +31,7 @@ const Mypage = () => {
   return (
     <div><Header/>
     <div>
-      <div><img src={user.ProfileImg === null ? photoIMG : user.profileImg}/></div>
+      <div><img src={user.profileImg == (null || undefined) ? photoIMG : user.profileImg}/></div>
       <div>{user.nickname}</div>
       <div>{user.email}</div>
     </div>

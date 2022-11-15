@@ -8,7 +8,6 @@ import photoIMG from "../assets/photoIMG.png"
 
 const Main = () => {
   const {user} = useSelector((state) => state.Login)
-  console.log(user.profileImg)
   const dispatch = useDispatch();
   const navigate = useNavigate();
   const accessToken = localStorage.getItem("Access_Token");
@@ -17,12 +16,13 @@ const Main = () => {
     dispatch(__UserProfile());
   }, [dispatch]);
   return (
+    
     <>
       <div>Main</div>
       <br />
 
       <img
-        src={user.ProfileImg === null  ? photoIMG : user.profileImg}
+        src={user.profileImg == (null || undefined)  ? photoIMG : user.profileImg}
         style={{
           marginTop: "-20px",
           width: "300px",

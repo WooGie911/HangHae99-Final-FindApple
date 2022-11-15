@@ -82,7 +82,7 @@ const nicknameEdit = () => {
       />
       {/* 아래 내용만 데이터 받으면 div를 사진으로 바꿔서 사용할 것 */}
       <div>
-      <img src={user.ProfileImg === null  ? photoIMG : user.profileImg}
+      <img src={user.profileImg == (null || undefined)  ? photoIMG : user.profileImg}
           ref={uploadedImage}
           style={{
           height: "200px",
