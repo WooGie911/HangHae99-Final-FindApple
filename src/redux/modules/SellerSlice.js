@@ -23,7 +23,6 @@ export const __getSellerinfo = createAsyncThunk(
           "Cache-Control": "no-cache",
         }
       })
-      console.log(data);
       return thunkAPI.fulfillWithValue(data.data);
     } catch(error){
       return thunkAPI.rejectWithValue(error);

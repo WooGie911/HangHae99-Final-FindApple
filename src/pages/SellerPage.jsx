@@ -7,12 +7,12 @@ import { useParams } from 'react-router-dom'
 
 const SellerPage = () => {
   const {myPostList, sellerInfoDto} = useSelector((state) => state.sellerpage)
-  const params = useParams()
+  const {memberId} = useParams()
+  // params, router 접근
   const dispatch = useDispatch()
-  const nickname = params.nickname
   useEffect(() => {
-    dispatch(__getSellerinfo(params.nickname))
-  }, [nickname])
+    dispatch(__getSellerinfo(memberId))
+  }, [memberId])
   return (
     <div>
       <Header/>

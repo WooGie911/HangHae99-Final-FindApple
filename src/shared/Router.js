@@ -64,7 +64,7 @@ const Router = () => {
         <Route path="/" element={<Main />} />
 
         {/* 판매자 페이지 이동하기 */}
-        <Route path="/sellerpage/:nickname" element={<SellerPage />} />
+        <Route path="/sellerpage/:memberId" element={<SellerPage />} />
 
         {/* 찜하기 페이지 이동하기 */}
         <Route path="/mylike" element={<MyLike />} />
