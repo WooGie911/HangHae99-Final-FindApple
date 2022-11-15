@@ -5,6 +5,7 @@ import { useDispatch } from 'react-redux'
 import { useNavigate } from 'react-router-dom'
 import { useSelector } from 'react-redux'
 import {__UserProfile} from '../redux/modules/LoginSlice'
+import photoIMG from "../assets/photoIMG.png"
 
 
 const Mypage = () => {
@@ -30,7 +31,7 @@ const Mypage = () => {
   return (
     <div><Header/>
     <div>
-      <div><img src={user.profileImg} /></div>
+      <div><img src={user.profileImg == (null || undefined) ? photoIMG : user.profileImg}/></div>
       <div>{user.nickname}</div>
       <div>{user.email}</div>
     </div>

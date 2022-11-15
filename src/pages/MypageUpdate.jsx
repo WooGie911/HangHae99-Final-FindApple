@@ -3,10 +3,10 @@ import { useNavigate } from 'react-router-dom'
 import useInput from "../hook/useInput";
 import { useDispatch } from 'react-redux';
 import styled from "styled-components"
-import photoIMG from "../assets/photoIMG.png"
 import Header from "../components/Header"
 import { useSelector } from 'react-redux'
 import {__UserProfileEdit} from '../redux/modules/LoginSlice'
+import photoIMG from "../assets/photoIMG.png"
 
 
 const MypageUpdate = () => {
@@ -34,10 +34,7 @@ const MypageUpdate = () => {
     }
   };
   const [write, setWrite, writeHandle] = useInput({
-        // 임시 : 정수님 코드 확인 필요
-    email : "damin1@naver.com",
-    nickname : "damin1",
-    password : "damin1234",
+    nickname : "",
   });
  
 
@@ -46,30 +43,23 @@ const MypageUpdate = () => {
     dispatch(__UserProfileEdit);
   }, [dispatch]);
 
-// const {user} = useSeletor((state) => state.Login)
-// console.log(user)
-//  const profileIMG = user.profileImg
-//  const onSubmitHandler = () => {
-//   imageUploader.current.click()
-// }
+const {user} = useSelector((state) => state.Login)
+ const onSubmitHandler = () => {
+  imageUploader.current.click()
+}
 
 const nicknameEdit = () => {
-  // 백엔드와 협의 필요
   const formData = new FormData();
   formData.append("image", photo)
   const obj = {
-    // 임시
-    // 나중에 이미지 url을 받아서 뿌려야 함.
-    email : write.email,
     nickname : write.nickname,
-    password : write.password
   }
   formData.append(
-    "memberReqDto",
+    "myInfoRequestDto",
     new Blob([JSON.stringify(obj)], {type : "application/json"})
   );
   dispatch(__UserProfileEdit(formData));
-  //   navigate("/mypage")
+    window.location.replace("/mypage")
 }
 
   return (
@@ -91,29 +81,16 @@ const nicknameEdit = () => {
         }}
       />
       {/* 아래 내용만 데이터 받으면 div를 사진으로 바꿔서 사용할 것 */}
-      {/* <img src={ProfileIMG} style={{
+      <div>
+      <img src={user.profileImg == (null || undefined)  ? photoIMG : user.profileImg}
+          ref={uploadedImage}
+          style={{
           height: "200px",
           width: "200px",
           border: "1px dashed black",
-          border-radius : "50%"
+          borderRadius : "50%"
         }}
-        onClick={onSubmitHandler} /> */}
-      <div
-        style={{
-          height: "200px",
-          width: "200px",
-          border: "1px dashed black"
-        }}
-        onClick={() => imageUploader.current.click()}
-      >
-        <img
-          ref={uploadedImage}
-          style={{
-            width: "200px",
-            height: "200px",
-            position: "absolute"
-          }}
-        />
+        onClick={onSubmitHandler} />
       </div>
       프로필 사진을 바꾸시려면 눌러주세요
       <input size='medium' style={{ marginTop: '20px' }} onChange={writeHandle} name='nickname' value={write.nickname || ""}  placeholder='변경하실 닉네임을 입력하세요' />

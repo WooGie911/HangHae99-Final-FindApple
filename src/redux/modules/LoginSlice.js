@@ -28,28 +28,28 @@ export const __emailCheck = createAsyncThunk(
   }
 );
 
-export const __kakaoLogin = (code) => {
-  return function (dispatch, getState) {
-    console.log(code);
-    axios
-      .get(`${process.env.REACT_APP_SERVER}/api/member/kakao?code=${code}`)
-      .then((res) => {
-        console.log("넘어온 토큰값", res); // 토큰이 넘어올 것임
-        window.localStorage.setItem("Access_Token", res.data.accessToken);
-        window.localStorage.setItem("Refresh_Token", res.data.refreshToken);
-        window.localStorage.setItem("nickname", res.data.nickname);
-        window.localStorage.setItem("profileIMG", res.data.avatarUrl);
-        // 토큰 받았고 로그인됐으니 메인으로 화면 전환시켜줌
-        window.location.replace("/");
-      })
-      .catch((error) => {
-        console.log("소셜로그인 에러", error);
-        window.alert("로그인에 실패하였습니다.");
-        // 로그인 실패하면 로그인 화면으로 돌려보냄
-        window.location.replace("/login");
-      });
-  };
-};
+export const __kakaoLogin = createAsyncThunk(
+  "posts/__kakaoLogin",
+  async (code, thunkAPI) => {
+    console.log(code)
+    try {
+      const res = await axios
+      .get(`${process.env.REACT_APP_SERVER}/api/member/kakao?code=${code}`);
+      window.localStorage.setItem("Access_Token", res.data.accessToken);
+      window.localStorage.setItem("Refresh_Token", res.data.refreshToken);
+      window.location.replace("/");
+      console.log(res)
+        return thunkAPI.fulfillWithValue(res.data);
+    } catch (error) {console.log("소셜로그인 에러", error);
+    window.alert("로그인에 실패하였습니다.");
+    // 로그인 실패하면 로그인 화면으로 돌려보냄
+    window.location.replace("/login");
+      return thunkAPI.rejectWithValue(error);
+    }
+  }
+);
+
+
 
 export const __Signin = createAsyncThunk(
   "Login/__Signin",
@@ -130,7 +130,6 @@ export const __UserProfile = createAsyncThunk(
           },
         }
       );
-      console.log(data);
       return thunkAPI.fulfillWithValue(data.data);
     } catch (error) {
       return thunkAPI.rejectWithValue(error);
@@ -223,6 +222,20 @@ const LoginSlice = createSlice({
     [__SignUp.rejected]: (state, action) => {
       state.isLoading = false;
       state.error = action.payload;
+      
+    },
+    //__kakaoLogin
+    [__kakaoLogin.pending]: (state) => {
+      state.isLoading = true;
+    },
+    [__kakaoLogin.fulfilled]: (state, action) => {
+      state.isLoading = false;
+      state.user = action.payload;
+    },
+    [__kakaoLogin.rejected]: (state, action) => {
+      state.isLoading = false;
+      state.error = action.payload;
+      
     },
     //__UserProfile
     [__UserProfile.pending]: (state) => {
