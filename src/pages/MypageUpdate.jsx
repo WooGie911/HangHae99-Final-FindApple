@@ -3,10 +3,10 @@ import { useNavigate } from 'react-router-dom'
 import useInput from "../hook/useInput";
 import { useDispatch } from 'react-redux';
 import styled from "styled-components"
-import photoIMG from "../assets/photoIMG.png"
 import Header from "../components/Header"
 import { useSelector } from 'react-redux'
 import {__UserProfileEdit} from '../redux/modules/LoginSlice'
+import photoIMG from "../assets/photoIMG.png"
 
 
 const MypageUpdate = () => {
@@ -44,8 +44,6 @@ const MypageUpdate = () => {
   }, [dispatch]);
 
 const {user} = useSelector((state) => state.Login)
-console.log(user)
- const profileIMG = user.profileImg
  const onSubmitHandler = () => {
   imageUploader.current.click()
 }
@@ -84,7 +82,7 @@ const nicknameEdit = () => {
       />
       {/* 아래 내용만 데이터 받으면 div를 사진으로 바꿔서 사용할 것 */}
       <div>
-      <img src={profileIMG}
+      <img src={user.ProfileImg === null  ? photoIMG : user.profileImg}
           ref={uploadedImage}
           style={{
           height: "200px",

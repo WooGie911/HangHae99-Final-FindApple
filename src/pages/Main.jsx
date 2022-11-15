@@ -3,15 +3,16 @@ import React, {useEffect} from "react";
 import { useDispatch, useSelector } from "react-redux";
 import { useNavigate } from "react-router-dom";
 import { __UserProfile } from "../redux/modules/LoginSlice";
+import photoIMG from "../assets/photoIMG.png"
+
 
 const Main = () => {
   const {user} = useSelector((state) => state.Login)
+  console.log(user.profileImg)
   const dispatch = useDispatch();
   const navigate = useNavigate();
   const accessToken = localStorage.getItem("Access_Token");
   const refreshToken = localStorage.getItem("Refresh_Token");
-  // const nickname = localStorage.getItem("nickname");
-  // const profileIMG = localStorage.getItem("profileIMG");
   useEffect(() => {
     dispatch(__UserProfile());
   }, [dispatch]);
@@ -21,7 +22,7 @@ const Main = () => {
       <br />
 
       <img
-        src={user.profileImg}
+        src={user.ProfileImg === null  ? photoIMG : user.profileImg}
         style={{
           marginTop: "-20px",
           width: "300px",
