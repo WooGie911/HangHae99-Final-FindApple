@@ -2,6 +2,7 @@ import React from "react";
 import { useDispatch, useSelector } from "react-redux";
 import { __getPost } from "../redux/modules/PostsSlice";
 import { useNavigate } from "react-router-dom";
+import styled from "styled-components";
 
 const PostList = ({ posts, detail, __getDetail }) => {
   const navigate = useNavigate();
@@ -15,29 +16,14 @@ const PostList = ({ posts, detail, __getDetail }) => {
       {posts &&
         posts.map((post, index) => {
           return (
-            <div key={index}>
+             <div key={index}>
               <div
                 onClick={() => {
                   onClickHandler(post.postId);
                 }}
               >
-                {/* <div>
-                  {post.images &&
-                    post.images.map((item) => {
-                      return (
-                        <img
-                          key={item.id}
-                          src={item.imgUrl}
-                          style={{
-                            marginTop: "-20px",
-                            width: "300px",
-                            height: "300px",
-                          }}
-                        />
-                      );
-                    })}
-                </div> */}
-                <br />
+                
+                <PList>
                 <div>{post.images && <img src={post.images[0].imgUrl} />}</div>
                 <br />
                 <div>
@@ -46,10 +32,10 @@ const PostList = ({ posts, detail, __getDetail }) => {
                   <label>category : {post.category}</label>
                   <br />
                   <label>userPrice : {post.userPrice}</label>
-                  <br />
-                  <br />
+
                   {/* 크리에이트앳 받아서 수정, 카테고리 대신 기종*/}
                 </div>
+                </PList>
               </div>
             </div>
           );
@@ -59,3 +45,16 @@ const PostList = ({ posts, detail, __getDetail }) => {
 };
 
 export default PostList;
+const PList = styled.div`
+border: 1.2px solid gray;
+border-width: 1.2px 0px 1.2px 0px ;
+display: flex;
+padding : 15px;
+img {
+  margin-right : 10px;
+  width: 50px;
+  height: 50px;
+  border-radius: 25%;
+  border: 1px solid transparent;
+}
+`

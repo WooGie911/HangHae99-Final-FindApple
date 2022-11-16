@@ -24,12 +24,12 @@ const PostRead = () => {
       <div>{params.category}</div>
 
       <PostSearch __search={__searchPost} />
+      <Header />
       <PostList
         posts={posts}
         detail={"/PostDetail"}
         __getDetail={__getPostDetail}
       />
-      <Header />
       <Footer/>
     </Layout>
     </div>
