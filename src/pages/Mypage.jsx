@@ -9,7 +9,9 @@ import photoIMG from "../assets/photoIMG.png"
 import Layout from "../components/Layout"
 import bookmark from "../assets/bookmark.png" 
 import doubletick from "../assets/doubletick.png" 
-import window from "../assets/window.png" 
+import window from "../assets/window.png"
+import settings from "../assets/settings.png" 
+
 
 const Mypage = () => {
   const navigate = useNavigate()
@@ -35,8 +37,11 @@ const Mypage = () => {
     <div>
           <Layout>
     <FirstContainer>
-    <div>
+    <Head>
       <h3>마이페이지</h3>
+      <img onClick={mypageupdate} style={{width:25, height : 25}} src={settings}/>
+    </Head>
+    <div>
       <img style={{width:50, height : 50, borderRadius : '50%', float : 'left'}} src={user.profileImg == (null || undefined) ? photoIMG : user.profileImg}/>
       <UserInfo>
       <div>{user.nickname}</div>
@@ -56,9 +61,7 @@ const Mypage = () => {
     <Content onClick={mylike}><img src={bookmark}/> 찜목록</Content>
     </div>
     </SecondContainer>
-    <div>
-      <button onClick={mypageupdate}>정보수정</button>
-    </div>
+    
     </FirstContainer>
     <Header/>
     </Layout>
@@ -72,6 +75,12 @@ export default Mypage
 const FirstContainer = styled.div`
 padding : 20px;
 `
+
+const Head = styled.div`
+display: flex;
+justify-content: space-between;
+`
+
 const UserInfo = styled.div`
 padding: 10px;
 margin-left: 50px;
