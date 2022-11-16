@@ -6,6 +6,7 @@ import { __UserProfile } from "../redux/modules/LoginSlice";
 import photoIMG from "../assets/photoIMG.png"
 import Layout from "../components/Layout" 
 import Footer from "../components/Footer"
+import Header from "../components/Header";
 
 const Main = () => {
   const {user} = useSelector((state) => state.Login)
@@ -17,12 +18,6 @@ const Main = () => {
   const nickname = localStorage.getItem("nickname");
   const profileIMG = localStorage.getItem("profileIMG");
 
-  const onClickButton = (e) => {
-    e.preventDefault();
-    localStorage.clear();
-    navigate("/signin");
-  };
-
   useEffect(() => {
     dispatch(__UserProfile());
   }, [dispatch]);
@@ -31,38 +26,20 @@ const Main = () => {
     
     <>
     <Layout>
-      <div>Main</div>
+      <MainLogo>
+      <div>Main로고 예정</div>
       <br />
 
       <img
         src={user.profileImg == (null || undefined)  ? photoIMG : user.profileImg}
         style={{
-          marginTop: "-20px",
-          width: "300px",
-          height: "300px",
+          width: "40px",
+          height: "40px",
           borderRadius: "50%"
         }}
       />
-
-      <br />
-      <div>{user.nickname}</div>
-      <br />
-      <div onClick={onClickButton}>로그아웃</div>
-
-      <div
-        onClick={() => {
-          navigate("/postread/macbook");
-        }}
-      >
-        MacBook
-      </div>
-      <div
-        onClick={() => {
-          navigate("/postread/iphone");
-        }}
-      >
-        iPhone
-      </div>
+      </MainLogo>
+      <Header/>
       <br />
       <div>앱소개 또는 배너</div>
       <br />
@@ -78,3 +55,9 @@ const Main = () => {
 };
 
 export default Main;
+
+const MainLogo = styled.div`
+height: 50px;
+display: flex;
+justify-content: space-between;
+`

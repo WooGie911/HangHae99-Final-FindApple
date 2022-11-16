@@ -5,6 +5,7 @@ import styled from "styled-components";
 import useInput from "../hook/useInput";
 import { __getPriceInfo } from "../redux/modules/PriceSlice";
 import Header from "./Header";
+import Layout from "./Layout";
 
 const PricingInput = (props) => {
   const navigate = useNavigate();
@@ -149,6 +150,7 @@ const PricingInput = (props) => {
 
   return (
     <>
+    <Layout>
       <Header />
       <br />
       <br />
@@ -413,6 +415,7 @@ const PricingInput = (props) => {
         </button> */}
       {/* </div>
     </br> */}
+    </Layout>
     </>
   );
 };

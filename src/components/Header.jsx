@@ -1,22 +1,18 @@
 import React, { useState } from "react";
-import Modal from "./modal";
 import { useNavigate } from "react-router-dom";
+import styled from "styled-components";
 
 
 const Header = () => {
   const navigate = useNavigate();
-  const [modalOn, setModalOn] = useState(false);
-  const handleModal = () => {
-    setModalOn(true);
-  };
-
   return (
     <div>
+      <HeaderSpace>
       <div
         onClick={() => {
           navigate("/");
         }}
-      >        HOME
+      >        홈
       </div>
       <div
         onClick={() => {
@@ -26,30 +22,25 @@ const Header = () => {
         
         MacBook
       </div>
-      <h2
+      <div
         onClick={() => {
           navigate("/postread/iphone");
         }}
       >
         iPhone
-      </h2>
-      <button
-        onClick={() => {
-          navigate("/mypage");
-        }}
-      >
-        마이페이지
-      </button>
-      <button
-        onClick={() => {
-          navigate("/pricingInput");
-        }}
-      >
-        가격책정
-      </button>
-      {modalOn && <Modal setModalOn={setModalOn} />}
+      </div>
+      </HeaderSpace>
     </div>
   );
 };
 
 export default Header;
+
+const HeaderSpace = styled.div`
+cursor: pointer;
+background-color: beige;
+display: flex;
+div{
+  margin-right : 15px;
+}
+`
