@@ -1,13 +1,18 @@
-import React from "react";
+import React, {useEffect} from "react";
 
 import { useDispatch, useSelector } from "react-redux";
 import { useNavigate } from "react-router-dom";
+import { __UserProfile } from "../redux/modules/LoginSlice";
+import photoIMG from "../assets/photoIMG.png"
+
 
 const Main = () => {
+  const {user} = useSelector((state) => state.Login)
   const dispatch = useDispatch();
   const navigate = useNavigate();
   const accessToken = localStorage.getItem("Access_Token");
   const refreshToken = localStorage.getItem("Refresh_Token");
+
   const nickname = localStorage.getItem("nickname");
   const profileIMG = localStorage.getItem("profileIMG");
 
@@ -17,22 +22,28 @@ const Main = () => {
     navigate("/signin");
   };
 
+  useEffect(() => {
+    dispatch(__UserProfile());
+  }, [dispatch]);
+
   return (
+    
     <>
       <div>Main</div>
       <br />
 
       <img
-        src={profileIMG}
+        src={user.profileImg == (null || undefined)  ? photoIMG : user.profileImg}
         style={{
           marginTop: "-20px",
           width: "300px",
           height: "300px",
+          borderRadius: "50%"
         }}
       />
 
       <br />
-      <div>{nickname}</div>
+      <div>{user.nickname}</div>
       <br />
       <div onClick={onClickButton}>로그아웃</div>
 

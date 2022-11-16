@@ -16,14 +16,15 @@ const MyPost = () => {
       MyPost
       {
         posts.length > 0 && (
-          <>
+          <div>
         {posts.map((post) => {
-        return <div>
-          {post.image}
-          {post.title}
+        return <div key={post.postId}>
+          <img src={post.images[0].imgUrl}/>
+          <div>{post.title}</div>
+          <div>{post.userPrice}</div>
         </div>
       })}
-          </>
+          </div>
         )
       }
 
