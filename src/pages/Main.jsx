@@ -1,9 +1,10 @@
 import React, {useEffect} from "react";
-
+import styled from "styled-components";
 import { useDispatch, useSelector } from "react-redux";
 import { useNavigate } from "react-router-dom";
 import { __UserProfile } from "../redux/modules/LoginSlice";
 import photoIMG from "../assets/photoIMG.png"
+import Layout from "../components/Layout" 
 
 
 const Main = () => {
@@ -29,6 +30,7 @@ const Main = () => {
   return (
     
     <>
+    <Layout>
       <div>Main</div>
       <br />
 
@@ -93,6 +95,7 @@ const Main = () => {
       >
         마이페이지
       </div>
+      </Layout>
     </>
   );
 };
