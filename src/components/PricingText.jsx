@@ -1,6 +1,14 @@
 import React from "react";
+import { useSelector } from "react-redux";
 
 const PricingText = ({ Data }) => {
+  // const tagListName = "";
+  // const {
+  //   tagListName: [tagLists],
+  // } = useSelector((state) => state.price.tagList);
+  // tagList =
+  // console.log(tagListName);
+  // console.log(tagLists);
   return (
     <>
       <div>PricingText</div>

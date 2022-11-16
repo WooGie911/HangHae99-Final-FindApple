@@ -45,6 +45,7 @@ export const __getPost = createAsyncThunk(
           },
         }
       );
+      console.log("data 겟디테일", data);
       return thunkAPI.fulfillWithValue(data.data);
     } catch (error) {
       console.log("error", error);

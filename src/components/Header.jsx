@@ -35,19 +35,18 @@ const Header = () => {
       </h2>
       <button
         onClick={() => {
-          navigate("/signin");
-        }}
-      >
-        로그인
-      </button>
-      <button
-        onClick={() => {
           navigate("/mypage");
         }}
       >
         마이페이지
       </button>
-      <button onClick={handleModal}>모달켜기</button>
+      <button
+        onClick={() => {
+          navigate("/pricingInput");
+        }}
+      >
+        가격책정
+      </button>
       {modalOn && <Modal setModalOn={setModalOn} />}
     </div>
   );

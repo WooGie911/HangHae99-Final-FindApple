@@ -11,6 +11,12 @@ const Main = () => {
   const nickname = localStorage.getItem("nickname");
   const profileIMG = localStorage.getItem("profileIMG");
 
+  const onClickButton = (e) => {
+    e.preventDefault();
+    localStorage.clear();
+    navigate("/signin");
+  };
+
   return (
     <>
       <div>Main</div>
@@ -28,13 +34,7 @@ const Main = () => {
       <br />
       <div>{nickname}</div>
       <br />
-      <div
-        onClick={() => {
-          localStorage.clear();
-        }}
-      >
-        로그아웃
-      </div>
+      <div onClick={onClickButton}>로그아웃</div>
 
       <div
         onClick={() => {
@@ -69,7 +69,7 @@ const Main = () => {
 
       <div
         onClick={() => {
-          navigate("/objectionread");
+          navigate("/objectionread/all");
         }}
       >
         이의제기

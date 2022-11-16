@@ -18,6 +18,8 @@ import SellerPage from "../pages/SellerPage";
 import MyLike from "../pages/MyLike";
 import MyObjection from "../pages/MyObjection";
 import MyPost from "../pages/MyPost";
+import PricingInput from "../components/PricingInput";
+import Pricingfinal from "../components/Pricingfinal";
 
 const Router = () => {
   return (
@@ -46,7 +48,7 @@ const Router = () => {
         <Route path="/objectioncreate" element={<ObjectionCreate />} />
 
         {/* 이의제기 홈으로 이동하기 */}
-        <Route path="/objectionread" element={<ObjectionRead />} />
+        <Route path="/objectionread/:category" element={<ObjectionRead />} />
 
         {/* 이의제기 업데이트로 이동하기 */}
         <Route path="/objectionupdate" element={<ObjectionUpdate />} />
@@ -75,7 +77,25 @@ const Router = () => {
         {/* 내 이의제기 페이지 이동하기 */}
         <Route path="/mypost" element={<MyPost />} />
 
+        {/* 카카오 소셜 로그인 */}
         <Route path="/KAKAO" element={<Redirect />} />
+
+        {/*가격 책정 페이지로 이동하기 */}
+        <Route path="/pricingInput" element={<PricingInput />} />
+        <Route path="/pricingInput/:category" element={<PricingInput />} />
+        <Route
+          path="/pricingInput/:category/:year"
+          element={<PricingInput />}
+        />
+        <Route
+          path="/pricingInput/:category/:year/:model"
+          element={<PricingInput />}
+        />
+        <Route
+          path="/pricingInput/:category/:year/:model/:option"
+          element={<PricingInput />}
+        />
+        <Route path="/pricingfinal" element={<Pricingfinal />} />
       </Routes>
     </BrowserRouter>
   );

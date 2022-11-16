@@ -16,6 +16,7 @@ const PostDetail = () => {
   const dispatch = useDispatch();
   const params = useParams();
   const { posts } = useSelector((state) => state.details);
+  console.log("posts 유즈셀렉터 데이터", posts);
   // const { comments } = useSelector((state) => state.details.posts);
 
   //찜하기
@@ -35,14 +36,14 @@ const PostDetail = () => {
       <Header />
       <div>PostDetail</div>
       <button onClick={() => onCartButton(posts.postId)}>찜</button>
-      <button onClick={() => navigate(`/postupdate/${posts.postId}`)}>
+      <button onClick={() => navigate(`/postupdate/${params.id}`)}>
         수정하기
       </button>
       <div>
         <div>{posts.title}</div>
         {posts.images !== undefined &&
           posts.images.map((item, index) => {
-            return <img src={item.image} key={index} />;
+            return <img src={item.imgUrl} key={index} />;
           })}
         <div>{posts.expectPrice}</div>
         <div>{posts.userPrice}</div>

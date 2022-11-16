@@ -1,6 +1,6 @@
 import React from "react";
 import Header from "../components/Header";
-import { useNavigate } from "react-router-dom";
+import { useNavigate, useParams } from "react-router-dom";
 import { useDispatch, useSelector } from "react-redux";
 import CommentCreate from "../components/CommentCreate";
 import CommentList from "../components/CommentList";
@@ -13,7 +13,8 @@ import {
 const ObjectionDetail = () => {
   const navigate = useNavigate();
   const dispatch = useDispatch();
-  const post = useSelector((state) => state.Objections.post);
+  const params = useParams();
+  const { post } = useSelector((state) => state.Objections);
 
   //게시글 삭제
   const onDeleteHandler = (payload) => {

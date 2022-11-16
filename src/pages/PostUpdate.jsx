@@ -14,7 +14,6 @@ const PostUpdate = () => {
   const [files, fileUrls, uploadHandle] = useImageUpload(5, true, 0.3, 1000);
   const imgRef = useRef();
   const posts = useSelector((state) => state.details.posts);
-  const [delImg, setDelImg] = useState([]);
   const [updateInput, setUpdateInput, updateInputHandle] = useInput(posts);
 
   const updateSubmit = () => {
@@ -23,27 +22,31 @@ const PostUpdate = () => {
     //폼 데이터에 파일 담기
     if (files.length > 0) {
       files.forEach((file) => {
-        formData.append("images", file);
+        formData.append("multipartFiles", file);
       });
     } else {
-      formData.append("images", null);
+      formData.append("multipartFiles", null);
     }
-    //폼 데이터에 글작성 데이터 넣기
-    formData.append("post", JSON.stringify(updateInput.title));
 
-    formData.append("imageId", delImg);
+    // 폼 데이터에 글작성 데이터 넣기
+    const objects = {
+      title: updateInput.title,
+      category: updateInput.category,
+      expectPrice: updateInput.expectPrice,
+      userPrice: updateInput.userPrice,
+      content: updateInput.content,
+    };
+    formData.append(
+      "postReqDto",
+      new Blob([JSON.stringify(objects)], { type: "application/json" })
+    );
 
     const obj = {
       id: paramId.id,
-      contentInfo: formData,
+      formData: formData,
     };
     //Api 날리기
     dispatch(__editPost(obj));
-  };
-
-  const delPreview = (imgId) => {
-    //삭제할 이미지 번호 담기
-    setDelImg((e) => [...e, imgId]);
   };
 
   return (
@@ -69,6 +72,24 @@ const PostUpdate = () => {
           placeholder="내용을 입력하세요."
         />
         <label htmlFor="imgFile">
+          {fileUrls.length > 0 ? (
+            <div>
+              {
+                /*previews*/
+                fileUrls.map((val, i) => {
+                  return <img src={val} key={i} />;
+                })
+              }
+            </div>
+          ) : (
+            <div>
+              {updateInput.images &&
+                updateInput.images.map((item) => {
+                  return <img src={item.imgUrl} />;
+                })}
+            </div>
+          )}
+
           <input
             type="file"
             style={{ display: "none" }}
@@ -88,44 +109,14 @@ const PostUpdate = () => {
             이미지 업로드 버튼
           </button>
         </label>
-        <div>
-          {
-            //기존 이미지 뿌려줄
-            posts !== undefined &&
-              posts.map((item) => {
-                return (
-                  <div
-                    key={item.paramId}
-                    isView={
-                      delImg.indexOf(item.paramId) > -1 ? "none" : "block"
-                    }
-                  >
-                    <img src={item.image} />
-                    <button
-                      style={{
-                        width: "100px",
-                        marginLeft: "20px",
-                        borderRadius: "10px",
-                      }}
-                      onClick={() => {
-                        delPreview(item.paramId);
-                      }}
-                    >
-                      삭제
-                    </button>
-                  </div>
-                );
-              })
-          }
-        </div>
-        <div className="preview">
-          {
-            /*previews map쓸곳*/
-            fileUrls.map((val, i) => {
-              return <img src={val} key={i} />;
-            })
-          }
-        </div>
+        판매가격:
+        <input
+          onChange={updateInputHandle}
+          name="userPrice"
+          value={updateInput.userPrice || ""}
+          type="text"
+          placeholder="제목을 입력하세요."
+        />
         <button onClick={updateSubmit}>글 수정</button>
       </div>
     </div>

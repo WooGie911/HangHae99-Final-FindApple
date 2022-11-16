@@ -19,13 +19,12 @@ const PostRead = () => {
   return (
     <>
       <Header />
-      <div>PostRead</div>
       <div>{params.category}</div>
 
       <PostSearch __search={__searchPost} />
       <PostList
         posts={posts}
-        detail={"PostDetail"}
+        detail={"/PostDetail"}
         __getDetail={__getPostDetail}
       />
     </>
