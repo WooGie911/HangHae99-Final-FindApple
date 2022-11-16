@@ -10,9 +10,9 @@ const Header = () => {
       <HeaderSpace>
       <div
         onClick={() => {
-          navigate("/");
+          navigate("/postread/all");
         }}
-      >        홈
+      >        제품 전체보기
       </div>
       <div
         onClick={() => {

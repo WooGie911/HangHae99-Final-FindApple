@@ -5,6 +5,7 @@ import {
   __getPriceInfo,
   checkPricingDetail,
 } from "../redux/modules/PriceSlice";
+import Layout from "./Layout";
 
 const Pricingfinal = () => {
   const dispatch = useDispatch();
@@ -20,6 +21,7 @@ const Pricingfinal = () => {
   };
   return (
     <>
+    <Layout>
       <div>Pricingfinal</div>
 
       <div>
@@ -44,6 +46,7 @@ const Pricingfinal = () => {
         <br />
         <button onClick={onsubmitHandler}>가격책정</button>
       </div>
+      </Layout>
     </>
   );
 };
