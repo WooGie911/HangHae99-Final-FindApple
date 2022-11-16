@@ -54,7 +54,6 @@ const PostUpdate = () => {
   return (
     <div>
       <Layout>
-      <Header />
       <PricingText Data={posts} />
 
       <div>
