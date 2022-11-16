@@ -21,7 +21,6 @@ const PostRead = () => {
   return (
     <div>
     <Layout>
-      <Header />
       <div>{params.category}</div>
 
       <PostSearch __search={__searchPost} />
@@ -30,6 +29,7 @@ const PostRead = () => {
         detail={"/PostDetail"}
         __getDetail={__getPostDetail}
       />
+      <Header />
       <Footer/>
     </Layout>
     </div>

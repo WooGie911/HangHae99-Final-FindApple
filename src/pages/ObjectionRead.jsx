@@ -23,7 +23,6 @@ const ObjectionRead = () => {
   return (
     <>
     <Layout>
-      <Header />
       <div>ObjectionRead</div>
 
       <PostSearch __search={__searchObjection} />
@@ -32,6 +31,7 @@ const ObjectionRead = () => {
         detail={"/objectionDetail"}
         __getDetail={__getObjection}
       />
+      <Header />
       <Footer/>
       </Layout>
     </>

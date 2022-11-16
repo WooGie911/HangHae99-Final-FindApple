@@ -46,4 +46,5 @@ width: 250px;
 background-image: url("https://img.icons8.com/ios-glyphs/30/null/search--v1.png");
 background-repeat : no-repeat;
 background-size: 30px;
+margin-bottom: 20px;
 `
