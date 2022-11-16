@@ -10,6 +10,8 @@ import {
   __addPostComment,
   __deletePostComment,
 } from "../redux/modules/PostDetailsSlice";
+import Layout from "../components/Layout"
+import Footer from "../components/Footer"
 
 const PostDetail = () => {
   const navigate = useNavigate();
@@ -33,6 +35,7 @@ const PostDetail = () => {
 
   return (
     <>
+    <Layout>
       <Header />
       <div>PostDetail</div>
       <button onClick={() => onCartButton(posts.postId)}>찜</button>
@@ -65,7 +68,9 @@ const PostDetail = () => {
         >
           글삭제
         </button>
+        <Footer/>
       </div>
+      </Layout>
     </>
   );
 };

@@ -7,6 +7,8 @@ import useImageUpload from "../hook/useImageUpload";
 import { useSelector } from "react-redux";
 import PricingText from "../components/PricingText";
 import { useParams } from "react-router-dom";
+import Layout from "../components/Layout";
+import Footer from "../components/Footer"
 
 const PostUpdate = () => {
   const paramId = useParams();
@@ -51,6 +53,7 @@ const PostUpdate = () => {
 
   return (
     <div>
+      <Layout>
       <Header />
       <PricingText Data={posts} />
 
@@ -119,6 +122,8 @@ const PostUpdate = () => {
         />
         <button onClick={updateSubmit}>글 수정</button>
       </div>
+      <Footer/>
+      </Layout>
     </div>
   );
 };

@@ -3,13 +3,12 @@ import { useNavigate } from 'react-router-dom'
 import useInput from "../hook/useInput";
 import { useDispatch } from 'react-redux';
 import styled from "styled-components"
-import Header from "../components/Header"
 import { useSelector } from 'react-redux'
 import {__UserProfileEdit} from '../redux/modules/LoginSlice'
 import photoIMG from "../assets/photoIMG.png"
 import Layout from "../components/Layout"
 import back from "../assets/back.png" 
-
+import Footer from "../components/Footer"
 
 const MypageUpdate = () => {
   const uploadedImage = React.useRef(null);
@@ -64,6 +63,12 @@ const nicknameEdit = () => {
     window.location.replace("/mypage")
 }
 
+const onClickButton = (e) => {
+  e.preventDefault();
+  localStorage.clear();
+  navigate("/signin");
+};
+
   return (
     <div
       style={{
@@ -78,11 +83,6 @@ const nicknameEdit = () => {
         <img onClick={onClickHandler} style={{width:25, height : 25}} src={back}/>
         <h3>내 정보</h3>
       </HeadContainer>
-
-      {/* <Head>
-
-      </Head> */}
-
       <ProfileEdit>
       <input
         type="file"
@@ -110,7 +110,8 @@ const nicknameEdit = () => {
       <EditButton onClick={nicknameEdit}>변경</EditButton>
       </EditContainer>
         </ProfileEdit>
-      <Header /> 
+      <br />
+      <Logout onClick={onClickButton}>로그아웃</Logout>
       </Layout>
     </div>
   );
@@ -144,6 +145,8 @@ img {
 }
 `
 
+
+//버튼 추후 개발 예정
 const EditButton = styled.button`
 
 `
@@ -156,4 +159,11 @@ justify-content: center;
 align-content: center;
 border: 1.2px solid gray;
 border-width: 1.2px 0px 1.2px 0px ;
+`
+
+//LogOut
+const Logout = styled.button`
+position : absolute;
+margin-left: 10px;
+bottom: 10px;
 `

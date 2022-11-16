@@ -5,6 +5,7 @@ import { useNavigate } from "react-router-dom";
 import styled from "styled-components";
 import useInput from "../hook/useInput";
 import KakaoLogin from "../components/KakaoLogin";
+import Layout from "../components/Layout";
 
 const SignIn = () => {
   const initialState = {
@@ -28,6 +29,7 @@ const SignIn = () => {
   };
 
   return (
+    <Layout>
     <StWrapper>
       <StSignupBox>
         <StLoginBox>
@@ -62,6 +64,7 @@ const SignIn = () => {
         </StLoginBox>
       </StSignupBox>
     </StWrapper>
+    </Layout>
   );
 };
 

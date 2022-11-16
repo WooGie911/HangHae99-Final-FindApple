@@ -5,7 +5,7 @@ import { useNavigate } from "react-router-dom";
 import { __UserProfile } from "../redux/modules/LoginSlice";
 import photoIMG from "../assets/photoIMG.png"
 import Layout from "../components/Layout" 
-
+import Footer from "../components/Footer"
 
 const Main = () => {
   const {user} = useSelector((state) => state.Login)
@@ -71,30 +71,7 @@ const Main = () => {
 
         <div>추천상품 리스트업</div>
       </div>
-      <br />
-      <div
-        onClick={() => {
-          navigate("/postread/all");
-        }}
-      >
-        검색
-      </div>
-
-      <div
-        onClick={() => {
-          navigate("/objectionread/all");
-        }}
-      >
-        이의제기
-      </div>
-
-      <div
-        onClick={() => {
-          navigate("/mypage");
-        }}
-      >
-        마이페이지
-      </div>
+      <Footer/>
       </Layout>
     </>
   );

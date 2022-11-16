@@ -4,6 +4,7 @@ import styled from "styled-components";
 import { __SignUp, __emailCheck } from "../redux/modules/LoginSlice";
 import { useNavigate } from "react-router-dom";
 import useInput from "../hook/useInput";
+import Layout from "../components/Layout";
 
 const SignUp = () => {
   const dispatch = useDispatch();
@@ -57,6 +58,7 @@ const SignUp = () => {
   };
 
   return (
+    <Layout>
     <StWrapper>
       <StSignupBox>
         <Div>
@@ -117,6 +119,7 @@ const SignUp = () => {
         </StLoginBox>
       </StSignupBox>
     </StWrapper>
+    </Layout>
   );
 };
 

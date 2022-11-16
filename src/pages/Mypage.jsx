@@ -1,5 +1,4 @@
 import React, {useEffect} from 'react'
-import Header from "../components/Header"
 import styled from "styled-components"
 import { useDispatch } from 'react-redux'
 import { useNavigate } from 'react-router-dom'
@@ -11,7 +10,7 @@ import bookmark from "../assets/bookmark.png"
 import doubletick from "../assets/doubletick.png" 
 import window from "../assets/window.png"
 import settings from "../assets/settings.png" 
-
+import Footer from "../components/Footer"
 
 const Mypage = () => {
   const navigate = useNavigate()
@@ -63,7 +62,7 @@ const Mypage = () => {
     </SecondContainer>
     
     </FirstContainer>
-    <Header/>
+    <Footer/>
     </Layout>
     </div>
   )

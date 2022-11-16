@@ -2,6 +2,8 @@ import React, {useEffect} from 'react'
 import Header from "../components/Header"
 import { useSelector, useDispatch } from 'react-redux'
 import { __getMyPost } from '../redux/modules/MypageSlice'
+import Layout from "../components/Layout"
+import Footer from "../components/Footer"
 
 const MyPost = () => {
   const {posts} = useSelector((state) => state.mypage)
@@ -12,6 +14,7 @@ const MyPost = () => {
   }, [])
   return (
     <div>
+      <Layout>
       <Header/>
       MyPost
       {
@@ -27,7 +30,8 @@ const MyPost = () => {
           </div>
         )
       }
-
+      <Footer/>
+      </Layout>
       </div>
   )
 }

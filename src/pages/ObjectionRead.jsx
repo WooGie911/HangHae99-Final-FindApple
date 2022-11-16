@@ -8,7 +8,8 @@ import {
   __searchObjection,
 } from "../redux/modules/ObjectionsSlice";
 import PostSearch from "../components/PostSearch";
-
+import Layout from "../components/Layout"
+import Footer from "../components/Footer"
 const ObjectionRead = () => {
   const params = useParams();
   console.log("params.category", params.category);
@@ -21,6 +22,7 @@ const ObjectionRead = () => {
 
   return (
     <>
+    <Layout>
       <Header />
       <div>ObjectionRead</div>
 
@@ -30,6 +32,8 @@ const ObjectionRead = () => {
         detail={"/objectionDetail"}
         __getDetail={__getObjection}
       />
+      <Footer/>
+      </Layout>
     </>
   );
 };

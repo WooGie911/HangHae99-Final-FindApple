@@ -6,6 +6,8 @@ import { useParams } from "react-router-dom";
 import { __getPost, __searchPost } from "../redux/modules/PostsSlice";
 import PostSearch from "../components/PostSearch";
 import { __getPostDetail } from "../redux/modules/PostDetailsSlice";
+import Layout from "../components/Layout";
+import Footer from "../components/Footer"
 
 const PostRead = () => {
   const params = useParams();
@@ -17,7 +19,8 @@ const PostRead = () => {
   }, [params]);
 
   return (
-    <>
+    <div>
+    <Layout>
       <Header />
       <div>{params.category}</div>
 
@@ -27,7 +30,9 @@ const PostRead = () => {
         detail={"/PostDetail"}
         __getDetail={__getPostDetail}
       />
-    </>
+      <Footer/>
+    </Layout>
+    </div>
   );
 };
 

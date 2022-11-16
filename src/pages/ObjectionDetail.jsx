@@ -9,6 +9,8 @@ import {
   __addObjectionComment,
   __deleteObjectionComment,
 } from "../redux/modules/ObjectionDetailsSlice";
+import Layout from "../components/Layout"
+import Footer from "../components/Footer"
 
 const ObjectionDetail = () => {
   const navigate = useNavigate();
@@ -25,6 +27,7 @@ const ObjectionDetail = () => {
 
   return (
     <>
+    <Layout>
       <Header />
       <div>ObjectionDetail</div>
 
@@ -55,7 +58,9 @@ const ObjectionDetail = () => {
         >
           글삭제
         </button>
+        <Footer/>
       </div>
+      </Layout>
     </>
   );
 };

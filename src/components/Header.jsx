@@ -1,7 +1,7 @@
 import React, { useState } from "react";
 import Modal from "./modal";
 import { useNavigate } from "react-router-dom";
-import styled from "styled-components";
+
 
 const Header = () => {
   const navigate = useNavigate();
@@ -12,20 +12,20 @@ const Header = () => {
 
   return (
     <div>
-      <h1
+      <div
         onClick={() => {
           navigate("/");
         }}
-      >
-        HOME
-      </h1>
-      <h2
+      >        HOME
+      </div>
+      <div
         onClick={() => {
           navigate("/postread/macbook");
         }}
       >
+        
         MacBook
-      </h2>
+      </div>
       <h2
         onClick={() => {
           navigate("/postread/iphone");
@@ -53,7 +53,3 @@ const Header = () => {
 };
 
 export default Header;
-
-const Span = styled.span`
-  cursor: pointer;
-`;

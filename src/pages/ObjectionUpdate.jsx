@@ -6,6 +6,8 @@ import useImageUpload from "../hook/useImageUpload";
 import { useSelector } from "react-redux";
 import PricingText from "../components/PricingText";
 import { __editObjection } from "../redux/modules/ObjectionsSlice";
+import Layout from "../components/Layout"
+import Footer from "../components/Footer"
 
 const ObjectionUpdate = ({ paramId }) => {
   const dispatch = useDispatch();
@@ -46,6 +48,7 @@ const ObjectionUpdate = ({ paramId }) => {
 
   return (
     <>
+    <Layout>
       <Header />
       <div>ObjectionUpdate</div>
 
@@ -128,6 +131,8 @@ const ObjectionUpdate = ({ paramId }) => {
         </div>
         <button onClick={updateSubmit}>글 수정</button>
       </div>
+      <Footer/>
+      </Layout>
     </>
   );
 };
