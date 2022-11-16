@@ -12,9 +12,20 @@ const Main = () => {
   const navigate = useNavigate();
   const accessToken = localStorage.getItem("Access_Token");
   const refreshToken = localStorage.getItem("Refresh_Token");
+
+  const nickname = localStorage.getItem("nickname");
+  const profileIMG = localStorage.getItem("profileIMG");
+
+  const onClickButton = (e) => {
+    e.preventDefault();
+    localStorage.clear();
+    navigate("/signin");
+  };
+
   useEffect(() => {
     dispatch(__UserProfile());
   }, [dispatch]);
+
   return (
     
     <>
@@ -34,13 +45,7 @@ const Main = () => {
       <br />
       <div>{user.nickname}</div>
       <br />
-      <div
-        onClick={() => {
-          localStorage.clear();
-        }}
-      >
-        로그아웃
-      </div>
+      <div onClick={onClickButton}>로그아웃</div>
 
       <div
         onClick={() => {
@@ -75,7 +80,7 @@ const Main = () => {
 
       <div
         onClick={() => {
-          navigate("/objectionread");
+          navigate("/objectionread/all");
         }}
       >
         이의제기

@@ -8,11 +8,10 @@ const PostList = ({ posts, detail, __getDetail }) => {
   const dispatch = useDispatch();
   const onClickHandler = (data) => {
     dispatch(__getDetail(data));
-    navigate(`/${detail}/${data}`);
+    navigate(`${detail}/${data}`);
   };
   return (
     <>
-      <div>PostList컴포넌트</div>
       {posts &&
         posts.map((post, index) => {
           return (
@@ -22,7 +21,7 @@ const PostList = ({ posts, detail, __getDetail }) => {
                   onClickHandler(post.postId);
                 }}
               >
-                <div>
+                {/* <div>
                   {post.images &&
                     post.images.map((item) => {
                       return (
@@ -37,21 +36,19 @@ const PostList = ({ posts, detail, __getDetail }) => {
                         />
                       );
                     })}
-                </div>
+                </div> */}
+                <br />
+                <div>{post.images && <img src={post.images[0].imgUrl} />}</div>
                 <br />
                 <div>
-                  <label>nickname : {post.nickname}</label>
+                  <label>title : {post.title}</label>
                   <br />
-                  <label>제목 : {post.title}</label>
+                  <label>category : {post.category}</label>
                   <br />
-                  <label>예상가격 : {post.expectPrice}</label>
-                  <br />
-                  <label>판매 가격 : {post.userPrice}</label>
-                  <br />
-                  <label>내용 : {post.content}</label>
+                  <label>userPrice : {post.userPrice}</label>
                   <br />
                   <br />
-                  <br />
+                  {/* 크리에이트앳 받아서 수정, 카테고리 대신 기종*/}
                 </div>
               </div>
             </div>

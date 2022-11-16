@@ -45,13 +45,12 @@ const PostsCreate = (props) => {
       title: write.title,
       category: write.category,
       expectPrice: 1000,
-      userPrice: 2000,
+      userPrice: write.userPrice,
       content: write.content,
     };
     formData.append(
       "postReqDto",
       new Blob([JSON.stringify(objects)], { type: "application/json" })
-      // objects
     );
 
     //Api 날리기
@@ -64,12 +63,18 @@ const PostsCreate = (props) => {
 
   return (
     <div>
-      <PricingInput
+      {/* <PricingInput
         State={write}
         setState={setWrite}
         stateHandle={writeHandle}
-      />
+      /> */}
 
+      <select name="category" onChange={writeHandle}>
+        {/* <select name="category" onChange={tagHandler} onChange={subTagHandler}> */}
+        <option value={"category"}>Category</option>
+        <option value={"macbook"}>macbook</option>
+        <option value={"iphone"}>iphone</option>
+      </select>
       <div>
         title:
         <input
@@ -109,12 +114,20 @@ const PostsCreate = (props) => {
         </label>
         <div className="preview">
           {
-            /*previews map쓸곳*/
+            /*previews*/
             fileUrls.map((val, i) => {
               return <img src={val} key={i} />;
             })
           }
         </div>
+        판매가격:
+        <input
+          onChange={writeHandle}
+          name="userPrice"
+          value={write.userPrice || ""}
+          type="text"
+          placeholder="제목을 입력하세요."
+        />
         <button onClick={writeSubmit}>글 작성</button>
       </div>
     </div>

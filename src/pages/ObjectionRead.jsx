@@ -16,8 +16,8 @@ const ObjectionRead = () => {
   const { posts } = useSelector((state) => state.objections);
 
   useEffect(() => {
-    dispatch(__getObjection);
-  }, []);
+    dispatch(__getObjection(params.category));
+  }, [params]);
 
   return (
     <>
@@ -25,7 +25,11 @@ const ObjectionRead = () => {
       <div>ObjectionRead</div>
 
       <PostSearch __search={__searchObjection} />
-      <PostList posts={posts} />
+      <PostList
+        posts={posts}
+        detail={"/objectionDetail"}
+        __getDetail={__getObjection}
+      />
     </>
   );
 };

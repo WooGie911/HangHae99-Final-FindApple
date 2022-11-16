@@ -2,7 +2,7 @@ import { createAsyncThunk, createSlice } from "@reduxjs/toolkit";
 import axios from "axios";
 
 const initialState = {
-  posts: [],
+  posts: {},
 };
 
 const accessToken = localStorage.getItem("Access_Token");
@@ -25,7 +25,7 @@ export const __getPostDetail = createAsyncThunk(
       );
       console.log("__getPostDetail", data);
       // console.log("response", data);
-      return thunkAPI.fulfillWithValue(data.data.data);
+      return thunkAPI.fulfillWithValue(data.data);
     } catch (error) {
       console.log("error", error);
       return thunkAPI.rejectWithValue(error);
