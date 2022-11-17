@@ -48,6 +48,7 @@ display: flex;
 justify-content: space-between;
 font-size : 10px;
 text-align: center;
-position : absolute;
-bottom: 0;
+position : relative;
+bottom: 10;
+margin-top: 20px;
 `
