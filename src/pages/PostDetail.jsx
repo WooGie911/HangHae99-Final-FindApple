@@ -2,7 +2,8 @@ import React, { useState } from "react";
 import styled from "styled-components";
 import { useNavigate, useParams } from "react-router-dom";
 import { useDispatch, useSelector } from "react-redux";
-
+import CommentCreate from "../components/CommentCreate";
+import CommentList from "../components/CommentList";
 import { __deletePost, __CartPost } from "../redux/modules/PostsSlice";
 import {
   __addPostComment,
@@ -18,7 +19,7 @@ const PostDetail = () => {
   const params = useParams();
   const { post } = useSelector((state) => state.details);
 
-  console.log(post);
+  console.log(post)
 
   // const { comments } = useSelector((state) => state.details.posts);
 
@@ -79,40 +80,33 @@ const PostDetail = () => {
             </ToggleNav>
           ) : null}
         </EditHead>
-        <button onClick={() => navigate(-1)}>이전으로</button>
 
-        <br />
-        <br />
+
         <div>
           {post.images !== undefined &&
             post.images.map((item, index) => {
               return <Image src={item.imgUrl} key={index} />;
             })}
-          <br />
-          <br />
-          <div>글쓴이 프로필사진 , 닉네임 : {post.nickname}</div>
-          <button onClick={() => onCartButton(post.postId)}>찜</button>
-          <br />
-          <div>글제목 : {post.title}</div>
-          <br />
-          <div>내용 : {post.content}</div>
-          <br />
-
-          <div> 하트 {post.likeCnt}</div>
-          <br />
-          <div>책정 가격 : {post.expectPrice}</div>
-
-          <div>판매 가격 : {post.userPrice}</div>
-          <br />
+          <h3>{post.title}</h3>
+          <div>{post.content}</div>
         </div>
+            {/* 추후 댓글 만들어지면 들어갈 내용 */}
+        <CommentList
+          __deleteComment={__deletePostComment}
+          commentList={post.comments}
+        />
+        <CommentCreate __addComment={__addPostComment} />
+        {/* 찜카운트 추가 예정 */}
+        <img src="https://img.icons8.com/ios-glyphs/15/null/hearts.png" onClick={() => onCartButton(post.postId)}/>
+        <hr/>
+        <Price>
+          <div>책정가격 : {post.expectPrice} 원</div>
+          <div> <img src="https://img.icons8.com/metro/15/null/long-arrow-right.png"/> </div>
+          <div>판매가격 : {post.userPrice} 원</div>
+          <div><img src="https://img.icons8.com/ios/25/null/topic.png"/></div>
+        </Price>
+        <Footer />
 
-        <button onClick={() => navigate(`/postComment/${params.id}`)}>
-          댓글
-        </button>
-
-        <div>
-          <Footer />
-        </div>
       </Layout>
     </>
   );
@@ -155,17 +149,18 @@ const Button = styled.button`
 
 // 이미지 크기 지정
 const Image = styled.img`
-  width: 300px;
-  height: 300px;
-  margin: auto;
-  margin-bottom: 20px;
-  display: block;
-`;
+width : 300px;
+height : 300px;
+margin: auto;
+margin-bottom: 20px;
+display: block;
+`
 
 // 물건 가격
 const Price = styled.div`
-  display: flex;
-  div {
-    margin-right: 10px;
-  }
-`;
+display: flex;
+div{
+  margin-right : 10px;
+}
+
+`
