@@ -6,45 +6,45 @@ import {
   checkPricingDetail,
 } from "../redux/modules/PriceSlice";
 import Layout from "./Layout";
+import { useSelector } from "react-redux";
+import { useNavigate } from "react-router-dom";
+import { __getPriceInfo, __checkPrice } from "../redux/modules/PriceSlice";
+import PricingList from "./PricingList";
 
 const Pricingfinal = () => {
-  const dispatch = useDispatch();
-  const state = useLocation();
-  const data = state.state;
-  const macOB = data.objMac;
-  const phoneOB = data.objPhone;
-  const Data = data.category === "macbook" ? macOB : phoneOB;
+  const navigate = useNavigate();
 
-  const onsubmitHandler = () => {
-    console.log("Data", Data);
-    dispatch(checkPricingDetail("Data"));
-  };
+  const { DetailPrice } = useSelector((state) => state.price);
+
   return (
     <>
     <Layout>
       <div>Pricingfinal</div>
 
       <div>
-        <label>category : {Data.category}</label>
-        <br />
-        <label>year : {Data.year}</label>
-        <br />
-        <label>model : {Data.model}</label>
-        <br />
-        <label>option : {Data.option}</label>
-        <br />
-        <label>batteryState : {Data.batteryState}</label>
-        <br />
-        <label>displayState : {Data.displayState}</label>
-        <br />
-        <label>scratchState : {Data.scratchState}</label>
-        <br />
-        <label>careOX : {Data.careOX}</label>
-        <br />
-        <label>careDate : {Data.careDate}</label>
-        <br />
-        <br />
-        <button onClick={onsubmitHandler}>가격책정</button>
+        <PricingList DetailPrice={DetailPrice} />
+
+        <button
+          onClick={() => {
+            navigate(`/pricingInput`);
+          }}
+        >
+          가격책정 다시하기
+        </button>
+        <button
+          onClick={() => {
+            navigate("/postcreate");
+          }}
+        >
+          상품 등록
+        </button>
+        <button
+          onClick={() => {
+            navigate(`/objectioncreate`);
+          }}
+        >
+          이의 제기
+        </button>
       </div>
       </Layout>
     </>

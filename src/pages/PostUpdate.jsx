@@ -5,23 +5,19 @@ import useInput from "../hook/useInput";
 import useImageUpload from "../hook/useImageUpload";
 import { useSelector } from "react-redux";
 import PricingText from "../components/PricingText";
-import { useParams } from "react-router-dom";
 import Layout from "../components/Layout";
 import Footer from "../components/Footer"
-import back from "../assets/back.png" 
+import back from "../assets/back.png"
 import styled from "styled-components";
-import { useNavigate } from "react-router-dom";
-
-
+import { useNavigate, useParams } from "react-router-dom";
 const PostUpdate = () => {
-  const paramId = useParams();
   const dispatch = useDispatch();
   const navigate = useNavigate();
+  const params = useParams();
   const [files, fileUrls, uploadHandle] = useImageUpload(5, true, 0.3, 1000);
   const imgRef = useRef();
-  const posts = useSelector((state) => state.details.posts);
+  const { posts } = useSelector((state) => state.details);
   const [updateInput, setUpdateInput, updateInputHandle] = useInput(posts);
-
   const updateSubmit = () => {
     //request로 날릴 폼데이터
     const formData = new FormData();
@@ -33,7 +29,6 @@ const PostUpdate = () => {
     } else {
       formData.append("multipartFiles", null);
     }
-
     // 폼 데이터에 글작성 데이터 넣기
     const objects = {
       title: updateInput.title,
@@ -46,19 +41,18 @@ const PostUpdate = () => {
       "postReqDto",
       new Blob([JSON.stringify(objects)], { type: "application/json" })
     );
-
     const obj = {
-      id: paramId.id,
+      id: params.id,
       formData: formData,
     };
     //Api 날리기
     dispatch(__editPost(obj));
+    navigate(`/PostDetail/${params.id}`);
+    // window.location.replace(`/PostDetail/${params.id}`;
   };
-
   return (
     <div>
       <Layout>
-        
         <FirstContainer>
         <div><img onClick={()=> {navigate(-1)}} style={{width:25, height : 25}} src={back}/></div>
         <div>상품 게시물 수정</div>
@@ -95,12 +89,21 @@ const PostUpdate = () => {
           </PhotoButton>
         </label>
         </ImageWrapper>
-        
       <div>
-        title:
-        <div>
-        {updateInput.title}
-        </div>
+        <br />
+        <br />
+         title :<div>{updateInput.title}</div>
+            <br />
+        <br />
+        <button
+          onClick={() => {
+            navigate("/pricingText");
+          }}
+        >
+          상품 상세 정보
+        </button>
+      <br />
+      <br />
         content
         <PricingText Data={posts} />
         <PriceInput>
@@ -113,8 +116,14 @@ const PostUpdate = () => {
           placeholder="판매 가격을 입력해주세요."
         />
         </PriceInput>
+        <br />
+      <br />
+       측정 가격 :<div>{updateInput.getPrice}</div>
+        <br />
+        <br />
         <EditText>
-        <textarea
+      content :
+        <input
           onChange={updateInputHandle}
           name="content"
           value={updateInput.content || ""}
@@ -122,16 +131,14 @@ const PostUpdate = () => {
           placeholder="수정할 내용을 입력하세요."
         />
         </EditText>
-
+         <button onClick={updateSubmit}>글 수정</button>
       </div>
       <Footer/>
       </Layout>
     </div>
   );
 };
-
 export default PostUpdate;
-
 // 제목
 const FirstContainer = styled.div`
 display: flex;
@@ -142,7 +149,6 @@ const EditButton = styled.div`
 background-color: transparent;
 cursor: pointer;
 `
-
 // 사진 업로드
 const ImageWrapper = styled.div`
 border: 1.2px solid gray;
@@ -156,7 +162,6 @@ border-radius: 25%;
 background-color: aliceblue;
 margin : 10px;
 `
-
 const CameraImg = styled.div`
 display: flex;
 flex-direction: column;
@@ -164,7 +169,6 @@ align-items: center;
 justify-content: center;
 padding-top : 5px;
 `
-
 // 판매가격 및 내용입력
 const PriceInput = styled.div`
 border: 1.2px solid gray;
@@ -174,10 +178,8 @@ input{
   background-color: transparent;
   border: 1px solid transparent;
   width: 250px;
-
 }
 `
-
 const EditText = styled.div`
 border: 1.2px solid gray;
 border-width: 1.2px 0px 1.2px 0px ;
@@ -187,6 +189,5 @@ textarea{
   border: 1px solid transparent;
   width: 375px;
   height: 115px;
-
 }
 `

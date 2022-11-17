@@ -17,8 +17,8 @@ const PostDetail = () => {
   const navigate = useNavigate();
   const dispatch = useDispatch();
   const params = useParams();
-  const { posts } = useSelector((state) => state.details);
-  console.log("posts 유즈셀렉터 데이터", posts);
+  const { post } = useSelector((state) => state.details);
+
   // const { comments } = useSelector((state) => state.details.posts);
 
   //찜하기
@@ -36,6 +36,7 @@ const PostDetail = () => {
     }
     
     //   navigate("/postread/all");
+
   };
 
   const [editTg, setEidtTg] = useState({
@@ -66,20 +67,24 @@ const PostDetail = () => {
     </EditHead>
       <button onClick={() => onCartButton(posts.postId)}>찜</button>
       
+      <Header />
+      <div>PostDetail</div>
+      <button onClick={() => onCartButton(post.postId)}>찜</button>
+
       <div>
-        <div>{posts.title}</div>
-        {posts.images !== undefined &&
-          posts.images.map((item, index) => {
+        <div>{post.title}</div>
+        {post.images !== undefined &&
+          post.images.map((item, index) => {
             return <img src={item.imgUrl} key={index} />;
           })}
-        <div>{posts.expectPrice}</div>
-        <div>{posts.userPrice}</div>
-        <div>{posts.content}</div>
+        <div>{post.expectPrice}</div>
+        <div>{post.userPrice}</div>
+        <div>{post.content}</div>
       </div>
 
       <CommentList
         __deleteComment={__deletePostComment}
-        commentList={posts.comments}
+        commentList={post.comments}
       />
       <CommentCreate __addComment={__addPostComment} />
 

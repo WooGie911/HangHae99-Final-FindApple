@@ -23,6 +23,8 @@ const ObjectionRead = () => {
     <>
     <Layout>
       <div>ObjectionRead</div>
+      <Header />
+      <div>{params.category}</div>
 
       <PostSearch __search={__searchObjection} />
       <PostList

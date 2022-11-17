@@ -9,11 +9,12 @@ const PostCreate = () => {
     <>
     <Layout>
       <Header />
-      <div>PostCreate</div>
+      <div>상품등록</div>
 
       <PostsCreate __addData={__addPost} />
       <Footer/>
       </Layout>
+      <PostsCreate Navigate={"postread/all"} __addData={__addPost} />
     </>
   );
 };

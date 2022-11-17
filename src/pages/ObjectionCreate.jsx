@@ -9,11 +9,12 @@ const ObjectionCreate = () => {
     <>
     <Layout>
       <Header />
-      <div>ObjectionCreate</div>
+      <div>이의제기 등록</div>
 
       <PostsCreate __addData={__addObjection} />
       <Footer/>
       </Layout>
+      <PostsCreate Navigate={"objectionread/all"} __addData={__addObjection} />
     </>
   );
 };
