@@ -42,7 +42,7 @@ export default Footer
 // 메뉴바
 const MenuBar = styled.div`
 background-color : gray;
-width : 375px;
+width : 355px;
 height: 45px;
 display: flex;
 justify-content: space-between;
@@ -50,5 +50,6 @@ font-size : 10px;
 text-align: center;
 position : relative;
 bottom: 10;
-margin-top: 20px;
+margin : auto;
+align-items: center;
 `

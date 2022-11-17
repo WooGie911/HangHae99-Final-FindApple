@@ -218,7 +218,7 @@ const Stuploadbutton = styled.div`
 
 
 // 내용 입력
-const Stcontentinput = styled.input`
+const Stcontentinput = styled.textarea`
   margin-top: 25px;
   width: 98.5%;
   height: 30px;

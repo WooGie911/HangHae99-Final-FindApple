@@ -10,9 +10,11 @@ const Layout = ({ children }) => {
 export default Layout
 
 const StLayout = styled.div`
-  width: 375px;
-  height: 100%;
-  margin: 0 auto;
+  max-width: 375px;
+  max-height: 100vh;
+  height : 100%;
+  overflow: auto;
+  padding : 10px;
   background-color: aqua;
-  padding : 0px 20px;
+  /* padding : 0px 20px; */
 `;
