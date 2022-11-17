@@ -5,8 +5,9 @@ import useInput from "../hook/useInput";
 import useImgUpload from "../hook/useImageUpload";
 import { useDispatch, useSelector } from "react-redux";
 import { useNavigate } from "react-router-dom";
-import Layout from "../components/Layout";
-import back from "../assets/back.png";
+import Layout from "../components/Layout"
+import back from "../assets/back.png" 
+
 
 const PostsCreate = (props) => {
   const dispatch = useDispatch();
@@ -56,28 +57,24 @@ const PostsCreate = (props) => {
 
     //Api 날리기
     dispatch(props.__addData(formData));
-    // navigate(`${props.Navigate}`);
-    // window.location.replace(`${props.Navigate}`);
+    navigate(`${props.Navigate}`);
+    console.log("폼데이터", formData);
+    console.log("files", files);
+    console.log("objects", objects);
   };
   const onClickHandler = () => {
     navigate(-1);
   };
-
   return (
     <>
+    <Layout>
       <Stcontainer>
         <Stuploadbutton>
-          <div>
-            <div>
-              <img
-                onClick={onClickHandler}
-                style={{ width: 25, height: 25 }}
-                src={back}
-              />
-            </div>
+        <div>
+            <div><img onClick={onClickHandler} style={{width:25, height : 25}} src={back}/></div>
           </div>
           <div>
-            <h3>상품등록</h3>
+            <div>상품등록</div>
           </div>
           <div>
             <span onClick={writeSubmit}>완료</span>
@@ -111,65 +108,67 @@ const PostsCreate = (props) => {
             </div>
           ) : (
             <PhotoButton
-              type="button"
-              onClick={() => {
-                imgRef.current.click();
-              }}
-            >
-              <CameraImg>
-                <div>
-                  <img src="https://img.icons8.com/fluency-systems-regular/20/null/multiple-cameras.png" />
-                </div>
-                <div>{fileUrls.length}/5</div>
-              </CameraImg>
-            </PhotoButton>
+            type="button"
+            onClick={() => {
+              imgRef.current.click();
+            }}
+          >
+            <CameraImg>
+            <div><img src="https://img.icons8.com/fluency-systems-regular/20/null/multiple-cameras.png"/></div>
+            <div>{fileUrls.length}/5</div>
+            </CameraImg>
+          </PhotoButton>
           )}
         </Stphotolabel>
-
+        
+      
         <div>
-          <Sttitleinput
-            onChange={writeHandle}
-            name="title"
-            value={write.title || ""}
-            type="text"
-            placeholder="제목을 입력하세요."
-          />
-        </div>
-        <hr />
-
-        <Detail
-          onClick={() => {
-            navigate("/pricingfinal");
-          }}
-        >
-          상품 상세 정보
-        </Detail>
-        <hr />
-
-        <Price>
-          <div>측정 가격 {DetailPrice.getPrice}</div>
-          <hr />
           <div>
-            <input
+            <Sttitleinput
               onChange={writeHandle}
-              name="userPrice"
-              value={write.userPrice || ""}
+              name="title"
+              value={write.title || ""}
               type="text"
-              placeholder="가격을 입력하세요."
+              placeholder="글제목"
             />
           </div>
-        </Price>
-        <hr />
-        <div>
-          <Stcontentinput
+          <hr/>
+
+          <Detail
+            onClick={() => {
+              navigate("/pricingfinal");
+            }}
+          >
+            상품 상세 정보
+          </Detail>
+          <hr/>
+
+          <Price>
+          <div>측정 가격 {DetailPrice.getPrice}</div>
+          <hr/>
+          <div>
+          <input
             onChange={writeHandle}
-            name="content"
-            value={write.content || ""}
+            name="userPrice"
+            value={write.userPrice || ""}
             type="text"
-            placeholder="내용을 입력하세요."
+            placeholder="판매가격"
           />
+          </div>
+          </Price>
+          <hr/>    
+          <div>
+            <Stcontentinput
+              onChange={writeHandle}
+              name="content"
+              value={write.content || ""}
+              type="text"
+              placeholder="내용을 입력하세요."
+            />
+          </div>
         </div>
       </Stcontainer>
+      </Layout>
     </>
   );
 };
@@ -182,63 +181,67 @@ const Stcontainer = styled.div`
   flex-direction: column;
 `;
 
+
 // 상품 가격 측정
 const Detail = styled.div`
-  cursor: pointer;
-  display: flex;
-  margin-top: 20px;
-  height: 30px;
-  color: gray;
-  font-size: 14px;
-`;
+cursor: pointer;
+display: flex;
+margin-top: 20px;
+height: 30px;
+color : gray;
+font-size: 14px;
+
+`
 // 가격 결정
 const Price = styled.div`
-  div {
-    margin-top: 30px;
-    color: gray;
-    font-size: 14px;
-  }
-  input {
-    border: none;
-    width: 98.5%;
-    background-color: transparent;
-  }
-`;
+div{
+margin-top: 30px;
+color : gray;
+font-size: 14px;
+}
+input{
+  border : none;
+  width: 98.5%;
+  background-color : transparent;
+}
+`
 
 const Stuploadbutton = styled.div`
   display: flex;
   justify-content: space-between;
   border-bottom: 1px solid lightgrey;
   padding-bottom: 10px;
-  span {
+  span{
     cursor: pointer;
   }
 `;
+
 
 // 내용 입력
 const Stcontentinput = styled.textarea`
   margin-top: 25px;
   width: 98.5%;
   height: 30px;
-  border: none;
-  background-color: transparent;
+  border : none;
+  background-color : transparent;
 `;
+
 
 // 사진 업로드
 const PhotoButton = styled.div`
-  width: 50px;
-  height: 50px;
-  border-radius: 25%;
-  background-color: aliceblue;
-  margin: 10px;
-`;
+width: 50px;
+height: 50px;
+border-radius: 25%;
+background-color: aliceblue;
+margin : 10px;
+`
 const CameraImg = styled.div`
-  display: flex;
-  flex-direction: column;
-  align-items: center;
-  justify-content: center;
-  padding-top: 5px;
-`;
+display: flex;
+flex-direction: column;
+align-items: center;
+justify-content: center;
+padding-top : 5px;
+`
 
 // 사진 업로드 관련인 듯
 const Stphotolabel = styled.label`
@@ -250,6 +253,6 @@ const Stphotolabel = styled.label`
 const Sttitleinput = styled.input`
   width: 98.5%;
   height: 30px;
-  border: none;
-  background-color: transparent;
-`;
+  border : none;
+  background-color : transparent;
+`
