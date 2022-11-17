@@ -2,7 +2,8 @@ import React, {useEffect} from 'react'
 import Header from "../components/Header"
 import { useSelector, useDispatch } from 'react-redux'
 import { __getMyLike } from '../redux/modules/MypageSlice'
-
+import Layout from "../components/Layout"
+import Footer from "../components/Footer"
 const MyLike = () => {
   const {likes} = useSelector((state) => state.mypage)
   console.log(likes)
@@ -12,6 +13,7 @@ const MyLike = () => {
   }, [])
   return (
     <div>
+      <Layout>
       <Header/>
       MyLike
       {
@@ -25,7 +27,10 @@ const MyLike = () => {
       })}
           </>
         )
-      }</div>
+      }
+      <Footer />
+      </Layout>
+      </div>
   )
 }
 

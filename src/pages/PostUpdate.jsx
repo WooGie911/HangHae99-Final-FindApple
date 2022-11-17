@@ -1,13 +1,15 @@
 import React, { useState, useRef, useEffect } from "react";
-import Header from "../components/Header";
 import { useDispatch } from "react-redux";
 import { __editPost } from "../redux/modules/PostsSlice";
 import useInput from "../hook/useInput";
 import useImageUpload from "../hook/useImageUpload";
 import { useSelector } from "react-redux";
 import PricingText from "../components/PricingText";
+import Layout from "../components/Layout";
+import Footer from "../components/Footer"
+import back from "../assets/back.png"
+import styled from "styled-components";
 import { useNavigate, useParams } from "react-router-dom";
-
 const PostUpdate = () => {
   const dispatch = useDispatch();
   const navigate = useNavigate();
@@ -16,7 +18,6 @@ const PostUpdate = () => {
   const imgRef = useRef();
   const { posts } = useSelector((state) => state.details);
   const [updateInput, setUpdateInput, updateInputHandle] = useInput(posts);
-
   const updateSubmit = () => {
     //request로 날릴 폼데이터
     const formData = new FormData();
@@ -28,7 +29,6 @@ const PostUpdate = () => {
     } else {
       formData.append("multipartFiles", null);
     }
-
     // 폼 데이터에 글작성 데이터 넣기
     const objects = {
       title: updateInput.title,
@@ -41,7 +41,6 @@ const PostUpdate = () => {
       "postReqDto",
       new Blob([JSON.stringify(objects)], { type: "application/json" })
     );
-
     const obj = {
       id: params.id,
       formData: formData,
@@ -51,55 +50,50 @@ const PostUpdate = () => {
     navigate(`/PostDetail/${params.id}`);
     // window.location.replace(`/PostDetail/${params.id}`;
   };
-
   return (
     <div>
-      <Header />
-      <br />
-      <br />
-      <label htmlFor="imgFile">
-        {fileUrls.length > 0 ? (
-          <div>
-            {
-              /*previews*/
-              fileUrls.map((val, i) => {
-                return <img src={val} key={i} />;
-              })
-            }
-          </div>
-        ) : (
-          <div>
-            {updateInput.images &&
-              updateInput.images.map((item) => {
-                return <img src={item.imgUrl} />;
-              })}
-          </div>
-        )}
-
-        <input
-          type="file"
-          style={{ display: "none" }}
-          accept="image/*"
-          id="imgFile"
-          name="imgFile"
-          multiple
-          onChange={uploadHandle}
-          ref={imgRef}
-        />
-        <button
-          type="button"
-          onClick={() => {
-            imgRef.current.click();
-          }}
-        >
-          이미지 업로드 버튼
-        </button>
-      </label>
-      <br />
-      <br />
+      <Layout>
+        <FirstContainer>
+        <div><img onClick={()=> {navigate(-1)}} style={{width:25, height : 25}} src={back}/></div>
+        <div>상품 게시물 수정</div>
+        <EditButton onClick={updateSubmit}>완료</EditButton>
+        </FirstContainer>
+        <ImageWrapper>
+        <label htmlFor="imgFile">
+          {
+          /*previews*/
+          fileUrls.map((val, i) => {
+          return <img src={val} key={i} />;
+          })
+          }
+          <input
+            type="file"
+            style={{ display: "none" }}
+            accept="image/*"
+            id="imgFile"
+            name="imgFile"
+            multiple
+            onChange={uploadHandle}
+            ref={imgRef}
+          />
+          <PhotoButton
+            type="button"
+            onClick={() => {
+              imgRef.current.click();
+            }}
+          >
+            <CameraImg>
+            <div><img src="https://img.icons8.com/fluency-systems-regular/20/null/multiple-cameras.png"/></div>
+            <div>{fileUrls.length}/5</div>
+            </CameraImg>
+          </PhotoButton>
+        </label>
+        </ImageWrapper>
       <div>
-        title :<div>{updateInput.title}</div>
         <br />
+        <br />
+         title :<div>{updateInput.title}</div>
+            <br />
         <br />
         <button
           onClick={() => {
@@ -108,35 +102,92 @@ const PostUpdate = () => {
         >
           상품 상세 정보
         </button>
-        <br />
-        <br />
-        측정 가격 :<div>{updateInput.getPrice}</div>
-        <br />
-        <br />
-        판매가격 :
+      <br />
+      <br />
+        content
+        <PricingText Data={posts} />
+        <PriceInput>
+        판매가격:
         <input
           onChange={updateInputHandle}
           name="userPrice"
           value={updateInput.userPrice || ""}
           type="text"
-          placeholder="가격을 입력하세요."
+          placeholder="판매 가격을 입력해주세요."
         />
+        </PriceInput>
+        <br />
+      <br />
+       측정 가격 :<div>{updateInput.getPrice}</div>
         <br />
         <br />
-        content :
+        <EditText>
+      content :
         <input
           onChange={updateInputHandle}
           name="content"
           value={updateInput.content || ""}
           type="text"
-          placeholder="내용을 입력하세요."
+          placeholder="수정할 내용을 입력하세요."
         />
-        <br />
-        <br />
-        <button onClick={updateSubmit}>글 수정</button>
+        </EditText>
+         <button onClick={updateSubmit}>글 수정</button>
       </div>
+      <Footer/>
+      </Layout>
     </div>
   );
 };
-
 export default PostUpdate;
+// 제목
+const FirstContainer = styled.div`
+display: flex;
+justify-content: space-between;
+padding: 10px;
+`
+const EditButton = styled.div`
+background-color: transparent;
+cursor: pointer;
+`
+// 사진 업로드
+const ImageWrapper = styled.div`
+border: 1.2px solid gray;
+border-width: 1.2px 0px 1.2px 0px ;
+height : 60px;
+`
+const PhotoButton = styled.div`
+width: 50px;
+height: 50px;
+border-radius: 25%;
+background-color: aliceblue;
+margin : 10px;
+`
+const CameraImg = styled.div`
+display: flex;
+flex-direction: column;
+align-items: center;
+justify-content: center;
+padding-top : 5px;
+`
+// 판매가격 및 내용입력
+const PriceInput = styled.div`
+border: 1.2px solid gray;
+border-width: 1.2px 0px 1.2px 0px ;
+height : 60px;
+input{
+  background-color: transparent;
+  border: 1px solid transparent;
+  width: 250px;
+}
+`
+const EditText = styled.div`
+border: 1.2px solid gray;
+border-width: 1.2px 0px 1.2px 0px ;
+height : 120px;
+textarea{
+  background-color: transparent;
+  border: 1px solid transparent;
+  width: 375px;
+  height: 115px;
+}
+`

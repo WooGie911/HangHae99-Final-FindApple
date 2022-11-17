@@ -2,6 +2,8 @@ import React, {useEffect} from 'react'
 import Header from "../components/Header"
 import { useSelector, useDispatch } from 'react-redux'
 import {__getMyObjection} from '../redux/modules/MypageSlice'
+import Layout from "../components/Layout"
+import Footer from "../components/Footer"
 const MyObjection = () => {
   const {objections} = useSelector((state) => state.mypage)
   console.log(objections)
@@ -11,6 +13,7 @@ const MyObjection = () => {
   }, [])
   return (
     <div>
+      <Layout>
       <Header/>
       MyObjection
       {
@@ -25,6 +28,8 @@ const MyObjection = () => {
           </>
         )
       }
+      <Footer />
+      </Layout>
 </div>
   )
 }

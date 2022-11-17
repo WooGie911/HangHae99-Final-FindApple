@@ -5,6 +5,8 @@ import useInput from "../hook/useInput";
 import { useSelector } from "react-redux";
 import PricingText from "../components/PricingText";
 import { __editObjection } from "../redux/modules/ObjectionsSlice";
+import Layout from "../components/Layout"
+import Footer from "../components/Footer"
 import { useNavigate, useParams } from "react-router-dom";
 
 const ObjectionUpdate = ({ paramId }) => {
@@ -26,6 +28,7 @@ const ObjectionUpdate = ({ paramId }) => {
   };
   return (
     <>
+    <Layout>
       <Header />
       <div>ObjectionUpdate</div>
       <PricingText Data={posts} />
@@ -70,6 +73,8 @@ const ObjectionUpdate = ({ paramId }) => {
         />
         <button onClick={updateSubmit}>글 수정</button>
       </div>
+      <Footer/>
+      </Layout>
     </>
   );
 };

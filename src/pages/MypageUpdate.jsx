@@ -3,11 +3,11 @@ import { useNavigate } from 'react-router-dom'
 import useInput from "../hook/useInput";
 import { useDispatch } from 'react-redux';
 import styled from "styled-components"
-import Header from "../components/Header"
 import { useSelector } from 'react-redux'
 import {__UserProfileEdit} from '../redux/modules/LoginSlice'
 import photoIMG from "../assets/photoIMG.png"
-
+import Layout from "../components/Layout"
+import back from "../assets/back.png" 
 
 const MypageUpdate = () => {
   const uploadedImage = React.useRef(null);
@@ -62,6 +62,12 @@ const nicknameEdit = () => {
     window.location.replace("/mypage")
 }
 
+const onClickButton = (e) => {
+  e.preventDefault();
+  localStorage.clear();
+  navigate("/signin");
+};
+
   return (
     <div
       style={{
@@ -71,6 +77,12 @@ const nicknameEdit = () => {
         justifyContent: "center"
       }}
     >
+      <Layout>
+        <HeadContainer>
+        <img onClick={onClickHandler} style={{width:25, height : 25}} src={back}/>
+        <h3>내 정보</h3>
+      </HeadContainer>
+      <ProfileEdit>
       <input
         type="file"
         accept="image/*"
@@ -80,28 +92,77 @@ const nicknameEdit = () => {
           display: "none"
         }}
       />
-      {/* 아래 내용만 데이터 받으면 div를 사진으로 바꿔서 사용할 것 */}
       <div>
       <img src={user.profileImg == (null || undefined)  ? photoIMG : user.profileImg}
           ref={uploadedImage}
           style={{
-          height: "200px",
-          width: "200px",
+          height: "75px",
+          width: "75px",
           border: "1px dashed black",
           borderRadius : "50%"
         }}
         onClick={onSubmitHandler} />
       </div>
-      프로필 사진을 바꾸시려면 눌러주세요
-      <input size='medium' style={{ marginTop: '20px' }} onChange={writeHandle} name='nickname' value={write.nickname || ""}  placeholder='변경하실 닉네임을 입력하세요' />
-      <div>
-        <button onClick={nicknameEdit}>변경</button>
-
-        <button onClick={onClickHandler}>이전으로</button>
-      </div>
-      <Header /> 
+      프로필 사진 바꾸기
+      <EditContainer>
+        닉네임 변경하기 <input size='medium' onChange={writeHandle} name='nickname' value={write.nickname || ""} />
+      <EditButton onClick={nicknameEdit}>변경</EditButton>
+      </EditContainer>
+        </ProfileEdit>
+      <br />
+      <Logout onClick={onClickButton}>로그아웃</Logout>
+      </Layout>
     </div>
   );
 }
 
 export default MypageUpdate
+
+//Head 파트
+
+const HeadContainer = styled.div`
+img {float: left;}
+h3{
+  text-align: center;
+  margin-right: 30px;
+}
+`
+
+
+// ProfileEdit 파트
+
+const ProfileEdit = styled.div`
+justify-content: center;
+text-align: center;
+input {
+  border-radius: 25px;
+  border: 1px solid transparent;
+  padding : 10px;
+}
+img {
+  margin-bottom: 15px;
+}
+`
+
+
+//버튼 추후 개발 예정
+const EditButton = styled.button`
+
+`
+
+const EditContainer = styled.div`
+display: flex;
+height: 50px;
+align-items: center;
+justify-content: center;
+align-content: center;
+border: 1.2px solid gray;
+border-width: 1.2px 0px 1.2px 0px ;
+`
+
+//LogOut
+const Logout = styled.button`
+position : absolute;
+margin-left: 10px;
+bottom: 10px;
+`

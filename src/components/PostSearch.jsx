@@ -1,6 +1,9 @@
 import React from "react";
 import useInput from "../hook/useInput";
 import { useDispatch } from "react-redux";
+import styled from "styled-components";
+import Search from "../assets/search.png"
+ 
 
 const PostSearch = (props) => {
   const initialState = { searchContent: "" };
@@ -19,7 +22,7 @@ const PostSearch = (props) => {
   return (
     <>
       <div>
-        <input
+        <Input
           placeholder="검색어를 입력하세요 WWW"
           value={search.searchContent || ""}
           name="searchContent"
@@ -34,3 +37,14 @@ const PostSearch = (props) => {
 };
 
 export default PostSearch;
+
+// icon 사진 집어넣기
+const Input = styled.input`
+padding-left: 30px;
+height : 35px;
+width: 250px;
+background-image: url("https://img.icons8.com/ios-glyphs/30/null/search--v1.png");
+background-repeat : no-repeat;
+background-size: 30px;
+margin-bottom: 20px;
+`

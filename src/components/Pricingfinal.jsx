@@ -1,4 +1,11 @@
 import React from "react";
+import { useDispatch } from "react-redux";
+import { useLocation } from "react-router-dom";
+import {
+  __getPriceInfo,
+  checkPricingDetail,
+} from "../redux/modules/PriceSlice";
+import Layout from "./Layout";
 import { useSelector } from "react-redux";
 import { useNavigate } from "react-router-dom";
 import { __getPriceInfo, __checkPrice } from "../redux/modules/PriceSlice";
@@ -11,6 +18,7 @@ const Pricingfinal = () => {
 
   return (
     <>
+    <Layout>
       <div>Pricingfinal</div>
 
       <div>
@@ -38,6 +46,7 @@ const Pricingfinal = () => {
           이의 제기
         </button>
       </div>
+      </Layout>
     </>
   );
 };

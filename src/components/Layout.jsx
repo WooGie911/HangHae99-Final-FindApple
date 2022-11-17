@@ -10,6 +10,9 @@ const Layout = ({ children }) => {
 export default Layout
 
 const StLayout = styled.div`
-  width: 1000px;
+  width: 375px;
+  height: 100vh;
   margin: 0 auto;
+  background-color: aqua;
+  padding : 0px 20px;
 `;

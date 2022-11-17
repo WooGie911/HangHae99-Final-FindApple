@@ -4,6 +4,7 @@ import { useNavigate, useParams } from "react-router-dom";
 import styled from "styled-components";
 import { __checkPrice, __getPriceInfo } from "../redux/modules/PriceSlice";
 import Header from "./Header";
+import Layout from "./Layout";
 
 const PricingInput = () => {
   const navigate = useNavigate();
@@ -177,6 +178,7 @@ const PricingInput = () => {
 
   return (
     <>
+    <Layout>
       <Header />
       <br />
       <br />
@@ -307,6 +309,9 @@ const PricingInput = () => {
           </div>
         )}
       </div>
+
+    </Layout>
+
     </>
   );
 };

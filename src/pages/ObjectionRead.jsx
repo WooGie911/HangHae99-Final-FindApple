@@ -1,5 +1,4 @@
 import React, { useEffect } from "react";
-import Header from "../components/Header";
 import PostList from "../components/PostList";
 import { useDispatch, useSelector } from "react-redux";
 import { useParams } from "react-router-dom";
@@ -8,7 +7,8 @@ import {
   __searchObjection,
 } from "../redux/modules/ObjectionsSlice";
 import PostSearch from "../components/PostSearch";
-
+import Layout from "../components/Layout"
+import Footer from "../components/Footer"
 const ObjectionRead = () => {
   const params = useParams();
   console.log("params.category", params.category);
@@ -21,6 +21,8 @@ const ObjectionRead = () => {
 
   return (
     <>
+    <Layout>
+      <div>ObjectionRead</div>
       <Header />
       <div>{params.category}</div>
 
@@ -30,6 +32,8 @@ const ObjectionRead = () => {
         detail={"/objectionDetail"}
         __getDetail={__getObjection}
       />
+      <Footer/>
+      </Layout>
     </>
   );
 };

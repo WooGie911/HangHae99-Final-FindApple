@@ -4,6 +4,8 @@ import { useSelector } from 'react-redux'
 import { __getSellerinfo} from '../redux/modules/SellerSlice'
 import { useDispatch } from 'react-redux'
 import { useParams } from 'react-router-dom'
+import Layout from "../components/Layout";
+import Footer from "../components/Footer"
 
 const SellerPage = () => {
   const {myPostList, sellerInfoDto} = useSelector((state) => state.sellerpage)
@@ -16,6 +18,7 @@ const SellerPage = () => {
   }, [memberId])
   return (
     <div>
+     <Layout>
       <Header/>
       {
         sellerInfoDto !== undefined && (
@@ -48,6 +51,8 @@ const SellerPage = () => {
         }
         
       </div>
+      <Footer/>
+      </Layout>
     </div>
   )
 }
