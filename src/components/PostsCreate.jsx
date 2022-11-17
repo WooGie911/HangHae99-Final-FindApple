@@ -152,7 +152,7 @@ const PostsCreate = (props) => {
             name="userPrice"
             value={write.userPrice || ""}
             type="text"
-            placeholder="판매가격."
+            placeholder="판매가격"
           />
           </div>
           </Price>
