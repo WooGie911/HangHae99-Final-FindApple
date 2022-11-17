@@ -18,6 +18,8 @@ const PostDetail = () => {
   const params = useParams();
   const { post } = useSelector((state) => state.details);
 
+  console.log(post);
+
   // const { comments } = useSelector((state) => state.details.posts);
 
   //찜하기
@@ -84,7 +86,7 @@ const PostDetail = () => {
         <div>
           {post.images !== undefined &&
             post.images.map((item, index) => {
-              return <img src={item.imgUrl} key={index} />;
+              return <Image src={item.imgUrl} key={index} />;
             })}
           <br />
           <br />
@@ -148,5 +150,22 @@ const Button = styled.button`
   background-color: #fff;
   &:hover {
     background-color: red;
+  }
+`;
+
+// 이미지 크기 지정
+const Image = styled.img`
+  width: 300px;
+  height: 300px;
+  margin: auto;
+  margin-bottom: 20px;
+  display: block;
+`;
+
+// 물건 가격
+const Price = styled.div`
+  display: flex;
+  div {
+    margin-right: 10px;
   }
 `;
