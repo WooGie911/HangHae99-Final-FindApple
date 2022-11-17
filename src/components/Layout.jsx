@@ -14,4 +14,5 @@ const StLayout = styled.div`
   height: 100vh;
   margin: 0 auto;
   background-color: aqua;
+  padding : 0px 20px;
 `;
