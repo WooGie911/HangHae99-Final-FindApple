@@ -19,8 +19,7 @@ const ObjectionDetail = () => {
   //게시글 삭제
   const onDeleteHandler = (payload) => {
     dispatch(__deleteObjection(payload));
-    navigate("-1");
-    // window.location.replace("/Main");
+    window.location.replace("/objectionread/all");
   };
 
   return (
@@ -28,9 +27,12 @@ const ObjectionDetail = () => {
       <Header />
       <div>ObjectionDetail</div>
 
+      <button onClick={() => navigate(`/objectionupdate/${params.id}`)}>
+        수정하기
+      </button>
+
       <div>
         <div>post.title</div>
-
         {post.images !== undefined &&
           post.images.map((item) => {
             return <img src={item.image} key={item.imageId} />;
@@ -47,10 +49,10 @@ const ObjectionDetail = () => {
       <CommentCreate __addComment={__addObjectionComment} />
 
       <div>
-        <button onClick={() => navigate("-1")}>이전으로</button>
+        <button onClick={() => navigate(-1)}>이전으로</button>
         <button
           onClick={() => {
-            onDeleteHandler(post.postId);
+            onDeleteHandler(params.id);
           }}
         >
           글삭제

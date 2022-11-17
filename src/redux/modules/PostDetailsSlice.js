@@ -2,7 +2,7 @@ import { createAsyncThunk, createSlice } from "@reduxjs/toolkit";
 import axios from "axios";
 
 const initialState = {
-  posts: {},
+  post: {},
 };
 
 const accessToken = localStorage.getItem("Access_Token");
@@ -125,7 +125,7 @@ const PostDetailSlice = createSlice({
     },
     [__getPostDetail.fulfilled]: (state, action) => {
       state.isLoading = false;
-      state.posts = action.payload;
+      state.post = action.payload;
       // console.log("state.post", state.post);
     },
     [__getPostDetail.rejected]: (state, action) => {
@@ -140,7 +140,7 @@ const PostDetailSlice = createSlice({
     },
     [__addPostComment.fulfilled]: (state, action) => {
       state.isLoading = false;
-      state.posts.commentList.push(action.payload);
+      state.post.commentList.push(action.payload);
     },
     [__addPostComment.rejected]: (state, action) => {
       state.isLoading = false;
@@ -152,7 +152,7 @@ const PostDetailSlice = createSlice({
     },
     [__deletePostComment.fulfilled]: (state, action) => {
       state.isLoading = false;
-      state.posts.commentList = state.posts.commentList.filter(
+      state.post.commentList = state.post.commentList.filter(
         (comment) => comment.commentId !== action.payload
       );
     },

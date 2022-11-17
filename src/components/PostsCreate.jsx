@@ -1,22 +1,18 @@
 import React, { useRef, useState, useEffect } from "react";
-import Header from "./Header";
-
 import useInput from "../hook/useInput";
 import useImgUpload from "../hook/useImageUpload";
-import { useDispatch } from "react-redux";
+import { useDispatch, useSelector } from "react-redux";
 import { useNavigate } from "react-router-dom";
-import PricingInput from "./PricingInput";
 
 const PostsCreate = (props) => {
   const dispatch = useDispatch();
   const navigate = useNavigate();
+  const { DetailPrice } = useSelector((state) => state.price);
+  console.log("DetailPrice", DetailPrice);
+
   const [write, setWrite, writeHandle] = useInput({
     title: "",
-    category: "",
-    image: "",
-    expectPrice: "",
     userprice: "",
-    product: "",
     content: "",
   });
 
@@ -43,10 +39,11 @@ const PostsCreate = (props) => {
     // 폼 데이터에 글작성 데이터 넣기
     const objects = {
       title: write.title,
-      category: write.category,
-      expectPrice: 1000,
+      category: DetailPrice.category,
+      expectPrice: DetailPrice.getPrice,
       userPrice: write.userPrice,
       content: write.content,
+      option: { ...DetailPrice },
     };
     formData.append(
       "postReqDto",
@@ -55,7 +52,7 @@ const PostsCreate = (props) => {
 
     //Api 날리기
     dispatch(props.__addData(formData));
-    //navigate("/PostRead");
+    navigate(`${props.Navigate}`);
     console.log("폼데이터", formData);
     console.log("files", files);
     console.log("objects", objects);
@@ -63,18 +60,37 @@ const PostsCreate = (props) => {
 
   return (
     <div>
-      {/* <PricingInput
-        State={write}
-        setState={setWrite}
-        stateHandle={writeHandle}
-      /> */}
-
-      <select name="category" onChange={writeHandle}>
-        {/* <select name="category" onChange={tagHandler} onChange={subTagHandler}> */}
-        <option value={"category"}>Category</option>
-        <option value={"macbook"}>macbook</option>
-        <option value={"iphone"}>iphone</option>
-      </select>
+      <label htmlFor="imgFile">
+        <input
+          type="file"
+          style={{ display: "none" }}
+          accept="image/*"
+          id="imgFile"
+          name="imgFile"
+          multiple
+          onChange={uploadHandle}
+          ref={imgRef}
+        />
+        <br />
+        <br />
+        <button
+          type="button"
+          onClick={() => {
+            imgRef.current.click();
+          }}
+        >
+          이미지 업로드 버튼
+        </button>
+      </label>
+      <div className="preview">
+        {
+          /*previews*/
+          fileUrls.map((val, i) => {
+            return <img src={val} key={i} />;
+          })
+        }
+      </div>
+      <br />
       <div>
         title:
         <input
@@ -84,6 +100,30 @@ const PostsCreate = (props) => {
           type="text"
           placeholder="제목을 입력하세요."
         />
+        <br />
+        <br />
+        <button
+          onClick={() => {
+            navigate("/pricingfinal");
+          }}
+        >
+          상품 상세 정보
+        </button>
+        <br />
+        <br />
+        측정 가격 :<div>{DetailPrice.getPrice}</div>
+        <br />
+        <br />
+        판매가격:
+        <input
+          onChange={writeHandle}
+          name="userPrice"
+          value={write.userPrice || ""}
+          type="text"
+          placeholder="가격을 입력하세요."
+        />
+        <br />
+        <br />
         content:
         <input
           onChange={writeHandle}
@@ -92,42 +132,8 @@ const PostsCreate = (props) => {
           type="text"
           placeholder="내용을 입력하세요."
         />
-        <label htmlFor="imgFile">
-          <input
-            type="file"
-            style={{ display: "none" }}
-            accept="image/*"
-            id="imgFile"
-            name="imgFile"
-            multiple
-            onChange={uploadHandle}
-            ref={imgRef}
-          />
-          <button
-            type="button"
-            onClick={() => {
-              imgRef.current.click();
-            }}
-          >
-            이미지 업로드 버튼
-          </button>
-        </label>
-        <div className="preview">
-          {
-            /*previews*/
-            fileUrls.map((val, i) => {
-              return <img src={val} key={i} />;
-            })
-          }
-        </div>
-        판매가격:
-        <input
-          onChange={writeHandle}
-          name="userPrice"
-          value={write.userPrice || ""}
-          type="text"
-          placeholder="제목을 입력하세요."
-        />
+        <br />
+        <br />
         <button onClick={writeSubmit}>글 작성</button>
       </div>
     </div>
