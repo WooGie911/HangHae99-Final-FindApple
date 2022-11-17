@@ -11,7 +11,6 @@ const PricingText = ({ Data }) => {
   // console.log(tagLists);
   return (
     <>
-      <div>PricingText</div>
       <div>
         <label>nickname : {Data.nickname}</label>
         <br />

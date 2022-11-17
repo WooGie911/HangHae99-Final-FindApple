@@ -8,7 +8,6 @@ import {__UserProfileEdit} from '../redux/modules/LoginSlice'
 import photoIMG from "../assets/photoIMG.png"
 import Layout from "../components/Layout"
 import back from "../assets/back.png" 
-import Footer from "../components/Footer"
 
 const MypageUpdate = () => {
   const uploadedImage = React.useRef(null);
