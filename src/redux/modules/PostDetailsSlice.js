@@ -36,6 +36,7 @@ export const __getPostDetail = createAsyncThunk(
 export const __addPostComment = createAsyncThunk(
   "details/__addPostComment",
   async (payload, thunkAPI) => {
+    console.log("__addPostComment -payload", payload);
     try {
       const data = await axios.post(
         `${process.env.REACT_APP_SERVER}/api/comment/${payload.id}`,
@@ -49,8 +50,8 @@ export const __addPostComment = createAsyncThunk(
           },
         }
       );
-      return console.log("response", data);
-      // return thunkAPI.fulfillWithValue(payload.comment);
+      console.log("response", data);
+      return thunkAPI.fulfillWithValue(data.data);
     } catch (error) {
       console.log("error", error);
       return thunkAPI.rejectWithValue(error);
@@ -140,7 +141,7 @@ const PostDetailSlice = createSlice({
     },
     [__addPostComment.fulfilled]: (state, action) => {
       state.isLoading = false;
-      state.post.commentList.push(action.payload);
+      state.post.comments.push(action.payload);
     },
     [__addPostComment.rejected]: (state, action) => {
       state.isLoading = false;

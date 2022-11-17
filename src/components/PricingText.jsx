@@ -12,7 +12,6 @@ const PricingText = () => {
 
   return (
     <>
-
       //*돌아가기 버튼
       <button
         onClick={() => {
@@ -21,19 +20,6 @@ const PricingText = () => {
       >
         X
       </button>
-      {/* <div>PricingText</div>
-      <div>
-        <label>nickname : {posts.nickname}</label>
-        <br />
-        <label>제목 : {posts.title}</label>
-        <br />
-        <label>예상가격 : {posts.expectPrice}</label>
-        <br />
-        <label>판매 가격 : {posts.userPrice}</label>
-        <br />
-        <label>내용 : {posts.content}</label>
-        <br />
-      </div> */}
       <div>
         <PricingList DetailPrice={data.DetailPrice} />
       </div>

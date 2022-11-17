@@ -40,7 +40,7 @@ export const __addObjectionComment = createAsyncThunk(
       //console.log(payload)
       // payload를 데이터를 넣어줄때까지 실행하지 하지않겠다. //비동기
       const data = await axios.post(
-        `${process.env.REACT_APP_SERVER}/api/issues-comment/${payload.issuesId}`,
+        `${process.env.REACT_APP_SERVER}/api/issues-comment/${payload.id}`,
         // JSON.stringify(payload.comment),
         payload.comment,
         {
@@ -52,8 +52,8 @@ export const __addObjectionComment = createAsyncThunk(
           },
         }
       );
-      return console.log("response", data);
-      // return thunkAPI.fulfillWithValue(payload.comment);
+      console.log("response", data);
+      return thunkAPI.fulfillWithValue(data.data);
     } catch (error) {
       console.log("error", error);
       return thunkAPI.rejectWithValue(error);
@@ -143,7 +143,7 @@ const ObjectionDetailsSlice = createSlice({
     },
     [__addObjectionComment.fulfilled]: (state, action) => {
       state.isLoading = false;
-      state.post.commentList.push(action.payload);
+      state.post.comments.push(action.payload);
     },
     [__addObjectionComment.rejected]: (state, action) => {
       state.isLoading = false;

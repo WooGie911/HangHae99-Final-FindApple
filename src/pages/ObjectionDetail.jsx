@@ -58,6 +58,10 @@ const ObjectionDetail = () => {
           >
             글삭제
           </button>
+
+          <button onClick={() => navigate(`/objectionComment/${params.id}`)}>
+            댓글
+          </button>
           <Footer />
         </div>
       </Layout>

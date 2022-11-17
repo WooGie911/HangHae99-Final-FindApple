@@ -2,8 +2,7 @@ import React, { useState } from "react";
 import styled from "styled-components";
 import { useNavigate, useParams } from "react-router-dom";
 import { useDispatch, useSelector } from "react-redux";
-import CommentCreate from "../components/CommentCreate";
-import CommentList from "../components/CommentList";
+
 import { __deletePost, __CartPost } from "../redux/modules/PostsSlice";
 import {
   __addPostComment,
@@ -42,7 +41,7 @@ const PostDetail = () => {
     isEdit: false,
   });
 
-  const editToggleHandler = (postId) => {
+  const editToggleHandler = () => {
     const newEdit = {
       isEdit: !editTg.isEdit,
     };
@@ -78,31 +77,38 @@ const PostDetail = () => {
             </ToggleNav>
           ) : null}
         </EditHead>
-        <button onClick={() => onCartButton(post.postId)}>찜</button>
+        <button onClick={() => navigate(-1)}>이전으로</button>
 
-        <div>PostDetail</div>
-        <button onClick={() => onCartButton(post.postId)}>찜</button>
-
+        <br />
+        <br />
         <div>
-          <div>{post.title}</div>
           {post.images !== undefined &&
             post.images.map((item, index) => {
               return <img src={item.imgUrl} key={index} />;
             })}
-          <div>{post.expectPrice}</div>
-          <div>{post.userPrice}</div>
-          <div>{post.content}</div>
+          <br />
+          <br />
+          <div>글쓴이 프로필사진 , 닉네임 : {post.nickname}</div>
+          <button onClick={() => onCartButton(post.postId)}>찜</button>
+          <br />
+          <div>글제목 : {post.title}</div>
+          <br />
+          <div>내용 : {post.content}</div>
+          <br />
+
+          <div> 하트 {post.likeCnt}</div>
+          <br />
+          <div>책정 가격 : {post.expectPrice}</div>
+
+          <div>판매 가격 : {post.userPrice}</div>
+          <br />
         </div>
 
-        <CommentList
-          __deleteComment={__deletePostComment}
-          commentList={post.comments}
-        />
-        <CommentCreate __addComment={__addPostComment} />
+        <button onClick={() => navigate(`/postComment/${params.id}`)}>
+          댓글
+        </button>
 
         <div>
-          <button onClick={() => navigate(-1)}>이전으로</button>
-
           <Footer />
         </div>
       </Layout>

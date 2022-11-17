@@ -1,17 +1,19 @@
 import React from "react";
 import { useDispatch } from "react-redux";
+import { useParams } from "react-router-dom";
 
 import useInput from "../hook/useInput";
 
 const CommentCreate = (props) => {
   const dispatch = useDispatch();
   const initialState = { comment: "" };
+  const params = useParams();
   const [comments, setComments, onChangeInputHandler] = useInput(initialState);
 
   const onClickAddButton = (e) => {
     e.preventDefault();
     const Fdata = {
-      id: props.postId,
+      id: params.id,
       comment: { comment: comments.comment },
     };
     if (comments.comment.trim() === "") {
