@@ -16,8 +16,9 @@ export const nhInstance = axios.create({
 });
 
 export const postApis = {
-  postListAX: (page) => nhInstance.get(`${process.env.REACT_APP_SERVER}/posts`)
+  postListAX: (payload) => nhInstance.get(`${process.env.REACT_APP_SERVER}/api/post?page=1&size=3,${payload}`)
 }
+
 
 export const __postList = createAsyncThunk(
   "postSlice/__postList",
@@ -210,7 +211,7 @@ const PostsSlice = createSlice({
     },
     [__postList.rejected]: (state, action) => {
         state.isLoading = false;
-        console.log(action.payload);
+        console.log("포스트리스트",action.payload);
     },
 
     //__getPost
