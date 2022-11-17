@@ -3,20 +3,18 @@ import Header from "./Header";
 import styled from "styled-components";
 import useInput from "../hook/useInput";
 import useImgUpload from "../hook/useImageUpload";
-import { useDispatch } from "react-redux";
+import { useDispatch, useSelector } from "react-redux";
 import { useNavigate } from "react-router-dom";
-import PricingInput from "./PricingInput";
 
 const PostsCreate = (props) => {
   const dispatch = useDispatch();
   const navigate = useNavigate();
+  const { DetailPrice } = useSelector((state) => state.price);
+  console.log("DetailPrice", DetailPrice);
+
   const [write, setWrite, writeHandle] = useInput({
     title: "",
-    category: "",
-    image: "",
-    expectPrice: "",
     userprice: "",
-    product: "",
     content: "",
   });
 
@@ -43,10 +41,11 @@ const PostsCreate = (props) => {
     // 폼 데이터에 글작성 데이터 넣기
     const objects = {
       title: write.title,
-      category: write.category,
-      expectPrice: 1000,
+      category: DetailPrice.category,
+      expectPrice: DetailPrice.getPrice,
       userPrice: write.userPrice,
       content: write.content,
+      option: { ...DetailPrice },
     };
     formData.append(
       "postReqDto",
@@ -55,13 +54,14 @@ const PostsCreate = (props) => {
 
     //Api 날리기
     dispatch(props.__addData(formData));
-    //navigate("/PostRead");
+    navigate(`${props.Navigate}`);
     console.log("폼데이터", formData);
     console.log("files", files);
     console.log("objects", objects);
   };
 
   return (
+
     <Stcontainer>
       <Stuploadbutton>
         <div>
@@ -106,14 +106,7 @@ const PostsCreate = (props) => {
           ></Stbutton>
         )}
       </Stphotolabel>
-      <div>
-        <Stselcet name="category" onChange={writeHandle}>
-          {/* <select name="category" onChange={tagHandler} onChange={subTagHandler}> */}
-          <option value={"category"}>Category</option>
-          <option value={"macbook"}>macbook</option>
-          <option value={"iphone"}>iphone</option>
-        </Stselcet>
-      </div>
+      
 
       <div>
         <div>
@@ -125,6 +118,30 @@ const PostsCreate = (props) => {
             placeholder="제목을 입력하세요."
           />
         </div>
+        <br />
+        <br />
+        <button
+          onClick={() => {
+            navigate("/pricingfinal");
+          }}
+        >
+          상품 상세 정보
+        </button>
+        <br />
+        <br />
+         측정 가격 :<div>{DetailPrice.getPrice}</div>
+        <br />
+        <br />
+        판매가격:
+        <input
+          onChange={writeHandle}
+          name="userPrice"
+          value={write.userPrice || ""}
+          type="text"
+          placeholder="가격을 입력하세요."
+        />
+        <br />
+        <br />
         <div>
           <Stcontentinput
             onChange={writeHandle}
@@ -136,19 +153,7 @@ const PostsCreate = (props) => {
         </div>
 
         <Stpricetinput
-          onChange={writeHandle}
-          name="userPrice"
-          value={write.userPrice || ""}
-          type="text"
-          placeholder="판매가격을 입력하세요."
-        />
-        {/* <St22jaegiinput
-          onChange={writeHandle}
-          name="userPrice"
-          value={write.userPrice || ""}
-          type="text"
-          placeholder="이의제기 내용을 작성해주세요."
-        /> */}
+
       </div>
     </Stcontainer>
   );

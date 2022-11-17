@@ -54,22 +54,6 @@ const PostList = ({ posts, detail, __getDetail }) => {
                   onClickHandler(post.postId);
                 }}
               >
-                {/* <div>
-                  {post.images &&
-                    post.images.map((item) => {
-                      return (
-                        <img
-                          key={item.id}
-                          src={item.imgUrl}
-                          style={{
-                            marginTop: "-20px",
-                            width: "300px",
-                            height: "300px",
-                          }}
-                        />
-                      );
-                    })}
-                </div> */}
                 <br />
                 <div>{post.images && <img src={post.images[0].imgUrl} />}</div>
                 <br />
@@ -81,7 +65,6 @@ const PostList = ({ posts, detail, __getDetail }) => {
                   <label>userPrice : {post.userPrice}</label>
                   <br />
                   <br />
-                  {/* 크리에이트앳 받아서 수정, 카테고리 대신 기종*/}
                 </div>
               </div>
             </div>

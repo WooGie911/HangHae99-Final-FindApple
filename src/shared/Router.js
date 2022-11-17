@@ -20,6 +20,7 @@ import MyObjection from "../pages/MyObjection";
 import MyPost from "../pages/MyPost";
 import PricingInput from "../components/PricingInput";
 import Pricingfinal from "../components/Pricingfinal";
+import PricingText from "../components/PricingText";
 
 const Router = () => {
   return (
@@ -51,7 +52,7 @@ const Router = () => {
         <Route path="/objectionread/:category" element={<ObjectionRead />} />
 
         {/* 이의제기 업데이트로 이동하기 */}
-        <Route path="/objectionupdate" element={<ObjectionUpdate />} />
+        <Route path="/objectionupdate/:id" element={<ObjectionUpdate />} />
 
         {/* 이의제기리스트 카드별 상세보기 페이지로 이동하기 */}
         <Route path="objectionDetail/:id" element={<ObjectionDetail />} />
@@ -80,7 +81,7 @@ const Router = () => {
         {/* 카카오 소셜 로그인 */}
         <Route path="/KAKAO" element={<Redirect />} />
 
-        {/*가격 책정 페이지로 이동하기 */}
+        {/*가격 책정 페이지 */}
         <Route path="/pricingInput" element={<PricingInput />} />
         <Route path="/pricingInput/:category" element={<PricingInput />} />
         <Route
@@ -95,7 +96,10 @@ const Router = () => {
           path="/pricingInput/:category/:year/:model/:option"
           element={<PricingInput />}
         />
+        {/*가격 결정 페이지 */}
         <Route path="/pricingfinal" element={<Pricingfinal />} />
+        {/*상세내용 확인 페이지 */}
+        <Route path="/pricingtext" element={<PricingText />} />
       </Routes>
     </BrowserRouter>
   );

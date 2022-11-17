@@ -7,9 +7,9 @@ const PostCreate = () => {
   return (
     <>
       <Header />
-      <div>PostCreate</div>
+      <div>상품등록</div>
 
-      <PostsCreate __addData={__addPost} />
+      <PostsCreate Navigate={"postread/all"} __addData={__addPost} />
     </>
   );
 };

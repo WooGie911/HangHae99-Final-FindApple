@@ -1,65 +1,65 @@
-import React, { useState, useRef, useEffect } from "react";
+import React from "react";
 import Header from "../components/Header";
 import { useDispatch } from "react-redux";
 import useInput from "../hook/useInput";
-import useImageUpload from "../hook/useImageUpload";
 import { useSelector } from "react-redux";
 import PricingText from "../components/PricingText";
 import { __editObjection } from "../redux/modules/ObjectionsSlice";
+import { useNavigate, useParams } from "react-router-dom";
 
 const ObjectionUpdate = ({ paramId }) => {
   const dispatch = useDispatch();
-  const [files, fileUrls, uploadHandle] = useImageUpload(5, true, 0.3, 1000);
-  const imgRef = useRef();
-  const posts = useSelector((state) => state.objectionDetails.posts);
-  const [delImg, setDelImg] = useState([]);
+  const navigate = useNavigate();
+  const params = useParams();
+  const { posts } = useSelector((state) => state.objectionDetails);
   const [updateInput, setUpdateInput, updateInputHandle] = useInput(posts);
 
   const updateSubmit = () => {
-    //request로 날릴 폼데이터
-    const formData = new FormData();
-    //폼 데이터에 파일 담기
-    if (files.length > 0) {
-      files.forEach((file) => {
-        formData.append("images", file);
-      });
-    } else {
-      formData.append("images", null);
-    }
-    //폼 데이터에 글작성 데이터 넣기
-    formData.append("post", JSON.stringify(updateInput.title));
-
-    formData.append("imageId", delImg);
-
+    console.log("updateInput", updateInput);
     const obj = {
       id: paramId,
-      contentInfo: formData,
+      formData: updateInput,
     };
-    //Api 날리기
     dispatch(__editObjection(obj));
+    navigate(`/objectionDetail/${params.id}`);
+    // window.location.replace(`/objectionDetail/${params.id}`);
   };
-
-  const delPreview = (imgId) => {
-    //삭제할 이미지 번호 담기
-    setDelImg((e) => [...e, imgId]);
-  };
-
   return (
     <>
       <Header />
       <div>ObjectionUpdate</div>
-
       <PricingText Data={posts} />
-
+      //*기존 이미지들*/
       <div>
-        title:
+        {posts.images &&
+          posts.images.map((item) => {
+            return <img src={item.imgUrl} />;
+          })}
+      </div>
+      <div>
+        title :<div>{updateInput.title}</div>
+        <button
+          onClick={() => {
+            navigate("/pricingText", { state: posts });
+          }}
+        >
+          상품 상세 정보
+        </button>
+        <br />
+        <br />
+        측정 가격 :<div>{updateInput.getPrice}</div>
+        <br />
+        <br />
+        판매가격 :
         <input
           onChange={updateInputHandle}
-          name="title"
-          value={updateInput.title || ""}
+          name="userPrice"
+          value={updateInput.userPrice || ""}
           type="text"
-          placeholder="제목을 입력하세요."
+          placeholder="가격을 입력하세요."
         />
+        <br />
+        <br />
         content
         <input
           onChange={updateInputHandle}
@@ -68,64 +68,6 @@ const ObjectionUpdate = ({ paramId }) => {
           type="text"
           placeholder="내용을 입력하세요."
         />
-        <label htmlFor="imgFile">
-          <input
-            type="file"
-            style={{ display: "none" }}
-            accept="image/*"
-            id="imgFile"
-            name="imgFile"
-            multiple
-            onChange={uploadHandle}
-            ref={imgRef}
-          />
-          <button
-            type="button"
-            onClick={() => {
-              imgRef.current.click();
-            }}
-          >
-            이미지 업로드 버튼
-          </button>
-        </label>
-        <div>
-          {
-            //기존 이미지 뿌려줄
-            posts !== undefined &&
-              posts.map((item) => {
-                return (
-                  <div
-                    key={item.paramId}
-                    isView={
-                      delImg.indexOf(item.paramId) > -1 ? "none" : "block"
-                    }
-                  >
-                    <img src={item.image} />
-                    <button
-                      style={{
-                        width: "100px",
-                        marginLeft: "20px",
-                        borderRadius: "10px",
-                      }}
-                      onClick={() => {
-                        delPreview(item.paramId);
-                      }}
-                    >
-                      삭제
-                    </button>
-                  </div>
-                );
-              })
-          }
-        </div>
-        <div className="preview">
-          {
-            /*previews map쓸곳*/
-            fileUrls.map((val, i) => {
-              return <img src={val} key={i} />;
-            })
-          }
-        </div>
         <button onClick={updateSubmit}>글 수정</button>
       </div>
     </>
