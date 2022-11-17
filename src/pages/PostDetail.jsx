@@ -12,7 +12,6 @@ import {
 import Layout from "../components/Layout";
 import Footer from "../components/Footer";
 import back from "../assets/back.png";
-import Header from "../components/Header";
 
 const PostDetail = () => {
   const navigate = useNavigate();
@@ -81,7 +80,6 @@ const PostDetail = () => {
         </EditHead>
         <button onClick={() => onCartButton(post.postId)}>찜</button>
 
-        <Header />
         <div>PostDetail</div>
         <button onClick={() => onCartButton(post.postId)}>찜</button>
 

@@ -3,7 +3,6 @@ import { __getPost } from "../redux/modules/PostsSlice";
 import { useNavigate } from "react-router-dom";
 import styled from "styled-components";
 
-//원규--
 import React, { useState, useEffect, useCallback } from "react";
 import { __postList } from "../redux/modules/PostsSlice";
 import { useInView } from "react-intersection-observer";
@@ -50,27 +49,26 @@ const PostList = ({ posts, detail, __getDetail }) => {
       {posts &&
         posts.map((post, index) => {
           return (
-             <div key={index}>
+            <div key={index}>
               <div
                 onClick={() => {
                   onClickHandler(post.postId);
                 }}
               >
-                
                 <PList>
-
-                <div>{post.images && <img src={post.images[0].imgUrl} />}</div>
-                <br />
-                <div>
-                  <label>title : {post.title}</label>
+                  <div>
+                    {post.images && <img src={post.images[0].imgUrl} />}
+                  </div>
                   <br />
-                  <label>category : {post.category}</label>
-                  <br />
-                  <label>userPrice : {post.userPrice}</label>
+                  <div>
+                    <label>title : {post.title}</label>
+                    <br />
+                    <label>category : {post.category}</label>
+                    <br />
+                    <label>userPrice : {post.userPrice}</label>
 
-                  {/* 크리에이트앳 받아서 수정, 카테고리 대신 기종*/}
-
-                </div>
+                    {/* 크리에이트앳 받아서 수정, 카테고리 대신 기종*/}
+                  </div>
                 </PList>
               </div>
             </div>
@@ -83,15 +81,15 @@ const PostList = ({ posts, detail, __getDetail }) => {
 
 export default PostList;
 const PList = styled.div`
-border: 1.2px solid gray;
-border-width: 1.2px 0px 1.2px 0px ;
-display: flex;
-padding : 15px;
-img {
-  margin-right : 10px;
-  width: 50px;
-  height: 50px;
-  border-radius: 25%;
-  border: 1px solid transparent;
-}
-`
+  border: 1.2px solid gray;
+  border-width: 1.2px 0px 1.2px 0px;
+  display: flex;
+  padding: 15px;
+  img {
+    margin-right: 10px;
+    width: 50px;
+    height: 50px;
+    border-radius: 25%;
+    border: 1px solid transparent;
+  }
+`;

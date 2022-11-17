@@ -31,25 +31,25 @@ export const __emailCheck = createAsyncThunk(
 export const __kakaoLogin = createAsyncThunk(
   "posts/__kakaoLogin",
   async (code, thunkAPI) => {
-    console.log(code)
+    console.log(code);
     try {
-      const res = await axios
-      .get(`${process.env.REACT_APP_SERVER}/api/member/kakao?code=${code}`);
+      const res = await axios.get(
+        `${process.env.REACT_APP_SERVER}/api/member/kakao?code=${code}`
+      );
       window.localStorage.setItem("Access_Token", res.data.accessToken);
       window.localStorage.setItem("Refresh_Token", res.data.refreshToken);
       window.location.replace("/");
-      console.log(res)
-        return thunkAPI.fulfillWithValue(res.data);
-    } catch (error) {console.log("소셜로그인 에러", error);
-    window.alert("로그인에 실패하였습니다.");
-    // 로그인 실패하면 로그인 화면으로 돌려보냄
-    window.location.replace("/login");
+      console.log(res);
+      return thunkAPI.fulfillWithValue(res.data);
+    } catch (error) {
+      console.log("소셜로그인 에러", error);
+      window.alert("로그인에 실패하였습니다.");
+      // 로그인 실패하면 로그인 화면으로 돌려보냄
+      window.location.replace("/login");
       return thunkAPI.rejectWithValue(error);
     }
   }
 );
-
-
 
 export const __Signin = createAsyncThunk(
   "Login/__Signin",
@@ -222,7 +222,6 @@ const LoginSlice = createSlice({
     [__SignUp.rejected]: (state, action) => {
       state.isLoading = false;
       state.error = action.payload;
-      
     },
     //__kakaoLogin
     [__kakaoLogin.pending]: (state) => {
@@ -235,7 +234,6 @@ const LoginSlice = createSlice({
     [__kakaoLogin.rejected]: (state, action) => {
       state.isLoading = false;
       state.error = action.payload;
-      
     },
     //__UserProfile
     [__UserProfile.pending]: (state) => {

@@ -1,37 +1,35 @@
-import React, {useEffect} from 'react'
-import Header from "../components/Header"
-import { useSelector, useDispatch } from 'react-redux'
-import {__getMyObjection} from '../redux/modules/MypageSlice'
-import Layout from "../components/Layout"
-import Footer from "../components/Footer"
+import React, { useEffect } from "react";
+import { useSelector, useDispatch } from "react-redux";
+import { __getMyObjection } from "../redux/modules/MypageSlice";
+import Layout from "../components/Layout";
+import Footer from "../components/Footer";
 const MyObjection = () => {
-  const {objections} = useSelector((state) => state.mypage)
-  console.log(objections)
-  const dispatch = useDispatch()
+  const { objections } = useSelector((state) => state.mypage);
+  console.log(objections);
+  const dispatch = useDispatch();
   useEffect(() => {
-    dispatch(__getMyObjection())
-  }, [])
+    dispatch(__getMyObjection());
+  }, []);
   return (
     <div>
       <Layout>
-      <Header/>
-      MyObjection
-      {
-        objections.length > 0 && (
+        MyObjection
+        {objections.length > 0 && (
           <>
-                {objections.map((objection) => {
-        return <div>
-          {objection.image}
-          {objection.title}
-        </div>
-      })}
+            {objections.map((objection) => {
+              return (
+                <div>
+                  {objection.image}
+                  {objection.title}
+                </div>
+              );
+            })}
           </>
-        )
-      }
-      <Footer />
+        )}
+        <Footer />
       </Layout>
-</div>
-  )
-}
+    </div>
+  );
+};
 
-export default MyObjection
+export default MyObjection;

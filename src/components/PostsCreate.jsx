@@ -1,5 +1,5 @@
 import React, { useRef, useState, useEffect } from "react";
-import Header from "./Header";
+
 import styled from "styled-components";
 import useInput from "../hook/useInput";
 import useImgUpload from "../hook/useImageUpload";

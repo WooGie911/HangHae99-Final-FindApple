@@ -1,37 +1,35 @@
-import React, {useEffect} from 'react'
-import Header from "../components/Header"
-import { useSelector, useDispatch } from 'react-redux'
-import { __getMyLike } from '../redux/modules/MypageSlice'
-import Layout from "../components/Layout"
-import Footer from "../components/Footer"
+import React, { useEffect } from "react";
+import { useSelector, useDispatch } from "react-redux";
+import { __getMyLike } from "../redux/modules/MypageSlice";
+import Layout from "../components/Layout";
+import Footer from "../components/Footer";
 const MyLike = () => {
-  const {likes} = useSelector((state) => state.mypage)
-  console.log(likes)
-  const dispatch = useDispatch()
+  const { likes } = useSelector((state) => state.mypage);
+  console.log(likes);
+  const dispatch = useDispatch();
   useEffect(() => {
-    dispatch(__getMyLike())
-  }, [])
+    dispatch(__getMyLike());
+  }, []);
   return (
     <div>
       <Layout>
-      <Header/>
-      MyLike
-      {
-        likes.length > 0 && (
+        MyLike
+        {likes.length > 0 && (
           <>
-        {likes.map((like) => {
-        return <div>
-          {like.image}
-          {like.title}
-        </div>
-      })}
+            {likes.map((like) => {
+              return (
+                <div>
+                  {like.image}
+                  {like.title}
+                </div>
+              );
+            })}
           </>
-        )
-      }
-      <Footer />
+        )}
+        <Footer />
       </Layout>
-      </div>
-  )
-}
+    </div>
+  );
+};
 
-export default MyLike
+export default MyLike;
