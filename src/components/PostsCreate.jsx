@@ -55,9 +55,6 @@ const PostsCreate = (props) => {
     //Api 날리기
     dispatch(props.__addData(formData));
     navigate(`${props.Navigate}`);
-    console.log("폼데이터", formData);
-    console.log("files", files);
-    console.log("objects", objects);
   };
 
   return (
