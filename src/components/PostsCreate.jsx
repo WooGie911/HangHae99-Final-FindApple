@@ -81,7 +81,7 @@ const PostsCreate = (props) => {
           </div>
         </Stuploadbutton>
         <Stphotolabel htmlFor="imgFile">
-          <input
+        <input
             type="file"
             style={{ display: "none" }}
             accept="image/*"
@@ -91,7 +91,8 @@ const PostsCreate = (props) => {
             onChange={uploadHandle}
             ref={imgRef}
           />
-          {fileUrls.length > 0 ? (
+
+          {fileUrls.length > 0 && (
             <div className="preview">
               {
                 /*previews*/
@@ -100,13 +101,14 @@ const PostsCreate = (props) => {
                     <img
                       src={val}
                       key={i}
-                      style={{ width: "100px", height: "100px" }}
+                      style={{ width: "40px", height: "40px" }}
                     />
                   );
                 })
               }
             </div>
-          ) : (
+          )} 
+            
             <PhotoButton
             type="button"
             onClick={() => {
@@ -118,7 +120,8 @@ const PostsCreate = (props) => {
             <div>{fileUrls.length}/5</div>
             </CameraImg>
           </PhotoButton>
-          )}
+         
+          
         </Stphotolabel>
         
       
@@ -228,9 +231,10 @@ const Stcontentinput = styled.textarea`
 
 
 // 사진 업로드
-const PhotoButton = styled.div`
+const PhotoButton = styled.button`
 width: 50px;
 height: 50px;
+border : none;
 border-radius: 25%;
 background-color: aliceblue;
 margin : 10px;
