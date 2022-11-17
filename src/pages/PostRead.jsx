@@ -10,7 +10,7 @@ import { __getPostDetail } from "../redux/modules/PostDetailsSlice";
 const PostRead = () => {
   const params = useParams();
   const dispatch = useDispatch();
-  const posts = useSelector((state) => state.posts.posts);
+  const { posts } = useSelector((state) => state.posts);
 
   useEffect(() => {
     dispatch(__getPost(params.category));

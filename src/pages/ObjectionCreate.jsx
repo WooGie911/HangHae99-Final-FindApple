@@ -7,9 +7,9 @@ const ObjectionCreate = () => {
   return (
     <>
       <Header />
-      <div>ObjectionCreate</div>
+      <div>이의제기 등록</div>
 
-      <PostsCreate __addData={__addObjection} />
+      <PostsCreate Navigate={"objectionread/all"} __addData={__addObjection} />
     </>
   );
 };

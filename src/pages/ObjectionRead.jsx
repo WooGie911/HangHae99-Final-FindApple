@@ -22,7 +22,7 @@ const ObjectionRead = () => {
   return (
     <>
       <Header />
-      <div>ObjectionRead</div>
+      <div>{params.category}</div>
 
       <PostSearch __search={__searchObjection} />
       <PostList
