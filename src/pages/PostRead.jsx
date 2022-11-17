@@ -7,7 +7,7 @@ import { __getPost, __searchPost } from "../redux/modules/PostsSlice";
 import PostSearch from "../components/PostSearch";
 import { __getPostDetail } from "../redux/modules/PostDetailsSlice";
 import Layout from "../components/Layout";
-import Footer from "../components/Footer"
+import Footer from "../components/Footer";
 
 const PostRead = () => {
   const params = useParams();
@@ -20,18 +20,18 @@ const PostRead = () => {
 
   return (
     <div>
-    <Layout>
-      <div>{params.category}</div>
+      <Layout>
+        <div>{params.category}</div>
 
-      <PostSearch __search={__searchPost} />
-      <Header />
-      <PostList
-        posts={posts}
-        detail={"/PostDetail"}
-        __getDetail={__getPostDetail}
-      />
-      <Footer/>
-    </Layout>
+        <PostSearch __search={__searchPost} />
+        <Header Navigate={"/postread"} />
+        <PostList
+          posts={posts}
+          detail={"/PostDetail"}
+          __getDetail={__getPostDetail}
+        />
+        <Footer />
+      </Layout>
     </div>
   );
 };

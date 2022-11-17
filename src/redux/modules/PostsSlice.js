@@ -3,39 +3,40 @@ import axios from "axios";
 
 const initialState = {
   posts_state: [],
-  isLoading: false
+  isLoading: false,
 };
 
 const accessToken = localStorage.getItem("Access_Token");
 const refreshToken = localStorage.getItem("Refresh_Token");
 
-//무한스크롤 
+//무한스크롤
 export const nhInstance = axios.create({
   baseURL: process.env.REACT_APP_SERVER,
   headers: {},
 });
 
 export const postApis = {
-  postListAX: (payload) => nhInstance.get(`${process.env.REACT_APP_SERVER}/api/post?page=1&size=3,${payload}`)
-}
-
+  postListAX: (payload) =>
+    nhInstance.get(
+      `${process.env.REACT_APP_SERVER}/api/post?page=1&size=3,${payload}`
+    ),
+};
 
 export const __postList = createAsyncThunk(
   "postSlice/__postList",
   async (payload, thunkAPI) => {
-      try {
-        console.log(payload)
-          const res = await postApis.postListAX();
+    try {
+      console.log(payload);
+      const res = await postApis.postListAX();
 
-          const curPage = payload * 10;
-          
-          return thunkAPI.fulfillWithValue(res.data.slice((curPage - 10), curPage));
-      } catch (error) {
-          return thunkAPI.rejectWithValue(error);
-      }
+      const curPage = payload * 10;
+
+      return thunkAPI.fulfillWithValue(res.data.slice(curPage - 10, curPage));
+    } catch (error) {
+      return thunkAPI.rejectWithValue(error);
+    }
   }
-)
-
+);
 
 //검색기능 미완성
 export const __searchPost = createAsyncThunk(
@@ -201,17 +202,17 @@ const PostsSlice = createSlice({
       state.isLoading = false;
       state.error = action.payload;
     },
-     //__postList
+    //__postList
     [__postList.pending]: (state, action) => {
-        state.isLoading = true;
+      state.isLoading = true;
     },
     [__postList.fulfilled]: (state, action) => {
-        state.isLoading = false;
-        state.posts.push(...action.payload);
+      state.isLoading = false;
+      state.posts.push(...action.payload);
     },
     [__postList.rejected]: (state, action) => {
-        state.isLoading = false;
-        console.log("포스트리스트",action.payload);
+      state.isLoading = false;
+      console.log("포스트리스트", action.payload);
     },
 
     //__getPost
