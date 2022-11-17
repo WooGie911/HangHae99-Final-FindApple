@@ -61,101 +61,98 @@ const PostsCreate = (props) => {
   };
 
   return (
-
-    <Stcontainer>
-      <Stuploadbutton>
-        <div>
-          <h3>상품등록</h3>
-        </div>
-        <div>
-          <button onClick={writeSubmit}>완료</button>
-        </div>
-      </Stuploadbutton>
-      <Stphotolabel htmlFor="imgFile">
-        <input
-          type="file"
-          style={{ display: "none" }}
-          accept="image/*"
-          id="imgFile"
-          name="imgFile"
-          multiple
-          onChange={uploadHandle}
-          ref={imgRef}
-        />
-        {fileUrls.length > 0 ? (
-          <div className="preview">
-            {
-              /*previews*/
-              fileUrls.map((val, i) => {
-                return (
-                  <img
-                    src={val}
-                    key={i}
-                    style={{ width: "100px", height: "100px" }}
-                  />
-                );
-              })
-            }
+    <>
+      <Stcontainer>
+        <Stuploadbutton>
+          <div>
+            <h3>상품등록</h3>
           </div>
-        ) : (
-          <Stbutton
-            type="button"
+          <div>
+            <button onClick={writeSubmit}>완료</button>
+          </div>
+        </Stuploadbutton>
+        <Stphotolabel htmlFor="imgFile">
+          <input
+            type="file"
+            style={{ display: "none" }}
+            accept="image/*"
+            id="imgFile"
+            name="imgFile"
+            multiple
+            onChange={uploadHandle}
+            ref={imgRef}
+          />
+          {fileUrls.length > 0 ? (
+            <div className="preview">
+              {
+                /*previews*/
+                fileUrls.map((val, i) => {
+                  return (
+                    <img
+                      src={val}
+                      key={i}
+                      style={{ width: "100px", height: "100px" }}
+                    />
+                  );
+                })
+              }
+            </div>
+          ) : (
+            <Stbutton
+              type="button"
+              onClick={() => {
+                imgRef.current.click();
+              }}
+            ></Stbutton>
+          )}
+        </Stphotolabel>
+
+        <div>
+          <div>
+            <Sttitleinput
+              onChange={writeHandle}
+              name="title"
+              value={write.title || ""}
+              type="text"
+              placeholder="제목을 입력하세요."
+            />
+          </div>
+          <br />
+          <br />
+          <button
             onClick={() => {
-              imgRef.current.click();
+              navigate("/pricingfinal");
             }}
-          ></Stbutton>
-        )}
-      </Stphotolabel>
-      
-
-      <div>
-        <div>
-          <Sttitleinput
+          >
+            상품 상세 정보
+          </button>
+          <br />
+          <br />
+          측정 가격 :<div>{DetailPrice.getPrice}</div>
+          <br />
+          <br />
+          판매가격:
+          <input
             onChange={writeHandle}
-            name="title"
-            value={write.title || ""}
+            name="userPrice"
+            value={write.userPrice || ""}
             type="text"
-            placeholder="제목을 입력하세요."
+            placeholder="가격을 입력하세요."
           />
+          <br />
+          <br />
+          <div>
+            <Stcontentinput
+              onChange={writeHandle}
+              name="content"
+              value={write.content || ""}
+              type="text"
+              placeholder="내용을 입력하세요."
+            />
+          </div>
         </div>
-        <br />
-        <br />
-        <button
-          onClick={() => {
-            navigate("/pricingfinal");
-          }}
-        >
-          상품 상세 정보
-        </button>
-        <br />
-        <br />
-         측정 가격 :<div>{DetailPrice.getPrice}</div>
-        <br />
-        <br />
-        판매가격:
-        <input
-          onChange={writeHandle}
-          name="userPrice"
-          value={write.userPrice || ""}
-          type="text"
-          placeholder="가격을 입력하세요."
-        />
-        <br />
-        <br />
-        <div>
-          <Stcontentinput
-            onChange={writeHandle}
-            name="content"
-            value={write.content || ""}
-            type="text"
-            placeholder="내용을 입력하세요."
-          />
-        </div>
-
-        <Stpricetinput
-
-      </div>
-    </Stcontainer>
+      </Stcontainer>
+    </>
   );
 };
 

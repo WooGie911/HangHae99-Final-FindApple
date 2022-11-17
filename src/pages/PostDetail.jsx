@@ -1,4 +1,4 @@
-import React , {useState}from "react";
+import React, { useState } from "react";
 import styled from "styled-components";
 import { useNavigate, useParams } from "react-router-dom";
 import { useDispatch, useSelector } from "react-redux";
@@ -9,9 +9,10 @@ import {
   __addPostComment,
   __deletePostComment,
 } from "../redux/modules/PostDetailsSlice";
-import Layout from "../components/Layout"
-import Footer from "../components/Footer"
-import back from "../assets/back.png" 
+import Layout from "../components/Layout";
+import Footer from "../components/Footer";
+import back from "../assets/back.png";
+import Header from "../components/Header";
 
 const PostDetail = () => {
   const navigate = useNavigate();
@@ -28,71 +29,84 @@ const PostDetail = () => {
 
   //게시글 삭제
   const onDeleteHandler = (payload) => {
-    if(window.confirm("정말 삭제하시겠습니까?")){
+    if (window.confirm("정말 삭제하시겠습니까?")) {
       dispatch(__deletePost(payload));
-    window.location.replace("/postread/all");
-    }else{
-      window.location.reload()
+      window.location.replace("/postread/all");
+    } else {
+      window.location.reload();
     }
-    
-    //   navigate("/postread/all");
 
+    //   navigate("/postread/all");
   };
 
   const [editTg, setEidtTg] = useState({
-    isEdit:false,
+    isEdit: false,
   });
-  
+
   const editToggleHandler = (postId) => {
     const newEdit = {
-      isEdit:!editTg.isEdit,
-    }
-    setEidtTg(newEdit)
-  }
-
+      isEdit: !editTg.isEdit,
+    };
+    setEidtTg(newEdit);
+  };
 
   return (
     <>
-    <Layout>
-      <EditHead>
-      <div><img onClick={()=> {navigate(-1)}} style={{width:25, height : 25}} src={back}/></div>
-      <Tgbutton onClick={editToggleHandler}>···</Tgbutton>
-                {editTg.isEdit === true ? (
-                <ToggleNav>
-                  <Button onClick={() => navigate(`/postupdate/${params.id}`)}>수정</Button>
-                  <Button onClick={() => {onDeleteHandler(params.id);}}>글삭제</Button>
-                </ToggleNav>
-                ):null 
-                } 
-    </EditHead>
-      <button onClick={() => onCartButton(posts.postId)}>찜</button>
-      
-      <Header />
-      <div>PostDetail</div>
-      <button onClick={() => onCartButton(post.postId)}>찜</button>
+      <Layout>
+        <EditHead>
+          <div>
+            <img
+              onClick={() => {
+                navigate(-1);
+              }}
+              style={{ width: 25, height: 25 }}
+              src={back}
+            />
+          </div>
+          <Tgbutton onClick={editToggleHandler}>···</Tgbutton>
+          {editTg.isEdit === true ? (
+            <ToggleNav>
+              <Button onClick={() => navigate(`/postupdate/${params.id}`)}>
+                수정
+              </Button>
+              <Button
+                onClick={() => {
+                  onDeleteHandler(params.id);
+                }}
+              >
+                글삭제
+              </Button>
+            </ToggleNav>
+          ) : null}
+        </EditHead>
+        <button onClick={() => onCartButton(post.postId)}>찜</button>
 
-      <div>
-        <div>{post.title}</div>
-        {post.images !== undefined &&
-          post.images.map((item, index) => {
-            return <img src={item.imgUrl} key={index} />;
-          })}
-        <div>{post.expectPrice}</div>
-        <div>{post.userPrice}</div>
-        <div>{post.content}</div>
-      </div>
+        <Header />
+        <div>PostDetail</div>
+        <button onClick={() => onCartButton(post.postId)}>찜</button>
 
-      <CommentList
-        __deleteComment={__deletePostComment}
-        commentList={post.comments}
-      />
-      <CommentCreate __addComment={__addPostComment} />
+        <div>
+          <div>{post.title}</div>
+          {post.images !== undefined &&
+            post.images.map((item, index) => {
+              return <img src={item.imgUrl} key={index} />;
+            })}
+          <div>{post.expectPrice}</div>
+          <div>{post.userPrice}</div>
+          <div>{post.content}</div>
+        </div>
 
-      <div>
-        <button onClick={() => navigate(-1)}>이전으로</button>
-        
-        <Footer/>
-      </div>
+        <CommentList
+          __deleteComment={__deletePostComment}
+          commentList={post.comments}
+        />
+        <CommentCreate __addComment={__addPostComment} />
+
+        <div>
+          <button onClick={() => navigate(-1)}>이전으로</button>
+
+          <Footer />
+        </div>
       </Layout>
     </>
   );
@@ -102,33 +116,33 @@ export default PostDetail;
 
 // 수정 삭제 토글 및 뒤로가기
 const EditHead = styled.div`
-position : relative;
-display: flex;
-justify-content: space-between;
-padding: 10px;
-`
+  position: relative;
+  display: flex;
+  justify-content: space-between;
+  padding: 10px;
+`;
 
 const Tgbutton = styled.button`
-  border:none;
-  font-weight:600;
-  width:50px;
-  background-color:white;
-`
+  border: none;
+  font-weight: 600;
+  width: 50px;
+  background-color: white;
+`;
 const ToggleNav = styled.div`
-  width : 50px;
+  width: 50px;
   height: 80px;
   position: absolute;
-  right : 10px;
-  top : 50px;
-  `
+  right: 10px;
+  top: 50px;
+`;
 const Button = styled.button`
-  width:50px;
-  height:40px;
-  margin-bottom:3px;
-  border:1px solid #ddd;
-  border-radius:5px;
-  background-color:#fff;
+  width: 50px;
+  height: 40px;
+  margin-bottom: 3px;
+  border: 1px solid #ddd;
+  border-radius: 5px;
+  background-color: #fff;
   &:hover {
-    background-color:red;
+    background-color: red;
   }
-`
+`;
