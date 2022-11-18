@@ -33,10 +33,11 @@ const PostDetail = () => {
     if (window.confirm("정말 삭제하시겠습니까?")) {
       dispatch(__deletePost(payload));
       window.location.replace("/postread/all");
+    } else {
+      window.location.reload();
     }
-    // else {
-    //   window.location.reload();
-    // }
+
+    //   navigate("/postread/all");
   };
 
   const [editTg, setEidtTg] = useState({

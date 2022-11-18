@@ -19,10 +19,8 @@ const ObjectionDetail = () => {
 
   //게시글 삭제
   const onDeleteHandler = (payload) => {
-    if (window.confirm("정말 삭제하시겠습니까?")) {
-      dispatch(__deleteObjection(payload));
-      window.location.replace("/objectionread/all");
-    }
+    dispatch(__deleteObjection(payload));
+    window.location.replace("/objectionread/all");
   };
 
   return (
