@@ -1,5 +1,4 @@
 import React, { useRef, useState, useEffect } from "react";
-
 import styled from "styled-components";
 import useInput from "../hook/useInput";
 import useImgUpload from "../hook/useImageUpload";
@@ -7,7 +6,6 @@ import { useDispatch, useSelector } from "react-redux";
 import { useNavigate } from "react-router-dom";
 import Layout from "../components/Layout"
 import back from "../assets/back.png" 
-
 
 const PostsCreate = (props) => {
   const dispatch = useDispatch();
@@ -51,7 +49,7 @@ const PostsCreate = (props) => {
       option: { ...DetailPrice },
     };
     formData.append(
-      "postReqDto",
+      `${props.postReqDto}`,
       new Blob([JSON.stringify(objects)], { type: "application/json" })
     );
 
@@ -239,6 +237,7 @@ border-radius: 25%;
 background-color: aliceblue;
 margin : 10px;
 `
+
 const CameraImg = styled.div`
 display: flex;
 flex-direction: column;
