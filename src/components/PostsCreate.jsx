@@ -53,9 +53,10 @@ const PostsCreate = (props) => {
     );
 
     //Api 날리기
-    dispatch(props.__addData(formData));
-    // navigate(`${props.Navigate}`);
-    // window.location.replace(`${props.Navigate}`);
+    if (window.confirm("작성하시겠습니까?")) {
+      dispatch(props.__addData(formData));
+      window.location.replace(`${props.Navigate}`);
+    }
   };
   const onClickHandler = () => {
     navigate(-1);
