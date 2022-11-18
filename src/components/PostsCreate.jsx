@@ -1,11 +1,9 @@
 import React, { useRef, useState, useEffect } from "react";
-
 import styled from "styled-components";
 import useInput from "../hook/useInput";
 import useImgUpload from "../hook/useImageUpload";
 import { useDispatch, useSelector } from "react-redux";
 import { useNavigate } from "react-router-dom";
-import Layout from "../components/Layout";
 import back from "../assets/back.png";
 
 const PostsCreate = (props) => {
@@ -50,7 +48,7 @@ const PostsCreate = (props) => {
       option: { ...DetailPrice },
     };
     formData.append(
-      "postReqDto",
+      `${props.postReqDto}`,
       new Blob([JSON.stringify(objects)], { type: "application/json" })
     );
 
@@ -225,12 +223,13 @@ const Stcontentinput = styled.textarea`
 `;
 
 // 사진 업로드
-const PhotoButton = styled.div`
+const PhotoButton = styled.button`
   width: 50px;
   height: 50px;
   border-radius: 25%;
   background-color: aliceblue;
   margin: 10px;
+  border: none;
 `;
 const CameraImg = styled.div`
   display: flex;

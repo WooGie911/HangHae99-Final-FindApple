@@ -23,7 +23,7 @@ export const __getObjectionDetail = createAsyncThunk(
           },
         }
       );
-      return thunkAPI.fulfillWithValue(data.data.data);
+      return thunkAPI.fulfillWithValue(data.data);
     } catch (error) {
       console.log("error", error);
       return thunkAPI.rejectWithValue(error);
@@ -40,7 +40,7 @@ export const __addObjectionComment = createAsyncThunk(
       //console.log(payload)
       // payload를 데이터를 넣어줄때까지 실행하지 하지않겠다. //비동기
       const data = await axios.post(
-        `${process.env.REACT_APP_SERVER}/api/issues-comment/${payload.id}`,
+        `${process.env.REACT_APP_SERVER}/api/issue-comment/${payload.id}`,
         // JSON.stringify(payload.comment),
         payload.comment,
         {
@@ -69,7 +69,7 @@ export const __deleteObjectionComment = createAsyncThunk(
       console.log(payload);
       // payload를 데이터를 넣어줄때까지 실행하지 하지않겠다. //비동기
       const data = await axios.delete(
-        `${process.env.REACT_APP_SERVER}/api/issues-comment/${payload}`,
+        `${process.env.REACT_APP_SERVER}/api/issue-comment/${payload}`,
         {
           headers: {
             "Content-Type": `application/json`,
@@ -80,8 +80,11 @@ export const __deleteObjectionComment = createAsyncThunk(
         }
       );
       // console.log("페이로드",payload);
-      return console.log("response", data);
-      // return thunkAPI.fulfillWithValue(payload);
+      if (data.data === "Success") {
+        console.log("삭제 성공");
+        return thunkAPI.fulfillWithValue(payload);
+      }
+      console.log("삭제 성공 인데 메시지 이상? ");
     } catch (error) {
       console.log("error", error);
       return thunkAPI.rejectWithValue(error);
@@ -96,7 +99,7 @@ export const __editObjectionComment = createAsyncThunk(
     try {
       console.log(payload);
       const data = await axios.put(
-        `${process.env.REACT_APP_SERVER}/api/issues-comment/${payload.id}`,
+        `${process.env.REACT_APP_SERVER}/api/issue-comment/${payload.id}`,
         JSON.stringify(payload.comment),
         {
           headers: {
@@ -155,7 +158,7 @@ const ObjectionDetailsSlice = createSlice({
     },
     [__deleteObjectionComment.fulfilled]: (state, action) => {
       state.isLoading = false;
-      state.post.commentList = state.post.commentList.filter(
+      state.post.comments = state.post.comments.filter(
         (comment) => comment.commentId !== action.payload
       );
     },
@@ -171,7 +174,7 @@ const ObjectionDetailsSlice = createSlice({
       state.isLoading = false;
 
       const indexId = state.comment.findIndex((comment) => {
-        if (comment.commentId == action.payload.id) {
+        if (comment.id == action.payload.id) {
           return true;
         }
         return false;

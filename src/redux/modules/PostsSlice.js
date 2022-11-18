@@ -140,36 +140,12 @@ export const __editPost = createAsyncThunk(
     console.log("payload", payload);
     try {
       console.log(payload);
-      const data = await axios.put(
-        `${process.env.REACT_APP_SERVER}/api/post/${payload.postId}`,
+      const data = await axios.patch(
+        `${process.env.REACT_APP_SERVER}/api/post/${payload.id}`,
         payload.formData,
         {
           headers: {
             enctype: "multipart/form-data",
-            Access_Token: accessToken,
-            Refresh_Token: refreshToken,
-            "Cache-Control": "no-cache",
-          },
-        }
-      );
-      console.log("response", data);
-      return thunkAPI.fulfillWithValue(data.data.data);
-    } catch (error) {
-      console.log("error", error);
-      return thunkAPI.rejectWithValue(error);
-    }
-  }
-);
-
-export const __CartPost = createAsyncThunk(
-  "posts/__CartPost",
-  async (payload, thunkAPI) => {
-    try {
-      const data = await axios.get(
-        `${process.env.REACT_APP_SERVER}/api/likes/${payload}`,
-        {
-          headers: {
-            "Content-Type": `application/json`,
             Access_Token: accessToken,
             Refresh_Token: refreshToken,
             "Cache-Control": "no-cache",
@@ -188,7 +164,6 @@ export const __CartPost = createAsyncThunk(
 const PostsSlice = createSlice({
   name: "posts",
   initialState,
-
   reducers: {},
   extraReducers: {
     //__searchPost
@@ -275,17 +250,6 @@ const PostsSlice = createSlice({
       state.posts = [...state.posts];
     },
     [__editPost.rejected]: (state, action) => {
-      state.isLoading = false;
-      state.error = action.payload;
-    },
-    //__CartPost
-    [__CartPost.pending]: (state) => {
-      state.isLoading = true;
-    },
-    [__CartPost.fulfilled]: (state, action) => {
-      state.isLoading = false;
-    },
-    [__CartPost.rejected]: (state, action) => {
       state.isLoading = false;
       state.error = action.payload;
     },

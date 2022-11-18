@@ -9,6 +9,7 @@ const ObjectionCreate = () => {
       <Layout>
         <div>이의제기 등록</div>
         <PostsCreate
+          postReqDto={"issuesRequestDto"}
           Navigate={"objectionread/all"}
           __addData={__addObjection}
         />

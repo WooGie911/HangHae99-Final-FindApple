@@ -3,10 +3,12 @@ import styled from "styled-components";
 import { useNavigate, useParams } from "react-router-dom";
 import { useDispatch, useSelector } from "react-redux";
 
-import { __deletePost, __CartPost } from "../redux/modules/PostsSlice";
+import { __deletePost } from "../redux/modules/PostsSlice";
 import {
   __addPostComment,
   __deletePostComment,
+  __CartInPost,
+  __CartOutPost,
 } from "../redux/modules/PostDetailsSlice";
 import Layout from "../components/Layout";
 import Footer from "../components/Footer";
@@ -17,14 +19,15 @@ const PostDetail = () => {
   const dispatch = useDispatch();
   const params = useParams();
   const { post } = useSelector((state) => state.details);
-
   console.log(post);
-
-  // const { comments } = useSelector((state) => state.details.posts);
 
   //찜하기
   const onCartButton = (payload) => {
-    dispatch(__CartPost(payload));
+    {
+      post.isLike
+        ? dispatch(__CartOutPost(payload))
+        : dispatch(__CartInPost(payload));
+    }
   };
 
   //게시글 삭제
@@ -92,6 +95,7 @@ const PostDetail = () => {
           <br />
           <div>글쓴이 프로필사진 , 닉네임 : {post.nickname}</div>
           <button onClick={() => onCartButton(post.postId)}>찜</button>
+          <div>찜 유무 : {post.isLike ? "찜한거" : "안한거"}</div>
           <br />
           <div>글제목 : {post.title}</div>
           <br />

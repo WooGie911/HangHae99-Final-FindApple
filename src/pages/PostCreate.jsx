@@ -7,7 +7,11 @@ const PostCreate = () => {
   return (
     <>
       <Layout>
-        <PostsCreate Navigate={"postread/all"} __addData={__addPost} />
+        <PostsCreate
+          postReqDto={"postReqDto"}
+          Navigate={"postread/all"}
+          __addData={__addPost}
+        />
         <Footer />
       </Layout>
     </>
