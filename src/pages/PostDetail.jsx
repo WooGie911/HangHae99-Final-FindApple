@@ -19,7 +19,6 @@ const PostDetail = () => {
   const dispatch = useDispatch();
   const params = useParams();
   const { post } = useSelector((state) => state.details);
-  console.log(post);
 
   //찜하기
   const onCartButton = (payload) => {

@@ -16,7 +16,7 @@ const ObjectionDetail = () => {
   const dispatch = useDispatch();
   const params = useParams();
   const { post } = useSelector((state) => state.Objections);
-
+  console.log(post);
   //게시글 삭제
   const onDeleteHandler = (payload) => {
     if (window.confirm("정말 삭제하시겠습니까?")) {
