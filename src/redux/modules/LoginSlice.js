@@ -92,18 +92,18 @@ export const __SignUp = createAsyncThunk(
   async (payload, thunkAPI) => {
     try {
       console.log(payload);
-      const data = await axios
-        .post(`${process.env.REACT_APP_SERVER}/api/member/signup`, payload)
+      const response = await axios.post(
+        `${process.env.REACT_APP_SERVER}/api/member/signup`,
+        payload
+      );
 
-        .then((response) => {
-          console.log("회원가입response", response);
-          alert(`${response.data.msg}`);
-          if (response.data.msg == "회원가입이 완료되었습니다.") {
-            window.location.replace("/");
-          }
-          return thunkAPI.fulfillWithValue(response.data);
-        });
-      console.log("회원가입응답", data);
+      console.log("회원가입response", response);
+      // alert(`${response.data.msg}`);
+      if (response.data == "Success") {
+        alert("회원가입 성공!");
+        window.location.replace("/signin");
+      }
+      return thunkAPI.fulfillWithValue(response.data);
     } catch (error) {
       console.log("error", error);
       if (error.response.data.message !== undefined) {

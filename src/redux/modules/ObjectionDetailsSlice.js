@@ -32,7 +32,6 @@ export const __getObjectionDetail = createAsyncThunk(
 );
 
 //comment 부분
-
 export const __addObjectionComment = createAsyncThunk(
   "objectionDetails/__addObjectionComment",
   async (payload, thunkAPI) => {

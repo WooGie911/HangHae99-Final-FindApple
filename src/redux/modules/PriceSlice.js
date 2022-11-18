@@ -25,6 +25,7 @@ export const __getPriceInfo = createAsyncThunk(
           },
         }
       );
+      console.log("겟프라이스인포", data);
       return thunkAPI.fulfillWithValue(data.data);
     } catch (error) {
       return thunkAPI.rejectWithValue(error);
