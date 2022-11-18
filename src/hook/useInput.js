@@ -17,7 +17,7 @@ const useInput = (init = {}) => {
       ...value,
       [e.target.name]: e.target.value,
     });
-    console.log(value);
+ 
   };
 
   // 1. 이 훅은 [ ] 을 반환하는데, 첫번째는 value, 두번째는 핸들러를 반환합니다.

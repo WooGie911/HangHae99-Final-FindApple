@@ -8,6 +8,7 @@ import PostSearch from "../components/PostSearch";
 import { __getPostDetail } from "../redux/modules/PostDetailsSlice";
 import Layout from "../components/Layout";
 import Footer from "../components/Footer";
+import { __postList } from "../redux/modules/PostsSlice";
 
 const PostRead = () => {
   const params = useParams();

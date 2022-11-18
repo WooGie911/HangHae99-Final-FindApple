@@ -4,10 +4,11 @@ import { useNavigate } from "react-router-dom";
 import styled from "styled-components";
 
 import React, { useState, useEffect, useCallback } from "react";
-import { __postList } from "../redux/modules/PostsSlice";
+import { __getPostTime } from "../redux/modules/PostsSlice";
 import { useInView } from "react-intersection-observer";
 
 const PostList = ({ posts, detail, __getDetail }) => {
+  console.log("포스츠츠츠", posts);
   const navigate = useNavigate();
   const dispatch = useDispatch();
   const onClickHandler = (data) => {
@@ -16,64 +17,62 @@ const PostList = ({ posts, detail, __getDetail }) => {
   };
 
   //원규 무한스크롤
-  const { posts_state, isLoading } = useSelector((state) => state.posts);
-  const [page, setPage] = useState(1);
-  const [total, setTotal] = useState(0);
+
+  const [page, setPage] = useState(1); //페이지수
+  const [size, setSize] = useState([]); //리스트수
+  const [loading, setLoading] = useState(false);
+  console.log("page", page);
   const [ref, inView] = useInView();
 
   /**  서버에서 아이템을 가지고 오는 함수 */
   const getItems = useCallback(async () => {
-    dispatch(__postList(page));
-  }, [dispatch, page]);
+    //의존하는 값(deps)들이 바뀌지 않는 한 기존 함수를 재사용할 수 있습니다.
+    dispatch(__getPostTime(page));
+  }, [page]);
 
   // `getItems` 가 바뀔 때 마다 함수 실행
   useEffect(() => {
     getItems();
-    setTotal(posts_state.length);
-    console.log("total", total);
+    setSize(posts);
+    // console.log("size", size);
   }, [getItems]);
 
   useEffect(() => {
-    // 사용자가 마지막 요소를 보고 있고, 로딩 중이 아니고 마지막이 아니면 페이지+1
-    if (inView && !isLoading && total !== posts_state.length) {
+    // 사용자가 마지막 요소를 보고 있고, 로딩 중이 아니라면
+    if (inView && !loading && size !== posts) {
       setPage((prevState) => prevState + 1);
+      console.log("페이지", page);
     }
-  }, [inView, isLoading, total]);
-
-  useEffect(() => {
-    console.log("posts", posts_state);
-  }, [posts_state]);
+  }, [inView, loading]);
 
   return (
+    //posts &&
     <>
-      {posts &&
-        posts.map((post, index) => {
-          return (
-            <div key={index}>
-              <div
-                onClick={() => {
-                  onClickHandler(post.postId);
-                }}
-              >
-                <PList>
-                  <div>
-                    {post.images && <img src={post.images[0].imgUrl} />}
-                  </div>
+      {posts.map((post, index) => {
+        return (
+          <div key={index}>
+            <div
+              onClick={() => {
+                onClickHandler(post.postId);
+              }}
+            >
+              <PList>
+                <div>{post.images && <img src={post.images[0].imgUrl} />}</div>
+                <br />
+                <div>
+                  <label>title : {post.title}</label>
                   <br />
-                  <div>
-                    <label>title : {post.title}</label>
-                    <br />
-                    <label>category : {post.category}</label>
-                    <br />
-                    <label>userPrice : {post.userPrice}</label>
+                  <label>category : {post.category}</label>
+                  <br />
+                  <label>userPrice : {post.userPrice}</label>
 
-                    {/* 크리에이트앳 받아서 수정, 카테고리 대신 기종*/}
-                  </div>
-                </PList>
-              </div>
+                  {/* 크리에이트앳 받아서 수정, 카테고리 대신 기종*/}
+                </div>
+              </PList>
             </div>
-          );
-        })}
+          </div>
+        );
+      })}
       <div ref={ref}></div>
     </>
   );

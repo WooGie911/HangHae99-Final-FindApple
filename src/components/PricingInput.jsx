@@ -103,6 +103,7 @@ const PricingInput = () => {
     if (tag.careOX === "false") {
       setTag({ ...tag, careDate: "" });
     }
+
     console.log("전개", { ...tag });
     const objMac = {};
     const objMac2 = {};
@@ -132,6 +133,7 @@ const PricingInput = () => {
         careDate: "",
       };
     }
+
     const objPhone = {
       category: tag.category,
       year: tag.year,

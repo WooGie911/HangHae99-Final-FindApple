@@ -8,7 +8,6 @@ const PricingText = () => {
   const state = useLocation();
   const data = state.state;
   const navigate = useNavigate();
-  console.log("유즈로케이션data ", data);
 
   return (
     <>

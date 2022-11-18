@@ -16,7 +16,6 @@ const ObjectionUpdate = ({ paramId }) => {
   const [updateInput, setUpdateInput, updateInputHandle] = useInput(posts);
 
   const updateSubmit = () => {
-    console.log("updateInput", updateInput);
     const obj = {
       id: paramId,
       formData: updateInput,

@@ -5,7 +5,7 @@ import Layout from "../components/Layout";
 import Footer from "../components/Footer";
 const MyObjection = () => {
   const { objections } = useSelector((state) => state.mypage);
-  console.log(objections);
+
   const dispatch = useDispatch();
   useEffect(() => {
     dispatch(__getMyObjection());

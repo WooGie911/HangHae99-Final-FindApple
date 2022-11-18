@@ -3,41 +3,56 @@ import axios from "axios";
 
 const initialState = {
   posts: [],
-  posts_state: [],
+
   isLoading: false,
+  error: null,	
 };
+
+// const initialState = {	
+//   isLoading: false,	
+//   post: {},	
+//   posts:[], //공배열로 바꿔야함
+//   error: null,	
+// }
 
 const accessToken = localStorage.getItem("Access_Token");
 const refreshToken = localStorage.getItem("Refresh_Token");
 
 //무한스크롤
-export const nhInstance = axios.create({
+const token = axios.create({
+  // 추후에 로컬에서 서버 주소로 변경해야 함
   baseURL: process.env.REACT_APP_SERVER,
-  headers: {},
-});
+  headers: {
+    Access_Token:
+      localStorage.getItem("Access_Token") === undefined
+        ? ""
+        : localStorage.getItem("Access_Token"),
+  },
+  withCredentials: true,
+})
 
-export const postApis = {
-  postListAX: (payload) =>
-    nhInstance.get(
-      `${process.env.REACT_APP_SERVER}/api/post?page=1&size=3,${payload}`
-    ),
+export const Apis = {
+  getPostTimeAX: (payload) => token.get(`/api/post?size=5&page=${payload}`),
 };
 
-export const __postList = createAsyncThunk(
-  "postSlice/__postList",
-  async (payload, thunkAPI) => {
-    try {
-      console.log(payload);
-      const res = await postApis.postListAX();
+export const __getPostTime = createAsyncThunk(	
+  "api/posts/getPost",	
+  async (payload, thunkAPI) => {	
+    try {	
+      console.log('페이로드',payload)
+      const response = await Apis.getPostTimeAX(payload)
+      console.log('리스폰스',response)
+      return thunkAPI.fulfillWithValue(response.data.content);	
+      
+    } catch (error) {	
+      
+      return thunkAPI.rejectWithValue(error);	
+    }	
+  }	
+  
+)	
 
-      const curPage = payload * 10;
 
-      return thunkAPI.fulfillWithValue(res.data.slice(curPage - 10, curPage));
-    } catch (error) {
-      return thunkAPI.rejectWithValue(error);
-    }
-  }
-);
 
 //검색기능 미완성
 export const __searchPost = createAsyncThunk(
@@ -52,10 +67,10 @@ export const __searchPost = createAsyncThunk(
           "Cache-Control": "no-cache",
         },
       });
-      console.log("__searchPost", data);
+
       return thunkAPI.fulfillWithValue(data.data);
     } catch (error) {
-      console.log("error", error);
+
       return thunkAPI.rejectWithValue(error);
     }
   }
@@ -77,10 +92,12 @@ export const __getPost = createAsyncThunk(
           },
         }
       );
+
       console.log("data 겟디테일", data);
       return thunkAPI.fulfillWithValue(data.data.content);
+
     } catch (error) {
-      console.log("error", error);
+ 
       return thunkAPI.rejectWithValue(error);
     }
   }
@@ -100,11 +117,11 @@ export const __addPost = createAsyncThunk(
           },
         })
         .then((response) => {
-          console.log("response", response);
+       
           return thunkAPI.fulfillWithValue(response.data.data);
         });
     } catch (error) {
-      console.log("error", error);
+ 
       return thunkAPI.rejectWithValue(error);
     }
   }
@@ -113,7 +130,7 @@ export const __addPost = createAsyncThunk(
 export const __deletePost = createAsyncThunk(
   "posts/__deletePost",
   async (payload, thunkAPI) => {
-    console.log(payload);
+
     try {
       const data = await axios.delete(
         `${process.env.REACT_APP_SERVER}/api/post/${payload}`,
@@ -126,10 +143,10 @@ export const __deletePost = createAsyncThunk(
           },
         }
       );
-      console.log("딜리트 response", data);
+
       return thunkAPI.fulfillWithValue(payload);
     } catch (error) {
-      console.log("error", error);
+    
       return thunkAPI.rejectWithValue(error);
     }
   }
@@ -138,11 +155,13 @@ export const __deletePost = createAsyncThunk(
 export const __editPost = createAsyncThunk(
   "posts/__editPost",
   async (payload, thunkAPI) => {
-    console.log("payload", payload);
+
     try {
+
       console.log(payload);
       const data = await axios.patch(
         `${process.env.REACT_APP_SERVER}/api/post/${payload.id}`,
+
         payload.formData,
         {
           headers: {
@@ -153,10 +172,10 @@ export const __editPost = createAsyncThunk(
           },
         }
       );
-      console.log("response", data);
+
       return thunkAPI.fulfillWithValue(data.data);
     } catch (error) {
-      console.log("error", error);
+ 
       return thunkAPI.rejectWithValue(error);
     }
   }
@@ -176,20 +195,27 @@ const PostsSlice = createSlice({
       state.posts = action.payload;
     },
     [__searchPost.rejected]: (state, action) => {
-      state.isLoading = false;
-      state.error = action.payload;
+      state.isLoading = false;	
+      state.isSuccess = false;	
+      
     },
     //__postList
-    [__postList.pending]: (state, action) => {
+    [__getPostTime.pending]: (state) => {
       state.isLoading = true;
     },
-    [__postList.fulfilled]: (state, action) => {
-      state.isLoading = false;
-      state.posts.push(...action.payload);
+    [__getPostTime.fulfilled]: (state, action) => {
+      state.isLoading = false;	
+      state.isSuccess = false;	
+      state.posts.push(...action.payload);	// 기존에 있던 리스트에서 뒤에 붙여줘야하기 때문에 push를 써줘야함
+      console.log('action.payload',action.payload)
+      // console.log('액션액션스테이트',state)
+      
     },
-    [__postList.rejected]: (state, action) => {
-      state.isLoading = false;
-      console.log("포스트리스트", action.payload);
+    [__getPostTime.rejected]: (state, action) => {
+      state.isLoading = false;	
+      state.isSuccess = false;	
+      state.error = action.payload;
+
     },
 
     //__getPost

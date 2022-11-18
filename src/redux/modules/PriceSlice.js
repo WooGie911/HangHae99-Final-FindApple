@@ -37,9 +37,7 @@ export const __checkPrice = createAsyncThunk(
   "price/__checkPrice",
   async (payload, thunkAPI) => {
     try {
-      console.log("payload", payload);
-      console.log("payload.....", payload.category);
-      console.log("payload.....data", payload.Data);
+   
       const response = await axios.post(
         `${process.env.REACT_APP_SERVER}/api/price/${payload.category}`,
         payload.Data,
@@ -54,7 +52,7 @@ export const __checkPrice = createAsyncThunk(
       );
       return thunkAPI.fulfillWithValue(response.data);
     } catch (error) {
-      console.log("error", error);
+
       return thunkAPI.rejectWithValue(error);
     }
   }
@@ -65,11 +63,7 @@ const PriceSlice = createSlice({
   initialState,
 
   reducer: {
-    // checkPricingDetail(state, action) {
-    //   console.log("action.payload", action.payload);
-    //   // state.DetailPrice = action.payload;
-    //   console.log("state.DetailPrice", state.DetailPrices);
-    // },
+
   },
   extraReducers: {
     //__getPriceInfo
@@ -92,7 +86,7 @@ const PriceSlice = createSlice({
     [__checkPrice.fulfilled]: (state, action) => {
       state.isLoading = false;
       state.DetailPrice = action.payload;
-      console.log(action.payload);
+    
     },
     [__checkPrice.rejected]: (state, action) => {
       state.isLoading = false;

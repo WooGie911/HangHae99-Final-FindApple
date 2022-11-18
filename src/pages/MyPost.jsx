@@ -6,7 +6,7 @@ import Footer from "../components/Footer";
 
 const MyPost = () => {
   const { posts } = useSelector((state) => state.mypage);
-  console.log(posts);
+
   const dispatch = useDispatch();
   useEffect(() => {
     dispatch(__getMyPost());

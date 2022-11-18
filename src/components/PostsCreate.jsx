@@ -10,7 +10,6 @@ const PostsCreate = (props) => {
   const dispatch = useDispatch();
   const navigate = useNavigate();
   const { DetailPrice } = useSelector((state) => state.price);
-  console.log("DetailPrice", DetailPrice);
 
   const [write, setWrite, writeHandle] = useInput({
     title: "",
@@ -70,6 +69,7 @@ const PostsCreate = (props) => {
       return window.alert("사진을 입력하세요");
     }
     //Api 날리기
+
     if (window.confirm("작성하시겠습니까?")) {
       dispatch(props.__addData(formData));
       window.location.replace(`${props.Navigate}`);
@@ -77,6 +77,7 @@ const PostsCreate = (props) => {
   };
   const onClickHandler = () => {
     navigate(-1);
+
   };
 
   return (
