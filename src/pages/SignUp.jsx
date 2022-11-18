@@ -46,8 +46,6 @@ const SignUp = () => {
       password: input.password,
     };
     dispatch(__SignUp(AAA));
-    console.log(AAA);
-    // dispatch(__SignUp(input));
     setInput(initialstate);
   };
 
@@ -59,66 +57,66 @@ const SignUp = () => {
 
   return (
     <Layout>
-    <StWrapper>
-      <StSignupBox>
-        <Div>
-          <StInputBox2
-            type="text"
-            name="email"
-            value={input.email}
-            onChange={changeInputHandler}
-            placeholder="Email"
-          />
-          <StInputButton onClick={emailCheckHandler}>
-            인증번호 발송
-          </StInputButton>
-        </Div>
-        {emailCheckTF && (
+      <StWrapper>
+        <StSignupBox>
+          <Div>
+            <StInputBox2
+              type="text"
+              name="email"
+              value={input.email}
+              onChange={changeInputHandler}
+              placeholder="Email"
+            />
+            <StInputButton onClick={emailCheckHandler}>
+              인증번호 발송
+            </StInputButton>
+          </Div>
+          {emailCheckTF && (
+            <StInputBox
+              type="text"
+              name="emailCheck"
+              value={input.emailCheck}
+              onChange={changeInputHandler}
+              placeholder="이메일 메일인증"
+            />
+          )}
+
           <StInputBox
             type="text"
-            name="emailCheck"
-            value={input.emailCheck}
+            name="nickname"
+            value={input.nickname}
             onChange={changeInputHandler}
-            placeholder="이메일 메일인증"
+            placeholder="Nickname"
           />
-        )}
 
-        <StInputBox
-          type="text"
-          name="nickname"
-          value={input.nickname}
-          onChange={changeInputHandler}
-          placeholder="Nickname"
-        />
+          <StInputBox
+            type="text"
+            name="password"
+            value={input.password}
+            onChange={changeInputHandler}
+            placeholder="Password"
+          />
+          <StInputBox
+            type="text"
+            name="passwordCheck"
+            value={input.passwordCheck}
+            onChange={changeInputHandler}
+            placeholder="PasswordCheck"
+          />
+          <StButton onClick={SubmitHandler}>회원가입</StButton>
 
-        <StInputBox
-          type="text"
-          name="password"
-          value={input.password}
-          onChange={changeInputHandler}
-          placeholder="Password"
-        />
-        <StInputBox
-          type="text"
-          name="passwordCheck"
-          value={input.passwordCheck}
-          onChange={changeInputHandler}
-          placeholder="PasswordCheck"
-        />
-        <StButton onClick={SubmitHandler}>회원가입</StButton>
-
-        <StLoginBox>
-          <h5>계정이 있으신가요?</h5>
-          <button
-            onClick={() => {
-              navigate("/signin");
-            }}
-          >
-            로그인
-          </button>
-        </StLoginBox>
-      </StSignupBox>
-    </StWrapper>
+          <StLoginBox>
+            <h5>계정이 있으신가요?</h5>
+            <button
+              onClick={() => {
+                navigate("/signin");
+              }}
+            >
+              로그인
+            </button>
+          </StLoginBox>
+        </StSignupBox>
+      </StWrapper>
     </Layout>
   );
 };
