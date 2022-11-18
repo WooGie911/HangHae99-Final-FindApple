@@ -40,7 +40,7 @@ export const __addObjectionComment = createAsyncThunk(
       //console.log(payload)
       // payload를 데이터를 넣어줄때까지 실행하지 하지않겠다. //비동기
       const data = await axios.post(
-        `${process.env.REACT_APP_SERVER}/api/issues-comment/${payload.id}`,
+        `${process.env.REACT_APP_SERVER}/api/issue-comment/${payload.id}`,
         // JSON.stringify(payload.comment),
         payload.comment,
         {
@@ -69,7 +69,7 @@ export const __deleteObjectionComment = createAsyncThunk(
       console.log(payload);
       // payload를 데이터를 넣어줄때까지 실행하지 하지않겠다. //비동기
       const data = await axios.delete(
-        `${process.env.REACT_APP_SERVER}/api/issues-comment/${payload}`,
+        `${process.env.REACT_APP_SERVER}/api/issue-comment/${payload}`,
         {
           headers: {
             "Content-Type": `application/json`,
@@ -96,7 +96,7 @@ export const __editObjectionComment = createAsyncThunk(
     try {
       console.log(payload);
       const data = await axios.put(
-        `${process.env.REACT_APP_SERVER}/api/issues-comment/${payload.id}`,
+        `${process.env.REACT_APP_SERVER}/api/issue-comment/${payload.id}`,
         JSON.stringify(payload.comment),
         {
           headers: {
