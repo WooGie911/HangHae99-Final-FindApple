@@ -4,8 +4,7 @@ import useInput from "../hook/useInput";
 import useImgUpload from "../hook/useImageUpload";
 import { useDispatch, useSelector } from "react-redux";
 import { useNavigate } from "react-router-dom";
-import Layout from "../components/Layout"
-import back from "../assets/back.png" 
+import back from "../assets/back.png";
 
 const PostsCreate = (props) => {
   const dispatch = useDispatch();
@@ -46,40 +45,62 @@ const PostsCreate = (props) => {
       expectPrice: DetailPrice.getPrice,
       userPrice: write.userPrice,
       content: write.content,
-      option: { ...DetailPrice },
     };
+
     formData.append(
-      `${props.postReqDto}`,
+      props.postReqDto,
       new Blob([JSON.stringify(objects)], { type: "application/json" })
     );
-
+    {
+      DetailPrice.category === "macbook"
+        ? formData.append(
+            "macbookOption",
+            new Blob([JSON.stringify(DetailPrice)], {
+              type: "application/json",
+            })
+          )
+        : formData.append(
+            "iphoneOption",
+            new Blob([JSON.stringify(DetailPrice)], {
+              type: "application/json",
+            })
+          );
+    }
+    if (files.length < 1) {
+      return window.alert("사진을 입력하세요");
+    }
     //Api 날리기
-    dispatch(props.__addData(formData));
-    navigate(`${props.Navigate}`);
-    console.log("폼데이터", formData);
-    console.log("files", files);
-    console.log("objects", objects);
+    if (window.confirm("작성하시겠습니까?")) {
+      dispatch(props.__addData(formData));
+      window.location.replace(`${props.Navigate}`);
+    }
   };
   const onClickHandler = () => {
     navigate(-1);
   };
+
   return (
     <>
-    <Layout>
       <Stcontainer>
         <Stuploadbutton>
-        <div>
-            <div><img onClick={onClickHandler} style={{width:25, height : 25}} src={back}/></div>
+          <div>
+            <div>
+              <img
+                onClick={onClickHandler}
+                style={{ width: 25, height: 25 }}
+                src={back}
+              />
+            </div>
           </div>
           <div>
-            <div>상품등록</div>
+            <h3>상품등록</h3>
           </div>
           <div>
             <span onClick={writeSubmit}>완료</span>
           </div>
         </Stuploadbutton>
         <Stphotolabel htmlFor="imgFile">
-        <input
+          <input
             type="file"
             style={{ display: "none" }}
             accept="image/*"
@@ -89,8 +110,7 @@ const PostsCreate = (props) => {
             onChange={uploadHandle}
             ref={imgRef}
           />
-
-          {fileUrls.length > 0 && (
+          {fileUrls.length > 0 ? (
             <div className="preview">
               {
                 /*previews*/
@@ -99,77 +119,73 @@ const PostsCreate = (props) => {
                     <img
                       src={val}
                       key={i}
-                      style={{ width: "40px", height: "40px" }}
+                      style={{ width: "100px", height: "100px" }}
                     />
                   );
                 })
               }
             </div>
-          )} 
-            
+          ) : (
             <PhotoButton
-            type="button"
-            onClick={() => {
-              imgRef.current.click();
-            }}
-          >
-            <CameraImg>
-            <div><img src="https://img.icons8.com/fluency-systems-regular/20/null/multiple-cameras.png"/></div>
-            <div>{fileUrls.length}/5</div>
-            </CameraImg>
-          </PhotoButton>
-         
-          
+              type="button"
+              onClick={() => {
+                imgRef.current.click();
+              }}
+            >
+              <CameraImg>
+                <div>
+                  <img src="https://img.icons8.com/fluency-systems-regular/20/null/multiple-cameras.png" />
+                </div>
+                <div>{fileUrls.length}/5</div>
+              </CameraImg>
+            </PhotoButton>
+          )}
         </Stphotolabel>
-        
-      
+
         <div>
-          <div>
-            <Sttitleinput
-              onChange={writeHandle}
-              name="title"
-              value={write.title || ""}
-              type="text"
-              placeholder="글제목"
-            />
-          </div>
-          <hr/>
-
-          <Detail
-            onClick={() => {
-              navigate("/pricingfinal");
-            }}
-          >
-            상품 상세 정보
-          </Detail>
-          <hr/>
-
-          <Price>
-          <div>측정 가격 {DetailPrice.getPrice}</div>
-          <hr/>
-          <div>
-          <input
+          <Sttitleinput
             onChange={writeHandle}
-            name="userPrice"
-            value={write.userPrice || ""}
+            name="title"
+            value={write.title || ""}
             type="text"
-            placeholder="판매가격"
+            placeholder="제목을 입력하세요."
           />
-          </div>
-          </Price>
-          <hr/>    
+        </div>
+        <hr />
+
+        <Detail
+          onClick={() => {
+            navigate("/pricingfinal");
+          }}
+        >
+          상품 상세 정보
+        </Detail>
+        <hr />
+
+        <Price>
+          <div>측정 가격 {DetailPrice.getPrice}</div>
+          <hr />
           <div>
-            <Stcontentinput
+            <input
               onChange={writeHandle}
-              name="content"
-              value={write.content || ""}
+              name="userPrice"
+              value={write.userPrice || ""}
               type="text"
-              placeholder="내용을 입력하세요."
+              placeholder="가격을 입력하세요."
             />
           </div>
+        </Price>
+        <hr />
+        <div>
+          <Stcontentinput
+            onChange={writeHandle}
+            name="content"
+            value={write.content || ""}
+            type="text"
+            placeholder="내용을 입력하세요."
+          />
         </div>
       </Stcontainer>
-      </Layout>
     </>
   );
 };
@@ -182,69 +198,64 @@ const Stcontainer = styled.div`
   flex-direction: column;
 `;
 
-
 // 상품 가격 측정
 const Detail = styled.div`
-cursor: pointer;
-display: flex;
-margin-top: 20px;
-height: 30px;
-color : gray;
-font-size: 14px;
-
-`
+  cursor: pointer;
+  display: flex;
+  margin-top: 20px;
+  height: 30px;
+  color: gray;
+  font-size: 14px;
+`;
 // 가격 결정
 const Price = styled.div`
-div{
-margin-top: 30px;
-color : gray;
-font-size: 14px;
-}
-input{
-  border : none;
-  width: 98.5%;
-  background-color : transparent;
-}
-`
+  div {
+    margin-top: 30px;
+    color: gray;
+    font-size: 14px;
+  }
+  input {
+    border: none;
+    width: 98.5%;
+    background-color: transparent;
+  }
+`;
 
 const Stuploadbutton = styled.div`
   display: flex;
   justify-content: space-between;
   border-bottom: 1px solid lightgrey;
   padding-bottom: 10px;
-  span{
+  span {
     cursor: pointer;
   }
 `;
-
 
 // 내용 입력
 const Stcontentinput = styled.textarea`
   margin-top: 25px;
   width: 98.5%;
   height: 30px;
-  border : none;
-  background-color : transparent;
+  border: none;
+  background-color: transparent;
 `;
-
 
 // 사진 업로드
 const PhotoButton = styled.button`
-width: 50px;
-height: 50px;
-border : none;
-border-radius: 25%;
-background-color: aliceblue;
-margin : 10px;
-`
-
+  width: 50px;
+  height: 50px;
+  border-radius: 25%;
+  background-color: aliceblue;
+  margin: 10px;
+  border: none;
+`;
 const CameraImg = styled.div`
-display: flex;
-flex-direction: column;
-align-items: center;
-justify-content: center;
-padding-top : 5px;
-`
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
+  padding-top: 5px;
+`;
 
 // 사진 업로드 관련인 듯
 const Stphotolabel = styled.label`
@@ -256,6 +267,6 @@ const Stphotolabel = styled.label`
 const Sttitleinput = styled.input`
   width: 98.5%;
   height: 30px;
-  border : none;
-  background-color : transparent;
-`
+  border: none;
+  background-color: transparent;
+`;

@@ -64,9 +64,10 @@ export const __searchPost = createAsyncThunk(
 export const __getPost = createAsyncThunk(
   "posts/__getPost",
   async (payload, thunkAPI) => {
+    console.log("겟디테일 payload", payload);
     try {
       const data = await axios.get(
-        `${process.env.REACT_APP_SERVER}/api/post/category/${payload}`,
+        `${process.env.REACT_APP_SERVER}/api/post${payload.paramObj}?page=${payload.pageNumber}&size=10`,
         {
           headers: {
             "Content-Type": `application/json`,
@@ -77,7 +78,7 @@ export const __getPost = createAsyncThunk(
         }
       );
       console.log("data 겟디테일", data);
-      return thunkAPI.fulfillWithValue(data.data);
+      return thunkAPI.fulfillWithValue(data.data.content);
     } catch (error) {
       console.log("error", error);
       return thunkAPI.rejectWithValue(error);

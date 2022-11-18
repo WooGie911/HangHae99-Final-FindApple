@@ -15,7 +15,16 @@ const PostRead = () => {
   const { posts } = useSelector((state) => state.posts);
 
   useEffect(() => {
-    dispatch(__getPost(params.category));
+    const paramObj = params.category === "all" ? "" : `/${params.category}`;
+
+    const pageNumber = 0;
+
+    const submitObj = {
+      paramObj: paramObj,
+      pageNumber: pageNumber,
+    };
+    console.log(paramObj);
+    dispatch(__getPost(submitObj));
   }, [params]);
 
   return (

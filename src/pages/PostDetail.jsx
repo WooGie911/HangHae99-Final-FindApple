@@ -3,12 +3,7 @@ import styled from "styled-components";
 import { useNavigate, useParams } from "react-router-dom";
 import { useDispatch, useSelector } from "react-redux";
 import { __deletePost } from "../redux/modules/PostsSlice";
-import {
-  __addPostComment,
-  __deletePostComment,
-  __CartInPost,
-  __CartOutPost,
-} from "../redux/modules/PostDetailsSlice";
+import { __CartInPost, __CartOutPost } from "../redux/modules/PostDetailsSlice";
 import Layout from "../components/Layout";
 import Footer from "../components/Footer";
 import back from "../assets/back.png";
@@ -81,7 +76,6 @@ const PostDetail = () => {
           ) : null}
         </EditHead>
 
-
         <div>
           {post.images !== undefined &&
             post.images.map((item, index) => {
@@ -90,29 +84,38 @@ const PostDetail = () => {
 
           <h3>{post.title}</h3>
           <div>{post.content}</div>
-
         </div>
-            {/* 추후 댓글 만들어지면 들어갈 내용 */}
-        <CommentList
-          __deleteComment={__deletePostComment}
-          commentList={post.comments}
-        />
-        <CommentCreate __addComment={__addPostComment} />
+        {/* 추후 댓글 만들어지면 들어갈 내용 */}
         {/* 찜카운트 추가 예정 */}
-          <div>글쓴이 프로필사진 , 닉네임 : {post.nickname}</div>
-          <button onClick={() => onCartButton(post.postId)}>찜</button>
+        <div>글쓴이 프로필사진 , 닉네임 : {post.nickname}</div>
+        <button onClick={() => onCartButton(post.postId)}>찜</button>
         <div>찜 유무 : {post.isLike ? "찜한거" : "안한거"}</div>
-         <div> 하트 {post.likeCnt}</div>
-        <img src="https://img.icons8.com/ios-glyphs/15/null/hearts.png" onClick={() => onCartButton(post.postId)}/>
-        <hr/>
+        <div> 하트 {post.likeCnt}</div>
+        <img
+          src="https://img.icons8.com/ios-glyphs/15/null/hearts.png"
+          onClick={() => onCartButton(post.postId)}
+        />
+        <hr />
         <Price>
           <div>책정가격 : {post.expectPrice} 원</div>
-          <div> <img src="https://img.icons8.com/metro/15/null/long-arrow-right.png"/> </div>
+          <div>
+            {" "}
+            <img src="https://img.icons8.com/metro/15/null/long-arrow-right.png" />{" "}
+          </div>
           <div>판매가격 : {post.userPrice} 원</div>
-          <div><img src="https://img.icons8.com/ios/25/null/topic.png"/></div>
+          <div>
+            <img src="https://img.icons8.com/ios/25/null/topic.png" />
+          </div>
         </Price>
-        <Footer />
 
+        <button
+          onClick={() => {
+            navigate(`/postComment/${params.id}`);
+          }}
+        >
+          댓글
+        </button>
+        <Footer />
       </Layout>
     </>
   );
@@ -155,18 +158,17 @@ const Button = styled.button`
 
 // 이미지 크기 지정
 const Image = styled.img`
-width : 300px;
-height : 300px;
-margin: auto;
-margin-bottom: 20px;
-display: block;
-`
+  width: 300px;
+  height: 300px;
+  margin: auto;
+  margin-bottom: 20px;
+  display: block;
+`;
 
 // 물건 가격
 const Price = styled.div`
-display: flex;
-div{
-  margin-right : 10px;
-}
-
-`
+  display: flex;
+  div {
+    margin-right: 10px;
+  }
+`;
