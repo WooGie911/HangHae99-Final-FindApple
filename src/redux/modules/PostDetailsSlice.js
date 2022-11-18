@@ -36,6 +36,7 @@ export const __getPostDetail = createAsyncThunk(
 export const __addPostComment = createAsyncThunk(
   "details/__addPostComment",
   async (payload, thunkAPI) => {
+    console.log("__addPostComment -payload", payload);
     try {
       const data = await axios.post(
         `${process.env.REACT_APP_SERVER}/api/comment/${payload.id}`,
@@ -49,8 +50,10 @@ export const __addPostComment = createAsyncThunk(
           },
         }
       );
-      return
-      // return thunkAPI.fulfillWithValue(payload.comment);
+
+      console.log("response", data);
+      return thunkAPI.fulfillWithValue(data.data);
+
     } catch (error) {
 
       return thunkAPI.rejectWithValue(error);
@@ -77,8 +80,13 @@ export const __deletePostComment = createAsyncThunk(
         }
       );
 
-      return
-      // return thunkAPI.fulfillWithValue(payload);
+      // console.log("페이로드",payload);
+      if (data.data === "Success") {
+        console.log("삭제 성공");
+        return thunkAPI.fulfillWithValue(payload);
+      }
+      console.log("삭제 성공 인데 메시지 이상? ");
+
     } catch (error) {
 
       return thunkAPI.rejectWithValue(error);
@@ -113,6 +121,63 @@ export const __editPostComment = createAsyncThunk(
   }
 );
 
+export const __CartInPost = createAsyncThunk(
+  "details/__CartInPost",
+  async (payload, thunkAPI) => {
+    try {
+      const data = await axios.post(
+        `${process.env.REACT_APP_SERVER}/api/post/likes/${payload}`,
+        "",
+        {
+          headers: {
+            "Content-Type": `application/json`,
+            Access_Token: accessToken,
+            Refresh_Token: refreshToken,
+            "Cache-Control": "no-cache",
+          },
+        }
+      );
+      console.log("response", data);
+      if (data.data === "찜 성공") {
+        console.log("찜 성공");
+        return thunkAPI.fulfillWithValue({ islike: true, count: +1 });
+      }
+      return thunkAPI.fulfillWithValue({ islike: false, count: -1 });
+    } catch (error) {
+      console.log("error", error);
+      return thunkAPI.rejectWithValue(error);
+    }
+  }
+);
+
+export const __CartOutPost = createAsyncThunk(
+  "details/__CartOutPost",
+  async (payload, thunkAPI) => {
+    try {
+      const data = await axios.delete(
+        `${process.env.REACT_APP_SERVER}/api/post/likes/${payload}`,
+        {
+          headers: {
+            "Content-Type": `application/json`,
+            Access_Token: accessToken,
+            Refresh_Token: refreshToken,
+            "Cache-Control": "no-cache",
+          },
+        }
+      );
+      console.log("response", data);
+      if (data.data === "찜 삭제") {
+        console.log("찜 삭제 성공");
+        return thunkAPI.fulfillWithValue({ islike: false, count: -1 });
+      }
+      return thunkAPI.fulfillWithValue({ islike: true, count: +1 });
+    } catch (error) {
+      console.log("error", error);
+      return thunkAPI.rejectWithValue(error);
+    }
+  }
+);
+
 const PostDetailSlice = createSlice({
   name: "details",
   initialState,
@@ -140,7 +205,7 @@ const PostDetailSlice = createSlice({
     },
     [__addPostComment.fulfilled]: (state, action) => {
       state.isLoading = false;
-      state.post.commentList.push(action.payload);
+      state.post.comments.push(action.payload);
     },
     [__addPostComment.rejected]: (state, action) => {
       state.isLoading = false;
@@ -152,7 +217,7 @@ const PostDetailSlice = createSlice({
     },
     [__deletePostComment.fulfilled]: (state, action) => {
       state.isLoading = false;
-      state.post.commentList = state.post.commentList.filter(
+      state.post.comments = state.post.comments.filter(
         (comment) => comment.commentId !== action.payload
       );
     },
@@ -168,7 +233,7 @@ const PostDetailSlice = createSlice({
       state.isLoading = false;
 
       const indexId = state.comment.findIndex((comment) => {
-        if (comment.commentId == action.payload.id) {
+        if (comment.id == action.payload.id) {
           return true;
         }
         return false;
@@ -178,6 +243,38 @@ const PostDetailSlice = createSlice({
       state.comment = [...state.comment];
     },
     [__editPostComment.rejected]: (state, action) => {
+      state.isLoading = false;
+      state.error = action.payload;
+    },
+
+    //__CartInPost
+    [__CartInPost.pending]: (state) => {
+      state.isLoading = true;
+    },
+    [__CartInPost.fulfilled]: (state, action) => {
+      state.isLoading = false;
+      state.post.isLike = action.payload.islike;
+      state.post.likeCnt = state.post.likeCnt + action.payload.count;
+      console.log("action", action);
+      console.log("state.post.isLike", state.post.isLike);
+    },
+    [__CartInPost.rejected]: (state, action) => {
+      state.isLoading = false;
+      state.error = action.payload;
+    },
+    //__CartOutPost
+    [__CartOutPost.pending]: (state) => {
+      state.isLoading = true;
+    },
+    [__CartOutPost.fulfilled]: (state, action) => {
+      state.isLoading = false;
+      state.post.isLike = action.payload.islike;
+      state.post.likeCnt = state.post.likeCnt + action.payload.count;
+
+      console.log("action", action);
+      console.log("state.post.isLike", state.post.isLike);
+    },
+    [__CartOutPost.rejected]: (state, action) => {
       state.isLoading = false;
       state.error = action.payload;
     },

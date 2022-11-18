@@ -2,13 +2,8 @@ import React, { useState } from "react";
 import styled from "styled-components";
 import { useNavigate, useParams } from "react-router-dom";
 import { useDispatch, useSelector } from "react-redux";
-import CommentCreate from "../components/CommentCreate";
-import CommentList from "../components/CommentList";
-import { __deletePost, __CartPost } from "../redux/modules/PostsSlice";
-import {
-  __addPostComment,
-  __deletePostComment,
-} from "../redux/modules/PostDetailsSlice";
+import { __deletePost } from "../redux/modules/PostsSlice";
+import { __CartInPost, __CartOutPost } from "../redux/modules/PostDetailsSlice";
 import Layout from "../components/Layout";
 import Footer from "../components/Footer";
 import back from "../assets/back.png";
@@ -19,11 +14,13 @@ const PostDetail = () => {
   const params = useParams();
   const { post } = useSelector((state) => state.details);
 
-  // const { comments } = useSelector((state) => state.details.posts);
-
   //찜하기
   const onCartButton = (payload) => {
-    dispatch(__CartPost(payload));
+    {
+      post.isLike
+        ? dispatch(__CartOutPost(payload))
+        : dispatch(__CartInPost(payload));
+    }
   };
 
   //게시글 삭제
@@ -42,7 +39,7 @@ const PostDetail = () => {
     isEdit: false,
   });
 
-  const editToggleHandler = (postId) => {
+  const editToggleHandler = () => {
     const newEdit = {
       isEdit: !editTg.isEdit,
     };
@@ -78,33 +75,47 @@ const PostDetail = () => {
             </ToggleNav>
           ) : null}
         </EditHead>
-        <button onClick={() => onCartButton(post.postId)}>찜</button>
-
-        <div>PostDetail</div>
-        <button onClick={() => onCartButton(post.postId)}>찜</button>
 
         <div>
-          <div>{post.title}</div>
           {post.images !== undefined &&
             post.images.map((item, index) => {
-              return <img src={item.imgUrl} key={index} />;
+              return <Image src={item.imgUrl} key={index} />;
             })}
-          <div>{post.expectPrice}</div>
-          <div>{post.userPrice}</div>
+
+          <h3>{post.title}</h3>
           <div>{post.content}</div>
         </div>
-
-        <CommentList
-          __deleteComment={__deletePostComment}
-          commentList={post.comments}
+        {/* 추후 댓글 만들어지면 들어갈 내용 */}
+        {/* 찜카운트 추가 예정 */}
+        <div>글쓴이 프로필사진 , 닉네임 : {post.nickname}</div>
+        <button onClick={() => onCartButton(post.postId)}>찜</button>
+        <div>찜 유무 : {post.isLike ? "찜한거" : "안한거"}</div>
+        <div> 하트 {post.likeCnt}</div>
+        <img
+          src="https://img.icons8.com/ios-glyphs/15/null/hearts.png"
+          onClick={() => onCartButton(post.postId)}
         />
-        <CommentCreate __addComment={__addPostComment} />
+        <hr />
+        <Price>
+          <div>책정가격 : {post.expectPrice} 원</div>
+          <div>
+            {" "}
+            <img src="https://img.icons8.com/metro/15/null/long-arrow-right.png" />{" "}
+          </div>
+          <div>판매가격 : {post.userPrice} 원</div>
+          <div>
+            <img src="https://img.icons8.com/ios/25/null/topic.png" />
+          </div>
+        </Price>
 
-        <div>
-          <button onClick={() => navigate(-1)}>이전으로</button>
-
-          <Footer />
-        </div>
+        <button
+          onClick={() => {
+            navigate(`/postComment/${params.id}`);
+          }}
+        >
+          댓글
+        </button>
+        <Footer />
       </Layout>
     </>
   );
@@ -142,5 +153,22 @@ const Button = styled.button`
   background-color: #fff;
   &:hover {
     background-color: red;
+  }
+`;
+
+// 이미지 크기 지정
+const Image = styled.img`
+  width: 300px;
+  height: 300px;
+  margin: auto;
+  margin-bottom: 20px;
+  display: block;
+`;
+
+// 물건 가격
+const Price = styled.div`
+  display: flex;
+  div {
+    margin-right: 10px;
   }
 `;

@@ -21,6 +21,8 @@ import MyPost from "../pages/MyPost";
 import PricingInput from "../components/PricingInput";
 import Pricingfinal from "../components/Pricingfinal";
 import PricingText from "../components/PricingText";
+import PostComment from "../pages/PostComment";
+import ObjectionComment from "../pages/ObjectionComment";
 
 const Router = () => {
   return (
@@ -96,10 +98,18 @@ const Router = () => {
           path="/pricingInput/:category/:year/:model/:option"
           element={<PricingInput />}
         />
+
         {/*가격 결정 페이지 */}
         <Route path="/pricingfinal" element={<Pricingfinal />} />
+
         {/*상세내용 확인 페이지 */}
         <Route path="/pricingtext" element={<PricingText />} />
+
+        {/*게시물 댓글 페이지 */}
+        <Route path="/postComment/:id" element={<PostComment />} />
+
+        {/*이의제기 댓글 페이지 */}
+        <Route path="/objectionComment/:id" element={<ObjectionComment />} />
       </Routes>
     </BrowserRouter>
   );

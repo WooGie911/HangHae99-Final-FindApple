@@ -3,7 +3,7 @@ import axios from "axios";
 
 const initialState = {
   posts: [],
-  post: {},
+
   isLoading: false,
   error: null,	
 };
@@ -79,9 +79,10 @@ export const __searchPost = createAsyncThunk(
 export const __getPost = createAsyncThunk(
   "posts/__getPost",
   async (payload, thunkAPI) => {
+    console.log("겟디테일 payload", payload);
     try {
       const data = await axios.get(
-        `${process.env.REACT_APP_SERVER}/api/post/category/${payload}`,
+        `${process.env.REACT_APP_SERVER}/api/post${payload.paramObj}?page=${payload.pageNumber}&size=10`,
         {
           headers: {
             "Content-Type": `application/json`,
@@ -91,8 +92,10 @@ export const __getPost = createAsyncThunk(
           },
         }
       );
-    
-      return thunkAPI.fulfillWithValue(data.data);
+
+      console.log("data 겟디테일", data);
+      return thunkAPI.fulfillWithValue(data.data.content);
+
     } catch (error) {
  
       return thunkAPI.rejectWithValue(error);
@@ -154,9 +157,11 @@ export const __editPost = createAsyncThunk(
   async (payload, thunkAPI) => {
 
     try {
-      
-      const data = await axios.put(
-        `${process.env.REACT_APP_SERVER}/api/post/${payload.postId}`,
+
+      console.log(payload);
+      const data = await axios.patch(
+        `${process.env.REACT_APP_SERVER}/api/post/${payload.id}`,
+
         payload.formData,
         {
           headers: {
@@ -167,31 +172,7 @@ export const __editPost = createAsyncThunk(
           },
         }
       );
-  
-      return thunkAPI.fulfillWithValue(data.data.data);
-    } catch (error) {
-    
-      return thunkAPI.rejectWithValue(error);
-    }
-  }
-);
 
-export const __CartPost = createAsyncThunk(
-  "posts/__CartPost",
-  async (payload, thunkAPI) => {
-    try {
-      const data = await axios.get(
-        `${process.env.REACT_APP_SERVER}/api/likes/${payload}`,
-        {
-          headers: {
-            "Content-Type": `application/json`,
-            Access_Token: accessToken,
-            Refresh_Token: refreshToken,
-            "Cache-Control": "no-cache",
-          },
-        }
-      );
-   
       return thunkAPI.fulfillWithValue(data.data);
     } catch (error) {
  
@@ -203,7 +184,6 @@ export const __CartPost = createAsyncThunk(
 const PostsSlice = createSlice({
   name: "posts",
   initialState,
-
   reducers: {},
   extraReducers: {
     //__searchPost
@@ -297,17 +277,6 @@ const PostsSlice = createSlice({
       state.posts = [...state.posts];
     },
     [__editPost.rejected]: (state, action) => {
-      state.isLoading = false;
-      state.error = action.payload;
-    },
-    //__CartPost
-    [__CartPost.pending]: (state) => {
-      state.isLoading = true;
-    },
-    [__CartPost.fulfilled]: (state, action) => {
-      state.isLoading = false;
-    },
-    [__CartPost.rejected]: (state, action) => {
       state.isLoading = false;
       state.error = action.payload;
     },

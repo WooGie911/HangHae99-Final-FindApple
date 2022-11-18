@@ -104,18 +104,35 @@ const PricingInput = () => {
       setTag({ ...tag, careDate: "" });
     }
 
-    const objMac = {
-      category: tag.category,
-      year: tag.year,
-      model: tag.model,
-      option: tag.option,
-      ram: tag.ram,
-      keyboard: save2.keyboard[0],
-      storage: tag.storage,
-      batteryState: tag.batteryState,
-      careOX: tag.careOX,
-      careDate: tag.careDate,
-    };
+    console.log("전개", { ...tag });
+    const objMac = {};
+    const objMac2 = {};
+    if (tag.category === "macbook") {
+      objMac = {
+        category: tag.category,
+        year: tag.year,
+        model: tag.model,
+        option: tag.option,
+        ram: tag.ram,
+        keyboard: save2.keyboard[0],
+        storage: tag.storage,
+        batteryState: tag.batteryState,
+        careOX: tag.careOX,
+        careDate: tag.careDate,
+      };
+      objMac2 = {
+        category: tag.category,
+        year: tag.year,
+        model: tag.model,
+        option: tag.option,
+        ram: tag.ram,
+        keyboard: save2.keyboard[0],
+        storage: tag.storage,
+        batteryState: tag.batteryState,
+        careOX: tag.careOX,
+        careDate: "",
+      };
+    }
 
     const objPhone = {
       category: tag.category,
@@ -127,18 +144,6 @@ const PricingInput = () => {
       scratchState: tag.scratchState,
       careOX: tag.careOX,
       careDate: tag.careDate,
-    };
-    const objMac2 = {
-      category: tag.category,
-      year: tag.year,
-      model: tag.model,
-      option: tag.option,
-      ram: tag.ram,
-      keyboard: save2.keyboard[0],
-      storage: tag.storage,
-      batteryState: tag.batteryState,
-      careOX: tag.careOX,
-      careDate: "",
     };
 
     const objPhone2 = {
@@ -166,7 +171,7 @@ const PricingInput = () => {
       category: tag.category,
       Data: Data,
     };
-
+    console.log(passData);
     dispatch(__checkPrice(passData));
     navigate(`/Pricingfinal`);
     setTag({});

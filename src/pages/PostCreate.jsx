@@ -7,8 +7,11 @@ const PostCreate = () => {
   return (
     <>
       <Layout>
-        <div>상품등록</div>
-        <PostsCreate Navigate={"postread/all"} __addData={__addPost} />
+        <PostsCreate
+          postReqDto={"postReqDto"}
+          Navigate={"postread/all"}
+          __addData={__addPost}
+        />
         <Footer />
       </Layout>
     </>

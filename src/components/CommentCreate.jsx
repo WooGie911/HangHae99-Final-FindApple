@@ -1,24 +1,28 @@
 import React from "react";
 import { useDispatch } from "react-redux";
+import { useParams } from "react-router-dom";
 
 import useInput from "../hook/useInput";
 
 const CommentCreate = (props) => {
   const dispatch = useDispatch();
   const initialState = { comment: "" };
+  const params = useParams();
   const [comments, setComments, onChangeInputHandler] = useInput(initialState);
 
   const onClickAddButton = (e) => {
     e.preventDefault();
     const Fdata = {
-      id: props.postId,
+      id: params.id,
       comment: { comment: comments.comment },
     };
     if (comments.comment.trim() === "") {
       return alert("댓글을 입력하세요.");
     }
-    dispatch(props.__addComment(Fdata));
-    setComments(initialState);
+    if (window.confirm("작성하시겠습니까?")) {
+      dispatch(props.__addComment(Fdata));
+      setComments(initialState);
+    }
   };
   return (
     <>

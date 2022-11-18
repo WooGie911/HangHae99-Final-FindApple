@@ -36,7 +36,8 @@ export const __getObjection = createAsyncThunk(
   async (payload, thunkAPI) => {
     try {
       const data = await axios.get(
-        `${process.env.REACT_APP_SERVER}/api/issues`,
+        `${process.env.REACT_APP_SERVER}/api/issue`,
+        // `${process.env.REACT_APP_SERVER}/api/issue/category/${payload}`,
         {
           headers: {
             "Content-Type": `application/json`,
@@ -47,7 +48,10 @@ export const __getObjection = createAsyncThunk(
         }
       );
 
-      return thunkAPI.fulfillWithValue(data.data.data);
+      // console.log("data", data);
+      console.log("__getObjection", data);
+      return thunkAPI.fulfillWithValue(data.data);
+
     } catch (error) {
 
       return thunkAPI.rejectWithValue(error);

@@ -16,7 +16,7 @@ const ObjectionDetail = () => {
   const dispatch = useDispatch();
   const params = useParams();
   const { post } = useSelector((state) => state.Objections);
-
+  console.log(post);
   //게시글 삭제
   const onDeleteHandler = (payload) => {
     dispatch(__deleteObjection(payload));
@@ -57,6 +57,10 @@ const ObjectionDetail = () => {
             }}
           >
             글삭제
+          </button>
+
+          <button onClick={() => navigate(`/objectionComment/${params.id}`)}>
+            댓글
           </button>
           <Footer />
         </div>
