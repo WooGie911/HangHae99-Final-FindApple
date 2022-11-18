@@ -55,7 +55,7 @@ const PostsCreate = (props) => {
     dispatch(props.__addData(formData));
     // navigate(`${props.Navigate}`);
 
-    window.location.replace(`${props.Navigate}`);
+    // window.location.replace(`${props.Navigate}`);
   };
 
   return (

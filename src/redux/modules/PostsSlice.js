@@ -3,46 +3,54 @@ import axios from "axios";
 
 const initialState = {
   posts: [],
-  posts_state: [],
+  post: {},
   isLoading: false,
+  error: null,	
 };
+
+// const initialState = {	
+//   isLoading: false,	
+//   post: {},	
+//   posts:[], //공배열로 바꿔야함
+//   error: null,	
+// }
 
 const accessToken = localStorage.getItem("Access_Token");
 const refreshToken = localStorage.getItem("Refresh_Token");
 
 //무한스크롤
-export const nhInstance = axios.create({
+const token = axios.create({
+  // 추후에 로컬에서 서버 주소로 변경해야 함
   baseURL: process.env.REACT_APP_SERVER,
-  headers: {},
-});
+  headers: {
+    Access_Token:
+      localStorage.getItem("Access_Token") === undefined
+        ? ""
+        : localStorage.getItem("Access_Token"),
+  },
+  withCredentials: true,
+})
 
-export const postApis = {
-  
-  postListAX: (page) =>
-    nhInstance.get(
-      `${process.env.REACT_APP_SERVER}/api/post?page=0&size=5`
-    ),
-    
+export const Apis = {
+  getPostTimeAX: (payload) => token.get(`/api/post?size=5&page=${payload}`),
 };
 
-export const __postList = createAsyncThunk(
-  "postSlice/__postList",
-  async (payload, thunkAPI) => {
-    try {
-      console.log('123123',payload)
-      const res = await postApis.postListAX();
-      console.log('__포스트리스트',res)
-      // const curPage = payload * 10;
-
-     
-      return thunkAPI.fulfillWithValue(res.data.data);
-      // .slice(curPage - 10, curPage)
-    } 
-    catch (error) {
-      return thunkAPI.rejectWithValue(error);
-    }
-  }
-);
+export const __getPostTime = createAsyncThunk(	
+  "api/posts/getPost",	
+  async (payload, thunkAPI) => {	
+    try {	
+      console.log('페이로드',payload)
+      const response = await Apis.getPostTimeAX(payload)
+      console.log('리스폰스',response)
+      return thunkAPI.fulfillWithValue(response.data.content);	
+      
+    } catch (error) {	
+      
+      return thunkAPI.rejectWithValue(error);	
+    }	
+  }	
+  
+)	
 
 
 
@@ -207,21 +215,26 @@ const PostsSlice = createSlice({
       state.posts = action.payload;
     },
     [__searchPost.rejected]: (state, action) => {
-      state.isLoading = false;
-      state.error = action.payload;
+      state.isLoading = false;	
+      state.isSuccess = false;	
+      
     },
     //__postList
-    [__postList.pending]: (state, action) => {
+    [__getPostTime.pending]: (state) => {
       state.isLoading = true;
     },
-    [__postList.fulfilled]: (state, action) => {
-      state.isLoading = false;
-      state.posts.push(...action.payload);
-      console.log('액션액션',...action)
-      console.log('액션액션스테이트',state)
+    [__getPostTime.fulfilled]: (state, action) => {
+      state.isLoading = false;	
+      state.isSuccess = false;	
+      state.posts.push(...action.payload);	// 기존에 있던 리스트에서 뒤에 붙여줘야하기 때문에 push를 써줘야함
+      console.log('action.payload',action.payload)
+      // console.log('액션액션스테이트',state)
+      
     },
-    [__postList.rejected]: (state, action) => {
-      state.isLoading = false;
+    [__getPostTime.rejected]: (state, action) => {
+      state.isLoading = false;	
+      state.isSuccess = false;	
+      state.error = action.payload;
 
     },
 
