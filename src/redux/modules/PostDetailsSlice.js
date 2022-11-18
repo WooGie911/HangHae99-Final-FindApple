@@ -23,11 +23,11 @@ export const __getPostDetail = createAsyncThunk(
           },
         }
       );
-      console.log("__getPostDetail", data);
-      // console.log("response", data);
+   
+ 
       return thunkAPI.fulfillWithValue(data.data);
     } catch (error) {
-      console.log("error", error);
+
       return thunkAPI.rejectWithValue(error);
     }
   }
@@ -49,10 +49,10 @@ export const __addPostComment = createAsyncThunk(
           },
         }
       );
-      return console.log("response", data);
+      return
       // return thunkAPI.fulfillWithValue(payload.comment);
     } catch (error) {
-      console.log("error", error);
+
       return thunkAPI.rejectWithValue(error);
     }
   }
@@ -63,7 +63,7 @@ export const __deletePostComment = createAsyncThunk(
   // async 는 프로미스에 새로운 신문법이다. // 언제끝나는지 알려준다.
   async (payload, thunkAPI) => {
     try {
-      console.log(payload);
+
       // payload를 데이터를 넣어줄때까지 실행하지 하지않겠다. //비동기
       const data = await axios.delete(
         `${process.env.REACT_APP_SERVER}/api/comment/${payload}`,
@@ -76,11 +76,11 @@ export const __deletePostComment = createAsyncThunk(
           },
         }
       );
-      // console.log("페이로드",payload);
-      return console.log("response", data);
+
+      return
       // return thunkAPI.fulfillWithValue(payload);
     } catch (error) {
-      console.log("error", error);
+
       return thunkAPI.rejectWithValue(error);
     }
   }
@@ -89,9 +89,9 @@ export const __deletePostComment = createAsyncThunk(
 export const __editPostComment = createAsyncThunk(
   "details/__editPostComment",
   async (payload, thunkAPI) => {
-    //console.log("payload",payload.id)
+
     try {
-      console.log(payload);
+
       const data = await axios.put(
         `${process.env.REACT_APP_SERVER}/api/comment/${payload.id}`,
         JSON.stringify(payload.comment),
@@ -104,10 +104,10 @@ export const __editPostComment = createAsyncThunk(
           },
         }
       );
-      return console.log("response", data);
+      return 
       // return thunkAPI.fulfillWithValue(payload);
     } catch (error) {
-      console.log("error", error);
+
       return thunkAPI.rejectWithValue(error);
     }
   }
@@ -126,7 +126,7 @@ const PostDetailSlice = createSlice({
     [__getPostDetail.fulfilled]: (state, action) => {
       state.isLoading = false;
       state.post = action.payload;
-      // console.log("state.post", state.post);
+     
     },
     [__getPostDetail.rejected]: (state, action) => {
       state.isLoading = false;

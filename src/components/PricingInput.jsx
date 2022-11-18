@@ -103,7 +103,7 @@ const PricingInput = () => {
     if (tag.careOX === "false") {
       setTag({ ...tag, careDate: "" });
     }
-    console.log("전개", { ...tag });
+
     const objMac = {
       category: tag.category,
       year: tag.year,

@@ -10,7 +10,7 @@ const SellerPage = () => {
   const { myPostList, sellerInfoDto } = useSelector(
     (state) => state.sellerpage
   );
-  console.log(myPostList);
+
   const { memberId } = useParams();
   // params, router 접근
   const dispatch = useDispatch();

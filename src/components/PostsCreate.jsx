@@ -10,7 +10,6 @@ const PostsCreate = (props) => {
   const dispatch = useDispatch();
   const navigate = useNavigate();
   const { DetailPrice } = useSelector((state) => state.price);
-  console.log("DetailPrice", DetailPrice);
 
   const [write, setWrite, writeHandle] = useInput({
     title: "",
@@ -54,10 +53,9 @@ const PostsCreate = (props) => {
 
     //Api 날리기
     dispatch(props.__addData(formData));
-    navigate(`${props.Navigate}`);
-    console.log("폼데이터", formData);
-    console.log("files", files);
-    console.log("objects", objects);
+    // navigate(`${props.Navigate}`);
+
+    window.location.replace(`${props.Navigate}`);
   };
 
   return (

@@ -12,7 +12,7 @@ import Footer from "../components/Footer";
 import Header from "../components/Header";
 const ObjectionRead = () => {
   const params = useParams();
-  console.log("params.category", params.category);
+
   const dispatch = useDispatch();
   const { posts } = useSelector((state) => state.objections);
 

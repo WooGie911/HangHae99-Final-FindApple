@@ -7,8 +7,7 @@ const initialState = {
 
 const accessToken = localStorage.getItem("Access_Token");
 const refreshToken = localStorage.getItem("Refresh_Token");
-console.log(accessToken);
-console.log(refreshToken);
+
 
 //검색기능 미완성
 export const __searchObjection = createAsyncThunk(
@@ -23,11 +22,10 @@ export const __searchObjection = createAsyncThunk(
           "Cache-Control": "no-cache",
         },
       });
-      // console.log("data", data);
-      console.log("__searchPost", data);
+
       return thunkAPI.fulfillWithValue(data.data.data);
     } catch (error) {
-      console.log("error", error);
+
       return thunkAPI.rejectWithValue(error);
     }
   }
@@ -48,11 +46,10 @@ export const __getObjection = createAsyncThunk(
           },
         }
       );
-      // console.log("data", data);
-      console.log("__getObjection", data);
+
       return thunkAPI.fulfillWithValue(data.data.data);
     } catch (error) {
-      console.log("error", error);
+
       return thunkAPI.rejectWithValue(error);
     }
   }
@@ -72,11 +69,11 @@ export const __addObjection = createAsyncThunk(
           },
         })
         .then((response) => {
-          console.log("response", response);
+  
           return thunkAPI.fulfillWithValue(response.data.data);
         });
     } catch (error) {
-      console.log("error", error);
+
       return thunkAPI.rejectWithValue(error);
     }
   }
@@ -97,10 +94,10 @@ export const __deleteObjection = createAsyncThunk(
           },
         }
       );
-      console.log("response", data);
+    
       return thunkAPI.fulfillWithValue(payload);
     } catch (error) {
-      console.log("error", error);
+    
       return thunkAPI.rejectWithValue(error);
     }
   }
@@ -109,7 +106,7 @@ export const __deleteObjection = createAsyncThunk(
 export const __editObjection = createAsyncThunk(
   "objections/__editObjection",
   async (payload, thunkAPI) => {
-    console.log("payload", payload);
+ 
     try {
       const data = await axios.put(
         `${process.env.REACT_APP_SERVER}/api/issue/${payload.postId}`,
@@ -123,11 +120,10 @@ export const __editObjection = createAsyncThunk(
           },
         }
       );
-      // console.log("data", data.data);
-      console.log("response", data);
+ 
       return thunkAPI.fulfillWithValue(data.data.data);
     } catch (error) {
-      console.log("error", error);
+    
       return thunkAPI.rejectWithValue(error);
     }
   }
@@ -148,10 +144,10 @@ export const __heartObjection = createAsyncThunk(
           },
         }
       );
-      console.log("response", data);
+    
       return thunkAPI.fulfillWithValue(data.data);
     } catch (error) {
-      console.log("error", error);
+    
       return thunkAPI.rejectWithValue(error);
     }
   }

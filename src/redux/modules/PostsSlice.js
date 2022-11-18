@@ -2,6 +2,7 @@ import { createAsyncThunk, createSlice } from "@reduxjs/toolkit";
 import axios from "axios";
 
 const initialState = {
+  posts: [],
   posts_state: [],
   isLoading: false,
 };
@@ -16,27 +17,34 @@ export const nhInstance = axios.create({
 });
 
 export const postApis = {
-  postListAX: (payload) =>
+  
+  postListAX: (page) =>
     nhInstance.get(
-      `${process.env.REACT_APP_SERVER}/api/post?page=1&size=3,${payload}`
+      `${process.env.REACT_APP_SERVER}/api/post?page=0&size=5`
     ),
+    
 };
 
 export const __postList = createAsyncThunk(
   "postSlice/__postList",
   async (payload, thunkAPI) => {
     try {
-      console.log(payload);
+      console.log('123123',payload)
       const res = await postApis.postListAX();
+      console.log('__포스트리스트',res)
+      // const curPage = payload * 10;
 
-      const curPage = payload * 10;
-
-      return thunkAPI.fulfillWithValue(res.data.slice(curPage - 10, curPage));
-    } catch (error) {
+     
+      return thunkAPI.fulfillWithValue(res.data.data);
+      // .slice(curPage - 10, curPage)
+    } 
+    catch (error) {
       return thunkAPI.rejectWithValue(error);
     }
   }
 );
+
+
 
 //검색기능 미완성
 export const __searchPost = createAsyncThunk(
@@ -51,10 +59,10 @@ export const __searchPost = createAsyncThunk(
           "Cache-Control": "no-cache",
         },
       });
-      console.log("__searchPost", data);
+
       return thunkAPI.fulfillWithValue(data.data);
     } catch (error) {
-      console.log("error", error);
+
       return thunkAPI.rejectWithValue(error);
     }
   }
@@ -75,10 +83,10 @@ export const __getPost = createAsyncThunk(
           },
         }
       );
-      console.log("data 겟디테일", data);
+    
       return thunkAPI.fulfillWithValue(data.data);
     } catch (error) {
-      console.log("error", error);
+ 
       return thunkAPI.rejectWithValue(error);
     }
   }
@@ -98,11 +106,11 @@ export const __addPost = createAsyncThunk(
           },
         })
         .then((response) => {
-          console.log("response", response);
+       
           return thunkAPI.fulfillWithValue(response.data.data);
         });
     } catch (error) {
-      console.log("error", error);
+ 
       return thunkAPI.rejectWithValue(error);
     }
   }
@@ -111,7 +119,7 @@ export const __addPost = createAsyncThunk(
 export const __deletePost = createAsyncThunk(
   "posts/__deletePost",
   async (payload, thunkAPI) => {
-    console.log(payload);
+
     try {
       const data = await axios.delete(
         `${process.env.REACT_APP_SERVER}/api/post/${payload}`,
@@ -124,10 +132,10 @@ export const __deletePost = createAsyncThunk(
           },
         }
       );
-      console.log("딜리트 response", data);
+
       return thunkAPI.fulfillWithValue(payload);
     } catch (error) {
-      console.log("error", error);
+    
       return thunkAPI.rejectWithValue(error);
     }
   }
@@ -136,9 +144,9 @@ export const __deletePost = createAsyncThunk(
 export const __editPost = createAsyncThunk(
   "posts/__editPost",
   async (payload, thunkAPI) => {
-    console.log("payload", payload);
+
     try {
-      console.log(payload);
+      
       const data = await axios.put(
         `${process.env.REACT_APP_SERVER}/api/post/${payload.postId}`,
         payload.formData,
@@ -151,10 +159,10 @@ export const __editPost = createAsyncThunk(
           },
         }
       );
-      console.log("response", data);
+  
       return thunkAPI.fulfillWithValue(data.data.data);
     } catch (error) {
-      console.log("error", error);
+    
       return thunkAPI.rejectWithValue(error);
     }
   }
@@ -175,10 +183,10 @@ export const __CartPost = createAsyncThunk(
           },
         }
       );
-      console.log("response", data);
+   
       return thunkAPI.fulfillWithValue(data.data);
     } catch (error) {
-      console.log("error", error);
+ 
       return thunkAPI.rejectWithValue(error);
     }
   }
@@ -209,10 +217,12 @@ const PostsSlice = createSlice({
     [__postList.fulfilled]: (state, action) => {
       state.isLoading = false;
       state.posts.push(...action.payload);
+      console.log('액션액션',...action)
+      console.log('액션액션스테이트',state)
     },
     [__postList.rejected]: (state, action) => {
       state.isLoading = false;
-      console.log("포스트리스트", action.payload);
+
     },
 
     //__getPost

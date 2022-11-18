@@ -5,7 +5,7 @@ import Layout from "../components/Layout";
 import Footer from "../components/Footer";
 const MyLike = () => {
   const { likes } = useSelector((state) => state.mypage);
-  console.log(likes);
+
   const dispatch = useDispatch();
   useEffect(() => {
     dispatch(__getMyLike());

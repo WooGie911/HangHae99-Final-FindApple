@@ -25,7 +25,7 @@ export const __getObjectionDetail = createAsyncThunk(
       );
       return thunkAPI.fulfillWithValue(data.data.data);
     } catch (error) {
-      console.log("error", error);
+      
       return thunkAPI.rejectWithValue(error);
     }
   }
@@ -37,7 +37,7 @@ export const __addObjectionComment = createAsyncThunk(
   "objectionDetails/__addObjectionComment",
   async (payload, thunkAPI) => {
     try {
-      //console.log(payload)
+
       // payload를 데이터를 넣어줄때까지 실행하지 하지않겠다. //비동기
       const data = await axios.post(
         `${process.env.REACT_APP_SERVER}/api/issues-comment/${payload.issuesId}`,
@@ -52,10 +52,10 @@ export const __addObjectionComment = createAsyncThunk(
           },
         }
       );
-      return console.log("response", data);
+      return 
       // return thunkAPI.fulfillWithValue(payload.comment);
     } catch (error) {
-      console.log("error", error);
+
       return thunkAPI.rejectWithValue(error);
     }
   }
@@ -66,7 +66,7 @@ export const __deleteObjectionComment = createAsyncThunk(
   // async 는 프로미스에 새로운 신문법이다. // 언제끝나는지 알려준다.
   async (payload, thunkAPI) => {
     try {
-      console.log(payload);
+    
       // payload를 데이터를 넣어줄때까지 실행하지 하지않겠다. //비동기
       const data = await axios.delete(
         `${process.env.REACT_APP_SERVER}/api/issues-comment/${payload}`,
@@ -79,11 +79,11 @@ export const __deleteObjectionComment = createAsyncThunk(
           },
         }
       );
-      // console.log("페이로드",payload);
-      return console.log("response", data);
+
+      return 
       // return thunkAPI.fulfillWithValue(payload);
     } catch (error) {
-      console.log("error", error);
+
       return thunkAPI.rejectWithValue(error);
     }
   }
@@ -92,9 +92,9 @@ export const __deleteObjectionComment = createAsyncThunk(
 export const __editObjectionComment = createAsyncThunk(
   "objectionDetails/__editObjectionComment",
   async (payload, thunkAPI) => {
-    //console.log("payload",payload.id)
+
     try {
-      console.log(payload);
+
       const data = await axios.put(
         `${process.env.REACT_APP_SERVER}/api/issues-comment/${payload.id}`,
         JSON.stringify(payload.comment),
@@ -107,10 +107,10 @@ export const __editObjectionComment = createAsyncThunk(
           },
         }
       );
-      return console.log("response", data);
+      return 
       // return thunkAPI.fulfillWithValue(payload);
     } catch (error) {
-      console.log("error", error);
+
       return thunkAPI.rejectWithValue(error);
     }
   }
@@ -129,7 +129,7 @@ const ObjectionDetailsSlice = createSlice({
     [__getObjectionDetail.fulfilled]: (state, action) => {
       state.isLoading = false;
       state.post = action.payload;
-      // console.log("state.post", state.post);
+  
     },
     [__getObjectionDetail.rejected]: (state, action) => {
       state.isLoading = false;

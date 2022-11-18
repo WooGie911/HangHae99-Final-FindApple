@@ -46,13 +46,13 @@ const SignUp = () => {
       password: input.password,
     };
     dispatch(__SignUp(AAA));
-    console.log(AAA);
+
     // dispatch(__SignUp(input));
     setInput(initialstate);
   };
 
   const emailCheckHandler = () => {
-    console.log(input.email);
+
     dispatch(__emailCheck(input.email));
     setEmailCheckTF(true);
   };
