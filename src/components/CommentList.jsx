@@ -4,9 +4,7 @@ import { useDispatch } from "react-redux";
 const CommentList = (props) => {
   const dispatch = useDispatch();
   const onDeleteButton = (payload) => {
-    if (window.confirm("정말 삭제하시겠습니까?")) {
-      dispatch(props.__deleteComment(payload));
-    }
+    dispatch(props.__deleteComment(payload));
   };
 
   return (
