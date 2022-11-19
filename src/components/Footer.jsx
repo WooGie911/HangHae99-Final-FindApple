@@ -43,7 +43,7 @@ export default Footer
 const MenuBar = styled.div`
 background-color : gray;
 width : 375px;
-max-width: 95%;
+max-width: 88%;
 height: 45px;
 display: flex;
 justify-content: space-between;
@@ -53,4 +53,5 @@ position : absolute;
 bottom: -8px;
 margin : auto;
 align-items: center;
+padding : 15px;
 `
