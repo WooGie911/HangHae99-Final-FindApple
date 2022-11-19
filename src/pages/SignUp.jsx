@@ -5,6 +5,7 @@ import { __SignUp, __emailCheck } from "../redux/modules/LoginSlice";
 import { useNavigate } from "react-router-dom";
 import useInput from "../hook/useInput";
 import Layout from "../components/Layout";
+import back from "../assets/back.png" 
 
 const SignUp = () => {
   const dispatch = useDispatch();
@@ -57,17 +58,29 @@ const SignUp = () => {
     setEmailCheckTF(true);
   };
 
+  const onClickHandler = () => {
+    navigate("/signin");
+  };
+
   return (
     <Layout>
-    <StWrapper>
       <StSignupBox>
-        <Div>
+      <HeadContainer>
+        <div>
+        <img onClick={onClickHandler} style={{width:25, height : 25}} src={back}/>
+        </div>
+        <div>
+        <span>Findapple</span>
+        </div>
+      </HeadContainer>
+      <InfoDiv>이메일</InfoDiv>
+              <Div>
           <StInputBox2
             type="text"
             name="email"
             value={input.email}
             onChange={changeInputHandler}
-            placeholder="Email"
+            placeholder="이메일"
           />
           <StInputButton onClick={emailCheckHandler}>
             인증번호 발송
@@ -82,64 +95,69 @@ const SignUp = () => {
             placeholder="이메일 메일인증"
           />
         )}
-
+        <InfoDiv>닉네임</InfoDiv>
         <StInputBox
           type="text"
           name="nickname"
           value={input.nickname}
           onChange={changeInputHandler}
-          placeholder="Nickname"
+          placeholder="숫자, 영문, 한글 조합 20자"
         />
-
+        <InfoDiv>비밀번호</InfoDiv>
         <StInputBox
           type="text"
           name="password"
           value={input.password}
           onChange={changeInputHandler}
-          placeholder="Password"
+          placeholder="숫자, 영문, 특수문자 조합 최소 8자"
         />
         <StInputBox
           type="text"
           name="passwordCheck"
           value={input.passwordCheck}
           onChange={changeInputHandler}
-          placeholder="PasswordCheck"
+          placeholder="비밀번호 재입력"
         />
         <StButton onClick={SubmitHandler}>회원가입</StButton>
 
         <StLoginBox>
           <h5>계정이 있으신가요?</h5>
-          <button
+          <span
             onClick={() => {
               navigate("/signin");
             }}
           >
             로그인
-          </button>
+          </span>
         </StLoginBox>
       </StSignupBox>
-    </StWrapper>
     </Layout>
   );
 };
 
 export default SignUp;
 
-const StWrapper = styled.div`
-  width: 100%;
-  height: 100vh;
-  background-color: #fafafa;
-  display: flex;
-  justify-content: center;
-  align-items: center;
-  flex-direction: column;
-`;
+// header
+const HeadContainer = styled.div`
+gap : 100px;
+position : fixed;
+top : 20px;
+display: flex;
+align-items: center;
+margin-right : 120px;
+img {float: left;
+}
+span{
+  /* text-align: center; */
+  font-size : 24px;
+  font-weight: bold;
+}
+`
 
 const StSignupBox = styled.div`
-  background-color: white;
-  border: 1px solid #dbdbdb;
-  width: 400px;
-  height: 600px;
+  background-color: transparent;
+  width: 375px;
+  height: 100vh;
   display: flex;
   justify-content: center;
   align-items: center;
@@ -150,58 +168,76 @@ const Div = styled.div`
   width: 84%;
   display: flex;
   justify-content: space-evenly;
+  
 `;
+
+// 안내 div
+const InfoDiv = styled.div`
+margin-top : 30px;
+margin-right : 270px;
+font-size: 14px;
+`
 const StInputBox2 = styled.input`
   background-color: #fafafa;
-  border: 1px solid #dbdbdb;
+  border: none;
   border-radius: 5px;
+
   &:focus,
   &:active {
     outline: none;
   }
-  width: 40%;
-  height: 40px;
+  ::placeholder {
+  color: #c4c4c4;
+}
+  width: 182px;
+  height: 38px;
   margin-top: 10px;
   padding-left: 10px;
 `;
 const StInputButton = styled.button`
-  background-color: #fafafa;
-  border: 1px solid #dbdbdb;
+  background-color: black;
+  border: none;
+  font-size: 12px;
+  color : white;
   border-radius: 5px;
   &:focus,
   &:active {
     outline: none;
   }
-  width: 30%;
-  height: 40px;
+  width: 100px;
+  height: 38px;
   margin-top: 10px;
+  margin-left : 10px;
 `;
 
 const StInputBox = styled.input`
   background-color: #fafafa;
-  border: 1px solid #dbdbdb;
+  border: none;
   border-radius: 5px;
   &:focus,
   &:active {
     outline: none;
   }
-  width: 66%;
-  height: 40px;
+  ::placeholder {
+  color: #c4c4c4;
+}
+  width: 296px;
+  height: 38px;
   margin-top: 10px;
   padding-left: 10px;
 `;
 
 const StButton = styled.button`
-  width: 280px;
-  height: 35px;
+  width: 296px;
+  height: 38px;
   margin-top: 30px;
   border: none;
   color: white;
-  font-size: 20px;
-  border-radius: 7px;
+  font-size: 12px;
+  border-radius: 5px;
   background-color: ${({ userid, password, username, nickname }) =>
     userid !== "" && password !== "" && username !== "" && nickname !== ""
-      ? "#0095f6"
+      ? "black"
       : "#ececec"};
   cursor: ${({ userid, password, username, nickname }) =>
     userid !== "" && password !== "" && username !== "" && nickname !== ""
@@ -210,14 +246,15 @@ const StButton = styled.button`
 `;
 
 const StLoginBox = styled.div`
+  font-size: 12px;
   width: 400px;
-  height: 10vh;
-  margin-top: 15px;
-  background-color: white;
-  border-top: 1px solid #dbdbdb;
-  border-radius: 1px solid #bababa;
+  margin-top: 10px;
   display: flex;
   justify-content: center;
   text-align: center;
   align-items: center;
+  span {
+    margin-left: 10px;
+    color : #2288EE;
+  }
 `;

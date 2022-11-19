@@ -21,4 +21,5 @@ const StLayout = styled.div`
   height : 100%;
   overflow: auto;
   background-color: aqua;
+  margin : auto;
 `;
