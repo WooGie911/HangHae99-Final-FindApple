@@ -37,27 +37,34 @@ const Mypage = () => {
           <Layout>
     <FirstContainer>
     <Head>
-      <h3>마이페이지</h3>
-      <img onClick={mypageupdate} style={{width:25, height : 25}} src={settings}/>
+      <span>내 정보</span>
     </Head>
-    <div>
+    <div style={{alignItems : "center"}}>
       <img style={{width:50, height : 50, borderRadius : '50%', float : 'left'}} src={user.profileImg == (null || undefined) ? photoIMG : user.profileImg}/>
-      <UserInfo>
+      <UserInfoContainer>
+        <UserInfo>
       <div>{user.nickname}</div>
       <Email>{user.email}</Email>
       </UserInfo>
+      <img onClick={mypageupdate} style={{width:25, height : 25}} src="https://img.icons8.com/ios/25/null/forward--v1.png"/>
+      </UserInfoContainer>
     </div>
     <br/>
-    <hr/>
+
     <SecondContainer>
+      <span>
+        나의 활동
+      </span>
     <div>
-    <Content onClick={mypost}><img src={window}/> 내가 올린 게시글</Content>
+    <Content> <span><img src={window}/>내가 올린 게시글</span><img onClick={mypost} src="https://img.icons8.com/ios/25/null/forward--v1.png"/></Content>
     </div>
     <div>
-    <Content onClick={myobjection}><img src={doubletick}/> 이의제기</Content>
+    <Content> <span><img src={doubletick}/>이의제기</span> <img onClick={myobjection}src="https://img.icons8.com/ios/25/null/forward--v1.png"/></Content>
+    
     </div>
     <div>
-    <Content onClick={mylike}><img src={bookmark}/> 찜목록</Content>
+    <Content> <span><img src={bookmark}/>찜목록</span> <img onClick={mylike} src="https://img.icons8.com/ios/25/null/forward--v1.png"/></Content>
+    
     </div>
     </SecondContainer>
     
@@ -76,13 +83,22 @@ padding : 20px;
 `
 
 const Head = styled.div`
+span {
+  font-size : 18px;
+}
+margin-bottom : 40px;
+`
+
+const UserInfoContainer = styled.div`
 display: flex;
-justify-content: space-between;
+justify-content : space-between;
+img {
+  margin-top : 17px;
+}
 `
 
 const UserInfo = styled.div`
 padding: 10px;
-margin-left: 50px;
 `
 
 const Email = styled.div`
@@ -93,8 +109,30 @@ font-size: 12px
 // 나의 활동
 const Content = styled.div`
 margin-bottom: 10px;
+display: flex;
+justify-content: space-between;
 img {vertical-align:bottom;}
+span{
+  font-size : 16px;
+  img{
+    margin-right : 10px;
+  }
+}
 `
 
 const SecondContainer = styled.div`
+span{
+  font-size: 14px;
+  font-weight: bold;
+}
+div{
+  padding : 5px;
+}
+margin : auto;
+padding : 7px;
+border : none;
+width: 329px;
+height: 203px;
+background-color: white;
+border-radius: 5px;
 `
