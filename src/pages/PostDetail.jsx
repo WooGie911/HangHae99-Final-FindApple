@@ -13,6 +13,7 @@ const PostDetail = () => {
   const dispatch = useDispatch();
   const params = useParams();
   const { post } = useSelector((state) => state.details);
+  console.log(post)
 
   //찜하기
   const onCartButton = (payload) => {
@@ -81,41 +82,38 @@ const PostDetail = () => {
             post.images.map((item, index) => {
               return <Image src={item.imgUrl} key={index} />;
             })}
-
-          <h3>{post.title}</h3>
-          <div>{post.content}</div>
         </div>
         {/* 추후 댓글 만들어지면 들어갈 내용 */}
         {/* 찜카운트 추가 예정 */}
+        <WriterContainer>
         <div>글쓴이 프로필사진 , 닉네임 : {post.nickname}</div>
-        <button onClick={() => onCartButton(post.postId)}>찜</button>
-        <div>찜 유무 : {post.isLike ? "찜한거" : "안한거"}</div>
-        <div> 하트 {post.likeCnt}</div>
         <img
           src="https://img.icons8.com/ios-glyphs/15/null/hearts.png"
           onClick={() => onCartButton(post.postId)}
         />
-        <hr />
+        </WriterContainer>
+        <hr/>
+        {/* <div>찜 유무 : {post.isLike ? "찜한거" : "안한거"}</div>
+        <div> 하트 {post.likeCnt}</div> */}
+        <h3>{post.title}</h3>
+        <div>{post.content}</div>
         <Price>
-          <div>책정가격 : {post.expectPrice} 원</div>
-          <div>
+          <div><TextDiv>책정가격</TextDiv>
+          <PriceDiv>{post.expectPrice}원</PriceDiv>
+          </div>
+          <Arrow>
             {" "}
             <img src="https://img.icons8.com/metro/15/null/long-arrow-right.png" />{" "}
+          </Arrow>
+          <div><TextDiv>판매가격</TextDiv>
+          <PriceDiv>{post.userPrice}원</PriceDiv>
           </div>
-          <div>판매가격 : {post.userPrice} 원</div>
           <div>
-            <img src="https://img.icons8.com/ios/25/null/topic.png" />
+            <img onClick={() => {
+            navigate(`/postComment/${params.id}`);
+          }} src="https://img.icons8.com/ios/25/null/topic.png" />
           </div>
         </Price>
-
-        <button
-          onClick={() => {
-            navigate(`/postComment/${params.id}`);
-          }}
-        >
-          댓글
-        </button>
-        <Footer />
       </Layout>
     </>
   );
@@ -167,8 +165,33 @@ const Image = styled.img`
 
 // 물건 가격
 const Price = styled.div`
+  border-top: 1px solid #D9D9D9;
+  width : 367px;
+  height : 86px;
+  position : fixed;
+  bottom: 15px;
   display: flex;
+  justify-content: space-between;
   div {
     margin-right: 10px;
+    padding-top: 10px;
   }
 `;
+
+const Arrow = styled.div`
+margin-top: 20px;
+`
+
+const TextDiv = styled.div`
+font-size: 10px;
+`
+
+const PriceDiv = styled.div`
+font-size: 16px
+`
+
+// 글쓴이 정보 및 하트
+const WriterContainer = styled.div`
+display: flex;
+justify-content: space-between;
+`
