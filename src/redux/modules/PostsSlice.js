@@ -57,6 +57,29 @@ export const __searchPost = createAsyncThunk(
   }
 );
 
+export const __getAddPost = createAsyncThunk(
+  "posts/__getAddPost",
+  async (payload, thunkAPI) => {
+    try {
+      const data = await axios.get(
+        `${process.env.REACT_APP_SERVER}/api/post/${payload.paramObj}?page=${payload.pageNumber}&size=${payload.pageSize}&sort=${payload.postSort},DESC`,
+
+        {
+          headers: {
+            "Content-Type": `application/json`,
+            Access_Token: accessToken,
+            Refresh_Token: refreshToken,
+            "Cache-Control": "no-cache",
+          },
+        }
+      );
+      return thunkAPI.fulfillWithValue(data.data.content);
+    } catch (error) {
+      return thunkAPI.rejectWithValue(error);
+    }
+  }
+);
+
 export const __getPost = createAsyncThunk(
   "posts/__getPost",
   async (payload, thunkAPI) => {
@@ -194,6 +217,19 @@ const PostsSlice = createSlice({
     [__searchPost.rejected]: (state, action) => {
       state.isLoading = false;
       state.isSuccess = false;
+      state.error = action.payload;
+    },
+
+    //__getAddPost
+    [__getAddPost.pending]: (state) => {
+      state.isLoading = true;
+    },
+    [__getAddPost.fulfilled]: (state, action) => {
+      state.isLoading = false;
+      state.posts.push(...action.payload);
+    },
+    [__getAddPost.rejected]: (state, action) => {
+      state.isLoading = false;
       state.error = action.payload;
     },
 
