@@ -10,7 +10,6 @@ import {
   __getPostDetail,
 } from "../redux/modules/PostDetailsSlice";
 import Layout from "../components/Layout";
-import Footer from "../components/Footer";
 import back from "../assets/back.png";
 
 const PostDetail = () => {
@@ -89,7 +88,8 @@ const PostDetail = () => {
         </div>
         <WriterContainer>
           <div>
-            <img
+            <SellerProfile>
+            <div><img
               style={{
                 width: 50,
                 height: 50,
@@ -101,33 +101,46 @@ const PostDetail = () => {
                   ? photoIMG
                   : post.avatarUrl
               }
-            />
+            /></div>
+            <Nickname>
             {post.nickname}
+            </Nickname>
+            </SellerProfile>
           </div>
-          <div onClick={() => onCartButton(post.postId)}>
-            {post.isLike ? "찜한거" : "안한거"}{" "}
-          </div>
+          <ClickHeart onClick={() => onCartButton(post.postId)}>
+            {post.isLike ? "❤️" : "🤍"}{" "}
+          </ClickHeart>
         </WriterContainer>
         <hr />
         {/* <div>찜 유무 : {post.isLike ? "찜한거" : "안한거"}</div>
         <div> 하트 {post.likeCnt}</div> */}
         <h3>{post.title}</h3>
+        {post.options !== undefined &&
+        (
+         <>
+          <Models>{post.options.category} / {post.options.model} / {post.options.years} / {post.options.options}</Models>
+         </> 
+        )
+        }
+
         <div>{post.content}</div>
 
-        {/* <button onClick={() => onCartButton(post.postId)}>찜</button> */}
+        <Detail onClick={() => {
+              navigate("/pricingtext", { state: post });
+            }}>
+          <p5>상품 상세 정보</p5>
+          <Stdetailrightarrow
+            src="https://img.icons8.com/ios-glyphs/30/null/chevron-right.png"
+          ></Stdetailrightarrow>
+        </Detail>
 
-        <hr />
-
-        <div>
-          <div>
+        <Heart>
             <div>
               <img src="https://img.icons8.com/ios-glyphs/15/null/hearts.png" />{" "}
               {post.likeCnt}
             </div>
             <div> {post.createdAt}</div>
-          </div>
-        </div>
-        <hr />
+        </Heart>
         <Price>
           <div>
             <TextDiv>책정가격</TextDiv>
@@ -232,3 +245,65 @@ const WriterContainer = styled.div`
   display: flex;
   justify-content: space-between;
 `;
+
+// seller 프로필
+const SellerProfile = styled.div`
+display: flex;
+`
+
+const Nickname = styled.div`
+margin-top: 18px;
+margin-left: 10px;
+`
+
+// 상품 측정 정도 확인
+const Detail = styled.div`
+  background-color: gray;
+  cursor: pointer;
+  display: flex;
+  margin-bottom: 10px;
+  width : 343px;
+  height: 20px;
+  border-radius: 5px;
+  font-size: 14px;
+  font-weight: 550;
+  display: flex;
+  position: fixed;
+  margin : auto;
+  bottom: 160px;
+  justify-content: space-between;
+  padding: 10px;
+`;
+
+const Stdetailrightarrow = styled.img`
+  position: relative;
+  top: 0px;
+  width: 25px;
+  height: 25px;
+`;
+
+// 찜하기 파트
+const Heart = styled.div`
+  font-size: 12px;
+  color : #606060;
+  width: 367px;
+  height: 86px;
+  position: fixed;
+  bottom: 60px;
+  display: flex;
+  div{
+    margin-left: 15px;
+  }
+`
+
+// 찜하기 버튼
+const ClickHeart = styled.div`
+margin-top: 13px;
+`
+
+// 기종 설명
+const Models = styled.div`
+font-size: 12px;
+color : #000000;
+margin-bottom: 10px;
+`
