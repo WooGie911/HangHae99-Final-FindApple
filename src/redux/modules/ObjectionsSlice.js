@@ -1,31 +1,26 @@
 import { createAsyncThunk, createSlice } from "@reduxjs/toolkit";
 import axios from "axios";
 
-const initialState = {
-  posts: [],
-};
-
 const accessToken = localStorage.getItem("Access_Token");
 const refreshToken = localStorage.getItem("Refresh_Token");
 
-
-//검색기능 미완성
 export const __searchObjection = createAsyncThunk(
-  "posts/__searchObjection",
+  "objections/__searchObjection",
   async (payload, thunkAPI) => {
     try {
-      const data = await axios.get(`${process.env.REACT_APP_SERVER}/api/post`, {
-        headers: {
-          "Content-Type": `application/json`,
-          Access_Token: accessToken,
-          Refresh_Token: refreshToken,
-          "Cache-Control": "no-cache",
-        },
-      });
-
-      return thunkAPI.fulfillWithValue(data.data.data);
+      const data = await axios.get(
+        `${process.env.REACT_APP_SERVER}/api/issue/${payload.paramObj}/${payload.searchObj}?page=${payload.pageNumber}&size=${payload.pageSize}&sort=${payload.postSort},DESC`,
+        {
+          headers: {
+            "Content-Type": `application/json`,
+            Access_Token: accessToken,
+            Refresh_Token: refreshToken,
+            "Cache-Control": "no-cache",
+          },
+        }
+      );
+      return thunkAPI.fulfillWithValue(data.data.content);
     } catch (error) {
-
       return thunkAPI.rejectWithValue(error);
     }
   }
@@ -36,8 +31,8 @@ export const __getObjection = createAsyncThunk(
   async (payload, thunkAPI) => {
     try {
       const data = await axios.get(
-        `${process.env.REACT_APP_SERVER}/api/issue`,
-        // `${process.env.REACT_APP_SERVER}/api/issue/category/${payload}`,
+        `${process.env.REACT_APP_SERVER}/api/issue/${payload.paramObj}?page=${payload.pageNumber}&size=${payload.pageSize}&sort=${payload.postSort},DESC`,
+
         {
           headers: {
             "Content-Type": `application/json`,
@@ -47,13 +42,8 @@ export const __getObjection = createAsyncThunk(
           },
         }
       );
-
-      // console.log("data", data);
-      console.log("__getObjection", data);
-      return thunkAPI.fulfillWithValue(data.data);
-
+      return thunkAPI.fulfillWithValue(data.data.content);
     } catch (error) {
-
       return thunkAPI.rejectWithValue(error);
     }
   }
@@ -73,11 +63,9 @@ export const __addObjection = createAsyncThunk(
           },
         })
         .then((response) => {
-  
           return thunkAPI.fulfillWithValue(response.data.data);
         });
     } catch (error) {
-
       return thunkAPI.rejectWithValue(error);
     }
   }
@@ -98,10 +86,9 @@ export const __deleteObjection = createAsyncThunk(
           },
         }
       );
-    
+
       return thunkAPI.fulfillWithValue(payload);
     } catch (error) {
-    
       return thunkAPI.rejectWithValue(error);
     }
   }
@@ -110,10 +97,9 @@ export const __deleteObjection = createAsyncThunk(
 export const __editObjection = createAsyncThunk(
   "objections/__editObjection",
   async (payload, thunkAPI) => {
- 
     try {
-      const data = await axios.put(
-        `${process.env.REACT_APP_SERVER}/api/issue/${payload.postId}`,
+      const data = await axios.patch(
+        `${process.env.REACT_APP_SERVER}/api/issue/${payload.id}`,
         payload.formData,
         {
           headers: {
@@ -124,34 +110,9 @@ export const __editObjection = createAsyncThunk(
           },
         }
       );
- 
+
       return thunkAPI.fulfillWithValue(data.data.data);
     } catch (error) {
-    
-      return thunkAPI.rejectWithValue(error);
-    }
-  }
-);
-
-export const __heartObjection = createAsyncThunk(
-  "objections/__heartObjection",
-  async (payload, thunkAPI) => {
-    try {
-      const data = await axios.get(
-        `${process.env.REACT_APP_SERVER}/api/likes/${payload}`,
-        {
-          headers: {
-            "Content-Type": `application/json`,
-            Access_Token: accessToken,
-            Refresh_Token: refreshToken,
-            "Cache-Control": "no-cache",
-          },
-        }
-      );
-    
-      return thunkAPI.fulfillWithValue(data.data);
-    } catch (error) {
-    
       return thunkAPI.rejectWithValue(error);
     }
   }
@@ -159,7 +120,9 @@ export const __heartObjection = createAsyncThunk(
 
 const ObjectionsSlice = createSlice({
   name: "objections",
-  initialState,
+  initialState: {
+    posts: [],
+  },
   reducers: {},
   extraReducers: {
     //__searchObjection
@@ -208,7 +171,7 @@ const ObjectionsSlice = createSlice({
     [__deleteObjection.fulfilled]: (state, action) => {
       state.isLoading = false;
       state.posts = state.posts.filter(
-        (post) => post.postId !== action.payload
+        (post) => post.issuesId !== action.payload
       );
     },
 
@@ -224,7 +187,7 @@ const ObjectionsSlice = createSlice({
       state.isLoading = false;
 
       const indexId = state.posts.findIndex((post) => {
-        if (post.postId == action.payload.postId) {
+        if (post.issuesId == action.payload.issuesId) {
           return true;
         }
         return false;
@@ -234,17 +197,6 @@ const ObjectionsSlice = createSlice({
       state.posts = [...state.posts];
     },
     [__editObjection.rejected]: (state, action) => {
-      state.isLoading = false;
-      state.error = action.payload;
-    },
-    //__heartObjection
-    [__heartObjection.pending]: (state) => {
-      state.isLoading = true;
-    },
-    [__heartObjection.fulfilled]: (state, action) => {
-      state.isLoading = false;
-    },
-    [__heartObjection.rejected]: (state, action) => {
       state.isLoading = false;
       state.error = action.payload;
     },

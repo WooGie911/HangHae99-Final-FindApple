@@ -18,10 +18,17 @@ const MyLike = () => {
           <>
             {likes.map((like) => {
               return (
-                <div>
-                  {like.image}
-                  {like.title}
-                </div>
+                <>
+                  <br />
+                  <img
+                    src={like.images[0].imgUrl}
+                    style={{ width: 50, height: 50 }}
+                  />
+                  <div>{like.category}</div>
+                  <div>제목 : {like.title}</div>
+                  <div>작성자 : {like.nickname}</div>
+                  <br />
+                </>
               );
             })}
           </>

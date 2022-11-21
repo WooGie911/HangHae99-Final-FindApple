@@ -6,7 +6,7 @@ import { __UserProfile } from "../redux/modules/LoginSlice";
 import photoIMG from "../assets/photoIMG.png";
 import Layout from "../components/Layout";
 import Footer from "../components/Footer";
-import Header from "../components/Header";
+import MainHeader from "../components/MainHeader";
 
 const Main = () => {
   const { user } = useSelector((state) => state.Login);
@@ -42,7 +42,7 @@ const Main = () => {
             }}
           />
         </MainLogo>
-        <Header Navigate={"/postread"} />
+        <MainHeader Navigate={"/postread"} />
         <br />
         <div>앱소개 또는 배너</div>
         <br />

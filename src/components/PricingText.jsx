@@ -8,6 +8,7 @@ const PricingText = () => {
   const state = useLocation();
   const data = state.state;
   const navigate = useNavigate();
+  console.log("datdatadataa", data);
 
   return (
     <>
@@ -20,7 +21,7 @@ const PricingText = () => {
         X
       </button>
       <div>
-        <PricingList DetailPrice={data.DetailPrice} />
+        <PricingList DetailPrice={{ ...data.DetailPrice }} />
       </div>
     </>
   );

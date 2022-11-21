@@ -1,4 +1,4 @@
-import React, { useEffect } from "react";
+import React, { useEffect, useState } from "react";
 import Header from "../components/Header";
 import PostList from "../components/PostList";
 import { useDispatch, useSelector } from "react-redux";
@@ -9,22 +9,17 @@ import { __getPostDetail } from "../redux/modules/PostDetailsSlice";
 import Layout from "../components/Layout";
 import Footer from "../components/Footer";
 import { __postList } from "../redux/modules/PostsSlice";
+import SortBar from "../components/SortBar";
 
 const PostRead = () => {
   const params = useParams();
   const dispatch = useDispatch();
   const { posts } = useSelector((state) => state.posts);
+  const { HeaderState } = useSelector((state) => state.posts);
+  const [submitObj, setSubmitObj] = useState(HeaderState);
 
+  console.log("postspostsposts", posts);
   useEffect(() => {
-    const paramObj = params.category === "all" ? "" : `/${params.category}`;
-
-    const pageNumber = 0;
-
-    const submitObj = {
-      paramObj: paramObj,
-      pageNumber: pageNumber,
-    };
-    console.log(paramObj);
     dispatch(__getPost(submitObj));
   }, [params]);
 
@@ -32,9 +27,19 @@ const PostRead = () => {
     <div>
       <Layout>
         <div>{params.category}</div>
-
         <PostSearch __search={__searchPost} />
-        <Header Navigate={"/postread"} />
+        <Header
+          state={submitObj}
+          setState={setSubmitObj}
+          Navigate={"/postread"}
+        />
+        <SortBar
+          state={submitObj}
+          setState={setSubmitObj}
+          Navigate={"/postread"}
+          postId="postId"
+          postLikeCnt="postLikeCnt"
+        />
         <PostList
           posts={posts}
           detail={"/PostDetail"}

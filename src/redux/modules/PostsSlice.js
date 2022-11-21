@@ -1,20 +1,6 @@
 import { createAsyncThunk, createSlice } from "@reduxjs/toolkit";
 import axios from "axios";
 
-const initialState = {
-  posts: [],
-
-  isLoading: false,
-  error: null,	
-};
-
-// const initialState = {	
-//   isLoading: false,	
-//   post: {},	
-//   posts:[], //공배열로 바꿔야함
-//   error: null,	
-// }
-
 const accessToken = localStorage.getItem("Access_Token");
 const refreshToken = localStorage.getItem("Refresh_Token");
 
@@ -29,60 +15,32 @@ const token = axios.create({
         : localStorage.getItem("Access_Token"),
   },
   withCredentials: true,
-})
+});
 
 export const Apis = {
   getPostTimeAX: (payload) => token.get(`/api/post?size=5&page=${payload}`),
 };
 
-export const __getPostTime = createAsyncThunk(	
-  "api/posts/getPost",	
-  async (payload, thunkAPI) => {	
-    try {	
-      console.log('페이로드',payload)
-      const response = await Apis.getPostTimeAX(payload)
-      console.log('리스폰스',response)
-      return thunkAPI.fulfillWithValue(response.data.content);	
-      
-    } catch (error) {	
-      
-      return thunkAPI.rejectWithValue(error);	
-    }	
-  }	
-  
-)	
-
-
-
-//검색기능 미완성
-export const __searchPost = createAsyncThunk(
-  "posts/__searchPost",
+export const __getPostTime = createAsyncThunk(
+  "api/posts/getPost",
   async (payload, thunkAPI) => {
     try {
-      const data = await axios.get(`${process.env.REACT_APP_SERVER}/api/post`, {
-        headers: {
-          "Content-Type": `application/json`,
-          Access_Token: accessToken,
-          Refresh_Token: refreshToken,
-          "Cache-Control": "no-cache",
-        },
-      });
-
-      return thunkAPI.fulfillWithValue(data.data);
+      console.log("페이로드", payload);
+      const response = await Apis.getPostTimeAX(payload);
+      console.log("리스폰스", response);
+      return thunkAPI.fulfillWithValue(response.data.content);
     } catch (error) {
-
       return thunkAPI.rejectWithValue(error);
     }
   }
 );
 
-export const __getPost = createAsyncThunk(
-  "posts/__getPost",
+export const __searchPost = createAsyncThunk(
+  "posts/__searchPost",
   async (payload, thunkAPI) => {
-    console.log("겟디테일 payload", payload);
     try {
       const data = await axios.get(
-        `${process.env.REACT_APP_SERVER}/api/post${payload.paramObj}?page=${payload.pageNumber}&size=10`,
+        `${process.env.REACT_APP_SERVER}/api/post/${payload.paramObj}/${payload.searchObj}?page=${payload.pageNumber}&size=${payload.pageSize}&sort=${payload.postSort},DESC`,
         {
           headers: {
             "Content-Type": `application/json`,
@@ -92,12 +50,31 @@ export const __getPost = createAsyncThunk(
           },
         }
       );
-
-      console.log("data 겟디테일", data);
       return thunkAPI.fulfillWithValue(data.data.content);
-
     } catch (error) {
- 
+      return thunkAPI.rejectWithValue(error);
+    }
+  }
+);
+
+export const __getPost = createAsyncThunk(
+  "posts/__getPost",
+  async (payload, thunkAPI) => {
+    try {
+      const data = await axios.get(
+        `${process.env.REACT_APP_SERVER}/api/post/${payload.paramObj}?page=${payload.pageNumber}&size=${payload.pageSize}&sort=${payload.postSort},DESC`,
+
+        {
+          headers: {
+            "Content-Type": `application/json`,
+            Access_Token: accessToken,
+            Refresh_Token: refreshToken,
+            "Cache-Control": "no-cache",
+          },
+        }
+      );
+      return thunkAPI.fulfillWithValue(data.data.content);
+    } catch (error) {
       return thunkAPI.rejectWithValue(error);
     }
   }
@@ -117,11 +94,9 @@ export const __addPost = createAsyncThunk(
           },
         })
         .then((response) => {
-       
           return thunkAPI.fulfillWithValue(response.data.data);
         });
     } catch (error) {
- 
       return thunkAPI.rejectWithValue(error);
     }
   }
@@ -130,7 +105,6 @@ export const __addPost = createAsyncThunk(
 export const __deletePost = createAsyncThunk(
   "posts/__deletePost",
   async (payload, thunkAPI) => {
-
     try {
       const data = await axios.delete(
         `${process.env.REACT_APP_SERVER}/api/post/${payload}`,
@@ -146,7 +120,6 @@ export const __deletePost = createAsyncThunk(
 
       return thunkAPI.fulfillWithValue(payload);
     } catch (error) {
-    
       return thunkAPI.rejectWithValue(error);
     }
   }
@@ -155,13 +128,10 @@ export const __deletePost = createAsyncThunk(
 export const __editPost = createAsyncThunk(
   "posts/__editPost",
   async (payload, thunkAPI) => {
-
     try {
-
       console.log(payload);
       const data = await axios.patch(
         `${process.env.REACT_APP_SERVER}/api/post/${payload.id}`,
-
         payload.formData,
         {
           headers: {
@@ -175,7 +145,6 @@ export const __editPost = createAsyncThunk(
 
       return thunkAPI.fulfillWithValue(data.data);
     } catch (error) {
- 
       return thunkAPI.rejectWithValue(error);
     }
   }
@@ -183,9 +152,37 @@ export const __editPost = createAsyncThunk(
 
 const PostsSlice = createSlice({
   name: "posts",
-  initialState,
-  reducers: {},
+  initialState: {
+    posts: [],
+    HeaderState: {
+      paramObj: "all",
+      pageNumber: 0,
+      pageSize: 10,
+      postSort: "postId",
+    },
+  },
+  reducers: {
+    initialHeaderState(state, action) {
+      state.HeaderState = action.payload;
+    },
+  },
   extraReducers: {
+    //__postList
+    [__getPostTime.pending]: (state) => {
+      state.isLoading = true;
+    },
+    [__getPostTime.fulfilled]: (state, action) => {
+      state.isLoading = false;
+      state.isSuccess = false;
+      state.posts.push(...action.payload); // 기존에 있던 리스트에서 뒤에 붙여줘야하기 때문에 push를 써줘야함
+      // console.log('액션액션스테이트',state)
+    },
+    [__getPostTime.rejected]: (state, action) => {
+      state.isLoading = false;
+      state.isSuccess = false;
+      state.error = action.payload;
+    },
+
     //__searchPost
     [__searchPost.pending]: (state) => {
       state.isLoading = true;
@@ -195,27 +192,9 @@ const PostsSlice = createSlice({
       state.posts = action.payload;
     },
     [__searchPost.rejected]: (state, action) => {
-      state.isLoading = false;	
-      state.isSuccess = false;	
-      
-    },
-    //__postList
-    [__getPostTime.pending]: (state) => {
-      state.isLoading = true;
-    },
-    [__getPostTime.fulfilled]: (state, action) => {
-      state.isLoading = false;	
-      state.isSuccess = false;	
-      state.posts.push(...action.payload);	// 기존에 있던 리스트에서 뒤에 붙여줘야하기 때문에 push를 써줘야함
-      console.log('action.payload',action.payload)
-      // console.log('액션액션스테이트',state)
-      
-    },
-    [__getPostTime.rejected]: (state, action) => {
-      state.isLoading = false;	
-      state.isSuccess = false;	
+      state.isLoading = false;
+      state.isSuccess = false;
       state.error = action.payload;
-
     },
 
     //__getPost
@@ -283,4 +262,5 @@ const PostsSlice = createSlice({
   },
 });
 
+export const { initialHeaderState } = PostsSlice.actions;
 export default PostsSlice.reducer;
