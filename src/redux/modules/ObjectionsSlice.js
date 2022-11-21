@@ -103,7 +103,8 @@ export const __editObjection = createAsyncThunk(
         payload.formData,
         {
           headers: {
-            "Content-Type": `application/json`,
+            // "Content-Type": `application/json`,
+            enctype: "multipart/form-data",
             Access_Token: accessToken,
             Refresh_Token: refreshToken,
             "Cache-Control": "no-cache",

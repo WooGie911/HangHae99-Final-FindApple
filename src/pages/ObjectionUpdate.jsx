@@ -18,18 +18,20 @@ const ObjectionUpdate = ({ paramId }) => {
 
   const updateSubmit = () => {
     const oobj = {
-      category: updateInput.category,
       content: updateInput.content,
-      expectPrice: updateInput.expectPrice,
-      title: updateInput.title,
-      userPrice: updateInput.userPrice,
     };
+    const formData = new FormData();
+    formData.append(
+      "issuesRequestDto",
+      new Blob([JSON.stringify(oobj)], { type: "application/json" })
+    );
     const obj = {
       id: params.id,
-      formData: oobj,
+      formData: formData,
     };
     dispatch(__editObjection(obj));
     navigate(`/objectionDetail/${params.id}`);
+    window.location.reload(`/objectionDetail/${params.id}`);
     // window.location.replace(`/objectionDetail/${params.id}`);
   };
   return (
