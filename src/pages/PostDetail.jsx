@@ -112,8 +112,6 @@ const PostDetail = () => {
           </ClickHeart>
         </WriterContainer>
         <hr />
-        {/* <div>찜 유무 : {post.isLike ? "찜한거" : "안한거"}</div>
-        <div> 하트 {post.likeCnt}</div> */}
         <h3>{post.title}</h3>
         {post.options !== undefined &&
         (
@@ -122,9 +120,6 @@ const PostDetail = () => {
          </> 
         )
         }
-
-        <div>{post.content}</div>
-
         <Detail onClick={() => {
               navigate("/pricingtext", { state: post });
             }}>
@@ -133,6 +128,11 @@ const PostDetail = () => {
             src="https://img.icons8.com/ios-glyphs/30/null/chevron-right.png"
           ></Stdetailrightarrow>
         </Detail>
+
+
+        <div>{post.content}</div>
+
+        
 
         <Heart>
             <div>
@@ -261,16 +261,14 @@ const Detail = styled.div`
   background-color: gray;
   cursor: pointer;
   display: flex;
-  margin-bottom: 10px;
   width : 343px;
   height: 20px;
   border-radius: 5px;
   font-size: 14px;
   font-weight: 550;
   display: flex;
-  position: fixed;
   margin : auto;
-  bottom: 160px;
+  margin-bottom: 20px;
   justify-content: space-between;
   padding: 10px;
 `;

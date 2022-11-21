@@ -1,28 +1,15 @@
-import React from "react";
-import { useDispatch } from "react-redux";
-
+import React, { useState } from "react";
+import styled from "styled-components";
+import Comment from "./Comment"
 const CommentList = (props) => {
-  const dispatch = useDispatch();
-  const onDeleteButton = (payload) => {
-    if (window.confirm("정말 삭제하시겠습니까?")) {
-      dispatch(props.__deleteComment(payload));
-    }
-  };
-
   return (
     <>
-      <div>CommentList</div>
-
       {props.commentList &&
         props.commentList.map((comment, index) => {
           return (
             <div key={index}>
-              <span>{comment.nickname} </span>
-              <span> {comment.comment}</span>
-              <button onClick={() => onDeleteButton(comment.id)}>
-                댓글 삭제
-              </button>
-            </div>
+             <Comment comment={comment} __deleteComment={props.__deleteComment}/>
+             </div>
           );
         })}
     </>
