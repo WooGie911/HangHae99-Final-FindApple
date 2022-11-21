@@ -17,6 +17,7 @@ const PostDetail = () => {
   const dispatch = useDispatch();
   const params = useParams();
   const { post } = useSelector((state) => state.details);
+  console.log(post)
 
   //찜하기
   const onCartButton = (payload) => {
@@ -50,6 +51,10 @@ const PostDetail = () => {
     dispatch(__getPostDetail(params.id));
     console.log("겟 포스트 디테일 내용", post);
   }, [params]);
+
+  const onSellerPage = () => {
+    navigate(`/sellerpage/${post.memberId}`)
+  }
   return (
     <>
       <Layout>
@@ -102,7 +107,7 @@ const PostDetail = () => {
                   : post.avatarUrl
               }
             /></div>
-            <Nickname>
+            <Nickname onClick={onSellerPage}>
             {post.nickname}
             </Nickname>
             </SellerProfile>
@@ -252,6 +257,7 @@ display: flex;
 `
 
 const Nickname = styled.div`
+cursor: pointer;
 margin-top: 18px;
 margin-left: 10px;
 `
