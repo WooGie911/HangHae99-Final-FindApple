@@ -112,6 +112,7 @@ const PostDetail = () => {
             <img onClick={() => {
             navigate(`/postComment/${params.id}`);
           }} src="https://img.icons8.com/ios/25/null/topic.png" />
+          <TextDiv>댓글</TextDiv>
           </div>
         </Price>
       </Layout>
