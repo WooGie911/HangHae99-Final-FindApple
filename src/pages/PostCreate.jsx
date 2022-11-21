@@ -12,7 +12,6 @@ const PostCreate = () => {
           Navigate={"postread/all"}
           __addData={__addPost}
         />
-        <Footer />
       </Layout>
     </>
   );
