@@ -21,12 +21,12 @@ const PostRead = () => {
   console.log("postspostsposts", posts);
   useEffect(() => {
     dispatch(__getPost(submitObj));
+    setSubmitObj({ ...submitObj, pageNumber: 0 });
   }, [params]);
 
   return (
     <div>
       <Layout>
-        <div>{params.category}</div>
         <PostSearch __search={__searchPost} />
         <Header
           state={submitObj}
@@ -41,6 +41,8 @@ const PostRead = () => {
           postLikeCnt="postLikeCnt"
         />
         <PostList
+          state={submitObj}
+          setState={setSubmitObj}
           posts={posts}
           detail={"/PostDetail"}
           __getDetail={__getPostDetail}

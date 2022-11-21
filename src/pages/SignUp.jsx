@@ -5,7 +5,7 @@ import { __SignUp, __emailCheck } from "../redux/modules/LoginSlice";
 import { useNavigate } from "react-router-dom";
 import useInput from "../hook/useInput";
 import Layout from "../components/Layout";
-import back from "../assets/back.png" 
+import back from "../assets/back.png";
 
 const SignUp = () => {
   const dispatch = useDispatch();
@@ -64,64 +64,39 @@ const SignUp = () => {
 
   return (
     <Layout>
-      <StSignupBox>
       <HeadContainer>
         <div>
-        <img onClick={onClickHandler} style={{width:25, height : 25}} src={back}/>
+          <img
+            onClick={onClickHandler}
+            style={{ width: 25, height: 25 }}
+            src={back}
+          />
         </div>
         <div>
-        <span>Findapple</span>
+          <span>Findapple</span>
         </div>
       </HeadContainer>
-      <InfoDiv>이메일</InfoDiv>
-              <Div>
+      <StSignupBox>
+        <InfoDiv>이메일</InfoDiv>
+        <Div>
           <StInputBox2
-      <StWrapper>
-        <StSignupBox>
-          <Div>
-            <StInputBox2
-              type="text"
-              name="email"
-              value={input.email}
-              onChange={changeInputHandler}
-              placeholder="Email"
-            />
-            <StInputButton onClick={emailCheckHandler}>
-              인증번호 발송
-            </StInputButton>
-          </Div>
-          {emailCheckTF && (
-            <StInputBox
-              type="text"
-              name="emailCheck"
-              value={input.emailCheck}
-              onChange={changeInputHandler}
-              placeholder="이메일 메일인증"
-            />
-          )}
-
-          <StInputBox
             type="text"
-            name="nickname"
-            value={input.nickname}
+            name="email"
+            value={input.email}
             onChange={changeInputHandler}
-            placeholder="Nickname"
+            placeholder="Email"
           />
-
+          <StInputButton onClick={emailCheckHandler}>
+            인증번호 발송
+          </StInputButton>
+        </Div>
+        {emailCheckTF && (
           <StInputBox
             type="text"
-            name="password"
-            value={input.password}
+            name="emailCheck"
+            value={input.emailCheck}
             onChange={changeInputHandler}
-
-            placeholder="Password"
-          />
-          <StInputBox
-            type="text"
-            name="passwordCheck"
-            value={input.passwordCheck}
-            onChange={changeInputHandler}
-            placeholder="PasswordCheck"
+            placeholder="이메일 인증번호"
           />
         )}
         <InfoDiv>닉네임</InfoDiv>
@@ -148,7 +123,6 @@ const SignUp = () => {
           placeholder="비밀번호 재입력"
         />
         <StButton onClick={SubmitHandler}>회원가입</StButton>
-
         <StLoginBox>
           <h5>계정이 있으신가요?</h5>
           <span
@@ -160,7 +134,6 @@ const SignUp = () => {
           </span>
         </StLoginBox>
       </StSignupBox>
-
     </Layout>
   );
 };
@@ -169,20 +142,21 @@ export default SignUp;
 
 // header
 const HeadContainer = styled.div`
-gap : 100px;
-position : fixed;
-top : 20px;
-display: flex;
-align-items: center;
-margin-right : 120px;
-img {float: left;
-}
-span{
-  /* text-align: center; */
-  font-size : 24px;
-  font-weight: bold;
-}
-`
+  gap: 100px;
+  position: fixed;
+  top: 20px;
+  display: flex;
+  align-items: center;
+  margin-right: 120px;
+  img {
+    float: left;
+  }
+  span {
+    /* text-align: center; */
+    font-size: 24px;
+    font-weight: bold;
+  }
+`;
 
 const StSignupBox = styled.div`
   background-color: transparent;
@@ -198,15 +172,14 @@ const Div = styled.div`
   width: 84%;
   display: flex;
   justify-content: space-evenly;
-  
 `;
 
 // 안내 div
 const InfoDiv = styled.div`
-margin-top : 30px;
-margin-right : 270px;
-font-size: 14px;
-`
+  margin-top: 30px;
+  margin-right: 270px;
+  font-size: 14px;
+`;
 const StInputBox2 = styled.input`
   background-color: #fafafa;
   border: none;
@@ -217,8 +190,8 @@ const StInputBox2 = styled.input`
     outline: none;
   }
   ::placeholder {
-  color: #c4c4c4;
-}
+    color: #c4c4c4;
+  }
   width: 182px;
   height: 38px;
   margin-top: 10px;
@@ -228,7 +201,7 @@ const StInputButton = styled.button`
   background-color: black;
   border: none;
   font-size: 12px;
-  color : white;
+  color: white;
   border-radius: 5px;
   &:focus,
   &:active {
@@ -237,7 +210,7 @@ const StInputButton = styled.button`
   width: 100px;
   height: 38px;
   margin-top: 10px;
-  margin-left : 10px;
+  margin-left: 10px;
 `;
 
 const StInputBox = styled.input`
@@ -249,8 +222,8 @@ const StInputBox = styled.input`
     outline: none;
   }
   ::placeholder {
-  color: #c4c4c4;
-}
+    color: #c4c4c4;
+  }
   width: 296px;
   height: 38px;
   margin-top: 10px;
@@ -285,6 +258,6 @@ const StLoginBox = styled.div`
   align-items: center;
   span {
     margin-left: 10px;
-    color : #2288EE;
+    color: #2288ee;
   }
 `;

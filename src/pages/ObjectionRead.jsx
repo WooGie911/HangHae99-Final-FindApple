@@ -35,7 +35,6 @@ const ObjectionRead = () => {
   return (
     <>
       <Layout>
-        <div>{params.category}</div>
         <PostSearch __search={__searchObjection} />
         <Header
           state={submitObj}

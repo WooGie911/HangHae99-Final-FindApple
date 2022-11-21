@@ -52,22 +52,21 @@ export default PostSearch;
 
 // icon 사진 넣기
 const Input = styled.input`
-padding-left: 30px;
-height : 34px;
-width: 290px;
-background-image: url("https://img.icons8.com/ios-glyphs/30/null/search--v1.png");
-background-repeat : no-repeat;
-background-size: 30px;
-margin-bottom: 20px;
-margin-right : 10px;
-`
+  padding-left: 30px;
+  height: 34px;
+  width: 290px;
+  background-image: url("https://img.icons8.com/ios-glyphs/30/null/search--v1.png");
+  background-repeat: no-repeat;
+  background-size: 30px;
+  margin-bottom: 20px;
+  margin-right: 10px;
+`;
 
 const SearchButton = styled.button`
-height : 22px;
-width: 38px;
-background-color: transparent;
-color : #2288EE;
-border-radius: 15px;
-font-size: 12px;
-`
-
+  height: 22px;
+  width: 38px;
+  background-color: transparent;
+  color: #2288ee;
+  border-radius: 15px;
+  font-size: 10px;
+`;
