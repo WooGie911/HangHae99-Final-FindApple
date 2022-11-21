@@ -110,7 +110,8 @@ const PostsCreate = (props) => {
             onChange={uploadHandle}
             ref={imgRef}
           />
-          {fileUrls.length > 0 ? (
+          {fileUrls.length > 0 && (
+            <>
             <div className="preview">
               {
                 /*previews*/
@@ -119,14 +120,15 @@ const PostsCreate = (props) => {
                     <img
                       src={val}
                       key={i}
-                      style={{ width: "100px", height: "100px" }}
+                      style={{ width: "50px", height: "50px" }}
                     />
                   );
                 })
               }
             </div>
-          ) : (
-            <PhotoButton
+            </>
+          )}
+          <PhotoButton
               type="button"
               onClick={() => {
                 imgRef.current.click();
@@ -139,7 +141,6 @@ const PostsCreate = (props) => {
                 <div>{fileUrls.length}/5</div>
               </CameraImg>
             </PhotoButton>
-          )}
         </Stphotolabel>
 
         <div>
@@ -267,7 +268,6 @@ const PhotoButton = styled.button`
   background-color: white;
   margin: 10px;
   border: 2px solid lightgrey;
-  position: relative;
   top: 25px;
 `;
 const CameraImg = styled.div`
