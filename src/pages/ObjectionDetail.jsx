@@ -51,6 +51,10 @@ const ObjectionDetail = () => {
     dispatch(__getObjectionDetail(params.id));
   }, [params]);
 
+  useEffect(() => {
+    dispatch(__getObjectionDetail(params.id));
+  }, [post.updateComment]);
+
   return (
     <>
       <Layout>

@@ -54,7 +54,7 @@ const SignUp = () => {
   };
 
   const emailCheckHandler = () => {
-    dispatch(__emailCheck(input.email));
+    dispatch(__emailCheck({ email: input.email }));
     setEmailCheckTF(true);
   };
 
