@@ -80,7 +80,9 @@ const onClickButton = (e) => {
       <Layout>
         <HeadContainer>
         <img onClick={onClickHandler} style={{width:25, height : 25}} src={back}/>
-        <h3>내 정보</h3>
+        <span>내 정보</span>
+        <EditButton onClick={nicknameEdit}>변경</EditButton>
+
       </HeadContainer>
       <ProfileEdit>
       <input
@@ -103,10 +105,10 @@ const onClickButton = (e) => {
         }}
         onClick={onSubmitHandler} />
       </div>
-      프로필 사진 바꾸기
+      <span>프로필 사진 바꾸기</span>
       <EditContainer>
-        닉네임 변경하기 <input size='medium' onChange={writeHandle} name='nickname' value={write.nickname || ""} />
-      <EditButton onClick={nicknameEdit}>변경</EditButton>
+        <span>닉네임</span> 
+        <input size='medium' onChange={writeHandle} name='nickname' value={write.nickname || ""} />
       </EditContainer>
         </ProfileEdit>
       <br />
@@ -121,13 +123,18 @@ export default MypageUpdate
 //Head 파트
 
 const HeadContainer = styled.div`
-img {float: left;}
-h3{
-  text-align: center;
-  margin-right: 30px;
+display: flex;
+justify-content: space-between;
+span{
+  font-size: 18px;
 }
+margin-bottom: 40px;
 `
-
+const EditButton = styled.button`
+border : none;
+background-color: transparent;
+font-size: 16px;
+`
 
 // ProfileEdit 파트
 
@@ -142,22 +149,27 @@ input {
 img {
   margin-bottom: 15px;
 }
-`
-
-
-//버튼 추후 개발 예정
-const EditButton = styled.button`
-
+span{
+  color:#4D5E9B;
+}
 `
 
 const EditContainer = styled.div`
+padding : 15px;
+input{
 display: flex;
-height: 50px;
+width : 333px;
+height: 38x;
 align-items: center;
 justify-content: center;
 align-content: center;
-border: 1.2px solid gray;
-border-width: 1.2px 0px 1.2px 0px ;
+border: 0.5px transparent gray;
+border-radius: 5px;
+margin-top : 10px;
+}
+span{
+  margin-right: 280px;
+}
 `
 
 //LogOut

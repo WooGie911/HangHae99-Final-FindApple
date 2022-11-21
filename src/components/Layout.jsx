@@ -13,4 +13,7 @@ const StLayout = styled.div`
   min-height: 100vh;
   height: 100%;
   overflow: auto;
+  background-color: aqua;
+  margin : auto;
 `;
+

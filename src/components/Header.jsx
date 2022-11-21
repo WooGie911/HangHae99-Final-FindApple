@@ -51,8 +51,14 @@ export default Header;
 
 const HeaderSpace = styled.div`
   cursor: pointer;
-  background-color: beige;
+  background-color: black;
+  color : #FFFFFF;
+  font-size : 14px;
   display: flex;
+  height: 49px;
+  justify-content: space-between;
+  line-height : 49px;
+  padding : 0 20px;
   div {
     margin-right: 15px;
   }

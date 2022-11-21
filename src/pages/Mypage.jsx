@@ -34,60 +34,47 @@ const Mypage = () => {
   }, [dispatch]);
   return (
     <div>
-      <Layout>
-        <FirstContainer>
-          <Head>
-            <h3>마이페이지</h3>
-            <img
-              onClick={mypageupdate}
-              style={{ width: 25, height: 25 }}
-              src={settings}
-            />
-          </Head>
-          <div>
-            <img
-              style={{
-                width: 50,
-                height: 50,
-                borderRadius: "50%",
-                float: "left",
-              }}
-              src={
-                user.profileImg == (null || undefined)
-                  ? photoIMG
-                  : user.profileImg
-              }
-            />
-            <UserInfo>
-              <div>{user.nickname}</div>
-              <Email>{user.email}</Email>
-            </UserInfo>
-          </div>
-          <br />
-          <hr />
-          <SecondContainer>
-            <div>
-              <Content onClick={mypost}>
-                <img src={window} /> 내가 올린 게시글
-              </Content>
-            </div>
-            <div>
-              <Content onClick={myobjection}>
-                <img src={doubletick} /> 이의제기
-              </Content>
-            </div>
-            <div>
-              <Content onClick={mylike}>
-                <img src={bookmark} /> 찜목록
-              </Content>
-            </div>
-          </SecondContainer>
-        </FirstContainer>
-        <Footer />
-      </Layout>
+          <Layout>
+    <FirstContainer>
+    <Head>
+      <span>내 정보</span>
+    </Head>
+    <div style={{alignItems : "center"}}>
+      <img style={{width:50, height : 50, borderRadius : '50%', float : 'left'}} src={user.profileImg == (null || undefined) ? photoIMG : user.profileImg}/>
+      <UserInfoContainer>
+        <UserInfo>
+      <div>{user.nickname}</div>
+      <Email>{user.email}</Email>
+      </UserInfo>
+      <img onClick={mypageupdate} style={{width:25, height : 25}} src="https://img.icons8.com/ios/25/null/forward--v1.png"/>
+      </UserInfoContainer>
     </div>
-  );
-};
+    <br/>
+
+    <SecondContainer>
+      <span>
+        나의 활동
+      </span>
+    <div>
+    <Content> <span><img src={window}/>내가 올린 게시글</span><img onClick={mypost} src="https://img.icons8.com/ios/25/null/forward--v1.png"/></Content>
+    </div>
+    <div>
+    <Content> <span><img src={doubletick}/>이의제기</span> <img onClick={myobjection}src="https://img.icons8.com/ios/25/null/forward--v1.png"/></Content>
+    
+    </div>
+    <div>
+    <Content> <span><img src={bookmark}/>찜목록</span> <img onClick={mylike} src="https://img.icons8.com/ios/25/null/forward--v1.png"/></Content>
+    
+    </div>
+    </SecondContainer>
+    
+    </FirstContainer>
+    <Footer/>
+    </Layout>
+    </div>
+  )
+}
+
 
 export default Mypage;
 
@@ -97,14 +84,24 @@ const FirstContainer = styled.div`
 `;
 
 const Head = styled.div`
-  display: flex;
-  justify-content: space-between;
-`;
+span {
+  font-size : 18px;
+}
+margin-bottom : 40px;
+`
+
+const UserInfoContainer = styled.div`
+display: flex;
+justify-content : space-between;
+img {
+  margin-top : 17px;
+}
+`
 
 const UserInfo = styled.div`
-  padding: 10px;
-  margin-left: 50px;
-`;
+padding: 10px;
+`
+
 
 const Email = styled.div`
   color: gray;
@@ -113,10 +110,32 @@ const Email = styled.div`
 
 // 나의 활동
 const Content = styled.div`
-  margin-bottom: 10px;
-  img {
-    vertical-align: bottom;
+margin-bottom: 10px;
+display: flex;
+justify-content: space-between;
+img {vertical-align:bottom;}
+span{
+  font-size : 16px;
+  img{
+    margin-right : 10px;
   }
-`;
+}
+`
 
-const SecondContainer = styled.div``;
+const SecondContainer = styled.div`
+span{
+  font-size: 14px;
+  font-weight: bold;
+}
+div{
+  padding : 5px;
+}
+margin : auto;
+padding : 7px;
+border : none;
+width: 329px;
+height: 203px;
+background-color: white;
+border-radius: 5px;
+`
+
