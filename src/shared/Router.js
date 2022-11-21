@@ -30,55 +30,52 @@ const Router = () => {
       <Routes>
         {/* 로그인 페이지 이동하기 */}
         <Route path="/signin" element={<SignIn />} />
-
         {/* 회원가입 페이지 이동하기 */}
         <Route path="/signup" element={<SignUp />} />
 
         {/* 포스트 리스트 생성 페이지로 이동하기 */}
         <Route path="/postcreate" element={<PostCreate />} />
-
         {/* 게시글 홈으로 이동하기 */}
-
         <Route path="/postread/:category" element={<PostRead />} />
-
+        <Route path="/postread/:category/:sort" element={<PostRead />} />
         {/* 게시글 업데이트로 이동하기 */}
         <Route path="/postupdate/:id" element={<PostUpdate />} />
-
         {/* 포스트리스트 카드별 상세보기 페이지로 이동하기 */}
         <Route path="/PostDetail/:id" element={<PostDetail />} />
+        {/*게시물 댓글 페이지 */}
+        <Route path="/postComment/:id" element={<PostComment />} />
 
         {/* 이의제기 리스트 생성 페이지로 이동하기 */}
         <Route path="/objectioncreate" element={<ObjectionCreate />} />
-
         {/* 이의제기 홈으로 이동하기 */}
         <Route path="/objectionread/:category" element={<ObjectionRead />} />
-
+        <Route
+          path="/objectionread/:category/:sort"
+          element={<ObjectionRead />}
+        />
         {/* 이의제기 업데이트로 이동하기 */}
         <Route path="/objectionupdate/:id" element={<ObjectionUpdate />} />
-
         {/* 이의제기리스트 카드별 상세보기 페이지로 이동하기 */}
         <Route path="objectionDetail/:id" element={<ObjectionDetail />} />
+        {/*이의제기 댓글 페이지 */}
+        <Route path="/objectionComment/:id" element={<ObjectionComment />} />
 
         {/* 개인 페이지 이동하기 */}
         <Route path="/mypage" element={<Mypage />} />
-
         {/* 개인 페이지 업데이트 이동하기 */}
         <Route path="/mypageupdate" element={<MypageUpdate />} />
+        {/* 찜하기 페이지 이동하기 */}
+        <Route path="/mylike" element={<MyLike />} />
+        {/* 내 이의제기 페이지 이동하기 */}
+        <Route path="/myobjection" element={<MyObjection />} />
+        {/* 내 이의제기 페이지 이동하기 */}
+        <Route path="/mypost" element={<MyPost />} />
 
         {/* main 페이지 이동하기 */}
         <Route path="/" element={<Main />} />
 
         {/* 판매자 페이지 이동하기 */}
         <Route path="/sellerpage/:memberId" element={<SellerPage />} />
-
-        {/* 찜하기 페이지 이동하기 */}
-        <Route path="/mylike" element={<MyLike />} />
-
-        {/* 내 이의제기 페이지 이동하기 */}
-        <Route path="/myobjection" element={<MyObjection />} />
-
-        {/* 내 이의제기 페이지 이동하기 */}
-        <Route path="/mypost" element={<MyPost />} />
 
         {/* 카카오 소셜 로그인 */}
         <Route path="/KAKAO" element={<Redirect />} />
@@ -104,12 +101,6 @@ const Router = () => {
 
         {/*상세내용 확인 페이지 */}
         <Route path="/pricingtext" element={<PricingText />} />
-
-        {/*게시물 댓글 페이지 */}
-        <Route path="/postComment/:id" element={<PostComment />} />
-
-        {/*이의제기 댓글 페이지 */}
-        <Route path="/objectionComment/:id" element={<ObjectionComment />} />
       </Routes>
     </BrowserRouter>
   );

@@ -1,4 +1,4 @@
-import React, { useRef, useState, useEffect } from "react";
+import React, { useRef, useState } from "react";
 import styled from "styled-components";
 import useInput from "../hook/useInput";
 import useImgUpload from "../hook/useImageUpload";
@@ -77,7 +77,6 @@ const PostsCreate = (props) => {
   };
   const onClickHandler = () => {
     navigate(-1);
-
   };
 
   return (

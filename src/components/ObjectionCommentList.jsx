@@ -1,7 +1,7 @@
 import React from "react";
 import { useDispatch } from "react-redux";
 
-const CommentList = (props) => {
+const ObjectionCommentList = (props) => {
   const dispatch = useDispatch();
   const onDeleteButton = (payload) => {
     if (window.confirm("정말 삭제하시겠습니까?")) {
@@ -18,8 +18,8 @@ const CommentList = (props) => {
           return (
             <div key={index}>
               <span>{comment.nickname} </span>
-              <span> {comment.comment}</span>
-              <button onClick={() => onDeleteButton(comment.id)}>
+              <span> {comment.issuesComment}</span>
+              <button onClick={() => onDeleteButton(comment.issuesCommentId)}>
                 댓글 삭제
               </button>
             </div>
@@ -29,4 +29,4 @@ const CommentList = (props) => {
   );
 };
 
-export default CommentList;
+export default ObjectionCommentList;

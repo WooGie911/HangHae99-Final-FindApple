@@ -1,6 +1,7 @@
 import React from "react";
 
 const PricingList = ({ DetailPrice }) => {
+  console.log("DetailPrice", DetailPrice);
   return (
     <>
       <br />
@@ -26,6 +27,8 @@ const PricingList = ({ DetailPrice }) => {
           <br />
           <label>storage: {DetailPrice.storage}</label>
           <br />
+          <label>macbookState : {DetailPrice.macbookState}</label>
+          <br />
           <label>careOX : {DetailPrice.careOX}</label>
           <br />
           <label>careDate : {DetailPrice.careDate}</label>
@@ -46,9 +49,7 @@ const PricingList = ({ DetailPrice }) => {
           <br />
           <label>batteryState : {DetailPrice.batteryState}</label>
           <br />
-          <label>displayState : {DetailPrice.displayState}</label>
-          <br />
-          <label>scratchState : {DetailPrice.scratchState}</label>
+          <label>iphoneState : {DetailPrice.iphoneState}</label>
           <br />
           <label>careOX : {DetailPrice.careOX}</label>
           <br />

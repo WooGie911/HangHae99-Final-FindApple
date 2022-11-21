@@ -16,7 +16,10 @@ const PricingInput = () => {
     step3: false,
     step4: false,
     step5: false,
-    category: "",
+    category: " ",
+    year: " ",
+    model: " ",
+    option: " ",
   };
   const [tag, setTag] = useState(initialState);
   const { tagList } = useSelector((state) => state.price);
@@ -71,89 +74,108 @@ const PricingInput = () => {
 
   const onClickHandler12 = (e) => {
     e.preventDefault();
-    setTag({ ...tag, step1: false, step2: true });
-    navigate(`/pricingInput/${tag.category}`);
+    if (window.confirm(`${tag.category} 맞습니까?`)) {
+      if (tag.category === " " || tag.category === "category") {
+        return alert("항목을 확인하세요");
+      }
+      setTag({ ...tag, step1: false, step2: true });
+      navigate(`/pricingInput/${tag.category}`);
+    }
   };
 
   const onClickHandler23 = (e) => {
     e.preventDefault();
-    setTag({ ...tag, step2: false, step3: true });
-    navigate(`/pricingInput/${params.category}/${tag.year}`);
+    if (window.confirm(`${tag.year} 맞습니까?`)) {
+      if (tag.year === " " || tag.year === "year") {
+        return alert("항목을 확인하세요");
+      }
+      setTag({ ...tag, step2: false, step3: true });
+      navigate(`/pricingInput/${params.category}/${tag.year}`);
+    }
   };
 
   const onClickHandler34 = (e) => {
     e.preventDefault();
-    setTag({ ...tag, step3: false, step4: true });
-    navigate(`/pricingInput/${params.category}/${params.year}/${tag.model}`);
+    if (window.confirm(`${tag.model} 맞습니까?`)) {
+      if (tag.model === " " || tag.model === "model") {
+        return alert("항목을 확인하세요");
+      }
+      setTag({ ...tag, step3: false, step4: true });
+      navigate(`/pricingInput/${params.category}/${params.year}/${tag.model}`);
+    }
   };
   const onClickHandler45 = (e) => {
     e.preventDefault();
-    setTag({
-      ...tag,
-      step4: false,
-      step5: true,
-      keyboard: save.keyboard !== undefined ? save.keyboard[0] : "",
-    });
-    navigate(
-      `/pricingInput/${params.category}/${params.year}/${params.model}/${tag.option}`
-    );
+    if (window.confirm(`${tag.option} 맞습니까?`)) {
+      if (tag.option === " " || tag.option === "option") {
+        return alert("항목을 확인하세요");
+      }
+      setTag({
+        ...tag,
+        step4: false,
+        step5: true,
+        keyboard: save.keyboard !== undefined ? save.keyboard[0] : "",
+      });
+      navigate(
+        `/pricingInput/${params.category}/${params.year}/${params.model}/${tag.option}`
+      );
+    }
   };
 
   const onSubmitHandler = () => {
-    if (tag.careOX === "false") {
-      setTag({ ...tag, careDate: "" });
+    if (tag.model === " " || tag.model === "model") {
+      return alert("항목을 확인하세요");
     }
 
     console.log("전개", { ...tag });
-    const objMac = {};
-    const objMac2 = {};
+    let objMac = {};
+    let objMac2 = {};
     if (tag.category === "macbook") {
       objMac = {
         category: tag.category,
-        year: tag.year,
+        year: Number(tag.year),
         model: tag.model,
         option: tag.option,
         ram: tag.ram,
         keyboard: save2.keyboard[0],
         storage: tag.storage,
-        batteryState: tag.batteryState,
+        batteryState: Number(tag.batteryState),
+        macbookState: tag.macbookState,
         careOX: tag.careOX,
         careDate: tag.careDate,
       };
       objMac2 = {
         category: tag.category,
-        year: tag.year,
+        year: Number(tag.year),
         model: tag.model,
         option: tag.option,
         ram: tag.ram,
         keyboard: save2.keyboard[0],
         storage: tag.storage,
-        batteryState: tag.batteryState,
+        macbookState: tag.macbookState,
+        batteryState: Number(tag.batteryState),
         careOX: tag.careOX,
         careDate: "",
       };
     }
-
     const objPhone = {
       category: tag.category,
-      year: tag.year,
+      year: Number(tag.year),
       model: tag.model,
       option: tag.option,
-      batteryState: tag.batteryState,
-      displayState: tag.displayState,
-      scratchState: tag.scratchState,
+      batteryState: Number(tag.batteryState),
+      iphoneState: tag.iphoneState,
       careOX: tag.careOX,
       careDate: tag.careDate,
     };
 
     const objPhone2 = {
       category: tag.category,
-      year: tag.year,
+      year: Number(tag.year),
       model: tag.model,
       option: tag.option,
-      batteryState: tag.batteryState,
-      displayState: tag.displayState,
-      scratchState: tag.scratchState,
+      batteryState: Number(tag.batteryState),
+      iphoneState: tag.iphoneState,
       careOX: tag.careOX,
       careDate: "",
     };
@@ -172,9 +194,11 @@ const PricingInput = () => {
       Data: Data,
     };
     console.log(passData);
-    dispatch(__checkPrice(passData));
-    navigate(`/Pricingfinal`);
-    setTag({});
+    if (window.confirm(`확실해요?`)) {
+      dispatch(__checkPrice(passData));
+      navigate(`/Pricingfinal`);
+      setTag({});
+    }
   };
   useEffect(() => {
     setSave(tagList);
@@ -251,6 +275,12 @@ const PricingInput = () => {
                         return <option value={list}> {list} </option>;
                       })}
                   </select>
+                  <select name="macbookState" onChange={onChangeHandler4}>
+                    <option value={"macbookState"}>맥북 상태</option>
+                    <option value={"A급"}>A급!</option>
+                    <option value={"B급"}>B급!</option>
+                    <option value={"C급"}>C급!</option>
+                  </select>
                   <input
                     placeholder="배터리 사이클"
                     value={tag.batteryState}
@@ -262,15 +292,8 @@ const PricingInput = () => {
                 </div>
               ) : (
                 <div>
-                  <select name="displayState" onChange={onChangeHandler4}>
-                    <option value={"displayState"}>액정 상태</option>
-                    <option value={"A급"}>A급!</option>
-                    <option value={"B급"}>B급!</option>
-                    <option value={"C급"}>C급!</option>
-                  </select>
-
-                  <select name="scratchState" onChange={onChangeHandler4}>
-                    <option value={"scratchState"}>흠집 상태</option>
+                  <select name="iphoneState" onChange={onChangeHandler4}>
+                    <option value={"iphoneState"}>아이폰 상태</option>
                     <option value={"A급"}>A급!</option>
                     <option value={"B급"}>B급!</option>
                     <option value={"C급"}>C급!</option>
