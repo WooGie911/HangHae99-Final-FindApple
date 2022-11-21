@@ -2,23 +2,35 @@ import React from "react";
 import useInput from "../hook/useInput";
 import { useDispatch } from "react-redux";
 import styled from "styled-components";
-import Search from "../assets/search.png"
- 
+import { useParams } from "react-router-dom";
 
 const PostSearch = (props) => {
   const initialState = { searchContent: "" };
   const [search, setSearch, onChangeSearchHandler] = useInput(initialState);
   const dispatch = useDispatch();
+  const params = useParams();
 
   const onClickSubmitButton = (e) => {
     e.preventDefault();
     if (search.searchContent.trim() === "") {
       return alert("검색어를 입력하세요.");
     }
-    dispatch(props.__search({ searchContent: search.searchContent }));
+    const paramObj =
+      params.category === "all"
+        ? params.category
+        : `category/${params.category}`;
+
+    const submitObj = {
+      paramObj: paramObj,
+      searchObj: search.searchContent,
+      pageNumber: 0,
+      pageSize: 10,
+      postSort: params.sort,
+    };
+
+    dispatch(props.__search(submitObj));
     setSearch(initialState);
   };
-
   return (
     <>
       <div>
@@ -38,7 +50,7 @@ const PostSearch = (props) => {
 
 export default PostSearch;
 
-// icon 사진 집어넣기
+// icon 사진 넣기
 const Input = styled.input`
 padding-left: 30px;
 height : 34px;
@@ -58,3 +70,4 @@ color : #2288EE;
 border-radius: 15px;
 font-size: 12px;
 `
+

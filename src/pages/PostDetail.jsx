@@ -1,9 +1,14 @@
-import React, { useState } from "react";
+import React, { useEffect, useState } from "react";
 import styled from "styled-components";
 import { useNavigate, useParams } from "react-router-dom";
 import { useDispatch, useSelector } from "react-redux";
 import { __deletePost } from "../redux/modules/PostsSlice";
-import { __CartInPost, __CartOutPost } from "../redux/modules/PostDetailsSlice";
+import photoIMG from "../assets/photoIMG.png";
+import {
+  __CartInPost,
+  __CartOutPost,
+  __getPostDetail,
+} from "../redux/modules/PostDetailsSlice";
 import Layout from "../components/Layout";
 import Footer from "../components/Footer";
 import back from "../assets/back.png";
@@ -13,7 +18,6 @@ const PostDetail = () => {
   const dispatch = useDispatch();
   const params = useParams();
   const { post } = useSelector((state) => state.details);
-  console.log(post)
 
   //찜하기
   const onCartButton = (payload) => {
@@ -29,11 +33,7 @@ const PostDetail = () => {
     if (window.confirm("정말 삭제하시겠습니까?")) {
       dispatch(__deletePost(payload));
       window.location.replace("/postread/all");
-    } else {
-      window.location.reload();
     }
-
-    //   navigate("/postread/all");
   };
 
   const [editTg, setEidtTg] = useState({
@@ -47,6 +47,10 @@ const PostDetail = () => {
     setEidtTg(newEdit);
   };
 
+  useEffect(() => {
+    dispatch(__getPostDetail(params.id));
+    console.log("겟 포스트 디테일 내용", post);
+  }, [params]);
   return (
     <>
       <Layout>
@@ -97,6 +101,36 @@ const PostDetail = () => {
         <div> 하트 {post.likeCnt}</div> */}
         <h3>{post.title}</h3>
         <div>{post.content}</div>
+
+        <div>
+          <img
+            style={{
+              width: 50,
+              height: 50,
+              borderRadius: "50%",
+              float: "left",
+            }}
+            src={
+              post.avatarUrl == (null || undefined) ? photoIMG : post.avatarUrl
+            }
+          />
+          {post.nickname}
+        </div>
+        {/* <button onClick={() => onCartButton(post.postId)}>찜</button> */}
+        <div>
+          <div>
+            <img
+              src="https://img.icons8.com/ios-glyphs/15/null/hearts.png"
+              onClick={() => onCartButton(post.postId)}
+            />{" "}
+            {post.likeCnt}
+          </div>
+          <div>
+            <div>찜 유무 : {post.isLike ? "찜한거" : "안한거"}</div>
+            <div> {post.createdAt}</div>
+          </div>
+        </div>
+        <hr />
         <Price>
           <div><TextDiv>책정가격</TextDiv>
           <PriceDiv>{post.expectPrice}원</PriceDiv>

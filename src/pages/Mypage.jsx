@@ -1,37 +1,37 @@
-import React, {useEffect} from 'react'
-import styled from "styled-components"
-import { useDispatch } from 'react-redux'
-import { useNavigate } from 'react-router-dom'
-import { useSelector } from 'react-redux'
-import {__UserProfile} from '../redux/modules/LoginSlice'
-import photoIMG from "../assets/photoIMG.png"
-import Layout from "../components/Layout"
-import bookmark from "../assets/bookmark.png" 
-import doubletick from "../assets/doubletick.png" 
-import window from "../assets/window.png"
-import settings from "../assets/settings.png" 
-import Footer from "../components/Footer"
+import React, { useEffect } from "react";
+import styled from "styled-components";
+import { useDispatch } from "react-redux";
+import { useNavigate } from "react-router-dom";
+import { useSelector } from "react-redux";
+import { __UserProfile } from "../redux/modules/LoginSlice";
+import photoIMG from "../assets/photoIMG.png";
+import Layout from "../components/Layout";
+import bookmark from "../assets/bookmark.png";
+import doubletick from "../assets/doubletick.png";
+import window from "../assets/window.png";
+import settings from "../assets/settings.png";
+import Footer from "../components/Footer";
 
 const Mypage = () => {
-  const navigate = useNavigate()
+  const navigate = useNavigate();
   const mypageupdate = () => {
-    navigate("/mypageupdate")
-  }
+    navigate("/mypageupdate");
+  };
   const mypost = () => {
-    navigate("/mypost")
-  }
+    navigate("/mypost");
+  };
   const myobjection = () => {
-    navigate("/myobjection")
-  }
+    navigate("/myobjection");
+  };
   const mylike = () => {
-    navigate("/mylike")
-  }
-  const dispatch = useDispatch()
-  const {user} = useSelector((state) => state.Login)
-    //get 해오기
-    useEffect(() => {
-      dispatch(__UserProfile());
-    }, [dispatch]);
+    navigate("/mylike");
+  };
+  const dispatch = useDispatch();
+  const { user } = useSelector((state) => state.Login);
+  //get 해오기
+  useEffect(() => {
+    dispatch(__UserProfile());
+  }, [dispatch]);
   return (
     <div>
           <Layout>
@@ -75,12 +75,13 @@ const Mypage = () => {
   )
 }
 
-export default Mypage
+
+export default Mypage;
 
 // 첫 박스
 const FirstContainer = styled.div`
-padding : 20px;
-`
+  padding: 20px;
+`;
 
 const Head = styled.div`
 span {
@@ -101,10 +102,11 @@ const UserInfo = styled.div`
 padding: 10px;
 `
 
+
 const Email = styled.div`
-color : gray;
-font-size: 12px
-`
+  color: gray;
+  font-size: 12px;
+`;
 
 // 나의 활동
 const Content = styled.div`
@@ -136,3 +138,4 @@ height: 203px;
 background-color: white;
 border-radius: 5px;
 `
+

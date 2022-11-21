@@ -1,4 +1,4 @@
-import React, { useRef, useState, useEffect } from "react";
+import React, { useRef, useState } from "react";
 import styled from "styled-components";
 import useInput from "../hook/useInput";
 import useImgUpload from "../hook/useImageUpload";
@@ -77,7 +77,6 @@ const PostsCreate = (props) => {
   };
   const onClickHandler = () => {
     navigate(-1);
-
   };
 
   return (
@@ -89,7 +88,7 @@ const PostsCreate = (props) => {
               <img
                 onClick={onClickHandler}
                 style={{ width: 25, height: 25 }}
-                src={back}
+                src="https://img.icons8.com/ios-glyphs/30/null/chevron-left.png"
               />
             </div>
           </div>
@@ -149,41 +148,39 @@ const PostsCreate = (props) => {
             name="title"
             value={write.title || ""}
             type="text"
-            placeholder="제목을 입력하세요."
+            placeholder="글제목"
           />
         </div>
-        <hr />
 
-        <Detail
-          onClick={() => {
-            navigate("/pricingfinal");
-          }}
-        >
-          상품 상세 정보
+        <Detail>
+          <p5>상품 상세 정보</p5>
+          <Stdetailrightarrow
+            onClick={() => {
+              navigate("/pricingfinal");
+            }}
+            src="https://img.icons8.com/ios-glyphs/30/null/chevron-right.png"
+          ></Stdetailrightarrow>
         </Detail>
-        <hr />
 
         <Price>
-          <div>측정 가격 {DetailPrice.getPrice}</div>
-          <hr />
-          <div>
-            <input
-              onChange={writeHandle}
-              name="userPrice"
-              value={write.userPrice || ""}
-              type="text"
-              placeholder="가격을 입력하세요."
-            />
-          </div>
+          <p5>책정 가격 {DetailPrice.getPrice}</p5>
         </Price>
-        <hr />
+
+        <Stpriceinput
+          onChange={writeHandle}
+          name="userPrice"
+          value={write.userPrice || ""}
+          type="text"
+          placeholder="희망 가격"
+        />
+
         <div>
           <Stcontentinput
             onChange={writeHandle}
             name="content"
             value={write.content || ""}
             type="text"
-            placeholder="내용을 입력하세요."
+            placeholder="상품설명을 작성해주세요."
           />
         </div>
       </Stcontainer>
@@ -203,71 +200,105 @@ const Stcontainer = styled.div`
 const Detail = styled.div`
   cursor: pointer;
   display: flex;
-  margin-top: 20px;
-  height: 30px;
-  color: gray;
-  font-size: 14px;
+  margin-bottom: 10px;
+  height: 35px;
+  font-size: 15px;
+  font-weight: 550;
+  width: 98.5%;
+  border-bottom: 2px solid lightgrey;
+  display: flex;
+  justify-content: space-between;
 `;
 // 가격 결정
 const Price = styled.div`
-  div {
-    margin-top: 30px;
-    color: gray;
-    font-size: 14px;
-  }
-  input {
-    border: none;
-    width: 98.5%;
-    background-color: transparent;
-  }
+  color: gray;
+  font-size: 15px;
+  width: 98.5%;
+  height: 40px;
+  border-bottom: 2px solid lightgrey;
+  font-size: 15px;
+  margin-bottom: 10px;
+`;
+
+const Stpriceinput = styled.input`
+  border: none;
+  width: 97.5%;
+  height: 40px;
+  border-bottom: 2px solid lightgrey;
+  background-color: transparent;
+  margin-bottom: 10px;
+  font-size: 15px;
 `;
 
 const Stuploadbutton = styled.div`
   display: flex;
   justify-content: space-between;
   border-bottom: 1px solid lightgrey;
-  padding-bottom: 10px;
+
+  img {
+    cursor: pointer;
+    margin-top: 15px;
+  }
   span {
     cursor: pointer;
+    position: relative;
+    top: 17px;
+
+    font-weight: 550;
   }
 `;
 
 // 내용 입력
 const Stcontentinput = styled.textarea`
-  margin-top: 25px;
-  width: 98.5%;
-  height: 30px;
+  width: 97.5%;
+  height: 120px;
   border: none;
   background-color: transparent;
+  border-bottom: 2px solid lightgrey;
+  margin-bottom: 10px;
+  font-size: 15px;
 `;
 
 // 사진 업로드
 const PhotoButton = styled.button`
-  width: 50px;
-  height: 50px;
-  border-radius: 25%;
-  background-color: aliceblue;
+  width: 75px;
+  height: 75px;
+  border-radius: 5px;
+  background-color: white;
   margin: 10px;
-  border: none;
+  border: 2px solid lightgrey;
+  position: relative;
+  top: 25px;
 `;
 const CameraImg = styled.div`
   display: flex;
-  flex-direction: column;
   align-items: center;
   justify-content: center;
+  flex-direction: column;
   padding-top: 5px;
+  cursor: pointer;
 `;
 
 // 사진 업로드 관련인 듯
 const Stphotolabel = styled.label`
-  border-bottom: 1px solid lightgrey;
+  width: 98.5%;
   height: 150px;
   display: inline-block;
+  border-bottom: 2px solid lightgrey;
 `;
 
 const Sttitleinput = styled.input`
-  width: 98.5%;
-  height: 30px;
+  width: 97.5%;
+  height: 40px;
   border: none;
   background-color: transparent;
+  border-bottom: 2px solid lightgrey;
+  margin-bottom: 10px;
+  font-size: 15px;
+`;
+const Stdetailrightarrow = styled.img`
+  position: relative;
+  top: 0px;
+  width: 25px;
+  height: 25px;
 `;

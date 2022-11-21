@@ -1,20 +1,24 @@
-import React, { useState } from "react";
-import { useNavigate, useParams } from "react-router-dom";
+import React from "react";
+import { useDispatch } from "react-redux";
+import { useNavigate } from "react-router-dom";
 import styled from "styled-components";
+import { initialHeaderState } from "../redux/modules/PostsSlice";
 
-const Header = (props) => {
+const MainHeader = (props) => {
   const navigate = useNavigate();
-  const params = useParams();
+  const dispatch = useDispatch();
 
-  //카테고리별 이동 및 get 을 위한 state 변경
+  //카테고리별 이동 및 get 을 위한 store 변경
   const onClickCategoryHandler = (data) => {
     const paramObj = data === "all" ? data : `category/${data}`;
-    props.setState({
-      ...props.state,
+    const initialObj = {
       paramObj: paramObj,
-      postSort: params.sort,
-    });
-    navigate(`${props.Navigate}/${data}/${params.sort}`);
+      pageNumber: 0,
+      pageSize: 10,
+      postSort: "postId",
+    };
+    dispatch(initialHeaderState(initialObj));
+    navigate(`${props.Navigate}/${data}/postId`);
   };
 
   return (
@@ -47,18 +51,12 @@ const Header = (props) => {
   );
 };
 
-export default Header;
+export default MainHeader;
 
 const HeaderSpace = styled.div`
   cursor: pointer;
-  background-color: black;
-  color : #FFFFFF;
-  font-size : 14px;
+  background-color: beige;
   display: flex;
-  height: 49px;
-  justify-content: space-between;
-  line-height : 49px;
-  padding : 0 20px;
   div {
     margin-right: 15px;
   }

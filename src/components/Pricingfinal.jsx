@@ -14,29 +14,31 @@ const Pricingfinal = () => {
     if (window.confirm("이동하시겠습니까?")) {
       navigate(data);
     }
+    console.log("DetailPrice", DetailPrice);
   };
   return (
     <>
       <Layout>
         <div>Pricingfinal</div>
 
-        {/* <div>
-          <PricingList DetailPrice={DetailPrice} />
-
-          <button onClick={checkReally(`/pricingInput`)}>
-            가격책정 다시하기
-          </button>
-          <button onClick={checkReally(`/postcreate`)}>상품 등록</button>
-          <button onClick={checkReally(`/objectioncreate`)}>이의 제기</button>
-        </div> */}
         <div>
           <PricingList DetailPrice={DetailPrice} />
 
-          <button onClick={() => navigate(`/pricingInput`)}>
+          <button onClick={() => window.location.replace(`/pricingInput`)}>
             가격책정 다시하기
           </button>
-          <button onClick={() => navigate(`/postcreate`)}>상품 등록</button>
-          <button onClick={() => navigate(`/objectioncreate`)}>
+          <button
+            onClick={() => {
+              checkReally(`/postcreate`);
+            }}
+          >
+            상품 등록
+          </button>
+          <button
+            onClick={() => {
+              checkReally(`/objectioncreate`);
+            }}
+          >
             이의 제기
           </button>
         </div>

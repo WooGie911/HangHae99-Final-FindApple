@@ -46,14 +46,14 @@ const SignUp = () => {
       nickname: input.nickname,
       password: input.password,
     };
-    dispatch(__SignUp(AAA));
 
-    // dispatch(__SignUp(input));
-    setInput(initialstate);
+    if (window.confirm("가입하시겠습니까?")) {
+      dispatch(__SignUp(AAA));
+      setInput(initialstate);
+    }
   };
 
   const emailCheckHandler = () => {
-
     dispatch(__emailCheck(input.email));
     setEmailCheckTF(true);
   };
@@ -76,23 +76,52 @@ const SignUp = () => {
       <InfoDiv>이메일</InfoDiv>
               <Div>
           <StInputBox2
-            type="text"
-            name="email"
-            value={input.email}
-            onChange={changeInputHandler}
-            placeholder="이메일"
-          />
-          <StInputButton onClick={emailCheckHandler}>
-            인증번호 발송
-          </StInputButton>
-        </Div>
-        {emailCheckTF && (
+      <StWrapper>
+        <StSignupBox>
+          <Div>
+            <StInputBox2
+              type="text"
+              name="email"
+              value={input.email}
+              onChange={changeInputHandler}
+              placeholder="Email"
+            />
+            <StInputButton onClick={emailCheckHandler}>
+              인증번호 발송
+            </StInputButton>
+          </Div>
+          {emailCheckTF && (
+            <StInputBox
+              type="text"
+              name="emailCheck"
+              value={input.emailCheck}
+              onChange={changeInputHandler}
+              placeholder="이메일 메일인증"
+            />
+          )}
+
           <StInputBox
             type="text"
-            name="emailCheck"
-            value={input.emailCheck}
+            name="nickname"
+            value={input.nickname}
             onChange={changeInputHandler}
-            placeholder="이메일 메일인증"
+            placeholder="Nickname"
+          />
+
+          <StInputBox
+            type="text"
+            name="password"
+            value={input.password}
+            onChange={changeInputHandler}
+
+            placeholder="Password"
+          />
+          <StInputBox
+            type="text"
+            name="passwordCheck"
+            value={input.passwordCheck}
+            onChange={changeInputHandler}
+            placeholder="PasswordCheck"
           />
         )}
         <InfoDiv>닉네임</InfoDiv>
@@ -131,6 +160,7 @@ const SignUp = () => {
           </span>
         </StLoginBox>
       </StSignupBox>
+
     </Layout>
   );
 };

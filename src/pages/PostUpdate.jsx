@@ -1,10 +1,9 @@
-import React, { useState, useRef, useEffect } from "react";
+import React, { useRef } from "react";
 import { useDispatch } from "react-redux";
 import { __editPost } from "../redux/modules/PostsSlice";
 import useInput from "../hook/useInput";
 import useImageUpload from "../hook/useImageUpload";
 import { useSelector } from "react-redux";
-import PricingText from "../components/PricingText";
 import Layout from "../components/Layout";
 import Footer from "../components/Footer";
 import back from "../assets/back.png";
@@ -18,6 +17,7 @@ const PostUpdate = () => {
   const imgRef = useRef();
   const { post } = useSelector((state) => state.details);
   const [updateInput, setUpdateInput, updateInputHandle] = useInput(post);
+
   const updateSubmit = () => {
     //request로 날릴 폼데이터
     const formData = new FormData();
@@ -37,6 +37,7 @@ const PostUpdate = () => {
       userPrice: updateInput.userPrice,
       content: updateInput.content,
     };
+    console.log("objectsobjectsobjects", objects);
     formData.append(
       "postReqDto",
       new Blob([JSON.stringify(objects)], { type: "application/json" })
@@ -45,13 +46,20 @@ const PostUpdate = () => {
       id: params.id,
       formData: formData,
     };
+    console.log("paramsparamsparams", params);
+    if (files.length < 1) {
+      return window.alert("사진을 입력하세요");
+    }
     //Api 날리기
-    dispatch(__editPost(obj));
-    navigate(`/PostDetail/${params.id}`);
-    // window.location.replace(`/PostDetail/${params.id}`;
+    if (window.confirm("수정하시겠습니까?")) {
+      dispatch(__editPost(obj));
+      navigate(`/PostDetail/${params.id}`);
+      window.location.reload(`/PostDetail/${params.id}`);
+      // window.location.replace(`/PostDetail/${params.id}`);
+    }
   };
   return (
-    <div>
+    <>
       <Layout>
         <FirstContainer>
           <div>
@@ -102,12 +110,12 @@ const PostUpdate = () => {
         <div>
           <br />
           <br />
-          title :<div>{updateInput.title}</div>
+          <div> 제목 :{updateInput.title}</div>
           <br />
           <br />
           <button
             onClick={() => {
-              navigate("/pricingText", { state: post });
+              navigate("/pricingtext", { state: post });
             }}
           >
             상품 상세 정보
@@ -115,7 +123,7 @@ const PostUpdate = () => {
           <br />
           <br />
           <PriceInput>
-            판매가격:
+            <span>판매가격: </span>
             <input
               onChange={updateInputHandle}
               name="userPrice"
@@ -126,7 +134,7 @@ const PostUpdate = () => {
           </PriceInput>
           <br />
           <br />
-          측정 가격 :<div>{updateInput.getPrice}</div>
+          <div> 측정 가격 : {updateInput.expectPrice}</div>
           <br />
           <br />
           <EditText>
@@ -142,7 +150,7 @@ const PostUpdate = () => {
         </div>
         <Footer />
       </Layout>
-    </div>
+    </>
   );
 };
 export default PostUpdate;
@@ -178,6 +186,8 @@ const CameraImg = styled.div`
 `;
 // 판매가격 및 내용입력
 const PriceInput = styled.div`
+  display: flex;
+  align-items: center;
   border: 1.2px solid gray;
   border-width: 1.2px 0px 1.2px 0px;
   height: 60px;
@@ -188,6 +198,8 @@ const PriceInput = styled.div`
   }
 `;
 const EditText = styled.div`
+  display: flex;
+  align-items: center;
   border: 1.2px solid gray;
   border-width: 1.2px 0px 1.2px 0px;
   height: 120px;
