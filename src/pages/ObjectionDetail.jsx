@@ -55,6 +55,10 @@ const ObjectionDetail = () => {
     dispatch(__getObjectionDetail(params.id));
   }, [post.updateComment]);
 
+  const onSellerPage = () => {
+    navigate(`/sellerpage/${post.memberId}`)
+  }
+
   return (
     <>
       <Layout>
@@ -89,53 +93,87 @@ const ObjectionDetail = () => {
             post.images.map((item, index) => {
               return <Image src={item.imgUrl} key={index} />;
             })}
-
-          <h3>{post.title}</h3>
-          <div>{post.content}</div>
         </div>
-        <div>
-          <img
-            style={{
-              width: 50,
-              height: 50,
-              borderRadius: "50%",
-              float: "left",
-            }}
-            src={
-              post.avatarUrl == (null || undefined) ? photoIMG : post.avatarUrl
-            }
-          />
-          {post.nickname}
-        </div>
-        {/* <button onClick={() => onCartButton(post.issuesId)}>찜</button> */}
-        <div>
+        <WriterContainer>
           <div>
-            <img
-              src="https://img.icons8.com/ios-glyphs/15/null/hearts.png"
-              onClick={() => onCartButton(post.issuesId)}
-            />{" "}
-            {post.likeCnt}
+            <SellerProfile>
+            <div><img
+              style={{
+                width: 50,
+                height: 50,
+                borderRadius: "50%",
+                float: "left",
+              }}
+              src={
+                post.avatarUrl == (null || undefined)
+                  ? photoIMG
+                  : post.avatarUrl
+              }
+            /></div>
+            <Nickname onClick={onSellerPage}>
+            {post.nickname}
+            </Nickname>
+            </SellerProfile>
           </div>
-          <div>찜 유무 : {post.isLike ? "찜한거" : "안한거"}</div>
-          <div> {post.createdAt}</div>
-        </div>
+          <ClickHeart onClick={() => onCartButton(post.postId)}>
+            {post.isLike ? "❤️" : "🤍"}{" "}
+          </ClickHeart>
+        </WriterContainer>
         <hr />
+        <h3>{post.title}</h3>
+        {post.options !== undefined &&
+        (
+         <>
+          <Models>{post.options.category} / {post.options.model} / {post.options.years} / {post.options.options}</Models>
+         </> 
+        )
+        }
+        
+
+
+        <div>{post.content}</div>
+
+        
+
+        <Heart>
+            <div>
+              <img src="https://img.icons8.com/ios-glyphs/15/null/hearts.png" />{" "}
+              {post.likeCnt}
+            </div>
+            <div> {post.createdAt}</div>
+        </Heart>
+        <Detail onClick={() => {
+              navigate("/pricingtext", { state: post });
+            }}>
+          <p5>상품 상세 정보</p5>
+          <Stdetailrightarrow
+            src="https://img.icons8.com/ios-glyphs/30/null/chevron-right.png"
+          ></Stdetailrightarrow>
+        </Detail>
+
         <Price>
-          <div>책정가격 : {post.expectPrice} 원</div>
           <div>
+            <TextDiv>책정가격</TextDiv>
+            <PriceDiv>{post.expectPrice}원</PriceDiv>
+          </div>
+          <Arrow>
             {" "}
             <img src="https://img.icons8.com/metro/15/null/long-arrow-right.png" />{" "}
-          </div>
-          <div>판매가격 : {post.userPrice} 원</div>
+          </Arrow>
           <div>
-            <img src="https://img.icons8.com/ios/25/null/topic.png" />
+            <TextDiv>판매가격</TextDiv>
+            <PriceDiv>{post.userPrice}원</PriceDiv>
+          </div>
+          <div>
+            <img
+              onClick={() => {
+                navigate(`/postComment/${params.id}`);
+              }}
+              src="https://img.icons8.com/ios/25/null/topic.png"
+            />
+            <TextDiv>댓글</TextDiv>
           </div>
         </Price>
-
-        <button onClick={() => navigate(`/objectionComment/${params.id}`)}>
-          댓글
-        </button>
-        <Footer />
       </Layout>
     </>
   );
@@ -187,8 +225,95 @@ const Image = styled.img`
 
 // 물건 가격
 const Price = styled.div`
+  border-top: 1px solid #d9d9d9;
+  width: 367px;
+  height: 86px;
+  position: fixed;
+  bottom: 15px;
   display: flex;
+  justify-content: space-between;
   div {
     margin-right: 10px;
+    padding-top: 10px;
   }
 `;
+
+const Arrow = styled.div`
+  margin-top: 20px;
+`;
+
+const TextDiv = styled.div`
+  font-size: 10px;
+`;
+
+const PriceDiv = styled.div`
+  font-size: 16px;
+`;
+
+// 글쓴이 정보 및 하트
+const WriterContainer = styled.div`
+  display: flex;
+  justify-content: space-between;
+`;
+
+// seller 프로필
+const SellerProfile = styled.div`
+display: flex;
+`
+
+const Nickname = styled.div`
+cursor: pointer;
+margin-top: 18px;
+margin-left: 10px;
+`
+
+// 상품 측정 정도 확인
+const Detail = styled.div`
+  background-color: gray;
+  cursor: pointer;
+  position: fixed;
+  width : 343px;
+  height: 20px;
+  border-radius: 5px;
+  font-size: 14px;
+  font-weight: 550;
+  display: flex;
+  margin : auto;
+  margin-bottom: 20px;
+  bottom : 90px;
+  justify-content: space-between;
+  padding: 10px;
+`;
+
+const Stdetailrightarrow = styled.img`
+  position: relative;
+  top: 0px;
+  width: 25px;
+  height: 25px;
+`;
+
+// 찜하기 파트
+const Heart = styled.div`
+  font-size: 12px;
+  color : #606060;
+  width: 367px;
+  height: 86px;
+  position: fixed;
+  bottom: 90px;
+  display: flex;
+  div{
+    margin-left: 15px;
+  }
+`
+
+// 찜하기 버튼
+const ClickHeart = styled.div`
+margin-top: 13px;
+`
+
+// 기종 설명
+const Models = styled.div`
+font-size: 12px;
+color : #000000;
+margin-bottom: 10px;
+`

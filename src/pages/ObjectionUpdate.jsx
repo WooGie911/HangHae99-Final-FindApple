@@ -50,6 +50,7 @@ const ObjectionUpdate = ({ paramId }) => {
           <div>상품 게시물 수정</div>
           <EditButton onClick={updateSubmit}>완료</EditButton>
         </FirstContainer>
+        <hr/>
         <ImageWrapper>
           {post.images &&
             post.images.map((item) => {
@@ -57,22 +58,24 @@ const ObjectionUpdate = ({ paramId }) => {
             })}
         </ImageWrapper>
         <div>
-          <br />
-          <br />
-          title :<div>{updateInput.title}</div>
-          <br />
-          <br />
-          <button
-            onClick={() => {
+        <hr/>
+          <TextDiv>{updateInput.title}</TextDiv>
+        <hr/>
+          <Detail onClick={() => {
               navigate("/pricingtext", { state: post });
-            }}
-          >
-            상품 상세 정보
-          </button>
-          <br />
-          <br />
+            }}>
+          <p5>상품 상세 정보</p5>
+          <Stdetailrightarrow
+            src="https://img.icons8.com/ios-glyphs/30/null/chevron-right.png"
+          ></Stdetailrightarrow>
+        </Detail>
+        <hr/>
+
+         <TextDiv>책정 가격</TextDiv>
+            <PriceDiv>{updateInput.getPrice}</PriceDiv>
+          <hr/>
           <PriceInput>
-            희망가격:
+          <div>판매 가격</div>
             <input
               onChange={updateInputHandle}
               name="userPrice"
@@ -81,14 +84,11 @@ const ObjectionUpdate = ({ paramId }) => {
               placeholder="희망 가격을 입력해주세요."
             />
           </PriceInput>
-          <br />
-          <br />
-          측정 가격 :<div>{updateInput.getPrice}</div>
-          <br />
-          <br />
+
+          <hr/>
           <EditText>
             content :
-            <input
+            <textarea
               onChange={updateInputHandle}
               name="content"
               value={updateInput.content || ""}
@@ -117,43 +117,64 @@ const EditButton = styled.div`
 `;
 // 사진 업로드
 const ImageWrapper = styled.div`
-  border: 1.2px solid gray;
-  border-width: 1.2px 0px 1.2px 0px;
+  border : none;
   height: 60px;
+  img{
+    width: 50px;
+    height: 50px;
+  }
 `;
-const PhotoButton = styled.button`
-  width: 50px;
-  height: 50px;
-  border-radius: 25%;
-  background-color: aliceblue;
-  margin: 10px;
-`;
-const CameraImg = styled.div`
-  display: flex;
-  flex-direction: column;
-  align-items: center;
-  justify-content: center;
-  padding-top: 5px;
-`;
+
 // 판매가격 및 내용입력
 const PriceInput = styled.div`
-  border: 1.2px solid gray;
-  border-width: 1.2px 0px 1.2px 0px;
+  border : none;
   height: 60px;
   input {
     background-color: transparent;
-    border: 1px solid transparent;
+    border: none;
     width: 250px;
+  }
+  div{
+    font-size: 10px;   
   }
 `;
 const EditText = styled.div`
-  border: 1.2px solid gray;
-  border-width: 1.2px 0px 1.2px 0px;
+  border: none;
   height: 120px;
   textarea {
     background-color: transparent;
-    border: 1px solid transparent;
+    border: none;
     width: 375px;
     height: 115px;
   }
+`;
+
+// 상품 상세 정보
+const Detail = styled.div`
+  background-color: gray;
+  cursor: pointer;
+  width : 343px;
+  height: 20px;
+  border-radius: 5px;
+  font-size: 14px;
+  font-weight: 550;
+  display: flex;
+  margin : auto;
+  justify-content: space-between;
+  padding: 10px;
+`;
+const Stdetailrightarrow = styled.img`
+  position: relative;
+  top: 0px;
+  width: 25px;
+  height: 25px;
+`;
+
+const TextDiv = styled.div`
+  height : 60px;
+  font-size: 10px;
+`;
+
+const PriceDiv = styled.div`
+  font-size: 16px;
 `;

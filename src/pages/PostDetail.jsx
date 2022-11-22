@@ -125,16 +125,6 @@ const PostDetail = () => {
          </> 
         )
         }
-        <Detail onClick={() => {
-              navigate("/pricingtext", { state: post });
-            }}>
-          <p5>상품 상세 정보</p5>
-          <Stdetailrightarrow
-            src="https://img.icons8.com/ios-glyphs/30/null/chevron-right.png"
-          ></Stdetailrightarrow>
-        </Detail>
-
-
         <div>{post.content}</div>
 
         
@@ -146,6 +136,15 @@ const PostDetail = () => {
             </div>
             <div> {post.createdAt}</div>
         </Heart>
+        <Detail onClick={() => {
+              navigate("/pricingtext", { state: post });
+            }}>
+          <p5>상품 상세 정보</p5>
+          <Stdetailrightarrow
+            src="https://img.icons8.com/ios-glyphs/30/null/chevron-right.png"
+          ></Stdetailrightarrow>
+        </Detail>
+
         <Price>
           <div>
             <TextDiv>책정가격</TextDiv>
@@ -266,7 +265,7 @@ margin-left: 10px;
 const Detail = styled.div`
   background-color: gray;
   cursor: pointer;
-  display: flex;
+  position : fixed;
   width : 343px;
   height: 20px;
   border-radius: 5px;
@@ -275,6 +274,7 @@ const Detail = styled.div`
   display: flex;
   margin : auto;
   margin-bottom: 20px;
+  bottom : 90px;
   justify-content: space-between;
   padding: 10px;
 `;
@@ -293,7 +293,7 @@ const Heart = styled.div`
   width: 367px;
   height: 86px;
   position: fixed;
-  bottom: 60px;
+  bottom: 90px;
   display: flex;
   div{
     margin-left: 15px;
