@@ -93,6 +93,7 @@ const PList = styled.div`
   border-width: 1.2px 0px 1.2px 0px;
   display: flex;
   padding: 15px;
+
   img {
     margin-right: 10px;
     width: 50px;
