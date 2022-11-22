@@ -7,6 +7,11 @@ import { useNavigate, useParams } from "react-router-dom";
 import { useDispatch, useSelector } from "react-redux";
 import { __deletePost } from "../redux/modules/PostsSlice";
 import photoIMG from "../assets/photoIMG.png";
+import whitearrow from "../assets/whitearrow.png";
+import home from "../assets/home.png";
+import threedots from "../assets/threedots.png";
+
+
 import {
   __CartInPost,
   __CartOutPost,
@@ -74,6 +79,7 @@ const PostDetail = () => {
       <Layout>
         <EditHead>
           <div>
+            <Span>
             <img
               onClick={() => {
                 navigate(-1);
@@ -81,8 +87,13 @@ const PostDetail = () => {
               style={{ width: 25, height: 25 }}
               src={back}
             />
+            <span onClick={() => navigate("/")}>
+            <img src={home} />
+        </span>
+            </Span>
+           
           </div>
-          <Tgbutton onClick={editToggleHandler}>···</Tgbutton>
+          <Tgbutton src={threedots} onClick={editToggleHandler}/>
           {editTg.isEdit === true ? (
             <ToggleNav>
               <Button onClick={() => navigate(`/postupdate/${params.id}`)}>
@@ -137,7 +148,7 @@ const PostDetail = () => {
         {post.options !== undefined &&
         (
          <>
-          <Models>{post.options.category} / {post.options.model} / {post.options.years} / {post.options.options}</Models>
+          <Models><span>{post.options.category}</span> <span>{post.options.model}</span> <span>{post.options.years}</span> <span>{post.options.options}</span> </Models>
          </> 
         )
         }
@@ -157,7 +168,7 @@ const PostDetail = () => {
             }}>
           <p5>상품 상세 정보</p5>
           <Stdetailrightarrow
-            src="https://img.icons8.com/ios-glyphs/30/null/chevron-right.png"
+            src={whitearrow} style={{ width: "25px", height: "25px"}}
           ></Stdetailrightarrow>
         </Detail>
 
@@ -199,11 +210,15 @@ const EditHead = styled.div`
   padding: 10px;
 `;
 
-const Tgbutton = styled.button`
-  border: none;
-  font-weight: 600;
-  width: 50px;
-  background-color: white;
+const Span = styled.span`
+span{
+  margin-left: 10px;
+}
+`
+
+const Tgbutton = styled.img`
+  width: 23px;
+  height: 23px;
 `;
 const ToggleNav = styled.div`
   width: 50px;
@@ -237,6 +252,8 @@ const Image = styled.img`
 // 물건 가격
 const Price = styled.div`
   border-top: 1px solid #d9d9d9;
+  background-color:#3D6AF2 ;
+  color : white;
   width: 367px;
   height: 86px;
   position: fixed;
@@ -247,6 +264,9 @@ const Price = styled.div`
     margin-right: 10px;
     padding-top: 10px;
   }
+  img {
+	filter: invert()
+}
 `;
 
 const Arrow = styled.div`
@@ -265,6 +285,8 @@ const PriceDiv = styled.div`
 const WriterContainer = styled.div`
   margin-top: 30px;
   display: flex;
+  background-color: white;
+  border-radius: 15px 15px 0 0;
   justify-content: space-between;
 `;
 
@@ -281,8 +303,9 @@ margin-left: 10px;
 
 // 상품 측정 정도 확인
 const Detail = styled.div`
-  background-color: gray;
+  background-color: #3D6AF2;
   cursor: pointer;
+  color : white;
   position : fixed;
   width : 343px;
   height: 20px;
@@ -295,6 +318,8 @@ const Detail = styled.div`
   bottom : 90px;
   justify-content: space-between;
   padding: 10px;
+  
+
 `;
 
 const Stdetailrightarrow = styled.img`
@@ -327,5 +352,11 @@ margin-top: 13px;
 const Models = styled.div`
 font-size: 12px;
 color : #000000;
-margin-bottom: 10px;
+margin-bottom: 30px;
+span{
+  border: 0.5px solid #3D6AF2;
+  color : #3D6AF2;
+  border-radius: 5px;
+  padding : 3px;
+}
 `
