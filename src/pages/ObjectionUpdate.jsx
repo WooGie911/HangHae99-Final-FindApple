@@ -7,6 +7,7 @@ import Layout from "../components/Layout";
 import Footer from "../components/Footer";
 import { useNavigate, useParams } from "react-router-dom";
 import styled from "styled-components";
+import whitearrow from "../assets/whitearrow.png";
 import back from "../assets/back.png";
 
 const ObjectionUpdate = ({ paramId }) => {
@@ -61,12 +62,12 @@ const ObjectionUpdate = ({ paramId }) => {
         <hr/>
           <TextDiv>{updateInput.title}</TextDiv>
         <hr/>
-          <Detail onClick={() => {
+        <Detail onClick={() => {
               navigate("/pricingtext", { state: post });
             }}>
           <p5>상품 상세 정보</p5>
           <Stdetailrightarrow
-            src="https://img.icons8.com/ios-glyphs/30/null/chevron-right.png"
+            src={whitearrow} style={{ width: "25px", height: "25px"}}
           ></Stdetailrightarrow>
         </Detail>
         <hr/>
@@ -151,8 +152,9 @@ const EditText = styled.div`
 
 // 상품 상세 정보
 const Detail = styled.div`
-  background-color: gray;
+    background-color: #3D6AF2;
   cursor: pointer;
+  color : white;
   width : 343px;
   height: 20px;
   border-radius: 5px;
@@ -160,6 +162,8 @@ const Detail = styled.div`
   font-weight: 550;
   display: flex;
   margin : auto;
+  margin-bottom: 20px;
+  bottom : 90px;
   justify-content: space-between;
   padding: 10px;
 `;
@@ -176,5 +180,7 @@ const TextDiv = styled.div`
 `;
 
 const PriceDiv = styled.div`
-  font-size: 16px;
-`;
+color : #3D6AF2;
+font-weight: bold;
+font-size: 16px;
+`

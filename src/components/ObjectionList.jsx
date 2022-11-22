@@ -7,6 +7,7 @@ import React from "react";
 import { __getPostTime } from "../redux/modules/PostsSlice";
 
 const ObjectionList = ({ posts, detail, __getDetail }) => {
+  console.log(posts);
   const navigate = useNavigate();
   const dispatch = useDispatch();
   const onClickHandler = (data) => {
@@ -31,11 +32,15 @@ const ObjectionList = ({ posts, detail, __getDetail }) => {
                   </div>
                   <br />
                   <div>
-                    <label>title : {post.title}</label>
+                    <label>{post.title}</label>
                     <br />
-                    <label>category : {post.category}</label>
+                    <label>{post.userPrice}</label>
                     <br />
-                    <label>userPrice : {post.userPrice}</label>
+                    <label>{post.category}</label>
+                    <HeartCreatedAt>
+                      <div>{post.createdAt}</div>
+                      <div> <img src="https://img.icons8.com/ios-glyphs/15/null/hearts.png" style={{width : "10px", height:"10px"}}/>{post.likeCnt}</div>
+                    </HeartCreatedAt>
                   </div>
                 </PList>
               </div>
@@ -61,3 +66,10 @@ const PList = styled.div`
     border: 1px solid transparent;
   }
 `;
+
+// 리스트 하트와 시간
+const HeartCreatedAt=styled.div`
+width: 290px;
+display: flex;
+justify-content: space-between;
+`
