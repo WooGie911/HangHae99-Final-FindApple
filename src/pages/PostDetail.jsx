@@ -1,4 +1,7 @@
-import React, { useEffect, useState } from "react";
+import React, { useEffect, useState, Component } from "react";
+import Slider from "react-slick"
+import "slick-carousel/slick/slick.css";
+import "slick-carousel/slick/slick-theme.css";
 import styled from "styled-components";
 import { useNavigate, useParams } from "react-router-dom";
 import { useDispatch, useSelector } from "react-redux";
@@ -55,6 +58,17 @@ const PostDetail = () => {
   const onSellerPage = () => {
     navigate(`/sellerpage/${post.memberId}`)
   }
+
+  // 케러셀
+
+      const settings = {
+        dots: true,
+        infinite: true,
+        speed: 500,
+        slidesToShow: 1,
+        slidesToScroll: 1
+      };
+
   return (
     <>
       <Layout>
@@ -86,10 +100,12 @@ const PostDetail = () => {
         </EditHead>
 
         <div>
+          <Slider {...settings}>
           {post.images !== undefined &&
             post.images.map((item, index) => {
               return <Image src={item.imgUrl} key={index} />;
             })}
+            </Slider>
         </div>
         <WriterContainer>
           <div>
@@ -195,6 +211,7 @@ const ToggleNav = styled.div`
   position: absolute;
   right: 10px;
   top: 50px;
+  z-index : 999;
 `;
 const Button = styled.button`
   width: 50px;
@@ -246,6 +263,7 @@ const PriceDiv = styled.div`
 
 // 글쓴이 정보 및 하트
 const WriterContainer = styled.div`
+  margin-top: 30px;
   display: flex;
   justify-content: space-between;
 `;
