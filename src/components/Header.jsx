@@ -22,11 +22,17 @@ const Header = (props) => {
       <HeaderSpace>
         <div
           onClick={() => {
+            navigate("/");
+          }}
+        >
+          HOME
+        </div>
+        <div
+          onClick={() => {
             onClickCategoryHandler("all");
           }}
         >
-          {" "}
-          제품 전체보기
+          전체
         </div>
         <div
           onClick={() => {
@@ -52,13 +58,13 @@ export default Header;
 const HeaderSpace = styled.div`
   cursor: pointer;
   background-color: black;
-  color : #FFFFFF;
-  font-size : 14px;
+  color: #ffffff;
+  font-size: 14px;
   display: flex;
   height: 49px;
   justify-content: space-between;
-  line-height : 49px;
-  padding : 0 20px;
+  line-height: 49px;
+  padding: 0 20px;
   div {
     margin-right: 15px;
   }
