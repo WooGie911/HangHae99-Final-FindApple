@@ -140,7 +140,7 @@ const PostDetail = () => {
             </SellerProfile>
           </div>
           <ClickHeart onClick={() => onCartButton(post.postId)}>
-            {post.isLike ? "❤️" : "🤍"}{" "}
+            {post.isLike ? <img src="https://img.icons8.com/emoji/25/null/blue-heart.png"/> : "🤍"}{" "}
           </ClickHeart>
         </WriterContainer>
         <hr />

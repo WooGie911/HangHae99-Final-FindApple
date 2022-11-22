@@ -2,6 +2,7 @@ import React, {useState} from 'react'
 import { useDispatch, useSelector } from "react-redux";
 import photoIMG from "../assets/photoIMG.png";
 import styled from "styled-components";
+import threedots from "../assets/threedots.png";
 
 const Comment = ({comment, __deleteComment}) => {
   const { post } = useSelector((state) => state.details);
@@ -41,9 +42,11 @@ const Comment = ({comment, __deleteComment}) => {
                   : post.avatarUrl
               }
             />
-              <span>{comment.nickname} </span>
+              <div>{comment.nickname} </div>
+              <Cmnt> {comment.comment}</Cmnt>
+
               </div>
-              <Tgbutton onClick={editToggleHandler}>···</Tgbutton>
+              <Tgbutton src={threedots} onClick={editToggleHandler}/>
           {editTg.isEdit === true ? (
           <Button onClick={() => onDeleteButton(comment.id)}>
                 삭제
@@ -53,7 +56,6 @@ const Comment = ({comment, __deleteComment}) => {
           </Buttons>
 
               </StContainer>
-              <span> {comment.comment}</span>
               <hr/>
               
             </div>
@@ -76,13 +78,14 @@ display: flex;
 justify-content: space-between;
 width: 100%;
 height: 40px;
+div{
+  width : 300px;
+}
 `
 
-const Tgbutton = styled.button`
-  border: none;
-  font-weight: 600;
-  width: 50px;
-  background-color: white;
+const Tgbutton = styled.img`
+  width: 23px;
+  height: 23px;
 `;
 
 const Button = styled.button`
@@ -99,3 +102,7 @@ const Button = styled.button`
     background-color: red;
   }
 `;
+
+const Cmnt = styled.div`
+font-size : 12px;
+`
