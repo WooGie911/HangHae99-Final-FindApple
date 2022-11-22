@@ -9,6 +9,8 @@ import Footer from "../components/Footer";
 import back from "../assets/back.png";
 import styled from "styled-components";
 import { useNavigate, useParams } from "react-router-dom";
+import whitearrow from "../assets/whitearrow.png";
+
 const PostUpdate = () => {
   const dispatch = useDispatch();
   const navigate = useNavigate();
@@ -99,7 +101,7 @@ const PostUpdate = () => {
                     <img
                       src={val}
                       key={i}
-                      style={{ width: "45px", height: "45px", marginLeft:"5px"}}
+                      style={{ width: "50px", height: "50px", marginLeft:"5px"}}
                     />
                   );
                 })
@@ -120,44 +122,42 @@ const PostUpdate = () => {
             
           </Stphotolabel>
         </ImageWrapper>
-        <hr/>
         <div>
 
-          <Title> 제목 {updateInput.title}</Title>
-          <hr/>
+          <Title> 
+            <div>{updateInput.title}
+            </div>
+            </Title>
 
-          <DetailButton
-            onClick={() => {
+          <Detail onClick={() => {
               navigate("/pricingtext", { state: post });
-            }}
-          >
-            상품 상세 정보
-            <Stdetailrightarrow
-            onClick={() => {
-              navigate("/pricingfinal");
-            }}
-            src="https://img.icons8.com/ios-glyphs/30/null/chevron-right.png"
+            }}>
+          <p5>상품 상세 정보</p5>
+          <Stdetailrightarrow
+            src={whitearrow} style={{ width: "25px", height: "25px"}}
           ></Stdetailrightarrow>
-          </DetailButton>
-          <hr/>
+        </Detail>
+
   
           <PriceInput>
-            <span>판매가격 </span>
-            <input
+          <TextPrice>판매가격</TextPrice>
+            <ExpectPrice><input
               onChange={updateInputHandle}
               name="userPrice"
               value={updateInput.userPrice || ""}
               type="text"
               placeholder="판매 가격을 입력해주세요."
-            />
+            /></ExpectPrice>
           </PriceInput>
-          <hr/>
       
-          <CalPrice> 책정 가격 {updateInput.expectPrice}원</CalPrice>
-          <hr/>
+          <CalPrice>
+          <TextPrice>책정 가격</TextPrice>
+          <ExpectPrice>{updateInput.expectPrice}원</ExpectPrice>
+          </CalPrice>
   
           <EditText>
-            내용
+            <div>상품설명</div>
+            <div>
             <textarea
               onChange={updateInputHandle}
               name="content"
@@ -165,6 +165,7 @@ const PostUpdate = () => {
               type="text"
               placeholder="수정할 내용을 입력하세요."
             />
+            </div>
           </EditText>
         </div>
         <Footer />
@@ -178,6 +179,7 @@ const FirstContainer = styled.div`
   display: flex;
   justify-content: space-between;
   padding: 10px;
+  border-bottom: 1px solid lightgray;
 `;
 const EditButton = styled.div`
   background-color: transparent;
@@ -185,7 +187,6 @@ const EditButton = styled.div`
 `;
 // 사진 업로드
 const ImageWrapper = styled.div`
-  border: none;
   height: 80px;
 `;
 const PhotoButton = styled.button`
@@ -194,6 +195,7 @@ const PhotoButton = styled.button`
   border-radius: 25%;
   background-color: aliceblue;
   margin: 10px;
+  border: 2px solid #3D6AF2;
 `;
 const CameraImg = styled.div`
   display: flex;
@@ -202,13 +204,14 @@ const CameraImg = styled.div`
   justify-content: center;
   height: 50px;
   border : none;
+  
 `;
 // 판매가격 및 내용입력
 const PriceInput = styled.div`
-  display: flex;
   align-items: center;
-  border: none;
   height: 60px;
+  border-bottom: 1px solid lightgrey;
+  border-top: 1px solid lightgrey;
   input {
     background-color: transparent;
     border: 1px solid transparent;
@@ -216,22 +219,23 @@ const PriceInput = styled.div`
   }
 `;
 const EditText = styled.div`
-  display: flex;
   align-items: center;
   border: none;
   height: 120px;
+  margin-top: 15px;
   textarea {
-    margin-top : 100px;
+    margin-top: 15px;
     background-color: transparent;
     border: 1px solid transparent;
-    width: 330px;
+    width: 300px;
     height: 200px;
   }
 `;
 
 const CalPrice = styled.div`
 height: 50px;
-border : none;
+border-bottom: 1px solid lightgray;
+
 `
 // 사진 업로드
 
@@ -245,18 +249,20 @@ flex-direction:row;
 `;
 
 // 상품 상세정보
-const DetailButton = styled.button`
-border: none;
-background-color: transparent;
-cursor: pointer;
-  display: flex;
-  margin-bottom: 10px;
-  height: 35px;
-  font-size: 15px;
+const Detail = styled.div`
+  background-color: #3D6AF2;
+  color : white;
+  cursor: pointer;
+  width : 343px;
+  height: 20px;
+  border-radius: 5px;
+  font-size: 14px;
   font-weight: 550;
-  width: 98.5%;
   display: flex;
+  margin : auto;
+  margin-bottom: 20px;
   justify-content: space-between;
+  padding: 10px;
 `;
 
 const Stdetailrightarrow = styled.img`
@@ -268,6 +274,26 @@ const Stdetailrightarrow = styled.img`
 
 // 제목
 const Title = styled.div`
+div{
+  height: 60px;
+  border-top: 1px solid lightgrey;
+}
 height: 40px;
 border: none;
+`
+
+// 책정가격 폰트
+const ExpectPrice = styled.div`
+color : #3D6AF2;
+font-weight: bold;
+font-size: 16px;
+input {
+  font-size: 16px;
+}
+`
+
+const TextPrice = styled.div`
+margin-top: 15px;
+font-size: 12px;
+color : #000000;
 `

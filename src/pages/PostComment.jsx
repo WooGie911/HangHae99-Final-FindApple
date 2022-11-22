@@ -28,11 +28,7 @@ const PostComment = () => {
   return (
     <>
     <HeadContainer>
-      <div
-        onClick={() => {
-          navigate(`/PostDetail/${id}`);
-        }}
-      >
+      <div>
         <img
             onClick={onClickHandler}
             style={{ width: 25, height: 25 }}

@@ -1,6 +1,5 @@
 import React from "react";
 import styled from "styled-components";
-
 const PricingList = ({ DetailPrice }) => {
   // let PricingPrice = 0;
   // if (DetailPrice.getPrice !== undefined || DetailPrice.getPrice !== "") {
@@ -126,11 +125,27 @@ const PricingList = ({ DetailPrice }) => {
           </div>
         </ListDiv>
       )}
+          <InputButton
+            onClick={() => {
+              checkReally(`/postcreate`);
+            }}
+          >
+            상품 등록
+          </InputButton>
+          <ObjectionButton
+            onClick={() => {
+              checkReally(`/objectioncreate`);
+            }}
+          >
+            이의 제기
+          </ObjectionButton>
+
     </>
   );
 };
 
 export default PricingList;
+
 
 const TopDiv = styled.div`
   position: relative;

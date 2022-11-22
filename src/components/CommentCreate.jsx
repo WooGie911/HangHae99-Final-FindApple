@@ -54,6 +54,8 @@ width: 288px;
 height: 46px;
 }
 button{
+  background-color: #3D6AF2;
+  color : white;
   border : none;
   width : 50px;
   height : 46px;

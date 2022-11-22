@@ -52,7 +52,7 @@ export default Footer;
 
 // 메뉴바
 const MenuBar = styled.div`
-background-color : gray;
+background-color : white;
 width : 375px;
 max-width: 100%;
 height: 45px;
