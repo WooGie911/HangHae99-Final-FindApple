@@ -100,33 +100,7 @@ const PostsCreate = (props) => {
           </div>
         </Stuploadbutton>
         <Stphotolabel htmlFor="imgFile">
-          <input
-            type="file"
-            style={{ display: "none" }}
-            accept="image/*"
-            id="imgFile"
-            name="imgFile"
-            multiple
-            onChange={uploadHandle}
-            ref={imgRef}
-          />
-          {fileUrls.length > 0 ? (
-            <div className="preview">
-              {
-                /*previews*/
-                fileUrls.map((val, i) => {
-                  return (
-                    <img
-                      src={val}
-                      key={i}
-                      style={{ width: "100px", height: "100px" }}
-                    />
-                  );
-                })
-              }
-            </div>
-          ) : (
-            <PhotoButton
+        <PhotoButton
               type="button"
               onClick={() => {
                 imgRef.current.click();
@@ -139,7 +113,35 @@ const PostsCreate = (props) => {
                 <div>{fileUrls.length}/5</div>
               </CameraImg>
             </PhotoButton>
+          <input
+            type="file"
+            style={{ display: "none" }}
+            accept="image/*"
+            id="imgFile"
+            name="imgFile"
+            multiple
+            onChange={uploadHandle}
+            ref={imgRef}
+          />
+          {fileUrls.length > 0 && (
+            <>
+            <div className="preview" style={{marginTop:"15px"}}>
+              {
+                /*previews*/
+                fileUrls.map((val, i) => {
+                  return (
+                    <img
+                      src={val}
+                      key={i}
+                      style={{ width: "45px", height: "45px", marginLeft:"5px"}}
+                    />
+                  );
+                })
+              }
+            </div>
+            </>
           )}
+          
         </Stphotolabel>
 
         <div>
@@ -261,13 +263,12 @@ const Stcontentinput = styled.textarea`
 
 // 사진 업로드
 const PhotoButton = styled.button`
-  width: 75px;
-  height: 75px;
+  width: 45px;
+  height: 45px;
   border-radius: 5px;
   background-color: white;
   margin: 10px;
   border: 2px solid lightgrey;
-  position: relative;
   top: 25px;
 `;
 const CameraImg = styled.div`
@@ -285,6 +286,9 @@ const Stphotolabel = styled.label`
   height: 150px;
   display: inline-block;
   border-bottom: 2px solid lightgrey;
+  display: flex;
+flex-direction:row;
+
 `;
 
 const Sttitleinput = styled.input`

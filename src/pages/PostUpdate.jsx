@@ -75,24 +75,8 @@ const PostUpdate = () => {
           <EditButton onClick={updateSubmit}>완료</EditButton>
         </FirstContainer>
         <ImageWrapper>
-          <label htmlFor="imgFile">
-            {
-              /*previews*/
-              fileUrls.map((val, i) => {
-                return <img src={val} key={i} />;
-              })
-            }
-            <input
-              type="file"
-              style={{ display: "none" }}
-              accept="image/*"
-              id="imgFile"
-              name="imgFile"
-              multiple
-              onChange={uploadHandle}
-              ref={imgRef}
-            />
-            <PhotoButton
+          <Stphotolabel htmlFor="imgFile">
+          <PhotoButton
               type="button"
               onClick={() => {
                 imgRef.current.click();
@@ -105,25 +89,60 @@ const PostUpdate = () => {
                 <div>{fileUrls.length}/5</div>
               </CameraImg>
             </PhotoButton>
-          </label>
+            {fileUrls.length > 0 && (
+            <>
+            <div className="preview" style={{marginTop:"15px"}}>
+              {
+                /*previews*/
+                fileUrls.map((val, i) => {
+                  return (
+                    <img
+                      src={val}
+                      key={i}
+                      style={{ width: "45px", height: "45px", marginLeft:"5px"}}
+                    />
+                  );
+                })
+              }
+            </div>
+            </>
+          )}
+            <input
+              type="file"
+              style={{ display: "none" }}
+              accept="image/*"
+              id="imgFile"
+              name="imgFile"
+              multiple
+              onChange={uploadHandle}
+              ref={imgRef}
+            />
+            
+          </Stphotolabel>
         </ImageWrapper>
+        <hr/>
         <div>
-          <br />
-          <br />
-          <div> 제목 :{updateInput.title}</div>
-          <br />
-          <br />
-          <button
+
+          <Title> 제목 {updateInput.title}</Title>
+          <hr/>
+
+          <DetailButton
             onClick={() => {
               navigate("/pricingtext", { state: post });
             }}
           >
             상품 상세 정보
-          </button>
-          <br />
-          <br />
+            <Stdetailrightarrow
+            onClick={() => {
+              navigate("/pricingfinal");
+            }}
+            src="https://img.icons8.com/ios-glyphs/30/null/chevron-right.png"
+          ></Stdetailrightarrow>
+          </DetailButton>
+          <hr/>
+  
           <PriceInput>
-            <span>판매가격: </span>
+            <span>판매가격 </span>
             <input
               onChange={updateInputHandle}
               name="userPrice"
@@ -132,14 +151,14 @@ const PostUpdate = () => {
               placeholder="판매 가격을 입력해주세요."
             />
           </PriceInput>
-          <br />
-          <br />
-          <div> 측정 가격 : {updateInput.expectPrice}</div>
-          <br />
-          <br />
+          <hr/>
+      
+          <CalPrice> 책정 가격 {updateInput.expectPrice}원</CalPrice>
+          <hr/>
+  
           <EditText>
-            content :
-            <input
+            내용
+            <textarea
               onChange={updateInputHandle}
               name="content"
               value={updateInput.content || ""}
@@ -166,9 +185,8 @@ const EditButton = styled.div`
 `;
 // 사진 업로드
 const ImageWrapper = styled.div`
-  border: 1.2px solid gray;
-  border-width: 1.2px 0px 1.2px 0px;
-  height: 60px;
+  border: none;
+  height: 80px;
 `;
 const PhotoButton = styled.button`
   width: 50px;
@@ -182,14 +200,14 @@ const CameraImg = styled.div`
   flex-direction: column;
   align-items: center;
   justify-content: center;
-  padding-top: 5px;
+  height: 50px;
+  border : none;
 `;
 // 판매가격 및 내용입력
 const PriceInput = styled.div`
   display: flex;
   align-items: center;
-  border: 1.2px solid gray;
-  border-width: 1.2px 0px 1.2px 0px;
+  border: none;
   height: 60px;
   input {
     background-color: transparent;
@@ -200,13 +218,56 @@ const PriceInput = styled.div`
 const EditText = styled.div`
   display: flex;
   align-items: center;
-  border: 1.2px solid gray;
-  border-width: 1.2px 0px 1.2px 0px;
+  border: none;
   height: 120px;
   textarea {
+    margin-top : 100px;
     background-color: transparent;
     border: 1px solid transparent;
-    width: 375px;
-    height: 115px;
+    width: 330px;
+    height: 200px;
   }
 `;
+
+const CalPrice = styled.div`
+height: 50px;
+border : none;
+`
+// 사진 업로드
+
+const Stphotolabel = styled.label`
+  width: 98.5%;
+  height: 150px;
+  display: inline-block;
+  display: flex;
+flex-direction:row;
+
+`;
+
+// 상품 상세정보
+const DetailButton = styled.button`
+border: none;
+background-color: transparent;
+cursor: pointer;
+  display: flex;
+  margin-bottom: 10px;
+  height: 35px;
+  font-size: 15px;
+  font-weight: 550;
+  width: 98.5%;
+  display: flex;
+  justify-content: space-between;
+`;
+
+const Stdetailrightarrow = styled.img`
+  position: relative;
+  top: 0px;
+  width: 25px;
+  height: 25px;
+`;
+
+// 제목
+const Title = styled.div`
+height: 40px;
+border: none;
+`
