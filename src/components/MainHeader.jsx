@@ -26,11 +26,17 @@ const MainHeader = (props) => {
       <HeaderSpace>
         <div
           onClick={() => {
+            navigate("/");
+          }}
+        >
+          HOME
+        </div>
+        <div
+          onClick={() => {
             onClickCategoryHandler("all");
           }}
         >
-          {" "}
-          제품 전체보기
+          전체
         </div>
         <div
           onClick={() => {

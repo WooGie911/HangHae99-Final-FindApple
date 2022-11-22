@@ -7,16 +7,12 @@ import photoIMG from "../assets/photoIMG.png";
 import Layout from "../components/Layout";
 import Footer from "../components/Footer";
 import MainHeader from "../components/MainHeader";
+import MainList from "../components/MainList";
 
 const Main = () => {
   const { user } = useSelector((state) => state.Login);
   const dispatch = useDispatch();
   const navigate = useNavigate();
-  const accessToken = localStorage.getItem("Access_Token");
-  const refreshToken = localStorage.getItem("Refresh_Token");
-
-  const nickname = localStorage.getItem("nickname");
-  const profileIMG = localStorage.getItem("profileIMG");
 
   useEffect(() => {
     dispatch(__UserProfile());
@@ -46,6 +42,8 @@ const Main = () => {
         <br />
         <div>앱소개 또는 배너</div>
         <br />
+        <MainList />
+
         <div>
           <div>회원님을 위한 추천상품!</div>
 

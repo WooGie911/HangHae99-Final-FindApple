@@ -1,6 +1,6 @@
 // src/redux/modules/config/configStore.js
 
-import { configureStore } from "@reduxjs/toolkit";
+import { configureStore, getDefaultMiddleware } from "@reduxjs/toolkit";
 
 import posts from "../modules/PostsSlice";
 import details from "../modules/PostDetailsSlice";
@@ -22,6 +22,9 @@ const store = configureStore({
     sellerpage,
     price,
   },
+  middleware: getDefaultMiddleware({
+    serializableCheck: false,
+  }),
 
   //dev tool을 개발 환경에서만 설정
   // devTools: process.env.REACT_APP_MOD !== "production",

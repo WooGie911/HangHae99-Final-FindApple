@@ -30,10 +30,8 @@ const PostComment = () => {
       <div>PostComment</div>
 
       <CommentList
-        List={post}
         __deleteComment={__deletePostComment}
         commentList={post.comments}
-        __getDetail={__getPostDetail}
       />
       <CommentCreate
         __addComment={__addPostComment}
