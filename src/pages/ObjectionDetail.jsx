@@ -184,7 +184,7 @@ const settings = {
           <div>
             <img
               onClick={() => {
-                navigate(`/postComment/${params.id}`);
+                navigate(`/objectionComment/${params.id}`);
               }}
               src="https://img.icons8.com/ios/25/null/topic.png"
             />
