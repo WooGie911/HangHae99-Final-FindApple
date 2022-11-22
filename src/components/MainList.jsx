@@ -16,6 +16,7 @@ const MainList = () => {
   };
   const [submitOBJ, setSubmitOBJ] = useState(HeaderState);
   const { posts } = useSelector((state) => state.posts);
+  console.log(posts);
 
   const onClickCategoryHandler = (data) => {
     const paramObj = data === "all" ? data : `category/${data}`;
@@ -33,30 +34,31 @@ const MainList = () => {
 
   return (
     <>
-      <div>
-        <div
+      <Stdivwrap>
+        <Stbutton1
+          src="https://img.icons8.com/external-regular-kawalan-studio/24/null/external-oval-shape-regular-kawalan-studio.png"
           onClick={() => {
             onClickCategoryHandler("all");
           }}
         >
           전체
-        </div>
-        <div
+        </Stbutton1>
+        <Stbutton2
           onClick={() => {
             onClickCategoryHandler("macbook");
           }}
         >
           MacBook
-        </div>
-        <div
+        </Stbutton2>
+        <Stbutton3
           onClick={() => {
             onClickCategoryHandler("iphone");
           }}
         >
           iPhone
-        </div>
-      </div>
-      <div>
+        </Stbutton3>
+      </Stdivwrap>
+      <Stlistwrap>
         {posts &&
           posts.map((post, index) => {
             return (
@@ -68,33 +70,58 @@ const MainList = () => {
                 >
                   <PList>
                     <div>
-                      {post.images && <img src={post.images[0].imgUrl} />}
+                      {post.images && (
+                        <img
+                          src={post.images[0].imgUrl}
+                          style={{
+                            width: 97,
+                            height: 97,
+                            marginTop: 9,
+                            marginLeft: 9,
+                            borderRadius: 5,
+                          }}
+                        />
+                      )}
                     </div>
-                    <br />
-                    <div>
-                      <label>title : {post.title}</label>
-                      <br />
-                      <label>category : {post.category}</label>
-                      <br />
-                      <label>userPrice : {post.userPrice}</label>
-                    </div>
+                    <Map_listwrap>
+                      <Map_listprice2>
+                        <label>{post.userPrice}</label>
+                      </Map_listprice2>
+                      <Map_listcategory>
+                        <label>{post.category}</label>
+                      </Map_listcategory>
+                      <Map_listlike>
+                        <span>{post.createdAt}</span>
+                        <span>❤️{post.likeCnt}</span>
+                      </Map_listlike>
+                    </Map_listwrap>
                   </PList>
                 </div>
               </div>
             );
           })}
-      </div>
+      </Stlistwrap>
     </>
   );
 };
 
 export default MainList;
 
+const Stlistwrap = styled.div`
+  margin-top: 20px;
+`;
+
 const PList = styled.div`
-  border: 1.2px solid gray;
   border-width: 1.2px 0px 1.2px 0px;
   display: flex;
-  padding: 15px;
+  padding: 4px;
+  margin-left: 12px;
+  margin-top: 12px;
+  background-color: white;
+  box-shadow: 0px 6px 16px 0px rgba(0, 0, 0, 0.15);
+  border-radius: 5px;
+  width: 343px;
+  height: 118px;
   img {
     margin-right: 10px;
     width: 50px;
@@ -102,4 +129,66 @@ const PList = styled.div`
     border-radius: 25%;
     border: 1px solid transparent;
   }
+`;
+
+const Stdivwrap = styled.div`
+  display: flex;
+  margin-left: 15px;
+`;
+
+const Stbutton1 = styled.button`
+  background-color: white;
+  border-radius: 20px;
+  width: 45px;
+  height: 23px;
+  margin-left: 3px;
+  margin-top: 30px;
+  border: 2px solid #3d6af2;
+  background-color: #3d6af2;
+  cursor: pointer;
+`;
+const Stbutton2 = styled.button`
+  background-color: white;
+  border-radius: 20px;
+  width: 69px;
+  height: 23px;
+  margin-left: 3px;
+  margin-top: 30px;
+  border: 2px solid #3d6af2;
+  cursor: pointer;
+`;
+const Stbutton3 = styled.button`
+  background-color: white;
+  border-radius: 20px;
+  width: 86px;
+  height: 23px;
+  margin-left: 3px;
+  margin-top: 30px;
+  border: 2px solid #3d6af2;
+  cursor: pointer;
+`;
+
+const Map_listwrap = styled.div`
+  font-style: inter;
+  flex-direction: row;
+`;
+
+const Map_listprice2 = styled.div`
+  margin-left: 7px;
+  font-size: 16px;
+  margin-top: 9px;
+`;
+
+const Map_listcategory = styled.div`
+  font-size: 14px;
+  margin-left: 7px;
+`;
+
+const Map_listlike = styled.span`
+  margin-left: 7px;
+  margin-top: 33px;
+  font-size: 12px;
+  display: flex;
+
+  justify-content: space-between;
 `;

@@ -8,8 +8,9 @@ import Layout from "../components/Layout";
 import Footer from "../components/Footer";
 import MainHeader from "../components/MainHeader";
 import MainList from "../components/MainList";
+import Slide from "../components/Slide";
 
-const Main = () => {
+const Main = ({}) => {
   const { user } = useSelector((state) => state.Login);
   const dispatch = useDispatch();
   const navigate = useNavigate();
@@ -22,7 +23,7 @@ const Main = () => {
     <>
       <Layout>
         <MainLogo>
-          <div>Main로고 예정</div>
+          <Title>Findapple</Title>
           <br />
 
           <img
@@ -38,17 +39,27 @@ const Main = () => {
             }}
           />
         </MainLogo>
+
         <MainHeader Navigate={"/postread"} />
-        <br />
-        <div>앱소개 또는 배너</div>
-        <br />
-        <MainList />
 
         <div>
-          <div>회원님을 위한 추천상품!</div>
-
-          <div>추천상품 리스트업</div>
+          <Slide />
         </div>
+
+        <Text>
+          회원님을 위한 추천상품!
+          <a>
+            더보기
+            <More_seebutton
+              onClick={() => {
+                navigate("/pricingfinal");
+              }}
+            ></More_seebutton>
+          </a>
+        </Text>
+
+        <MainList />
+
         <Footer />
       </Layout>
     </>
@@ -61,4 +72,33 @@ const MainLogo = styled.div`
   height: 50px;
   display: flex;
   justify-content: space-between;
+`;
+
+const Title = styled.div`
+  font-size: 25px;
+  font-weight: bold;
+  text-align: center;
+  margin-bottom: 100px;
+`;
+const Text = styled.div`
+  font-size: 18px;
+  font-weight: bold;
+  font: inter;
+  margin-top: 40px;
+  margin-left: 15px;
+  position: relative;
+  top: 10px;
+  a {
+    font-size: 12px;
+    position: relative;
+    left: 90px;
+  }
+`;
+const More_seebutton = styled.button`
+  background-image: url("https://img.icons8.com/material-two-tone/14/null/forward.png");
+  width: 14px;
+  height: 14px;
+  border: 0;
+  outline: 0;
+  opacity: 0.5;
 `;
