@@ -17,4 +17,5 @@ const StLayout = styled.div`
   overflow-y: hidden;
   background-color: aqua;
   margin: auto;
+  padding-bottom: 60px;
 `;

@@ -38,17 +38,14 @@ const SellerPage = () => {
       </div>
       </HeadContainer>
       <hr/>
-
         {sellerInfoDto !== undefined && (
           <>
-            <SellerProfile>
-            <div><img src={sellerInfoDto.profileImg} /></div>
-            <Nickname>{sellerInfoDto.nickname}</Nickname>
-            </SellerProfile>
-            
-          </>
-        )}
-        <div>
+          <SellerProfile>
+  <div><img src={sellerInfoDto.profileImg} /></div>
+  <Nickname>{sellerInfoDto.nickname}</Nickname>
+  </SellerProfile>
+          <PostList>
+        <Posts>
         <Title>{sellerInfoDto.nickname}님의 판매상품</Title>
           {myPostList.length > 0 && (
             <>
@@ -56,7 +53,7 @@ const SellerPage = () => {
                 return (
                   <SellerPost key={mypost.postId}>
                     <img src={mypost.images[0].imgUrl} />
-                    <PostPrice>{mypost.userPrice}</PostPrice>
+                    <PostPrice>{mypost.userPrice}원</PostPrice>
                     <PostTitle>{mypost.title}</PostTitle>
                     <LikeCnt>🤍{mypost.likeCnt}</LikeCnt>
                   </SellerPost>
@@ -64,7 +61,10 @@ const SellerPage = () => {
               })}
             </>
           )}
-        </div>
+        </Posts>
+        </PostList>
+        </>
+        )}
         <Footer />
       </Layout>
     </div>
@@ -93,8 +93,11 @@ const HeadContainer = styled.div`
 
 // 유저 정보
 const SellerProfile = styled.div`
-display: flex;
-margin-right : 10px;
+position : absolute;
+top : 110px;
+z-index:999;
+left:47%;
+text-align: center;
 img{
   width: 50px;
   height: 50px;
@@ -102,8 +105,6 @@ img{
 }
 `
 const Nickname = styled.div`
-margin-top: 15px;
-margin-left: 15px;
 font-style: normal;
 font-weight: 600;
 font-size: 16px;
@@ -126,6 +127,21 @@ line-height: 17px;
 
 
 color: #000000;
+`
+
+const PostList = styled.div`
+position: relative;
+top: 70px;
+width:100%;
+height:80vh;
+overflow: auto;
+background-color : white;
+border-radius: 5px 5px 0 0;
+padding-bottom: 140px;
+`
+
+const Posts = styled.div`
+margin-bottom: 50px;
 `
 
 const SellerPost = styled.div`
