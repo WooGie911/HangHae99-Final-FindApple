@@ -242,6 +242,8 @@ const Image = styled.img`
 // 물건 가격
 const Price = styled.div`
   border-top: 1px solid #d9d9d9;
+  background-color:#3D6AF2 ;
+  color : white;
   width: 367px;
   height: 86px;
   position: fixed;
@@ -252,6 +254,9 @@ const Price = styled.div`
     margin-right: 10px;
     padding-top: 10px;
   }
+  img {
+	filter: invert()
+}
 `;
 
 const Arrow = styled.div`

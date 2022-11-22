@@ -34,7 +34,7 @@ const ObjectionList = ({ posts, detail, __getDetail }) => {
                   <div>
                     <label>{post.title}</label>
                     <br />
-                    <label>{post.userPrice}</label>
+                    <label>{post.userPrice}원</label>
                     <br />
                     <label>{post.category}</label>
                     <HeartCreatedAt>
