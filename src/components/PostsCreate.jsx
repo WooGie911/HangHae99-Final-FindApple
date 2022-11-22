@@ -4,7 +4,7 @@ import useInput from "../hook/useInput";
 import useImgUpload from "../hook/useImageUpload";
 import { useDispatch, useSelector } from "react-redux";
 import { useNavigate } from "react-router-dom";
-import back from "../assets/back.png";
+import whitearrow from "../assets/whitearrow.png";
 
 const PostsCreate = (props) => {
   const dispatch = useDispatch();
@@ -133,7 +133,7 @@ const PostsCreate = (props) => {
                     <img
                       src={val}
                       key={i}
-                      style={{ width: "45px", height: "45px", marginLeft:"5px"}}
+                      style={{ width: "50px", height: "50px", marginLeft:"5px"}}
                     />
                   );
                 })
@@ -154,18 +154,17 @@ const PostsCreate = (props) => {
           />
         </div>
 
-        <Detail>
+        <Detail onClick={() => {
+              navigate("/pricingfinal");
+            }}>
           <p5>상품 상세 정보</p5>
           <Stdetailrightarrow
-            onClick={() => {
-              navigate("/pricingfinal");
-            }}
-            src="https://img.icons8.com/ios-glyphs/30/null/chevron-right.png"
+            src={whitearrow} style={{ width: "25px", height: "25px"}}
           ></Stdetailrightarrow>
         </Detail>
 
         <Price>
-          <p5>책정 가격 {DetailPrice.getPrice}</p5>
+          <p5>책정 가격 <div>{DetailPrice.getPrice}원</div></p5>
         </Price>
 
         <Stpriceinput
@@ -173,7 +172,7 @@ const PostsCreate = (props) => {
           name="userPrice"
           value={write.userPrice || ""}
           type="text"
-          placeholder="희망 가격"
+          placeholder="판매 가격"
         />
 
         <div>
@@ -200,26 +199,34 @@ const Stcontainer = styled.div`
 
 // 상품 가격 측정
 const Detail = styled.div`
+  background-color: #3D6AF2;
+  color : white;
   cursor: pointer;
-  display: flex;
-  margin-bottom: 10px;
-  height: 35px;
-  font-size: 15px;
+  width : 343px;
+  height: 20px;
+  border-radius: 5px;
+  font-size: 14px;
   font-weight: 550;
-  width: 98.5%;
-  border-bottom: 2px solid lightgrey;
   display: flex;
+  margin : auto;
+  margin-bottom: 20px;
   justify-content: space-between;
+  padding: 10px;
+
 `;
 // 가격 결정
 const Price = styled.div`
   color: gray;
   font-size: 15px;
   width: 98.5%;
-  height: 40px;
+  height: 60px;
+  border-top: 2px solid lightgrey;
   border-bottom: 2px solid lightgrey;
   font-size: 15px;
   margin-bottom: 10px;
+  div{
+    color : #3D6AF2;
+  }
 `;
 
 const Stpriceinput = styled.input`
@@ -263,12 +270,12 @@ const Stcontentinput = styled.textarea`
 
 // 사진 업로드
 const PhotoButton = styled.button`
-  width: 45px;
-  height: 45px;
+  width: 50px;
+  height: 50px;
   border-radius: 5px;
   background-color: white;
   margin: 10px;
-  border: 2px solid lightgrey;
+  border: 2px solid #3D6AF2;
   top: 25px;
 `;
 const CameraImg = styled.div`
@@ -278,12 +285,17 @@ const CameraImg = styled.div`
   flex-direction: column;
   padding-top: 5px;
   cursor: pointer;
+  div{
+    border: #3D6AF2;
+    color: #3D6AF2;
+  }
+
 `;
 
 // 사진 업로드 관련인 듯
 const Stphotolabel = styled.label`
   width: 98.5%;
-  height: 150px;
+  height: 100px;
   display: inline-block;
   border-bottom: 2px solid lightgrey;
   display: flex;
