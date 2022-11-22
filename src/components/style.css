@@ -1,0 +1,33 @@
+.RadioLabel {
+  width: 100px;
+  height: 200px;
+  overflow: auto;
+  border: 1px solid #4f75ff;
+  border-radius: 50px;
+  font-size: 15px;
+  text-align: center;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+}
+.RadioLab-input {
+  width: 100px;
+  height: 10px;
+  background-color: white;
+}
+input:checked {
+  border: 1px solid #949497;
+  background-color: #4f75ff;
+  color: #ff0000;
+}
+/* 
+.RadioInput {
+  appearance: none;
+  width: 100px;
+  height: 10px;
+  &:checked {
+    border: 1px solid #949497;
+    background-color: #4f75ff;
+    color: #ff0000;
+  }
+} */
