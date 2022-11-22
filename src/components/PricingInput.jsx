@@ -208,18 +208,38 @@ const PricingInput = () => {
   return (
     <>
       <Layout>
-        <br />
-        <br />
         <div>
           {tag.step1 && (
-            <div>
-              <select name="category" onChange={onChangeHandler1}>
-                <option value={"category"}>Category</option>
-                <option value={"macbook"}>macbook</option>
-                <option value={"iphone"}>iphone</option>
-              </select>
-              <button onClick={onClickHandler12}>스텝2로</button>
-            </div>
+            <ContainerDiv>
+              <TitleDiv>
+                <Xbutton
+                  onClick={() => {
+                    navigate(-1);
+                  }}
+                >
+                  X
+                </Xbutton>
+                <span>가격책정</span>
+              </TitleDiv>
+
+              <ContentDiv>카테고리를 선택해주세요</ContentDiv>
+
+              <CategoryDiv>
+                <SelectBox
+                  type="radio"
+                  name="category"
+                  onChange={onChangeHandler1}
+                >
+                  <option value={"category"}>Category</option>
+                  <option value={"macbook"}>macbook</option>
+                  <option value={"iphone"}>iphone</option>
+                </SelectBox>
+              </CategoryDiv>
+              <div>
+                <img />
+              </div>
+              <NextButton onClick={onClickHandler12}>스텝2로</NextButton>
+            </ContainerDiv>
           )}
           {tag.step2 && (
             <div>
@@ -344,8 +364,72 @@ const PricingInput = () => {
 
 export default PricingInput;
 
-const Select = styled.select`
-  width: 300px;
-  height: 50px;
+const ContentDiv = styled.div`
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  justify-items: center;
+  position: relative;
+  font-size: 15px;
+  padding-left: 10px;
+  width: 100%;
+  height: 60px;
+  background-color: #15ff00;
+`;
+
+const SelectBox = styled.select`
+  width: 330px;
+  height: 40px;
   overflow: auto;
+  border: 1px solid #000000;
+  border-radius: 50px;
+  font-size: 15px;
+`;
+
+const ContainerDiv = styled.div`
+  display: flex;
+  position: relative;
+  flex-direction: column;
+  width: 375px;
+  height: 100vh;
+`;
+
+const TitleDiv = styled.div`
+  display: flex;
+  justify-content: center;
+  justify-items: center;
+  align-items: center;
+  position: relative;
+  width: 100%;
+  height: 56px;
+  background-color: blue;
+`;
+
+const CategoryDiv = styled.div`
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  justify-items: center;
+  align-items: center;
+  position: relative;
+  font-size: 15px;
+  width: 100%;
+  height: 100px;
+  background-color: #ff7300;
+`;
+
+const Xbutton = styled.button`
+  position: absolute;
+  left: 0px;
+  width: 56px;
+  height: 100%;
+  background-color: transparent;
+`;
+
+const NextButton = styled.button`
+  position: absolute;
+  bottom: 100px;
+  width: 100%;
+  height: 56px;
+  background-color: #4f75ff;
 `;
