@@ -1,12 +1,13 @@
-import React, {useState} from 'react'
+import React, { useState } from "react";
 import { useDispatch, useSelector } from "react-redux";
 import photoIMG from "../assets/photoIMG.png";
 import styled from "styled-components";
 import threedots from "../assets/threedots.png";
 
-const Comment = ({comment, __deleteComment}) => {
+const Comment = ({ comment, __deleteComment }) => {
   const { post } = useSelector((state) => state.details);
   const dispatch = useDispatch();
+  console.log("포스트 겟", post);
   const onDeleteButton = (payload) => {
     if (window.confirm("정말 삭제하시겠습니까?")) {
       dispatch(__deleteComment(payload));
@@ -24,17 +25,16 @@ const Comment = ({comment, __deleteComment}) => {
   };
   return (
     <div>
-          <StContainer>
-
-            <Buttons>
-              <div>
+      <StContainer>
+        <Buttons>
+          <div>
             <img
               style={{
                 width: 25,
                 height: 25,
                 borderRadius: "50%",
                 float: "left",
-                marginRight: 10
+                marginRight: 10,
               }}
               src={
                 post.avatarUrl == (null || undefined)
@@ -42,46 +42,38 @@ const Comment = ({comment, __deleteComment}) => {
                   : post.avatarUrl
               }
             />
-              <div>{comment.nickname} </div>
-              <Cmnt> {comment.comment}</Cmnt>
-
-              </div>
-              <Tgbutton src={threedots} onClick={editToggleHandler}/>
+            <div>{comment.nickname} </div>
+            <Cmnt> {comment.comment}</Cmnt>
+          </div>
+          <Tgbutton src={threedots} onClick={editToggleHandler} />
           {editTg.isEdit === true ? (
-          <Button onClick={() => onDeleteButton(comment.id)}>
-                삭제
-              </Button>
+            <Button onClick={() => onDeleteButton(comment.id)}>삭제</Button>
           ) : null}
-          
-          </Buttons>
+        </Buttons>
+      </StContainer>
+      <hr />
+    </div>
+  );
+};
 
-              </StContainer>
-              <hr/>
-              
-            </div>
-
-  )
-}
-
-export default Comment
+export default Comment;
 // 전체 컨테이너
 const StContainer = styled.div`
-width: 100%;
-height: 50px;
-position: relative;
-`
-
+  width: 100%;
+  height: 50px;
+  position: relative;
+`;
 
 //삭제 토글
 const Buttons = styled.div`
-display: flex;
-justify-content: space-between;
-width: 100%;
-height: 40px;
-div{
-  width : 300px;
-}
-`
+  display: flex;
+  justify-content: space-between;
+  width: 100%;
+  height: 40px;
+  div {
+    width: 300px;
+  }
+`;
 
 const Tgbutton = styled.img`
   width: 23px;
@@ -89,9 +81,9 @@ const Tgbutton = styled.img`
 `;
 
 const Button = styled.button`
-  position : absolute;
-  top : 40px;
-  right : 0px;
+  position: absolute;
+  top: 40px;
+  right: 0px;
   width: 50px;
   height: 40px;
   /* margin-bottom: 3px; */
@@ -104,5 +96,5 @@ const Button = styled.button`
 `;
 
 const Cmnt = styled.div`
-font-size : 12px;
-`
+  font-size: 12px;
+`;

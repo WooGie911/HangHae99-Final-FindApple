@@ -125,27 +125,11 @@ const PricingList = ({ DetailPrice }) => {
           </div>
         </ListDiv>
       )}
-          <InputButton
-            onClick={() => {
-              checkReally(`/postcreate`);
-            }}
-          >
-            상품 등록
-          </InputButton>
-          <ObjectionButton
-            onClick={() => {
-              checkReally(`/objectioncreate`);
-            }}
-          >
-            이의 제기
-          </ObjectionButton>
-
     </>
   );
 };
 
 export default PricingList;
-
 
 const TopDiv = styled.div`
   position: relative;
