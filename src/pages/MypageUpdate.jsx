@@ -61,12 +61,6 @@ const MypageUpdate = () => {
     window.location.replace("/mypage");
   };
 
-  const onClickButton = (e) => {
-    e.preventDefault();
-    localStorage.clear();
-    navigate("/signin");
-  };
-
   return (
     <div
       style={{
@@ -125,7 +119,6 @@ const MypageUpdate = () => {
           </EditContainer>
         </ProfileEdit>
         <br />
-        <Logout onClick={onClickButton}>로그아웃</Logout>
       </Layout>
     </div>
   );
@@ -185,9 +178,3 @@ const EditContainer = styled.div`
   }
 `;
 
-//LogOut
-const Logout = styled.button`
-  position: absolute;
-  margin-left: 10px;
-  bottom: 10px;
-`;

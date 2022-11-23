@@ -32,6 +32,14 @@ const Mypage = () => {
   useEffect(() => {
     dispatch(__UserProfile());
   }, [dispatch]);
+
+  const onClickButton = (e) => {
+    e.preventDefault();
+    localStorage.clear();
+    navigate("/signin");
+  };
+
+
   return (
     <div>
       <Layout>
@@ -107,6 +115,7 @@ const Mypage = () => {
             </div>
           </SecondContainer>
         </FirstContainer>
+        <Logout onClick={onClickButton}>로그아웃</Logout>
         <Footer />
       </Layout>
     </div>
@@ -175,4 +184,23 @@ const SecondContainer = styled.div`
   height: 203px;
   background-color: white;
   border-radius: 5px;
+`;
+
+//LogOut
+const Logout = styled.button`
+/* Rectangle 96 */
+
+box-sizing: border-box;
+
+position: absolute;
+width: 70px;
+height: 38px;
+left: 26px;
+top: 706px;
+/* #3D6AF2 */
+
+border: 1px solid #3D6AF2;
+border-radius: 5px;
+background-color: transparent;
+color : #3D6AF2;
 `;
