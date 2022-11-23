@@ -179,17 +179,24 @@ const PostDetail = () => {
           </Detail>
 
           <Price>
+            
             <div>
+            {post.expectPrice !== undefined && (
+              <>
               <TextDiv>책정가격</TextDiv>
-              <PriceDiv>{post.expectPrice}원</PriceDiv>
+              <PriceDiv>{post.expectPrice.toLocaleString('ko-KR')}원</PriceDiv>
+              </>
+              )}
             </div>
             <Arrow>
               {" "}
               <img src="https://img.icons8.com/metro/15/null/long-arrow-right.png" />{" "}
             </Arrow>
             <div>
+              {post.userPrice !== undefined && (<>
               <TextDiv>판매가격</TextDiv>
-              <PriceDiv>{post.userPrice}원</PriceDiv>
+              <PriceDiv>{post.userPrice.toLocaleString('ko-KR')}원</PriceDiv>
+              </>)}
             </div>
             <div>
               <img

@@ -4,7 +4,6 @@ import styled from "styled-components";
 import threedots from "../assets/threedots.png";
 
 const ObjectionComment = ({ comment, __deleteComment }) => {
-  console.log(comment);
   const dispatch = useDispatch();
   const onDeleteButton = (payload) => {
     if (window.confirm("정말 삭제하시겠습니까?")) {
