@@ -92,7 +92,14 @@ const MainList = () => {
                       </Map_listcategory>
                       <Map_listlike>
                         <span>{post.createdAt}</span>
-                        <span>❤️{post.likeCnt}</span>
+                        <span
+                          style={{
+                            position: "relative",
+                            left: 150,
+                          }}
+                        >
+                          ❤️{post.likeCnt}
+                        </span>
                       </Map_listlike>
                     </Map_listwrap>
                   </PList>
@@ -186,9 +193,9 @@ const Map_listcategory = styled.div`
 
 const Map_listlike = styled.span`
   margin-left: 7px;
-  margin-top: 33px;
   font-size: 12px;
   display: flex;
-
   justify-content: space-between;
+  position: relative;
+  top: 36px;
 `;

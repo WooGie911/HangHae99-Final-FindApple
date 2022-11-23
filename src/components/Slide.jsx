@@ -34,6 +34,7 @@ const Slide = () => {
           <Carouseldiv3>3</Carouseldiv3>
         </Slider>
       </Stdivwrap>
+      <div></div>
     </div>
   );
 };
