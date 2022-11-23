@@ -41,8 +41,9 @@ const MyPost = () => {
               return (
                 <SellerPost key={post.postId}>
                   <img src={post.images[0].imgUrl} onClick={() => {navigate(`/PostDetail/${post.postId}`)}} />
-                  <div>{post.title}</div>
                   <div>{post.userPrice}원</div>
+                  <TitleEdit>{post.title}</TitleEdit>
+                  <LikeCnt>🤍{post.likeCnt}</LikeCnt>
                 </SellerPost>
               );
             })}
@@ -101,4 +102,20 @@ const SellerPost = styled.div`
     height: 160px;
     border-radius: 5px;
   }
+`;
+// 타이틀 글자 줄이기
+const TitleEdit=styled.div`
+font-size: 12px;
+`
+
+//찜하기
+const LikeCnt = styled.div`
+  font-family: "Inter";
+  font-style: normal;
+  font-weight: 400;
+  font-size: 12px;
+  line-height: 15px;
+  /* identical to box height */
+
+  color: #595959;
 `;
