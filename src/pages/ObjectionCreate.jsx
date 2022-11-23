@@ -1,9 +1,21 @@
-import React from 'react'
-
+import React from "react";
+import PostsCreate from "../components/PostsCreate";
+import { __addObjection } from "../redux/modules/ObjectionsSlice";
+import Footer from "../components/Footer";
+import Layout from "../components/Layout";
 const ObjectionCreate = () => {
   return (
-    <div>ObjectionCreate</div>
-  )
-}
+    <>
+      <Layout>
+        <PostsCreate
+          postReqDto={"issuesRequestDto"}
+          Navigate={"objectionread/all"}
+          __addData={__addObjection}
+        />
+        <Footer />
+      </Layout>
+    </>
+  );
+};
 
-export default ObjectionCreate
+export default ObjectionCreate;

@@ -1,61 +1,52 @@
 import { createAsyncThunk, createSlice } from "@reduxjs/toolkit";
 import axios from "axios";
 
-const initialState = {
-  post: [],
-};
-
 const accessToken = localStorage.getItem("Access_Token");
 const refreshToken = localStorage.getItem("Refresh_Token");
 
 export const __getObjectionDetail = createAsyncThunk(
-  "objectionDetails/__getPostDetail",
+  "objectionDetails/__getObjectionDetail",
   async (payload, thunkAPI) => {
+    console.log("겟오브젝션디테일 되나");
     try {
-      const data = await axios.get(`https://jkk.p-e.kr/api/post/${payload}`, {
-        headers: {
-          "Content-Type": `application/json`,
-          Authorization: accessToken,
-          RefreshToken: refreshToken,
-          "Cache-Control": "no-cache",
-        },
-      });
-      //   console.log("__getPostDetail", data.data.data);
-      // console.log("response", data);
-      return thunkAPI.fulfillWithValue(data.data.data);
+      console.log("payloadpayloadpayload", payload);
+      const data = await axios.get(
+        `${process.env.REACT_APP_SERVER}/api/issue/detail/${payload}`,
+        {
+          headers: {
+            "Content-Type": `application/json`,
+            Access_Token: accessToken,
+            Refresh_Token: refreshToken,
+            "Cache-Control": "no-cache",
+          },
+        }
+      );
+
+      return thunkAPI.fulfillWithValue(data.data);
     } catch (error) {
-      console.log("error", error);
       return thunkAPI.rejectWithValue(error);
     }
   }
 );
 
-//comment 부분
-
 export const __addObjectionComment = createAsyncThunk(
   "objectionDetails/__addObjectionComment",
-  // async 는 프로미스에 새로운 신문법이다. // 언제끝나는지 알려준다.
   async (payload, thunkAPI) => {
     try {
-      //console.log(payload)
-      // payload를 데이터를 넣어줄때까지 실행하지 하지않겠다. //비동기
       const data = await axios.post(
-        `https://jkk.p-e.kr/api/comment/${payload.id}`,
-        // JSON.stringify(payload.comment),
+        `${process.env.REACT_APP_SERVER}/api/issue/comment/${payload.id}`,
         payload.comment,
         {
           headers: {
             "Content-Type": `application/json`,
-            Authorization: accessToken,
-            RefreshToken: refreshToken,
+            Access_Token: accessToken,
+            Refresh_Token: refreshToken,
             "Cache-Control": "no-cache",
           },
         }
       );
-      return console.log("response", data);
-      // return thunkAPI.fulfillWithValue(payload.comment);
+      return thunkAPI.fulfillWithValue(data.data);
     } catch (error) {
-      console.log("error", error);
       return thunkAPI.rejectWithValue(error);
     }
   }
@@ -63,25 +54,50 @@ export const __addObjectionComment = createAsyncThunk(
 
 export const __deleteObjectionComment = createAsyncThunk(
   "objectionDetails/__deleteObjectionComment",
-  // async 는 프로미스에 새로운 신문법이다. // 언제끝나는지 알려준다.
   async (payload, thunkAPI) => {
     try {
-      console.log(payload);
-      // payload를 데이터를 넣어줄때까지 실행하지 하지않겠다. //비동기
       const data = await axios.delete(
-        `https://jkk.p-e.kr/api/comment/${payload}`,
+        `${process.env.REACT_APP_SERVER}/api/issue/comment/${payload}`,
         {
           headers: {
             "Content-Type": `application/json`,
-            Authorization: accessToken,
-            RefreshToken: refreshToken,
+            Access_Token: accessToken,
+            Refresh_Token: refreshToken,
             "Cache-Control": "no-cache",
           },
         }
       );
-      // console.log("페이로드",payload);
-      return console.log("response", data);
-      // return thunkAPI.fulfillWithValue(payload);
+      if (data.data === "댓글 삭제 성공") {
+        console.log("삭제 성공");
+        return thunkAPI.fulfillWithValue(payload);
+      }
+      console.log("삭제 성공 인데 메시지 이상? ");
+    } catch (error) {
+      return thunkAPI.rejectWithValue(error);
+    }
+  }
+);
+
+export const __CartInObjection = createAsyncThunk(
+  "objectionDetails/__CartInObjection",
+  async (payload, thunkAPI) => {
+    try {
+      const data = await axios.post(
+        `${process.env.REACT_APP_SERVER}/api/issue/likes/${payload}`,
+        "",
+        {
+          headers: {
+            "Content-Type": `application/json`,
+            Access_Token: accessToken,
+            Refresh_Token: refreshToken,
+            "Cache-Control": "no-cache",
+          },
+        }
+      );
+      if (data.data === "찜 성공") {
+        return thunkAPI.fulfillWithValue({ islike: true, count: +1 });
+      }
+      return thunkAPI.fulfillWithValue({ islike: false, count: -1 });
     } catch (error) {
       console.log("error", error);
       return thunkAPI.rejectWithValue(error);
@@ -89,26 +105,25 @@ export const __deleteObjectionComment = createAsyncThunk(
   }
 );
 
-export const __editObjectionComment = createAsyncThunk(
-  "objectionDetails/__editObjectionComment",
+export const __CartOutObjection = createAsyncThunk(
+  "objectionDetails/__CartOutObjection",
   async (payload, thunkAPI) => {
-    //console.log("payload",payload.id)
     try {
-      console.log(payload);
-      const data = await axios.put(
-        `https://jkk.p-e.kr/api/comment/${payload.id}`,
-        JSON.stringify(payload.comment),
+      const data = await axios.delete(
+        `${process.env.REACT_APP_SERVER}/api/issue/likes/${payload}`,
         {
           headers: {
             "Content-Type": `application/json`,
-            Authorization: accessToken,
-            RefreshToken: refreshToken,
+            Access_Token: accessToken,
+            Refresh_Token: refreshToken,
             "Cache-Control": "no-cache",
           },
         }
       );
-      return console.log("response", data);
-      // return thunkAPI.fulfillWithValue(payload);
+      if (data.data === "찜 삭제") {
+        return thunkAPI.fulfillWithValue({ islike: false, count: -1 });
+      }
+      return thunkAPI.fulfillWithValue({ islike: true, count: +1 });
     } catch (error) {
       console.log("error", error);
       return thunkAPI.rejectWithValue(error);
@@ -118,8 +133,9 @@ export const __editObjectionComment = createAsyncThunk(
 
 const ObjectionDetailsSlice = createSlice({
   name: "objectionDetails",
-  initialState,
-
+  initialState: {
+    post: { updateComment: false },
+  },
   reducers: {},
   extraReducers: {
     //__getObjectionDetail
@@ -129,7 +145,6 @@ const ObjectionDetailsSlice = createSlice({
     [__getObjectionDetail.fulfilled]: (state, action) => {
       state.isLoading = false;
       state.post = action.payload;
-      // console.log("state.post", state.post);
     },
     [__getObjectionDetail.rejected]: (state, action) => {
       state.isLoading = false;
@@ -143,7 +158,9 @@ const ObjectionDetailsSlice = createSlice({
     },
     [__addObjectionComment.fulfilled]: (state, action) => {
       state.isLoading = false;
-      state.post.commentList.push(action.payload);
+      state.post.comments.push(action.payload);
+      state.post.updateComment = !state.post.updateComment;
+      state.post = { ...state.post };
     },
     [__addObjectionComment.rejected]: (state, action) => {
       state.isLoading = false;
@@ -155,32 +172,38 @@ const ObjectionDetailsSlice = createSlice({
     },
     [__deleteObjectionComment.fulfilled]: (state, action) => {
       state.isLoading = false;
-      state.post.commentList = state.post.commentList.filter(
-        (comment) => comment.commentId !== action.payload
+      state.post.comments = state.post.comments.filter(
+        (comment) => comment.issuesCommentId !== action.payload
       );
     },
     [__deleteObjectionComment.rejected]: (state, action) => {
       state.isLoading = false;
       state.error = action.payload;
     },
-    //__editObjectionComment
-    [__editObjectionComment.pending]: (state) => {
+
+    //__CartInObjection
+    [__CartInObjection.pending]: (state) => {
       state.isLoading = true;
     },
-    [__editObjectionComment.fulfilled]: (state, action) => {
+    [__CartInObjection.fulfilled]: (state, action) => {
       state.isLoading = false;
-
-      const indexId = state.comment.findIndex((comment) => {
-        if (comment.commentId == action.payload.id) {
-          return true;
-        }
-        return false;
-      });
-      state.comment[indexId] = action.payload.comment;
-
-      state.comment = [...state.comment];
+      state.post.isLike = action.payload.islike;
+      state.post.likeCnt = state.post.likeCnt + action.payload.count;
     },
-    [__editObjectionComment.rejected]: (state, action) => {
+    [__CartInObjection.rejected]: (state, action) => {
+      state.isLoading = false;
+      state.error = action.payload;
+    },
+    //__CartOutObjection
+    [__CartOutObjection.pending]: (state) => {
+      state.isLoading = true;
+    },
+    [__CartOutObjection.fulfilled]: (state, action) => {
+      state.isLoading = false;
+      state.post.isLike = action.payload.islike;
+      state.post.likeCnt = state.post.likeCnt + action.payload.count;
+    },
+    [__CartOutObjection.rejected]: (state, action) => {
       state.isLoading = false;
       state.error = action.payload;
     },

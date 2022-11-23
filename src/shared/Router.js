@@ -13,6 +13,16 @@ import ObjectionDetail from "../pages/ObjectionDetail";
 import Mypage from "../pages/Mypage";
 import MypageUpdate from "../pages/MypageUpdate";
 import Main from "../pages/Main";
+import Redirect from "../components/Redirect";
+import SellerPage from "../pages/SellerPage";
+import MyLike from "../pages/MyLike";
+import MyObjection from "../pages/MyObjection";
+import MyPost from "../pages/MyPost";
+import PricingInput from "../components/PricingInput";
+import Pricingfinal from "../components/Pricingfinal";
+import PricingText from "../components/PricingText";
+import PostComment from "../pages/PostComment";
+import ObjectionComment from "../pages/ObjectionComment";
 
 const Router = () => {
   return (
@@ -20,42 +30,77 @@ const Router = () => {
       <Routes>
         {/* 로그인 페이지 이동하기 */}
         <Route path="/signin" element={<SignIn />} />
-
         {/* 회원가입 페이지 이동하기 */}
         <Route path="/signup" element={<SignUp />} />
 
         {/* 포스트 리스트 생성 페이지로 이동하기 */}
         <Route path="/postcreate" element={<PostCreate />} />
-
         {/* 게시글 홈으로 이동하기 */}
-        <Route path="/postread" element={<PostRead />} />
-
+        <Route path="/postread/:category" element={<PostRead />} />
+        <Route path="/postread/:category/:sort" element={<PostRead />} />
         {/* 게시글 업데이트로 이동하기 */}
-        <Route path="/postupdate" element={<PostUpdate />} />
-
+        <Route path="/postupdate/:id" element={<PostUpdate />} />
         {/* 포스트리스트 카드별 상세보기 페이지로 이동하기 */}
         <Route path="/PostDetail/:id" element={<PostDetail />} />
+        {/*게시물 댓글 페이지 */}
+        <Route path="/postComment/:id" element={<PostComment />} />
 
         {/* 이의제기 리스트 생성 페이지로 이동하기 */}
         <Route path="/objectioncreate" element={<ObjectionCreate />} />
-
         {/* 이의제기 홈으로 이동하기 */}
-        <Route path="/objectionread" element={<ObjectionRead />} />
-
+        <Route path="/objectionread/:category" element={<ObjectionRead />} />
+        <Route
+          path="/objectionread/:category/:sort"
+          element={<ObjectionRead />}
+        />
         {/* 이의제기 업데이트로 이동하기 */}
-        <Route path="/objectionupdate" element={<ObjectionUpdate />} />
-
+        <Route path="/objectionupdate/:id" element={<ObjectionUpdate />} />
         {/* 이의제기리스트 카드별 상세보기 페이지로 이동하기 */}
         <Route path="objectionDetail/:id" element={<ObjectionDetail />} />
+        {/*이의제기 댓글 페이지 */}
+        <Route path="/objectionComment/:id" element={<ObjectionComment />} />
 
         {/* 개인 페이지 이동하기 */}
         <Route path="/mypage" element={<Mypage />} />
-
         {/* 개인 페이지 업데이트 이동하기 */}
         <Route path="/mypageupdate" element={<MypageUpdate />} />
+        {/* 찜하기 페이지 이동하기 */}
+        <Route path="/mylike" element={<MyLike />} />
+        {/* 내 이의제기 페이지 이동하기 */}
+        <Route path="/myobjection" element={<MyObjection />} />
+        {/* 내 이의제기 페이지 이동하기 */}
+        <Route path="/mypost" element={<MyPost />} />
 
         {/* main 페이지 이동하기 */}
         <Route path="/" element={<Main />} />
+
+        {/* 판매자 페이지 이동하기 */}
+        <Route path="/sellerpage/:memberId" element={<SellerPage />} />
+
+        {/* 카카오 소셜 로그인 */}
+        <Route path="/KAKAO" element={<Redirect />} />
+
+        {/*가격 책정 페이지 */}
+        <Route path="/pricingInput" element={<PricingInput />} />
+        <Route path="/pricingInput/:category" element={<PricingInput />} />
+        <Route
+          path="/pricingInput/:category/:year"
+          element={<PricingInput />}
+        />
+        <Route
+          path="/pricingInput/:category/:year/:model"
+          element={<PricingInput />}
+        />
+        <Route
+          path="/pricingInput/:category/:year/:model/:option"
+          element={<PricingInput />}
+        />
+
+        {/*가격 결정 페이지 */}
+        <Route path="/pricingfinal" element={<Pricingfinal />} />
+
+        {/*상세내용 확인 페이지 */}
+        <Route path="/pricingtext" element={<PricingText />} />
       </Routes>
     </BrowserRouter>
   );

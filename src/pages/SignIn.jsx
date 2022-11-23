@@ -4,6 +4,8 @@ import { __Signin } from "../redux/modules/LoginSlice";
 import { useNavigate } from "react-router-dom";
 import styled from "styled-components";
 import useInput from "../hook/useInput";
+import KakaoLogin from "../components/KakaoLogin";
+import Layout from "../components/Layout";
 
 const SignIn = () => {
   const initialState = {
@@ -27,67 +29,57 @@ const SignIn = () => {
   };
 
   return (
-    <StWrapper>
+    <Layout>
       <StSignupBox>
         <StLoginBox>
-          <StImgBox />
+          <Title>Findapple</Title>
           <StInputBox
             type="text"
             name="email"
             onChange={ChangeInputHandler}
-            placeholder="email"
+            placeholder="이메일 입력"
             value={input.email}
           />
           <StInputBox
             type="text"
             name="password"
             onChange={ChangeInputHandler}
-            placeholder="PASSWORD"
+            placeholder="비밀번호 입력"
             value={input.password}
           />
           <StButton onClick={onSubmitHandler}>로그인</StButton>
-          계정이 없으신가요?
-          <StSignupBox
-            onClick={() => {
-              navigate("/signup");
-            }}
-          >
-            가입하기
-          </StSignupBox>
+          <br />
+          <div>
+            회원이 아니신가요?
+            <A
+              onClick={() => {
+                navigate("/signup");
+              }}
+            >
+              회원가입
+            </A>
+          </div>
+          <br />
+          <KakaoLogin />
         </StLoginBox>
       </StSignupBox>
-    </StWrapper>
+    </Layout>
   );
 };
 
 export default SignIn;
 
-const StWrapper = styled.div`
-  width: 100%;
+const StLoginBox = styled.div`
+  position: relative;
+  width: 375px;
   height: 100vh;
   background-color: #fafafa;
   display: flex;
   justify-content: center;
   align-items: center;
   flex-direction: column;
-`;
-
-const StLoginBox = styled.div`
-  width: 600px;
-  height: 500px;
-  background-color: white;
-  border: 1px solid #bababa;
-  display: flex;
-  justify-content: center;
-  align-items: center;
-  flex-direction: column;
-`;
-
-const StImgBox = styled.div`
-  width: 60%;
-  background-image: url("https://blog.kakaocdn.net/dn/SjvFN/btreg3CYQb2/3uu6ofxOgBcoTDzEU1s6q0/img.png");
-  background-size: 100% 100%;
-  height: 230px;
+  top: 350px;
+  left: -13px;
 `;
 
 const StSignupBox = styled.div`
@@ -95,37 +87,53 @@ const StSignupBox = styled.div`
   margin-top: 30px;
   height: 10vh;
   background-color: white;
-  border-top: 1px solid #bababa;
   display: flex;
   justify-content: center;
   text-align: center;
   align-items: center;
 `;
 
+const Title = styled.div`
+  font-size: 30px;
+  font-weight: bold;
+  text-align: center;
+  margin-bottom: 100px;
+`;
+
 const StInputBox = styled.input`
-  width: 70%;
-  height: 35px;
+  width: 296px;
+  height: 38px;
   margin-top: 10px;
-  background-color: #fafafa;
-  border: 1px solid #d4d4d4;
+  background-color: white;
+  border: none;
   border-radius: 5px;
+  box-shadow: 5px 5px #f2f2f2;
   &:focus,
   &:active {
     outline: none;
+  }
+  ::placeholder {
+    color: #c4c4c4;
   }
   padding-left: 10px;
 `;
 
 const StButton = styled.button`
-  width: 70%;
-  height: 35px;
+  width: 296px;
+  height: 38px;
   margin-top: 30px;
   border: none;
+  border-radius: 5px;
   color: white;
   font-weight: 600;
   font-size: 18px;
   background-color: ${({ username, password }) =>
-    username !== "" && password !== "" ? "#0095f6" : "#ececec"};
+    username !== "" && password !== "" ? "black" : "#ececec"};
   cursor: ${({ username, password }) =>
     username !== "" && password !== "" ? "pointer" : null};
+`;
+
+const A = styled.a`
+  color: #2288ee;
+  margin-left: 10px;
 `;

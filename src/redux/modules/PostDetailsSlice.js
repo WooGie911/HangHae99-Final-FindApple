@@ -1,10 +1,6 @@
 import { createAsyncThunk, createSlice } from "@reduxjs/toolkit";
 import axios from "axios";
 
-const initialState = {
-  post: [],
-};
-
 const accessToken = localStorage.getItem("Access_Token");
 const refreshToken = localStorage.getItem("Refresh_Token");
 
@@ -12,22 +8,21 @@ export const __getPostDetail = createAsyncThunk(
   "details/__getPostDetail",
   async (payload, thunkAPI) => {
     try {
+      console.log("payloadpayloadpayload", payload);
       const data = await axios.get(
         `${process.env.REACT_APP_SERVER}/api/post/detail/${payload}`,
         {
           headers: {
             "Content-Type": `application/json`,
-            Authorization: accessToken,
-            RefreshToken: refreshToken,
+            Access_Token: accessToken,
+            Refresh_Token: refreshToken,
             "Cache-Control": "no-cache",
           },
         }
       );
-      console.log("__getPostDetail", data.data.data);
-      // console.log("response", data);
-      return thunkAPI.fulfillWithValue(data.data.data);
+
+      return thunkAPI.fulfillWithValue(data.data);
     } catch (error) {
-      console.log("error", error);
       return thunkAPI.rejectWithValue(error);
     }
   }
@@ -35,28 +30,22 @@ export const __getPostDetail = createAsyncThunk(
 
 export const __addPostComment = createAsyncThunk(
   "details/__addPostComment",
-  // async 는 프로미스에 새로운 신문법이다. // 언제끝나는지 알려준다.
   async (payload, thunkAPI) => {
     try {
-      //console.log(payload)
-      // payload를 데이터를 넣어줄때까지 실행하지 하지않겠다. //비동기
       const data = await axios.post(
-        `${process.env.REACT_APP_SERVER}/api/comment/${payload.id}`,
-        // JSON.stringify(payload.comment),
+        `${process.env.REACT_APP_SERVER}/api/post/comment/${payload.id}`,
         payload.comment,
         {
           headers: {
             "Content-Type": `application/json`,
-            Authorization: accessToken,
-            RefreshToken: refreshToken,
+            Access_Token: accessToken,
+            Refresh_Token: refreshToken,
             "Cache-Control": "no-cache",
           },
         }
       );
-      return console.log("response", data);
-      // return thunkAPI.fulfillWithValue(payload.comment);
+      return thunkAPI.fulfillWithValue(data.data);
     } catch (error) {
-      console.log("error", error);
       return thunkAPI.rejectWithValue(error);
     }
   }
@@ -64,25 +53,52 @@ export const __addPostComment = createAsyncThunk(
 
 export const __deletePostComment = createAsyncThunk(
   "details/__deletePostComment",
-  // async 는 프로미스에 새로운 신문법이다. // 언제끝나는지 알려준다.
   async (payload, thunkAPI) => {
     try {
-      console.log(payload);
-      // payload를 데이터를 넣어줄때까지 실행하지 하지않겠다. //비동기
       const data = await axios.delete(
-        `${process.env.REACT_APP_SERVER}/api/comment/${payload}`,
+        `${process.env.REACT_APP_SERVER}/api/post/comment/${payload}`,
         {
           headers: {
             "Content-Type": `application/json`,
-            Authorization: accessToken,
-            RefreshToken: refreshToken,
+            Access_Token: accessToken,
+            Refresh_Token: refreshToken,
             "Cache-Control": "no-cache",
           },
         }
       );
-      // console.log("페이로드",payload);
-      return console.log("response", data);
-      // return thunkAPI.fulfillWithValue(payload);
+      if (data.data === "Success") {
+        console.log("삭제 성공");
+        return thunkAPI.fulfillWithValue(payload);
+      }
+      console.log("삭제 성공 인데 메시지 이상? ");
+    } catch (error) {
+      return thunkAPI.rejectWithValue(error);
+    }
+  }
+);
+
+export const __CartInPost = createAsyncThunk(
+  "details/__CartInPost",
+  async (payload, thunkAPI) => {
+    try {
+      const data = await axios.post(
+        `${process.env.REACT_APP_SERVER}/api/post/likes/${payload}`,
+        "",
+        {
+          headers: {
+            "Content-Type": `application/json`,
+            Access_Token: accessToken,
+            Refresh_Token: refreshToken,
+            "Cache-Control": "no-cache",
+          },
+        }
+      );
+      console.log("response", data);
+      if (data.data === "찜 성공") {
+        console.log("찜 성공");
+        return thunkAPI.fulfillWithValue({ islike: true, count: +1 });
+      }
+      return thunkAPI.fulfillWithValue({ islike: false, count: -1 });
     } catch (error) {
       console.log("error", error);
       return thunkAPI.rejectWithValue(error);
@@ -90,26 +106,25 @@ export const __deletePostComment = createAsyncThunk(
   }
 );
 
-export const __editPostComment = createAsyncThunk(
-  "details/__editPostComment",
+export const __CartOutPost = createAsyncThunk(
+  "details/__CartOutPost",
   async (payload, thunkAPI) => {
-    //console.log("payload",payload.id)
     try {
-      console.log(payload);
-      const data = await axios.put(
-        `${process.env.REACT_APP_SERVER}/api/comment/${payload.id}`,
-        JSON.stringify(payload.comment),
+      const data = await axios.delete(
+        `${process.env.REACT_APP_SERVER}/api/post/likes/${payload}`,
         {
           headers: {
             "Content-Type": `application/json`,
-            Authorization: accessToken,
-            RefreshToken: refreshToken,
+            Access_Token: accessToken,
+            Refresh_Token: refreshToken,
             "Cache-Control": "no-cache",
           },
         }
       );
-      return console.log("response", data);
-      // return thunkAPI.fulfillWithValue(payload);
+      if (data.data === "찜 삭제") {
+        return thunkAPI.fulfillWithValue({ islike: false, count: -1 });
+      }
+      return thunkAPI.fulfillWithValue({ islike: true, count: +1 });
     } catch (error) {
       console.log("error", error);
       return thunkAPI.rejectWithValue(error);
@@ -119,8 +134,9 @@ export const __editPostComment = createAsyncThunk(
 
 const PostDetailSlice = createSlice({
   name: "details",
-  initialState,
-
+  initialState: {
+    post: { updateComment: false },
+  },
   reducers: {},
   extraReducers: {
     //__getPostDetail
@@ -130,7 +146,6 @@ const PostDetailSlice = createSlice({
     [__getPostDetail.fulfilled]: (state, action) => {
       state.isLoading = false;
       state.post = action.payload;
-      // console.log("state.post", state.post);
     },
     [__getPostDetail.rejected]: (state, action) => {
       state.isLoading = false;
@@ -144,7 +159,9 @@ const PostDetailSlice = createSlice({
     },
     [__addPostComment.fulfilled]: (state, action) => {
       state.isLoading = false;
-      state.post.commentList.push(action.payload);
+      state.post.comments.push(action.payload);
+      state.post.updateComment = !state.post.updateComment;
+      state.post = { ...state.post };
     },
     [__addPostComment.rejected]: (state, action) => {
       state.isLoading = false;
@@ -156,32 +173,40 @@ const PostDetailSlice = createSlice({
     },
     [__deletePostComment.fulfilled]: (state, action) => {
       state.isLoading = false;
-      state.post.commentList = state.post.commentList.filter(
+      state.post.comments = state.post.comments.filter(
         (comment) => comment.commentId !== action.payload
       );
+      state.post.updateComment = !state.post.updateComment;
+      state.post = { ...state.post };
     },
     [__deletePostComment.rejected]: (state, action) => {
       state.isLoading = false;
       state.error = action.payload;
     },
-    //__editPostComment
-    [__editPostComment.pending]: (state) => {
+
+    //__CartInPost
+    [__CartInPost.pending]: (state) => {
       state.isLoading = true;
     },
-    [__editPostComment.fulfilled]: (state, action) => {
+    [__CartInPost.fulfilled]: (state, action) => {
       state.isLoading = false;
-
-      const indexId = state.comment.findIndex((comment) => {
-        if (comment.commentId == action.payload.id) {
-          return true;
-        }
-        return false;
-      });
-      state.comment[indexId] = action.payload.comment;
-
-      state.comment = [...state.comment];
+      state.post.isLike = action.payload.islike;
+      state.post.likeCnt = state.post.likeCnt + action.payload.count;
     },
-    [__editPostComment.rejected]: (state, action) => {
+    [__CartInPost.rejected]: (state, action) => {
+      state.isLoading = false;
+      state.error = action.payload;
+    },
+    //__CartOutPost
+    [__CartOutPost.pending]: (state) => {
+      state.isLoading = true;
+    },
+    [__CartOutPost.fulfilled]: (state, action) => {
+      state.isLoading = false;
+      state.post.isLike = action.payload.islike;
+      state.post.likeCnt = state.post.likeCnt + action.payload.count;
+    },
+    [__CartOutPost.rejected]: (state, action) => {
       state.isLoading = false;
       state.error = action.payload;
     },
