@@ -57,7 +57,7 @@ export default Header;
 
 const HeaderSpace = styled.div`
   cursor: pointer;
-  background-color: black;
+  background-color: #3D6AF2;
   color: #ffffff;
   font-size: 14px;
   display: flex;
