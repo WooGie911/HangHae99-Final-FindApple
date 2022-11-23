@@ -101,4 +101,5 @@ const More_seebutton = styled.button`
   border: 0;
   outline: 0;
   opacity: 0.5;
+  cursor: pointer;
 `;
