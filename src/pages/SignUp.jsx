@@ -33,11 +33,11 @@ const SignUp = () => {
     ) {
       return alert("입력을 확인하세요.");
     }
-    // if (emailCheckTF === true) {
-    //   if (input.emailCheck !== emailCheckData) {
-    //     return alert("인증번호가 일치하지 않습니다.");
-    //   }
-    // }
+    if (emailCheckTF === true) {
+      if (input.emailCheck !== emailCheckData) {
+        return alert("인증번호가 일치하지 않습니다.");
+      }
+    }
     if (input.password !== input.passwordCheck) {
       return alert("비밀번호가 일치하지 않습니다.");
     }

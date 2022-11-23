@@ -92,7 +92,7 @@ const PricingList = ({ DetailPrice }) => {
           <div>
             <div>
               <span>카테고리</span>
-              <label>{DetailPrice.category.toUpperCase()}</label>
+              <label>{DetailPrice.category}</label>
             </div>
             <div>
               <span>출시년도</span>
