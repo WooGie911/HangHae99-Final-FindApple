@@ -1,32 +1,31 @@
 import React, { useState } from "react";
-import { useDispatch } from "react-redux";
+import { useDispatch, } from "react-redux";
 import styled from "styled-components";
 import threedots from "../assets/threedots.png";
 
-const Comment = ({ comment, __deleteComment }) => {
+const ObjectionComment = ({comment, __deleteObjectionComment}) => {
   const dispatch = useDispatch();
   const onDeleteButton = (payload) => {
     if (window.confirm("정말 삭제하시겠습니까?")) {
-      dispatch(__deleteComment(payload));
+      dispatch(__deleteObjectionComment(payload));
     }
   };
-
-  const [editTg, setEidtTg] = useState({
-    isEdit: false,
-  });
-  const editToggleHandler = () => {
-    const newEdit = {
-      isEdit: !editTg.isEdit,
-    };
-    setEidtTg(newEdit);
+const [editTg, setEidtTg] = useState({
+  isEdit: false,
+});
+const editToggleHandler = () => {
+  const newEdit = {
+    isEdit: !editTg.isEdit,
   };
+  setEidtTg(newEdit);
+};
   return (
     <div>
       <StContainer>
         <Buttons>
           <div>
             <div>{comment.nickname} </div>
-            <Cmnt> {comment.comment}</Cmnt>
+            <Cmnt> {comment.issuesComment}</Cmnt>
           </div>
           <Tgbutton src={threedots} onClick={editToggleHandler} />
           {editTg.isEdit === true ? (
@@ -36,10 +35,10 @@ const Comment = ({ comment, __deleteComment }) => {
       </StContainer>
       <hr />
     </div>
-  );
-};
+  )
+}
 
-export default Comment;
+export default ObjectionComment
 // 전체 컨테이너
 const StContainer = styled.div`
   width: 100%;

@@ -143,8 +143,8 @@ const PostDetail = () => {
             {post.isLike ? <img src="https://img.icons8.com/emoji/25/null/blue-heart.png"/> : "🤍"}{" "}
           </ClickHeart>
         </WriterContainer>
-        <hr />
-        <h3>{post.title}</h3>
+        <White>
+        <Title>{post.title}</Title>
         {post.options !== undefined &&
         (
          <>
@@ -195,6 +195,7 @@ const PostDetail = () => {
             <TextDiv>댓글</TextDiv>
           </div>
         </Price>
+        </White>
       </Layout>
     </>
   );
@@ -288,6 +289,8 @@ const WriterContainer = styled.div`
   background-color: white;
   border-radius: 15px 15px 0 0;
   justify-content: space-between;
+  border-bottom: 0.5px solid lightgrey;
+  padding-bottom: 10px;
 `;
 
 // seller 프로필
@@ -299,6 +302,19 @@ const Nickname = styled.div`
 cursor: pointer;
 margin-top: 18px;
 margin-left: 10px;
+`
+
+// 흰배경
+const White = styled.div`
+background: white;
+height: 80vh;
+`
+
+// 타이틀
+const Title=styled.div`
+font-size: 18px;
+font-weight: bold;
+margin-bottom: 15px;
 `
 
 // 상품 측정 정도 확인
