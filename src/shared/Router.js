@@ -60,15 +60,15 @@ const Router = () => {
         {/*이의제기 댓글 페이지 */}
         <Route path="/objectionComment/:id" element={<ObjectionComment />} />
 
-        {/* 개인 페이지 이동하기 */}
+        {/* 마이 페이지 이동하기 */}
         <Route path="/mypage" element={<Mypage />} />
-        {/* 개인 페이지 업데이트 이동하기 */}
+        {/* 내정보 업데이트 페이지 이동하기 */}
         <Route path="/mypageupdate" element={<MypageUpdate />} />
-        {/* 찜하기 페이지 이동하기 */}
+        {/* 찜목록 페이지 이동하기 */}
         <Route path="/mylike" element={<MyLike />} />
         {/* 내 이의제기 페이지 이동하기 */}
         <Route path="/myobjection" element={<MyObjection />} />
-        {/* 내 이의제기 페이지 이동하기 */}
+        {/* 내 게시물 페이지 이동하기 */}
         <Route path="/mypost" element={<MyPost />} />
 
         {/* main 페이지 이동하기 */}

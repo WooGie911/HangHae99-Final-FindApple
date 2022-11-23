@@ -28,7 +28,7 @@ const SortBar = (props) => {
             onClickSortHandler(props.postId);
           }}
         >
-          인기순
+          최신순
         </span>
         <> </>
         <span
@@ -36,7 +36,7 @@ const SortBar = (props) => {
             onClickSortHandler(props.postLikeCnt);
           }}
         >
-          최신순
+          인기순
         </span>
       </div>
     </>

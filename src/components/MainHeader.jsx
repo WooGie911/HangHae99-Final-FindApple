@@ -24,34 +24,42 @@ const MainHeader = (props) => {
   return (
     <div>
       <HeaderSpace>
-        <div
-          onClick={() => {
-            navigate("/");
-          }}
-        >
-          HOME
-        </div>
-        <div
-          onClick={() => {
-            onClickCategoryHandler("all");
-          }}
-        >
-          전체
-        </div>
-        <div
-          onClick={() => {
-            onClickCategoryHandler("macbook");
-          }}
-        >
-          MacBook
-        </div>
-        <div
-          onClick={() => {
-            onClickCategoryHandler("iphone");
-          }}
-        >
-          iPhone
-        </div>
+        <HeaderTextSpace>
+          <span
+            onClick={() => {
+              navigate("/");
+            }}
+          >
+            HOME
+          </span>
+          <div
+            onClick={() => {
+              onClickCategoryHandler("all");
+            }}
+          >
+            전체
+          </div>
+          <div
+            onClick={() => {
+              onClickCategoryHandler("macbook");
+            }}
+          >
+            MacBook
+          </div>
+          <div
+            onClick={() => {
+              onClickCategoryHandler("iphone");
+            }}
+          >
+            iPhone
+          </div>
+        </HeaderTextSpace>
+        <HeaderBottomBar>
+          <span />
+          <div />
+          <div />
+          <div />
+        </HeaderBottomBar>
       </HeaderSpace>
     </div>
   );
@@ -63,13 +71,44 @@ const HeaderSpace = styled.div`
   cursor: pointer;
   background-color: #3d6af2;
   color: #ffffff;
+  height: 49px;
+`;
+const HeaderTextSpace = styled.div`
   font-size: 14px;
   display: flex;
-  height: 49px;
+  height: 45px;
   justify-content: space-between;
-  line-height: 49px;
-  padding: 0 20px;
+
+  span {
+    cursor: pointer;
+    display: flex;
+    height: 100%;
+    align-items: center;
+    width: 25%;
+    justify-content: center;
+  }
+
   div {
-    margin-right: 15px;
+    cursor: pointer;
+    display: flex;
+    height: 100%;
+    align-items: center;
+    width: 25%;
+    justify-content: center;
+    color: rgba(255, 255, 255, 0.5);
+  }
+`;
+
+const HeaderBottomBar = styled.div`
+  display: flex;
+  height: 4px;
+  span {
+    height: 100%;
+    width: 25%;
+    background-color: rgba(255, 255, 255, 0.5);
+  }
+  div {
+    height: 100%;
+    width: 25%;
   }
 `;

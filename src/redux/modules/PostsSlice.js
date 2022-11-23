@@ -96,7 +96,7 @@ export const __getPost = createAsyncThunk(
           },
         }
       );
-      return thunkAPI.fulfillWithValue(data.data.content);
+      return thunkAPI.fulfillWithValue(data.data);
     } catch (error) {
       return thunkAPI.rejectWithValue(error);
     }
@@ -177,6 +177,7 @@ const PostsSlice = createSlice({
   name: "posts",
   initialState: {
     posts: [],
+    postsCount: 0,
     HeaderState: {
       paramObj: "all",
       pageNumber: 0,
@@ -239,7 +240,8 @@ const PostsSlice = createSlice({
     },
     [__getPost.fulfilled]: (state, action) => {
       state.isLoading = false;
-      state.posts = action.payload;
+      state.posts = action.payload.content;
+      state.postsCount = action.payload.totalElements;
     },
     [__getPost.rejected]: (state, action) => {
       state.isLoading = false;
