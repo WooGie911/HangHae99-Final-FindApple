@@ -3,11 +3,11 @@ import { useDispatch, } from "react-redux";
 import styled from "styled-components";
 import threedots from "../assets/threedots.png";
 
-const ObjectionComment = ({comment, __deleteComment}) => {
+const ObjectionComment = ({comment, __deleteObjectionComment}) => {
   const dispatch = useDispatch();
   const onDeleteButton = (payload) => {
     if (window.confirm("정말 삭제하시겠습니까?")) {
-      dispatch(__deleteComment(payload));
+      dispatch(__deleteObjectionComment(payload));
     }
   };
 const [editTg, setEidtTg] = useState({

@@ -41,7 +41,7 @@ const ObjectionComment = () => {
 
       <ObjectionCommentList
         List={post}
-        __deleteComment={__deleteObjectionComment}
+        __deleteObjectionComment={__deleteObjectionComment}
         commentList={post.comments}
         __getDetail={__getObjectionDetail}
       />
