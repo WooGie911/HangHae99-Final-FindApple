@@ -2,9 +2,8 @@ import { createAsyncThunk, createSlice } from "@reduxjs/toolkit";
 import axios from "axios";
 
 const initialState = {
-  myPostList : [],
-  sellerInfoDto : {}
-
+  myPostList: [],
+  sellerInfoDto: {},
 };
 
 const accessToken = localStorage.getItem("Access_Token");
@@ -13,52 +12,52 @@ const refreshToken = localStorage.getItem("Refresh_Token");
 // api 나오면 data 부분 완성할 것
 export const __getSellerinfo = createAsyncThunk(
   "sellerpage/__getSellerinfo",
-  async(payload, thunkAPI) => {
+  async (payload, thunkAPI) => {
     try {
-      const data = await axios.get(`${process.env.REACT_APP_SERVER}/api/myinfo/seller/${payload}`,{
-        headers: {
-          "Content-Type": `application/json`,
-          Access_Token: accessToken,
-          Refresh_Token: refreshToken,
-          "Cache-Control": "no-cache",
+      const data = await axios.get(
+        `${process.env.REACT_APP_SERVER}/api/myinfo/seller/${payload}`,
+        {
+          headers: {
+            "Content-Type": `application/json`,
+            Access_Token: accessToken,
+            Refresh_Token: refreshToken,
+            "Cache-Control": "no-cache",
+          },
         }
-      })
+      );
       return thunkAPI.fulfillWithValue(data.data);
-    } catch(error){
+    } catch (error) {
       return thunkAPI.rejectWithValue(error);
     }
   }
-)
-
+);
 
 const SellerSlice = createSlice({
-  name : "sellerpage",
+  name: "sellerpage",
   initialState,
 
-  reducer : {},
-  extraReducers : {
-//__getSellerinfo
-[__getSellerinfo.pending]: (state) => {
-  state.isLoading = true;
-},
-[__getSellerinfo.fulfilled]: (state, action) => {
-  state.isLoading = false;
-  state.myPostList = action.payload.myPostList;
-  state.sellerInfoDto = action.payload.sellerInfoDto
-},
-[__getSellerinfo.rejected]: (state, action) => {
-  state.isLoading = false;
-  state.error = action.payload;
-},
-
-  }
+  reducer: {},
+  extraReducers: {
+    //__getSellerinfo
+    [__getSellerinfo.pending]: (state) => {
+      state.isLoading = true;
+    },
+    [__getSellerinfo.fulfilled]: (state, action) => {
+      state.isLoading = false;
+      state.myPostList = action.payload.myPostList;
+      state.sellerInfoDto = action.payload.sellerInfoDto;
+    },
+    [__getSellerinfo.rejected]: (state, action) => {
+      state.isLoading = false;
+      state.error = action.payload;
+    },
+  },
 });
 
 export default SellerSlice.reducer;
 
-
-  //sellerPost : {},
-  //sellerPostList: [],
+//sellerPost : {},
+//sellerPostList: [],
 // export const __getSellerPost = createAsyncThunk(
 //   "sellerpage/__getSellerPost",
 //   async(payload, thunkAPI) => {

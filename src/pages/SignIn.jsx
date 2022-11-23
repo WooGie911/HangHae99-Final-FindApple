@@ -32,9 +32,7 @@ const SignIn = () => {
     <Layout>
       <StSignupBox>
         <StLoginBox>
-          <Title>
-            Findapple
-          </Title>
+          <Title>Findapple</Title>
           <StInputBox
             type="text"
             name="email"
@@ -71,7 +69,6 @@ const SignIn = () => {
 
 export default SignIn;
 
-
 const StLoginBox = styled.div`
   position: relative;
   width: 375px;
@@ -82,7 +79,7 @@ const StLoginBox = styled.div`
   align-items: center;
   flex-direction: column;
   top: 350px;
-  left : -13px;
+  left: -13px;
 `;
 
 const StSignupBox = styled.div`
@@ -97,11 +94,11 @@ const StSignupBox = styled.div`
 `;
 
 const Title = styled.div`
-font-size: 30px;
-font-weight: bold;
-text-align: center;
-margin-bottom: 100px;
-`
+  font-size: 30px;
+  font-weight: bold;
+  text-align: center;
+  margin-bottom: 100px;
+`;
 
 const StInputBox = styled.input`
   width: 296px;
@@ -116,8 +113,8 @@ const StInputBox = styled.input`
     outline: none;
   }
   ::placeholder {
-  color: #c4c4c4;
-}
+    color: #c4c4c4;
+  }
   padding-left: 10px;
 `;
 
@@ -137,6 +134,6 @@ const StButton = styled.button`
 `;
 
 const A = styled.a`
-  color: #2288EE;
+  color: #2288ee;
   margin-left: 10px;
-`
+`;

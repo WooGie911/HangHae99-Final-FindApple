@@ -27,21 +27,20 @@ const ObjectionComment = () => {
   return (
     <>
       <HeadContainer>
-      <div>
-        <img
+        <div>
+          <img
             onClick={onClickHandler}
             style={{ width: 25, height: 25 }}
             src={back}
           />
-        <span>댓글</span>
-
-      </div>
+          <span>댓글</span>
+        </div>
       </HeadContainer>
-      <hr/>
+      <hr />
 
       <ObjectionCommentList
         List={post}
-        __deleteObjectionComment={__deleteObjectionComment}
+        deleteComment={__deleteObjectionComment}
         commentList={post.comments}
         __getDetail={__getObjectionDetail}
       />
@@ -60,7 +59,7 @@ const HeadContainer = styled.div`
   margin-right: 120px;
   img {
     float: left;
-    margin-right : 130px;
+    margin-right: 130px;
   }
   span {
     /* text-align: center; */

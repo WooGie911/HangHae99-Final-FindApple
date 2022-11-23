@@ -37,7 +37,6 @@ export const __checkPrice = createAsyncThunk(
   "price/__checkPrice",
   async (payload, thunkAPI) => {
     try {
-   
       const response = await axios.post(
         `${process.env.REACT_APP_SERVER}/api/price/${payload.category}`,
         payload.Data,
@@ -52,7 +51,6 @@ export const __checkPrice = createAsyncThunk(
       );
       return thunkAPI.fulfillWithValue(response.data);
     } catch (error) {
-
       return thunkAPI.rejectWithValue(error);
     }
   }
@@ -62,9 +60,7 @@ const PriceSlice = createSlice({
   name: "price",
   initialState,
 
-  reducer: {
-
-  },
+  reducer: {},
   extraReducers: {
     //__getPriceInfo
     [__getPriceInfo.pending]: (state) => {
@@ -86,7 +82,6 @@ const PriceSlice = createSlice({
     [__checkPrice.fulfilled]: (state, action) => {
       state.isLoading = false;
       state.DetailPrice = action.payload;
-    
     },
     [__checkPrice.rejected]: (state, action) => {
       state.isLoading = false;

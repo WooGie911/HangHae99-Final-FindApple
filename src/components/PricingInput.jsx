@@ -5,7 +5,6 @@ import styled from "styled-components";
 import { __checkPrice, __getPriceInfo } from "../redux/modules/PriceSlice";
 import Footer from "./Footer";
 import Layout from "./Layout";
-import "./style.css";
 
 const PricingInput = () => {
   const navigate = useNavigate();
@@ -213,9 +212,16 @@ const PricingInput = () => {
           {tag.step1 && (
             <ContainerDiv>
               <TitleDiv>
-                <Xbutton
+                <Backbutton
                   onClick={() => {
                     navigate(-1);
+                  }}
+                >
+                  〈
+                </Backbutton>
+                <Xbutton
+                  onClick={() => {
+                    navigate("/");
                   }}
                 >
                   X
@@ -261,9 +267,16 @@ const PricingInput = () => {
           {tag.step2 && (
             <ContainerDiv>
               <TitleDiv>
-                <Xbutton
+                <Backbutton
                   onClick={() => {
                     navigate(-1);
+                  }}
+                >
+                  〈
+                </Backbutton>
+                <Xbutton
+                  onClick={() => {
+                    navigate("/");
                   }}
                 >
                   X
@@ -344,9 +357,16 @@ const PricingInput = () => {
           {tag.step3 && (
             <ContainerDiv>
               <TitleDiv>
-                <Xbutton
+                <Backbutton
                   onClick={() => {
                     navigate(-1);
+                  }}
+                >
+                  〈
+                </Backbutton>
+                <Xbutton
+                  onClick={() => {
+                    navigate("/");
                   }}
                 >
                   X
@@ -388,9 +408,16 @@ const PricingInput = () => {
           {tag.step4 && (
             <ContainerDiv>
               <TitleDiv>
-                <Xbutton
+                <Backbutton
                   onClick={() => {
                     navigate(-1);
+                  }}
+                >
+                  〈
+                </Backbutton>
+                <Xbutton
+                  onClick={() => {
+                    navigate("/");
                   }}
                 >
                   X
@@ -432,9 +459,16 @@ const PricingInput = () => {
           {tag.step5 && (
             <ContainerDiv>
               <TitleDiv>
-                <Xbutton
+                <Backbutton
                   onClick={() => {
                     navigate(-1);
+                  }}
+                >
+                  〈
+                </Backbutton>
+                <Xbutton
+                  onClick={() => {
+                    navigate("/");
                   }}
                 >
                   X
@@ -707,9 +741,20 @@ const DateInput = styled.input`
   background-color: transparent;
 `;
 
-const Xbutton = styled.button`
+const Backbutton = styled.button`
   position: absolute;
   left: 0px;
+  width: 56px;
+  height: 100%;
+  font-size: 18px;
+  font-weight: bold;
+  border: none;
+  background-color: transparent;
+`;
+
+const Xbutton = styled.button`
+  position: absolute;
+  right: 0px;
   width: 56px;
   height: 100%;
   font-size: 18px;

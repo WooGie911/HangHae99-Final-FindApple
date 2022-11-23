@@ -39,7 +39,14 @@ const ObjectionList = ({ posts, detail, __getDetail }) => {
                     <label>{post.category}</label>
                     <HeartCreatedAt>
                       <div>{post.createdAt}</div>
-                      <div> <img src="https://img.icons8.com/ios-glyphs/15/null/hearts.png" style={{width : "10px", height:"10px"}}/>{post.likeCnt}</div>
+                      <div>
+                        {" "}
+                        <img
+                          src="https://img.icons8.com/ios-glyphs/15/null/hearts.png"
+                          style={{ width: "10px", height: "10px" }}
+                        />
+                        {post.likeCnt}
+                      </div>
                     </HeartCreatedAt>
                   </div>
                 </PList>
@@ -68,8 +75,8 @@ const PList = styled.div`
 `;
 
 // 리스트 하트와 시간
-const HeartCreatedAt=styled.div`
-width: 290px;
-display: flex;
-justify-content: space-between;
-`
+const HeartCreatedAt = styled.div`
+  width: 290px;
+  display: flex;
+  justify-content: space-between;
+`;

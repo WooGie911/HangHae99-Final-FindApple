@@ -78,7 +78,7 @@ const PostUpdate = () => {
         </FirstContainer>
         <ImageWrapper>
           <Stphotolabel htmlFor="imgFile">
-          <PhotoButton
+            <PhotoButton
               type="button"
               onClick={() => {
                 imgRef.current.click();
@@ -92,23 +92,27 @@ const PostUpdate = () => {
               </CameraImg>
             </PhotoButton>
             {fileUrls.length > 0 && (
-            <>
-            <div className="preview" style={{marginTop:"15px"}}>
-              {
-                /*previews*/
-                fileUrls.map((val, i) => {
-                  return (
-                    <img
-                      src={val}
-                      key={i}
-                      style={{ width: "50px", height: "50px", marginLeft:"5px"}}
-                    />
-                  );
-                })
-              }
-            </div>
-            </>
-          )}
+              <>
+                <div className="preview" style={{ marginTop: "15px" }}>
+                  {
+                    /*previews*/
+                    fileUrls.map((val, i) => {
+                      return (
+                        <img
+                          src={val}
+                          key={i}
+                          style={{
+                            width: "50px",
+                            height: "50px",
+                            marginLeft: "5px",
+                          }}
+                        />
+                      );
+                    })
+                  }
+                </div>
+              </>
+            )}
             <input
               type="file"
               style={{ display: "none" }}
@@ -119,52 +123,53 @@ const PostUpdate = () => {
               onChange={uploadHandle}
               ref={imgRef}
             />
-            
           </Stphotolabel>
         </ImageWrapper>
         <div>
+          <Title>
+            <div>{updateInput.title}</div>
+          </Title>
 
-          <Title> 
-            <div>{updateInput.title}
-            </div>
-            </Title>
-
-          <Detail onClick={() => {
+          <Detail
+            onClick={() => {
               navigate("/pricingtext", { state: post });
-            }}>
-          <p5>상품 상세 정보</p5>
-          <Stdetailrightarrow
-            src={whitearrow} style={{ width: "25px", height: "25px"}}
-          ></Stdetailrightarrow>
-        </Detail>
+            }}
+          >
+            <p5>상품 상세 정보</p5>
+            <Stdetailrightarrow
+              src={whitearrow}
+              style={{ width: "25px", height: "25px" }}
+            ></Stdetailrightarrow>
+          </Detail>
 
-  
           <PriceInput>
-          <TextPrice>판매가격</TextPrice>
-            <ExpectPrice><input
-              onChange={updateInputHandle}
-              name="userPrice"
-              value={updateInput.userPrice || ""}
-              type="text"
-              placeholder="판매 가격을 입력해주세요."
-            /></ExpectPrice>
+            <TextPrice>판매가격</TextPrice>
+            <ExpectPrice>
+              <input
+                onChange={updateInputHandle}
+                name="userPrice"
+                value={updateInput.userPrice || ""}
+                type="text"
+                placeholder="판매 가격을 입력해주세요."
+              />
+            </ExpectPrice>
           </PriceInput>
-      
+
           <CalPrice>
-          <TextPrice>책정 가격</TextPrice>
-          <ExpectPrice>{updateInput.expectPrice}원</ExpectPrice>
+            <TextPrice>책정 가격</TextPrice>
+            <ExpectPrice>{updateInput.expectPrice}원</ExpectPrice>
           </CalPrice>
-  
+
           <EditText>
             <div>상품설명</div>
             <div>
-            <textarea
-              onChange={updateInputHandle}
-              name="content"
-              value={updateInput.content || ""}
-              type="text"
-              placeholder="수정할 내용을 입력하세요."
-            />
+              <textarea
+                onChange={updateInputHandle}
+                name="content"
+                value={updateInput.content || ""}
+                type="text"
+                placeholder="수정할 내용을 입력하세요."
+              />
             </div>
           </EditText>
         </div>
@@ -195,7 +200,7 @@ const PhotoButton = styled.button`
   border-radius: 25%;
   background-color: aliceblue;
   margin: 10px;
-  border: 2px solid #3D6AF2;
+  border: 2px solid #3d6af2;
 `;
 const CameraImg = styled.div`
   display: flex;
@@ -203,8 +208,7 @@ const CameraImg = styled.div`
   align-items: center;
   justify-content: center;
   height: 50px;
-  border : none;
-  
+  border: none;
 `;
 // 판매가격 및 내용입력
 const PriceInput = styled.div`
@@ -233,10 +237,9 @@ const EditText = styled.div`
 `;
 
 const CalPrice = styled.div`
-height: 50px;
-border-bottom: 1px solid lightgray;
-
-`
+  height: 50px;
+  border-bottom: 1px solid lightgray;
+`;
 // 사진 업로드
 
 const Stphotolabel = styled.label`
@@ -244,22 +247,21 @@ const Stphotolabel = styled.label`
   height: 150px;
   display: inline-block;
   display: flex;
-flex-direction:row;
-
+  flex-direction: row;
 `;
 
 // 상품 상세정보
 const Detail = styled.div`
-  background-color: #3D6AF2;
-  color : white;
+  background-color: #3d6af2;
+  color: white;
   cursor: pointer;
-  width : 343px;
+  width: 343px;
   height: 20px;
   border-radius: 5px;
   font-size: 14px;
   font-weight: 550;
   display: flex;
-  margin : auto;
+  margin: auto;
   margin-bottom: 20px;
   justify-content: space-between;
   padding: 10px;
@@ -274,26 +276,26 @@ const Stdetailrightarrow = styled.img`
 
 // 제목
 const Title = styled.div`
-div{
-  height: 60px;
-  border-top: 1px solid lightgrey;
-}
-height: 40px;
-border: none;
-`
+  div {
+    height: 60px;
+    border-top: 1px solid lightgrey;
+  }
+  height: 40px;
+  border: none;
+`;
 
 // 책정가격 폰트
 const ExpectPrice = styled.div`
-color : #3D6AF2;
-font-weight: bold;
-font-size: 16px;
-input {
+  color: #3d6af2;
+  font-weight: bold;
   font-size: 16px;
-}
-`
+  input {
+    font-size: 16px;
+  }
+`;
 
 const TextPrice = styled.div`
-margin-top: 15px;
-font-size: 12px;
-color : #000000;
-`
+  margin-top: 15px;
+  font-size: 12px;
+  color: #000000;
+`;

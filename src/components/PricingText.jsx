@@ -18,17 +18,16 @@ const PricingText = () => {
   return (
     <>
       <HeadContainer>
-      <div>
-        <img
+        <div>
+          <img
             onClick={onClickHandler}
             style={{ width: 25, height: 25 }}
             src={back}
           />
-        <span>상품 상세 정보</span>
-
-      </div>
+          <span>상품 상세 정보</span>
+        </div>
       </HeadContainer>
-      <hr/>
+      <hr />
       <div>
         <PricingList DetailPrice={{ ...data.DetailPrice }} />
       </div>
@@ -43,7 +42,7 @@ const HeadContainer = styled.div`
   margin-right: 120px;
   img {
     float: left;
-    margin-right : 110px;
+    margin-right: 110px;
   }
   span {
     /* text-align: center; */

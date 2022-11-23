@@ -13,7 +13,7 @@ import back from "../assets/back.png";
 import { useParams } from "react-router-dom";
 
 const PostComment = () => {
-  const {id} = useParams()
+  const { id } = useParams();
   const navigate = useNavigate();
   const dispatch = useDispatch();
   const { post } = useSelector((state) => state.details);
@@ -27,18 +27,17 @@ const PostComment = () => {
 
   return (
     <>
-    <HeadContainer>
-      <div>
-        <img
+      <HeadContainer>
+        <div>
+          <img
             onClick={onClickHandler}
             style={{ width: 25, height: 25 }}
             src={back}
           />
-        <span>댓글</span>
-
-      </div>
+          <span>댓글</span>
+        </div>
       </HeadContainer>
-      <hr/>
+      <hr />
       <CommentList
         __deleteComment={__deletePostComment}
         commentList={post.comments}
@@ -58,7 +57,7 @@ const HeadContainer = styled.div`
   margin-right: 120px;
   img {
     float: left;
-    margin-right : 130px;
+    margin-right: 130px;
   }
   span {
     /* text-align: center; */

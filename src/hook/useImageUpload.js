@@ -3,7 +3,6 @@ import { useState } from "react";
 //이미지 압축
 import imageCompression from "browser-image-compression";
 
-
 const useImgUpload = (
   limitCount = 0,
   isComp = false,
@@ -67,9 +66,7 @@ const useImgUpload = (
             };
             reader.readAsDataURL(res); //reader에게 file을 먼저 읽힘
           })
-          .catch((error) => {
-       
-          });
+          .catch((error) => {});
       } else {
         //이미지 파일 담기
         setImgFiles((imgs) => [...imgs, file]);
@@ -82,7 +79,6 @@ const useImgUpload = (
         reader.readAsDataURL(file); //reader에게 file을 먼저 읽힘
       }
     });
-   
   };
   return [imgFiles, imgUrls, handler];
 };

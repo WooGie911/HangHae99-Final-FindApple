@@ -100,19 +100,19 @@ const PostsCreate = (props) => {
           </div>
         </Stuploadbutton>
         <Stphotolabel htmlFor="imgFile">
-        <PhotoButton
-              type="button"
-              onClick={() => {
-                imgRef.current.click();
-              }}
-            >
-              <CameraImg>
-                <div>
-                  <img src="https://img.icons8.com/fluency-systems-regular/20/null/multiple-cameras.png" />
-                </div>
-                <div>{fileUrls.length}/5</div>
-              </CameraImg>
-            </PhotoButton>
+          <PhotoButton
+            type="button"
+            onClick={() => {
+              imgRef.current.click();
+            }}
+          >
+            <CameraImg>
+              <div>
+                <img src="https://img.icons8.com/fluency-systems-regular/20/null/multiple-cameras.png" />
+              </div>
+              <div>{fileUrls.length}/5</div>
+            </CameraImg>
+          </PhotoButton>
           <input
             type="file"
             style={{ display: "none" }}
@@ -125,23 +125,26 @@ const PostsCreate = (props) => {
           />
           {fileUrls.length > 0 && (
             <>
-            <div className="preview" style={{marginTop:"15px"}}>
-              {
-                /*previews*/
-                fileUrls.map((val, i) => {
-                  return (
-                    <img
-                      src={val}
-                      key={i}
-                      style={{ width: "50px", height: "50px", marginLeft:"5px"}}
-                    />
-                  );
-                })
-              }
-            </div>
+              <div className="preview" style={{ marginTop: "15px" }}>
+                {
+                  /*previews*/
+                  fileUrls.map((val, i) => {
+                    return (
+                      <img
+                        src={val}
+                        key={i}
+                        style={{
+                          width: "50px",
+                          height: "50px",
+                          marginLeft: "5px",
+                        }}
+                      />
+                    );
+                  })
+                }
+              </div>
             </>
           )}
-          
         </Stphotolabel>
 
         <div>
@@ -154,17 +157,22 @@ const PostsCreate = (props) => {
           />
         </div>
 
-        <Detail onClick={() => {
-              navigate("/pricingfinal");
-            }}>
+        <Detail
+          onClick={() => {
+            navigate("/pricingfinal");
+          }}
+        >
           <p5>상품 상세 정보</p5>
           <Stdetailrightarrow
-            src={whitearrow} style={{ width: "25px", height: "25px"}}
+            src={whitearrow}
+            style={{ width: "25px", height: "25px" }}
           ></Stdetailrightarrow>
         </Detail>
 
         <Price>
-          <p5>책정 가격 <div>{DetailPrice.getPrice}원</div></p5>
+          <p5>
+            책정 가격 <div>{DetailPrice.getPrice}원</div>
+          </p5>
         </Price>
 
         <Stpriceinput
@@ -199,20 +207,19 @@ const Stcontainer = styled.div`
 
 // 상품 가격 측정
 const Detail = styled.div`
-  background-color: #3D6AF2;
-  color : white;
+  background-color: #3d6af2;
+  color: white;
   cursor: pointer;
-  width : 343px;
+  width: 343px;
   height: 20px;
   border-radius: 5px;
   font-size: 14px;
   font-weight: 550;
   display: flex;
-  margin : auto;
+  margin: auto;
   margin-bottom: 20px;
   justify-content: space-between;
   padding: 10px;
-
 `;
 // 가격 결정
 const Price = styled.div`
@@ -224,8 +231,8 @@ const Price = styled.div`
   border-bottom: 2px solid lightgrey;
   font-size: 15px;
   margin-bottom: 10px;
-  div{
-    color : #3D6AF2;
+  div {
+    color: #3d6af2;
   }
 `;
 
@@ -275,7 +282,7 @@ const PhotoButton = styled.button`
   border-radius: 5px;
   background-color: white;
   margin: 10px;
-  border: 2px solid #3D6AF2;
+  border: 2px solid #3d6af2;
   top: 25px;
 `;
 const CameraImg = styled.div`
@@ -285,11 +292,10 @@ const CameraImg = styled.div`
   flex-direction: column;
   padding-top: 5px;
   cursor: pointer;
-  div{
-    border: #3D6AF2;
-    color: #3D6AF2;
+  div {
+    border: #3d6af2;
+    color: #3d6af2;
   }
-
 `;
 
 // 사진 업로드 관련인 듯
@@ -299,8 +305,7 @@ const Stphotolabel = styled.label`
   display: inline-block;
   border-bottom: 2px solid lightgrey;
   display: flex;
-flex-direction:row;
-
+  flex-direction: row;
 `;
 
 const Sttitleinput = styled.input`

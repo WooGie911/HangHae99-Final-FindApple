@@ -1,6 +1,6 @@
 import React, { useState } from "react";
 import styled from "styled-components";
-import Comment from "./Comment"
+import Comment from "./Comment";
 const CommentList = (props) => {
   return (
     <>
@@ -8,8 +8,11 @@ const CommentList = (props) => {
         props.commentList.map((comment, index) => {
           return (
             <div key={index}>
-             <Comment comment={comment} __deleteComment={props.__deleteComment}/>
-             </div>
+              <Comment
+                comment={comment}
+                __deleteComment={props.__deleteComment}
+              />
+            </div>
           );
         })}
     </>

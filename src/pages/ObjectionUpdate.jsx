@@ -51,7 +51,7 @@ const ObjectionUpdate = ({ paramId }) => {
           <div>상품 게시물 수정</div>
           <EditButton onClick={updateSubmit}>완료</EditButton>
         </FirstContainer>
-        <hr/>
+        <hr />
         <ImageWrapper>
           {post.images &&
             post.images.map((item) => {
@@ -59,24 +59,27 @@ const ObjectionUpdate = ({ paramId }) => {
             })}
         </ImageWrapper>
         <div>
-        <hr/>
+          <hr />
           <TextDiv>{updateInput.title}</TextDiv>
-        <hr/>
-        <Detail onClick={() => {
+          <hr />
+          <Detail
+            onClick={() => {
               navigate("/pricingtext", { state: post });
-            }}>
-          <p5>상품 상세 정보</p5>
-          <Stdetailrightarrow
-            src={whitearrow} style={{ width: "25px", height: "25px"}}
-          ></Stdetailrightarrow>
-        </Detail>
-        <hr/>
+            }}
+          >
+            <p5>상품 상세 정보</p5>
+            <Stdetailrightarrow
+              src={whitearrow}
+              style={{ width: "25px", height: "25px" }}
+            ></Stdetailrightarrow>
+          </Detail>
+          <hr />
 
-         <TextDiv>책정 가격</TextDiv>
-            <PriceDiv>{updateInput.getPrice}</PriceDiv>
-          <hr/>
+          <TextDiv>책정 가격</TextDiv>
+          <PriceDiv>{updateInput.getPrice}</PriceDiv>
+          <hr />
           <PriceInput>
-          <div>판매 가격</div>
+            <div>판매 가격</div>
             <input
               onChange={updateInputHandle}
               name="userPrice"
@@ -86,7 +89,7 @@ const ObjectionUpdate = ({ paramId }) => {
             />
           </PriceInput>
 
-          <hr/>
+          <hr />
           <EditText>
             content :
             <textarea
@@ -118,9 +121,9 @@ const EditButton = styled.div`
 `;
 // 사진 업로드
 const ImageWrapper = styled.div`
-  border : none;
+  border: none;
   height: 60px;
-  img{
+  img {
     width: 50px;
     height: 50px;
   }
@@ -128,15 +131,15 @@ const ImageWrapper = styled.div`
 
 // 판매가격 및 내용입력
 const PriceInput = styled.div`
-  border : none;
+  border: none;
   height: 60px;
   input {
     background-color: transparent;
     border: none;
     width: 250px;
   }
-  div{
-    font-size: 10px;   
+  div {
+    font-size: 10px;
   }
 `;
 const EditText = styled.div`
@@ -152,18 +155,18 @@ const EditText = styled.div`
 
 // 상품 상세 정보
 const Detail = styled.div`
-    background-color: #3D6AF2;
+  background-color: #3d6af2;
   cursor: pointer;
-  color : white;
-  width : 343px;
+  color: white;
+  width: 343px;
   height: 20px;
   border-radius: 5px;
   font-size: 14px;
   font-weight: 550;
   display: flex;
-  margin : auto;
+  margin: auto;
   margin-bottom: 20px;
-  bottom : 90px;
+  bottom: 90px;
   justify-content: space-between;
   padding: 10px;
 `;
@@ -175,12 +178,12 @@ const Stdetailrightarrow = styled.img`
 `;
 
 const TextDiv = styled.div`
-  height : 60px;
+  height: 60px;
   font-size: 10px;
 `;
 
 const PriceDiv = styled.div`
-color : #3D6AF2;
-font-weight: bold;
-font-size: 16px;
-`
+  color: #3d6af2;
+  font-weight: bold;
+  font-size: 16px;
+`;

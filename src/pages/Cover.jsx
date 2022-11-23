@@ -1,9 +1,7 @@
-import React from 'react'
+import React from "react";
 
 const Cover = () => {
-  return (
-    <div>Cover</div>
-  )
-}
+  return <div>Cover</div>;
+};
 
-export default Cover
+export default Cover;

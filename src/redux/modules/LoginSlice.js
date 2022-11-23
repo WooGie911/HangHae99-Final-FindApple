@@ -12,17 +12,15 @@ const refreshToken = localStorage.getItem("Refresh_Token");
 export const __emailCheck = createAsyncThunk(
   "posts/__emailCheck",
   async (payload, thunkAPI) => {
-  
     try {
       const data = await axios.post(
         `${process.env.REACT_APP_SERVER}/api/member/signup/mail-confirm`,
         payload
       );
-     
+
       localStorage.setItem("emailCheckData", data.data);
       return thunkAPI.fulfillWithValue(data.data.data);
     } catch (error) {
-    
       return thunkAPI.rejectWithValue(error);
     }
   }
@@ -31,7 +29,6 @@ export const __emailCheck = createAsyncThunk(
 export const __kakaoLogin = createAsyncThunk(
   "posts/__kakaoLogin",
   async (code, thunkAPI) => {
-   
     try {
       const res = await axios.get(
         `${process.env.REACT_APP_SERVER}/api/member/kakao?code=${code}`
@@ -39,10 +36,9 @@ export const __kakaoLogin = createAsyncThunk(
       window.localStorage.setItem("Access_Token", res.data.accessToken);
       window.localStorage.setItem("Refresh_Token", res.data.refreshToken);
       window.location.replace("/");
-   
+
       return thunkAPI.fulfillWithValue(res.data);
     } catch (error) {
- 
       window.alert("로그인에 실패하였습니다.");
       // 로그인 실패하면 로그인 화면으로 돌려보냄
       window.location.replace("/login");
@@ -55,12 +51,10 @@ export const __Signin = createAsyncThunk(
   "Login/__Signin",
   async (payload, thunkAPI) => {
     try {
-   
       const data = await axios.post(
         `${process.env.REACT_APP_SERVER}/api/member/login`,
         payload
       );
-      
 
       if (data.status === 200 || data.status === 201) {
         window.localStorage.setItem("Access_Token", data.data.accessToken);
@@ -68,10 +62,9 @@ export const __Signin = createAsyncThunk(
         alert("로그인 성공");
         window.location.replace("/");
       }
-     
+
       return thunkAPI.fulfillWithValue(data.data);
     } catch (error) {
- 
       if (error.response.status >= 400 && error.response.status < 500) {
         alert("로그인 실패");
       }
@@ -91,7 +84,6 @@ export const __SignUp = createAsyncThunk(
   "Login/__SignUp",
   async (payload, thunkAPI) => {
     try {
-
       console.log(payload);
       const response = await axios.post(
         `${process.env.REACT_APP_SERVER}/api/member/signup`,
@@ -105,9 +97,7 @@ export const __SignUp = createAsyncThunk(
         window.location.replace("/signin");
       }
       return thunkAPI.fulfillWithValue(response.data);
-
     } catch (error) {
-   
       if (error.response.data.message !== undefined) {
         return window.alert(error.response.data.message);
       }
@@ -142,7 +132,6 @@ export const __UserProfile = createAsyncThunk(
 export const __UserProfileEdit = createAsyncThunk(
   "Login/__UserProfileEdit",
   async (payload, thunkAPI) => {
-    
     try {
       const data = await axios.patch(
         `${process.env.REACT_APP_SERVER}/api/myinfo/edit`,
@@ -156,7 +145,6 @@ export const __UserProfileEdit = createAsyncThunk(
           },
         }
       );
-     
     } catch (error) {
       return thunkAPI.rejectWithValue(error);
     }
