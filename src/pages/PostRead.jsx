@@ -15,6 +15,7 @@ const PostRead = () => {
   const params = useParams();
   const dispatch = useDispatch();
   const { posts } = useSelector((state) => state.posts);
+  const {postsCount} = useSelector((state) => state.posts)
   const { HeaderState } = useSelector((state) => state.posts);
   const [submitObj, setSubmitObj] = useState(HeaderState);
 
@@ -34,6 +35,7 @@ const PostRead = () => {
           Navigate={"/postread"}
         />
         <SortBar
+          postsCount={postsCount}
           state={submitObj}
           setState={setSubmitObj}
           Navigate={"/postread"}
