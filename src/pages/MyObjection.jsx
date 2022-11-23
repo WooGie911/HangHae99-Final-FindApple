@@ -49,6 +49,7 @@ const MyObjection = () => {
           </>
         )}
                       </Posts>
+                      <Div></Div>
             </PostList>        
         <Footer />
       </Layout>
@@ -79,7 +80,6 @@ const PostList = styled.div`
   position: relative;
   width: 100%;
   height: 80vh;
-  overflow: auto;
   background-color: white;
   border-radius: 5px 5px 0 0;
   padding-bottom: 140px;
@@ -87,7 +87,13 @@ const PostList = styled.div`
 
 const Posts = styled.div`
   margin-bottom: 50px;
+  overflow: auto;
 `;
+
+const Div=styled.div`
+height: 58px;
+background-color: white;
+`
 
 const SellerPost = styled.div`
   float: left;
