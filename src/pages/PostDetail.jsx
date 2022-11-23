@@ -10,6 +10,7 @@ import photoIMG from "../assets/photoIMG.png";
 import whitearrow from "../assets/whitearrow.png";
 import home from "../assets/home.png";
 import threedots from "../assets/threedots.png";
+import blueheart from "../assets/blueheart.png";
 
 import {
   __CartInPost,
@@ -139,10 +140,12 @@ const PostDetail = () => {
           </div>
           <ClickHeart onClick={() => onCartButton(post.postId)}>
             {post.isLike ? (
-              <img src="https://img.icons8.com/emoji/25/null/blue-heart.png" />
+              <img src={blueheart} />
             ) : (
               "🤍"
             )}{" "}
+       <div>{post.likeCnt}</div>
+
           </ClickHeart>
         </WriterContainer>
         <White>
@@ -160,10 +163,6 @@ const PostDetail = () => {
           <div>{post.content}</div>
 
           <Heart>
-            <div>
-              <img src="https://img.icons8.com/ios-glyphs/15/null/hearts.png" />{" "}
-              {post.likeCnt}
-            </div>
             <div> {post.createdAt}</div>
           </Heart>
           <Detail
@@ -363,9 +362,15 @@ const Heart = styled.div`
   }
 `;
 
+
 // 찜하기 버튼
 const ClickHeart = styled.div`
   margin-top: 13px;
+  div{
+    font-size: 12px;
+  color: #606060;
+  margin-left: 7px;
+  }
 `;
 
 // 기종 설명

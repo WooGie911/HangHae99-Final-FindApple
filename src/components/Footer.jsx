@@ -3,9 +3,8 @@ import { useNavigate } from "react-router-dom";
 import styled from "styled-components";
 import doubletick from "../assets/doubletick.png";
 import home from "../assets/home.png";
-import plus from "../assets/plus.png";
+import blueplus from "../assets/blueplus.png";
 import search from "../assets/search.png";
-import user from "../assets/user.png";
 
 const Footer = () => {
   const navigate = useNavigate();
@@ -27,9 +26,8 @@ const Footer = () => {
         </div>
         <div onClick={() => navigate("/pricingInput")}>
           <div>
-            <img src={plus} />{" "}
+            <img src={blueplus} />{" "}
           </div>
-          <div>가격측정</div>
         </div>
         <div onClick={() => navigate("/objectionread/all/issuesId")}>
           <div>
