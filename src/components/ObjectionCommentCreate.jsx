@@ -1,6 +1,7 @@
 import React from "react";
 import { useDispatch } from "react-redux";
 import { useParams } from "react-router-dom";
+import styled from "styled-components";
 
 import useInput from "../hook/useInput";
 
@@ -26,11 +27,10 @@ const ObjectionCommentCreate = (props) => {
   };
   return (
     <>
-      <div>CommentCreate</div>
 
-      <div>
+      <CommentInput>
         <input
-          placeholder="댓글 달기..."
+          placeholder="댓글 입력"
           value={comments.comment || ""}
           name="comment"
           type="text"
@@ -38,9 +38,27 @@ const ObjectionCommentCreate = (props) => {
         />
 
         <button onClick={onClickAddButton}>등록</button>
-      </div>
+      </CommentInput>
     </>
   );
 };
 
 export default ObjectionCommentCreate;
+
+const CommentInput = styled.div`
+position : fixed;
+bottom: 10px;
+input {
+margin-left : 10px;
+width: 288px;
+height: 46px;
+}
+button{
+  background-color: #3D6AF2;
+  color : white;
+  border : none;
+  width : 50px;
+  height : 46px;
+  margin-left : 15px;
+}
+`
