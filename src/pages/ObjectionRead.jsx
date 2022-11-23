@@ -18,6 +18,7 @@ const ObjectionRead = () => {
   const params = useParams();
   const dispatch = useDispatch();
   const { posts } = useSelector((state) => state.objections);
+  const { postsCount } = useSelector((state) => state.objections);
   console.log("postspostsposts", posts);
   const initialObj = {
     paramObj: "all",
@@ -42,6 +43,7 @@ const ObjectionRead = () => {
           Navigate={"/objectionread"}
         />
         <SortBar
+          postsCount={postsCount}
           state={submitObj}
           setState={setSubmitObj}
           Navigate={"/objectionread"}

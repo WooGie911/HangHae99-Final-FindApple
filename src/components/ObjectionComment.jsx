@@ -19,14 +19,19 @@ const ObjectionComment = ({ comment, __deleteComment }) => {
     };
     setEidtTg(newEdit);
   };
+
   return (
     <div>
       <StContainer>
         <Buttons>
           <div>
+          <ProfileImg><img src={comment.avatarUrl}/>
+            <div>
             <div>{comment.nickname} </div>
-            <Cmnt> {comment.issuesComment}</Cmnt>
-          </div>
+            <Cmnt> {comment.comment}</Cmnt>
+            </div>
+            </ProfileImg> 
+            </div>
           <Tgbutton src={threedots} onClick={editToggleHandler} />
           {editTg.isEdit === true ? (
             <Button onClick={() => onDeleteButton(comment.issuesCommentId)}>
@@ -78,6 +83,19 @@ const Button = styled.button`
     background-color: red;
   }
 `;
+
+const ProfileImg=styled.div`
+display: flex;
+padding : 5px;
+div {
+  padding : 2px;
+}
+img{
+  width: 25px;
+  height: 25px;
+  border-radius: 50%;
+}
+`
 
 const Cmnt = styled.div`
   font-size: 12px;

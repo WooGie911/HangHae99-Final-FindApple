@@ -10,11 +10,12 @@ const PostSearch = (props) => {
   const dispatch = useDispatch();
   const params = useParams();
 
-  const onClickSubmitButton = (e) => {
-    e.preventDefault();
+  const onClickSubmitButton = () => {
     if (search.searchContent.trim() === "") {
       return alert("검색어를 입력하세요.");
     }
+
+  
     const paramObj =
       params.category === "all"
         ? params.category
@@ -31,6 +32,12 @@ const PostSearch = (props) => {
     dispatch(props.__search(submitObj));
     setSearch(initialState);
   };
+
+  const keyPress = (e) => {
+    if(e.key === 'Enter') {
+      onClickSubmitButton();
+    }
+  }
   return (
     <>
       <div>
@@ -40,9 +47,9 @@ const PostSearch = (props) => {
           name="searchContent"
           type="text"
           onChange={onChangeSearchHandler}
+          onKeyPress={keyPress}
         />
 
-        <SearchButton onClick={onClickSubmitButton}>검색</SearchButton>
       </div>
     </>
   );
@@ -54,7 +61,7 @@ export default PostSearch;
 const Input = styled.input`
   padding-left: 30px;
   height: 34px;
-  width: 290px;
+  width: 330px;
   background-image: url("https://img.icons8.com/ios-glyphs/30/null/search--v1.png");
   background-repeat: no-repeat;
   background-size: 30px;

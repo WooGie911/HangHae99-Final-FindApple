@@ -171,7 +171,9 @@ const PostsCreate = (props) => {
 
         <Price>
           <p5>
-            책정 가격 <div>{DetailPrice.getPrice}원</div>
+            {DetailPrice.getPrice !== undefined && (<>
+            책정 가격 <div>{DetailPrice.getPrice.toLocaleString('ko-KR')}원</div>
+            </>)}
           </p5>
         </Price>
 

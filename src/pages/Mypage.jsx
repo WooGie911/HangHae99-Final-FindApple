@@ -9,7 +9,6 @@ import Layout from "../components/Layout";
 import bookmark from "../assets/bookmark.png";
 import doubletick from "../assets/doubletick.png";
 import window from "../assets/window.png";
-import settings from "../assets/settings.png";
 import Footer from "../components/Footer";
 
 const Mypage = () => {
@@ -32,12 +31,21 @@ const Mypage = () => {
   useEffect(() => {
     dispatch(__UserProfile());
   }, [dispatch]);
+
+  const onClickButton = (e) => {
+    e.preventDefault();
+    localStorage.clear();
+    navigate("/signin");
+  };
+
+
   return (
     <div>
       <Layout>
         <FirstContainer>
           <Head>
-            <span>내 정보</span>
+            <div>내 정보</div>
+            <Logout onClick={onClickButton}>로그아웃</Logout>
           </Head>
           <div style={{ alignItems: "center" }}>
             <img
@@ -121,6 +129,8 @@ const FirstContainer = styled.div`
 `;
 
 const Head = styled.div`
+display: flex;
+justify-content: space-between;
   span {
     font-size: 18px;
   }
@@ -152,7 +162,7 @@ const Content = styled.div`
   img {
     vertical-align: bottom;
   }
-  span {
+  div {
     font-size: 16px;
     img {
       margin-right: 10px;
@@ -175,4 +185,21 @@ const SecondContainer = styled.div`
   height: 203px;
   background-color: white;
   border-radius: 5px;
+`;
+
+//LogOut
+const Logout = styled.button`
+/* Rectangle 96 */
+
+box-sizing: border-box;
+
+font-size: 8px;
+width: 50px;
+height: 17px;
+/* #3D6AF2 */
+
+border: 1px solid #3D6AF2;
+border-radius: 5px;
+background-color: transparent;
+color : #3D6AF2;
 `;

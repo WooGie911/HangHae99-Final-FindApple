@@ -36,7 +36,9 @@ const PricingList = ({ DetailPrice }) => {
       <TopDiv>
         <TitleDiv>가격 책정 완료</TitleDiv>
         {/* <ContentDiv>{PricingPrice}원</ContentDiv> */}
-        <ContentDiv>{DetailPrice.getPrice}원</ContentDiv>
+        {DetailPrice.getPrice !== undefined && (<>
+        <ContentDiv>{DetailPrice.getPrice.toLocaleString('ko-KR')}원</ContentDiv>
+        </>)}
       </TopDiv>
       {DetailPrice.category === "macbook" ? (
         <ListDiv>

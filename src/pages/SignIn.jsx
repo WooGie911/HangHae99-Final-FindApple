@@ -19,15 +19,18 @@ const SignIn = () => {
   //커스텀훅 useInput 사용
   const [input, setInput, ChangeInputHandler] = useInput(initialState);
 
-  const onSubmitHandler = (e) => {
-    e.preventDefault();
+  const onSubmitHandler = () => {
     if (input.email === "" || input.memberPw === "") {
       return alert("입력을 확인하세요.");
     }
     dispatch(__Signin(input));
     setInput(input);
   };
-
+  const keyPress = (e) => {
+    if(e.key === 'Enter') {
+      onSubmitHandler();
+    }
+  }
   return (
     <Layout>
       <StSignupBox>
@@ -46,6 +49,7 @@ const SignIn = () => {
             onChange={ChangeInputHandler}
             placeholder="비밀번호 입력"
             value={input.password}
+            onKeyPress={keyPress}
           />
           <StButton onClick={onSubmitHandler}>로그인</StButton>
           <br />
