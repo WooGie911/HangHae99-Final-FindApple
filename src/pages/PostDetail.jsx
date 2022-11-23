@@ -11,6 +11,7 @@ import whitearrow from "../assets/whitearrow.png";
 import home from "../assets/home.png";
 import threedots from "../assets/threedots.png";
 import blueheart from "../assets/blueheart.png";
+import emptyheart from "../assets/emptyheart.png";
 
 import {
   __CartInPost,
@@ -142,7 +143,7 @@ const PostDetail = () => {
             {post.isLike ? (
               <img src={blueheart} />
             ) : (
-              "🤍"
+              <img src={emptyheart}/>
             )}{" "}
        <div>{post.likeCnt}</div>
 
