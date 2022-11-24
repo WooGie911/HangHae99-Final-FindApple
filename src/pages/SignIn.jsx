@@ -6,6 +6,7 @@ import styled from "styled-components";
 import useInput from "../hook/useInput";
 import KakaoLogin from "../components/KakaoLogin";
 import Layout from "../components/Layout";
+import findapple from "../assets/findapple.jpg";
 
 const SignIn = () => {
   const initialState = {
@@ -35,7 +36,7 @@ const SignIn = () => {
     <Layout>
       <StSignupBox>
         <StLoginBox>
-          <Title>Findapple</Title>
+          <Title src="findapple.jpg"></Title>
           <StInputBox
             type="text"
             name="email"
@@ -51,14 +52,17 @@ const SignIn = () => {
             value={input.password}
             onKeyPress={keyPress}
           />
-          <StButton onClick={onSubmitHandler}>로그인</StButton>
+          <StButton style={{ color: "black" }} onClick={onSubmitHandler}>
+            로그인
+          </StButton>
           <br />
-          <div>
+          <div style={{ color: "white", fontSize: 12 }}>
             회원이 아니신가요?
             <A
               onClick={() => {
                 navigate("/signup");
               }}
+              style={{ color: "white", fontSize: 12 }}
             >
               회원가입
             </A>
@@ -77,7 +81,7 @@ const StLoginBox = styled.div`
   position: relative;
   width: 375px;
   height: 100vh;
-  background-color: #fafafa;
+  background-color: #3d6af2;
   display: flex;
   justify-content: center;
   align-items: center;
@@ -97,7 +101,7 @@ const StSignupBox = styled.div`
   align-items: center;
 `;
 
-const Title = styled.div`
+const Title = styled.img`
   font-size: 30px;
   font-weight: bold;
   text-align: center;
@@ -108,10 +112,11 @@ const StInputBox = styled.input`
   width: 296px;
   height: 38px;
   margin-top: 10px;
-  background-color: white;
+  background-color: #ffffff;
+  opacity: 0.2;
   border: none;
   border-radius: 5px;
-  box-shadow: 5px 5px #f2f2f2;
+  box-shadow: 0px 6px 16px 0px rgba(0, 0, 0, 0.1);
   &:focus,
   &:active {
     outline: none;
@@ -129,10 +134,13 @@ const StButton = styled.button`
   border: none;
   border-radius: 5px;
   color: white;
+  font-family: "Noto Sans";
+  font-style: normal;
+  line-height: 18px;
   font-weight: 600;
-  font-size: 18px;
+  font-size: 13px;
   background-color: ${({ username, password }) =>
-    username !== "" && password !== "" ? "black" : "#ececec"};
+    username !== "" && password !== "" ? "white" : "#ececec"};
   cursor: ${({ username, password }) =>
     username !== "" && password !== "" ? "pointer" : null};
 `;
@@ -140,4 +148,5 @@ const StButton = styled.button`
 const A = styled.a`
   color: #2288ee;
   margin-left: 10px;
+  cursor: pointer;
 `;
