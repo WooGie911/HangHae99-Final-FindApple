@@ -45,7 +45,6 @@ useEffect(() => {
     // 사용자가 마지막 요소를 보고 있고, 로딩 중이 아니라면
     if (inView && !loading) {
       setPage((prevState) => prevState + 1);
-      console.log("페이지", page);
     }
   }, [inView, loading]);
 
@@ -95,6 +94,7 @@ useEffect(() => {
           );
         })}
       <div ref={ref}></div>
+      <Div></Div>
     </>
   );
 };
@@ -121,3 +121,8 @@ const HeartCreatedAt = styled.div`
   display: flex;
   justify-content: space-between;
 `;
+
+// 빈공간
+const Div=styled.div`
+height:60px;
+`
