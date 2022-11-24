@@ -19,18 +19,15 @@ const ObjectionRead = () => {
   const dispatch = useDispatch();
   const { posts } = useSelector((state) => state.objections);
   const { postsCount } = useSelector((state) => state.objections);
-  console.log("postspostsposts", posts);
-  const initialObj = {
-    paramObj: "all",
-    pageNumber: 0,
-    pageSize: 10,
-    postSort: "issuesId",
-  };
+  const { HeaderState } = useSelector((state) => state.objections);
+  const [submitObj, setSubmitObj] = useState(HeaderState);
 
-  const [submitObj, setSubmitObj] = useState(initialObj);
+
+
 
   useEffect(() => {
     dispatch(__getObjection(submitObj));
+    setSubmitObj({ ...submitObj, pageNumber: 0 });
   }, [params]);
 
   return (
@@ -52,6 +49,8 @@ const ObjectionRead = () => {
         />
 
         <ObjectionList
+        state={submitObj}
+        setState={setSubmitObj}
           posts={posts}
           detail={"/objectionDetail"}
           __getDetail={__getObjectionDetail}
