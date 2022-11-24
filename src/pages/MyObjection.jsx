@@ -8,7 +8,7 @@ import styled from "styled-components";
 import back from "../assets/back.png";
 const MyObjection = () => {
   const { objections } = useSelector((state) => state.mypage);
-  console.log(objections)
+  console.log(objections);
   const navigate = useNavigate();
 
   const dispatch = useDispatch();
@@ -17,40 +17,45 @@ const MyObjection = () => {
   }, []);
   const onClickHandler = () => {
     navigate(-1);
-  };  
+  };
   return (
     <div>
       <Layout>
-      <HeadContainer>
-          <div>
-            <img
-              onClick={onClickHandler}
-              style={{ width: 25, height: 25 }}
-              src={back}
-            />
-            <span>내 이의제기</span>
-          </div>
+        <HeadContainer>
+          <img
+            onClick={onClickHandler}
+            style={{ width: 25, height: 25 }}
+            src={back}
+          />
+          <span>
+            <div>내 이의제기</div>
+          </span>
         </HeadContainer>
         <hr />
         <PostList>
-              <Posts>        
-        {objections.length > 0 && (
-          <>
-            {objections.map((objection) => {
-              return (
-                <SellerPost key={objection.issuesId}>
-                  <img src={objection.images[0].imgUrl} onClick={() => {navigate(`/ObjectionDetail/${objection.issuesId}`)}}/>
-                  <div>{objection.expectPrice}원</div>
-                  <TitleEdit>{objection.title}</TitleEdit>
-                  <LikeCnt>🤍{objection.likeCnt}</LikeCnt>
-                </SellerPost>
-              );
-            })}
-          </>
-        )}
-                      </Posts>
-                      <Div></Div>
-            </PostList>        
+          <Posts>
+            {objections.length > 0 && (
+              <>
+                {objections.map((objection) => {
+                  return (
+                    <SellerPost key={objection.issuesId}>
+                      <img
+                        src={objection.images[0].imgUrl}
+                        onClick={() => {
+                          navigate(`/ObjectionDetail/${objection.issuesId}`);
+                        }}
+                      />
+                      <div>{objection.expectPrice}원</div>
+                      <TitleEdit>{objection.title}</TitleEdit>
+                      <LikeCnt>🤍{objection.likeCnt}</LikeCnt>
+                    </SellerPost>
+                  );
+                })}
+              </>
+            )}
+          </Posts>
+          <Div></Div>
+        </PostList>
         <Footer />
       </Layout>
     </div>
@@ -60,17 +65,21 @@ const MyObjection = () => {
 export default MyObjection;
 const HeadContainer = styled.div`
   display: flex;
+  justify-content: center;
+  justify-items: center;
   align-items: center;
-  margin-right: 120px;
-  margin-bottom: 20px;
+  position: relative;
+  width: 100%;
+  height: 60px;
+  font-family: "Inter";
+  font-style: normal;
+  font-weight: bold;
+  font-size: 24px;
+  line-height: 22px;
+
   img {
-    float: left;
-    margin-right: 110px;
-  }
-  span {
-    /* text-align: center; */
-    font-size: 24px;
-    font-weight: bold;
+    position: absolute;
+    left: 10px;
   }
 `;
 
@@ -90,10 +99,10 @@ const Posts = styled.div`
   overflow: auto;
 `;
 
-const Div=styled.div`
-height: 58px;
-background-color: white;
-`
+const Div = styled.div`
+  height: 58px;
+  background-color: white;
+`;
 
 const SellerPost = styled.div`
   float: left;
@@ -109,10 +118,9 @@ const SellerPost = styled.div`
 `;
 
 // 타이틀 글자 줄이기
-const TitleEdit=styled.div`
-font-size: 12px;
-
-`
+const TitleEdit = styled.div`
+  font-size: 12px;
+`;
 //찜하기
 const LikeCnt = styled.div`
   font-family: "Inter";

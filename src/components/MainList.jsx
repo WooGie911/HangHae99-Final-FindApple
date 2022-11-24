@@ -118,21 +118,16 @@ const MainList = () => {
                     </div>
                     <Map_listwrap>
                       <Map_listprice2>
-                        <label>{post.userPrice}</label>
+                        <label>
+                          {post.userPrice.toLocaleString("ko-KR")}원
+                        </label>
                       </Map_listprice2>
                       <Map_listcategory>
                         <label>{post.category}</label>
                       </Map_listcategory>
                       <Map_listlike>
                         <span>{post.createdAt}</span>
-                        <span
-                          style={{
-                            position: "relative",
-                            left: 150,
-                          }}
-                        >
-                          ❤️{post.likeCnt}
-                        </span>
+                        <div>❤️{post.likeCnt}</div>
                       </Map_listlike>
                     </Map_listwrap>
                   </PList>
@@ -224,11 +219,13 @@ const Stbutton4 = styled.button`
 const Map_listwrap = styled.div`
   font-style: inter;
   flex-direction: row;
+  width: 100%;
 `;
 
 const Map_listprice2 = styled.div`
   margin-left: 7px;
   font-size: 16px;
+  font-weight: 600;
   margin-top: 9px;
 `;
 
@@ -240,8 +237,13 @@ const Map_listcategory = styled.div`
 const Map_listlike = styled.span`
   margin-left: 7px;
   font-size: 12px;
+  width: 90%;
   display: flex;
   justify-content: space-between;
   position: relative;
   top: 36px;
+  div {
+    position: relative;
+    right: 0px;
+  }
 `;

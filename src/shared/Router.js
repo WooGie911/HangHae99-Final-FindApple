@@ -77,9 +77,6 @@ const Router = () => {
         {/* 판매자 페이지 이동하기 */}
         <Route path="/sellerpage/:memberId" element={<SellerPage />} />
 
-        {/* 카카오 소셜 로그인 */}
-        <Route path="/KAKAO" element={<Redirect />} />
-
         {/*가격 책정 페이지 */}
         <Route path="/pricingInput" element={<PricingInput />} />
         <Route path="/pricingInput/:category" element={<PricingInput />} />
@@ -101,6 +98,9 @@ const Router = () => {
 
         {/*상세내용 확인 페이지 */}
         <Route path="/pricingtext" element={<PricingText />} />
+
+        {/* 카카오 소셜 로그인 */}
+        <Route path="/KAKAO" element={<Redirect />} />
       </Routes>
     </BrowserRouter>
   );

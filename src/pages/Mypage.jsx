@@ -38,7 +38,6 @@ const Mypage = () => {
     navigate("/signin");
   };
 
-
   return (
     <div>
       <Layout>
@@ -129,8 +128,8 @@ const FirstContainer = styled.div`
 `;
 
 const Head = styled.div`
-display: flex;
-justify-content: space-between;
+  display: flex;
+  justify-content: space-between;
   span {
     font-size: 18px;
   }
@@ -142,6 +141,7 @@ const UserInfoContainer = styled.div`
   justify-content: space-between;
   img {
     margin-top: 17px;
+    cursor: pointer;
   }
 `;
 
@@ -159,8 +159,10 @@ const Content = styled.div`
   margin-bottom: 10px;
   display: flex;
   justify-content: space-between;
+
   img {
     vertical-align: bottom;
+    cursor: pointer;
   }
   div {
     font-size: 16px;
@@ -185,21 +187,20 @@ const SecondContainer = styled.div`
   height: 203px;
   background-color: white;
   border-radius: 5px;
+  box-shadow: 0px 6px 16px rgba(0, 0, 0, 0.1);
 `;
 
 //LogOut
 const Logout = styled.button`
-/* Rectangle 96 */
-
-box-sizing: border-box;
-
-font-size: 8px;
-width: 50px;
-height: 17px;
-/* #3D6AF2 */
-
-border: 1px solid #3D6AF2;
-border-radius: 5px;
-background-color: transparent;
-color : #3D6AF2;
+  font-family: "Inter";
+  font-style: normal;
+  font-weight: 500;
+  font-size: 11px;
+  width: 60px;
+  height: 25px;
+  border: 1px solid #3d6af2;
+  border-radius: 5px;
+  background-color: transparent;
+  color: #3d6af2;
+  cursor: pointer;
 `;

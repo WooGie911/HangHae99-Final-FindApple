@@ -36,9 +36,13 @@ const PricingList = ({ DetailPrice }) => {
       <TopDiv>
         <TitleDiv>가격 책정 완료</TitleDiv>
         {/* <ContentDiv>{PricingPrice}원</ContentDiv> */}
-        {DetailPrice.getPrice !== undefined && (<>
-        <ContentDiv>{DetailPrice.getPrice.toLocaleString('ko-KR')}원</ContentDiv>
-        </>)}
+        {DetailPrice.getPrice !== undefined && (
+          <>
+            <ContentDiv>
+              {DetailPrice.getPrice.toLocaleString("ko-KR")}원
+            </ContentDiv>
+          </>
+        )}
       </TopDiv>
       {DetailPrice.category === "macbook" ? (
         <ListDiv>
@@ -177,6 +181,7 @@ const ListDiv = styled.div`
   padding: 10px;
   background-color: white;
   border-radius: 5px;
+  box-shadow: 0px 6px 16px rgba(0, 0, 0, 0.1);
   div {
     height: 100%;
     div {

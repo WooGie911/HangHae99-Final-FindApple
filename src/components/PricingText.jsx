@@ -5,47 +5,61 @@ import { __getPriceInfo, __checkPrice } from "../redux/modules/PriceSlice";
 import PricingList from "./PricingList";
 import styled from "styled-components";
 import back from "../assets/back.png";
+import Layout from "./Layout";
 
 const PricingText = () => {
   const state = useLocation();
   const data = state.state;
   const navigate = useNavigate();
   console.log("datdatadataa", data);
-  const onClickHandler = () => {
-    navigate(-1);
-  };
 
   return (
     <>
-      <HeadContainer>
-        <div>
-          <img
-            onClick={onClickHandler}
-            style={{ width: 25, height: 25 }}
-            src={back}
-          />
+      <Layout>
+        <TitleDiv>
+          <Backbutton
+            onClick={() => {
+              navigate(-1);
+            }}
+          >
+            〈
+          </Backbutton>
           <span>상품 상세 정보</span>
+        </TitleDiv>
+
+        <div>
+          <PricingList DetailPrice={data.options} />
         </div>
-      </HeadContainer>
-      <hr />
-      <div>
-        <PricingList DetailPrice={{ ...data.DetailPrice }} />
-      </div>
+      </Layout>
     </>
   );
 };
 
 export default PricingText;
-const HeadContainer = styled.div`
+
+const TitleDiv = styled.div`
   display: flex;
+  justify-content: center;
+  justify-items: center;
   align-items: center;
-  margin-right: 120px;
-  img {
-    float: left;
-    margin-right: 110px;
-  }
-  span {
-    /* text-align: center; */
-    font-size: 17px;
-  }
+  position: relative;
+  width: 100%;
+  height: 60px;
+  font-family: "Inter";
+  font-style: normal;
+  font-weight: 400;
+  font-size: 18px;
+  line-height: 22px;
+  font-weight: bold;
+  border-bottom: solid 1px gray;
+`;
+const Backbutton = styled.button`
+  position: absolute;
+  left: 0px;
+  width: 56px;
+  height: 100%;
+  font-size: 18px;
+  font-weight: bold;
+  border: none;
+  background-color: transparent;
 `;
