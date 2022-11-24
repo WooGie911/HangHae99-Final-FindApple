@@ -1,70 +1,53 @@
-# Getting Started with Create React App
+# 파인드애플(FindApple) FrontEnd
+## 1. 프로젝트 소개
+[서비스 목적]  중고거래 사이트 가격 책정 한계 개선(불합리한 가격 제안 방지)
 
-This project was bootstrapped with [Create React App](https://github.com/facebook/create-react-app).
+## 2. 주요 기능
+- 중고 애플 맥북 및 아이폰 가격을 책정 받을 수 있다.
+- 책정된 가격을 커뮤니티에 올려 물건을 바로 판매할 수 있다.
+- 만약 책정 가격이 마음에 들지 않을 시 이의제기를 할 수 있는 커뮤니티가 있다.
+- MyPage를 통해 개인정보 변경, 찜한 물건, 올린 물건, 이의제기 내용을 확인할 수 있다.
 
-## Available Scripts
+### 구현한 기능들
+- JWT를 이용한 일반 회원가입 및 이메일 인증 서비스
+- 소셜 로그인 및 로그아웃(카카오톡)
+- 무한 스크롤 통한 게시글 전체 보기
+- 단계별 절차에 따른 가격책정 로직
+- 게시물 및 이의제기, 댓글 CRUD 
+- Hook 이용한 다중 및 용량 압축 사진 업로드
+- SlickSlider 통한 사진 가로 스크롤
+- Styled Component 를 활용한 CSS 적용
+- Redux-Toolkit의 Thunk를 활용한 MiddleWare 사용
+- Axios 통한 BackEnd 송수신
+- Rudux 활용한 전역 상태 관리
 
-In the project directory, you can run:
 
-### `yarn start`
+## 3. FrontEnd 팀원 소개
+ | Name | Position|
+| --- | --- |
+| 안다민 | 리더  |
+| 김원규 | 팀원 |
+| 김재욱 | 팀원 |
 
-Runs the app in the development mode.\
-Open [http://localhost:3000](http://localhost:3000) to view it in your browser.
 
-The page will reload when you make changes.\
-You may also see any lint errors in the console.
+## 4. 프로젝트 기간
+2022년 11월 07일 ~ 12월 16일
 
-### `yarn test`
+### 기술 아키텍쳐
 
-Launches the test runner in the interactive watch mode.\
-See the section about [running tests](https://facebook.github.io/create-react-app/docs/running-tests) for more information.
+![image](https://user-images.githubusercontent.com/113869496/203765586-d0e682c5-5c58-409c-9dd9-757be83c7c67.png)
+</details>
 
-### `yarn build`
+## 5. 개발환경 및 라이브러리
 
-Builds the app for production to the `build` folder.\
-It correctly bundles React in production mode and optimizes the build for the best performance.
+  <img src="https://img.shields.io/badge/javascript-F7DF1E?style=for-the-badge&logo=javascript&logoColor=black"> 
+<img src="https://img.shields.io/badge/react-%2320232a.svg?style=for-the-badge&logo=react&logoColor=%2361DAFB">
+<img src="https://img.shields.io/badge/styled--components-DB7093?style=for-the-badge&logo=styled-components&logoColor=white">
+<img src="https://img.shields.io/badge/yarn-%232C8EBB.svg?style=for-the-badge&logo=yarn&logoColor=white">
 
-The build is minified and the filenames include the hashes.\
-Your app is ready to be deployed!
+<img src="https://img.shields.io/badge/Git-F05032?style=for-the-badge&logo=Git&logoColor=white">
+<img src="https://img.shields.io/badge/github-181717?style=for-the-badge&logo=github&logoColor=white">
+<img src="https://img.shields.io/badge/kakao login-FFCD00?style=for-the-badge&logo=kakao&logoColor=black">
 
-See the section about [deployment](https://facebook.github.io/create-react-app/docs/deployment) for more information.
-
-### `yarn eject`
-
-**Note: this is a one-way operation. Once you `eject`, you can't go back!**
-
-If you aren't satisfied with the build tool and configuration choices, you can `eject` at any time. This command will remove the single build dependency from your project.
-
-Instead, it will copy all the configuration files and the transitive dependencies (webpack, Babel, ESLint, etc) right into your project so you have full control over them. All of the commands except `eject` will still work, but they will point to the copied scripts so you can tweak them. At this point you're on your own.
-
-You don't have to ever use `eject`. The curated feature set is suitable for small and middle deployments, and you shouldn't feel obligated to use this feature. However we understand that this tool wouldn't be useful if you couldn't customize it when you are ready for it.
-
-## Learn More
-
-You can learn more in the [Create React App documentation](https://facebook.github.io/create-react-app/docs/getting-started).
-
-To learn React, check out the [React documentation](https://reactjs.org/).
-
-### Code Splitting
-
-This section has moved here: [https://facebook.github.io/create-react-app/docs/code-splitting](https://facebook.github.io/create-react-app/docs/code-splitting)
-
-### Analyzing the Bundle Size
-
-This section has moved here: [https://facebook.github.io/create-react-app/docs/analyzing-the-bundle-size](https://facebook.github.io/create-react-app/docs/analyzing-the-bundle-size)
-
-### Making a Progressive Web App
-
-This section has moved here: [https://facebook.github.io/create-react-app/docs/making-a-progressive-web-app](https://facebook.github.io/create-react-app/docs/making-a-progressive-web-app)
-
-### Advanced Configuration
-
-This section has moved here: [https://facebook.github.io/create-react-app/docs/advanced-configuration](https://facebook.github.io/create-react-app/docs/advanced-configuration)
-
-### Deployment
-
-This section has moved here: [https://facebook.github.io/create-react-app/docs/deployment](https://facebook.github.io/create-react-app/docs/deployment)
-
-### `yarn build` fails to minify
-
-This section has moved here: [https://facebook.github.io/create-react-app/docs/troubleshooting#npm-run-build-fails-to-minify](https://facebook.github.io/create-react-app/docs/troubleshooting#npm-run-build-fails-to-minify)
+## 6. <a src="https://www.notion.so/1-2048c4aab357410e922fe426d5c24c99">노션 Link</a>
+- 노션을 통해 회의록 및 저희 팀원이 하루 하루 노력해온 흔적을 엿보실 수 있습니다. 꼭 들어와서 확인해주세요!
