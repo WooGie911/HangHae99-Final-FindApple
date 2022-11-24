@@ -73,6 +73,8 @@ const Main = ({}) => {
 
         <MainList />
 
+        <Diiiiv />
+
         <Footer />
       </Layout>
     </>
@@ -128,4 +130,8 @@ const More_seebutton = styled.button`
   right: 15px;
   cursor: pointer;
   background-color: transparent;
+`;
+
+const Diiiiv = styled.div`
+  height: 70px;
 `;

@@ -23,6 +23,7 @@ import Pricingfinal from "../components/Pricingfinal";
 import PricingText from "../components/PricingText";
 import PostComment from "../pages/PostComment";
 import ObjectionComment from "../pages/ObjectionComment";
+import RedirectLogout from "../components/RedirectLogout";
 
 const Router = () => {
   return (
@@ -101,6 +102,7 @@ const Router = () => {
 
         {/* 카카오 소셜 로그인 */}
         <Route path="/KAKAO" element={<Redirect />} />
+        <Route path="/KAKAO/LOGOUT" element={<RedirectLogout />} />
       </Routes>
     </BrowserRouter>
   );

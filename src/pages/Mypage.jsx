@@ -10,6 +10,7 @@ import bookmark from "../assets/bookmark.png";
 import doubletick from "../assets/doubletick.png";
 import window from "../assets/window.png";
 import Footer from "../components/Footer";
+import LogoutButton from "../components/LogoutButton";
 
 const Mypage = () => {
   const navigate = useNavigate();
@@ -32,19 +33,14 @@ const Mypage = () => {
     dispatch(__UserProfile());
   }, [dispatch]);
 
-  const onClickButton = (e) => {
-    e.preventDefault();
-    localStorage.clear();
-    navigate("/signin");
-  };
-
   return (
     <div>
       <Layout>
         <FirstContainer>
           <Head>
             <div>내 정보</div>
-            <Logout onClick={onClickButton}>로그아웃</Logout>
+
+            <LogoutButton />
           </Head>
           <div style={{ alignItems: "center" }}>
             <img
@@ -188,19 +184,4 @@ const SecondContainer = styled.div`
   background-color: white;
   border-radius: 5px;
   box-shadow: 0px 6px 16px rgba(0, 0, 0, 0.1);
-`;
-
-//LogOut
-const Logout = styled.button`
-  font-family: "Inter";
-  font-style: normal;
-  font-weight: 500;
-  font-size: 11px;
-  width: 60px;
-  height: 25px;
-  border: 1px solid #3d6af2;
-  border-radius: 5px;
-  background-color: transparent;
-  color: #3d6af2;
-  cursor: pointer;
 `;

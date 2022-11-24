@@ -123,7 +123,7 @@ const ObjectionsSlice = createSlice({
   name: "objections",
   initialState: {
     posts: [],
-  postsCount:0,
+    postsCount: 0,
   },
   reducers: {},
   extraReducers: {
