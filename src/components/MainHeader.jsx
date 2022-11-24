@@ -27,7 +27,7 @@ const MainHeader = (props) => {
         <HeaderTextSpace>
           <span
             onClick={() => {
-              navigate("/");
+              navigate("/main");
             }}
           >
             HOME
