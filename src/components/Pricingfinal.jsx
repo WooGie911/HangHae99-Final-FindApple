@@ -96,7 +96,6 @@ const TitleDiv = styled.div`
   line-height: 22px;
   font-weight: bold;
   border-bottom: solid 1px gray;
-  /* background-color: blue; */
 `;
 
 const Backbutton = styled.button`

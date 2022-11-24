@@ -15,10 +15,12 @@ const MainList = () => {
     postSort: "postLikeCnt",
   };
   const [submitOBJ, setSubmitOBJ] = useState(HeaderState);
+  const [headerBarState, setHeaderBarState] = useState("all");
   const { posts } = useSelector((state) => state.posts);
   console.log(posts);
 
   const onClickCategoryHandler = (data) => {
+    setHeaderBarState(data);
     const paramObj = data === "all" ? data : `category/${data}`;
     setSubmitOBJ({ ...submitOBJ, paramObj: paramObj });
   };
@@ -35,28 +37,59 @@ const MainList = () => {
   return (
     <>
       <Stdivwrap>
-        <Stbutton1
-          src="https://img.icons8.com/external-regular-kawalan-studio/24/null/external-oval-shape-regular-kawalan-studio.png"
-          onClick={() => {
-            onClickCategoryHandler("all");
-          }}
-        >
-          전체
-        </Stbutton1>
-        <Stbutton2
-          onClick={() => {
-            onClickCategoryHandler("macbook");
-          }}
-        >
-          MacBook
-        </Stbutton2>
-        <Stbutton3
-          onClick={() => {
-            onClickCategoryHandler("iphone");
-          }}
-        >
-          iPhone
-        </Stbutton3>
+        {headerBarState === "all" ? (
+          <Stbutton1
+            src="https://img.icons8.com/external-regular-kawalan-studio/24/null/external-oval-shape-regular-kawalan-studio.png"
+            onClick={() => {
+              onClickCategoryHandler("all");
+            }}
+          >
+            전체
+          </Stbutton1>
+        ) : (
+          <Stbutton2
+            src="https://img.icons8.com/external-regular-kawalan-studio/24/null/external-oval-shape-regular-kawalan-studio.png"
+            onClick={() => {
+              onClickCategoryHandler("all");
+            }}
+          >
+            전체
+          </Stbutton2>
+        )}
+        {headerBarState === "macbook" ? (
+          <Stbutton3
+            onClick={() => {
+              onClickCategoryHandler("macbook");
+            }}
+          >
+            MacBook
+          </Stbutton3>
+        ) : (
+          <Stbutton4
+            onClick={() => {
+              onClickCategoryHandler("macbook");
+            }}
+          >
+            MacBook
+          </Stbutton4>
+        )}
+        {headerBarState === "iphone" ? (
+          <Stbutton3
+            onClick={() => {
+              onClickCategoryHandler("iphone");
+            }}
+          >
+            iPhone
+          </Stbutton3>
+        ) : (
+          <Stbutton4
+            onClick={() => {
+              onClickCategoryHandler("iphone");
+            }}
+          >
+            iPhone
+          </Stbutton4>
+        )}
       </Stdivwrap>
       <Stlistwrap>
         {posts &&
@@ -144,7 +177,6 @@ const Stdivwrap = styled.div`
 `;
 
 const Stbutton1 = styled.button`
-  background-color: white;
   border-radius: 20px;
   width: 45px;
   height: 23px;
@@ -152,25 +184,39 @@ const Stbutton1 = styled.button`
   margin-top: 30px;
   border: 2px solid #3d6af2;
   background-color: #3d6af2;
+  color: white;
   cursor: pointer;
 `;
 const Stbutton2 = styled.button`
   background-color: white;
   border-radius: 20px;
-  width: 69px;
+  width: 45px;
   height: 23px;
   margin-left: 3px;
   margin-top: 30px;
+  color: #3d6af2;
   border: 2px solid #3d6af2;
   cursor: pointer;
 `;
 const Stbutton3 = styled.button`
+  background-color: #3d6af2;
+  border-radius: 20px;
+  width: 86px;
+  height: 23px;
+  margin-left: 3px;
+  margin-top: 30px;
+  color: white;
+  border: 2px solid #3d6af2;
+  cursor: pointer;
+`;
+const Stbutton4 = styled.button`
   background-color: white;
   border-radius: 20px;
   width: 86px;
   height: 23px;
   margin-left: 3px;
   margin-top: 30px;
+  color: #3d6af2;
   border: 2px solid #3d6af2;
   cursor: pointer;
 `;

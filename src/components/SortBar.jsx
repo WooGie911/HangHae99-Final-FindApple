@@ -24,13 +24,16 @@ const SortBar = (props) => {
   return (
     <>
       <div>
+
         <StContainer>
         <Total>전체{props.postsCount}개</Total>
         {params.sort === props.postId ? (<Sort
+
           onClick={() => {
             onClickSortHandler(props.postLikeCnt);
           }}
         >
+
           <img src={swapoutline}/>최신순
         </Sort> ) : (<Sort
         onClick={() => {
@@ -42,6 +45,7 @@ const SortBar = (props) => {
           
         )}
         </StContainer>
+
       </div>
     </>
   );

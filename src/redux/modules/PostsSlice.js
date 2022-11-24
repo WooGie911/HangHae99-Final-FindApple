@@ -177,7 +177,9 @@ const PostsSlice = createSlice({
   name: "posts",
   initialState: {
     posts: [],
-    postsCount:0,
+
+    postsCount: 0,
+
     HeaderState: {
       paramObj: "all",
       pageNumber: 0,
