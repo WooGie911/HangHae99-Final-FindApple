@@ -12,7 +12,7 @@ const RedirectLogout = () => {
   // }, []);
 
   localStorage.clear();
-
+  window.location.replace("/signin");
   return <Loading />;
 };
 
