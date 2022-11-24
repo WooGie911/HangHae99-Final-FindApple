@@ -23,6 +23,7 @@ import Pricingfinal from "../components/Pricingfinal";
 import PricingText from "../components/PricingText";
 import PostComment from "../pages/PostComment";
 import ObjectionComment from "../pages/ObjectionComment";
+import RedirectLogout from "../components/RedirectLogout";
 
 const Router = () => {
   return (
@@ -77,9 +78,6 @@ const Router = () => {
         {/* 판매자 페이지 이동하기 */}
         <Route path="/sellerpage/:memberId" element={<SellerPage />} />
 
-        {/* 카카오 소셜 로그인 */}
-        <Route path="/KAKAO" element={<Redirect />} />
-
         {/*가격 책정 페이지 */}
         <Route path="/pricingInput" element={<PricingInput />} />
         <Route path="/pricingInput/:category" element={<PricingInput />} />
@@ -101,6 +99,10 @@ const Router = () => {
 
         {/*상세내용 확인 페이지 */}
         <Route path="/pricingtext" element={<PricingText />} />
+
+        {/* 카카오 소셜 로그인 */}
+        <Route path="/KAKAO" element={<Redirect />} />
+        <Route path="/KAKAO/LOGOUT" element={<RedirectLogout />} />
       </Routes>
     </BrowserRouter>
   );

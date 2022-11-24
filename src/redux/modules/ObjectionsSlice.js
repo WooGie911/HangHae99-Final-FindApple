@@ -152,6 +152,7 @@ const ObjectionsSlice = createSlice({
   name: "objections",
   initialState: {
     posts: [],
+
   postsCount:0,
 
   HeaderState: {
@@ -160,6 +161,7 @@ const ObjectionsSlice = createSlice({
     pageSize: 10,
     postSort: "issuesId",
   },
+
 
 
 

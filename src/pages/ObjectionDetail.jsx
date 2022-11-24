@@ -17,7 +17,8 @@ import whitearrow from "../assets/whitearrow.png";
 import back from "../assets/back.png";
 import threedots from "../assets/threedots.png";
 import blueheart from "../assets/blueheart.png";
-import emptyheart from "../assets/emptyheart.png"
+import emptyheart from "../assets/emptyheart.png";
+import home from "../assets/home.png";
 const ObjectionDetail = () => {
   const navigate = useNavigate();
   const dispatch = useDispatch();
@@ -79,13 +80,18 @@ const ObjectionDetail = () => {
       <Layout>
         <EditHead>
           <div>
-            <img
-              onClick={() => {
-                navigate(-1);
-              }}
-              style={{ width: 25, height: 25 }}
-              src={back}
-            />
+            <Span>
+              <img
+                onClick={() => {
+                  navigate(-1);
+                }}
+                style={{ width: 25, height: 25 }}
+                src={back}
+              />
+              <span onClick={() => navigate("/")}>
+                <img src={home} />
+              </span>
+            </Span>
           </div>
           <Tgbutton src={threedots} onClick={editToggleHandler} />
           {editTg.isEdit === true ? (
@@ -132,17 +138,15 @@ const ObjectionDetail = () => {
               <Nickname onClick={onSellerPage}>{post.nickname}</Nickname>
             </SellerProfile>
           </div>
-          <ClickHeart onClick={() => onCartButton(post.issuesId)}>
-            {post.isLike ? (
-              <img src={blueheart} />
-            ) : (
-              <img src={emptyheart}/>
-            )}{" "}
-          </ClickHeart>
+          <Heart>
+            <ClickHeart onClick={() => onCartButton(post.issuesId)}>
+              {post.isLike ? <img src={blueheart} /> : <img src={emptyheart} />}{" "}
+            </ClickHeart>
+            <div>{post.likeCnt}</div>
+          </Heart>
         </WriterContainer>
 
         <White>
-          <Title>{post.title}</Title>
           {post.options !== undefined && (
             <>
               <Models>
@@ -153,16 +157,12 @@ const ObjectionDetail = () => {
               </Models>
             </>
           )}
-
+          <Title>{post.title}</Title>
           <div>{post.content}</div>
 
-          <Heart>
-            <div>
-              <img src="https://img.icons8.com/ios-glyphs/15/null/hearts.png" />{" "}
-              {post.likeCnt}
-            </div>
+          <Create>
             <div> {post.createdAt}</div>
-          </Heart>
+          </Create>
           <Detail
             onClick={() => {
               navigate("/pricingtext", { state: post });
@@ -177,11 +177,13 @@ const ObjectionDetail = () => {
 
           <Price>
             <div>
-            {post.expectPrice !== undefined && (
-              <>
-              <TextDiv>책정가격</TextDiv>
-              <PriceDiv>{post.expectPrice.toLocaleString('ko-KR')}원</PriceDiv>
-              </>
+              {post.expectPrice !== undefined && (
+                <>
+                  <TextDiv>책정가격</TextDiv>
+                  <PriceDiv>
+                    {post.expectPrice.toLocaleString("ko-KR")}원
+                  </PriceDiv>
+                </>
               )}
             </div>
             <Arrow>
@@ -189,10 +191,14 @@ const ObjectionDetail = () => {
               <img src="https://img.icons8.com/metro/15/null/long-arrow-right.png" />{" "}
             </Arrow>
             <div>
-            {post.userPrice !== undefined && (<>
-              <TextDiv>판매가격</TextDiv>
-              <PriceDiv>{post.userPrice.toLocaleString('ko-KR')}원</PriceDiv>
-              </>)}
+              {post.userPrice !== undefined && (
+                <>
+                  <TextDiv>판매가격</TextDiv>
+                  <PriceDiv>
+                    {post.userPrice.toLocaleString("ko-KR")}원
+                  </PriceDiv>
+                </>
+              )}
             </div>
             <div>
               <img
@@ -218,6 +224,12 @@ const EditHead = styled.div`
   display: flex;
   justify-content: space-between;
   padding: 10px;
+`;
+
+const Span = styled.span`
+  span {
+    margin-left: 10px;
+  }
 `;
 
 const Tgbutton = styled.img`
@@ -306,6 +318,7 @@ const Nickname = styled.div`
   margin-top: 18px;
   margin-left: 10px;
 `;
+
 // 흰배경
 const White = styled.div`
   background: white;
@@ -347,6 +360,28 @@ const Stdetailrightarrow = styled.img`
 
 // 찜하기 파트
 const Heart = styled.div`
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  font-size: 12px;
+  color: #606060;
+  width: 51px;
+  height: 50px;
+  position: relative;
+  right: 5px;
+  margin-top: 10px;
+  div {
+    font-size: 12px;
+    color: #606060;
+  }
+`;
+
+// 찜하기 버튼
+const ClickHeart = styled.div``;
+
+//생성시간
+const Create = styled.div`
+  margin-left: 5px;
   font-size: 12px;
   color: #606060;
   width: 367px;
@@ -354,21 +389,14 @@ const Heart = styled.div`
   position: fixed;
   bottom: 90px;
   display: flex;
-  div {
-    margin-left: 15px;
-  }
-`;
-
-// 찜하기 버튼
-const ClickHeart = styled.div`
-  margin-top: 13px;
 `;
 
 // 기종 설명
 const Models = styled.div`
   font-size: 12px;
   color: #000000;
-  margin-bottom: 30px;
+  margin-top: 20px;
+  margin-bottom: 10px;
   span {
     border: 0.5px solid #3d6af2;
     color: #3d6af2;

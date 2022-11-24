@@ -173,7 +173,7 @@ const ObjectionDetailsSlice = createSlice({
     [__deleteObjectionComment.fulfilled]: (state, action) => {
       state.isLoading = false;
       state.post.comments = state.post.comments.filter(
-        (comment) => comment.issuesCommentId !== action.payload
+        (comment) => comment.commentId !== action.payload
       );
     },
     [__deleteObjectionComment.rejected]: (state, action) => {

@@ -7,7 +7,6 @@ import Footer from "../components/Footer";
 import styled from "styled-components";
 import back from "../assets/back.png";
 
-
 const MyPost = () => {
   const { posts } = useSelector((state) => state.mypage);
   const navigate = useNavigate();
@@ -22,36 +21,42 @@ const MyPost = () => {
   return (
     <div>
       <Layout>
-      <HeadContainer>
-          <div>
-            <img
-              onClick={onClickHandler}
-              style={{ width: 25, height: 25 }}
-              src={back}
-            />
-            <span>내가 쓴 글</span>
-          </div>
+        <HeadContainer>
+          <img
+            onClick={onClickHandler}
+            style={{ width: 25, height: 25 }}
+            src={back}
+          />
+          <span>
+            {" "}
+            <div>내가 쓴 글 </div>
+          </span>
         </HeadContainer>
         <hr />
         <PostList>
-              <Posts>
-        {posts.length > 0 && (
-          <div>
-            {posts.map((post) => {
-              return (
-                <SellerPost key={post.postId}>
-                  <img src={post.images[0].imgUrl} onClick={() => {navigate(`/PostDetail/${post.postId}`)}} />
-                  <div>{post.userPrice}원</div>
-                  <TitleEdit>{post.title}</TitleEdit>
-                  <LikeCnt>🤍{post.likeCnt}</LikeCnt>
-                </SellerPost>
-              );
-            })}
-          </div>
-        )}
-                      </Posts>
-                      <Div></Div>
-            </PostList>
+          <Posts>
+            {posts.length > 0 && (
+              <div>
+                {posts.map((post) => {
+                  return (
+                    <SellerPost key={post.postId}>
+                      <img
+                        src={post.images[0].imgUrl}
+                        onClick={() => {
+                          navigate(`/PostDetail/${post.postId}`);
+                        }}
+                      />
+                      <div>{post.userPrice}원</div>
+                      <TitleEdit>{post.title}</TitleEdit>
+                      <LikeCnt>🤍{post.likeCnt}</LikeCnt>
+                    </SellerPost>
+                  );
+                })}
+              </div>
+            )}
+          </Posts>
+          <Div></Div>
+        </PostList>
         <Footer />
       </Layout>
     </div>
@@ -62,17 +67,21 @@ export default MyPost;
 //헤더
 const HeadContainer = styled.div`
   display: flex;
+  justify-content: center;
+  justify-items: center;
   align-items: center;
-  margin-right: 120px;
-  margin-bottom: 20px;
+  position: relative;
+  width: 100%;
+  height: 60px;
+  font-family: "Inter";
+  font-style: normal;
+  font-weight: bold;
+  font-size: 24px;
+  line-height: 22px;
+
   img {
-    float: left;
-    margin-right: 110px;
-  }
-  span {
-    /* text-align: center; */
-    font-size: 24px;
-    font-weight: bold;
+    position: absolute;
+    left: 10px;
   }
 `;
 
@@ -91,10 +100,10 @@ const Posts = styled.div`
   margin-bottom: 50px;
   overflow: auto;
 `;
-const Div=styled.div`
-height: 58px;
-background-color: white;
-`
+const Div = styled.div`
+  height: 58px;
+  background-color: white;
+`;
 const SellerPost = styled.div`
   float: left;
   margin-left: 20px;
@@ -108,9 +117,9 @@ const SellerPost = styled.div`
   }
 `;
 // 타이틀 글자 줄이기
-const TitleEdit=styled.div`
-font-size: 12px;
-`
+const TitleEdit = styled.div`
+  font-size: 12px;
+`;
 
 //찜하기
 const LikeCnt = styled.div`

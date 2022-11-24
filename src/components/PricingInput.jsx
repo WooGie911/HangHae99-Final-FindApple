@@ -295,60 +295,21 @@ const PricingInput = () => {
               </CategoryDiv>
               <StepDiv>
                 <svg
-                  width="78"
-                  height="14"
-                  viewBox="0 0 78 14"
+                  width="70"
+                  height="6"
+                  viewBox="0 0 70 6"
                   fill="none"
                   xmlns="http://www.w3.org/2000/svg"
                 >
-                  <g filter="url(#filter0_d_374_910)">
-                    <circle
-                      r="3"
-                      transform="matrix(-1 0 0 1 7 3)"
-                      fill="#D9D9D9"
-                    />
-                    <circle cx="23" cy="3" r="3" fill="#3D6AF2" />
-                    <circle cx="39" cy="3" r="3" fill="#D9D9D9" />
-                    <circle cx="55" cy="3" r="3" fill="#D9D9D9" />
-                    <circle cx="71" cy="3" r="3" fill="#D9D9D9" />
-                  </g>
-                  <defs>
-                    <filter
-                      id="filter0_d_374_910"
-                      x="0"
-                      y="0"
-                      width="78"
-                      height="14"
-                      filterUnits="userSpaceOnUse"
-                      color-interpolation-filters="sRGB"
-                    >
-                      <feFlood flood-opacity="0" result="BackgroundImageFix" />
-                      <feColorMatrix
-                        in="SourceAlpha"
-                        type="matrix"
-                        values="0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 127 0"
-                        result="hardAlpha"
-                      />
-                      <feOffset dy="4" />
-                      <feGaussianBlur stdDeviation="2" />
-                      <feComposite in2="hardAlpha" operator="out" />
-                      <feColorMatrix
-                        type="matrix"
-                        values="0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0.25 0"
-                      />
-                      <feBlend
-                        mode="normal"
-                        in2="BackgroundImageFix"
-                        result="effect1_dropShadow_374_910"
-                      />
-                      <feBlend
-                        mode="normal"
-                        in="SourceGraphic"
-                        in2="effect1_dropShadow_374_910"
-                        result="shape"
-                      />
-                    </filter>
-                  </defs>
+                  <circle
+                    r="3"
+                    transform="matrix(-1 0 0 1 3 3)"
+                    fill="#D9D9D9"
+                  />
+                  <circle cx="19" cy="3" r="3" fill="#3D6AF2" />
+                  <circle cx="35" cy="3" r="3" fill="#D9D9D9" />
+                  <circle cx="51" cy="3" r="3" fill="#D9D9D9" />
+                  <circle cx="67" cy="3" r="3" fill="#D9D9D9" />
                 </svg>
               </StepDiv>
               <NextButton onClick={onClickHandler23}>다음으로</NextButton>

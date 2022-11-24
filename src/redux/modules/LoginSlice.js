@@ -10,7 +10,7 @@ const accessToken = localStorage.getItem("Access_Token");
 const refreshToken = localStorage.getItem("Refresh_Token");
 
 export const __emailCheck = createAsyncThunk(
-  "posts/__emailCheck",
+  "Login/__emailCheck",
   async (payload, thunkAPI) => {
     try {
       const data = await axios.post(
@@ -26,8 +26,31 @@ export const __emailCheck = createAsyncThunk(
   }
 );
 
+//카카오 로그인 Thunk
 export const __kakaoLogin = createAsyncThunk(
-  "posts/__kakaoLogin",
+  "Login/__kakaoLogin",
+  async (code, thunkAPI) => {
+    try {
+      const res = await axios.get(
+        `${process.env.REACT_APP_SERVER}/api/member/kakao?code=${code}`
+      );
+      window.localStorage.setItem("Access_Token", res.data.accessToken);
+      window.localStorage.setItem("Refresh_Token", res.data.refreshToken);
+      window.location.replace("/");
+
+      return thunkAPI.fulfillWithValue(res.data);
+    } catch (error) {
+      window.alert("로그인에 실패하였습니다.");
+      // 로그인 실패하면 로그인 화면으로 돌려보냄
+      window.location.replace("/login");
+      return thunkAPI.rejectWithValue(error);
+    }
+  }
+);
+
+//카카오 로그아웃 Thunk
+export const __kakaoLogout = createAsyncThunk(
+  "Login/__kakaoLogout",
   async (code, thunkAPI) => {
     try {
       const res = await axios.get(
@@ -152,7 +175,7 @@ export const __UserProfileEdit = createAsyncThunk(
 );
 //로그아웃
 export const __logout = createAsyncThunk(
-  "members/__logout",
+  "Login/__logout",
   async (payload, thunkAPI) => {
     try {
       await axios
@@ -225,6 +248,20 @@ const LoginSlice = createSlice({
       state.isLoading = false;
       state.error = action.payload;
     },
+
+    //__kakaoLogout
+    [__kakaoLogout.pending]: (state) => {
+      state.isLoading = true;
+    },
+    [__kakaoLogout.fulfilled]: (state, action) => {
+      state.isLoading = false;
+      state.user = action.payload;
+    },
+    [__kakaoLogout.rejected]: (state, action) => {
+      state.isLoading = false;
+      state.error = action.payload;
+    },
+
     //__UserProfile
     [__UserProfile.pending]: (state) => {
       state.isLoading = true;

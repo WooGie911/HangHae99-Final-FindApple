@@ -10,6 +10,7 @@ import bookmark from "../assets/bookmark.png";
 import doubletick from "../assets/doubletick.png";
 import window from "../assets/window.png";
 import Footer from "../components/Footer";
+import LogoutButton from "../components/LogoutButton";
 
 const Mypage = () => {
   const navigate = useNavigate();
@@ -32,20 +33,14 @@ const Mypage = () => {
     dispatch(__UserProfile());
   }, [dispatch]);
 
-  const onClickButton = (e) => {
-    e.preventDefault();
-    localStorage.clear();
-    navigate("/signin");
-  };
-
-
   return (
     <div>
       <Layout>
         <FirstContainer>
           <Head>
             <div>내 정보</div>
-            <Logout onClick={onClickButton}>로그아웃</Logout>
+
+            <LogoutButton />
           </Head>
           <div style={{ alignItems: "center" }}>
             <img
@@ -129,8 +124,8 @@ const FirstContainer = styled.div`
 `;
 
 const Head = styled.div`
-display: flex;
-justify-content: space-between;
+  display: flex;
+  justify-content: space-between;
   span {
     font-size: 18px;
   }
@@ -142,6 +137,7 @@ const UserInfoContainer = styled.div`
   justify-content: space-between;
   img {
     margin-top: 17px;
+    cursor: pointer;
   }
 `;
 
@@ -159,8 +155,10 @@ const Content = styled.div`
   margin-bottom: 10px;
   display: flex;
   justify-content: space-between;
+
   img {
     vertical-align: bottom;
+    cursor: pointer;
   }
   div {
     font-size: 16px;
@@ -185,21 +183,5 @@ const SecondContainer = styled.div`
   height: 203px;
   background-color: white;
   border-radius: 5px;
-`;
-
-//LogOut
-const Logout = styled.button`
-/* Rectangle 96 */
-
-box-sizing: border-box;
-
-font-size: 8px;
-width: 50px;
-height: 17px;
-/* #3D6AF2 */
-
-border: 1px solid #3D6AF2;
-border-radius: 5px;
-background-color: transparent;
-color : #3D6AF2;
+  box-shadow: 0px 6px 16px rgba(0, 0, 0, 0.1);
 `;

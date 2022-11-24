@@ -16,43 +16,47 @@ const MyLike = () => {
   }, []);
   const onClickHandler = () => {
     navigate(-1);
-  };  
+  };
   return (
     <div>
       <Layout>
         <HeadContainer>
-          <div>
-            <img
-              onClick={onClickHandler}
-              style={{ width: 25, height: 25 }}
-              src={back}
-            />
-            <span>내가 찜한 글</span>
-          </div>
+          <img
+            onClick={onClickHandler}
+            style={{ width: 25, height: 25 }}
+            src={back}
+          />
+          <span>
+            <div>내가 찜한 글</div>
+          </span>
         </HeadContainer>
         <hr />
         <PostList>
-              <Posts>        
-        {likes.length > 0 && (
-          <>
-            {likes.map((like) => {
-              return (
-                <SellerPost key={like.postId}>
-                  <br />
-                  <img
-                    src={like.images[0].imgUrl} onClick={() => {navigate(`/PostDetail/${like.postId}`)}}/>
-                  <div>{like.userPrice}원</div>                  
-                  <TitleEdit>{like.title}</TitleEdit>
-                  <TitleEdit>{like.nickname}</TitleEdit>
-                  <br />
-                </SellerPost>
-              );
-            })}
-          </>
-        )}
-                      </Posts>
-                      <Div></Div>
-            </PostList>        
+          <Posts>
+            {likes.length > 0 && (
+              <>
+                {likes.map((like) => {
+                  return (
+                    <SellerPost key={like.postId}>
+                      <br />
+                      <img
+                        src={like.images[0].imgUrl}
+                        onClick={() => {
+                          navigate(`/PostDetail/${like.postId}`);
+                        }}
+                      />
+                      <div>{like.userPrice}원</div>
+                      <TitleEdit>{like.title}</TitleEdit>
+                      <TitleEdit>{like.nickname}</TitleEdit>
+                      <br />
+                    </SellerPost>
+                  );
+                })}
+              </>
+            )}
+          </Posts>
+          <Div></Div>
+        </PostList>
         <Footer />
       </Layout>
     </div>
@@ -63,17 +67,21 @@ export default MyLike;
 //헤더
 const HeadContainer = styled.div`
   display: flex;
+  justify-content: center;
+  justify-items: center;
   align-items: center;
-  margin-right: 120px;
-  margin-bottom: 20px;
+  position: relative;
+  width: 100%;
+  height: 60px;
+  font-family: "Inter";
+  font-style: normal;
+  font-weight: bold;
+  font-size: 24px;
+  line-height: 22px;
+
   img {
-    float: left;
-    margin-right: 110px;
-  }
-  span {
-    /* text-align: center; */
-    font-size: 24px;
-    font-weight: bold;
+    position: absolute;
+    left: 10px;
   }
 `;
 
@@ -93,10 +101,10 @@ const Posts = styled.div`
   overflow: auto;
 `;
 
-const Div=styled.div`
-height: 58px;
-background-color: white;
-`
+const Div = styled.div`
+  height: 58px;
+  background-color: white;
+`;
 const SellerPost = styled.div`
   float: left;
   margin-left: 20px;
@@ -111,6 +119,6 @@ const SellerPost = styled.div`
 `;
 
 // 타이틀 글자 줄이기
-const TitleEdit=styled.div`
-font-size: 12px;
-`
+const TitleEdit = styled.div`
+  font-size: 12px;
+`;
