@@ -6,7 +6,7 @@ import { useNavigate } from "react-router-dom";
 import useInput from "../hook/useInput";
 import Layout from "../components/Layout";
 import back from "../assets/back.png";
-
+import LOGO from "../assets/LOGO.svg";
 const SignUp = () => {
   const dispatch = useDispatch();
   const navigate = useNavigate();
@@ -73,7 +73,7 @@ const SignUp = () => {
           />
         </div>
         <div>
-          <img src="findapple.jpg"></img>
+          <img src={LOGO}></img>
         </div>
       </HeadContainer>
       <StSignupBox>
@@ -145,13 +145,14 @@ export default SignUp;
 // header
 const HeadContainer = styled.div`
   gap: 100px;
-  position: fixed;
+
   top: 20px;
   display: flex;
   align-items: center;
   margin-right: 120px;
   img {
-    float: left;
+    width: 143px;
+    height: 50px;
   }
   span {
     /* text-align: center; */
@@ -181,12 +182,13 @@ const InfoDiv = styled.div`
   margin-top: 30px;
   margin-right: 270px;
   font-size: 14px;
+  font-weight: 600;
 `;
 const StInputBox2 = styled.input`
   background-color: #fafafa;
   border: none;
   border-radius: 5px;
-
+  box-shadow: 0px 6px 16px 0 rgba(0, 0, 0, 0.1);
   &:focus,
   &:active {
     outline: none;
@@ -207,6 +209,7 @@ const StInputButton = styled.button`
   border: none;
   font-size: 12px;
   color: white;
+
   border-radius: 5px;
   &:focus,
   &:active {
@@ -222,6 +225,7 @@ const StInputBox = styled.input`
   background-color: #fafafa;
   border: none;
   border-radius: 5px;
+  box-shadow: 0px 6px 16px 0 rgba(0, 0, 0, 0.1);
   &:focus,
   &:active {
     outline: none;
@@ -260,7 +264,7 @@ const StButton = styled.button`
 `;
 
 const StLoginBox = styled.div`
-  font-size: 12px;
+  font-size: 13px;
   width: 400px;
   margin-top: 10px;
   display: flex;
