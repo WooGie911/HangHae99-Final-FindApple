@@ -6,7 +6,8 @@ import styled from "styled-components";
 import useInput from "../hook/useInput";
 import KakaoLogin from "../components/KakaoLogin";
 import Layout from "../components/Layout";
-import findapple from "../assets/findapple.jpg";
+import LOGO from "../assets/LOGO.svg";
+import LOGOWHITE from "../assets/LOGOWHITE.svg";
 
 const SignIn = () => {
   const initialState = {
@@ -28,15 +29,15 @@ const SignIn = () => {
     setInput(input);
   };
   const keyPress = (e) => {
-    if(e.key === 'Enter') {
+    if (e.key === "Enter") {
       onSubmitHandler();
     }
-  }
+  };
   return (
     <Layout>
       <StSignupBox>
         <StLoginBox>
-          <Title src="findapple.jpg"></Title>
+          <Title src={LOGOWHITE}></Title>
           <StInputBox
             type="text"
             name="email"
@@ -102,10 +103,8 @@ const StSignupBox = styled.div`
 `;
 
 const Title = styled.img`
-  font-size: 30px;
-  font-weight: bold;
-  text-align: center;
-  margin-bottom: 100px;
+  width: 143px;
+  height: 36px;
 `;
 
 const StInputBox = styled.input`
