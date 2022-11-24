@@ -177,4 +177,3 @@ const EditContainer = styled.div`
     margin-right: 280px;
   }
 `;
-

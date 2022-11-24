@@ -1,7 +1,7 @@
 import React, { useEffect } from "react";
 import styled from "styled-components";
 import { useDispatch } from "react-redux";
-import { useNavigate } from "react-router-dom";
+import { useNavigate, useParams } from "react-router-dom";
 import { useSelector } from "react-redux";
 import { __UserProfile } from "../redux/modules/LoginSlice";
 import photoIMG from "../assets/photoIMG.png";
@@ -14,6 +14,7 @@ import LogoutButton from "../components/LogoutButton";
 
 const Mypage = () => {
   const navigate = useNavigate();
+  const params = useParams();
   const mypageupdate = () => {
     navigate("/mypageupdate");
   };
@@ -31,7 +32,7 @@ const Mypage = () => {
   //get 해오기
   useEffect(() => {
     dispatch(__UserProfile());
-  }, [dispatch]);
+  }, [params]);
 
   return (
     <div>
