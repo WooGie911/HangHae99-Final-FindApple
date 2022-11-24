@@ -46,7 +46,7 @@ const SignIn = () => {
             value={input.email}
           />
           <StInputBox
-            type="text"
+            type="password"
             name="password"
             onChange={ChangeInputHandler}
             placeholder="비밀번호 입력"

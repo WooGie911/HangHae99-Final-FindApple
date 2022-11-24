@@ -96,8 +96,8 @@ const Title = styled.div`
   text-align: center;
 `;
 const MYLIKE = styled.div`
-  position: absolute;
-  right: 15px;
+  position: relative;
+  right: 10px;
   background-color: transparent;
 `;
 

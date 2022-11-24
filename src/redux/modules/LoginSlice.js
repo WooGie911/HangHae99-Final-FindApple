@@ -36,6 +36,7 @@ export const __kakaoLogin = createAsyncThunk(
       );
       window.localStorage.setItem("Access_Token", res.data.accessToken);
       window.localStorage.setItem("Refresh_Token", res.data.refreshToken);
+      window.localStorage.setItem("SITE", "SITE");
       window.location.replace("/");
 
       return thunkAPI.fulfillWithValue(res.data);
@@ -58,6 +59,7 @@ export const __kakaoLogout = createAsyncThunk(
       );
       window.localStorage.setItem("Access_Token", res.data.accessToken);
       window.localStorage.setItem("Refresh_Token", res.data.refreshToken);
+      window.localStorage.setItem("SITE", "KAKAO");
       window.location.replace("/");
 
       return thunkAPI.fulfillWithValue(res.data);
