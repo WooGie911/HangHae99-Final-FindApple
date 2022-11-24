@@ -10,6 +10,7 @@ import {
   __getObjectionDetail,
 } from "../redux/modules/ObjectionDetailsSlice";
 import back from "../assets/back.png";
+import Layout from "../components/Layout";
 
 const ObjectionComment = () => {
   const navigate = useNavigate();
@@ -26,28 +27,30 @@ const ObjectionComment = () => {
   };
   return (
     <>
-      <HeadContainer>
-        <div>
-          <img
-            onClick={onClickHandler}
-            style={{ width: 25, height: 25 }}
-            src={back}
-          />
-          <span>댓글</span>
-        </div>
-      </HeadContainer>
-      <hr />
+      <Layout>
+        <HeadContainer>
+          <div>
+            <img
+              onClick={onClickHandler}
+              style={{ width: 25, height: 25 }}
+              src={back}
+            />
+            <span>댓글</span>
+          </div>
+        </HeadContainer>
+        <hr />
 
-      <ObjectionCommentList
-        List={post}
-        deleteComment={__deleteObjectionComment}
-        commentList={post.comments}
-        __getDetail={__getObjectionDetail}
-      />
-      <ObjectionCommentCreate
-        __addComment={__addObjectionComment}
-        __getDetail={__getObjectionDetail}
-      />
+        <ObjectionCommentList
+          List={post}
+          deleteComment={__deleteObjectionComment}
+          commentList={post.comments}
+          __getDetail={__getObjectionDetail}
+        />
+        <ObjectionCommentCreate
+          __addComment={__addObjectionComment}
+          __getDetail={__getObjectionDetail}
+        />
+      </Layout>
     </>
   );
 };

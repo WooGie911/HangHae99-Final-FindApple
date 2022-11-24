@@ -25,12 +25,19 @@ const Comment = ({ comment, __deleteComment }) => {
       <StContainer>
         <Buttons>
           <div>
-            <div>{comment.nickname} </div>
-            <Cmnt> {comment.comment}</Cmnt>
+            <ProfileImg>
+              <img src={comment.avatarUrl} />
+              <div>
+                <div>{comment.nickname} </div>
+                <Cmnt> {comment.comment}</Cmnt>
+              </div>
+            </ProfileImg>
           </div>
           <Tgbutton src={threedots} onClick={editToggleHandler} />
           {editTg.isEdit === true ? (
-            <Button onClick={() => onDeleteButton(comment.id)}>삭제</Button>
+            <Button onClick={() => onDeleteButton(comment.commentId)}>
+              삭제
+            </Button>
           ) : null}
         </Buttons>
       </StContainer>
@@ -75,6 +82,19 @@ const Button = styled.button`
   background-color: #fff;
   &:hover {
     background-color: red;
+  }
+`;
+
+const ProfileImg = styled.div`
+  display: flex;
+  padding: 5px;
+  div {
+    padding: 2px;
+  }
+  img {
+    width: 25px;
+    height: 25px;
+    border-radius: 50%;
   }
 `;
 

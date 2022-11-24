@@ -11,6 +11,7 @@ import {
 } from "../redux/modules/PostDetailsSlice";
 import back from "../assets/back.png";
 import { useParams } from "react-router-dom";
+import Layout from "../components/Layout";
 
 const PostComment = () => {
   const { id } = useParams();
@@ -27,25 +28,27 @@ const PostComment = () => {
 
   return (
     <>
-      <HeadContainer>
-        <div>
-          <img
-            onClick={onClickHandler}
-            style={{ width: 25, height: 25 }}
-            src={back}
-          />
-          <span>댓글</span>
-        </div>
-      </HeadContainer>
-      <hr />
-      <CommentList
-        __deleteComment={__deletePostComment}
-        commentList={post.comments}
-      />
-      <CommentCreate
-        __addComment={__addPostComment}
-        __getDetail={__getPostDetail}
-      />
+      <Layout>
+        <HeadContainer>
+          <div>
+            <img
+              onClick={onClickHandler}
+              style={{ width: 25, height: 25 }}
+              src={back}
+            />
+            <span>댓글</span>
+          </div>
+        </HeadContainer>
+        <hr />
+        <CommentList
+          __deleteComment={__deletePostComment}
+          commentList={post.comments}
+        />
+        <CommentCreate
+          __addComment={__addPostComment}
+          __getDetail={__getPostDetail}
+        />
+      </Layout>
     </>
   );
 };

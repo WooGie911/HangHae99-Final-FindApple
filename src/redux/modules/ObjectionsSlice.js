@@ -26,6 +26,35 @@ export const __searchObjection = createAsyncThunk(
   }
 );
 
+export const __getAddObjection = createAsyncThunk(
+  "objections/__getAddObjection",
+  async (payload, thunkAPI) => {
+    console.log("pay", payload)
+    try {
+      const data = await axios.get(
+        `${process.env.REACT_APP_SERVER}/api/issue/${payload.state.paramObj}?page=${payload.page}&size=${payload.state.pageSize}&sort=${payload.state.postSort},DESC`,
+
+        {
+          headers: {
+            "Content-Type": `application/json`,
+            Access_Token: accessToken,
+            Refresh_Token: refreshToken,
+            "Cache-Control": "no-cache",
+          },
+        }
+      );
+      const obj =  {
+        payload: payload.page,
+        data: data.data.content
+      }
+      console.log(obj)
+      return thunkAPI.fulfillWithValue(obj);
+    } catch (error) {
+      return thunkAPI.rejectWithValue(error);
+    }
+  }
+);
+
 export const __getObjection = createAsyncThunk(
   "objections/__getObjection",
   async (payload, thunkAPI) => {
@@ -42,7 +71,7 @@ export const __getObjection = createAsyncThunk(
           },
         }
       );
-      return thunkAPI.fulfillWithValue(data.data.content);
+      return thunkAPI.fulfillWithValue(data.data);
     } catch (error) {
       return thunkAPI.rejectWithValue(error);
     }
@@ -123,6 +152,19 @@ const ObjectionsSlice = createSlice({
   name: "objections",
   initialState: {
     posts: [],
+
+  postsCount:0,
+
+  HeaderState: {
+    paramObj: "all",
+    pageNumber: 0,
+    pageSize: 10,
+    postSort: "issuesId",
+  },
+
+
+
+
   },
   reducers: {},
   extraReducers: {
@@ -138,14 +180,34 @@ const ObjectionsSlice = createSlice({
       state.isLoading = false;
       state.error = action.payload;
     },
+    //__getAddObjection
+    [__getAddObjection.pending]: (state) => {
+      state.isLoading = true;
+    },
+    [__getAddObjection.fulfilled]: (state, action) => {
+      state.isLoading = false;
+      console.log(action.payload.data)
+      if(action.payload.payload === 0) {
+        state.posts.splice(0)
+        state.posts.push(...action.payload.data)
 
+      }else{
+        state.posts.push(...action.payload.data)
+      }
+    },
+    [__getAddObjection.rejected]: (state, action) => {
+      state.isLoading = false;
+      state.error = action.payload;
+    },
+    
     //__getObjection
     [__getObjection.pending]: (state) => {
       state.isLoading = true;
     },
     [__getObjection.fulfilled]: (state, action) => {
       state.isLoading = false;
-      state.posts = action.payload;
+      state.posts = action.payload.content;
+      state.postsCount = action.payload.totalElements;
     },
     [__getObjection.rejected]: (state, action) => {
       state.isLoading = false;
