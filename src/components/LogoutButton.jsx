@@ -5,6 +5,8 @@ import KakaoLogout from "./KakaoLogout";
 
 const LogoutButton = () => {
   const navigate = useNavigate();
+
+  const SiteType = window.localStorage.getItem("SITE");
   const onClickButton = (e) => {
     e.preventDefault();
     localStorage.clear();
@@ -13,10 +15,11 @@ const LogoutButton = () => {
 
   return (
     <>
-      <Logout onClick={onClickButton}>로그아웃</Logout>
-
-      {/* 카카오 로그아웃
-      <KakaoLogout /> */}
+      {SiteType === "KAKAO" ? (
+        <KakaoLogout />
+      ) : (
+        <Logout onClick={onClickButton}>로그아웃</Logout>
+      )}
     </>
   );
 };
