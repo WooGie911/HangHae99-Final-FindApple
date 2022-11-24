@@ -8,17 +8,17 @@ const PricingList = ({ DetailPrice }) => {
   //     .replace(/\B(?=(\d{3})+(?!\d))/g, ",");
   // }
   let MacbookClass = "";
-  if (DetailPrice.macbookState === "A급") {
+  if (DetailPrice.state === "A급") {
     MacbookClass = "Class A";
-  } else if (DetailPrice.macbookState === "B급") {
+  } else if (DetailPrice.state === "B급") {
     MacbookClass = "Class B";
   } else {
     MacbookClass = "Class C";
   }
   let IphoneClass = "";
-  if (DetailPrice.iphoneState === "A급") {
+  if (DetailPrice.state === "A급") {
     IphoneClass = "Class A";
-  } else if (DetailPrice.iphoneState === "B급") {
+  } else if (DetailPrice.state === "B급") {
     IphoneClass = "Class B";
   } else {
     IphoneClass = "Class C";
@@ -53,7 +53,7 @@ const PricingList = ({ DetailPrice }) => {
             </div>
             <div>
               <span>출시년도</span>
-              <label>{DetailPrice.year}년</label>
+              <label>{DetailPrice.years}년</label>
             </div>
             <div>
               <span>기종</span>
@@ -61,7 +61,7 @@ const PricingList = ({ DetailPrice }) => {
             </div>
             <div>
               <span>화면크기</span>
-              <label>{DetailPrice.option}인치</label>
+              <label>{DetailPrice.options}인치</label>
             </div>
             <div>
               <span>배터리 사이클</span>
@@ -110,7 +110,7 @@ const PricingList = ({ DetailPrice }) => {
             </div>
             <div>
               <span>용량</span>
-              <label>{DetailPrice.option}</label>
+              <label>{DetailPrice.options}</label>
             </div>
             <div>
               <span>배터리 사이클</span>

@@ -42,11 +42,11 @@ const SignIn = () => {
             type="text"
             name="email"
             onChange={ChangeInputHandler}
-            placeholder="이메일 입력"
+            placeholder="아이디 입력"
             value={input.email}
           />
           <StInputBox
-            type="text"
+            type="password"
             name="password"
             onChange={ChangeInputHandler}
             placeholder="비밀번호 입력"
@@ -103,6 +103,8 @@ const StSignupBox = styled.div`
 `;
 
 const Title = styled.img`
+  position: relative;
+  top: -100px;
   width: 143px;
   height: 36px;
 `;
@@ -111,8 +113,8 @@ const StInputBox = styled.input`
   width: 296px;
   height: 38px;
   margin-top: 10px;
-  background-color: #ffffff;
-  opacity: 0.2;
+  background-color: #6488f5;
+
   border: none;
   border-radius: 5px;
   box-shadow: 0px 6px 16px 0px rgba(0, 0, 0, 0.1);
@@ -121,7 +123,7 @@ const StInputBox = styled.input`
     outline: none;
   }
   ::placeholder {
-    color: #c4c4c4;
+    color: white;
   }
   padding-left: 10px;
 `;

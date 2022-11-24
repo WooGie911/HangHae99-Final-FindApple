@@ -133,9 +133,9 @@ const PricingInput = () => {
     if (tag.category === "macbook") {
       objMac = {
         category: tag.category,
-        year: Number(tag.year),
+        years: Number(tag.year),
         model: tag.model,
-        option: tag.option,
+        options: tag.option,
         ram: tag.ram,
         keyboard: save2.keyboard[0],
         storage: tag.storage,
@@ -146,9 +146,9 @@ const PricingInput = () => {
       };
       objMac2 = {
         category: tag.category,
-        year: Number(tag.year),
+        years: Number(tag.year),
         model: tag.model,
-        option: tag.option,
+        options: tag.option,
         ram: tag.ram,
         keyboard: save2.keyboard[0],
         storage: tag.storage,
@@ -160,9 +160,9 @@ const PricingInput = () => {
     }
     const objPhone = {
       category: tag.category,
-      year: Number(tag.year),
+      years: Number(tag.year),
       model: tag.model,
-      option: tag.option,
+      options: tag.option,
       batteryState: Number(tag.batteryState),
       iphoneState: tag.iphoneState,
       careOX: tag.careOX,
@@ -171,9 +171,9 @@ const PricingInput = () => {
 
     const objPhone2 = {
       category: tag.category,
-      year: Number(tag.year),
+      years: Number(tag.year),
       model: tag.model,
-      option: tag.option,
+      options: tag.option,
       batteryState: Number(tag.batteryState),
       iphoneState: tag.iphoneState,
       careOX: tag.careOX,
