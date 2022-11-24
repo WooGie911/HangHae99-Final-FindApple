@@ -50,28 +50,6 @@ export const __kakaoLogin = createAsyncThunk(
   }
 );
 
-//카카오 로그아웃 Thunk
-export const __kakaoLogout = createAsyncThunk(
-  "Login/__kakaoLogout",
-  async (code, thunkAPI) => {
-    try {
-      const res = await axios.get(
-        `${process.env.REACT_APP_SERVER}/api/member/kakao?code=${code}`
-      );
-      window.localStorage.setItem("Access_Token", res.data.accessToken);
-      window.localStorage.setItem("Refresh_Token", res.data.refreshToken);
-      window.location.replace("/");
-
-      return thunkAPI.fulfillWithValue(res.data);
-    } catch (error) {
-      // window.alert("로그인에 실패하였습니다.");
-      // 로그인 실패하면 로그인 화면으로 돌려보냄
-      window.location.replace("/signin");
-      return thunkAPI.rejectWithValue(error);
-    }
-  }
-);
-
 export const __Signin = createAsyncThunk(
   "Login/__Signin",
   async (payload, thunkAPI) => {
@@ -88,7 +66,7 @@ export const __Signin = createAsyncThunk(
         alert("로그인 성공");
         window.location.replace("/");
       }
-
+      console.log(data);
       return thunkAPI.fulfillWithValue(data.data);
     } catch (error) {
       if (error.response.status >= 400 && error.response.status < 500) {
@@ -248,19 +226,6 @@ const LoginSlice = createSlice({
       state.user = action.payload;
     },
     [__kakaoLogin.rejected]: (state, action) => {
-      state.isLoading = false;
-      state.error = action.payload;
-    },
-
-    //__kakaoLogout
-    [__kakaoLogout.pending]: (state) => {
-      state.isLoading = true;
-    },
-    [__kakaoLogout.fulfilled]: (state, action) => {
-      state.isLoading = false;
-      state.user = action.payload;
-    },
-    [__kakaoLogout.rejected]: (state, action) => {
       state.isLoading = false;
       state.error = action.payload;
     },
