@@ -36,7 +36,8 @@ export const __kakaoLogin = createAsyncThunk(
       );
       window.localStorage.setItem("Access_Token", res.data.accessToken);
       window.localStorage.setItem("Refresh_Token", res.data.refreshToken);
-      window.localStorage.setItem("SITE", "SITE");
+
+      window.localStorage.setItem("SITE", "KAKAO");
       window.location.replace("/");
 
       return thunkAPI.fulfillWithValue(res.data);
@@ -59,7 +60,6 @@ export const __kakaoLogout = createAsyncThunk(
       );
       window.localStorage.setItem("Access_Token", res.data.accessToken);
       window.localStorage.setItem("Refresh_Token", res.data.refreshToken);
-      window.localStorage.setItem("SITE", "KAKAO");
       window.location.replace("/");
 
       return thunkAPI.fulfillWithValue(res.data);
@@ -84,6 +84,7 @@ export const __Signin = createAsyncThunk(
       if (data.status === 200 || data.status === 201) {
         window.localStorage.setItem("Access_Token", data.data.accessToken);
         window.localStorage.setItem("Refresh_Token", data.data.refreshToken);
+        window.localStorage.setItem("SITE", "SITE");
         alert("로그인 성공");
         window.location.replace("/");
       }
