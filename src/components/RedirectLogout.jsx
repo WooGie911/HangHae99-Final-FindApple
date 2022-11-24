@@ -5,11 +5,13 @@ import Loading from "./Loading";
 import { __kakaoLogout } from "../redux/modules/LoginSlice";
 
 const RedirectLogout = () => {
-  const dispatch = useDispatch();
+  // const dispatch = useDispatch();
 
-  useEffect(async () => {
-    await dispatch(__kakaoLogout());
-  }, []);
+  // useEffect(async () => {
+  //   await dispatch(__kakaoLogout());
+  // }, []);
+
+  localStorage.clear();
 
   return <Loading />;
 };
