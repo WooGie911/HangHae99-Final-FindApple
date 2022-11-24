@@ -73,7 +73,7 @@ const SignUp = () => {
           />
         </div>
         <div>
-          <span>Findapple</span>
+          <img src="findapple.jpg"></img>
         </div>
       </HeadContainer>
       <StSignupBox>
@@ -122,7 +122,9 @@ const SignUp = () => {
           onChange={changeInputHandler}
           placeholder="비밀번호 재입력"
         />
-        <StButton onClick={SubmitHandler}>회원가입</StButton>
+        <StButton id="signupbutton" onClick={SubmitHandler}>
+          회원가입
+        </StButton>
         <StLoginBox>
           <h5>계정이 있으신가요?</h5>
           <span
@@ -196,9 +198,12 @@ const StInputBox2 = styled.input`
   height: 38px;
   margin-top: 10px;
   padding-left: 10px;
+  &:hover {
+    border: 1px solid #f82323;
+  }
 `;
 const StInputButton = styled.button`
-  background-color: black;
+  background-color: #3d6af2;
   border: none;
   font-size: 12px;
   color: white;
@@ -228,6 +233,9 @@ const StInputBox = styled.input`
   height: 38px;
   margin-top: 10px;
   padding-left: 10px;
+  &:hover {
+    border: 1px solid #f82323;
+  }
 `;
 
 const StButton = styled.button`
@@ -238,9 +246,12 @@ const StButton = styled.button`
   color: white;
   font-size: 12px;
   border-radius: 5px;
+  &:hover {
+    background-color: #3d6af2;
+  }
   background-color: ${({ userid, password, username, nickname }) =>
     userid !== "" && password !== "" && username !== "" && nickname !== ""
-      ? "black"
+      ? "#d9d9d9"
       : "#ececec"};
   cursor: ${({ userid, password, username, nickname }) =>
     userid !== "" && password !== "" && username !== "" && nickname !== ""
@@ -256,6 +267,13 @@ const StLoginBox = styled.div`
   justify-content: center;
   text-align: center;
   align-items: center;
+  font-family: "Noto Sans";
+  font-style: normal;
+  font-weight: 400;
+  line-height: 16px;
+  display: flex;
+  align-items: center;
+  text-align: center;
   span {
     margin-left: 10px;
     color: #2288ee;
