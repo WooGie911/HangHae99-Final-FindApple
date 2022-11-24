@@ -16,7 +16,8 @@ import Layout from "../components/Layout";
 import whitearrow from "../assets/whitearrow.png";
 import back from "../assets/back.png";
 import threedots from "../assets/threedots.png";
-
+import blueheart from "../assets/blueheart.png";
+import emptyheart from "../assets/emptyheart.png"
 const ObjectionDetail = () => {
   const navigate = useNavigate();
   const dispatch = useDispatch();
@@ -133,9 +134,9 @@ const ObjectionDetail = () => {
           </div>
           <ClickHeart onClick={() => onCartButton(post.issuesId)}>
             {post.isLike ? (
-              <img src="https://img.icons8.com/emoji/25/null/blue-heart.png" />
+              <img src={blueheart} />
             ) : (
-              "🤍"
+              <img src={emptyheart}/>
             )}{" "}
           </ClickHeart>
         </WriterContainer>
@@ -176,16 +177,22 @@ const ObjectionDetail = () => {
 
           <Price>
             <div>
+            {post.expectPrice !== undefined && (
+              <>
               <TextDiv>책정가격</TextDiv>
-              <PriceDiv>{post.expectPrice}원</PriceDiv>
+              <PriceDiv>{post.expectPrice.toLocaleString('ko-KR')}원</PriceDiv>
+              </>
+              )}
             </div>
             <Arrow>
               {" "}
               <img src="https://img.icons8.com/metro/15/null/long-arrow-right.png" />{" "}
             </Arrow>
             <div>
+            {post.userPrice !== undefined && (<>
               <TextDiv>판매가격</TextDiv>
-              <PriceDiv>{post.userPrice}원</PriceDiv>
+              <PriceDiv>{post.userPrice.toLocaleString('ko-KR')}원</PriceDiv>
+              </>)}
             </div>
             <div>
               <img

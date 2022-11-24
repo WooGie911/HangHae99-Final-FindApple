@@ -73,7 +73,9 @@ const PostList = ({ posts, detail, __getDetail, state, setState }) => {
                   <div>
                     <label>{post.title}</label>
                     <br />
-                    <label>{post.userPrice}원</label>
+                    {post.userPrice !== undefined && (<>
+                    <label>{post.userPrice.toLocaleString('ko-KR')}원</label>
+                    </>)}
                     <br />
                     <label>{post.category}</label>
                     <HeartCreatedAt>

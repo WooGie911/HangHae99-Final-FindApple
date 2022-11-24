@@ -11,8 +11,7 @@ const ObjectionCommentCreate = (props) => {
   const params = useParams();
   const [comments, setComments, onChangeInputHandler] = useInput(initialState);
 
-  const onClickAddButton = (e) => {
-    e.preventDefault();
+  const onClickAddButton = () => {
     const Fdata = {
       id: params.id,
       comment: { issuesComment: comments.comment },
@@ -25,6 +24,11 @@ const ObjectionCommentCreate = (props) => {
       setComments(initialState);
     }
   };
+  const keyPress = (e) => {
+    if(e.key === 'Enter') {
+      onClickAddButton();
+    }
+  }  
   return (
     <>
       <CommentInput>
@@ -34,9 +38,9 @@ const ObjectionCommentCreate = (props) => {
           name="comment"
           type="text"
           onChange={onChangeInputHandler}
+          onKeyPress={keyPress}
         />
 
-        <button onClick={onClickAddButton}>등록</button>
       </CommentInput>
     </>
   );
@@ -49,15 +53,8 @@ const CommentInput = styled.div`
   bottom: 10px;
   input {
     margin-left: 10px;
-    width: 288px;
+    width: 330px;
     height: 46px;
   }
-  button {
-    background-color: #3d6af2;
-    color: white;
-    border: none;
-    width: 50px;
-    height: 46px;
-    margin-left: 15px;
-  }
+
 `;

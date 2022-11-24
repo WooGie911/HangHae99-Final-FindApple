@@ -42,7 +42,7 @@ export const __getObjection = createAsyncThunk(
           },
         }
       );
-      return thunkAPI.fulfillWithValue(data.data.content);
+      return thunkAPI.fulfillWithValue(data.data);
     } catch (error) {
       return thunkAPI.rejectWithValue(error);
     }
@@ -123,6 +123,7 @@ const ObjectionsSlice = createSlice({
   name: "objections",
   initialState: {
     posts: [],
+  postsCount:0,
   },
   reducers: {},
   extraReducers: {
@@ -145,7 +146,8 @@ const ObjectionsSlice = createSlice({
     },
     [__getObjection.fulfilled]: (state, action) => {
       state.isLoading = false;
-      state.posts = action.payload;
+      state.posts = action.payload.content;
+      state.postsCount = action.payload.totalElements;
     },
     [__getObjection.rejected]: (state, action) => {
       state.isLoading = false;
