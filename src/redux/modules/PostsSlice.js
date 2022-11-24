@@ -1,39 +1,9 @@
-import { createAsyncThunk, createSlice } from "@reduxjs/toolkit";
+import { createAsyncThunk, createSlice, current } from "@reduxjs/toolkit";
 import axios from "axios";
 
 const accessToken = localStorage.getItem("Access_Token");
 const refreshToken = localStorage.getItem("Refresh_Token");
 
-//무한스크롤
-const token = axios.create({
-  // 추후에 로컬에서 서버 주소로 변경해야 함
-  baseURL: process.env.REACT_APP_SERVER,
-  headers: {
-    Access_Token:
-      localStorage.getItem("Access_Token") === undefined
-        ? ""
-        : localStorage.getItem("Access_Token"),
-  },
-  withCredentials: true,
-});
-
-export const Apis = {
-  getPostTimeAX: (payload) => token.get(`/api/post?size=5&page=${payload}`),
-};
-
-export const __getPostTime = createAsyncThunk(
-  "api/posts/getPost",
-  async (payload, thunkAPI) => {
-    try {
-      console.log("페이로드", payload);
-      const response = await Apis.getPostTimeAX(payload);
-      console.log("리스폰스", response);
-      return thunkAPI.fulfillWithValue(response.data.content);
-    } catch (error) {
-      return thunkAPI.rejectWithValue(error);
-    }
-  }
-);
 
 export const __searchPost = createAsyncThunk(
   "posts/__searchPost",
@@ -60,9 +30,11 @@ export const __searchPost = createAsyncThunk(
 export const __getAddPost = createAsyncThunk(
   "posts/__getAddPost",
   async (payload, thunkAPI) => {
+    console.log(payload)
     try {
+
       const data = await axios.get(
-        `${process.env.REACT_APP_SERVER}/api/post/${payload.paramObj}?page=${payload.pageNumber}&size=${payload.pageSize}&sort=${payload.postSort},DESC`,
+        `${process.env.REACT_APP_SERVER}/api/post/${payload.state.paramObj}?page=${payload.page}&size=${payload.state.pageSize}&sort=${payload.state.postSort},DESC`,
 
         {
           headers: {
@@ -73,7 +45,11 @@ export const __getAddPost = createAsyncThunk(
           },
         }
       );
-      return thunkAPI.fulfillWithValue(data.data.content);
+      const obj =  {
+        payload: payload.page,
+        data: data.data.content
+      }
+      return thunkAPI.fulfillWithValue(obj);
     } catch (error) {
       return thunkAPI.rejectWithValue(error);
     }
@@ -193,21 +169,7 @@ const PostsSlice = createSlice({
     },
   },
   extraReducers: {
-    //__postList
-    [__getPostTime.pending]: (state) => {
-      state.isLoading = true;
-    },
-    [__getPostTime.fulfilled]: (state, action) => {
-      state.isLoading = false;
-      state.isSuccess = false;
-      state.posts.push(...action.payload); // 기존에 있던 리스트에서 뒤에 붙여줘야하기 때문에 push를 써줘야함
-      // console.log('액션액션스테이트',state)
-    },
-    [__getPostTime.rejected]: (state, action) => {
-      state.isLoading = false;
-      state.isSuccess = false;
-      state.error = action.payload;
-    },
+    
 
     //__searchPost
     [__searchPost.pending]: (state) => {
@@ -229,7 +191,13 @@ const PostsSlice = createSlice({
     },
     [__getAddPost.fulfilled]: (state, action) => {
       state.isLoading = false;
-      state.posts.push(...action.payload);
+      if(action.payload.payload === 0) {
+        state.posts.splice(0)
+        state.posts.push(...action.payload.data)
+
+      }else{
+        state.posts.push(...action.payload.data)
+      }
     },
     [__getAddPost.rejected]: (state, action) => {
       state.isLoading = false;

@@ -17,42 +17,40 @@ const PostList = ({ posts, detail, __getDetail, state, setState }) => {
     navigate(`${detail}/${data}`);
   };
 
-  // //원규 무한스크롤
-  // const [page, setPage] = useState(1); //페이지수
-  // const [size, setSize] = useState([]); //리스트수
-  // const [loading, setLoading] = useState(false);
-  // console.log("page", page);
-  // const [ref, inView] = useInView();
+  
+  const [page, setPage] = useState(0); //페이지수
+  const [loading, setLoading] = useState(false);
+  const [ref, inView] = useInView();
+/**  서버에서 아이템을 가지고 오는 함수 */
+const obj = {
+  page : page,
+  state: state,
+}
+const getItems = useCallback(async () => {
+  //의존하는 값(deps)들이 바뀌지 않는 한 기존 함수를 재사용할 수 있습니다.
+  dispatch(__getAddPost(obj));
+}, [page, params]);
 
-  // useEffect(() => {
-  //   setPage(0);
-  // }, [params]);
+// `getItems` 가 바뀔 때 마다 함수 실행
+useEffect(() => {
+  getItems();
+}, [getItems]);
+  useEffect(() => {
+    setState({ ...state, pageNumber: page });
+  }, [page]);
 
-  // useEffect(() => {
-  //   setState({ ...state, pageNumber: page });
-  // }, [page]);
+  
 
-  // /**  서버에서 아이템을 가지고 오는 함수 */
-  // const getItems = useCallback(async () => {
-  //   //의존하는 값(deps)들이 바뀌지 않는 한 기존 함수를 재사용할 수 있습니다.
-  //   dispatch(__getAddPost(state));
-  // }, [page]);
+  useEffect(() => {
+    // 사용자가 마지막 요소를 보고 있고, 로딩 중이 아니라면
+    if (inView && !loading) {
+      setPage((prevState) => prevState + 1);
+    }
+  }, [inView, loading]);
 
-  // // `getItems` 가 바뀔 때 마다 함수 실행
-  // useEffect(() => {
-  //   getItems();
-  //   setSize(posts);
-  //   // console.log("size", size);
-  // }, [getItems]);
-
-  // useEffect(() => {
-  //   // 사용자가 마지막 요소를 보고 있고, 로딩 중이 아니라면
-  //   if (inView && !loading && size !== posts) {
-  //     setPage((prevState) => prevState + 1);
-  //     console.log("페이지", page);
-  //     setState({ ...state, pageNumber: page });
-  //   }
-  // }, [inView, loading]);
+  useEffect(() => {
+    setPage(0);
+  }, [params]);
 
   return (
     <>
@@ -95,7 +93,8 @@ const PostList = ({ posts, detail, __getDetail, state, setState }) => {
             </div>
           );
         })}
-      {/* <div ref={ref}></div> */}
+      <div ref={ref}></div>
+      <Div></Div>
     </>
   );
 };
@@ -122,3 +121,8 @@ const HeartCreatedAt = styled.div`
   display: flex;
   justify-content: space-between;
 `;
+
+// 빈공간
+const Div=styled.div`
+height:60px;
+`
