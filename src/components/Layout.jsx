@@ -13,7 +13,7 @@ const StLayout = styled.div`
   width: 375px;
   max-height: 100%;
   min-height: 100vh;
-  height: 812px;
+  height: 100%;
   margin: 0 auto;
   background: #f6f7fb;
 `;

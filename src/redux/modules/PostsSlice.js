@@ -1,4 +1,4 @@
-import { createAsyncThunk, createSlice } from "@reduxjs/toolkit";
+import { createAsyncThunk, createSlice, current } from "@reduxjs/toolkit";
 import axios from "axios";
 
 const accessToken = localStorage.getItem("Access_Token");
@@ -61,8 +61,9 @@ export const __getAddPost = createAsyncThunk(
   "posts/__getAddPost",
   async (payload, thunkAPI) => {
     try {
+
       const data = await axios.get(
-        `${process.env.REACT_APP_SERVER}/api/post/${payload.paramObj}?page=${payload.pageNumber}&size=${payload.pageSize}&sort=${payload.postSort},DESC`,
+        `${process.env.REACT_APP_SERVER}/api/post/${payload.state.paramObj}?page=${payload.page}&size=${payload.state.pageSize}&sort=${payload.state.postSort},DESC`,
 
         {
           headers: {
@@ -73,7 +74,12 @@ export const __getAddPost = createAsyncThunk(
           },
         }
       );
-      return thunkAPI.fulfillWithValue(data.data.content);
+      console.log("페이 데이터", payload, data)
+      const obj =  {
+        payload: payload.page,
+        data: data.data.content
+      }
+      return thunkAPI.fulfillWithValue(obj);
     } catch (error) {
       return thunkAPI.rejectWithValue(error);
     }
@@ -229,7 +235,16 @@ const PostsSlice = createSlice({
     },
     [__getAddPost.fulfilled]: (state, action) => {
       state.isLoading = false;
-      state.posts.push(...action.payload);
+      if(action.payload.payload === 0) {
+        console.log("지우기 전",current(state));
+        state.posts.splice(0)
+        console.log("지우기 후",current(state));
+        state.posts.push(...action.payload.data)
+        console.log("넣은 후",current(state));
+
+      }else{
+        state.posts.push(...action.payload.data)
+      }
     },
     [__getAddPost.rejected]: (state, action) => {
       state.isLoading = false;
