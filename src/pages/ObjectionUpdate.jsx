@@ -75,10 +75,14 @@ const ObjectionUpdate = ({ paramId }) => {
           </Detail>
           <hr />
           <div>
-            {updateInput.expectPrice !== undefined && (<>
-          <TextDiv>책정 가격</TextDiv>
-          <PriceDiv>{updateInput.expectPrice.toLocaleString('ko-KR')}</PriceDiv>
-          </>)}
+            {updateInput.expectPrice !== undefined && (
+              <>
+                <TextDiv>책정 가격</TextDiv>
+                <PriceDiv>
+                  {updateInput.expectPrice.toLocaleString("ko-KR")}
+                </PriceDiv>
+              </>
+            )}
           </div>
           <hr />
           <PriceInput>
