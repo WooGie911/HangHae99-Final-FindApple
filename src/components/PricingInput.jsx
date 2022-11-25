@@ -418,122 +418,130 @@ const PricingInput = () => {
             </ContainerDiv>
           )}
           {tag.step5 && (
-            <ContainerDiv>
-              <TitleDiv>
-                <Backbutton
-                  onClick={() => {
-                    navigate(-1);
-                  }}
-                >
-                  〈
-                </Backbutton>
-                <Xbutton
-                  onClick={() => {
-                    navigate("/main");
-                  }}
-                >
-                  X
-                </Xbutton>
-                <span>가격책정</span>
-              </TitleDiv>
+            <ContainerDiv1>
+              <Div>
+                <TitleDiv>
+                  <Backbutton
+                    onClick={() => {
+                      navigate(-1);
+                    }}
+                  >
+                    〈
+                  </Backbutton>
+                  <Xbutton
+                    onClick={() => {
+                      navigate("/main");
+                    }}
+                  >
+                    X
+                  </Xbutton>
+                  <span>가격책정</span>
+                </TitleDiv>
 
-              <div>
-                {tag.category === "macbook" ? (
-                  <div>
-                    <ContentDiv>램 메모리</ContentDiv>
-                    <CategoryDiv>
-                      <SelectBox name="ram" onChange={onChangeHandler4}>
-                        <option value={"ram"}> ram </option>
-                        {save2.ram &&
-                          save2.ram.map((list) => {
-                            return <option value={list}> {list} </option>;
-                          })}
-                      </SelectBox>
-                    </CategoryDiv>
+                <div>
+                  {tag.category === "macbook" ? (
+                    <div>
+                      <ContentDiv>램 메모리</ContentDiv>
+                      <CategoryDiv>
+                        <SelectBox name="ram" onChange={onChangeHandler4}>
+                          <option value={"ram"}> ram </option>
+                          {save2.ram &&
+                            save2.ram.map((list) => {
+                              return <option value={list}> {list} </option>;
+                            })}
+                        </SelectBox>
+                      </CategoryDiv>
 
-                    <ContentDiv>SSD 용량</ContentDiv>
-                    <CategoryDiv>
-                      <SelectBox name="storage" onChange={onChangeHandler4}>
-                        <option value={"storage"}> storage </option>
-                        {save2.storage &&
-                          save2.storage.map((list) => {
-                            return <option value={list}> {list} </option>;
-                          })}
-                      </SelectBox>
-                    </CategoryDiv>
-                    <ContentDiv>배터리 사이클</ContentDiv>
-                    <CategoryDiv>
-                      <PriceInput
-                        placeholder="배터리 사이클을 입력해주세요"
-                        value={tag.batteryState}
-                        type="Number"
-                        min="0"
-                        name="batteryState"
-                        onChange={onChangeHandler4}
-                      />
-                    </CategoryDiv>
-                    <ContentDiv>맥북 상태</ContentDiv>
-                    <CategoryDiv>
-                      <SelectBox
-                        name="macbookState"
-                        onChange={onChangeHandler4}
-                      >
-                        <option value={"macbookState"}>맥북 상태</option>
-                        <option value={"A급"}>A급!</option>
-                        <option value={"B급"}>B급!</option>
-                        <option value={"C급"}>C급!</option>
-                      </SelectBox>
-                    </CategoryDiv>
-                  </div>
-                ) : (
-                  <div>
-                    <ContentDiv>아이폰 상태</ContentDiv>
-                    <CategoryDiv>
-                      <SelectBox name="iphoneState" onChange={onChangeHandler4}>
-                        <option value={"iphoneState"}>아이폰 상태</option>
-                        <option value={"A급"}>A급!</option>
-                        <option value={"B급"}>B급!</option>
-                        <option value={"C급"}>C급!</option>
-                      </SelectBox>
-                    </CategoryDiv>
-                    <ContentDiv>배터리 성능 최대치</ContentDiv>
-                    <CategoryDiv>
-                      <PriceInput
-                        placeholder="0% ~ 100%"
-                        value={tag.batteryState}
-                        type="Number"
-                        min="0"
-                        max="100"
-                        name="batteryState"
-                        onChange={onChangeHandler4}
-                      />
-                    </CategoryDiv>
-                  </div>
-                )}
+                      <ContentDiv>SSD 용량</ContentDiv>
+                      <CategoryDiv>
+                        <SelectBox name="storage" onChange={onChangeHandler4}>
+                          <option value={"storage"}> storage </option>
+                          {save2.storage &&
+                            save2.storage.map((list) => {
+                              return <option value={list}> {list} </option>;
+                            })}
+                        </SelectBox>
+                      </CategoryDiv>
+                      <ContentDiv>배터리 사이클</ContentDiv>
+                      <CategoryDiv>
+                        <PriceInput
+                          placeholder="배터리 사이클을 입력해주세요"
+                          value={tag.batteryState}
+                          type="Number"
+                          min="0"
+                          name="batteryState"
+                          onChange={onChangeHandler4}
+                        />
+                      </CategoryDiv>
+                      <ContentDiv>맥북 상태</ContentDiv>
+                      <CategoryDiv>
+                        <SelectBox
+                          name="macbookState"
+                          onChange={onChangeHandler4}
+                        >
+                          <option value={"macbookState"}>맥북 상태</option>
+                          <option value={"A급"}>A급!</option>
+                          <option value={"B급"}>B급!</option>
+                          <option value={"C급"}>C급!</option>
+                        </SelectBox>
+                      </CategoryDiv>
+                    </div>
+                  ) : (
+                    <div>
+                      <ContentDiv>아이폰 상태</ContentDiv>
+                      <CategoryDiv>
+                        <SelectBox
+                          name="iphoneState"
+                          onChange={onChangeHandler4}
+                        >
+                          <option value={"iphoneState"}>아이폰 상태</option>
+                          <option value={"A급"}>A급!</option>
+                          <option value={"B급"}>B급!</option>
+                          <option value={"C급"}>C급!</option>
+                        </SelectBox>
+                      </CategoryDiv>
+                      <ContentDiv>배터리 성능 최대치</ContentDiv>
+                      <CategoryDiv>
+                        <PriceInput
+                          placeholder="0% ~ 100%"
+                          value={tag.batteryState}
+                          type="Number"
+                          min="0"
+                          max="100"
+                          name="batteryState"
+                          onChange={onChangeHandler4}
+                        />
+                      </CategoryDiv>
+                    </div>
+                  )}
 
-                <ContentDiv>애플케어 유무</ContentDiv>
-                <CategoryDiv>
-                  <SelectBox name="careOX" onChange={onChangeHandler4}>
-                    <option value={"careOX"}>애플케어 유무</option>
-                    <option value={true}>있음!</option>
-                    <option value={false}>없음!</option>
-                  </SelectBox>
-                </CategoryDiv>
+                  <ContentDiv>애플케어 유무</ContentDiv>
+                  <CategoryDiv>
+                    <SelectBox name="careOX" onChange={onChangeHandler4}>
+                      <option value={"careOX"}>애플케어 유무</option>
+                      <option value={true}>있음!</option>
+                      <option value={false}>없음!</option>
+                    </SelectBox>
+                  </CategoryDiv>
 
-                {tag.careOX === "true" && (
-                  <>
-                    <ContentDiv>애플케어 보증기간</ContentDiv>
-                    <CategoryDiv>
-                      <DateInput
-                        placeholder="애플케어 보증기간"
-                        type="date"
-                        name="careDate"
-                        onChange={onChangeHandler4}
-                      />
-                    </CategoryDiv>
-                  </>
-                )}
-              </div>
+                  {tag.careOX === "true" && (
+                    <>
+                      <ContentDiv>애플케어 보증기간</ContentDiv>
+                      <CategoryDiv>
+                        <DateInput
+                          placeholder="애플케어 보증기간"
+                          type="date"
+                          name="careDate"
+                          onChange={onChangeHandler4}
+                        />
+                      </CategoryDiv>
+                    </>
+                  )}
+                </div>
+
+                <DDid />
+              </Div>
+
               <StepDiv>
                 <svg
                   width="70"
@@ -554,10 +562,9 @@ const PricingInput = () => {
                 </svg>
               </StepDiv>
               <NextButton onClick={onSubmitHandler}>다음으로</NextButton>
-            </ContainerDiv>
+            </ContainerDiv1>
           )}
         </div>
-        {/* <Footer /> */}
       </Layout>
     </>
   );
@@ -634,8 +641,21 @@ const ContainerDiv = styled.div`
   position: relative;
   flex-direction: column;
   background-color: transparent;
-  width: 375px;
   height: 100vh;
+  width: 375px;
+`;
+const ContainerDiv1 = styled.div`
+  display: flex;
+  position: relative;
+  flex-direction: column;
+  background-color: transparent;
+  height: 100%;
+  width: 375px;
+`;
+const Div = styled.div`
+  display: flex;
+  flex-direction: column;
+  height: 100%;
 `;
 
 const TitleDiv = styled.div`
@@ -670,7 +690,6 @@ const CategoryDiv = styled.div`
   line-height: 19px;
   width: 100%;
   height: 50px;
-  /* background-color: #ff7300; */
 `;
 
 const PriceInput = styled.input`
@@ -722,6 +741,10 @@ const Xbutton = styled.button`
   font-weight: bold;
   border: none;
   background-color: transparent;
+`;
+
+const DDid = styled.div`
+  height: 100px;
 `;
 
 const StepDiv = styled.div`
