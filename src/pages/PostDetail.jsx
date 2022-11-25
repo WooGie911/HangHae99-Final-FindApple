@@ -88,7 +88,7 @@ const PostDetail = () => {
                 style={{ width: 25, height: 25 }}
                 src={back}
               />
-              <span onClick={() => navigate("/")}>
+              <span onClick={() => navigate("/main")}>
                 <img src={home} />
               </span>
             </Span>

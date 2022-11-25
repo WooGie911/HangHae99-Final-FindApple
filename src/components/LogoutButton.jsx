@@ -9,8 +9,11 @@ const LogoutButton = () => {
   const SiteType = window.localStorage.getItem("SITE");
   const onClickButton = (e) => {
     e.preventDefault();
-    localStorage.clear();
-    navigate("/signin");
+    if (window.confirm("로그아웃 하시겠습니까?")) {
+      localStorage.clear();
+      alert("로그아웃 되었습니다.");
+      navigate("/signin");
+    }
   };
 
   return (

@@ -31,7 +31,7 @@ const Pricingfinal = () => {
             </Backbutton>
             <Xbutton
               onClick={() => {
-                navigate("/");
+                navigate("/main");
               }}
             >
               X

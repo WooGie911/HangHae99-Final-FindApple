@@ -250,6 +250,7 @@ const StButton = styled.button`
   color: white;
   font-size: 12px;
   border-radius: 5px;
+  box-shadow: 0px 6px 16px rgba(0, 0, 0, 0.1);
   &:hover {
     background-color: #3d6af2;
   }

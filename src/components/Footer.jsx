@@ -12,7 +12,7 @@ const Footer = () => {
   return (
     <Footers>
       <MenuBar>
-        <div onClick={() => navigate("/")}>
+        <div onClick={() => navigate("/main")}>
           <div>
             <img src={home} />
           </div>
