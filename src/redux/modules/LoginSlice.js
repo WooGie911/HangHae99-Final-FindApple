@@ -38,7 +38,7 @@ export const __kakaoLogin = createAsyncThunk(
       window.localStorage.setItem("Refresh_Token", res.data.refreshToken);
 
       window.localStorage.setItem("SITE", "KAKAO");
-      window.location.replace("/");
+      window.location.replace("/main");
 
       return thunkAPI.fulfillWithValue(res.data);
     } catch (error) {
@@ -64,7 +64,7 @@ export const __Signin = createAsyncThunk(
         window.localStorage.setItem("Refresh_Token", data.data.refreshToken);
         window.localStorage.setItem("SITE", "SITE");
         alert("로그인 성공");
-        window.location.replace("/");
+        window.location.replace("/main");
       }
       console.log(data);
       return thunkAPI.fulfillWithValue(data.data);
@@ -171,14 +171,14 @@ export const __logout = createAsyncThunk(
           if (res.data.statusCode === 200) {
             localStorage.clear();
             alert("로그아웃 되었습니다");
-            window.location.replace("/");
+            window.location.replace("/signin");
           }
         })
         .catch((error) => {
           if (error.response.data.statusCode === 400) {
             localStorage.clear();
             alert("로그아웃 되었습니다");
-            window.location.replace("/");
+            window.location.replace("/signin");
           }
         });
     } catch (error) {

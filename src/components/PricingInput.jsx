@@ -221,7 +221,7 @@ const PricingInput = () => {
                 </Backbutton>
                 <Xbutton
                   onClick={() => {
-                    navigate("/");
+                    navigate("/main");
                   }}
                 >
                   X
@@ -276,7 +276,7 @@ const PricingInput = () => {
                 </Backbutton>
                 <Xbutton
                   onClick={() => {
-                    navigate("/");
+                    navigate("/main");
                   }}
                 >
                   X
@@ -327,7 +327,7 @@ const PricingInput = () => {
                 </Backbutton>
                 <Xbutton
                   onClick={() => {
-                    navigate("/");
+                    navigate("/main");
                   }}
                 >
                   X
@@ -378,7 +378,7 @@ const PricingInput = () => {
                 </Backbutton>
                 <Xbutton
                   onClick={() => {
-                    navigate("/");
+                    navigate("/main");
                   }}
                 >
                   X
@@ -429,7 +429,7 @@ const PricingInput = () => {
                 </Backbutton>
                 <Xbutton
                   onClick={() => {
-                    navigate("/");
+                    navigate("/main");
                   }}
                 >
                   X

@@ -24,7 +24,7 @@ const Header = (props) => {
         <HeaderTextSpace>
           <div
             onClick={() => {
-              navigate("/");
+              navigate("/main");
             }}
           >
             HOME
