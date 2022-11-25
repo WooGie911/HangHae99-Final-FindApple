@@ -10,6 +10,7 @@ import Layout from "../components/Layout";
 import Footer from "../components/Footer";
 import { __postList } from "../redux/modules/PostsSlice";
 import SortBar from "../components/SortBar";
+import styled from "styled-components";
 
 const PostRead = () => {
   const params = useParams();
@@ -28,31 +29,39 @@ const PostRead = () => {
   return (
     <div>
       <Layout>
-        <PostSearch __search={__searchPost} />
-        <Header
-          state={submitObj}
-          setState={setSubmitObj}
-          Navigate={"/postread"}
-        />
-        <SortBar
-          postsCount={postsCount}
-          state={submitObj}
-          setState={setSubmitObj}
-          Navigate={"/postread"}
-          postId="postId"
-          postLikeCnt="postLikeCnt"
-        />
-        <PostList
-          state={submitObj}
-          setState={setSubmitObj}
-          posts={posts}
-          detail={"/PostDetail"}
-          __getDetail={__getPostDetail}
-        />
-        <Footer />
+        <READ>
+          <PostSearch __search={__searchPost} />
+          <Header
+            state={submitObj}
+            setState={setSubmitObj}
+            Navigate={"/postread"}
+          />
+          <SortBar
+            postsCount={postsCount}
+            state={submitObj}
+            setState={setSubmitObj}
+            Navigate={"/postread"}
+            postId="postId"
+            postLikeCnt="postLikeCnt"
+          />
+          <PostList
+            state={submitObj}
+            setState={setSubmitObj}
+            posts={posts}
+            detail={"/PostDetail"}
+            __getDetail={__getPostDetail}
+          />
+          <Footer />
+        </READ>
       </Layout>
     </div>
   );
 };
 
 export default PostRead;
+
+const READ = styled.div`
+  display: flex;
+  flex-direction: column;
+  position: relative;
+`;

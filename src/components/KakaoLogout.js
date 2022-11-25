@@ -4,7 +4,9 @@ import { KAKAO_LOGOUT_URL } from "./elements/LoginKey";
 
 const KakaoLogout = () => {
   const handleLogin = () => {
-    window.location.href = KAKAO_LOGOUT_URL;
+    if (window.confirm("로그아웃 하시겠습니까?")) {
+      window.location.href = KAKAO_LOGOUT_URL;
+    }
   };
   return (
     <div>
