@@ -19,7 +19,7 @@ const PostUpdate = () => {
   const imgRef = useRef();
   const { post } = useSelector((state) => state.details);
   const [updateInput, setUpdateInput, updateInputHandle] = useInput(post);
-
+  console.log("이미지 왜안나와", post.images);
   const updateSubmit = () => {
     //request로 날릴 폼데이터
     const formData = new FormData();
@@ -77,21 +77,24 @@ const PostUpdate = () => {
           <EditButton onClick={updateSubmit}>완료</EditButton>
         </FirstContainer>
         <ImageWrapper>
-          <Stphotolabel htmlFor="imgFile">
-            <PhotoButton
-              type="button"
-              onClick={() => {
-                imgRef.current.click();
-              }}
-            >
-              <CameraImg>
-                <div>
-                  <img src="https://img.icons8.com/fluency-systems-regular/20/null/multiple-cameras.png" />
-                </div>
-                <div>{fileUrls.length}/5</div>
-              </CameraImg>
-            </PhotoButton>
-            {fileUrls.length > 0 && (
+          <Stphotolabel>
+            <label htmlFor="imgFile">
+              <PhotoButton
+                type="button"
+                onClick={() => {
+                  imgRef.current.click();
+                }}
+              >
+                <CameraImg>
+                  <div>
+                    <img src="https://img.icons8.com/fluency-systems-regular/20/null/multiple-cameras.png" />
+                  </div>
+                  <div>{fileUrls.length}/5</div>
+                </CameraImg>
+              </PhotoButton>
+            </label>
+
+            {fileUrls.length > 0 ? (
               <>
                 <div className="preview" style={{ marginTop: "15px" }}>
                   {
@@ -112,7 +115,13 @@ const PostUpdate = () => {
                   }
                 </div>
               </>
+            ) : (
+              post.images &&
+              post.images.map((item, index) => {
+                return <Image src={item.imgUrl} key={index} />;
+              })
             )}
+
             <input
               type="file"
               style={{ display: "none" }}
@@ -207,6 +216,7 @@ const PhotoButton = styled.button`
   background-color: aliceblue;
   margin: 10px;
   border: 2px solid #3d6af2;
+  cursor: pointer;
 `;
 const CameraImg = styled.div`
   display: flex;
@@ -248,9 +258,8 @@ const CalPrice = styled.div`
 `;
 // 사진 업로드
 
-const Stphotolabel = styled.label`
+const Stphotolabel = styled.div`
   width: 98.5%;
-  height: 150px;
   display: inline-block;
   display: flex;
   flex-direction: row;
@@ -304,4 +313,12 @@ const TextPrice = styled.div`
   margin-top: 15px;
   font-size: 12px;
   color: #000000;
+`;
+
+// 이미지 크기 지정
+const Image = styled.img`
+  margin-top: 10px;
+  margin-left: 8px;
+  width: 50px;
+  height: 50px;
 `;

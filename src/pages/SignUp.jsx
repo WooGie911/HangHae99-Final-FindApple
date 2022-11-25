@@ -33,11 +33,11 @@ const SignUp = () => {
     ) {
       return alert("입력을 확인하세요.");
     }
-    if (emailCheckTF === true) {
-      if (input.emailCheck !== emailCheckData) {
-        return alert("인증번호가 일치하지 않습니다.");
-      }
+
+    if (input.emailCheck !== emailCheckData) {
+      return alert("인증번호가 일치하지 않습니다.");
     }
+
     if (input.password !== input.passwordCheck) {
       return alert("비밀번호가 일치하지 않습니다.");
     }
@@ -200,6 +200,7 @@ const StInputBox2 = styled.input`
   height: 38px;
   margin-top: 10px;
   padding-left: 10px;
+  border: 1px solid transparent;
   &:hover {
     border: 1px solid #f82323;
   }
@@ -223,7 +224,7 @@ const StInputButton = styled.button`
 
 const StInputBox = styled.input`
   background-color: #fafafa;
-  border: none;
+  border: 1px solid transparent;
   border-radius: 5px;
   box-shadow: 0px 6px 16px 0 rgba(0, 0, 0, 0.1);
   &:focus,

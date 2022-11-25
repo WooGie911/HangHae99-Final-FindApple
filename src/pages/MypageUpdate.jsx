@@ -33,8 +33,10 @@ const MypageUpdate = () => {
       setPhoto(file);
     }
   };
+
+  const { user } = useSelector((state) => state.Login);
   const [write, setWrite, writeHandle] = useInput({
-    nickname: "",
+    nickname: user.nickname,
   });
 
   //get 해오기
@@ -42,7 +44,6 @@ const MypageUpdate = () => {
     dispatch(__UserProfileEdit);
   }, [dispatch]);
 
-  const { user } = useSelector((state) => state.Login);
   const onSubmitHandler = () => {
     imageUploader.current.click();
   };
