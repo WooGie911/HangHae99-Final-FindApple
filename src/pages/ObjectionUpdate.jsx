@@ -24,7 +24,8 @@ const ObjectionUpdate = ({ paramId }) => {
     const formData = new FormData();
     formData.append(
       "issuesRequestDto",
-      new Blob([JSON.stringify(oobj)], { type: "application/json" })
+      // new Blob([JSON.stringify(oobj)], { type: "application/json" })
+      oobj
     );
     const obj = {
       id: params.id,

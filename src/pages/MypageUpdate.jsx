@@ -56,8 +56,7 @@ const MypageUpdate = () => {
     };
     formData.append(
       "myInfoRequestDto",
-      // new Blob([JSON.stringify(obj)], { type: "application/json" })
-      obj
+      new Blob([JSON.stringify(obj)], { type: "application/json" })
     );
     dispatch(__UserProfileEdit(formData));
     window.location.replace("/mypage");
