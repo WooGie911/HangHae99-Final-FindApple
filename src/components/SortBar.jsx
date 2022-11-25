@@ -1,7 +1,7 @@
 import React from "react";
 import { useNavigate, useParams } from "react-router-dom";
 import styled from "styled-components";
-import swapoutline from "../assets/swapoutline.png"
+import swapoutline from "../assets/swapoutline.png";
 const SortBar = (props) => {
   const navigate = useNavigate();
   const params = useParams();
@@ -24,28 +24,28 @@ const SortBar = (props) => {
   return (
     <>
       <div>
-
         <StContainer>
-        <Total>전체{props.postsCount}개</Total>
-        {params.sort === props.postId ? (<Sort
-
-          onClick={() => {
-            onClickSortHandler(props.postLikeCnt);
-          }}
-        >
-
-          <img src={swapoutline}/>최신순
-        </Sort> ) : (<Sort
-        onClick={() => {
-          onClickSortHandler(props.postId);
-        }}
-      >
-        <img src={swapoutline}/>인기순
-      </Sort>
-          
-        )}
+          <Total>전체{props.postsCount}개</Total>
+          {params.sort === props.postId ? (
+            <Sort
+              onClick={() => {
+                onClickSortHandler(props.postLikeCnt);
+              }}
+            >
+              <img src={swapoutline} />
+              최신순
+            </Sort>
+          ) : (
+            <Sort
+              onClick={() => {
+                onClickSortHandler(props.postId);
+              }}
+            >
+              <img src={swapoutline} />
+              인기순
+            </Sort>
+          )}
         </StContainer>
-
       </div>
     </>
   );
@@ -54,25 +54,25 @@ const SortBar = (props) => {
 export default SortBar;
 
 // 소트바
-const StContainer=styled.div`
-display: flex;
-justify-content: space-between;
-padding: 10px;
-`
+const StContainer = styled.div`
+  display: flex;
+  justify-content: space-between;
+  padding: 10px;
+`;
 
 // 글자크기
-const Total=styled.div`
-font-size : 12px;
-img {
-  width: 12px;
-  height: 12px;
-}
-`
+const Total = styled.div`
+  font-size: 12px;
+  img {
+    width: 12px;
+    height: 12px;
+  }
+`;
 
-const Sort=styled.div`
-font-size : 12px;
-img {
-  width: 12px;
-  height: 12px;
-}
-`
+const Sort = styled.div`
+  font-size: 12px;
+  img {
+    width: 12px;
+    height: 12px;
+  }
+`;

@@ -109,14 +109,14 @@ const SignUp = () => {
         />
         <InfoDiv>비밀번호</InfoDiv>
         <StInputBox
-          type="text"
+          type="password"
           name="password"
           value={input.password}
           onChange={changeInputHandler}
           placeholder="숫자, 영문, 특수문자 조합 최소 8자"
         />
         <StInputBox
-          type="text"
+          type="password"
           name="passwordCheck"
           value={input.passwordCheck}
           onChange={changeInputHandler}

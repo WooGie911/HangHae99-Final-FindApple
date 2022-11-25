@@ -156,10 +156,14 @@ const PostUpdate = () => {
           </PriceInput>
 
           <CalPrice>
-            {updateInput.expectPrice !== undefined && (<>
-            <TextPrice>책정 가격</TextPrice>
-            <ExpectPrice>{updateInput.expectPrice.toLocaleString('ko-KR')}원</ExpectPrice>
-            </>)}
+            {updateInput.expectPrice !== undefined && (
+              <>
+                <TextPrice>책정 가격</TextPrice>
+                <ExpectPrice>
+                  {updateInput.expectPrice.toLocaleString("ko-KR")}원
+                </ExpectPrice>
+              </>
+            )}
           </CalPrice>
 
           <EditText>

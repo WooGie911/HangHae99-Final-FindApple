@@ -25,10 +25,10 @@ const CommentCreate = (props) => {
     }
   };
   const keyPress = (e) => {
-    if(e.key === 'Enter') {
+    if (e.key === "Enter") {
       onClickAddButton();
     }
-  }
+  };
 
   return (
     <>
@@ -41,7 +41,6 @@ const CommentCreate = (props) => {
           onChange={onChangeInputHandler}
           onKeyPress={keyPress}
         />
-
       </CommentInput>
     </>
   );
@@ -57,4 +56,4 @@ const CommentInput = styled.div`
     width: 330px;
     height: 46px;
   }
-`
+`;

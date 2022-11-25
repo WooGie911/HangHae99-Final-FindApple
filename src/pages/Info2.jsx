@@ -2,7 +2,7 @@ import React from "react";
 import { useNavigate } from "react-router-dom";
 import styled from "styled-components";
 import Layout from "../components/Layout";
-import IMG2 from "../assets/SecondIMG.svg";
+import IMG2 from "../assets/SecondIMG.jpg";
 import STEP2 from "../assets/2-3.svg";
 
 const Info2 = () => {

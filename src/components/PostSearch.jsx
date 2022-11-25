@@ -2,7 +2,7 @@ import React from "react";
 import useInput from "../hook/useInput";
 import { useDispatch } from "react-redux";
 import styled from "styled-components";
-import { useParams } from "react-router-dom";
+import { useNavigate, useParams } from "react-router-dom";
 import BackIcon from "../assets/BackIcon.svg";
 import SearchIcon from "../assets/SearchIcon.svg";
 
@@ -11,6 +11,7 @@ const PostSearch = (props) => {
   const [search, setSearch, onChangeSearchHandler] = useInput(initialState);
   const dispatch = useDispatch();
   const params = useParams();
+  const navigate = useNavigate();
 
   const onClickSubmitButton = () => {
     if (search.searchContent.trim() === "") {
@@ -43,10 +44,20 @@ const PostSearch = (props) => {
     <>
       <Div>
         <BackDiv>
-          <img src={BackIcon} />
+          <img
+            src={BackIcon}
+            onClick={() => {
+              navigate(-1);
+            }}
+          />
         </BackDiv>
         <InputDiv>
-          <img src={SearchIcon} />
+          <img
+            src={SearchIcon}
+            onClick={() => {
+              onClickSubmitButton();
+            }}
+          />
           <Input
             placeholder="어떤걸 찾고 있나요?"
             value={search.searchContent || ""}
@@ -107,4 +118,5 @@ const Input = styled.input`
   font-style: normal;
   font-weight: 500;
   font-size: 16px;
+  outline: none;
 `;
