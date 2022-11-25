@@ -3,6 +3,8 @@ import useInput from "../hook/useInput";
 import { useDispatch } from "react-redux";
 import styled from "styled-components";
 import { useParams } from "react-router-dom";
+import BackIcon from "../assets/BackIcon.svg";
+import SearchIcon from "../assets/SearchIcon.svg";
 
 const PostSearch = (props) => {
   const initialState = { searchContent: "" };
@@ -15,7 +17,6 @@ const PostSearch = (props) => {
       return alert("검색어를 입력하세요.");
     }
 
-  
     const paramObj =
       params.category === "all"
         ? params.category
@@ -34,46 +35,76 @@ const PostSearch = (props) => {
   };
 
   const keyPress = (e) => {
-    if(e.key === 'Enter') {
+    if (e.key === "Enter") {
       onClickSubmitButton();
     }
-  }
+  };
   return (
     <>
-      <div>
-        <Input
-          placeholder="어떤 걸 찾고 있나요?"
-          value={search.searchContent || ""}
-          name="searchContent"
-          type="text"
-          onChange={onChangeSearchHandler}
-          onKeyPress={keyPress}
-        />
-
-      </div>
+      <Div>
+        <BackDiv>
+          <img src={BackIcon} />
+        </BackDiv>
+        <InputDiv>
+          <img src={SearchIcon} />
+          <Input
+            placeholder="어떤걸 찾고 있나요?"
+            value={search.searchContent || ""}
+            name="searchContent"
+            type="text"
+            onChange={onChangeSearchHandler}
+            onKeyPress={keyPress}
+          />
+        </InputDiv>
+      </Div>
     </>
   );
 };
 
 export default PostSearch;
 
-// icon 사진 넣기
-const Input = styled.input`
-  padding-left: 30px;
-  height: 34px;
-  width: 330px;
-  background-image: url("https://img.icons8.com/ios-glyphs/30/null/search--v1.png");
-  background-repeat: no-repeat;
-  background-size: 30px;
-  margin-bottom: 20px;
-  margin-right: 10px;
+const Div = styled.div`
+  display: flex;
+  width: 100%;
+  min-width: 375px;
+  height: 60px;
+  position: relative;
+  align-items: center;
 `;
 
-const SearchButton = styled.button`
-  height: 22px;
-  width: 38px;
-  background-color: transparent;
-  color: #2288ee;
-  border-radius: 15px;
-  font-size: 10px;
+const BackDiv = styled.div`
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  width: 15%;
+  height: 100%;
+  img {
+    height: 40px;
+    width: 40px;
+  }
+`;
+
+const InputDiv = styled.div`
+  display: flex;
+  position: relative;
+  align-items: center;
+  width: 78%;
+  height: 38px;
+  border-radius: 5px;
+  padding-left: 5px;
+  background-color: #d9d9d9;
+  img {
+    height: 80%;
+  }
+`;
+const Input = styled.input`
+  width: 100%;
+  height: 80%;
+  border: none;
+  border-radius: 10px;
+  background: #d9d9d9;
+  font-family: "Noto Sans";
+  font-style: normal;
+  font-weight: 500;
+  font-size: 16px;
 `;

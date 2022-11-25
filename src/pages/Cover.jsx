@@ -1,8 +1,19 @@
-import React from "react";
+import React, { useEffect } from "react";
 import styled from "styled-components";
 import Layout from "../components/Layout";
 import LOGOWHITE from "../assets/LOGOWHITE.svg";
+import { useNavigate } from "react-router-dom";
 const Cover = () => {
+  const navigate = useNavigate();
+  useEffect(() => {
+    let timer = setTimeout(() => {
+      navigate(`/introduction1`);
+    }, 3000);
+    return () => {
+      clearTimeout(timer);
+    };
+  }, []);
+
   return (
     <>
       <Layout>

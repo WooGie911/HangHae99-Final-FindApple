@@ -84,7 +84,7 @@ const Main = ({}) => {
 export default Main;
 
 const MainLogo = styled.div`
-  height: 50px;
+  height: 60px;
   display: flex;
   justify-content: space-between;
   align-items: center;
