@@ -17,9 +17,9 @@ const PricingInput = () => {
     step4: false,
     step5: false,
     category: " ",
-    year: " ",
+    years: " ",
     model: " ",
-    option: " ",
+    options: " ",
   };
   const [tag, setTag] = useState(initialState);
   const { tagList } = useSelector((state) => state.price);
@@ -51,7 +51,7 @@ const PricingInput = () => {
       [name]: value,
     });
 
-    dispatch(__getPriceInfo(`${params.category}/${params.year}/${value}`));
+    dispatch(__getPriceInfo(`${params.category}/${params.years}/${value}`));
   };
   const onChangeHandler4 = (e) => {
     const { value, name } = e.target;
@@ -67,7 +67,7 @@ const PricingInput = () => {
 
     dispatch(
       __getPriceInfo(
-        `${params.category}/${params.year}/${params.model}/${value}`
+        `${params.category}/${params.years}/${params.model}/${value}`
       )
     );
   };
@@ -85,12 +85,12 @@ const PricingInput = () => {
 
   const onClickHandler23 = (e) => {
     e.preventDefault();
-    if (window.confirm(`${tag.year} 맞습니까?`)) {
-      if (tag.year === " " || tag.year === "year") {
+    if (window.confirm(`${tag.years} 맞습니까?`)) {
+      if (tag.years === " " || tag.years === "years") {
         return alert("항목을 확인하세요");
       }
       setTag({ ...tag, step2: false, step3: true });
-      navigate(`/pricingInput/${params.category}/${tag.year}`);
+      navigate(`/pricingInput/${params.category}/${tag.years}`);
     }
   };
 
@@ -101,13 +101,13 @@ const PricingInput = () => {
         return alert("항목을 확인하세요");
       }
       setTag({ ...tag, step3: false, step4: true });
-      navigate(`/pricingInput/${params.category}/${params.year}/${tag.model}`);
+      navigate(`/pricingInput/${params.category}/${params.years}/${tag.model}`);
     }
   };
   const onClickHandler45 = (e) => {
     e.preventDefault();
-    if (window.confirm(`${tag.option} 맞습니까?`)) {
-      if (tag.option === " " || tag.option === "option") {
+    if (window.confirm(`${tag.options} 맞습니까?`)) {
+      if (tag.options === " " || tag.options === "options") {
         return alert("항목을 확인하세요");
       }
       setTag({
@@ -117,7 +117,7 @@ const PricingInput = () => {
         keyboard: save.keyboard !== undefined ? save.keyboard[0] : "",
       });
       navigate(
-        `/pricingInput/${params.category}/${params.year}/${params.model}/${tag.option}`
+        `/pricingInput/${params.category}/${params.years}/${params.model}/${tag.options}`
       );
     }
   };
@@ -133,9 +133,9 @@ const PricingInput = () => {
     if (tag.category === "macbook") {
       objMac = {
         category: tag.category,
-        years: Number(tag.year),
+        years: Number(tag.years),
         model: tag.model,
-        options: tag.option,
+        options: tag.options,
         ram: tag.ram,
         keyboard: save2.keyboard[0],
         storage: tag.storage,
@@ -146,9 +146,9 @@ const PricingInput = () => {
       };
       objMac2 = {
         category: tag.category,
-        years: Number(tag.year),
+        years: Number(tag.years),
         model: tag.model,
-        options: tag.option,
+        options: tag.options,
         ram: tag.ram,
         keyboard: save2.keyboard[0],
         storage: tag.storage,
@@ -160,9 +160,9 @@ const PricingInput = () => {
     }
     const objPhone = {
       category: tag.category,
-      years: Number(tag.year),
+      years: Number(tag.years),
       model: tag.model,
-      options: tag.option,
+      options: tag.options,
       batteryState: Number(tag.batteryState),
       iphoneState: tag.iphoneState,
       careOX: tag.careOX,
@@ -171,9 +171,9 @@ const PricingInput = () => {
 
     const objPhone2 = {
       category: tag.category,
-      years: Number(tag.year),
+      years: Number(tag.years),
       model: tag.model,
-      options: tag.option,
+      options: tag.options,
       batteryState: Number(tag.batteryState),
       iphoneState: tag.iphoneState,
       careOX: tag.careOX,
@@ -286,8 +286,8 @@ const PricingInput = () => {
 
               <ContentDiv>출시년도</ContentDiv>
               <CategoryDiv>
-                <SelectBox name="year" onChange={onChangeHandler2}>
-                  <option value={"year"}>year</option>
+                <SelectBox name="years" onChange={onChangeHandler2}>
+                  <option value={"years"}>years</option>
                   {save.map((list) => {
                     return <option value={list}> {list} </option>;
                   })}
@@ -388,8 +388,8 @@ const PricingInput = () => {
 
               <ContentDiv>옵션</ContentDiv>
               <CategoryDiv>
-                <SelectBox name="option" onChange={onChangeHandler4}>
-                  <option value={"option"}> option </option>
+                <SelectBox name="options" onChange={onChangeHandler4}>
+                  <option value={"options"}> option </option>
                   {save.map((list) => {
                     return <option value={list}> {list} </option>;
                   })}
