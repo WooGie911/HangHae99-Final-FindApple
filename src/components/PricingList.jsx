@@ -1,24 +1,21 @@
 import React from "react";
 import styled from "styled-components";
 const PricingList = ({ DetailPrice }) => {
-  // let PricingPrice = 0;
-  // if (DetailPrice.getPrice !== undefined || DetailPrice.getPrice !== "") {
-  //   PricingPrice = DetailPrice.getPrice
-  //     .toString()
-  //     .replace(/\B(?=(\d{3})+(?!\d))/g, ",");
-  // }
   let MacbookClass = "";
-  if (DetailPrice.state === "A급") {
+  if (DetailPrice.state === "A급" || DetailPrice.macbookState === "A급") {
     MacbookClass = "Class A";
-  } else if (DetailPrice.state === "B급") {
+  } else if (
+    DetailPrice.state === "B급" ||
+    DetailPrice.macbookState === "B급"
+  ) {
     MacbookClass = "Class B";
   } else {
     MacbookClass = "Class C";
   }
   let IphoneClass = "";
-  if (DetailPrice.state === "A급") {
+  if (DetailPrice.state === "A급" || DetailPrice.iphoneState === "A급") {
     IphoneClass = "Class A";
-  } else if (DetailPrice.state === "B급") {
+  } else if (DetailPrice.state === "B급" || DetailPrice.iphoneState === "B급") {
     IphoneClass = "Class B";
   } else {
     IphoneClass = "Class C";
@@ -35,7 +32,6 @@ const PricingList = ({ DetailPrice }) => {
     <>
       <TopDiv>
         <TitleDiv>가격 책정 완료</TitleDiv>
-        {/* <ContentDiv>{PricingPrice}원</ContentDiv> */}
         {DetailPrice.getPrice !== undefined && (
           <>
             <ContentDiv>
@@ -123,10 +119,6 @@ const PricingList = ({ DetailPrice }) => {
             <div>
               <span>애플케어 유무</span>
               <label>{careOX}</label>
-            </div>
-            <div>
-              <span>애플케어 보증기간</span>
-              <label>{DetailPrice.careDate}</label>
             </div>
           </div>
         </ListDiv>

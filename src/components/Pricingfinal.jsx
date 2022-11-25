@@ -38,8 +38,9 @@ const Pricingfinal = () => {
             </Xbutton>
             <span>가격책정</span>
           </TitleDiv>
-          <div>
-            <PricingList DetailPrice={DetailPrice} />
+
+          <PricingList DetailPrice={DetailPrice} />
+          <Div>
             <StepDiv>
               <StepButton
                 onClick={() => window.location.replace(`/pricingInput`)}
@@ -63,7 +64,7 @@ const Pricingfinal = () => {
                 이의 제기
               </NextButton>
             </BottomButtons>
-          </div>
+          </Div>
         </ContainerDiv>
       </Layout>
     </>
@@ -72,13 +73,18 @@ const Pricingfinal = () => {
 
 export default Pricingfinal;
 
+const Div = styled.div`
+  display: flex;
+  flex-direction: column;
+  position: relative;
+`;
 const ContainerDiv = styled.div`
   display: flex;
   position: relative;
   flex-direction: column;
   background-color: transparent;
   width: 375px;
-  height: 100vh;
+  height: 100%;
 `;
 
 const TitleDiv = styled.div`
@@ -88,7 +94,7 @@ const TitleDiv = styled.div`
   align-items: center;
   position: relative;
   width: 100%;
-  height: 60px;
+  min-height: 60px;
   font-family: "Inter";
   font-style: normal;
   font-weight: 400;
@@ -125,11 +131,10 @@ const StepDiv = styled.div`
   align-items: center;
   justify-content: center;
   justify-items: center;
-  position: absolute;
-  bottom: 100px;
+  position: relative;
+  margin: 30px 0;
   width: 100%;
   height: 56px;
-  background-color: transparent;
 `;
 
 const StepButton = styled.button`
@@ -161,7 +166,7 @@ const StepButton = styled.button`
 const BottomButtons = styled.div`
   display: flex;
   flex-direction: row;
-  position: absolute;
+  position: relative;
   justify-content: space-evenly;
   bottom: 0px;
   width: 100%;
