@@ -10,7 +10,7 @@ import styled from "styled-components";
 import whitearrow from "../assets/whitearrow.png";
 import back from "../assets/back.png";
 
-const ObjectionUpdate = ({ paramId }) => {
+const ObjectionUpdate = () => {
   const dispatch = useDispatch();
   const navigate = useNavigate();
   const params = useParams();
@@ -24,8 +24,7 @@ const ObjectionUpdate = ({ paramId }) => {
     const formData = new FormData();
     formData.append(
       "issuesRequestDto",
-      // new Blob([JSON.stringify(oobj)], { type: "application/json" })
-      oobj
+      new Blob([JSON.stringify(oobj)], { type: "application/json" })
     );
     const obj = {
       id: params.id,
