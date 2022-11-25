@@ -15,7 +15,7 @@ const PostUpdate = () => {
   const dispatch = useDispatch();
   const navigate = useNavigate();
   const params = useParams();
-  const [files, fileUrls, uploadHandle] = useImageUpload(5, true, 0.3, 1000);
+  const [files, fileUrls, uploadHandle] = useImageUpload(5, true, 1, 1000);
   const imgRef = useRef();
   const { post } = useSelector((state) => state.details);
   const [updateInput, setUpdateInput, updateInputHandle] = useInput(post);

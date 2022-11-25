@@ -18,7 +18,7 @@ const PostsCreate = (props) => {
   });
 
   //이미지 업로드 훅
-  const [files, fileUrls, uploadHandle] = useImgUpload(5, true, 0.5, 1000);
+  const [files, fileUrls, uploadHandle] = useImgUpload(5, true, 1, 1000);
   const [imgUrls, setImgUrls] = useState([]);
   //이미지 업로드 인풋돔 선택 훅
   const imgRef = useRef();

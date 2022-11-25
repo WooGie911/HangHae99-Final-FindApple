@@ -10,11 +10,9 @@ import {
   __getPostDetail,
 } from "../redux/modules/PostDetailsSlice";
 import back from "../assets/back.png";
-import { useParams } from "react-router-dom";
 import Layout from "../components/Layout";
 
 const PostComment = () => {
-  const { id } = useParams();
   const navigate = useNavigate();
   const dispatch = useDispatch();
   const { post } = useSelector((state) => state.details);
