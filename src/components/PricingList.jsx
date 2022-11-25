@@ -102,7 +102,7 @@ const PricingList = ({ DetailPrice }) => {
             </div>
             <div>
               <span>출시년도</span>
-              <label>{DetailPrice.year}년</label>
+              <label>{DetailPrice.years}년</label>
             </div>
             <div>
               <span>기종</span>

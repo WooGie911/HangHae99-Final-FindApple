@@ -86,15 +86,15 @@ const Router = () => {
         <Route path="/pricingInput" element={<PricingInput />} />
         <Route path="/pricingInput/:category" element={<PricingInput />} />
         <Route
-          path="/pricingInput/:category/:year"
+          path="/pricingInput/:category/:years"
           element={<PricingInput />}
         />
         <Route
-          path="/pricingInput/:category/:year/:model"
+          path="/pricingInput/:category/:years/:model"
           element={<PricingInput />}
         />
         <Route
-          path="/pricingInput/:category/:year/:model/:option"
+          path="/pricingInput/:category/:years/:model/:options"
           element={<PricingInput />}
         />
 
