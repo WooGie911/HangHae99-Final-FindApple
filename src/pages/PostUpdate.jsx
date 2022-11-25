@@ -55,9 +55,8 @@ const PostUpdate = () => {
     //Api 날리기
     if (window.confirm("수정하시겠습니까?")) {
       dispatch(__editPost(obj));
-      // navigate(`/PostDetail/${params.id}`);
-      // window.location.reload(`/PostDetail/${params.id}`);
-      // window.location.replace(`/PostDetail/${params.id}`);
+      navigate(`/PostDetail/${params.id}`);
+      window.location.reload(`/PostDetail/${params.id}`);
     }
   };
   return (
