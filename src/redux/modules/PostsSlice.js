@@ -4,7 +4,6 @@ import axios from "axios";
 const accessToken = localStorage.getItem("Access_Token");
 const refreshToken = localStorage.getItem("Refresh_Token");
 
-
 export const __searchPost = createAsyncThunk(
   "posts/__searchPost",
   async (payload, thunkAPI) => {
@@ -30,9 +29,8 @@ export const __searchPost = createAsyncThunk(
 export const __getAddPost = createAsyncThunk(
   "posts/__getAddPost",
   async (payload, thunkAPI) => {
-    console.log(payload)
+    console.log(payload);
     try {
-
       const data = await axios.get(
         `${process.env.REACT_APP_SERVER}/api/post/${payload.state.paramObj}?page=${payload.page}&size=${payload.state.pageSize}&sort=${payload.state.postSort},DESC`,
 
@@ -45,10 +43,10 @@ export const __getAddPost = createAsyncThunk(
           },
         }
       );
-      const obj =  {
+      const obj = {
         payload: payload.page,
-        data: data.data.content
-      }
+        data: data.data.content,
+      };
       return thunkAPI.fulfillWithValue(obj);
     } catch (error) {
       return thunkAPI.rejectWithValue(error);
@@ -169,8 +167,6 @@ const PostsSlice = createSlice({
     },
   },
   extraReducers: {
-    
-
     //__searchPost
     [__searchPost.pending]: (state) => {
       state.isLoading = true;
@@ -191,12 +187,11 @@ const PostsSlice = createSlice({
     },
     [__getAddPost.fulfilled]: (state, action) => {
       state.isLoading = false;
-      if(action.payload.payload === 0) {
-        state.posts.splice(0)
-        state.posts.push(...action.payload.data)
-
-      }else{
-        state.posts.push(...action.payload.data)
+      if (action.payload.payload === 0) {
+        state.posts.splice(0);
+        state.posts.push(...action.payload.data);
+      } else {
+        state.posts.push(...action.payload.data);
       }
     },
     [__getAddPost.rejected]: (state, action) => {

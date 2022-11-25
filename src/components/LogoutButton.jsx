@@ -35,7 +35,7 @@ const Logout = styled.button`
   font-style: normal;
   font-weight: 500;
   font-size: 11px;
-  width: 60px;
+  width: 70px;
   height: 25px;
   border: 1px solid #3d6af2;
   border-radius: 5px;

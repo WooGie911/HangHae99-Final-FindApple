@@ -173,7 +173,7 @@ const Stdivwrap = styled.div`
 
 const Stbutton1 = styled.button`
   border-radius: 20px;
-  width: 45px;
+  width: 55px;
   height: 23px;
   margin-left: 3px;
   margin-top: 30px;
@@ -185,7 +185,7 @@ const Stbutton1 = styled.button`
 const Stbutton2 = styled.button`
   background-color: white;
   border-radius: 20px;
-  width: 45px;
+  width: 55px;
   height: 23px;
   margin-left: 3px;
   margin-top: 30px;
