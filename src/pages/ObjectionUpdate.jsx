@@ -34,7 +34,6 @@ const ObjectionUpdate = ({ paramId }) => {
     dispatch(__editObjection(obj));
     navigate(`/objectionDetail/${params.id}`);
     window.location.reload(`/objectionDetail/${params.id}`);
-    // window.location.replace(`/objectionDetail/${params.id}`);
   };
   return (
     <>
