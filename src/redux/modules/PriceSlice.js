@@ -1,12 +1,6 @@
 import { createAsyncThunk, createSlice } from "@reduxjs/toolkit";
 import axios from "axios";
 
-const initialState = {
-  tagList: [],
-  tagList2: {},
-  DetailPrice: {},
-};
-
 const accessToken = localStorage.getItem("Access_Token");
 const refreshToken = localStorage.getItem("Refresh_Token");
 
@@ -58,7 +52,13 @@ export const __checkPrice = createAsyncThunk(
 
 const PriceSlice = createSlice({
   name: "price",
-  initialState,
+  initialState: {
+    stepState: 1,
+
+    tagList: [],
+    tagList2: {},
+    DetailPrice: {},
+  },
 
   reducer: {},
   extraReducers: {

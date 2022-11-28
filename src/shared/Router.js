@@ -28,6 +28,7 @@ import Cover from "../pages/Cover";
 import Info1 from "../pages/Info1";
 import Info2 from "../pages/Info2";
 import Info3 from "../pages/Info3";
+import PricingPage from "../pages/PricingPage";
 
 const Router = () => {
   return (
@@ -96,6 +97,19 @@ const Router = () => {
         <Route
           path="/pricingInput/:category/:years/:model/:options"
           element={<PricingInput />}
+        />
+
+        {/*가격 책정 페이지 */}
+        <Route path="/pricingPage" element={<PricingPage />} />
+        <Route path="/pricingPage/:category" element={<PricingPage />} />
+        <Route path="/pricingPage/:category/:years" element={<PricingPage />} />
+        <Route
+          path="/pricingPage/:category/:years/:model"
+          element={<PricingPage />}
+        />
+        <Route
+          path="/pricingPage/:category/:years/:model/:options"
+          element={<PricingPage />}
         />
 
         {/*가격 결정 페이지 */}
