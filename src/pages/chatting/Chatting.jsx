@@ -137,16 +137,14 @@ const onSubmitHandler = (event) =>{
             {
               Access_Token: localStorage.getItem("Access_Token")
             },
-      setChatBody("")     
           )})
-
+  setChatBody("")
 }
 const appKeyPress = (e) => {
   
   if (e.key === 'Enter') {
     onSubmitHandler()
     setChatBody("")
-    
   }
 }
 //enter시 메시지 보냄
@@ -180,7 +178,8 @@ return(
   
 
   <div>
-    <input onChange={inputHandler}/>
+    <input value={chatBody} onChange={inputHandler}/>
+    {/* value를 줘야 사라진다 */}
     <button onSubmit={appKeyPress} onClick={onSubmitHandler}>전송</button>
   </div>
   </div>
