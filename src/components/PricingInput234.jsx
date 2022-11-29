@@ -3,104 +3,167 @@ import { useDispatch, useSelector } from "react-redux";
 import { useNavigate } from "react-router-dom";
 import styled from "styled-components";
 import { __checkPrice, __getPriceInfo } from "../redux/modules/PriceSlice";
-import Layout from "./Layout";
-import PriceStep2 from "../assets/PriceStep2.svg";
+import PricingStep from "./PricingStep";
 
-const PricingInput2 = ({ params, stepState }) => {
+const PricingInput234 = ({ params, stepState }) => {
   const navigate = useNavigate();
   const dispatch = useDispatch();
+  const { priceLists } = useSelector((state) => state.price);
+  //경우에 따른 초기값으로 현상태 스테이트 초기화
+  let initialState = {};
+  let valueState = "";
+  if (stepState === 2) {
+    valueState = "years";
+    initialState = {
+      category: priceLists.category,
+      years: 0,
+      model: "",
+      options: "",
+      batteryState: 0,
+      careOX: "",
+      careDate: "",
+      iphoneState: "",
+      macbookState: "",
+      ram: "",
+      storage: "",
+      keyboard: "",
+    };
+  } else if (stepState === 3) {
+    valueState = "model";
+    initialState = {
+      category: priceLists.category,
+      years: priceLists.years,
+      model: "",
+      options: "",
+      batteryState: 0,
+      careOX: "",
+      careDate: "",
+      iphoneState: "",
+      macbookState: "",
+      ram: "",
+      storage: "",
+      keyboard: "",
+    };
+  } else if (stepState === 4) {
+    valueState = "options";
+    initialState = {
+      category: priceLists.category,
+      years: priceLists.years,
+      model: priceLists.model,
+      options: "",
+      batteryState: 0,
+      careOX: "",
+      careDate: "",
+      iphoneState: "",
+      macbookState: "",
+      ram: "",
+      storage: "",
+      keyboard: "",
+    };
+  }
 
-  const initialState = {
-    step1: true,
-    step2: false,
-    step3: false,
-    step4: false,
-    step5: false,
-    category: " ",
-    years: " ",
-    model: " ",
-    options: " ",
-  };
-  const [tag, setTag] = useState(initialState);
-  const { tagList } = useSelector((state) => state.price);
-  const { tagList2 } = useSelector((state) => state.price);
-  const [save, setSave] = useState([]);
-  const [save2, setSave2] = useState({});
-  const [subTag, setSubTag] = useState({});
+  const [tag, setTag] = useState(priceLists);
+  const [getInfo, setGetInfo] = useState("");
 
-  const onChangeHandler2 = (e) => {
+  const { getList } = useSelector((state) => state.price);
+
+  const onChangeHandler = (e) => {
     const { value, name } = e.target;
     setTag({
       ...tag,
       [name]: value,
     });
-    dispatch(__getPriceInfo(`${tag.category}/${value}`));
-  };
-  const onClickHandler23 = (e) => {
-    e.preventDefault();
-    if (window.confirm(`${tag.years} 맞습니까?`)) {
-      if (tag.years === " " || tag.years === "years") {
-        return alert("항목을 확인하세요");
-      }
-      setTag({ ...tag, step2: false, step3: true });
-      navigate(`/pricingInput/${params.category}/${tag.years}`);
-    }
   };
 
+  const onSubmitHandler = (e) => {
+    e.preventDefault();
+
+    //벨리데이션 나중에 걸기
+    // //컨펌 후 다음 리스트 받아오기, 해당페이지로 이동
+    // if (window.confirm(`${tag.category} 맞습니까?`)) {
+    //   if (tag.category === " " || tag.category === "category") {
+    //     return alert("항목을 확인하세요");
+    //   }
+    //   dispatch(__getPriceInfo(getInfo));
+
+    //   navigate(`/pricingPage/${getInfo}`);
+    // }
+
+    dispatch(__getPriceInfo(getInfo));
+    navigate(`/pricingPage/${getInfo.API}`);
+  };
+
+  //서브밋 함수에 사용할 매개변수 설정
   useEffect(() => {
-    setSave(tagList);
-    setSave2(tagList2);
-  }, [params]);
+    if (stepState === 2) {
+      setGetInfo({
+        stepState: 3,
+        API: `${priceLists.category}/${tag.years}`,
+        priceLists: tag,
+        BackAPI: "",
+      });
+    } else if (stepState === 3) {
+      setGetInfo({
+        stepState: 4,
+        API: `${priceLists.category}/${priceLists.years}/${tag.model}`,
+        priceLists: tag,
+        BackAPI: `${priceLists.category}`,
+      });
+    } else if (stepState === 4) {
+      if (priceLists.category === "iphone") {
+        setGetInfo({
+          stepState: 5,
+          API: `${priceLists.category}/${priceLists.years}/${priceLists.model}`,
+          priceLists: tag,
+          Backapi: `${priceLists.category}/${priceLists.years}`,
+        });
+      } else {
+        setGetInfo({
+          stepState: 5,
+          API: `${priceLists.category}/${priceLists.years}/${priceLists.model}/${tag.options}`,
+          BackAPI: `${priceLists.category}/${priceLists.years}`,
+          priceLists: tag,
+        });
+      }
+    }
+
+    console.log("겟프라이스인포", getInfo);
+  }, [tag]);
+
+  // //새로고침을 위한 get
+  // useEffect(() => {
+  //   __getPriceInfo(getListState);
+  // }, [dispatch]);
 
   return (
     <>
-      <Layout>
-        <div>
-          <ContainerDiv>
-            <TitleDiv>
-              <Backbutton
-                onClick={() => {
-                  navigate(-1);
-                }}
-              >
-                〈
-              </Backbutton>
-              <Xbutton
-                onClick={() => {
-                  navigate("/main");
-                }}
-              >
-                X
-              </Xbutton>
-              <span>가격책정</span>
-            </TitleDiv>
+      {stepState === 2 && <ContentDiv>출시년도</ContentDiv>}
+      {stepState === 3 && <ContentDiv>기종</ContentDiv>}
+      {stepState === 4 && <ContentDiv>옵션</ContentDiv>}
 
-            {tag.step2 && (
-              <>
-                <ContentDiv>출시년도</ContentDiv>
-                <CategoryDiv>
-                  <SelectBox name="years" onChange={onChangeHandler2}>
-                    <option value={"years"}>years</option>
-                    {save.map((list) => {
-                      return <option value={list}> {list} </option>;
-                    })}
-                  </SelectBox>
-                </CategoryDiv>
-                <StepDiv>
-                  <img src={PriceStep2} />
-                </StepDiv>
-              </>
-            )}
+      <CategoryDiv>
+        <SelectBox name={valueState} onChange={onChangeHandler}>
+          <option value={valueState}>{valueState}</option>
+          {getList &&
+            getList.map((list, index) => {
+              return (
+                <option key={index} value={list}>
+                  {list}
+                </option>
+              );
+            })}
+        </SelectBox>
+      </CategoryDiv>
 
-            <NextButton onClick={onClickHandler23}>다음으로</NextButton>
-          </ContainerDiv>
-        </div>
-      </Layout>
+      <StepDiv>
+        <PricingStep stepState={stepState} />
+      </StepDiv>
+      <NextButton onClick={onSubmitHandler}>다음으로</NextButton>
     </>
   );
 };
 
-export default PricingInput2;
+export default PricingInput234;
 
 const RLDiv = styled.div`
   .C02:checked {

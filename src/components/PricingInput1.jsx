@@ -3,101 +3,76 @@ import { useDispatch, useSelector } from "react-redux";
 import { useNavigate } from "react-router-dom";
 import styled from "styled-components";
 import { __checkPrice, __getPriceInfo } from "../redux/modules/PriceSlice";
-import Layout from "./Layout";
-import PriceStep1 from "../assets/PriceStep1.svg";
+import PricingStep from "./PricingStep";
 
 const PricingInput1 = ({ params, stepState }) => {
   const navigate = useNavigate();
   const dispatch = useDispatch();
-
   const initialState = {
-    step1: true,
-    step2: false,
-    step3: false,
-    step4: false,
-    step5: false,
-    category: " ",
-    years: " ",
-    model: " ",
-    options: " ",
+    category: "",
+    years: 0,
+    model: "",
+    options: "",
+    batteryState: 0,
+    careOX: "",
+    careDate: "",
+    iphoneState: "",
+    macbookState: "",
+    ram: "",
+    storage: "",
+    keyboard: "",
   };
   const [tag, setTag] = useState(initialState);
-  const { tagList } = useSelector((state) => state.price);
-  const { tagList2 } = useSelector((state) => state.price);
-  const [save, setSave] = useState([]);
-  const [save2, setSave2] = useState({});
-  const [subTag, setSubTag] = useState({});
+  const [getInfo, setGetInfo] = useState("");
 
-  const onChangeHandler1 = (e) => {
+  const onChangeHandler = (e) => {
     const { value, name } = e.target;
     setTag({
       ...tag,
       [name]: value,
     });
-    dispatch(__getPriceInfo(value));
   };
 
-  const onClickHandler12 = (e) => {
+  const onSubmitHandler = (e) => {
+    console.log("getInfo", getInfo);
     e.preventDefault();
-    if (window.confirm(`${tag.category} 맞습니까?`)) {
-      if (tag.category === " " || tag.category === "category") {
-        return alert("항목을 확인하세요");
-      }
-      setTag({ ...tag, step1: false, step2: true });
-      navigate(`/pricingInput/${tag.category}`);
+
+    if (tag.category === " " || tag.category === "category") {
+      return alert("항목을 확인하세요");
     }
+    //다음 리스트 받아오기
+    dispatch(__getPriceInfo(getInfo));
+    //
+    navigate(`/pricingPage/${getInfo.API}`);
   };
 
+  //서브밋 함수에 사용할 매개변수 설정
   useEffect(() => {
-    setSave(tagList);
-    setSave2(tagList2);
-  }, [params]);
+    setGetInfo({
+      stepState: 2,
+      API: `${tag.category}`,
+      priceLists: tag,
+      BackAPI: "",
+    });
+    console.log("겟프라이스인포", getInfo);
+  }, [tag]);
 
   return (
     <>
-      <Layout>
-        <div>
-          {tag.step1 && (
-            <ContainerDiv>
-              <TitleDiv>
-                <Backbutton
-                  onClick={() => {
-                    navigate(-1);
-                  }}
-                >
-                  〈
-                </Backbutton>
-                <Xbutton
-                  onClick={() => {
-                    navigate("/main");
-                  }}
-                >
-                  X
-                </Xbutton>
-                <span>가격책정</span>
-              </TitleDiv>
+      <ContentDiv>카테고리를 선택해주세요</ContentDiv>
 
-              <ContentDiv>카테고리를 선택해주세요</ContentDiv>
+      <CategoryDiv>
+        <SelectBox type="radio" name="category" onChange={onChangeHandler}>
+          <option value={"category"}>Category</option>
+          <option value={"macbook"}>macbook</option>
+          <option value={"iphone"}>iphone</option>
+        </SelectBox>
+      </CategoryDiv>
 
-              <CategoryDiv>
-                <select
-                  type="radio"
-                  name="category"
-                  onChange={onChangeHandler1}
-                >
-                  <option value={"category"}>Category</option>
-                  <option value={"macbook"}>macbook</option>
-                  <option value={"iphone"}>iphone</option>
-                </select>
-              </CategoryDiv>
-              <StepDiv>
-                <img src={PriceStep1} />
-              </StepDiv>
-              <NextButton onClick={onClickHandler12}>다음으로</NextButton>
-            </ContainerDiv>
-          )}
-        </div>
-      </Layout>
+      <StepDiv>
+        <PricingStep stepState={stepState} />
+      </StepDiv>
+      <NextButton onClick={onSubmitHandler}>다음으로</NextButton>
     </>
   );
 };
@@ -142,6 +117,15 @@ const RadioLabel = styled.label`
   }
 `;
 
+const SelectBox = styled.select`
+  width: 330px;
+  height: 40px;
+  overflow: auto;
+  border: 1px solid #000000;
+  background-color: transparent;
+  border-radius: 50px;
+  font-size: 15px;
+`;
 const ContentDiv = styled.div`
   display: flex;
   flex-direction: column;
@@ -158,56 +142,6 @@ const ContentDiv = styled.div`
   background-color: transparent;
 `;
 
-const SelectBox = styled.select`
-  width: 330px;
-  height: 40px;
-  overflow: auto;
-  border: 1px solid #000000;
-  background-color: transparent;
-  border-radius: 50px;
-  font-size: 15px;
-`;
-
-const ContainerDiv = styled.div`
-  display: flex;
-  position: relative;
-  flex-direction: column;
-  background-color: transparent;
-  height: 100vh;
-  width: 375px;
-`;
-const ContainerDiv1 = styled.div`
-  display: flex;
-  position: relative;
-  flex-direction: column;
-  background-color: transparent;
-  height: 100%;
-  width: 375px;
-`;
-const Div = styled.div`
-  display: flex;
-  flex-direction: column;
-  height: 100%;
-`;
-
-const TitleDiv = styled.div`
-  display: flex;
-  justify-content: center;
-  justify-items: center;
-  align-items: center;
-  position: relative;
-  width: 100%;
-  height: 60px;
-  font-family: "Inter";
-  font-style: normal;
-  font-weight: 400;
-  font-size: 18px;
-  line-height: 22px;
-  font-weight: bold;
-  border-bottom: solid 1px gray;
-  /* background-color: blue; */
-`;
-
 const CategoryDiv = styled.div`
   display: flex;
   flex-direction: column;
@@ -222,61 +156,6 @@ const CategoryDiv = styled.div`
   line-height: 19px;
   width: 100%;
   height: 50px;
-`;
-
-const PriceInput = styled.input`
-  position: absolute;
-  width: 330px;
-  height: 38px;
-  left: 19px;
-  font-family: "Inter";
-  font-style: normal;
-  font-weight: 400;
-  font-size: 14px;
-  line-height: 17px;
-  border: 1px solid #d9d9d9;
-  border-radius: 5px;
-  background-color: transparent;
-`;
-const DateInput = styled.input`
-  position: absolute;
-  width: 177px;
-  height: 38px;
-  left: 19px;
-  font-family: "Inter";
-  font-style: normal;
-  font-weight: 400;
-  font-size: 14px;
-  line-height: 17px;
-  border-radius: 50px;
-  border: 1px solid #c4c4c4;
-  background-color: transparent;
-`;
-
-const Backbutton = styled.button`
-  position: absolute;
-  left: 0px;
-  width: 56px;
-  height: 100%;
-  font-size: 18px;
-  font-weight: bold;
-  border: none;
-  background-color: transparent;
-`;
-
-const Xbutton = styled.button`
-  position: absolute;
-  right: 0px;
-  width: 56px;
-  height: 100%;
-  font-size: 18px;
-  font-weight: bold;
-  border: none;
-  background-color: transparent;
-`;
-
-const DDid = styled.div`
-  height: 100px;
 `;
 
 const StepDiv = styled.div`

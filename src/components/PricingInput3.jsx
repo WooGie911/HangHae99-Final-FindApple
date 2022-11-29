@@ -4,7 +4,6 @@ import { useNavigate } from "react-router-dom";
 import styled from "styled-components";
 import { __checkPrice, __getPriceInfo } from "../redux/modules/PriceSlice";
 import Layout from "./Layout";
-import PriceStep3 from "../assets/PriceStep3.svg";
 
 const PricingInput3 = ({ params, stepState }) => {
   const navigate = useNavigate();
@@ -78,8 +77,6 @@ const PricingInput3 = ({ params, stepState }) => {
 
             {tag.step3 && (
               <>
-                <ContentDiv>기종</ContentDiv>
-
                 <CategoryDiv>
                   <SelectBox name="model" onChange={onChangeHandler3}>
                     <option value={"model"}>model</option>
@@ -88,9 +85,7 @@ const PricingInput3 = ({ params, stepState }) => {
                     })}
                   </SelectBox>
                 </CategoryDiv>
-                <StepDiv>
-                  <img src={PriceStep3} />
-                </StepDiv>
+                <StepDiv></StepDiv>
               </>
             )}
 

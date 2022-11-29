@@ -8,8 +8,9 @@ export const __getPriceInfo = createAsyncThunk(
   "price/__getPriceInfo",
   async (payload, thunkAPI) => {
     try {
+      console.log("페이로드 뭐야", payload);
       const data = await axios.get(
-        `${process.env.REACT_APP_SERVER}/api/price/${payload}`,
+        `${process.env.REACT_APP_SERVER}/api/price/${payload.API}`,
         {
           headers: {
             "Content-Type": `application/json`,
@@ -19,8 +20,12 @@ export const __getPriceInfo = createAsyncThunk(
           },
         }
       );
+      const myPayload = {
+        ...payload,
+        getList: data.data,
+      };
       console.log("겟프라이스인포", data);
-      return thunkAPI.fulfillWithValue(data.data);
+      return thunkAPI.fulfillWithValue(myPayload);
     } catch (error) {
       return thunkAPI.rejectWithValue(error);
     }
@@ -54,9 +59,22 @@ const PriceSlice = createSlice({
   name: "price",
   initialState: {
     stepState: 1,
-
-    tagList: [],
-    tagList2: {},
+    BackAPI: "",
+    priceLists: {
+      category: "",
+      years: 0,
+      model: "",
+      options: "",
+      batteryState: 0,
+      careOX: "",
+      careDate: "",
+      iphoneState: "",
+      macbookState: "",
+      ram: "",
+      storage: "",
+      keyboard: "",
+    },
+    getList: [],
     DetailPrice: {},
   },
 
@@ -68,8 +86,14 @@ const PriceSlice = createSlice({
     },
     [__getPriceInfo.fulfilled]: (state, action) => {
       state.isLoading = false;
-      state.tagList = action.payload;
-      state.tagList2 = action.payload;
+      state.stepState = action.payload.stepState;
+      state.getList = action.payload.getList;
+      state.priceLists = action.payload.priceLists;
+      state.BackAPI = action.payload.BackAPI;
+      console.log("state.stepState", state.stepState);
+      console.log("state.getList", state.getList);
+      console.log("state.priceLists", state.priceLists);
+      console.log("state.BackAPI", state.BackAPI);
     },
     [__getPriceInfo.rejected]: (state, action) => {
       state.isLoading = false;

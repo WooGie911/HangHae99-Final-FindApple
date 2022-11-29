@@ -9,42 +9,32 @@ import PriceStep5 from "../assets/PriceStep5.svg";
 const PricingInput5 = ({ params, stepState }) => {
   const navigate = useNavigate();
   const dispatch = useDispatch();
-
+  const { priceLists } = useSelector((state) => state.price);
+  //경우에 따른 초기값으로 현상태 스테이트 초기화
   const initialState = {
-    step1: true,
-    step2: false,
-    step3: false,
-    step4: false,
-    step5: false,
-    category: " ",
-    years: " ",
-    model: " ",
-    options: " ",
+    category: priceLists.category,
+    years: priceLists.years,
+    model: priceLists.model,
+    options: priceLists.options,
+    batteryState: 0,
+    careOX: "",
+    careDate: "",
+    iphoneState: "",
+    macbookState: "",
+    ram: "",
+    storage: "",
+    keyboard: "",
   };
   const [tag, setTag] = useState(initialState);
-  const { tagList } = useSelector((state) => state.price);
-  const { tagList2 } = useSelector((state) => state.price);
-  const [save, setSave] = useState([]);
-  const [save2, setSave2] = useState({});
-  const [subTag, setSubTag] = useState({});
+  const [getInfo, setGetInfo] = useState("");
+  const { getList } = useSelector((state) => state.price);
 
-  const onChangeHandler4 = (e) => {
+  const onChangeHandler = (e) => {
     const { value, name } = e.target;
     setTag({
       ...tag,
       [name]: value,
     });
-
-    setSubTag({
-      ...subTag,
-      [name]: value,
-    });
-
-    dispatch(
-      __getPriceInfo(
-        `${params.category}/${params.years}/${params.model}/${value}`
-      )
-    );
   };
 
   const onSubmitHandler = () => {
@@ -62,7 +52,7 @@ const PricingInput5 = ({ params, stepState }) => {
         model: tag.model,
         options: tag.options,
         ram: tag.ram,
-        keyboard: save2.keyboard[0],
+        keyboard: getList.keyboard[0],
         storage: tag.storage,
         batteryState: Number(tag.batteryState),
         macbookState: tag.macbookState,
@@ -75,7 +65,7 @@ const PricingInput5 = ({ params, stepState }) => {
         model: tag.model,
         options: tag.options,
         ram: tag.ram,
-        keyboard: save2.keyboard[0],
+        keyboard: getList.keyboard[0],
         storage: tag.storage,
         macbookState: tag.macbookState,
         batteryState: Number(tag.batteryState),
@@ -119,155 +109,119 @@ const PricingInput5 = ({ params, stepState }) => {
       Data: Data,
     };
     console.log(passData);
-    if (window.confirm(`확실해요?`)) {
+    if (window.confirm(`입력한 정보와 일치합니까?`)) {
       dispatch(__checkPrice(passData));
       navigate(`/Pricingfinal`);
       setTag({});
     }
   };
-  useEffect(() => {
-    setSave(tagList);
-    setSave2(tagList2);
-  }, [params]);
 
   return (
     <>
-      <Layout>
+      <div>
         <div>
-          <ContainerDiv1>
-            <Div>
-              <TitleDiv>
-                <Backbutton
-                  onClick={() => {
-                    navigate(-1);
-                  }}
-                >
-                  〈
-                </Backbutton>
-                <Xbutton
-                  onClick={() => {
-                    navigate("/main");
-                  }}
-                >
-                  X
-                </Xbutton>
-                <span>가격책정</span>
-              </TitleDiv>
+          {tag.category === "macbook" ? (
+            <div>
+              <ContentDiv>램 메모리</ContentDiv>
+              <CategoryDiv>
+                <SelectBox name="ram" onChange={onChangeHandler}>
+                  <option value={"ram"}> ram </option>
+                  {getList.ram &&
+                    getList.ram.map((list) => {
+                      return <option value={list}> {list} </option>;
+                    })}
+                </SelectBox>
+              </CategoryDiv>
 
-              {tag.step5 && (
-                <div>
-                  {tag.category === "macbook" ? (
-                    <div>
-                      <ContentDiv>램 메모리</ContentDiv>
-                      <CategoryDiv>
-                        <SelectBox name="ram" onChange={onChangeHandler4}>
-                          <option value={"ram"}> ram </option>
-                          {save2.ram &&
-                            save2.ram.map((list) => {
-                              return <option value={list}> {list} </option>;
-                            })}
-                        </SelectBox>
-                      </CategoryDiv>
+              <ContentDiv>SSD 용량</ContentDiv>
+              <CategoryDiv>
+                <SelectBox name="storage" onChange={onChangeHandler}>
+                  <option value={"storage"}> storage </option>
+                  {getList.storage &&
+                    getList.storage.map((list) => {
+                      return <option value={list}> {list} </option>;
+                    })}
+                </SelectBox>
+              </CategoryDiv>
+              <ContentDiv>배터리 사이클</ContentDiv>
+              <CategoryDiv>
+                <PriceInput
+                  placeholder="배터리 사이클을 입력해주세요"
+                  value={tag.batteryState}
+                  type="Number"
+                  min="0"
+                  name="batteryState"
+                  onChange={onChangeHandler}
+                />
+              </CategoryDiv>
+              <ContentDiv>맥북 상태</ContentDiv>
+              <CategoryDiv>
+                <SelectBox name="macbookState" onChange={onChangeHandler}>
+                  <option value={"macbookState"}>맥북 상태</option>
+                  <option value={"Class A"}>A급</option>
+                  <option value={"Class B"}>B급</option>
+                  <option value={"Class C"}>C급</option>
+                </SelectBox>
+              </CategoryDiv>
+            </div>
+          ) : (
+            <div>
+              <ContentDiv>아이폰 상태</ContentDiv>
+              <CategoryDiv>
+                <SelectBox name="iphoneState" onChange={onChangeHandler}>
+                  <option value={"iphoneState"}>아이폰 상태</option>
+                  <option value={"Class A"}>A급</option>
+                  <option value={"Class B"}>B급</option>
+                  <option value={"Class C"}>C급</option>
+                </SelectBox>
+              </CategoryDiv>
+              <ContentDiv>배터리 성능 최대치</ContentDiv>
+              <CategoryDiv>
+                <PriceInput
+                  placeholder="0% ~ 100%"
+                  value={tag.batteryState}
+                  type="Number"
+                  min="0"
+                  max="100"
+                  name="batteryState"
+                  onChange={onChangeHandler}
+                />
+              </CategoryDiv>
+            </div>
+          )}
 
-                      <ContentDiv>SSD 용량</ContentDiv>
-                      <CategoryDiv>
-                        <SelectBox name="storage" onChange={onChangeHandler4}>
-                          <option value={"storage"}> storage </option>
-                          {save2.storage &&
-                            save2.storage.map((list) => {
-                              return <option value={list}> {list} </option>;
-                            })}
-                        </SelectBox>
-                      </CategoryDiv>
-                      <ContentDiv>배터리 사이클</ContentDiv>
-                      <CategoryDiv>
-                        <PriceInput
-                          placeholder="배터리 사이클을 입력해주세요"
-                          value={tag.batteryState}
-                          type="Number"
-                          min="0"
-                          name="batteryState"
-                          onChange={onChangeHandler4}
-                        />
-                      </CategoryDiv>
-                      <ContentDiv>맥북 상태</ContentDiv>
-                      <CategoryDiv>
-                        <SelectBox
-                          name="macbookState"
-                          onChange={onChangeHandler4}
-                        >
-                          <option value={"macbookState"}>맥북 상태</option>
-                          <option value={"A급"}>A급!</option>
-                          <option value={"B급"}>B급!</option>
-                          <option value={"C급"}>C급!</option>
-                        </SelectBox>
-                      </CategoryDiv>
-                    </div>
-                  ) : (
-                    <div>
-                      <ContentDiv>아이폰 상태</ContentDiv>
-                      <CategoryDiv>
-                        <SelectBox
-                          name="iphoneState"
-                          onChange={onChangeHandler4}
-                        >
-                          <option value={"iphoneState"}>아이폰 상태</option>
-                          <option value={"A급"}>A급!</option>
-                          <option value={"B급"}>B급!</option>
-                          <option value={"C급"}>C급!</option>
-                        </SelectBox>
-                      </CategoryDiv>
-                      <ContentDiv>배터리 성능 최대치</ContentDiv>
-                      <CategoryDiv>
-                        <PriceInput
-                          placeholder="0% ~ 100%"
-                          value={tag.batteryState}
-                          type="Number"
-                          min="0"
-                          max="100"
-                          name="batteryState"
-                          onChange={onChangeHandler4}
-                        />
-                      </CategoryDiv>
-                    </div>
-                  )}
+          <ContentDiv>애플케어 유무</ContentDiv>
+          <CategoryDiv>
+            <SelectBox name="careOX" onChange={onChangeHandler}>
+              <option value={"careOX"}>애플케어 유무</option>
+              <option value={"O"}>있음</option>
+              <option value={"X"}>없음</option>
+            </SelectBox>
+          </CategoryDiv>
 
-                  <ContentDiv>애플케어 유무</ContentDiv>
-                  <CategoryDiv>
-                    <SelectBox name="careOX" onChange={onChangeHandler4}>
-                      <option value={"careOX"}>애플케어 유무</option>
-                      <option value={true}>있음!</option>
-                      <option value={false}>없음!</option>
-                    </SelectBox>
-                  </CategoryDiv>
-
-                  {tag.careOX === "true" && (
-                    <>
-                      <ContentDiv>애플케어 보증기간</ContentDiv>
-                      <CategoryDiv>
-                        <DateInput
-                          placeholder="애플케어 보증기간"
-                          type="date"
-                          name="careDate"
-                          onChange={onChangeHandler4}
-                        />
-                      </CategoryDiv>
-                    </>
-                  )}
-                </div>
-              )}
-
-              <DDid />
-            </Div>
-
-            <StepDiv>
-              <img src={PriceStep5} />
-            </StepDiv>
-
-            <NextButton onClick={onSubmitHandler}>다음으로</NextButton>
-          </ContainerDiv1>
+          {tag.careOX === "O" && (
+            <>
+              <ContentDiv>애플케어 보증기간</ContentDiv>
+              <CategoryDiv>
+                <DateInput
+                  placeholder="애플케어 보증기간"
+                  type="date"
+                  name="careDate"
+                  onChange={onChangeHandler}
+                />
+              </CategoryDiv>
+            </>
+          )}
         </div>
-      </Layout>
+
+        <DDid />
+
+        <StepDiv>
+          <img src={PriceStep5} />
+        </StepDiv>
+
+        <NextButton onClick={onSubmitHandler}>다음으로</NextButton>
+      </div>
     </>
   );
 };
