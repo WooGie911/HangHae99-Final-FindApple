@@ -100,14 +100,14 @@ const PricingInput234 = ({ params, stepState }) => {
         stepState: 3,
         API: `${priceLists.category}/${tag.years}`,
         priceLists: tag,
-        BackAPI: "",
+        BackGetAPI: "",
       });
     } else if (stepState === 3) {
       setGetInfo({
         stepState: 4,
         API: `${priceLists.category}/${priceLists.years}/${tag.model}`,
         priceLists: tag,
-        BackAPI: `${priceLists.category}`,
+        BackGetAPI: `${priceLists.category}`,
       });
     } else if (stepState === 4) {
       if (priceLists.category === "iphone") {
@@ -121,7 +121,7 @@ const PricingInput234 = ({ params, stepState }) => {
         setGetInfo({
           stepState: 5,
           API: `${priceLists.category}/${priceLists.years}/${priceLists.model}/${tag.options}`,
-          BackAPI: `${priceLists.category}/${priceLists.years}`,
+          BackGetAPI: `${priceLists.category}/${priceLists.years}`,
           priceLists: tag,
         });
       }

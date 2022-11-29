@@ -59,7 +59,7 @@ const PriceSlice = createSlice({
   name: "price",
   initialState: {
     stepState: 1,
-    BackAPI: "",
+    BackGetAPI: "",
     priceLists: {
       category: "",
       years: 0,
@@ -89,11 +89,11 @@ const PriceSlice = createSlice({
       state.stepState = action.payload.stepState;
       state.getList = action.payload.getList;
       state.priceLists = action.payload.priceLists;
-      state.BackAPI = action.payload.BackAPI;
+      state.BackGetAPI = action.payload.BackGetAPI;
       console.log("state.stepState", state.stepState);
       console.log("state.getList", state.getList);
       console.log("state.priceLists", state.priceLists);
-      console.log("state.BackAPI", state.BackAPI);
+      console.log("state.BackGetAPI", state.BackGetAPI);
     },
     [__getPriceInfo.rejected]: (state, action) => {
       state.isLoading = false;

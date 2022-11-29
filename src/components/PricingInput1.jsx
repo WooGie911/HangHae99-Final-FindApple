@@ -52,7 +52,7 @@ const PricingInput1 = ({ params, stepState }) => {
       stepState: 2,
       API: `${tag.category}`,
       priceLists: tag,
-      BackAPI: "",
+      BackGetAPI: "",
     });
     console.log("겟프라이스인포", getInfo);
   }, [tag]);

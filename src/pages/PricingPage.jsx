@@ -15,10 +15,10 @@ const PricingPage = () => {
   const { stepState } = useSelector((state) => state.price);
   const { getList } = useSelector((state) => state.price);
   const { priceLists } = useSelector((state) => state.price);
-  const { BackAPI } = useSelector((state) => state.price);
+  const { BackGetAPI } = useSelector((state) => state.price);
   useEffect(() => {
-    console.log("왜 두번눌리냐 백에이피아이", BackAPI);
-  }, [BackAPI]);
+    console.log("왜 두번눌리냐 백에이피아이", BackGetAPI);
+  }, [BackGetAPI]);
 
   let Backapi = "";
   let backInfo = {};
@@ -39,16 +39,16 @@ const PricingPage = () => {
     console.log("셋 전 stepState", stepState);
     backInfo = {
       stepState: stepState - 1,
-      API: BackAPI,
+      API: BackGetAPI,
       priceLists: { ...priceLists },
-      BackAPI: Backapi,
+      BackGetAPI: Backapi,
     };
     console.log("셋 후 backInfo", backInfo);
 
     console.log("뭐가문젠데 stepState", stepState);
     if (window.confirm("really?")) {
       dispatch(__getPriceInfo(backInfo));
-      navigate(`/pricingPage/${BackAPI}`);
+      navigate(`/pricingPage/${BackGetAPI}`);
       console.log("뭐가문젠데 후 stepState", stepState);
     }
   };
@@ -69,9 +69,9 @@ const PricingPage = () => {
   //   console.log("셋 전 stepState", stepState);
   //   setBackInfo({
   //     stepState: stepState - 1,
-  //     API: BackAPI,
+  //     API: BackGetAPI,
   //     priceLists: priceLists,
-  //     BackAPI: Backapi,
+  //     BackGetAPI: Backapi,
   //   });
   //   console.log("셋 후 backInfo", backInfo);
   // }, [params]);
