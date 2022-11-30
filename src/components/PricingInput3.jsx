@@ -16,10 +16,15 @@ const PricingInput3 = ({ priceListState, setPriceListState, stepState }) => {
       ...priceListState,
       [name]: value,
     });
+    console.log(priceListState);
   };
 
   const onSubmitHandler = (e) => {
     e.preventDefault();
+
+    if (priceListState.model === "" || priceListState.model === "model") {
+      return alert("기종을 선택해주세요");
+    }
 
     getInfo = {
       stepState: stepState + 1,
@@ -32,10 +37,14 @@ const PricingInput3 = ({ priceListState, setPriceListState, stepState }) => {
 
   return (
     <>
-      <ContentDiv>기종</ContentDiv>
+      <ContentDiv>기종을 선택해주세요</ContentDiv>
 
       <CategoryDiv>
-        <SelectBox name={"model"} onChange={onChangeHandler}>
+        <SelectBox
+          defaultValue={priceListState.model}
+          name={"model"}
+          onChange={onChangeHandler}
+        >
           <option value={"model"}>model</option>
           {getList3 &&
             getList3.map((list, index) => {

@@ -15,10 +15,27 @@ const PricingInput4 = ({ priceListState, setPriceListState, stepState }) => {
       ...priceListState,
       [name]: value,
     });
+    console.log(priceListState);
   };
 
   const onSubmitHandler = (e) => {
     e.preventDefault();
+    if (priceListState.category === "macbook") {
+      if (
+        priceListState.options === "" ||
+        priceListState.options === "options"
+      ) {
+        return alert("화면크기을 선택해주세요");
+      }
+    } else {
+      if (
+        priceListState.options === "" ||
+        priceListState.options === "options"
+      ) {
+        return alert("용량을 선택해주세요");
+      }
+    }
+
     if (priceListState.category === "iphone") {
       getInfo = {
         stepState: stepState + 1,
@@ -38,10 +55,17 @@ const PricingInput4 = ({ priceListState, setPriceListState, stepState }) => {
 
   return (
     <>
-      <ContentDiv>옵션</ContentDiv>
-
+      {priceListState.category === "macbook" ? (
+        <ContentDiv>화면크기을 선택해주세요</ContentDiv>
+      ) : (
+        <ContentDiv>용량을 선택해주세요</ContentDiv>
+      )}
       <CategoryDiv>
-        <SelectBox name={"options"} onChange={onChangeHandler}>
+        <SelectBox
+          defaultValue={priceListState.options}
+          name={"options"}
+          onChange={onChangeHandler}
+        >
           <option value={"options"}>options</option>
           {getList4 &&
             getList4.map((list, index) => {

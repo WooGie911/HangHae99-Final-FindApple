@@ -14,11 +14,18 @@ const PricingInput1 = ({ priceListState, setPriceListState, stepState }) => {
       ...priceListState,
       [name]: value,
     });
+    console.log(priceListState);
   };
 
   const onSubmitHandler = (e) => {
     e.preventDefault();
 
+    if (
+      priceListState.category === "" ||
+      priceListState.category === "category"
+    ) {
+      return alert("카테고리를 선택해주세요");
+    }
     getInfo = {
       stepState: stepState + 1,
       API: `${priceListState.category}`,
@@ -33,7 +40,12 @@ const PricingInput1 = ({ priceListState, setPriceListState, stepState }) => {
       <ContentDiv>카테고리를 선택해주세요</ContentDiv>
 
       <CategoryDiv>
-        <SelectBox type="radio" name="category" onChange={onChangeHandler}>
+        <SelectBox
+          defaultValue={priceListState.Category}
+          type="radio"
+          name="category"
+          onChange={onChangeHandler}
+        >
           <option value={"category"}>Category</option>
           <option value={"macbook"}>macbook</option>
           <option value={"iphone"}>iphone</option>

@@ -16,11 +16,16 @@ const PricingInput2 = ({ priceListState, setPriceListState, stepState }) => {
       ...priceListState,
       [name]: value,
     });
+
+    console.log(priceListState);
   };
 
   const onSubmitHandler = (e) => {
     e.preventDefault();
 
+    if (priceListState.years == 0) {
+      return alert("출시년도를 선택해주세요");
+    }
     getInfo = {
       stepState: stepState + 1,
       API: `${priceListState.category}/${priceListState.years}`,
@@ -32,11 +37,15 @@ const PricingInput2 = ({ priceListState, setPriceListState, stepState }) => {
 
   return (
     <>
-      <ContentDiv>출시년도</ContentDiv>
+      <ContentDiv>출시년도를 선택해주세요</ContentDiv>
 
       <CategoryDiv>
-        <SelectBox name={"years"} onChange={onChangeHandler}>
-          <option value={"years"}>years</option>
+        <SelectBox
+          defaultValue={priceListState.years}
+          name={"years"}
+          onChange={onChangeHandler}
+        >
+          <option value={0}>years</option>
           {getList2 &&
             getList2.map((list, index) => {
               return (

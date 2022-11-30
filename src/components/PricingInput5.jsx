@@ -19,8 +19,54 @@ const PricingInput5 = ({ priceListState, setPriceListState }) => {
   };
 
   const onSubmitHandler = () => {
-    if (priceListState.model === " " || priceListState.model === "model") {
-      return alert("항목을 확인하세요");
+    if (priceListState.category === "macbook") {
+      if (priceListState.ram === "" || priceListState.ram === "ram") {
+        return alert("메모리를 선택해주세요");
+      }
+      if (
+        priceListState.storage === "" ||
+        priceListState.storage === "storage"
+      ) {
+        return alert("SSD 용량을 선택해주세요");
+      }
+      if (priceListState.batteryState === 0) {
+        return alert("배터리 사이클을 입력해주세요");
+      }
+      if (
+        priceListState.macbookState === "" ||
+        priceListState.macbookState === "macbookState"
+      ) {
+        return alert("맥북 상태를 선택해주세요");
+      }
+      if (priceListState.careOX === "" || priceListState.careOX === "careOX") {
+        return alert("애플케어 유무를 선택해주세요");
+      }
+      if (priceListState.careOX === "O") {
+        if (priceListState.careDate === "") {
+          return alert("애플케어 보증기간을 선택해주세요");
+        }
+      }
+    }
+    if (priceListState.category === "iphone") {
+      if (
+        priceListState.iphoneState === "" ||
+        priceListState.iphoneState === "iphoneState"
+      ) {
+        return alert("아이폰 상태를 선택해주세요");
+      }
+
+      if (priceListState.batteryState === 0) {
+        return alert("배터리 성능 최대치를 입력해주세요");
+      }
+
+      if (priceListState.careOX === "" || priceListState.careOX === "careOX") {
+        return alert("애플케어 유무를 선택해주세요");
+      }
+      if (priceListState.careOX === "O") {
+        if (priceListState.careDate === "") {
+          return alert("애플케어 보증기간을 선택해주세요");
+        }
+      }
     }
 
     let objMac = {};
@@ -90,7 +136,7 @@ const PricingInput5 = ({ priceListState, setPriceListState }) => {
       priceLists: priceListState,
     };
 
-    if (window.confirm(`입력한 정보와 일치합니까?`)) {
+    if (window.confirm(`가격책정을 시작할까요?`)) {
       dispatch(__checkPrice(passData));
       navigate(`/Pricingfinal`);
     }
@@ -104,7 +150,11 @@ const PricingInput5 = ({ priceListState, setPriceListState }) => {
             <div>
               <ContentDiv>램 메모리</ContentDiv>
               <CategoryDiv>
-                <SelectBox name="ram" onChange={onChangeHandler}>
+                <SelectBox
+                  defaultValue={priceListState.ram}
+                  name="ram"
+                  onChange={onChangeHandler}
+                >
                   <option value={"ram"}> ram </option>
                   {getList5.ram &&
                     getList5.ram.map((list, index) => {
@@ -120,8 +170,12 @@ const PricingInput5 = ({ priceListState, setPriceListState }) => {
 
               <ContentDiv>SSD 용량</ContentDiv>
               <CategoryDiv>
-                <SelectBox name="storage" onChange={onChangeHandler}>
-                  <option value={"storage"}> storage </option>
+                <SelectBox
+                  defaultValue={priceListState.storage}
+                  name="storage"
+                  onChange={onChangeHandler}
+                >
+                  <option value={"storage"}>SSD 용량</option>
                   {getList5.storage &&
                     getList5.storage.map((list, index) => {
                       return (
@@ -137,7 +191,7 @@ const PricingInput5 = ({ priceListState, setPriceListState }) => {
               <CategoryDiv>
                 <PriceInput
                   placeholder="배터리 사이클을 입력해주세요"
-                  value={priceListState.batteryState}
+                  value={priceListState.batteryState || ""}
                   type="Number"
                   min="0"
                   name="batteryState"
@@ -146,7 +200,11 @@ const PricingInput5 = ({ priceListState, setPriceListState }) => {
               </CategoryDiv>
               <ContentDiv>맥북 상태</ContentDiv>
               <CategoryDiv>
-                <SelectBox name="macbookState" onChange={onChangeHandler}>
+                <SelectBox
+                  defaultValue={priceListState.macbookState}
+                  name="macbookState"
+                  onChange={onChangeHandler}
+                >
                   <option value={"macbookState"}>맥북 상태</option>
                   <option value={"Class A"}>A급</option>
                   <option value={"Class B"}>B급</option>
@@ -158,7 +216,11 @@ const PricingInput5 = ({ priceListState, setPriceListState }) => {
             <div>
               <ContentDiv>아이폰 상태</ContentDiv>
               <CategoryDiv>
-                <SelectBox name="iphoneState" onChange={onChangeHandler}>
+                <SelectBox
+                  defaultValue={priceListState.iphoneState}
+                  name="iphoneState"
+                  onChange={onChangeHandler}
+                >
                   <option value={"iphoneState"}>아이폰 상태</option>
                   <option value={"Class A"}>A급</option>
                   <option value={"Class B"}>B급</option>
@@ -169,7 +231,7 @@ const PricingInput5 = ({ priceListState, setPriceListState }) => {
               <CategoryDiv>
                 <PriceInput
                   placeholder="0% ~ 100%"
-                  value={priceListState.batteryState}
+                  value={priceListState.batteryState || ""}
                   type="Number"
                   min="0"
                   max="100"
@@ -182,7 +244,11 @@ const PricingInput5 = ({ priceListState, setPriceListState }) => {
 
           <ContentDiv>애플케어 유무</ContentDiv>
           <CategoryDiv>
-            <SelectBox name="careOX" onChange={onChangeHandler}>
+            <SelectBox
+              defaultValue={priceListState.careOX}
+              name="careOX"
+              onChange={onChangeHandler}
+            >
               <option value={"careOX"}>애플케어 유무</option>
               <option value={"O"}>있음</option>
               <option value={"X"}>없음</option>
