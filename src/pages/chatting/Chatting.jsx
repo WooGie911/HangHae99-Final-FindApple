@@ -164,7 +164,7 @@ useEffect(() => {
 
 return(
   <div>
-
+    <ChatDiv>
   { listReducer !== undefined && listReducer !== null &&
     listReducer.map((item)=>{
       return (
@@ -174,6 +174,7 @@ return(
       )
   }
    <div ref={scrollRef}></div>
+   </ChatDiv>
  
   
 
@@ -190,7 +191,10 @@ return(
 }
 
 export default Chatting;
-
+const ChatDiv=styled.div`
+height: 80%;
+overflow: scroll;
+`
 // return (
 //         <LoginContainer>
 //                 <Header>

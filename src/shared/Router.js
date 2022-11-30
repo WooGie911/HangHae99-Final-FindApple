@@ -112,7 +112,7 @@ const Router = () => {
         <Route path="/introduction3" element={<Info3 />} />
 
         {/*채팅페이지 */}
-        <Route path="/chatting" element={<Chatting />} />
+        <Route path="/chatting/:roomId" element={<Chatting />} />
 
         {/* 카카오 소셜 로그인 */}
         <Route path="/KAKAO" element={<Redirect />} />

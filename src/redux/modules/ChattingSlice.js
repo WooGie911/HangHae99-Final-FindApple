@@ -50,8 +50,9 @@ export const __getRoomList = createAsyncThunk(
           "Cache-Control": "no-cache",
         },
       })
+      console.log(response.data)
       
-      return thunkAPI.fulfillWithValue(response.data.data);
+      return thunkAPI.fulfillWithValue(response.data);
     } catch (error) {
       return thunkAPI.rejectWithValue(error.response.data);
     }
@@ -127,6 +128,7 @@ const chatSlice = createSlice({
     [__getRoomList.fulfilled]: (state, action) => {
       state.isLoading = false;
       state.roomList = action.payload;
+      console.log("actionpaylod",action.payload);
     },
     [__getRoomList.rejected]: (state, action) => {
       state.isLoading = false;

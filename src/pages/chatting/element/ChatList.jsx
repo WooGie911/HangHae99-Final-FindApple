@@ -1,8 +1,9 @@
 import React,{ useEffect }  from 'react'
+import styled from "styled-components";
 import { useDispatch, useSelector } from "react-redux";
 import { useNavigate, useParams } from "react-router-dom";
-import {__getRoomList} from "../../../redux/modules/chattingSlice"
-import { __getinitialChatList } from "../../../redux/modules/chattingSlice"
+import {__getRoomList} from "../../../redux/modules/ChattingSlice"
+import { __getinitialChatList } from "../../../redux/modules/ChattingSlice"
 
 
 const ChatList = () => {
@@ -11,6 +12,7 @@ const ChatList = () => {
     const dispatch = useDispatch();
     const navigator = useNavigate();
     const Room = useSelector((state) => state.chatting.roomList);
+    console.log("room", Room);
 
 
     
@@ -22,7 +24,7 @@ const ChatList = () => {
 const onClickChatting = (item) => {
 
 
-  navigator(`/ChatRoomPage/${item.postId}`);
+  navigator(`/Chatting/${item.roomId}`);
 
   dispatch(__getinitialChatList({
    
@@ -34,10 +36,9 @@ const onClickChatting = (item) => {
 
 }
 
-
-
   return (
       <>
+      <Div onClick={(e) => e.stopPropagation()}>
             {  
              Room !== undefined && Room !== [] &&
              Room.map((item,i)=>{
@@ -56,10 +57,18 @@ const onClickChatting = (item) => {
                )
               }
               )
-            } 
+            }
+      </Div> 
       </>
 
   )
 }
 
 export default ChatList ;
+
+const Div=styled.div`
+width:360px;
+height:350px;
+background-color:blueviolet;
+`
+

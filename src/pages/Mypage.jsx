@@ -1,9 +1,10 @@
-import React, { useEffect } from "react";
+import React, { useState, useEffect } from "react";
 import styled from "styled-components";
 import { useDispatch } from "react-redux";
 import { useNavigate, useParams } from "react-router-dom";
 import { useSelector } from "react-redux";
 import { __UserProfile } from "../redux/modules/LoginSlice";
+import ChatList from "../pages/chatting/element/ChatList";
 import photoIMG from "../assets/photoIMG.png";
 import Layout from "../components/Layout";
 import bookmark from "../assets/bookmark.png";
@@ -11,6 +12,9 @@ import doubletick from "../assets/doubletick.png";
 import window from "../assets/window.png";
 import Footer from "../components/Footer";
 import LogoutButton from "../components/LogoutButton";
+import chatButton from "../assets/chatButton.png";
+
+
 
 const Mypage = () => {
   const navigate = useNavigate();
@@ -33,6 +37,19 @@ const Mypage = () => {
   useEffect(() => {
     dispatch(__UserProfile());
   }, [params]);
+
+  // modal 불러오기
+  const [modalOn, setModalOn] = useState(false);
+  const handleModal = () => {
+    setModalOn(true);
+  };
+// 채팅 modal창 상태 관리
+const [isChatModal, setIsChatModal] = useState(false);
+const popupPostCode = () => {
+  setIsChatModal(!isChatModal)
+}
+
+
 
   return (
     <div>
@@ -111,6 +128,12 @@ const Mypage = () => {
             </div>
           </SecondContainer>
         </FirstContainer>
+        <ChatButton src={chatButton} onClick={popupPostCode}/>
+        {isChatModal && (
+        <ModalWrap onClick={popupPostCode}>
+        <ChatList />
+        </ModalWrap>
+        )}
         <Footer />
       </Layout>
     </div>
@@ -186,3 +209,25 @@ const SecondContainer = styled.div`
   border-radius: 5px;
   box-shadow: 0px 6px 16px rgba(0, 0, 0, 0.1);
 `;
+
+// modal 버튼
+const ChatButton = styled.img`
+position : fixed;
+bottom: 70px;
+right : 10px;
+`
+// modal 닫기
+const ModalWrap=styled.div`
+position: fixed;
+bottom: 0;
+left: 0;
+width: 100%;
+height: 100%;
+background-color: rgba(0, 0, 0, 0.4);
+display: flex;
+justify-content: center;
+align-items: center;
+z-index: 998;
+padding: 0 15px;
+box-sizing: border-box;
+`
