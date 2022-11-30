@@ -1,50 +1,164 @@
-import React from "react";
+import React, { useEffect, useState } from "react";
 import { useDispatch, useSelector } from "react-redux";
+import { useNavigate } from "react-router-dom";
 import styled from "styled-components";
 import { __checkPrice, __getPriceInfo } from "../redux/modules/PriceSlice";
 import PricingStep from "./PricingStep";
 
-const PricingInput4 = ({ priceListState, setPriceListState, stepState }) => {
+const PricingInput222 = ({ params, stepState }) => {
+  const navigate = useNavigate();
   const dispatch = useDispatch();
-  const { getList4 } = useSelector((state) => state.price);
-  let getInfo = {};
+  const { priceLists } = useSelector((state) => state.price);
+  //경우에 따른 초기값으로 현상태 스테이트 초기화
+  let initialState = {};
+  let valueState = "";
+  if (stepState === 2) {
+    valueState = "years";
+    // initialState = {
+    //   category: priceLists.category,
+    //   years: 0,
+    //   model: "",
+    //   options: "",
+    //   batteryState: 0,
+    //   careOX: "",
+    //   careDate: "",
+    //   iphoneState: "",
+    //   macbookState: "",
+    //   ram: "",
+    //   storage: "",
+    //   keyboard: "",
+    // };
+  } else if (stepState === 3) {
+    valueState = "model";
+    // initialState = {
+    //   category: priceLists.category,
+    //   years: priceLists.years,
+    //   model: "",
+    //   options: "",
+    //   batteryState: 0,
+    //   careOX: "",
+    //   careDate: "",
+    //   iphoneState: "",
+    //   macbookState: "",
+    //   ram: "",
+    //   storage: "",
+    //   keyboard: "",
+    // };
+  } else if (stepState === 4) {
+    valueState = "options";
+    // initialState = {
+    //   category: priceLists.category,
+    //   years: priceLists.years,
+    //   model: priceLists.model,
+    //   options: "",
+    //   batteryState: 0,
+    //   careOX: "",
+    //   careDate: "",
+    //   iphoneState: "",
+    //   macbookState: "",
+    //   ram: "",
+    //   storage: "",
+    //   keyboard: "",
+    // };
+  }
+
+  const [tag, setTag] = useState(priceLists);
+  const [getInfo, setGetInfo] = useState("");
+
+  const { getList } = useSelector((state) => state.price);
 
   const onChangeHandler = (e) => {
     const { value, name } = e.target;
-    setPriceListState({
-      ...priceListState,
+    setTag({
+      ...tag,
       [name]: value,
     });
+    console.log("tag값", tag);
   };
 
   const onSubmitHandler = (e) => {
     e.preventDefault();
-    if (priceListState.category === "iphone") {
-      getInfo = {
-        stepState: stepState + 1,
-        API: `${priceListState.category}/${priceListState.years}/${priceListState.model}`,
-        priceLists: priceListState,
-      };
-    } else {
-      getInfo = {
-        stepState: stepState + 1,
-        API: `${priceListState.category}/${priceListState.years}/${priceListState.model}/${priceListState.options}`,
-        priceLists: priceListState,
-      };
-    }
+
+    //벨리데이션 나중에 걸기
+    // //컨펌 후 다음 리스트 받아오기, 해당페이지로 이동
+    // if (window.confirm(`${tag.category} 맞습니까?`)) {
+    //   if (tag.category === " " || tag.category === "category") {
+    //     return alert("항목을 확인하세요");
+    //   }
+    //   dispatch(__getPriceInfo(getInfo));
+
+    //   navigate(`/pricingPage/${getInfo}`);
+    // }
 
     dispatch(__getPriceInfo(getInfo));
+    navigate(`/pricingPage/${getInfo.API}`);
   };
+
+  //서브밋 함수에 사용할 매개변수 설정
+  useEffect(() => {
+    if (stepState === 1) {
+      setGetInfo({
+        stepState: 2,
+        API: `${priceLists.category}`,
+        priceLists: tag,
+        BackGetAPI: "",
+        BackNaviAPI: "",
+      });
+    } else if (stepState === 2) {
+      setGetInfo({
+        stepState: 3,
+        API: `${priceLists.category}/${tag.years}`,
+        priceLists: tag,
+        BackGetAPI: "",
+        BackNaviAPI: `${priceLists.category}`,
+      });
+    } else if (stepState === 3) {
+      setGetInfo({
+        stepState: 4,
+        API: `${priceLists.category}/${priceLists.years}/${tag.model}`,
+        priceLists: tag,
+        BackGetAPI: `${priceLists.category}`,
+        BackNaviAPI: `${priceLists.category}/${priceLists.years}`,
+      });
+    } else if (stepState === 4) {
+      if (priceLists.category === "iphone") {
+        setGetInfo({
+          stepState: 5,
+          API: `${priceLists.category}/${priceLists.years}/${priceLists.model}`,
+          priceLists: tag,
+          Backapi: `${priceLists.category}/${priceLists.years}`,
+          BackNaviAPI: `${priceLists.category}/${priceLists.years}/${priceLists.model}`,
+        });
+      } else {
+        setGetInfo({
+          stepState: 5,
+          API: `${priceLists.category}/${priceLists.years}/${priceLists.model}/${tag.options}`,
+          BackGetAPI: `${priceLists.category}/${priceLists.years}`,
+          priceLists: tag,
+          BackNaviAPI: `${priceLists.category}/${priceLists.years}/${priceLists.model}`,
+        });
+      }
+    }
+
+    // console.log("겟프라이스인포", getInfo);
+  }, [tag]);
+
+  // //새로고침을 위한 get
+  // useEffect(() => {
+  //   __getPriceInfo(getListState);
+  // }, [dispatch]);
 
   return (
     <>
-      <ContentDiv>옵션</ContentDiv>
+      {stepState === 2 && <ContentDiv>출시년도</ContentDiv>}
+      {stepState === 3 && <ContentDiv>기종</ContentDiv>}
+      {stepState === 4 && <ContentDiv>옵션</ContentDiv>}
 
       <CategoryDiv>
-        <SelectBox name={"options"} onChange={onChangeHandler}>
-          <option value={"options"}>options</option>
-          {getList4 &&
-            getList4.map((list, index) => {
+        <SelectBox name={valueState} onChange={onChangeHandler}>
+          <option value={valueState}>{valueState}</option>
+          {getList &&
+            getList.map((list, index) => {
               return (
                 <option key={index} value={list}>
                   {list}
@@ -62,7 +176,7 @@ const PricingInput4 = ({ priceListState, setPriceListState, stepState }) => {
   );
 };
 
-export default PricingInput4;
+export default PricingInput222;
 
 const RLDiv = styled.div`
   .C02:checked {

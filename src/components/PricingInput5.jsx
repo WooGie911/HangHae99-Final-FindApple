@@ -1,118 +1,98 @@
-import React, { useEffect, useState } from "react";
+import React from "react";
 import { useDispatch, useSelector } from "react-redux";
 import { useNavigate } from "react-router-dom";
 import styled from "styled-components";
 import { __checkPrice, __getPriceInfo } from "../redux/modules/PriceSlice";
-import Layout from "./Layout";
 import PriceStep5 from "../assets/PriceStep5.svg";
 
-const PricingInput5 = ({ params, stepState }) => {
+const PricingInput5 = ({ priceListState, setPriceListState }) => {
   const navigate = useNavigate();
   const dispatch = useDispatch();
-  const { priceLists } = useSelector((state) => state.price);
-  //경우에 따른 초기값으로 현상태 스테이트 초기화
-  const initialState = {
-    category: priceLists.category,
-    years: priceLists.years,
-    model: priceLists.model,
-    options: priceLists.options,
-    batteryState: 0,
-    careOX: "",
-    careDate: "",
-    iphoneState: "",
-    macbookState: "",
-    ram: "",
-    storage: "",
-    keyboard: "",
-  };
-  const [tag, setTag] = useState(initialState);
-  const [getInfo, setGetInfo] = useState("");
-  const { getList } = useSelector((state) => state.price);
+  const { getList5 } = useSelector((state) => state.price);
 
   const onChangeHandler = (e) => {
     const { value, name } = e.target;
-    setTag({
-      ...tag,
+    setPriceListState({
+      ...priceListState,
       [name]: value,
     });
   };
 
   const onSubmitHandler = () => {
-    if (tag.model === " " || tag.model === "model") {
+    if (priceListState.model === " " || priceListState.model === "model") {
       return alert("항목을 확인하세요");
     }
 
-    console.log("전개", { ...tag });
     let objMac = {};
     let objMac2 = {};
-    if (tag.category === "macbook") {
+    if (priceListState.category === "macbook") {
       objMac = {
-        category: tag.category,
-        years: Number(tag.years),
-        model: tag.model,
-        options: tag.options,
-        ram: tag.ram,
-        keyboard: getList.keyboard[0],
-        storage: tag.storage,
-        batteryState: Number(tag.batteryState),
-        macbookState: tag.macbookState,
-        careOX: tag.careOX,
-        careDate: tag.careDate,
+        category: priceListState.category,
+        years: Number(priceListState.years),
+        model: priceListState.model,
+        options: priceListState.options,
+        ram: priceListState.ram,
+        keyboard: getList5.keyboard[0],
+        storage: priceListState.storage,
+        batteryState: Number(priceListState.batteryState),
+        macbookState: priceListState.macbookState,
+        careOX: priceListState.careOX,
+        careDate: priceListState.careDate,
       };
       objMac2 = {
-        category: tag.category,
-        years: Number(tag.years),
-        model: tag.model,
-        options: tag.options,
-        ram: tag.ram,
-        keyboard: getList.keyboard[0],
-        storage: tag.storage,
-        macbookState: tag.macbookState,
-        batteryState: Number(tag.batteryState),
-        careOX: tag.careOX,
+        category: priceListState.category,
+        years: Number(priceListState.years),
+        model: priceListState.model,
+        options: priceListState.options,
+        ram: priceListState.ram,
+        keyboard: getList5.keyboard[0],
+        storage: priceListState.storage,
+        macbookState: priceListState.macbookState,
+        batteryState: Number(priceListState.batteryState),
+        careOX: priceListState.careOX,
         careDate: "",
       };
     }
     const objPhone = {
-      category: tag.category,
-      years: Number(tag.years),
-      model: tag.model,
-      options: tag.options,
-      batteryState: Number(tag.batteryState),
-      iphoneState: tag.iphoneState,
-      careOX: tag.careOX,
-      careDate: tag.careDate,
+      category: priceListState.category,
+      years: Number(priceListState.years),
+      model: priceListState.model,
+      options: priceListState.options,
+      batteryState: Number(priceListState.batteryState),
+      iphoneState: priceListState.iphoneState,
+      careOX: priceListState.careOX,
+      careDate: priceListState.careDate,
     };
 
     const objPhone2 = {
-      category: tag.category,
-      years: Number(tag.years),
-      model: tag.model,
-      options: tag.options,
-      batteryState: Number(tag.batteryState),
-      iphoneState: tag.iphoneState,
-      careOX: tag.careOX,
+      category: priceListState.category,
+      years: Number(priceListState.years),
+      model: priceListState.model,
+      options: priceListState.options,
+      batteryState: Number(priceListState.batteryState),
+      iphoneState: priceListState.iphoneState,
+      careOX: priceListState.careOX,
       careDate: "",
     };
 
     const Data =
-      tag.category === "macbook"
-        ? tag.careOX === "false"
+      priceListState.category === "macbook"
+        ? priceListState.careOX === "false"
           ? objMac2
           : objMac
-        : tag.careOX === "false"
+        : priceListState.careOX === "false"
         ? objPhone2
         : objPhone;
 
     const passData = {
-      category: tag.category,
+      category: priceListState.category,
       Data: Data,
+      priceLists: priceListState,
     };
-    console.log(passData);
+
     if (window.confirm(`입력한 정보와 일치합니까?`)) {
       dispatch(__checkPrice(passData));
       navigate(`/Pricingfinal`);
-      setTag({});
     }
   };
 
@@ -120,15 +100,20 @@ const PricingInput5 = ({ params, stepState }) => {
     <>
       <div>
         <div>
-          {tag.category === "macbook" ? (
+          {priceListState.category === "macbook" ? (
             <div>
               <ContentDiv>램 메모리</ContentDiv>
               <CategoryDiv>
                 <SelectBox name="ram" onChange={onChangeHandler}>
                   <option value={"ram"}> ram </option>
-                  {getList.ram &&
-                    getList.ram.map((list) => {
-                      return <option value={list}> {list} </option>;
+                  {getList5.ram &&
+                    getList5.ram.map((list, index) => {
+                      return (
+                        <option key={index} value={list}>
+                          {" "}
+                          {list}{" "}
+                        </option>
+                      );
                     })}
                 </SelectBox>
               </CategoryDiv>
@@ -137,9 +122,14 @@ const PricingInput5 = ({ params, stepState }) => {
               <CategoryDiv>
                 <SelectBox name="storage" onChange={onChangeHandler}>
                   <option value={"storage"}> storage </option>
-                  {getList.storage &&
-                    getList.storage.map((list) => {
-                      return <option value={list}> {list} </option>;
+                  {getList5.storage &&
+                    getList5.storage.map((list, index) => {
+                      return (
+                        <option key={index} value={list}>
+                          {" "}
+                          {list}{" "}
+                        </option>
+                      );
                     })}
                 </SelectBox>
               </CategoryDiv>
@@ -147,7 +137,7 @@ const PricingInput5 = ({ params, stepState }) => {
               <CategoryDiv>
                 <PriceInput
                   placeholder="배터리 사이클을 입력해주세요"
-                  value={tag.batteryState}
+                  value={priceListState.batteryState}
                   type="Number"
                   min="0"
                   name="batteryState"
@@ -179,7 +169,7 @@ const PricingInput5 = ({ params, stepState }) => {
               <CategoryDiv>
                 <PriceInput
                   placeholder="0% ~ 100%"
-                  value={tag.batteryState}
+                  value={priceListState.batteryState}
                   type="Number"
                   min="0"
                   max="100"
@@ -199,7 +189,7 @@ const PricingInput5 = ({ params, stepState }) => {
             </SelectBox>
           </CategoryDiv>
 
-          {tag.careOX === "O" && (
+          {priceListState.careOX === "O" && (
             <>
               <ContentDiv>애플케어 보증기간</ContentDiv>
               <CategoryDiv>

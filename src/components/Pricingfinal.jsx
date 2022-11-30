@@ -16,7 +16,7 @@ const Pricingfinal = () => {
       if (window.confirm(`정말 떠나시겠습니까?`)) {
         navigate(data);
       }
-    } else if (data === "/pricingInput") {
+    } else if (data === "/pricingPage") {
       if (window.confirm("모든 데이터를 새로 입력하시겠습니다?")) {
         window.location.replace(data);
       }
@@ -39,9 +39,7 @@ const Pricingfinal = () => {
           <TitleDiv>
             <Backbutton
               onClick={() => {
-                navigate(
-                  `/pricingPage/${DetailPrice.category}/${DetailPrice.years}/${DetailPrice.model}/${DetailPrice.options}`
-                );
+                navigate(`/pricingPage`);
               }}
             >
               〈

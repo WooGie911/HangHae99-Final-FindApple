@@ -1,87 +1,25 @@
 import React, { useEffect, useState } from "react";
 import { useDispatch, useSelector } from "react-redux";
-import { useNavigate, useParams } from "react-router-dom";
+import { useNavigate } from "react-router-dom";
 import styled from "styled-components";
 import Layout from "../components/Layout";
 import PricingInput1 from "../components/PricingInput1";
-import PricingInput234 from "../components/PricingInput234";
+import PricingInput2 from "../components/PricingInput2";
+import PricingInput3 from "../components/PricingInput3";
+import PricingInput4 from "../components/PricingInput4";
 import PricingInput5 from "../components/PricingInput5";
-import { chagePriceSet, __getPriceInfo } from "../redux/modules/PriceSlice";
+import { swichStepState, __getPriceInfo } from "../redux/modules/PriceSlice";
 
 const PricingPage = () => {
-  const params = useParams();
   const navigate = useNavigate();
   const dispatch = useDispatch();
   const { stepState } = useSelector((state) => state.price);
-  const { getList } = useSelector((state) => state.price);
   const { priceLists } = useSelector((state) => state.price);
-  const { BackGetAPI } = useSelector((state) => state.price);
-  const { BackNaviAPI } = useSelector((state) => state.price);
-
-  let Backapi = "";
-  let BackNaviapi = "";
-  let backInfo = {};
+  const [priceListState, setPriceListState] = useState(priceLists);
 
   const BackFn = () => {
-    console.log("stepState stepState", stepState);
-    if (stepState === 5) {
-      Backapi = `${priceLists.category}/${priceLists.years}`;
-      BackNaviapi = `${priceLists.category}/${priceLists.years}/${priceLists.model}/${priceLists.options}`;
-    } else if (stepState === 4) {
-      Backapi = `${priceLists.category}`;
-      BackNaviapi = `${priceLists.category}/${priceLists.years}/${priceLists.model}`;
-    } else if (stepState === 3) {
-      Backapi = "";
-      BackNaviapi = `${priceLists.category}/${priceLists.years}`;
-    } else if (stepState === 2) {
-      Backapi = "";
-      BackNaviapi = `${priceLists.category}`;
-    } else {
-      Backapi = ``;
-      BackNaviapi = ``;
-    }
-
-    backInfo = {
-      stepState: stepState - 1,
-      API: BackGetAPI,
-      priceLists: { ...priceLists },
-      BackGetAPI: Backapi,
-      BackNaviAPI: BackNaviapi,
-    };
-
-    if (stepState !== 2) {
-      return (
-        dispatch(__getPriceInfo(backInfo)),
-        navigate(`/pricingPage/${BackNaviAPI}`)
-      );
-    }
-
-    dispatch(chagePriceSet(1));
-    navigate(`/pricingPage`);
+    dispatch(swichStepState({ stepState: stepState - 1 }));
   };
-
-  // useEffect(() => {
-  //   console.log("stepState stepState", stepState);
-  //   if (stepState === 5) {
-  //     Backapi = `/${priceLists.category}/${priceLists.years}/${priceLists.model}`;
-  //   } else if (stepState === 4) {
-  //     Backapi = `/${priceLists.category}/${priceLists.years}`;
-  //   } else if (stepState === 3) {
-  //     Backapi = `/${priceLists.category}`;
-  //   } else if (stepState === 2) {
-  //     Backapi = `/`;
-  //   }
-
-  //   console.log("셋 전 backInfo", backInfo);
-  //   console.log("셋 전 stepState", stepState);
-  //   setBackInfo({
-  //     stepState: stepState - 1,
-  //     API: BackGetAPI,
-  //     priceLists: priceLists,
-  //     BackGetAPI: Backapi,
-  //   });
-  //   console.log("셋 후 backInfo", backInfo);
-  // }, [params]);
 
   return (
     <>
@@ -100,13 +38,39 @@ const PricingPage = () => {
           </TitleDiv>
 
           {stepState === 1 && (
-            <PricingInput1 params={params} stepState={stepState} />
+            <PricingInput1
+              priceListState={priceListState}
+              setPriceListState={setPriceListState}
+              stepState={stepState}
+            />
           )}
-          {(stepState === 2 || stepState === 3 || stepState === 4) && (
-            <PricingInput234 params={params} stepState={stepState} />
+          {stepState === 2 && (
+            <PricingInput2
+              priceListState={priceListState}
+              setPriceListState={setPriceListState}
+              stepState={stepState}
+            />
+          )}
+          {stepState === 3 && (
+            <PricingInput3
+              priceListState={priceListState}
+              setPriceListState={setPriceListState}
+              stepState={stepState}
+            />
+          )}
+          {stepState === 4 && (
+            <PricingInput4
+              priceListState={priceListState}
+              setPriceListState={setPriceListState}
+              stepState={stepState}
+            />
           )}
           {stepState === 5 && (
-            <PricingInput5 params={params} stepState={stepState} />
+            <PricingInput5
+              priceListState={priceListState}
+              setPriceListState={setPriceListState}
+              stepState={stepState}
+            />
           )}
         </ContainerDiv>
       </Layout>

@@ -101,16 +101,6 @@ const Router = () => {
 
         {/*가격 책정 페이지 */}
         <Route path="/pricingPage" element={<PricingPage />} />
-        <Route path="/pricingPage/:category" element={<PricingPage />} />
-        <Route path="/pricingPage/:category/:years" element={<PricingPage />} />
-        <Route
-          path="/pricingPage/:category/:years/:model"
-          element={<PricingPage />}
-        />
-        <Route
-          path="/pricingPage/:category/:years/:model/:options"
-          element={<PricingPage />}
-        />
 
         {/*가격 결정 페이지 */}
         <Route path="/pricingfinal" element={<Pricingfinal />} />

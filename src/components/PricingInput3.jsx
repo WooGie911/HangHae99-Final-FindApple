@@ -3,96 +3,55 @@ import { useDispatch, useSelector } from "react-redux";
 import { useNavigate } from "react-router-dom";
 import styled from "styled-components";
 import { __checkPrice, __getPriceInfo } from "../redux/modules/PriceSlice";
-import Layout from "./Layout";
+import PricingStep from "./PricingStep";
 
-const PricingInput3 = ({ params, stepState }) => {
-  const navigate = useNavigate();
+const PricingInput3 = ({ priceListState, setPriceListState, stepState }) => {
   const dispatch = useDispatch();
+  const { getList3 } = useSelector((state) => state.price);
+  let getInfo = {};
 
-  const initialState = {
-    step1: true,
-    step2: false,
-    step3: false,
-    step4: false,
-    step5: false,
-    category: " ",
-    years: " ",
-    model: " ",
-    options: " ",
-  };
-  const [tag, setTag] = useState(initialState);
-  const { tagList } = useSelector((state) => state.price);
-  const { tagList2 } = useSelector((state) => state.price);
-  const [save, setSave] = useState([]);
-  const [save2, setSave2] = useState({});
-  const [subTag, setSubTag] = useState({});
-
-  const onChangeHandler3 = (e) => {
+  const onChangeHandler = (e) => {
     const { value, name } = e.target;
-    setTag({
-      ...tag,
+    setPriceListState({
+      ...priceListState,
       [name]: value,
     });
-
-    dispatch(__getPriceInfo(`${params.category}/${params.years}/${value}`));
   };
-  const onClickHandler34 = (e) => {
+
+  const onSubmitHandler = (e) => {
     e.preventDefault();
-    if (window.confirm(`${tag.model} 맞습니까?`)) {
-      if (tag.model === " " || tag.model === "model") {
-        return alert("항목을 확인하세요");
-      }
-      setTag({ ...tag, step3: false, step4: true });
-      navigate(`/pricingInput/${params.category}/${params.years}/${tag.model}`);
-    }
-  };
 
-  useEffect(() => {
-    setSave(tagList);
-    setSave2(tagList2);
-  }, [params]);
+    getInfo = {
+      stepState: stepState + 1,
+      API: `${priceListState.category}/${priceListState.years}/${priceListState.model}`,
+      priceLists: priceListState,
+    };
+
+    dispatch(__getPriceInfo(getInfo));
+  };
 
   return (
     <>
-      <Layout>
-        <div>
-          <ContainerDiv>
-            <TitleDiv>
-              <Backbutton
-                onClick={() => {
-                  navigate(-1);
-                }}
-              >
-                〈
-              </Backbutton>
-              <Xbutton
-                onClick={() => {
-                  navigate("/main");
-                }}
-              >
-                X
-              </Xbutton>
-              <span>가격책정</span>
-            </TitleDiv>
+      <ContentDiv>기종</ContentDiv>
 
-            {tag.step3 && (
-              <>
-                <CategoryDiv>
-                  <SelectBox name="model" onChange={onChangeHandler3}>
-                    <option value={"model"}>model</option>
-                    {save.map((list) => {
-                      return <option value={list}> {list} </option>;
-                    })}
-                  </SelectBox>
-                </CategoryDiv>
-                <StepDiv></StepDiv>
-              </>
-            )}
+      <CategoryDiv>
+        <SelectBox name={"model"} onChange={onChangeHandler}>
+          <option value={"model"}>model</option>
+          {getList3 &&
+            getList3.map((list, index) => {
+              return (
+                <option key={index} value={list}>
+                  {list}
+                </option>
+              );
+            })}
+        </SelectBox>
+      </CategoryDiv>
 
-            <NextButton onClick={onClickHandler34}>다음으로</NextButton>
-          </ContainerDiv>
-        </div>
-      </Layout>
+      <StepDiv>
+        <PricingStep stepState={stepState} />
+      </StepDiv>
+      <NextButton onClick={onSubmitHandler}>다음으로</NextButton>
     </>
   );
 };

@@ -1,61 +1,32 @@
-import React, { useEffect, useState } from "react";
-import { useDispatch, useSelector } from "react-redux";
-import { useNavigate } from "react-router-dom";
+import React from "react";
+import { useDispatch } from "react-redux";
 import styled from "styled-components";
 import { __checkPrice, __getPriceInfo } from "../redux/modules/PriceSlice";
 import PricingStep from "./PricingStep";
 
-const PricingInput1 = ({ params, stepState }) => {
-  const navigate = useNavigate();
+const PricingInput1 = ({ priceListState, setPriceListState, stepState }) => {
   const dispatch = useDispatch();
-  const initialState = {
-    category: "",
-    years: 0,
-    model: "",
-    options: "",
-    batteryState: 0,
-    careOX: "",
-    careDate: "",
-    iphoneState: "",
-    macbookState: "",
-    ram: "",
-    storage: "",
-    keyboard: "",
-  };
-  const [tag, setTag] = useState(initialState);
-  const [getInfo, setGetInfo] = useState("");
+  let getInfo = {};
 
   const onChangeHandler = (e) => {
     const { value, name } = e.target;
-    setTag({
-      ...tag,
+    setPriceListState({
+      ...priceListState,
       [name]: value,
     });
   };
 
   const onSubmitHandler = (e) => {
-    console.log("getInfo", getInfo);
     e.preventDefault();
 
-    if (tag.category === " " || tag.category === "category") {
-      return alert("항목을 확인하세요");
-    }
-    //다음 리스트 받아오기
-    dispatch(__getPriceInfo(getInfo));
-    //
-    navigate(`/pricingPage/${getInfo.API}`);
-  };
+    getInfo = {
+      stepState: stepState + 1,
+      API: `${priceListState.category}`,
+      priceLists: priceListState,
+    };
 
-  //서브밋 함수에 사용할 매개변수 설정
-  useEffect(() => {
-    setGetInfo({
-      stepState: 2,
-      API: `${tag.category}`,
-      priceLists: tag,
-      BackGetAPI: "",
-      BackNaviAPI: "",
-    });
-  }, [tag]);
+    dispatch(__getPriceInfo(getInfo));
+  };
 
   return (
     <>
