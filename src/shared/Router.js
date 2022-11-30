@@ -84,22 +84,6 @@ const Router = () => {
         <Route path="/sellerpage/:memberId" element={<SellerPage />} />
 
         {/*가격 책정 페이지 */}
-        <Route path="/pricingInput" element={<PricingInput />} />
-        <Route path="/pricingInput/:category" element={<PricingInput />} />
-        <Route
-          path="/pricingInput/:category/:years"
-          element={<PricingInput />}
-        />
-        <Route
-          path="/pricingInput/:category/:years/:model"
-          element={<PricingInput />}
-        />
-        <Route
-          path="/pricingInput/:category/:years/:model/:options"
-          element={<PricingInput />}
-        />
-
-        {/*가격 책정 페이지 */}
         <Route path="/pricingPage" element={<PricingPage />} />
 
         {/*가격 결정 페이지 */}
