@@ -77,9 +77,9 @@ export const __getinitialChatList = createAsyncThunk(
         },
       })
       console.log("res", response);
-      return thunkAPI.fulfillWithValue(response.data.chatList);
+      return thunkAPI.fulfillWithValue(response.data);
     } catch (error) {
-      return thunkAPI.rejectWithValue(error.response.data.data);
+      return thunkAPI.rejectWithValue(error.response.data);
     }
   }
 );
@@ -103,7 +103,7 @@ const chatSlice = createSlice({
     },
  
     chatList: (state, action) => {
-      state.chatList.push(action.payload)
+      state.chatList.chatList.push(action.payload)
     },
 
   },

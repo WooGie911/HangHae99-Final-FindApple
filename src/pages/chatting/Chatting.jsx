@@ -5,56 +5,46 @@ import webstomp from "webstomp-client";
 import SockJS from "sockjs-client";
 import { useNavigate, useParams } from "react-router-dom";
 import { __getinitialChatList, chatList } from "../../redux/modules/ChattingSlice";
-import '../../App.css';
 import {v4 as uuidv4} from 'uuid';
-// import Modal2 from "../chatting/Chattmodalfolder/Modal2";
 
 function Chatting() {
-  
-  const {id}  = useParams()
   const navigate = useNavigate();
   const sock = new SockJS("http://3.38.228.74:8080/ws/chat");
   const ws = webstomp.over(sock);
   const dispatch = useDispatch();
-  
+  let {id} = useParams()
+  id = 1
+  let roomId=Number(id)
+
   const listReducer = useSelector((state) => state.chatting.chatList);
-  console.log(listReducer);
-  // let postId = Number(id)
-
   useEffect(() => {
-    
-  
-    dispatch(__getinitialChatList({
-  
-      postId:10,
-      roomId:1
-    }));
+    if(roomId !== undefined){
+      dispatch(__getinitialChatList({
+        roomId:roomId,
+      }));
+      return () => {
+        onbeforeunloda()
+      };
+    }
+  }, [roomId]);
 
-    return () => {
-      onbeforeunloda()
-      
-    };
-  
-  }, []);
-  
   useEffect(() => {
   
   
     wsConnectSubscribe()
     
     
-    // return () => {
-    //   console.log("???????")
-    //   onbeforeunloda()
+    return () => {
+      onbeforeunloda()
       
-    // };
+    };
  
   }, [listReducer.id]);
   
   const [chatBody, setChatBody] = useState("");
 
   const content = {
-    sender: "보내는이",
+    sender: listReducer.nickname,
     message:chatBody
     };
 
@@ -67,7 +57,7 @@ function Chatting() {
       ws.connect(
         headers,(frame) => {
           ws.subscribe(
-            `/sub/1`,
+            `/sub/${roomId}`,
             (response) => {
               console.log("어떻게 나오는지",response)
               let data = JSON.parse(response.body)
@@ -126,13 +116,13 @@ const onbeforeunloda = () =>{
 
   //onSubmitHandler
 const onSubmitHandler = (event) =>{
-  //event.preventDefault()
-  // if (chatBody=== "" || chatBody === " ") {
-  //   return alert("내용을 입력해주세요.");
-  //   }
+  event.preventDefault()
+  if (chatBody=== "" || chatBody === " ") {
+    return alert("내용을 입력해주세요.");
+    }
     waitForConnection(ws,function() {   
   ws.send(
-    `/pub/1`,
+    `/pub/${roomId}`,
     JSON.stringify(content),
             {
               Access_Token: localStorage.getItem("Access_Token")
@@ -163,10 +153,10 @@ useEffect(() => {
 
 
 return(
-  <div>
+  <StContainer>
     <ChatDiv>
-  { listReducer !== undefined && listReducer !== null &&
-    listReducer.map((item)=>{
+  { listReducer.chatList !== undefined && listReducer.chatList !== null &&
+    listReducer.chatList.map((item)=>{
       return (
       <div key={item.key}><span>{item.message}</span></div>
       )
@@ -174,7 +164,6 @@ return(
       )
   }
    <div ref={scrollRef}></div>
-   </ChatDiv>
  
   
 
@@ -183,7 +172,9 @@ return(
     {/* value를 줘야 사라진다 */}
     <button onSubmit={appKeyPress} onClick={onSubmitHandler}>전송</button>
   </div>
-  </div>
+  </ChatDiv>
+
+  </StContainer>
 )
 
 
@@ -191,9 +182,14 @@ return(
 }
 
 export default Chatting;
+const StContainer=styled.div`
+height:100%;
+padding:20px;
+`
+
 const ChatDiv=styled.div`
-height: 80%;
-overflow: scroll;
+height: 100%;
+overflow: auto;
 `
 // return (
 //         <LoginContainer>

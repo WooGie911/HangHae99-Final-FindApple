@@ -12,9 +12,6 @@ const ChatList = () => {
     const dispatch = useDispatch();
     const navigator = useNavigate();
     const Room = useSelector((state) => state.chatting.roomList);
-    console.log("room", Room);
-
-
     
     useEffect(() => {
 
@@ -27,7 +24,6 @@ const onClickChatting = (item) => {
   navigator(`/Chatting/${item.roomId}`);
 
   dispatch(__getinitialChatList({
-   
     postId:item.postId,
     roomId:item.roomId,
     
