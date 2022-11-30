@@ -50,8 +50,6 @@ export const __getRoomList = createAsyncThunk(
           "Cache-Control": "no-cache",
         },
       })
-      console.log(response.data)
-      
       return thunkAPI.fulfillWithValue(response.data);
     } catch (error) {
       return thunkAPI.rejectWithValue(error.response.data);
@@ -66,7 +64,6 @@ export const __getinitialChatList = createAsyncThunk(
   "/chat/__getInitialChatList",
   async (payload, thunkAPI) => {
     try {
-      console.log("페이로드", payload);
       const response = await axios.post(`${process.env.REACT_APP_SERVER}/roomInfo`, payload,         
       {
         headers: {
@@ -103,6 +100,7 @@ const chatSlice = createSlice({
     },
  
     chatList: (state, action) => {
+      console.log("action", action.payload);
       state.chatList.chatList.push(action.payload)
     },
 
@@ -138,7 +136,6 @@ const chatSlice = createSlice({
       state.isLoading = true;
     },
     [__getinitialChatList.fulfilled]: (state, action) => {
-      console.log("액션" , action.payload);
       state.isLoading = false;
       state.chatList = action.payload;
       

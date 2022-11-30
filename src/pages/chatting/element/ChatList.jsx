@@ -28,8 +28,7 @@ const onClickChatting = (item) => {
     roomId:item.roomId,
     
 }));
-
-
+localStorage.setItem("roomId", item.roomId)
 }
 
   return (
@@ -45,7 +44,7 @@ const onClickChatting = (item) => {
                     <span>{item.title}</span>
                     <span>
                         <button onClick={()=>onClickChatting(item)}>
-                        {item.postId}번방
+                        {item.roomId}번방
                         </button>
                     </span>
                 </div>

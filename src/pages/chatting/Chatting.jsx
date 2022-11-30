@@ -7,16 +7,17 @@ import { useNavigate, useParams } from "react-router-dom";
 import { __getinitialChatList, chatList } from "../../redux/modules/ChattingSlice";
 import {v4 as uuidv4} from 'uuid';
 
+
+
+
 function Chatting() {
   const navigate = useNavigate();
   const sock = new SockJS("http://3.38.228.74:8080/ws/chat");
   const ws = webstomp.over(sock);
   const dispatch = useDispatch();
-  let {id} = useParams()
-  id = 1
-  let roomId=Number(id)
-
+  let roomId=Number(localStorage.getItem("roomId"))
   const listReducer = useSelector((state) => state.chatting.chatList);
+  console.log(listReducer);
   useEffect(() => {
     if(roomId !== undefined){
       dispatch(__getinitialChatList({
@@ -47,11 +48,10 @@ function Chatting() {
     sender: listReducer.nickname,
     message:chatBody
     };
-
   let headers = { 
     Access_Token: localStorage.getItem('Access_Token')
   };
-
+console.log(content);
   function wsConnectSubscribe() {
     try {
       ws.connect(
@@ -158,7 +158,7 @@ return(
   { listReducer.chatList !== undefined && listReducer.chatList !== null &&
     listReducer.chatList.map((item)=>{
       return (
-      <div key={item.key}><span>{item.message}</span></div>
+      <div key={uuidv4()}><span>{item.message}</span></div>
       )
     }
       )
