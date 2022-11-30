@@ -53,8 +53,8 @@ const PricingInput1 = ({ params, stepState }) => {
       API: `${tag.category}`,
       priceLists: tag,
       BackGetAPI: "",
+      BackNaviAPI: "",
     });
-    console.log("겟프라이스인포", getInfo);
   }, [tag]);
 
   return (

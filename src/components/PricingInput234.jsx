@@ -14,52 +14,52 @@ const PricingInput234 = ({ params, stepState }) => {
   let valueState = "";
   if (stepState === 2) {
     valueState = "years";
-    initialState = {
-      category: priceLists.category,
-      years: 0,
-      model: "",
-      options: "",
-      batteryState: 0,
-      careOX: "",
-      careDate: "",
-      iphoneState: "",
-      macbookState: "",
-      ram: "",
-      storage: "",
-      keyboard: "",
-    };
+    // initialState = {
+    //   category: priceLists.category,
+    //   years: 0,
+    //   model: "",
+    //   options: "",
+    //   batteryState: 0,
+    //   careOX: "",
+    //   careDate: "",
+    //   iphoneState: "",
+    //   macbookState: "",
+    //   ram: "",
+    //   storage: "",
+    //   keyboard: "",
+    // };
   } else if (stepState === 3) {
     valueState = "model";
-    initialState = {
-      category: priceLists.category,
-      years: priceLists.years,
-      model: "",
-      options: "",
-      batteryState: 0,
-      careOX: "",
-      careDate: "",
-      iphoneState: "",
-      macbookState: "",
-      ram: "",
-      storage: "",
-      keyboard: "",
-    };
+    // initialState = {
+    //   category: priceLists.category,
+    //   years: priceLists.years,
+    //   model: "",
+    //   options: "",
+    //   batteryState: 0,
+    //   careOX: "",
+    //   careDate: "",
+    //   iphoneState: "",
+    //   macbookState: "",
+    //   ram: "",
+    //   storage: "",
+    //   keyboard: "",
+    // };
   } else if (stepState === 4) {
     valueState = "options";
-    initialState = {
-      category: priceLists.category,
-      years: priceLists.years,
-      model: priceLists.model,
-      options: "",
-      batteryState: 0,
-      careOX: "",
-      careDate: "",
-      iphoneState: "",
-      macbookState: "",
-      ram: "",
-      storage: "",
-      keyboard: "",
-    };
+    // initialState = {
+    //   category: priceLists.category,
+    //   years: priceLists.years,
+    //   model: priceLists.model,
+    //   options: "",
+    //   batteryState: 0,
+    //   careOX: "",
+    //   careDate: "",
+    //   iphoneState: "",
+    //   macbookState: "",
+    //   ram: "",
+    //   storage: "",
+    //   keyboard: "",
+    // };
   }
 
   const [tag, setTag] = useState(priceLists);
@@ -73,6 +73,7 @@ const PricingInput234 = ({ params, stepState }) => {
       ...tag,
       [name]: value,
     });
+    console.log("tag값", tag);
   };
 
   const onSubmitHandler = (e) => {
@@ -95,12 +96,21 @@ const PricingInput234 = ({ params, stepState }) => {
 
   //서브밋 함수에 사용할 매개변수 설정
   useEffect(() => {
-    if (stepState === 2) {
+    if (stepState === 1) {
+      setGetInfo({
+        stepState: 2,
+        API: `${priceLists.category}`,
+        priceLists: tag,
+        BackGetAPI: "",
+        BackNaviAPI: "",
+      });
+    } else if (stepState === 2) {
       setGetInfo({
         stepState: 3,
         API: `${priceLists.category}/${tag.years}`,
         priceLists: tag,
         BackGetAPI: "",
+        BackNaviAPI: `${priceLists.category}`,
       });
     } else if (stepState === 3) {
       setGetInfo({
@@ -108,6 +118,7 @@ const PricingInput234 = ({ params, stepState }) => {
         API: `${priceLists.category}/${priceLists.years}/${tag.model}`,
         priceLists: tag,
         BackGetAPI: `${priceLists.category}`,
+        BackNaviAPI: `${priceLists.category}/${priceLists.years}`,
       });
     } else if (stepState === 4) {
       if (priceLists.category === "iphone") {
@@ -116,6 +127,7 @@ const PricingInput234 = ({ params, stepState }) => {
           API: `${priceLists.category}/${priceLists.years}/${priceLists.model}`,
           priceLists: tag,
           Backapi: `${priceLists.category}/${priceLists.years}`,
+          BackNaviAPI: `${priceLists.category}/${priceLists.years}/${priceLists.model}`,
         });
       } else {
         setGetInfo({
@@ -123,11 +135,12 @@ const PricingInput234 = ({ params, stepState }) => {
           API: `${priceLists.category}/${priceLists.years}/${priceLists.model}/${tag.options}`,
           BackGetAPI: `${priceLists.category}/${priceLists.years}`,
           priceLists: tag,
+          BackNaviAPI: `${priceLists.category}/${priceLists.years}/${priceLists.model}`,
         });
       }
     }
 
-    console.log("겟프라이스인포", getInfo);
+    // console.log("겟프라이스인포", getInfo);
   }, [tag]);
 
   // //새로고침을 위한 get

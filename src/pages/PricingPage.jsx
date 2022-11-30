@@ -6,7 +6,7 @@ import Layout from "../components/Layout";
 import PricingInput1 from "../components/PricingInput1";
 import PricingInput234 from "../components/PricingInput234";
 import PricingInput5 from "../components/PricingInput5";
-import { __getPriceInfo } from "../redux/modules/PriceSlice";
+import { chagePriceSet, __getPriceInfo } from "../redux/modules/PriceSlice";
 
 const PricingPage = () => {
   const params = useParams();
@@ -16,41 +16,48 @@ const PricingPage = () => {
   const { getList } = useSelector((state) => state.price);
   const { priceLists } = useSelector((state) => state.price);
   const { BackGetAPI } = useSelector((state) => state.price);
-  useEffect(() => {
-    console.log("왜 두번눌리냐 백에이피아이", BackGetAPI);
-  }, [BackGetAPI]);
+  const { BackNaviAPI } = useSelector((state) => state.price);
 
   let Backapi = "";
+  let BackNaviapi = "";
   let backInfo = {};
 
   const BackFn = () => {
     console.log("stepState stepState", stepState);
     if (stepState === 5) {
-      Backapi = `${priceLists.category}/${priceLists.years}/${priceLists.model}`;
-    } else if (stepState === 4) {
       Backapi = `${priceLists.category}/${priceLists.years}`;
-    } else if (stepState === 3) {
+      BackNaviapi = `${priceLists.category}/${priceLists.years}/${priceLists.model}/${priceLists.options}`;
+    } else if (stepState === 4) {
       Backapi = `${priceLists.category}`;
+      BackNaviapi = `${priceLists.category}/${priceLists.years}/${priceLists.model}`;
+    } else if (stepState === 3) {
+      Backapi = "";
+      BackNaviapi = `${priceLists.category}/${priceLists.years}`;
     } else if (stepState === 2) {
+      Backapi = "";
+      BackNaviapi = `${priceLists.category}`;
+    } else {
       Backapi = ``;
+      BackNaviapi = ``;
     }
 
-    console.log("셋 전 backInfo", backInfo);
-    console.log("셋 전 stepState", stepState);
     backInfo = {
       stepState: stepState - 1,
       API: BackGetAPI,
       priceLists: { ...priceLists },
       BackGetAPI: Backapi,
+      BackNaviAPI: BackNaviapi,
     };
-    console.log("셋 후 backInfo", backInfo);
 
-    console.log("뭐가문젠데 stepState", stepState);
-    if (window.confirm("really?")) {
-      dispatch(__getPriceInfo(backInfo));
-      navigate(`/pricingPage/${BackGetAPI}`);
-      console.log("뭐가문젠데 후 stepState", stepState);
+    if (stepState !== 2) {
+      return (
+        dispatch(__getPriceInfo(backInfo)),
+        navigate(`/pricingPage/${BackNaviAPI}`)
+      );
     }
+
+    dispatch(chagePriceSet(1));
+    navigate(`/pricingPage`);
   };
 
   // useEffect(() => {

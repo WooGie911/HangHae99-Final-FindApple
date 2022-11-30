@@ -8,23 +8,25 @@ export const __getPriceInfo = createAsyncThunk(
   "price/__getPriceInfo",
   async (payload, thunkAPI) => {
     try {
-      console.log("페이로드 뭐야", payload);
-      const data = await axios.get(
-        `${process.env.REACT_APP_SERVER}/api/price/${payload.API}`,
-        {
-          headers: {
-            "Content-Type": `application/json`,
-            Access_Token: accessToken,
-            Refresh_Token: refreshToken,
-            "Cache-Control": "no-cache",
-          },
-        }
-      );
+      let data = {};
+      // console.log("페이로드 뭐야", payload);
+      if (payload.API !== "") {
+        data = await axios.get(
+          `${process.env.REACT_APP_SERVER}/api/price/${payload.API}`,
+          {
+            headers: {
+              "Content-Type": `application/json`,
+              Access_Token: accessToken,
+              Refresh_Token: refreshToken,
+              "Cache-Control": "no-cache",
+            },
+          }
+        );
+      }
       const myPayload = {
         ...payload,
         getList: data.data,
       };
-      console.log("겟프라이스인포", data);
       return thunkAPI.fulfillWithValue(myPayload);
     } catch (error) {
       return thunkAPI.rejectWithValue(error);
@@ -60,6 +62,7 @@ const PriceSlice = createSlice({
   initialState: {
     stepState: 1,
     BackGetAPI: "",
+    BackNaviAPI: "",
     priceLists: {
       category: "",
       years: 0,
@@ -78,7 +81,17 @@ const PriceSlice = createSlice({
     DetailPrice: {},
   },
 
-  reducer: {},
+  reducers: {
+    chagePriceSet(state, action) {
+      // console.log("체인지프라이스");
+      // console.log("체인지프라이스", action);
+      state.stepState = action.payload;
+      // state.getList = action.payload.getList;
+      // state.priceLists = action.payload.priceLists;
+      // state.BackGetAPI = action.payload.BackGetAPI;
+      // state.BackNaviAPI = action.payload.BackNaviAPI;
+    },
+  },
   extraReducers: {
     //__getPriceInfo
     [__getPriceInfo.pending]: (state) => {
@@ -90,6 +103,7 @@ const PriceSlice = createSlice({
       state.getList = action.payload.getList;
       state.priceLists = action.payload.priceLists;
       state.BackGetAPI = action.payload.BackGetAPI;
+      state.BackNaviAPI = action.payload.BackNaviAPI;
       console.log("state.stepState", state.stepState);
       console.log("state.getList", state.getList);
       console.log("state.priceLists", state.priceLists);
@@ -114,5 +128,5 @@ const PriceSlice = createSlice({
   },
 });
 
-// export const { checkPricingDetail } = PriceSlice.actions;
+export const { chagePriceSet } = PriceSlice.actions;
 export default PriceSlice.reducer;
