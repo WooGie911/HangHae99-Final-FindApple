@@ -8,9 +8,8 @@ import { __getinitialChatList } from "../../../redux/modules/ChattingSlice"
 
 const ChatList = () => {
     const {id}  = useParams()
-    const navigate = useNavigate();
     const dispatch = useDispatch();
-    const navigator = useNavigate();
+    const navigate = useNavigate();
     const Room = useSelector((state) => state.chatting.roomList);
     
     useEffect(() => {
@@ -21,7 +20,7 @@ const ChatList = () => {
 const onClickChatting = (item) => {
 
 
-  navigator(`/Chatting/${item.roomId}`);
+  navigate(`/Chatting/${item.roomId}`);
 
   dispatch(__getinitialChatList({
     postId:item.postId,

@@ -11,14 +11,13 @@ import {v4 as uuidv4} from 'uuid';
 
 
 function Chatting() {
-  const navigate = useNavigate();
   const sock = new SockJS("http://3.38.228.74:8080/ws/chat");
   const ws = webstomp.over(sock);
   const dispatch = useDispatch();
   let roomId=Number(localStorage.getItem("roomId"))
   const listReducer = useSelector((state) => state.chatting.chatList);
-  console.log(listReducer);
   useEffect(() => {
+    console.log(listReducer)
     if(roomId !== undefined){
       dispatch(__getinitialChatList({
         roomId:roomId,
@@ -40,7 +39,7 @@ function Chatting() {
       
     };
  
-  }, [listReducer.id]);
+  }, [roomId]);
   
   const [chatBody, setChatBody] = useState("");
 
@@ -51,7 +50,6 @@ function Chatting() {
   let headers = { 
     Access_Token: localStorage.getItem('Access_Token')
   };
-console.log(content);
   function wsConnectSubscribe() {
     try {
       ws.connect(

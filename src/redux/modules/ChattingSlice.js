@@ -3,7 +3,7 @@ import axios from "axios";
 import { current } from "@reduxjs/toolkit";
 
 const initialState = {
-  createRoom: [],
+  createRoom: 0,
   roomList:[],
   chatList:[],
   chatTrueFalse:false,
@@ -18,8 +18,9 @@ const refreshToken = localStorage.getItem("Refresh_Token");
 export const __CreateRoom = createAsyncThunk(
   "/chat/__CreateRoom",
   async (payload, thunkAPI) => {
+    console.log(payload);
     try {
-      const response = await axios.post(`${process.env.REACT_APP_SERVER}/room`,         
+      const response = await axios.post(`${process.env.REACT_APP_SERVER}/room`, payload.postId,        
       {
         headers: {
           "Content-Type": `application/json`,
@@ -29,8 +30,7 @@ export const __CreateRoom = createAsyncThunk(
         },
       }
         )
-      
-      return thunkAPI.fulfillWithValue(response.data.data);
+      return thunkAPI.fulfillWithValue(response.data);
     } catch (error) {
       return thunkAPI.rejectWithValue(error.response.data);
     }
@@ -73,7 +73,6 @@ export const __getinitialChatList = createAsyncThunk(
           "Cache-Control": "no-cache",
         },
       })
-      console.log("res", response);
       return thunkAPI.fulfillWithValue(response.data);
     } catch (error) {
       return thunkAPI.rejectWithValue(error.response.data);
@@ -89,9 +88,10 @@ const chatSlice = createSlice({
   name: "chatting",
   initialState,
   reducers: {
-    postChat: (state, action) => {
-      state.chatList.unshift(action.payload);
-    },
+    // postChat: (state, action) => {
+    //   console.log("action", action.payload);
+    //   state.chatList.unshift(action.payload);
+    // },
     clearChat: (state, action) => {
       state.chatList = new Array(0);
     },
@@ -100,7 +100,6 @@ const chatSlice = createSlice({
     },
  
     chatList: (state, action) => {
-      console.log("action", action.payload);
       state.chatList.chatList.push(action.payload)
     },
 
@@ -114,7 +113,8 @@ const chatSlice = createSlice({
     },
     [__CreateRoom.fulfilled]: (state, action) => {
       state.isLoading = false;
-      state.createRoom = action.payload;
+      console.log("action", action.payload)
+      state.createRoom = action.payload.roomId;
     },
     [__CreateRoom.rejected]: (state, action) => {
       state.isLoading = false;
@@ -126,7 +126,6 @@ const chatSlice = createSlice({
     [__getRoomList.fulfilled]: (state, action) => {
       state.isLoading = false;
       state.roomList = action.payload;
-      console.log("actionpaylod",action.payload);
     },
     [__getRoomList.rejected]: (state, action) => {
       state.isLoading = false;
