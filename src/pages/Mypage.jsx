@@ -12,7 +12,7 @@ import doubletick from "../assets/doubletick.png";
 import window from "../assets/window.png";
 import Footer from "../components/Footer";
 import LogoutButton from "../components/LogoutButton";
-import chatButton from "../assets/chatButton.png";
+import chat from "../assets/chat.png";
 
 
 
@@ -128,7 +128,7 @@ const popupPostCode = () => {
             </div>
           </SecondContainer>
         </FirstContainer>
-        <ChatButton src={chatButton} onClick={popupPostCode}/>
+        <ChatButton onClick={popupPostCode}><img src={chat}/>채팅</ChatButton>
         {isChatModal && (
         <ModalWrap onClick={popupPostCode}>
         <ChatList />
@@ -211,7 +211,11 @@ const SecondContainer = styled.div`
 `;
 
 // modal 버튼
-const ChatButton = styled.img`
+const ChatButton = styled.button`
+width: 79px;
+height: 45px;
+background: #3D6AF2;
+border-radius: 30px;
 position : fixed;
 bottom: 70px;
 right : 10px;

@@ -21,7 +21,7 @@ import {
 import {__CreateRoom } from "../redux/modules/ChattingSlice";
 import Layout from "../components/Layout";
 import back from "../assets/back.png";
-import chatButton from "../assets/chatButton.png";
+import chat from "../assets/chat.png";
 
 const PostDetail = () => {
   const navigate = useNavigate();
@@ -233,8 +233,8 @@ const onClickChatting = () =>{
               />
               <TextDiv>댓글</TextDiv>
             </div>
-            <ChatButton src={chatButton} onClick={onClickChatting}/>
           </Price>
+          <ChatButton onClick={onClickChatting}><img src={chat}/>채팅</ChatButton>
         </White>
       </Layout>
     </>
@@ -431,8 +431,12 @@ const Models = styled.div`
 `;
 
 // 채팅 버튼
-const ChatButton = styled.img`
+const ChatButton = styled.button`
+width: 79px;
+height: 45px;
+background: #3D6AF2;
+border-radius: 30px;
 position : fixed;
 bottom: 170px;
-right : 10px;
+right : 25px;
 `
