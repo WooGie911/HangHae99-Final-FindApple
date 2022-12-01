@@ -41,7 +41,7 @@ const PricingInput1 = ({ priceListState, setPriceListState, stepState }) => {
 
       <CategoryDiv>
         <SelectBox
-          defaultValue={priceListState.Category}
+          defaultValue={priceListState.category}
           type="radio"
           name="category"
           onChange={onChangeHandler}
