@@ -38,19 +38,12 @@ const Mypage = () => {
     dispatch(__UserProfile());
   }, [params]);
 
-  // modal 불러오기
-  const [modalOn, setModalOn] = useState(false);
-  const handleModal = () => {
-    setModalOn(true);
-  };
+
 // 채팅 modal창 상태 관리
 const [isChatModal, setIsChatModal] = useState(false);
 const popupPostCode = () => {
   setIsChatModal(!isChatModal)
 }
-
-
-
   return (
     <div>
       <Layout>

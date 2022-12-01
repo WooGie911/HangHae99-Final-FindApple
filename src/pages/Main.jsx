@@ -1,4 +1,4 @@
-import React, { useEffect } from "react";
+import React, { useState, useEffect } from "react";
 import styled from "styled-components";
 import { useDispatch } from "react-redux";
 import { useNavigate } from "react-router-dom";
@@ -10,6 +10,9 @@ import MainList from "../components/MainList";
 import Slide from "../components/Slide";
 import LOGO from "../assets/LOGO.svg";
 import { initialHeaderState } from "../redux/modules/PostsSlice";
+import ChatList from "../pages/chatting/element/ChatList";
+import chat from "../assets/chat.png";
+
 
 const Main = ({}) => {
   const dispatch = useDispatch();
@@ -31,6 +34,11 @@ const Main = ({}) => {
     dispatch(__UserProfile());
   }, [dispatch]);
 
+// 채팅 modal창 상태 관리
+const [isChatModal, setIsChatModal] = useState(false);
+const popupPostCode = () => {
+  setIsChatModal(!isChatModal)
+}
   return (
     <>
       <Layout>
@@ -74,7 +82,12 @@ const Main = ({}) => {
         <MainList />
 
         <Diiiiv />
-
+        <ChatButton onClick={popupPostCode}><img src={chat}/>채팅</ChatButton>
+        {isChatModal && (
+        <ModalWrap onClick={popupPostCode}>
+        <ChatList />
+        </ModalWrap>
+        )}
         <Footer />
       </Layout>
     </>
@@ -135,3 +148,28 @@ const More_seebutton = styled.button`
 const Diiiiv = styled.div`
   height: 70px;
 `;
+// modal 버튼
+const ChatButton = styled.button`
+width: 79px;
+height: 45px;
+background: #3D6AF2;
+border-radius: 30px;
+position : fixed;
+bottom: 70px;
+right : 10px;
+`
+// modal 닫기
+const ModalWrap=styled.div`
+position: fixed;
+bottom: 0;
+left: 0;
+width: 100%;
+height: 100%;
+background-color: rgba(0, 0, 0, 0.4);
+display: flex;
+justify-content: center;
+align-items: center;
+z-index: 998;
+padding: 0 15px;
+box-sizing: border-box;
+`
