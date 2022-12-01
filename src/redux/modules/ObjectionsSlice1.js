@@ -1,24 +1,13 @@
 import { createAsyncThunk, createSlice } from "@reduxjs/toolkit";
-import axios from "axios";
+import Apis from "../../shared/Apis";
 
-const accessToken = localStorage.getItem("Access_Token");
-const refreshToken = localStorage.getItem("Refresh_Token");
+
 
 export const __searchObjection = createAsyncThunk(
   "objections/__searchObjection",
   async (payload, thunkAPI) => {
     try {
-      const data = await axios.get(
-        `${process.env.REACT_APP_SERVER}/api/issue/${payload.paramObj}/${payload.searchObj}?page=${payload.pageNumber}&size=${payload.pageSize}&sort=${payload.postSort},DESC`,
-        {
-          headers: {
-            "Content-Type": `application/json`,
-            Access_Token: accessToken,
-            Refresh_Token: refreshToken,
-            "Cache-Control": "no-cache",
-          },
-        }
-      );
+      const data = await Apis.searchObjectionAX(payload);
       return thunkAPI.fulfillWithValue(data.data.content);
     } catch (error) {
       return thunkAPI.rejectWithValue(error);
@@ -31,18 +20,7 @@ export const __getAddObjection = createAsyncThunk(
   async (payload, thunkAPI) => {
     console.log("pay", payload);
     try {
-      const data = await axios.get(
-        `${process.env.REACT_APP_SERVER}/api/issue/${payload.state.paramObj}?page=${payload.page}&size=${payload.state.pageSize}&sort=${payload.state.postSort},DESC`,
-
-        {
-          headers: {
-            "Content-Type": `application/json`,
-            Access_Token: accessToken,
-            Refresh_Token: refreshToken,
-            "Cache-Control": "no-cache",
-          },
-        }
-      );
+      const data = await Apis.getAddObjectionAX(payload);
       const obj = {
         payload: payload.page,
         data: data.data.content,
@@ -59,18 +37,7 @@ export const __getObjection = createAsyncThunk(
   "objections/__getObjection",
   async (payload, thunkAPI) => {
     try {
-      const data = await axios.get(
-        `${process.env.REACT_APP_SERVER}/api/issue/${payload.paramObj}?page=${payload.pageNumber}&size=${payload.pageSize}&sort=${payload.postSort},DESC`,
-
-        {
-          headers: {
-            "Content-Type": `application/json`,
-            Access_Token: accessToken,
-            Refresh_Token: refreshToken,
-            "Cache-Control": "no-cache",
-          },
-        }
-      );
+      const data = await Apis.getObjectionAX(payload);
       return thunkAPI.fulfillWithValue(data.data);
     } catch (error) {
       return thunkAPI.rejectWithValue(error);
@@ -82,15 +49,8 @@ export const __addObjection = createAsyncThunk(
   "objections/__addObjection",
   async (payload, thunkAPI) => {
     try {
-      await axios
-        .post(`${process.env.REACT_APP_SERVER}/api/issue`, payload, {
-          headers: {
-            enctype: "multipart/form-data",
-            Access_Token: accessToken,
-            Refresh_Token: refreshToken,
-            "Cache-Control": "no-cache",
-          },
-        })
+      await Apis
+        .addObjectionAX(payload)
         .then((response) => {
           return thunkAPI.fulfillWithValue(response.data.data);
         });
@@ -104,17 +64,7 @@ export const __deleteObjection = createAsyncThunk(
   "objections/__deleteObjection",
   async (payload, thunkAPI) => {
     try {
-      const data = await axios.delete(
-        `${process.env.REACT_APP_SERVER}/api/issue/${payload}`,
-        {
-          headers: {
-            "Content-Type": `application/json`,
-            Access_Token: accessToken,
-            Refresh_Token: refreshToken,
-            "Cache-Control": "no-cache",
-          },
-        }
-      );
+      const data = await Apis.deleteObjectionAX(payload);
 
       return thunkAPI.fulfillWithValue(payload);
     } catch (error) {
@@ -127,19 +77,7 @@ export const __editObjection = createAsyncThunk(
   "objections/__editObjection",
   async (payload, thunkAPI) => {
     try {
-      const data = await axios.patch(
-        `${process.env.REACT_APP_SERVER}/api/issue/${payload.id}`,
-        payload.formData,
-        {
-          headers: {
-            // "Content-Type": `application/json`,
-            enctype: "multipart/form-data",
-            Access_Token: accessToken,
-            Refresh_Token: refreshToken,
-            "Cache-Control": "no-cache",
-          },
-        }
-      );
+      const data = await Apis.editObjectionAX(payload.formData);
 
       return thunkAPI.fulfillWithValue(data.data.data);
     } catch (error) {

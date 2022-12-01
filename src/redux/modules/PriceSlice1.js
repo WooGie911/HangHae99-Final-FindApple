@@ -1,5 +1,6 @@
 import { createAsyncThunk, createSlice } from "@reduxjs/toolkit";
 import axios from "axios";
+import Apis from "../../shared/Apis";
 
 const initialState = {
   tagList: [],
@@ -7,24 +8,12 @@ const initialState = {
   DetailPrice: {},
 };
 
-const accessToken = localStorage.getItem("Access_Token");
-const refreshToken = localStorage.getItem("Refresh_Token");
 
 export const __getPriceInfo = createAsyncThunk(
   "price/__getPriceInfo",
   async (payload, thunkAPI) => {
     try {
-      const data = await axios.get(
-        `${process.env.REACT_APP_SERVER}/api/price/${payload}`,
-        {
-          headers: {
-            "Content-Type": `application/json`,
-            Access_Token: accessToken,
-            Refresh_Token: refreshToken,
-            "Cache-Control": "no-cache",
-          },
-        }
-      );
+      const data = await Apis.getPriceInfoAX(payload);
       console.log("겟프라이스인포", data);
       return thunkAPI.fulfillWithValue(data.data);
     } catch (error) {
@@ -37,18 +26,7 @@ export const __checkPrice = createAsyncThunk(
   "price/__checkPrice",
   async (payload, thunkAPI) => {
     try {
-      const response = await axios.post(
-        `${process.env.REACT_APP_SERVER}/api/price/${payload.category}`,
-        payload.Data,
-        {
-          headers: {
-            "Content-Type": `application/json`,
-            Access_Token: accessToken,
-            Refresh_Token: refreshToken,
-            "Cache-Control": "no-cache",
-          },
-        }
-      );
+      const response = await Apis.checkPriceAX(payload);
       return thunkAPI.fulfillWithValue(response.data);
     } catch (error) {
       return thunkAPI.rejectWithValue(error);

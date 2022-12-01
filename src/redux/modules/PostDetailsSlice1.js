@@ -1,26 +1,14 @@
 import { createAsyncThunk, createSlice } from "@reduxjs/toolkit";
-import axios from "axios";
 
-const accessToken = localStorage.getItem("Access_Token");
-const refreshToken = localStorage.getItem("Refresh_Token");
+import Apis from "../../shared/Apis";
+
+
 
 export const __getPostDetail = createAsyncThunk(
   "details/__getPostDetail",
   async (payload, thunkAPI) => {
     try {
-      console.log("payloadpayloadpayload", payload);
-      const data = await axios.get(
-        `${process.env.REACT_APP_SERVER}/api/post/detail/${payload}`,
-        {
-          headers: {
-            "Content-Type": `application/json`,
-            Access_Token: accessToken,
-            Refresh_Token: refreshToken,
-            "Cache-Control": "no-cache",
-          },
-        }
-      );
-
+      const data = await Apis.getPostDetailAX(payload);
       return thunkAPI.fulfillWithValue(data.data);
     } catch (error) {
       return thunkAPI.rejectWithValue(error);
@@ -32,18 +20,7 @@ export const __addPostComment = createAsyncThunk(
   "details/__addPostComment",
   async (payload, thunkAPI) => {
     try {
-      const data = await axios.post(
-        `${process.env.REACT_APP_SERVER}/api/post/comment/${payload.id}`,
-        payload.comment,
-        {
-          headers: {
-            "Content-Type": `application/json`,
-            Access_Token: accessToken,
-            Refresh_Token: refreshToken,
-            "Cache-Control": "no-cache",
-          },
-        }
-      );
+      const data = await Apis.addPostCommentAX(payload.comment);
       return thunkAPI.fulfillWithValue(data.data);
     } catch (error) {
       return thunkAPI.rejectWithValue(error);
@@ -55,19 +32,8 @@ export const __deletePostComment = createAsyncThunk(
   "details/__deletePostComment",
   async (payload, thunkAPI) => {
     try {
-      const data = await axios.delete(
-        `${process.env.REACT_APP_SERVER}/api/post/comment/${payload}`,
-        {
-          headers: {
-            "Content-Type": `application/json`,
-            Access_Token: accessToken,
-            Refresh_Token: refreshToken,
-            "Cache-Control": "no-cache",
-          },
-        }
-      );
+      const data = await Apis.deletePostCommentAX(payload);
       if (data.data === "Success") {
-        console.log("삭제 성공");
         return thunkAPI.fulfillWithValue(payload);
       }
       console.log("삭제 성공 인데 메시지 이상? ");
@@ -81,18 +47,7 @@ export const __CartInPost = createAsyncThunk(
   "details/__CartInPost",
   async (payload, thunkAPI) => {
     try {
-      const data = await axios.post(
-        `${process.env.REACT_APP_SERVER}/api/post/likes/${payload}`,
-        "",
-        {
-          headers: {
-            "Content-Type": `application/json`,
-            Access_Token: accessToken,
-            Refresh_Token: refreshToken,
-            "Cache-Control": "no-cache",
-          },
-        }
-      );
+      const data = await Apis.post(payload,"");
       console.log("response", data);
       if (data.data === "찜 성공") {
         console.log("찜 성공");
@@ -110,17 +65,7 @@ export const __CartOutPost = createAsyncThunk(
   "details/__CartOutPost",
   async (payload, thunkAPI) => {
     try {
-      const data = await axios.delete(
-        `${process.env.REACT_APP_SERVER}/api/post/likes/${payload}`,
-        {
-          headers: {
-            "Content-Type": `application/json`,
-            Access_Token: accessToken,
-            Refresh_Token: refreshToken,
-            "Cache-Control": "no-cache",
-          },
-        }
-      );
+      const data = await Apis.CartOutPostAX(payload);
       if (data.data === "찜 삭제") {
         return thunkAPI.fulfillWithValue({ islike: false, count: -1 });
       }
