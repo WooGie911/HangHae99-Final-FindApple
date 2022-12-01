@@ -10,16 +10,17 @@ import {
 } from "../../redux/modules/ChattingSlice";
 import { v4 as uuidv4 } from "uuid";
 import back from "../../assets/back.png";
+import {ReactComponent as Send} from "../../assets/send.svg";
 
 function Chatting() {
-  const sock = new SockJS(`${process.env.REACT_APP_Chatting_SERVER}/ws/chat`);
+  const sock = new SockJS(`${process.env.REACT_APP_Chatting_SERVER}/api/ws/chat`);
   const ws = webstomp.over(sock);
   const dispatch = useDispatch();
   const navigate = useNavigate();
   let roomId = Number(localStorage.getItem("roomId"));
   const listReducer = useSelector((state) => state.chatting.chatList);
   useEffect(() => {
-    console.log(listReducer);
+    console.log("listReducer", listReducer);
     if (roomId !== undefined) {
       dispatch(
         __getinitialChatList({
@@ -99,8 +100,7 @@ function Chatting() {
   };
 
   //onSubmitHandler
-  const onSubmitHandler = (event) => {
-    event.preventDefault();
+  const onSubmitHandler = () => {
     if (chatBody === "" || chatBody === " ") {
       return alert("내용을 입력해주세요.");
     }
@@ -136,6 +136,9 @@ function Chatting() {
     navigate(-1);
   };
 
+// 삼항연산자와 usdState활용한 채팅방 좌우 설정
+const [chat, setChat] = useState(false)
+
   return (
     <StContainer>
       <HeadContainer>
@@ -146,32 +149,58 @@ function Chatting() {
         />
         <span>
           {" "}
-          <div>{listReducer.nickname}</div>
+          <div>{listReducer.postUserNickname}</div>
         </span>
       </HeadContainer>
       <TitleContainer>
+      {listReducer.image !== undefined && (<>
         <img src={listReducer.image.imgUrl} style={{ width: 44, height: 44 }} />
+              </>
+      )}
+      <div>
+      <div>
+        {listReducer.title}
+      </div>
+      <div>
+        {listReducer.price !== undefined && (<>
+        {listReducer.price.toLocaleString("ko-KR")}원
+        </>)}        
+      </div>
+      </div>
       </TitleContainer>
       <ChatDiv>
         {listReducer.chatList !== undefined &&
           listReducer.chatList !== null &&
           listReducer.chatList.map((item) => {
             return (
-              <div key={uuidv4()}>
-                <span>{item.message}</span>
-              </div>
+                <>
+                {listReducer.joinUserNickname === item.sender ?
+                (<ChatStyle key={uuidv4()} style={{textAlign:"right"}}>
+                  {/* 인라인 요소로 바로 우측 정렬 해결 */}
+                  <TimeDiv>
+                  <TimeSpan>{item.sendDate}</TimeSpan>
+                <JoinUserNickname>{item.message}</JoinUserNickname>
+                </TimeDiv>
+                </ChatStyle>) :
+                 
+                (<ChatStyle key={uuidv4()}>
+                   <TimeDiv>
+                    <PostUserNickname>{item.message}</PostUserNickname>
+                    <TimeSpan>{item.sendDate}</TimeSpan></TimeDiv>
+                </ChatStyle>)
+          }
+              </>
             );
           })}
         <div ref={scrollRef}></div>
+        </ChatDiv>
+        <InputDiv>
+          <Input value={chatBody} onChange={inputHandler} onKeyPress={appKeyPress} placeholder="댓글을 입력하세요"/>
+                    {/* value를 줘야 사라진다 */}
+          <Send onClick={onSubmitHandler} style={{position:"fixed", left:"calc(50% + 140px)", transform:"translateX(-50%)", bottom:25}}/>
+                    {/* calc로 계산해서 반응형에 맞춰도 움직이지 않는 그림 만든다. svg는 컴포넌트처럼 임포트가 가능하다 */}
+        </InputDiv>
 
-        <div>
-          <input value={chatBody} onChange={inputHandler} />
-          {/* value를 줘야 사라진다 */}
-          <button onSubmit={appKeyPress} onClick={onSubmitHandler}>
-            전송
-          </button>
-        </div>
-      </ChatDiv>
     </StContainer>
   );
 }
@@ -180,6 +209,7 @@ export default Chatting;
 const StContainer = styled.div`
   height: 100%;
   padding: 20px;
+  overflow: auto;
 `;
 
 //헤더
@@ -205,7 +235,6 @@ const HeadContainer = styled.div`
 
 const ChatDiv = styled.div`
   height: 100%;
-  overflow: auto;
 `;
 
 // title
@@ -216,7 +245,82 @@ const TitleContainer = styled.div`
   img {
     margin-top: 10px;
   }
+  display: flex;
+
+  div{
+    font-size: 16px;
+    padding: 1.5px;
+    margin-left: 1.5px;
+  }
 `;
+
+// chatting창 꾸미기
+
+ //chat style
+ const ChatStyle=styled.div`
+ margin-top: 15px;
+ margin-bottom : 15px;
+ `
+
+  //나 
+const JoinUserNickname=styled.span`
+padding : 7px;
+background: #3D6AF2;
+border-radius: 20px 20px 0px 20px;
+color: white;
+font-size: 14px;
+margin-top: 10px;
+display:inline-block;
+max-width: 250px;
+height: auto;
+white-space: pre-wrap;
+`
+  //상대방
+const PostUserNickname=styled.span`
+padding : 7px;
+background: #D9D9D9;
+border-radius: 20px 15px 15px 0px;
+font-size: 14px;
+margin-top: 10px;
+display:inline-block;
+max-width: 250px;
+height: auto;
+white-space: pre-wrap;
+`
+
+// 시간
+const TimeDiv=styled.div`
+`
+//시간 상세
+const TimeSpan=styled.span`
+font-size: 10px;
+color: #c4c4c4;
+`
+
+// input 창
+const InputDiv=styled.div`
+height: 50px;
+width: 100%;
+position:fixed;
+position:relative;
+bottom:20px;
+left:0;
+`
+
+const Input=styled.input`
+margin-top: 30px;
+width: 339px;
+height: 38px;
+background-color: transparent;
+border: 1px solid black;
+padding : 10px;
+position:fixed;
+bottom:15px;
+border-radius: 50px;
+left:50%;
+transform: translateX(-50%);
+
+`
 
 // return (
 //         <LoginContainer>
