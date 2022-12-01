@@ -1,13 +1,6 @@
 import { createAsyncThunk, createSlice } from "@reduxjs/toolkit";
 import Apis from "../../shared/Apis";
 
-const initialState = {
-  myPostList: [],
-  sellerInfoDto: {},
-};
-
-
-
 // api 나오면 data 부분 완성할 것
 export const __getSellerinfo = createAsyncThunk(
   "sellerpage/__getSellerinfo",
@@ -23,7 +16,10 @@ export const __getSellerinfo = createAsyncThunk(
 
 const SellerSlice = createSlice({
   name: "sellerpage",
-  initialState,
+  initialState: {
+    myPostList: [],
+    sellerInfoDto: {},
+  },
 
   reducer: {},
   extraReducers: {

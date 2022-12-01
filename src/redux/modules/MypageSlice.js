@@ -1,12 +1,6 @@
 import { createAsyncThunk, createSlice } from "@reduxjs/toolkit";
 import Apis from "../../shared/Apis";
 
-const initialState = {
-  posts: [],
-  objections: [],
-  likes: [],
-};
-
 export const __getMyPost = createAsyncThunk(
   "mypage/__getMyPost",
   async (payload, thunkAPI) => {
@@ -46,7 +40,11 @@ export const __getMyLike = createAsyncThunk(
 
 const MypageSlice = createSlice({
   name: "mypage",
-  initialState,
+  initialState: {
+    posts: [],
+    objections: [],
+    likes: [],
+  },
 
   reducer: {},
   extraReducers: {

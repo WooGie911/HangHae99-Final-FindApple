@@ -1,16 +1,5 @@
 import { createAsyncThunk, createSlice } from "@reduxjs/toolkit";
 import axios from "axios";
-import { current } from "@reduxjs/toolkit";
-
-const initialState = {
-  createRoom: 0,
-  roomList:[],
-  chatList:[],
-  chatTrueFalse:false,
-  isLoading: false,
-  roomId: null,
-  err: null,
-};
 
 const accessToken = localStorage.getItem("Access_Token");
 const refreshToken = localStorage.getItem("Refresh_Token");
@@ -20,16 +9,19 @@ export const __CreateRoom = createAsyncThunk(
   async (payload, thunkAPI) => {
     console.log(payload);
     try {
-      const response = await axios.post(`${process.env.REACT_APP_SERVER}/room`, payload.postId,        
-      {
-        headers: {
-          "Content-Type": `application/json`,
-          Access_Token: accessToken,
-          Refresh_Token: refreshToken,
-          "Cache-Control": "no-cache",
-        },
-      }
-        )
+      // const response = await axios.post(`${process.env.REACT_APP_SERVER}/room`, payload.postId,
+      const response = await axios.post(
+        `${process.env.REACT_APP_Chatting_SERVER}/room`,
+        payload.postId,
+        {
+          headers: {
+            "Content-Type": `application/json`,
+            Access_Token: accessToken,
+            Refresh_Token: refreshToken,
+            "Cache-Control": "no-cache",
+          },
+        }
+      );
       return thunkAPI.fulfillWithValue(response.data);
     } catch (error) {
       return thunkAPI.rejectWithValue(error.response.data);
@@ -41,38 +33,43 @@ export const __getRoomList = createAsyncThunk(
   "/chat/__getRoomList",
   async (payload, thunkAPI) => {
     try {
-      const response = await axios.get(`${process.env.REACT_APP_SERVER}/roomList`,         
-      {
-        headers: {
-          "Content-Type": `application/json`,
-          Access_Token: accessToken,
-          Refresh_Token: refreshToken,
-          "Cache-Control": "no-cache",
-        },
-      })
+      const response = await axios.get(
+        // `${process.env.REACT_APP_SERVER}/roomList`,
+        ` ${process.env.REACT_APP_Chatting_SERVER}/roomList`,
+        {
+          headers: {
+            "Content-Type": `application/json`,
+            Access_Token: accessToken,
+            Refresh_Token: refreshToken,
+            "Cache-Control": "no-cache",
+          },
+        }
+      );
       return thunkAPI.fulfillWithValue(response.data);
     } catch (error) {
       return thunkAPI.rejectWithValue(error.response.data);
     }
   }
 );
-
-
 
 // 메인 채팅 화면
 export const __getinitialChatList = createAsyncThunk(
   "/chat/__getInitialChatList",
   async (payload, thunkAPI) => {
     try {
-      const response = await axios.post(`${process.env.REACT_APP_SERVER}/roomInfo`, payload,         
-      {
-        headers: {
-          "Content-Type": `application/json`,
-          Access_Token: accessToken,
-          Refresh_Token: refreshToken,
-          "Cache-Control": "no-cache",
-        },
-      })
+      const response = await axios.post(
+        // `${process.env.REACT_APP_SERVER}/roomInfo`,
+        `${process.env.REACT_APP_Chatting_SERVER}/roomInfo`,
+        payload,
+        {
+          headers: {
+            "Content-Type": `application/json`,
+            Access_Token: accessToken,
+            Refresh_Token: refreshToken,
+            "Cache-Control": "no-cache",
+          },
+        }
+      );
       return thunkAPI.fulfillWithValue(response.data);
     } catch (error) {
       return thunkAPI.rejectWithValue(error.response.data);
@@ -80,13 +77,17 @@ export const __getinitialChatList = createAsyncThunk(
   }
 );
 
-
-
-
-
 const chatSlice = createSlice({
   name: "chatting",
-  initialState,
+  initialState: {
+    createRoom: 0,
+    roomList: [],
+    chatList: [],
+    chatTrueFalse: false,
+    isLoading: false,
+    roomId: null,
+    err: null,
+  },
   reducers: {
     // postChat: (state, action) => {
     //   console.log("action", action.payload);
@@ -96,16 +97,13 @@ const chatSlice = createSlice({
       state.chatList = new Array(0);
     },
     trueChat: (state, action) => {
-      state.chatTrueFalse = action.payload.mode
+      state.chatTrueFalse = action.payload.mode;
     },
- 
+
     chatList: (state, action) => {
-      state.chatList.chatList.push(action.payload)
+      state.chatList.chatList.push(action.payload);
     },
-
   },
-
-
 
   extraReducers: {
     [__CreateRoom.pending]: (state, action) => {
@@ -113,7 +111,7 @@ const chatSlice = createSlice({
     },
     [__CreateRoom.fulfilled]: (state, action) => {
       state.isLoading = false;
-      console.log("action", action.payload)
+      console.log("action", action.payload);
       state.createRoom = action.payload.roomId;
     },
     [__CreateRoom.rejected]: (state, action) => {
@@ -137,8 +135,6 @@ const chatSlice = createSlice({
     [__getinitialChatList.fulfilled]: (state, action) => {
       state.isLoading = false;
       state.chatList = action.payload;
-      
-    
     },
     [__getinitialChatList.rejected]: (state, action) => {
       state.isLoading = false;
@@ -147,6 +143,6 @@ const chatSlice = createSlice({
   },
 });
 
-export const { postChat, clearChat,trueChat,chatList } = chatSlice.actions;
+export const { postChat, clearChat, trueChat, chatList } = chatSlice.actions;
 
 export default chatSlice.reducer;

@@ -1,18 +1,13 @@
 import axios from "axios";
 
-
-
-
 const noToken = axios.create({
-  // 추후에 로컬에서 서버 주소로 변경해야 함
-  baseURL: process.env.REACT_APP_SERVER, 
+  baseURL: process.env.REACT_APP_SERVER,
   //process.env.REACT_APP_URL,
   withCredentials: true,
-})
+});
 
 const token = axios.create({
-  // 추후에 로컬에서 서버 주소로 변경해야 함
-  baseURL:process.env.REACT_APP_SERVER, 
+  baseURL: process.env.REACT_APP_SERVER,
   //process.env.REACT_APP_URL,
   headers: {
     Access_Token:
@@ -21,11 +16,11 @@ const token = axios.create({
         : localStorage.getItem("Access_Token"),
   },
   withCredentials: true,
-})
+});
 
 const file = axios.create({
   // 추후에 로컬에서 서버 주소로 변경해야 함
-  baseURL:process.env.REACT_APP_SERVER,
+  baseURL: process.env.REACT_APP_SERVER,
   //process.env.REACT_APP_URL,
   headers: {
     enctype: "multipart/form-data",
@@ -35,81 +30,100 @@ const file = axios.create({
         : localStorage.getItem("Access_Token"),
   },
   withCredentials: true,
-})
+});
 
 export const Apis = {
+  getSellerInfoAX: (payload) => token.get(`api/myinfo/seller/${payload}`),
 
-getSellerInfoAX: (payload) => token.get(`api/myinfo/seller/${payload}`),
+  getPriceInfoAX: (payload) => token.get(`/api/price/${payload}`),
 
-getPriceInfoAX:(payload) => token.get(`/api/price/${payload}`),
+  checkPriceAX: (payload) =>
+    token.post(`/api/price/${payload.category}`, payload.Data),
 
-checkPriceAX:(payload) => token.post( `/api/price/${payload.category}`,
-payload.Data),
+  searchPostAX: (payload) =>
+    token.get(
+      `/api/posts/${payload.paramObj}/${payload.searchObj}?page=${payload.pageNumber}&size=${payload.pageSize}&sort=${payload.postSort},DESC`
+    ),
 
-searchPostAX:(payload) => token.get(`/api/post/${payload.paramObj}/${payload.searchObj}?page=${payload.pageNumber}&size=${payload.pageSize}&sort=${payload.postSort},DESC`),
+  getAddPostAX: (payload) =>
+    token.get(
+      `/api/posts/${payload.state.paramObj}?page=${payload.page}&size=${payload.state.pageSize}&sort=${payload.state.postSort},DESC`
+    ),
 
-getAddPostAX:(payload) => token.get(`/api/post/${payload.state.paramObj}?page=${payload.page}&size=${payload.state.pageSize}&sort=${payload.state.postSort},DESC`),
+  getPostAX: (payload) =>
+    token.get(
+      `/api/posts/${payload.paramObj}?page=${payload.pageNumber}&size=${payload.pageSize}&sort=${payload.postSort},DESC`
+    ),
 
-getPostAX:(payload) => token.get( `/api/post/${payload.paramObj}?page=${payload.pageNumber}&size=${payload.pageSize}&sort=${payload.postSort},DESC`),
+  addPostAX: (payload) => token.post(`/api/posts`, payload),
 
-addPostAX:(payload) => token.post(`/api/post`, payload),
+  deletePostAX: (payload) => token.delete(`/api/posts/${payload}`),
 
-deletePostAX:(payload) => token.delete(`/api/post/${payload}`),
+  editPostAX: (payload) => token.patch(`/api/posts/${payload.id}`),
 
-editPostAX:(payload) => token.patch( `/api/post/${payload.id}`),
+  getPostDetailAX: (payload) => token.get(`/api/posts/detail/${payload}`),
 
-getPostDetailAX:(payload) => token.get(`/api/post/detail/${payload}`),
+  addPostCommentAX: (payload) => token.post(`/api/posts/comment/${payload.id}`),
 
-addPostCommentAX:(payload) => token.post(`/api/post/comment/${payload.id}`),
+  deletePostCommentAX: (payload) =>
+    token.delete(`/api/posts/comment/${payload}`),
 
-deletePostCommentAX:(payload) => token.delete(`/api/post/comment/${payload}`),
+  CartInPostAX: (payload) => token.post(`/api/posts/likes/${payload}`),
 
-CartInPostAX:(payload) => token.post(`/api/post/likes/${payload}`),
+  CartOutPostAX: (payload) => token.delete(`/api/posts/likes/${payload}`),
 
-CartOutPostAX:(payload) => token.delete( `/api/post/likes/${payload}`),
+  searchObjectionAX: (payload) =>
+    token.get(
+      `/api/issues/${payload.paramObj}/${payload.searchObj}?page=${payload.pageNumber}&size=${payload.pageSize}&sort=${payload.postSort},DESC`
+    ),
 
-searchObjectionAX:(payload) => token.get( `/api/issue/${payload.paramObj}/${payload.searchObj}?page=${payload.pageNumber}&size=${payload.pageSize}&sort=${payload.postSort},DESC`),
+  getAddObjectionAX: (payload) =>
+    token.get(
+      `/api/issues/${payload.state.paramObj}?page=${payload.page}&size=${payload.state.pageSize}&sort=${payload.state.postSort},DESC`
+    ),
 
-getAddObjectionAX:(payload) => token.get(`/api/issue/${payload.state.paramObj}?page=${payload.page}&size=${payload.state.pageSize}&sort=${payload.state.postSort},DESC`),
+  getObjectionAX: (payload) =>
+    token.get(
+      `/api/issues/${payload.paramObj}?page=${payload.pageNumber}&size=${payload.pageSize}&sort=${payload.postSort},DESC`
+    ),
 
-getObjectionAX:(payload) => token.get(`/api/issue/${payload.paramObj}?page=${payload.pageNumber}&size=${payload.pageSize}&sort=${payload.postSort},DESC`),
+  addObjectionAX: (payload) => token.post(`/api/issues`, payload),
 
-addObjectionAX:(payload) => token.post(`/api/issue`, payload),
+  deleteObjectionAX: (payload) => token.delete(`/api/issues/${payload}`),
 
-deleteObjectionAX:(payload) => token.delete(`/api/issue/${payload}`),
+  editObjectionAX: (payload) => token.patch(`/api/issues/${payload.id}`),
 
-editObjectionAX:(payload)=> token.patch(`/api/issue/${payload.id}`),
+  getObjectionDetailAX: (payload) => token.get(`/api/issues/detail/${payload}`),
 
-getObjectionDetailAX:(payload) => token.get(`/api/issue/detail/${payload}`),
+  addObjectionCommentAX: (payload) =>
+    token.post(`/api/issues/comment/${payload.id}`),
 
-addObjectionCommentAX:(payload) => token.post(`/api/issue/comment/${payload.id}`),
+  deleteObjectionCommentAX: (payload) =>
+    token.delete(`/api/issues/comment/${payload}`),
 
-deleteObjectionCommentAX:(payload) => token.delete(`/api/issue/comment/${payload}`),
+  CartInObjectionAX: (payload) => token.post(`/api/issues/likes/${payload}`),
 
-CartInObjectionAX:(payload) => token.post( `/api/issue/likes/${payload}`),
+  CartOutObjectionAX: (payload) => token.delete(`/api/issues/likes/${payload}`),
 
-CartOutObjectionAX:(payload) => token.delete( `/api/issue/likes/${payload}`),
+  getMyPostAX: () => token.get(`/api/myinfo/post`),
 
-getMyPostAX:() => token.get( `/api/myinfo/post`),
+  getMyObjectionAX: () => token.get(`/api/myinfo/issue`),
 
-getMyObjectionAX:() => token.get(`/api/myinfo/issue`),
+  getMyLikeAX: () => token.get(`/api/myinfo/likes`),
 
-getMyLikeAX:() => token.get( `/api/myinfo/likes`),
+  emailCheckAX: (payload) =>
+    token.post(`/api/member/signup/mail-confirm`, payload),
 
-emailCheckAX:(payload) => token.post( `/api/member/signup/mail-confirm`,payload),
+  kakaoLoginAX: (code) => token.get(`/api/member/kakao?code=${code}`),
 
-kakaoLoginAX:(code) => token.get(`/api/member/kakao?code=${code}`),
+  SigninAX: (payload) => noToken.post(`/api/member/login`, payload),
 
-SigninAX:(payload) => token.post(`/api/member/login`,payload),
+  SignUpAX: (payload) => noToken.post(`/api/member/signup`, payload),
 
-SignUpAX:(payload) => token.post(`/api/member/signup`,payload),
+  UserProfileAX: () => token.get(`/api/myinfo`),
 
-UserProfileAX:() => token.get(`/api/myinfo`),
+  UserProfileEditAX: (payload) => token.patch(`/api/myinfo/edit`, payload),
 
-UserProfileEditAX:(payload) => token.patch(`/api/myinfo/edit`,payload),
-
-logoutAX:() => token.get(`/api/logout`),
-
-
-}
-export default Apis
+  // logoutAX: () => token.get(`/api/logout`),
+};
+export default Apis;

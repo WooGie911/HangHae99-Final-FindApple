@@ -1,14 +1,5 @@
 import { createAsyncThunk, createSlice } from "@reduxjs/toolkit";
-import axios from "axios";
 import Apis from "../../shared/Apis";
-
-const initialState = {
-  post: [{}],
-  comment: [],
-  user: {},
-};
-const accessToken = localStorage.getItem("Access_Token");
-const refreshToken = localStorage.getItem("Refresh_Token");
 
 export const __emailCheck = createAsyncThunk(
   "Login/__emailCheck",
@@ -121,37 +112,41 @@ export const __UserProfileEdit = createAsyncThunk(
       return thunkAPI.rejectWithValue(error);
     }
   }
-);
-//로그아웃
-export const __logout = createAsyncThunk(
-  "Login/__logout",
-  async (payload, thunkAPI) => {
-    try {
-      await Apis
-        .logoutAX(payload)
-        .then((res) => {
-          if (res.data.statusCode === 200) {
-            localStorage.clear();
-            alert("로그아웃 되었습니다");
-            window.location.replace("/signin");
-          }
-        })
-        .catch((error) => {
-          if (error.response.data.statusCode === 400) {
-            localStorage.clear();
-            alert("로그아웃 되었습니다");
-            window.location.replace("/signin");
-          }
-        });
-    } catch (error) {
-      return thunkAPI.rejectWithValue(error);
-    }
-  }
+  // );
+  // //로그아웃
+  // export const __logout = createAsyncThunk(
+  //   "Login/__logout",
+  //   async (payload, thunkAPI) => {
+  //     try {
+  //       await Apis
+  //         .logoutAX(payload)
+  //         .then((res) => {
+  //           if (res.data.statusCode === 200) {
+  //             localStorage.clear();
+  //             alert("로그아웃 되었습니다");
+  //             window.location.replace("/signin");
+  //           }
+  //         })
+  //         .catch((error) => {
+  //           if (error.response.data.statusCode === 400) {
+  //             localStorage.clear();
+  //             alert("로그아웃 되었습니다");
+  //             window.location.replace("/signin");
+  //           }
+  //         });
+  //     } catch (error) {
+  //       return thunkAPI.rejectWithValue(error);
+  //     }
+  //   }
 );
 
 const LoginSlice = createSlice({
   name: "Login",
-  initialState,
+  initialState: {
+    post: [{}],
+    comment: [],
+    user: {},
+  },
 
   reducers: {},
   extraReducers: {
