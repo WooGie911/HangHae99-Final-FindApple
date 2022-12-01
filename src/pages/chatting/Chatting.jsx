@@ -6,7 +6,7 @@ import SockJS from "sockjs-client";
 import { useNavigate, useParams } from "react-router-dom";
 import { __getinitialChatList, chatList } from "../../redux/modules/ChattingSlice";
 import {v4 as uuidv4} from 'uuid';
-
+import back from "../../assets/back.png";
 
 
 
@@ -14,6 +14,7 @@ function Chatting() {
   const sock = new SockJS("http://3.38.228.74:8080/ws/chat");
   const ws = webstomp.over(sock);
   const dispatch = useDispatch();
+  const navigate = useNavigate();
   let roomId=Number(localStorage.getItem("roomId"))
   const listReducer = useSelector((state) => state.chatting.chatList);
   useEffect(() => {
@@ -149,9 +150,28 @@ useEffect(() => {
 }, [listReducer]);
 //채팅창 치면 맨 밑으로 내려감.
 
+// 뒤로가기
+const onClickHandler = () => {
+  navigate(-1);
+};
 
 return(
+  
   <StContainer>
+        <HeadContainer>
+          <img
+            onClick={onClickHandler}
+            style={{ width: 25, height: 25 }}
+            src={back}
+          />
+          <span>
+            {" "}
+            <div>{listReducer.nickname}</div>
+          </span>
+        </HeadContainer>
+        <TitleContainer>
+          <img src={listReducer.image.imgUrl} style={{width:44, height:44}}/>
+        </TitleContainer>
     <ChatDiv>
   { listReducer.chatList !== undefined && listReducer.chatList !== null &&
     listReducer.chatList.map((item)=>{
@@ -185,17 +205,47 @@ height:100%;
 padding:20px;
 `
 
+//헤더
+const HeadContainer = styled.div`
+  display: flex;
+  justify-content: center;
+  justify-items: center;
+  align-items: center;
+  position: relative;
+  width: 100%;
+  height: 60px;
+  font-family: "Inter";
+  font-style: normal;
+  font-weight: bold;
+  font-size: 18px;
+  line-height: 22px;
+
+  img {
+    position: absolute;
+    left: 10px;
+  }
+`;
+
 const ChatDiv=styled.div`
 height: 100%;
 overflow: auto;
 `
+
+// title
+const TitleContainer=styled.div`
+height: 60px;
+border-top: 1px solid lightgrey;
+border-bottom: 1px solid lightgrey;
+img{
+  margin-top: 10px;
+}
+`
+
 // return (
 //         <LoginContainer>
 //                 <Header>
                
-//                      {/* <div>
-//                       <Img onClick={()=>navigate(-1)} src={require("../chatting/chattingImg/png-clipart-computer-icons-arrow-previous-button-angle-triangle.png")}/>
-//                       </div> */}
+                     
                       
 //                      <div>
 //                       <Nickname>{chatList.postNickname}</Nickname>
