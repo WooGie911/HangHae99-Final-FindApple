@@ -18,7 +18,6 @@ import SellerPage from "../pages/SellerPage";
 import MyLike from "../pages/MyLike";
 import MyObjection from "../pages/MyObjection";
 import MyPost from "../pages/MyPost";
-import PricingInput from "../components/PricingInput";
 import Pricingfinal from "../components/Pricingfinal";
 import PricingText from "../components/PricingText";
 import PostComment from "../pages/PostComment";
