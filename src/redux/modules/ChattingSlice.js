@@ -9,9 +9,9 @@ export const __CreateRoom = createAsyncThunk(
   async (payload, thunkAPI) => {
     console.log(payload);
     try {
-      // const response = await axios.post(`${process.env.REACT_APP_SERVER}/room`, payload.postId,
+      // const response = await axios.post(`${process.env.REACT_APP_SERVER}/api/chat/room`, payload.postId,
       const response = await axios.post(
-        `${process.env.REACT_APP_Chatting_SERVER}/room`,
+        `${process.env.REACT_APP_Chatting_SERVER}/api/chat/room`,
         payload.postId,
         {
           headers: {
@@ -34,8 +34,8 @@ export const __getRoomList = createAsyncThunk(
   async (payload, thunkAPI) => {
     try {
       const response = await axios.get(
-        // `${process.env.REACT_APP_SERVER}/roomList`,
-        ` ${process.env.REACT_APP_Chatting_SERVER}/roomList`,
+        // `${process.env.REACT_APP_SERVER}/api/chat/roomList`,
+        ` ${process.env.REACT_APP_Chatting_SERVER}/api/chat/roomList`,
         {
           headers: {
             "Content-Type": `application/json`,
@@ -58,8 +58,8 @@ export const __getinitialChatList = createAsyncThunk(
   async (payload, thunkAPI) => {
     try {
       const response = await axios.post(
-        // `${process.env.REACT_APP_SERVER}/roomInfo`,
-        `${process.env.REACT_APP_Chatting_SERVER}/roomInfo`,
+        // `${process.env.REACT_APP_SERVER}/api/chat/roomInfo`,
+        `${process.env.REACT_APP_Chatting_SERVER}/api/chat/roomInfo`,
         payload,
         {
           headers: {
