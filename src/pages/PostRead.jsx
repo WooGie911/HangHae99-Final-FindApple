@@ -11,6 +11,8 @@ import Footer from "../components/Footer";
 import { __postList } from "../redux/modules/PostsSlice";
 import SortBar from "../components/SortBar";
 import styled from "styled-components";
+import ChatList from "../pages/chatting/element/ChatList";
+import chat from "../assets/chat.png";
 
 const PostRead = () => {
   const params = useParams();
@@ -25,7 +27,12 @@ const PostRead = () => {
     dispatch(__getPost(submitObj));
     setSubmitObj({ ...submitObj, pageNumber: 0 });
   }, [params]);
-
+  
+// 채팅 modal창 상태 관리
+const [isChatModal, setIsChatModal] = useState(false);
+const popupPostCode = () => {
+  setIsChatModal(!isChatModal)
+}
   return (
     <div>
       <Layout>
@@ -51,6 +58,12 @@ const PostRead = () => {
             detail={"/PostDetail"}
             __getDetail={__getPostDetail}
           />
+        <ChatButton onClick={popupPostCode}><img src={chat}/>채팅</ChatButton>
+        {isChatModal && (
+        <ModalWrap onClick={popupPostCode}>
+        <ChatList />
+        </ModalWrap>
+        )}
           <Footer />
         </READ>
       </Layout>
@@ -65,3 +78,29 @@ const READ = styled.div`
   flex-direction: column;
   position: relative;
 `;
+
+// modal 버튼
+const ChatButton = styled.button`
+width: 79px;
+height: 45px;
+background: #3D6AF2;
+border-radius: 30px;
+position : fixed;
+bottom: 70px;
+right : 10px;
+`
+// modal 닫기
+const ModalWrap=styled.div`
+position: fixed;
+bottom: 0;
+left: 0;
+width: 100%;
+height: 100%;
+background-color: rgba(0, 0, 0, 0.4);
+display: flex;
+justify-content: center;
+align-items: center;
+z-index: 998;
+padding: 0 15px;
+box-sizing: border-box;
+`

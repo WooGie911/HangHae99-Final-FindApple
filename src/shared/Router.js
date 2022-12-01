@@ -27,6 +27,7 @@ import Cover from "../pages/Cover";
 import Info1 from "../pages/Info1";
 import Info2 from "../pages/Info2";
 import Info3 from "../pages/Info3";
+import Chatting from "../pages/chatting/Chatting"
 import PricingPage from "../pages/PricingPage";
 
 const Router = () => {
@@ -96,6 +97,9 @@ const Router = () => {
         <Route path="/introduction1" element={<Info1 />} />
         <Route path="/introduction2" element={<Info2 />} />
         <Route path="/introduction3" element={<Info3 />} />
+
+        {/*채팅페이지 */}
+        <Route path="/chatting/:roomId" element={<Chatting />} />
 
         {/* 카카오 소셜 로그인 */}
         <Route path="/KAKAO" element={<Redirect />} />
