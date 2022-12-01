@@ -19,11 +19,15 @@ import threedots from "../assets/threedots.png";
 import blueheart from "../assets/blueheart.png";
 import emptyheart from "../assets/emptyheart.png";
 import home from "../assets/home.png";
+import {__CreateRoom } from "../redux/modules/ChattingSlice";
+import chat from "../assets/chat.png";
+
 const ObjectionDetail = () => {
   const navigate = useNavigate();
   const dispatch = useDispatch();
   const params = useParams();
   const { post } = useSelector((state) => state.objectionDetails);
+  const postChat = useSelector((state) => state.chatting.createRoom)
   console.log("이슈 포스트 뭐 들어왔나 변수명(id)", post);
   //찜하기
   const onCartButton = (payload) => {
@@ -64,6 +68,26 @@ const ObjectionDetail = () => {
   const onSellerPage = () => {
     navigate(`/sellerpage/${post.memberId}`);
   };
+
+// 채팅방 개설
+
+useEffect(()=>{
+  localStorage.setItem("roomId", postChat)
+}, [postChat])
+
+const onClickChatting = () =>{
+dispatch(__CreateRoom({
+  postId:post.issuesId,
+}));
+setTimeout(
+  function () {
+      // 만들어진 채팅방으로 이동하는 로직 => localStorage 활용한 방법 이용
+      // 연결되었을 때 콜백함수 실행
+      navigate(`/chatting/${localStorage.getItem("roomId")}`);
+  },
+  300 // 밀리초 간격으로 실행
+);
+}
 
   // 케러셀
 
@@ -210,6 +234,7 @@ const ObjectionDetail = () => {
               <TextDiv>댓글</TextDiv>
             </div>
           </Price>
+          <ChatButton onClick={onClickChatting}><img src={chat}/>채팅</ChatButton>
         </White>
       </Layout>
     </>
@@ -404,3 +429,14 @@ const Models = styled.div`
     padding: 3px;
   }
 `;
+
+// 채팅 버튼
+const ChatButton = styled.button`
+width: 79px;
+height: 45px;
+background: #3D6AF2;
+border-radius: 30px;
+position : fixed;
+bottom: 170px;
+right : 25px;
+`

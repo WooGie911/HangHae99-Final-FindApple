@@ -10,6 +10,7 @@ import Login from "../modules/LoginSlice";
 import mypage from "../modules/MypageSlice";
 import sellerpage from "../modules/SellerSlice";
 import price from "../modules/PriceSlice";
+import chatting from "../modules/ChattingSlice";
 
 const store = configureStore({
   reducer: {
@@ -21,6 +22,7 @@ const store = configureStore({
     mypage,
     sellerpage,
     price,
+    chatting,
   },
   middleware: getDefaultMiddleware({
     serializableCheck: false,
