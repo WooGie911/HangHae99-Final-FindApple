@@ -1,43 +1,15 @@
 import React from "react";
 import styled from "styled-components";
 const PricingList = ({ DetailPrice }) => {
-  let MacbookClass = "";
-  if (DetailPrice.state === "A급" || DetailPrice.macbookState === "A급") {
-    MacbookClass = "Class A";
-  } else if (
-    DetailPrice.state === "B급" ||
-    DetailPrice.macbookState === "B급"
-  ) {
-    MacbookClass = "Class B";
-  } else {
-    MacbookClass = "Class C";
-  }
-  let IphoneClass = "";
-  if (DetailPrice.state === "A급" || DetailPrice.iphoneState === "A급") {
-    IphoneClass = "Class A";
-  } else if (DetailPrice.state === "B급" || DetailPrice.iphoneState === "B급") {
-    IphoneClass = "Class B";
-  } else {
-    IphoneClass = "Class C";
-  }
-
-  let careOX = "";
-  if (DetailPrice.careOX === "true") {
-    careOX = "O";
-  } else {
-    careOX = "X";
-  }
-
   return (
     <>
       <TopDiv>
         <TitleDiv>가격 책정 완료</TitleDiv>
-        {DetailPrice.getPrice !== undefined && (
-          <>
-            <ContentDiv>
-              {DetailPrice.getPrice.toLocaleString("ko-KR")}원
-            </ContentDiv>
-          </>
+        {DetailPrice.getPrice && (
+          <ContentDiv>
+            {DetailPrice.getPrice.toLocaleString("ko-KR")}원
+            {/* {DetailPrice.getPrice}원 */}
+          </ContentDiv>
         )}
       </TopDiv>
       {DetailPrice.category === "macbook" ? (
@@ -77,11 +49,11 @@ const PricingList = ({ DetailPrice }) => {
             </div>
             <div>
               <span>맥북 상태</span>
-              <label>{MacbookClass}</label>
+              <label>{DetailPrice.macbookState}</label>
             </div>
             <div>
               <span>애플케어 유무</span>
-              <label>{careOX}</label>
+              <label>{DetailPrice.careOX}</label>
             </div>
             <div>
               <span>애플케어 보증기간</span>
@@ -114,11 +86,15 @@ const PricingList = ({ DetailPrice }) => {
             </div>
             <div>
               <span>아이폰 상태</span>
-              <label>{IphoneClass}</label>
+              <label>{DetailPrice.iphoneState}</label>
             </div>
             <div>
               <span>애플케어 유무</span>
-              <label>{careOX}</label>
+              <label>{DetailPrice.careOX}</label>
+            </div>
+            <div>
+              <span>애플케어 보증기간</span>
+              <label>{DetailPrice.careDate}</label>
             </div>
           </div>
         </ListDiv>

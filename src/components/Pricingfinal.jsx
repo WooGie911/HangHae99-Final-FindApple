@@ -12,11 +12,26 @@ const Pricingfinal = () => {
   const { DetailPrice } = useSelector((state) => state.price);
 
   const checkReally = (data) => {
-    if (window.confirm("이동하시겠습니까?")) {
-      navigate(data);
+    if (data === "/main") {
+      if (window.confirm(`정말 떠나시겠습니까?`)) {
+        navigate(data);
+      }
+    } else if (data === "/pricingPage") {
+      if (window.confirm("모든 데이터를 새로 입력하시겠습니다?")) {
+        window.location.replace(data);
+      }
+    } else if (data === "/postcreate") {
+      if (window.confirm(`상품을 등록하시겠습니까?`)) {
+        navigate(data);
+      }
+    } else if (data === "/objectioncreate") {
+      if (window.confirm(`가격이 마음에 들지 않으십니까?`)) {
+        navigate(data);
+      }
     }
     console.log("DetailPrice", DetailPrice);
   };
+
   return (
     <>
       <Layout>
@@ -24,14 +39,14 @@ const Pricingfinal = () => {
           <TitleDiv>
             <Backbutton
               onClick={() => {
-                navigate(-1);
+                navigate(`/pricingPage`);
               }}
             >
               〈
             </Backbutton>
             <Xbutton
               onClick={() => {
-                navigate("/main");
+                checkReally(`/main`);
               }}
             >
               X
@@ -43,7 +58,9 @@ const Pricingfinal = () => {
           <Div>
             <StepDiv>
               <StepButton
-                onClick={() => window.location.replace(`/pricingInput`)}
+                onClick={() => {
+                  checkReally(`/pricingInput`);
+                }}
               >
                 <div>처음부터</div> 다시 입력하기
               </StepButton>
