@@ -1,13 +1,22 @@
 import { createAsyncThunk, createSlice } from "@reduxjs/toolkit";
 import axios from "axios";
+import Apis from "../../shared/Apis";
+
 
 const accessToken = localStorage.getItem("Access_Token");
 const refreshToken = localStorage.getItem("Refresh_Token");
+
+
 
 export const __getPriceInfo = createAsyncThunk(
   "price/__getPriceInfo",
   async (payload, thunkAPI) => {
     try {
+
+      // const data = await Apis.getPriceInfoAX(payload);
+      // console.log("겟프라이스인포", data);
+      // return thunkAPI.fulfillWithValue(data.data);
+
       let data = {};
       if (payload.API !== "") {
         data = await axios.get(
@@ -27,6 +36,7 @@ export const __getPriceInfo = createAsyncThunk(
         getList: data.data,
       };
       return thunkAPI.fulfillWithValue(myPayload);
+
     } catch (error) {
       return thunkAPI.rejectWithValue(error);
     }
@@ -37,6 +47,10 @@ export const __checkPrice = createAsyncThunk(
   "price/__checkPrice",
   async (payload, thunkAPI) => {
     try {
+
+      // const response = await Apis.checkPriceAX(payload);
+      // return thunkAPI.fulfillWithValue(response.data);
+
       const data = await axios.post(
         `${process.env.REACT_APP_SERVER}/api/price/${payload.category}`,
         payload.Data,
@@ -54,6 +68,7 @@ export const __checkPrice = createAsyncThunk(
         data: data.data,
       };
       return thunkAPI.fulfillWithValue(myPayload);
+
     } catch (error) {
       return thunkAPI.rejectWithValue(error);
     }

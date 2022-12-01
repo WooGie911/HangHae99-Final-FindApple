@@ -1,5 +1,6 @@
 import { createAsyncThunk, createSlice } from "@reduxjs/toolkit";
 import axios from "axios";
+import Apis from "../../shared/Apis";
 
 const initialState = {
   post: [{}],
@@ -13,11 +14,7 @@ export const __emailCheck = createAsyncThunk(
   "Login/__emailCheck",
   async (payload, thunkAPI) => {
     try {
-      const data = await axios.post(
-        `${process.env.REACT_APP_SERVER}/api/member/signup/mail-confirm`,
-        payload
-      );
-
+      const data = await Apis.emailCheckAX(payload);
       localStorage.setItem("emailCheckData", data.data);
       return thunkAPI.fulfillWithValue(data.data.data);
     } catch (error) {
@@ -31,9 +28,7 @@ export const __kakaoLogin = createAsyncThunk(
   "Login/__kakaoLogin",
   async (code, thunkAPI) => {
     try {
-      const res = await axios.get(
-        `${process.env.REACT_APP_SERVER}/api/member/kakao?code=${code}`
-      );
+      const res = await Apis.kakaoLoginAX(code);
       window.localStorage.setItem("Access_Token", res.data.accessToken);
       window.localStorage.setItem("Refresh_Token", res.data.refreshToken);
 
@@ -54,10 +49,7 @@ export const __Signin = createAsyncThunk(
   "Login/__Signin",
   async (payload, thunkAPI) => {
     try {
-      const data = await axios.post(
-        `${process.env.REACT_APP_SERVER}/api/member/login`,
-        payload
-      );
+      const data = await Apis.SigninAX(payload);
 
       if (data.status === 200 || data.status === 201) {
         window.localStorage.setItem("Access_Token", data.data.accessToken);
@@ -89,10 +81,7 @@ export const __SignUp = createAsyncThunk(
   async (payload, thunkAPI) => {
     try {
       console.log(payload);
-      const response = await axios.post(
-        `${process.env.REACT_APP_SERVER}/api/member/signup`,
-        payload
-      );
+      const response = await Apis.SignUpAX(payload);
 
       console.log("회원가입response", response);
       // alert(`${response.data.msg}`);
@@ -115,17 +104,7 @@ export const __UserProfile = createAsyncThunk(
   "Login/__UserProfile",
   async (payload, thunkAPI) => {
     try {
-      const data = await axios.get(
-        `${process.env.REACT_APP_SERVER}/api/myinfo`,
-        {
-          headers: {
-            "Content-Type": `application/json`,
-            Access_Token: accessToken,
-            Refresh_Token: refreshToken,
-            "Cache-Control": "no-cache",
-          },
-        }
-      );
+      const data = await Apis.UserProfileAX(payload);
       return thunkAPI.fulfillWithValue(data.data);
     } catch (error) {
       return thunkAPI.rejectWithValue(error);
@@ -137,18 +116,7 @@ export const __UserProfileEdit = createAsyncThunk(
   "Login/__UserProfileEdit",
   async (payload, thunkAPI) => {
     try {
-      const data = await axios.patch(
-        `${process.env.REACT_APP_SERVER}/api/myinfo/edit`,
-        payload,
-        {
-          headers: {
-            enctype: "multipart/form-data",
-            Access_Token: accessToken,
-            // Refresh_Token: refreshToken,
-            "Cache-Control": "no-cache",
-          },
-        }
-      );
+      const data = await Apis.UserProfileEditAX(payload);
     } catch (error) {
       return thunkAPI.rejectWithValue(error);
     }
@@ -159,14 +127,8 @@ export const __logout = createAsyncThunk(
   "Login/__logout",
   async (payload, thunkAPI) => {
     try {
-      await axios
-        .get(`${process.env.REACT_APP_SERVER}/api/logout`, {
-          headers: {
-            Access_Token: accessToken,
-            Refresh_Token: refreshToken,
-            "Cache-Control": "no-cache",
-          },
-        })
+      await Apis
+        .logoutAX(payload)
         .then((res) => {
           if (res.data.statusCode === 200) {
             localStorage.clear();
