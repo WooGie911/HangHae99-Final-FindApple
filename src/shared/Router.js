@@ -18,7 +18,6 @@ import SellerPage from "../pages/SellerPage";
 import MyLike from "../pages/MyLike";
 import MyObjection from "../pages/MyObjection";
 import MyPost from "../pages/MyPost";
-import PricingInput from "../components/PricingInput";
 import Pricingfinal from "../components/Pricingfinal";
 import PricingText from "../components/PricingText";
 import PostComment from "../pages/PostComment";
@@ -28,6 +27,7 @@ import Cover from "../pages/Cover";
 import Info1 from "../pages/Info1";
 import Info2 from "../pages/Info2";
 import Info3 from "../pages/Info3";
+import PricingPage from "../pages/PricingPage";
 
 const Router = () => {
   return (
@@ -83,20 +83,7 @@ const Router = () => {
         <Route path="/sellerpage/:memberId" element={<SellerPage />} />
 
         {/*가격 책정 페이지 */}
-        <Route path="/pricingInput" element={<PricingInput />} />
-        <Route path="/pricingInput/:category" element={<PricingInput />} />
-        <Route
-          path="/pricingInput/:category/:years"
-          element={<PricingInput />}
-        />
-        <Route
-          path="/pricingInput/:category/:years/:model"
-          element={<PricingInput />}
-        />
-        <Route
-          path="/pricingInput/:category/:years/:model/:options"
-          element={<PricingInput />}
-        />
+        <Route path="/pricingPage" element={<PricingPage />} />
 
         {/*가격 결정 페이지 */}
         <Route path="/pricingfinal" element={<Pricingfinal />} />

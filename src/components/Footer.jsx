@@ -5,9 +5,37 @@ import doubletick from "../assets/doubletick.png";
 import home from "../assets/home.png";
 import blueplus from "../assets/blueplus.png";
 import search from "../assets/search.png";
+import { useDispatch } from "react-redux";
+import { swichStepState } from "../redux/modules/PriceSlice";
 
 const Footer = () => {
   const navigate = useNavigate();
+  const dispatch = useDispatch();
+
+  const onClickPricingButton = () => {
+    //가격책정 스토어 초기화
+    dispatch(
+      swichStepState({
+        stepState: 1,
+        priceLists: {
+          category: "",
+          years: 0,
+          model: "",
+          options: "",
+          batteryState: 0,
+          careOX: "",
+          careDate: "",
+          iphoneState: "",
+          macbookState: "",
+          ram: "",
+          storage: "",
+          keyboard: "",
+        },
+      })
+    );
+    //가격책정 페이지로 이동
+    navigate("/pricingPage");
+  };
 
   return (
     <Footers>
@@ -24,7 +52,7 @@ const Footer = () => {
           </div>
           <div>검색</div>
         </div>
-        <div onClick={() => navigate("/pricingInput")}>
+        <div onClick={() => onClickPricingButton()}>
           <div>
             <img src={blueplus} />{" "}
           </div>
