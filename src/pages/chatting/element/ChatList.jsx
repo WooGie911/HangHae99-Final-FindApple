@@ -36,15 +36,17 @@ const ChatList = () => {
           Room.map((item, i) => {
             return (
               <div key={i}>
+                {item.chatList.length > 0 ? (<>
                 <RoomList onClick={() => onClickChatting(item)}>
                   <Profile>
                 <div><img src={item.postUserAvatarUrl} style={{ width: 44, height: 44, borderRadius:"50%"}}/></div>
                <div>
+                
                <div>{item.postUserNickname} <Time>{item.chatList[item.chatList.length-1].sendDate}</Time></div>
                 <Message>
                 {item.chatList[item.chatList.length-1].message}
                 {/* 대화의 맨 마지막만 가지고 오는 로직이면 위와 같이 진행하면 됨 */}
-                </Message>
+                </Message>                
                 </div>
                 </Profile>
                 <SellImg>
@@ -54,6 +56,7 @@ const ChatList = () => {
                 </>)}
                 </SellImg>
                 </RoomList>
+                </>): null}
               </div>
             );
           })}

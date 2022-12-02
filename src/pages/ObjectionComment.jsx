@@ -23,7 +23,7 @@ const ObjectionComment = () => {
   }, [post.updateComment]);
 
   const onClickHandler = () => {
-    navigate(-1);
+    navigate(`/objectionDetail/${post.issuesId}`);
   };
   return (
     <>

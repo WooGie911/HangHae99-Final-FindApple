@@ -13,7 +13,7 @@ import back from "../../assets/back.png";
 import {ReactComponent as Send} from "../../assets/send.svg";
 
 function Chatting() {
-  const sock = new SockJS(`${process.env.REACT_APP_Chatting_SERVER}/api/ws/chat`);
+  const sock = new SockJS(`${process.env.REACT_APP_SERVER}/api/ws/chat`);
   const ws = webstomp.over(sock);
   const dispatch = useDispatch();
   const navigate = useNavigate();
@@ -136,8 +136,6 @@ function Chatting() {
     navigate(-1);
   };
 
-// 삼항연산자와 usdState활용한 채팅방 좌우 설정
-const [chat, setChat] = useState(false)
 
   return (
     <StContainer>

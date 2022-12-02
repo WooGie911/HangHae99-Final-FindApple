@@ -16,7 +16,7 @@ const MyObjection = () => {
     dispatch(__getMyObjection());
   }, []);
   const onClickHandler = () => {
-    navigate(-1);
+    navigate("/mypage");
   };
   return (
     <div>

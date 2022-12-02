@@ -107,7 +107,7 @@ setTimeout(
             <Span>
               <img
                 onClick={() => {
-                  navigate(-1);
+                  navigate("/objectionread/all");
                 }}
                 style={{ width: 25, height: 25 }}
                 src={back}

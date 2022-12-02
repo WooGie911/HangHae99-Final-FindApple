@@ -2,6 +2,7 @@ import React from "react";
 import { useNavigate } from "react-router-dom";
 import styled from "styled-components";
 import KakaoLogout from "./KakaoLogout";
+import "../assets/font/font.css";
 
 const LogoutButton = () => {
   const navigate = useNavigate();
@@ -21,7 +22,7 @@ const LogoutButton = () => {
       {SiteType === "KAKAO" ? (
         <KakaoLogout />
       ) : (
-        <Logout onClick={onClickButton}>로그아웃</Logout>
+        <Logout style={{fontFamily: 'Pretendard-Regular'}} onClick={onClickButton}>로그아웃</Logout>
       )}
     </>
   );
