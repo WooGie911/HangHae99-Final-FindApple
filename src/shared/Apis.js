@@ -18,19 +18,19 @@ const token = axios.create({
   withCredentials: true,
 });
 
-// 임시
+// 임시(정수님 서버용)
 
-const token2 = axios.create({
-  baseURL: process.env.REACT_APP_Chatting_SERVER,
-  //채팅용 서버,
-  headers: {
-    Access_Token:
-      localStorage.getItem("Access_Token") === undefined
-        ? ""
-        : localStorage.getItem("Access_Token"),
-  },
-  withCredentials: true,
-});
+// const token2 = axios.create({
+//   baseURL: process.env.REACT_APP_Chatting_SERVER,
+//   //채팅용 서버,
+//   headers: {
+//     Access_Token:
+//       localStorage.getItem("Access_Token") === undefined
+//         ? ""
+//         : localStorage.getItem("Access_Token"),
+//   },
+//   withCredentials: true,
+// });
 
 const file = axios.create({
   // 추후에 로컬에서 서버 주소로 변경해야 함
@@ -139,11 +139,11 @@ export const Apis = {
   UserProfileEditAX: (payload) => token.patch(`/api/myinfo/edit`, payload),
   
   // 채팅
-  CreateRoomAX: (payload) => token2.post(`/api/chat/room`, payload),
+  CreateRoomAX: (payload) => token.post(`/api/chat/room`, payload),
 
-  GetRoomListAX: () => token2.get(`/api/chat/roomList`),
+  GetRoomListAX: () => token.get(`/api/chat/roomList`),
 
-  GetInitialChatListAX: (payload) => token2.post(`/api/chat/roomInfo`, payload),
+  GetInitialChatListAX: (payload) => token.post(`/api/chat/roomInfo`, payload),
 
   // logoutAX: () => token.get(`/api/logout`),
 };
