@@ -8,6 +8,7 @@ import KakaoLogin from "../components/KakaoLogin";
 import Layout from "../components/Layout";
 import LOGO from "../assets/LOGO.svg";
 import LOGOWHITE from "../assets/LOGOWHITE.svg";
+import "../assets/font/font.css";
 
 const SignIn = () => {
   const initialState = {
@@ -53,7 +54,7 @@ const SignIn = () => {
             value={input.password}
             onKeyPress={keyPress}
           />
-          <StButton style={{ color: "black" }} onClick={onSubmitHandler}>
+          <StButton style={{ color: "black", fontFamily: 'Pretendard-Regular' }} onClick={onSubmitHandler}>
             로그인
           </StButton>
           <br />
