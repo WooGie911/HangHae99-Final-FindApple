@@ -6,7 +6,7 @@ export const __getSellerinfo = createAsyncThunk(
   "sellerpage/__getSellerinfo",
   async (payload, thunkAPI) => {
     try {
-      const data = await Apis.getsellerinfoAX(payload);
+      const data = await Apis.getSellerInfoAX(payload);
       return thunkAPI.fulfillWithValue(data.data);
     } catch (error) {
       return thunkAPI.rejectWithValue(error);
