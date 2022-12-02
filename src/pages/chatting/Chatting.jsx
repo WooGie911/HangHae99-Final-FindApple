@@ -13,7 +13,7 @@ import back from "../../assets/back.png";
 import {ReactComponent as Send} from "../../assets/send.svg";
 
 function Chatting() {
-  const sock = new SockJS(`${process.env.REACT_APP_Chatting_SERVER}/api/ws/chat`);
+  const sock = new SockJS(`${process.env.REACT_APP_SERVER}/api/ws/chat`);
   const ws = webstomp.over(sock);
   const dispatch = useDispatch();
   const navigate = useNavigate();
