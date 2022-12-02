@@ -139,11 +139,11 @@ export const Apis = {
   UserProfileEditAX: (payload) => token.patch(`/api/myinfo/edit`, payload),
   
   // 채팅
-  CreateRommAX: (payload) => token2.post(`/api/chat/room`, payload),
+  CreateRoomAX: (payload) => token2.post(`/api/chat/room`, payload),
 
   GetRoomListAX: () => token2.get(`/api/chat/roomList`),
 
-  GetInitialChatList: (payload) => token2.get(`/api/chat/roomInfo`, payload),
+  GetInitialChatListAX: (payload) => token2.post(`/api/chat/roomInfo`, payload),
 
   // logoutAX: () => token.get(`/api/logout`),
 };

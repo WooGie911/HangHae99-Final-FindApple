@@ -2,27 +2,14 @@ import { createAsyncThunk, createSlice } from "@reduxjs/toolkit";
 import axios from "axios";
 import Apis from "../../shared/Apis";
 
-
-const accessToken = localStorage.getItem("Access_Token");
-const refreshToken = localStorage.getItem("Refresh_Token");
 // 방만드는 코드
 export const __CreateRoom = createAsyncThunk(
   "/chat/__CreateRoom",
   async (payload, thunkAPI) => {
     try {
       // const response = await axios.post(`${process.env.REACT_APP_SERVER}/api/chat/room`, payload.postId,
-      const response = await axios.post(
-        `${process.env.REACT_APP_Chatting_SERVER}/api/chat/room`,
-        payload.postId,
-        {
-          headers: {
-            "Content-Type": `application/json`,
-            Access_Token: accessToken,
-            Refresh_Token: refreshToken,
-            "Cache-Control": "no-cache",
-          },
-        }
-      );
+      const response = await Apis.CreateRoomAX(
+        payload.postId);
       return thunkAPI.fulfillWithValue(response.data);
     } catch (error) {
       return thunkAPI.rejectWithValue(error.response.data);
@@ -34,18 +21,7 @@ export const __getRoomList = createAsyncThunk(
   "/chat/__getRoomList",
   async (payload, thunkAPI) => {
     try {
-      const response = await axios.get(
-        // `${process.env.REACT_APP_SERVER}/api/chat/roomList`,
-        ` ${process.env.REACT_APP_Chatting_SERVER}/api/chat/roomList`,
-        {
-          headers: {
-            "Content-Type": `application/json`,
-            Access_Token: accessToken,
-            Refresh_Token: refreshToken,
-            "Cache-Control": "no-cache",
-          },
-        }
-      );
+      const response = await Apis.GetRoomListAX();
       return thunkAPI.fulfillWithValue(response.data);
     } catch (error) {
       return thunkAPI.rejectWithValue(error.response.data);
@@ -58,19 +34,7 @@ export const __getinitialChatList = createAsyncThunk(
   "/chat/__getInitialChatList",
   async (payload, thunkAPI) => {
     try {
-      const response = await axios.post(
-        // `${process.env.REACT_APP_SERVER}/api/chat/roomInfo`,
-        `${process.env.REACT_APP_Chatting_SERVER}/api/chat/roomInfo`,
-        payload,
-        {
-          headers: {
-            "Content-Type": `application/json`,
-            Access_Token: accessToken,
-            Refresh_Token: refreshToken,
-            "Cache-Control": "no-cache",
-          },
-        }
-      );
+      const response = await Apis.GetInitialChatListAX(payload);
       return thunkAPI.fulfillWithValue(response.data);
     } catch (error) {
       return thunkAPI.rejectWithValue(error.response.data);
@@ -90,10 +54,6 @@ const chatSlice = createSlice({
     err: null,
   },
   reducers: {
-    // postChat: (state, action) => {
-    //   console.log("action", action.payload);
-    //   state.chatList.unshift(action.payload);
-    // },
     clearChat: (state, action) => {
       state.chatList = new Array(0);
     },
