@@ -9,7 +9,6 @@ const refreshToken = localStorage.getItem("Refresh_Token");
 export const __CreateRoom = createAsyncThunk(
   "/chat/__CreateRoom",
   async (payload, thunkAPI) => {
-    console.log(payload);
     try {
       // const response = await axios.post(`${process.env.REACT_APP_SERVER}/api/chat/room`, payload.postId,
       const response = await axios.post(
