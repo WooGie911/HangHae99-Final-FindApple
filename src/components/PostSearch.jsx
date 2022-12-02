@@ -47,7 +47,7 @@ const PostSearch = (props) => {
           <img
             src={BackIcon}
             onClick={() => {
-              navigate(-1);
+              navigate("/main");
             }}
           />
         </BackDiv>

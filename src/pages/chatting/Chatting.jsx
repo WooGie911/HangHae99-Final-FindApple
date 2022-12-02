@@ -136,8 +136,6 @@ function Chatting() {
     navigate(-1);
   };
 
-// 삼항연산자와 usdState활용한 채팅방 좌우 설정
-const [chat, setChat] = useState(false)
 
   return (
     <StContainer>

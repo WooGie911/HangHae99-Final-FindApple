@@ -16,7 +16,7 @@ const MyPost = () => {
     dispatch(__getMyPost());
   }, []);
   const onClickHandler = () => {
-    navigate(-1);
+    navigate("/mypage");
   };
   return (
     <div>
