@@ -124,6 +124,12 @@ export const Apis = {
 
   UserProfileEditAX: (payload) => token.patch(`/api/myinfo/edit`, payload),
 
+  CreateRommAX: (payload) => token.post(`/api/chat/room`, payload),
+
+  GetRoomListAX: () => token.get(`/api/chat/roomList`),
+
+  GetInitialChatList: (payload) => token.get(`/api/chat/roomInfo`)
+
   // logoutAX: () => token.get(`/api/logout`),
 };
 export default Apis;
