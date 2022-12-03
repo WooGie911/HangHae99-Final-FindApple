@@ -1,8 +1,6 @@
 import { createAsyncThunk, createSlice } from "@reduxjs/toolkit";
 import Apis from "../../shared/Apis";
 
-
-
 export const __searchObjection = createAsyncThunk(
   "objections/__searchObjection",
   async (payload, thunkAPI) => {
@@ -49,11 +47,9 @@ export const __addObjection = createAsyncThunk(
   "objections/__addObjection",
   async (payload, thunkAPI) => {
     try {
-      await Apis
-        .addObjectionAX(payload)
-        .then((response) => {
-          return thunkAPI.fulfillWithValue(response.data.data);
-        });
+      await Apis.addObjectionAX(payload).then((response) => {
+        return thunkAPI.fulfillWithValue(response.data.data);
+      });
     } catch (error) {
       return thunkAPI.rejectWithValue(error);
     }
@@ -77,7 +73,7 @@ export const __editObjection = createAsyncThunk(
   "objections/__editObjection",
   async (payload, thunkAPI) => {
     try {
-      const data = await Apis.editObjectionAX(payload.formData);
+      const data = await Apis.editObjectionAX(payload);
 
       return thunkAPI.fulfillWithValue(data.data.data);
     } catch (error) {

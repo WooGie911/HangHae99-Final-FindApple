@@ -104,9 +104,9 @@ const Footer = () => {
           </div>
         ) : (
           <div
-          // onClick={() =>
-          //   onClickHandler({ state: "Search", navi: "/postread/all/postId" })
-          // }
+            onClick={() =>
+              onClickHandler({ state: "Search", navi: "/postread/all/postId" })
+            }
           >
             <img className="h-8 w-8" src={blueSearch} />
             <div className="text-CC text-center">검색</div>
@@ -133,12 +133,12 @@ const Footer = () => {
           </div>
         ) : (
           <div
-          // onClick={() =>
-          //   onClickHandler({
-          //     state: "Issue",
-          //     navi: "/objectionread/all/issuesId",
-          //   })
-          // }
+            onClick={() =>
+              onClickHandler({
+                state: "Issue",
+                navi: "/objectionread/all/issuesId",
+              })
+            }
           >
             <img className=" ml-1  h-8 w-8" src={blueIssue} />
 

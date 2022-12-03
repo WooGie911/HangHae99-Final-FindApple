@@ -32,6 +32,7 @@ const PostDetail = () => {
 
   //찜하기
   const onCartButton = (payload) => {
+    console.log(post);
     {
       post.isLike
         ? dispatch(__CartOutPost(payload))

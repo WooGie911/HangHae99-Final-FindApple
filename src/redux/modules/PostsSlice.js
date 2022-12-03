@@ -73,7 +73,7 @@ export const __editPost = createAsyncThunk(
   async (payload, thunkAPI) => {
     try {
       console.log(payload);
-      const data = await Apis.editPostAX(payload.formData);
+      const data = await Apis.editPostAX(payload);
       return thunkAPI.fulfillWithValue(data.data);
     } catch (error) {
       return thunkAPI.rejectWithValue(error);
