@@ -100,19 +100,19 @@ const PostsCreate = (props) => {
           </div>
         </Stuploadbutton>
         <Stphotolabel htmlFor="imgFile">
-          <PhotoButton
+          {/* <PhotoButton
             type="button"
             onClick={() => {
               imgRef.current.click();
             }}
-          >
+          > */}
             <CameraImg>
               <div>
                 <img src="https://img.icons8.com/fluency-systems-regular/20/null/multiple-cameras.png" />
               </div>
               <div>{fileUrls.length}/5</div>
             </CameraImg>
-          </PhotoButton>
+          {/* </PhotoButton> */}
           <input
             type="file"
             style={{ display: "none" }}
@@ -281,15 +281,9 @@ const Stcontentinput = styled.textarea`
 `;
 
 // 사진 업로드
-const PhotoButton = styled.button`
-  width: 50px;
-  height: 50px;
-  border-radius: 5px;
-  background-color: white;
-  margin: 10px;
-  border: 2px solid #3d6af2;
-  top: 25px;
-`;
+// const PhotoButton = styled.button`
+
+// `;
 const CameraImg = styled.div`
   display: flex;
   align-items: center;
@@ -305,12 +299,19 @@ const CameraImg = styled.div`
 
 // 사진 업로드 관련인 듯
 const Stphotolabel = styled.label`
-  width: 98.5%;
+  width: 50px;
+  height: 50px;
+  border-radius: 5px;
+  background-color: white;
+  margin: 10px;
+  border: 2px solid #3d6af2;
+  top: 25px;
+/* width: 98.5%;
   height: 100px;
   display: inline-block;
   border-bottom: 2px solid lightgrey;
   display: flex;
-  flex-direction: row;
+  flex-direction: row; */
 `;
 
 const Sttitleinput = styled.input`
