@@ -48,11 +48,9 @@ export const __addPost = createAsyncThunk(
   async (payload, thunkAPI) => {
     try {
       await Apis.addPostAX(payload).then((response) => {
-        console.log("ADD", response)
         return thunkAPI.fulfillWithValue(response.data.data);
       });
     } catch (error) {
-      console.log("Error", error)
       return thunkAPI.rejectWithValue(error);
     }
   }
@@ -164,6 +162,7 @@ const PostsSlice = createSlice({
     [__addPost.fulfilled]: (state, action) => {
       state.isLoading = false;
       state.posts.push(action.payload);
+      window.location.replace("/postread/all")
     },
     [__addPost.rejected]: (state, action) => {
       state.isLoading = false;
