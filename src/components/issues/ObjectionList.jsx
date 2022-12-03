@@ -54,7 +54,7 @@ const ObjectionList = ({ posts, detail, __getDetail, state, setState }) => {
   return (
     <>
       <div>
-        {posts &&
+        {posts.length > 0 &&
           posts.map((post, index) => {
             return (
               <div
@@ -64,25 +64,23 @@ const ObjectionList = ({ posts, detail, __getDetail, state, setState }) => {
                   onClickHandler(post.issuesId);
                 }}
               >
-                {post.images && (
                   <img
                     className="object-cover min-w-[84px] w-[84px] h-[84px] rounded"
-                    src={post.images[0].imgUrl}
+                    src={post?.images[0]?.imgUrl}
                   />
-                )}
 
                 <div className=" w-full flex-col  ml-3 font-medium">
                   <div>
-                    <label>{post.title}</label>
+                    <label>{post?.title}</label>
                   </div>
                   <div className=" mt-1 text-base font-semibold">
-                    <label>{post.userPrice.toLocaleString("ko-KR")}원</label>
+                    <label>{post?.userPrice.toLocaleString("ko-KR")}원</label>
                   </div>
                   <div className="flex justify-between mt-4  text-xs font-normal">
-                    <div>{post.createdAt}</div>
+                    <div>{post?.createdAt}</div>
                     <div className="flex">
                       <img src={mainHeart} />
-                      <div>{post.likeCnt}</div>
+                      <div>{post?.likeCnt}</div>
                     </div>
                   </div>
                 </div>
