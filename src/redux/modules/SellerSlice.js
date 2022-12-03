@@ -1,30 +1,12 @@
 import { createAsyncThunk, createSlice } from "@reduxjs/toolkit";
-import axios from "axios";
-
-const initialState = {
-  myPostList: [],
-  sellerInfoDto: {},
-};
-
-const accessToken = localStorage.getItem("Access_Token");
-const refreshToken = localStorage.getItem("Refresh_Token");
+import Apis from "../../shared/Apis";
 
 // api 나오면 data 부분 완성할 것
 export const __getSellerinfo = createAsyncThunk(
   "sellerpage/__getSellerinfo",
   async (payload, thunkAPI) => {
     try {
-      const data = await axios.get(
-        `${process.env.REACT_APP_SERVER}/api/myinfo/seller/${payload}`,
-        {
-          headers: {
-            "Content-Type": `application/json`,
-            Access_Token: accessToken,
-            Refresh_Token: refreshToken,
-            "Cache-Control": "no-cache",
-          },
-        }
-      );
+      const data = await Apis.getSellerInfoAX(payload);
       return thunkAPI.fulfillWithValue(data.data);
     } catch (error) {
       return thunkAPI.rejectWithValue(error);
@@ -34,7 +16,10 @@ export const __getSellerinfo = createAsyncThunk(
 
 const SellerSlice = createSlice({
   name: "sellerpage",
-  initialState,
+  initialState: {
+    myPostList: [],
+    sellerInfoDto: {},
+  },
 
   reducer: {},
   extraReducers: {

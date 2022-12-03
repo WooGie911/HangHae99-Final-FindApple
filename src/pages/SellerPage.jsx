@@ -4,8 +4,8 @@ import { __getSellerinfo } from "../redux/modules/SellerSlice";
 import { useDispatch } from "react-redux";
 import { useParams, useNavigate } from "react-router-dom";
 import styled from "styled-components";
-import Layout from "../components/Layout";
-import Footer from "../components/Footer";
+import Layout from "../components/commons/Layout";
+import Footer from "../components/commons/Footer";
 import back from "../assets/back.png";
 
 const SellerPage = () => {

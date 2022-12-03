@@ -15,7 +15,7 @@ const MyLike = () => {
     dispatch(__getMyLike());
   }, []);
   const onClickHandler = () => {
-    navigate(-1);
+    navigate("/mypage");
   };
   return (
     <div>

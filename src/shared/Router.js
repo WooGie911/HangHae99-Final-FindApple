@@ -1,33 +1,34 @@
 import React from "react";
 import { BrowserRouter, Route, Routes } from "react-router-dom";
-import SignIn from "../pages/SignIn";
-import SignUp from "../pages/SignUp";
-import PostCreate from "../pages/PostCreate";
-import PostRead from "../pages/PostRead";
-import PostUpdate from "../pages/PostUpdate";
-import PostDetail from "../pages/PostDetail";
-import ObjectionCreate from "../pages/ObjectionCreate";
-import ObjectionRead from "../pages/ObjectionRead";
-import ObjectionUpdate from "../pages/ObjectionUpdate";
-import ObjectionDetail from "../pages/ObjectionDetail";
-import Mypage from "../pages/Mypage";
-import MypageUpdate from "../pages/MypageUpdate";
+import Pricingfinal from "../components/price/Pricingfinal";
+import PricingText from "../components/price/PricingText";
+import ObjectionComment from "../pages/issues/ObjectionComment";
+import SignIn from "../pages/login/SignIn";
 import Main from "../pages/Main";
-import Redirect from "../components/Redirect";
+import MyLike from "../pages/mypage/MyLike";
+import PostComment from "../pages/posts/PostComment";
+import PricingPage from "../pages/PricingPage";
 import SellerPage from "../pages/SellerPage";
-import MyLike from "../pages/MyLike";
-import MyObjection from "../pages/MyObjection";
-import MyPost from "../pages/MyPost";
-import PricingInput from "../components/PricingInput";
-import Pricingfinal from "../components/Pricingfinal";
-import PricingText from "../components/PricingText";
-import PostComment from "../pages/PostComment";
-import ObjectionComment from "../pages/ObjectionComment";
-import RedirectLogout from "../components/RedirectLogout";
-import Cover from "../pages/Cover";
-import Info1 from "../pages/Info1";
-import Info2 from "../pages/Info2";
-import Info3 from "../pages/Info3";
+import SignUp from "../pages/login/SignUp";
+import PostCreate from "../pages/posts/PostCreate";
+import PostRead from "../pages/posts/PostRead";
+import PostUpdate from "../pages/posts/PostUpdate";
+import PostDetail from "../pages/posts/PostDetail";
+import ObjectionCreate from "../pages/issues/ObjectionCreate";
+import ObjectionRead from "../pages/issues/ObjectionRead";
+import ObjectionUpdate from "../pages/issues/ObjectionUpdate";
+import ObjectionDetail from "../pages/issues/ObjectionDetail";
+import Mypage from "../pages/mypage/Mypage";
+import MypageUpdate from "../pages/mypage/MypageUpdate";
+import Redirect from "../components/login/Redirect";
+import MyObjection from "../pages/mypage/MyObjection";
+import MyPost from "../pages/mypage/MyPost";
+import RedirectLogout from "../components/login/RedirectLogout";
+import Cover from "../pages/introduce/Cover";
+import Info1 from "../pages/introduce/Info1";
+import Info2 from "../pages/introduce/Info2";
+import Info3 from "../pages/introduce/Info3";
+import Chatting from "../pages/chatting/Chatting";
 
 const Router = () => {
   return (
@@ -83,20 +84,7 @@ const Router = () => {
         <Route path="/sellerpage/:memberId" element={<SellerPage />} />
 
         {/*가격 책정 페이지 */}
-        <Route path="/pricingInput" element={<PricingInput />} />
-        <Route path="/pricingInput/:category" element={<PricingInput />} />
-        <Route
-          path="/pricingInput/:category/:years"
-          element={<PricingInput />}
-        />
-        <Route
-          path="/pricingInput/:category/:years/:model"
-          element={<PricingInput />}
-        />
-        <Route
-          path="/pricingInput/:category/:years/:model/:options"
-          element={<PricingInput />}
-        />
+        <Route path="/pricingPage" element={<PricingPage />} />
 
         {/*가격 결정 페이지 */}
         <Route path="/pricingfinal" element={<Pricingfinal />} />
@@ -109,6 +97,9 @@ const Router = () => {
         <Route path="/introduction1" element={<Info1 />} />
         <Route path="/introduction2" element={<Info2 />} />
         <Route path="/introduction3" element={<Info3 />} />
+
+        {/*채팅페이지 */}
+        <Route path="/chatting/:roomId" element={<Chatting />} />
 
         {/* 카카오 소셜 로그인 */}
         <Route path="/KAKAO" element={<Redirect />} />

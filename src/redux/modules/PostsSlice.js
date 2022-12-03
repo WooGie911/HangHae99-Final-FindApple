@@ -1,24 +1,12 @@
 import { createAsyncThunk, createSlice, current } from "@reduxjs/toolkit";
 import axios from "axios";
-
-const accessToken = localStorage.getItem("Access_Token");
-const refreshToken = localStorage.getItem("Refresh_Token");
+import Apis from "../../shared/Apis";
 
 export const __searchPost = createAsyncThunk(
   "posts/__searchPost",
   async (payload, thunkAPI) => {
     try {
-      const data = await axios.get(
-        `${process.env.REACT_APP_SERVER}/api/post/${payload.paramObj}/${payload.searchObj}?page=${payload.pageNumber}&size=${payload.pageSize}&sort=${payload.postSort},DESC`,
-        {
-          headers: {
-            "Content-Type": `application/json`,
-            Access_Token: accessToken,
-            Refresh_Token: refreshToken,
-            "Cache-Control": "no-cache",
-          },
-        }
-      );
+      const data = await Apis.searchPostAX(payload);
       return thunkAPI.fulfillWithValue(data.data.content);
     } catch (error) {
       return thunkAPI.rejectWithValue(error);
@@ -31,18 +19,7 @@ export const __getAddPost = createAsyncThunk(
   async (payload, thunkAPI) => {
     console.log(payload);
     try {
-      const data = await axios.get(
-        `${process.env.REACT_APP_SERVER}/api/post/${payload.state.paramObj}?page=${payload.page}&size=${payload.state.pageSize}&sort=${payload.state.postSort},DESC`,
-
-        {
-          headers: {
-            "Content-Type": `application/json`,
-            Access_Token: accessToken,
-            Refresh_Token: refreshToken,
-            "Cache-Control": "no-cache",
-          },
-        }
-      );
+      const data = await Apis.getAddPostAX(payload);
       const obj = {
         payload: payload.page,
         data: data.data.content,
@@ -58,18 +35,7 @@ export const __getPost = createAsyncThunk(
   "posts/__getPost",
   async (payload, thunkAPI) => {
     try {
-      const data = await axios.get(
-        `${process.env.REACT_APP_SERVER}/api/post/${payload.paramObj}?page=${payload.pageNumber}&size=${payload.pageSize}&sort=${payload.postSort},DESC`,
-
-        {
-          headers: {
-            "Content-Type": `application/json`,
-            Access_Token: accessToken,
-            Refresh_Token: refreshToken,
-            "Cache-Control": "no-cache",
-          },
-        }
-      );
+      const data = await Apis.getPostAX(payload);
       return thunkAPI.fulfillWithValue(data.data);
     } catch (error) {
       return thunkAPI.rejectWithValue(error);
@@ -81,18 +47,9 @@ export const __addPost = createAsyncThunk(
   "posts/__addPost",
   async (payload, thunkAPI) => {
     try {
-      await axios
-        .post(`${process.env.REACT_APP_SERVER}/api/post`, payload, {
-          headers: {
-            enctype: "multipart/form-data",
-            Access_Token: accessToken,
-            Refresh_Token: refreshToken,
-            "Cache-Control": "no-cache",
-          },
-        })
-        .then((response) => {
-          return thunkAPI.fulfillWithValue(response.data.data);
-        });
+      await Apis.addPostAX(payload).then((response) => {
+        return thunkAPI.fulfillWithValue(response.data.data);
+      });
     } catch (error) {
       return thunkAPI.rejectWithValue(error);
     }
@@ -103,18 +60,7 @@ export const __deletePost = createAsyncThunk(
   "posts/__deletePost",
   async (payload, thunkAPI) => {
     try {
-      const data = await axios.delete(
-        `${process.env.REACT_APP_SERVER}/api/post/${payload}`,
-        {
-          headers: {
-            "Content-Type": `application/json`,
-            Access_Token: accessToken,
-            Refresh_Token: refreshToken,
-            "Cache-Control": "no-cache",
-          },
-        }
-      );
-
+      const data = await Apis.deletePostAX(payload);
       return thunkAPI.fulfillWithValue(payload);
     } catch (error) {
       return thunkAPI.rejectWithValue(error);
@@ -127,19 +73,7 @@ export const __editPost = createAsyncThunk(
   async (payload, thunkAPI) => {
     try {
       console.log(payload);
-      const data = await axios.patch(
-        `${process.env.REACT_APP_SERVER}/api/post/${payload.id}`,
-        payload.formData,
-        {
-          headers: {
-            enctype: "multipart/form-data",
-            Access_Token: accessToken,
-            Refresh_Token: refreshToken,
-            "Cache-Control": "no-cache",
-          },
-        }
-      );
-
+      const data = await Apis.editPostAX(payload);
       return thunkAPI.fulfillWithValue(data.data);
     } catch (error) {
       return thunkAPI.rejectWithValue(error);
@@ -160,10 +94,18 @@ const PostsSlice = createSlice({
       pageSize: 10,
       postSort: "postId",
     },
+    footerState: "Home",
   },
   reducers: {
     initialHeaderState(state, action) {
-      state.HeaderState = action.payload;
+      state.HeaderState = action.payload.HeaderState;
+      state.footerState = action.payload.footerState;
+    },
+    // swichHeaderBarState(state, action) {
+    //   state.headerBarState = action.payload;
+    // },
+    swichFooterState(state, action) {
+      state.footerState = action.payload;
     },
   },
   extraReducers: {
@@ -265,5 +207,6 @@ const PostsSlice = createSlice({
   },
 });
 
-export const { initialHeaderState } = PostsSlice.actions;
+export const { swichHeaderBarState, swichFooterState, initialHeaderState } =
+  PostsSlice.actions;
 export default PostsSlice.reducer;
