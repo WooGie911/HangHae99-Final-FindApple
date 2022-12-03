@@ -71,7 +71,7 @@ const PostsCreate = (props) => {
 
     if (window.confirm("작성하시겠습니까?")) {
       dispatch(props.__addData(formData));
-      navigate(`/${props.Navigate}`);
+      // navigate(`/${props.Navigate}`);
       // window.location.reload(`/${props.Navigate}`);
     }
   };
