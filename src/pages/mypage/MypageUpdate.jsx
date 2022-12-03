@@ -2,12 +2,10 @@ import React, { useState, useEffect } from "react";
 import { useNavigate } from "react-router-dom";
 import useInput from "../../hook/useInput";
 import { useDispatch } from "react-redux";
-import styled from "styled-components";
 import { useSelector } from "react-redux";
 import { __UserProfileEdit } from "../../redux/modules/LoginSlice";
-import photoIMG from "../../assets/photoIMG.png";
 import Layout from "../../components/commons/Layout";
-import back from "../../assets/back.png";
+import backArrow from "../../assets/backArrow.svg";
 
 const MypageUpdate = () => {
   const uploadedImage = React.useRef(null);
@@ -72,16 +70,21 @@ const MypageUpdate = () => {
       }}
     >
       <Layout>
-        <HeadContainer>
+        <div className=" flex relative items-center justify-center h-[60px] text-[18px] font-semibold ">
           <img
+            className="h-6 w-6 absolute left-3"
             onClick={onClickHandler}
-            style={{ width: 25, height: 25 }}
-            src={back}
+            src={backArrow}
           />
-          <span>내 정보</span>
-          <EditButton onClick={nicknameEdit}>변경</EditButton>
-        </HeadContainer>
-        <ProfileEdit>
+          <div>
+            <div>프로필 수정 </div>
+          </div>
+          <button onClick={nicknameEdit} className="  absolute right-4">
+            완료
+          </button>
+        </div>
+
+        <div className=" text-[14px] font-semibold">
           <input
             type="file"
             accept="image/*"
@@ -91,90 +94,32 @@ const MypageUpdate = () => {
               display: "none",
             }}
           />
-          <div>
+          <div className="flex justify-center items-center mt-5 p-3">
             <img
-              src={
-                user.profileImg == (null || undefined)
-                  ? photoIMG
-                  : user.profileImg
-              }
+              className=" w-[88px] h-[88px] rounded-full "
+              src={user.profileImg}
               ref={uploadedImage}
-              style={{
-                height: "75px",
-                width: "75px",
-                border: "1px dashed black",
-                borderRadius: "50%",
-              }}
               onClick={onSubmitHandler}
             />
           </div>
-          <span>프로필 사진 바꾸기</span>
-          <EditContainer>
-            <span>닉네임</span>
+
+          <div className="text-center font-medium text-CC">
+            프로필 사진 바꾸기
+          </div>
+
+          <div className="ml-5 mb-2 mt-3">닉네임</div>
+          <div className="px-6">
             <input
-              size="medium"
+              className="bg-transparent w-full pl-3 h-[38px] rounded border-C4 border-[1px]"
               onChange={writeHandle}
               name="nickname"
               value={write.nickname || ""}
             />
-          </EditContainer>
-        </ProfileEdit>
-        <br />
+          </div>
+        </div>
       </Layout>
     </div>
   );
 };
 
 export default MypageUpdate;
-
-//Head 파트
-
-const HeadContainer = styled.div`
-  display: flex;
-  justify-content: space-between;
-  span {
-    font-size: 18px;
-  }
-  margin-bottom: 40px;
-`;
-const EditButton = styled.button`
-  border: none;
-  background-color: transparent;
-  font-size: 16px;
-`;
-
-// ProfileEdit 파트
-
-const ProfileEdit = styled.div`
-  justify-content: center;
-  text-align: center;
-  input {
-    border-radius: 25px;
-    border: 1px solid transparent;
-    padding: 10px;
-  }
-  img {
-    margin-bottom: 15px;
-  }
-  span {
-    color: #4d5e9b;
-  }
-`;
-
-const EditContainer = styled.div`
-  padding: 15px;
-  input {
-    display: flex;
-    width: 333px;
-    height: 38x;
-    align-items: center;
-    justify-content: center;
-    align-content: center;
-    border: 0.5px transparent gray;
-    border-radius: 5px;
-    margin-top: 10px;
-  }
-  span {
-    margin-right: 280px;
-  }
-`;

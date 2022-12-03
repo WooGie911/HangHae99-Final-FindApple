@@ -2,7 +2,6 @@ import React, { useEffect, useState } from "react";
 import Slider from "react-slick";
 import "slick-carousel/slick/slick.css";
 import "slick-carousel/slick/slick-theme.css";
-import styled from "styled-components";
 import { useNavigate, useParams } from "react-router-dom";
 import { useDispatch, useSelector } from "react-redux";
 import { __deletePost } from "../../redux/modules/PostsSlice";
@@ -113,14 +112,10 @@ const PostDetail = () => {
     ),
   };
 
-  // const onClickHandler = () => {
-  //   navigate(-1);
-  // };
-
   return (
     <>
       <Layout>
-        <div className="bg-white h-[925px]">
+        <div className="bg-white h-screen">
           <div className=" relative flex-col h-[410px] w-[375px] z-10">
             <div className="bg-transparent flex relative h-[60px] items-center justify-center z-20">
               <img className="h-5 w-5 absolute  left-3" src={blueBackArrow} />
@@ -135,20 +130,24 @@ const PostDetail = () => {
                 onClick={editToggleHandler}
               />
             </div>
-            {editTg.isEdit === true ? (
-              <ToggleNav>
-                <Button onClick={() => navigate(`/postupdate/${params.id}`)}>
+            {editTg.isEdit === true && (
+              <div className=" absolute right-3 top-13 z-30 w-10">
+                <button
+                  className=" bg-white w-12 h-10 rounded-lg"
+                  onClick={() => navigate(`/postupdate/${params.id}`)}
+                >
                   수정
-                </Button>
-                <Button
+                </button>
+                <button
+                  className=" bg-white w-12 h-10 rounded-lg mt-[1px]"
                   onClick={() => {
                     onDeleteHandler(params.id);
                   }}
                 >
-                  글삭제
-                </Button>
-              </ToggleNav>
-            ) : null}
+                  삭제
+                </button>
+              </div>
+            )}
 
             <div className=" absolute top-0 z-0 w-full h-[446px]">
               <Slider {...settings}>
@@ -215,7 +214,7 @@ const PostDetail = () => {
               </button>
             </div>
 
-            <div className="  flex-col relative h-[280px]">
+            <div className="  flex-col relative ">
               {post.options !== undefined && (
                 <div className=" flex text-xs px-[18px] items-stretch my-3 opacity-50 text-CC">
                   <div className="p-1 bg-EB rounded-md mx-0.5">
@@ -234,34 +233,35 @@ const PostDetail = () => {
               )}
               <div className="px-[18px] font-semibold">{post.title}</div>
               <div className=" p-[18px] text-sm">{post.content}</div>
-
-              <div className=" justify-between w-full px-[18px] absolute bottom-1 flex items-end">
-                <div className=" font-medium text-xs text-DD">
-                  {post.createdAt}
-                </div>
-              </div>
+              <div className=" min-h-96 h-96" />
             </div>
           </div>
 
           <div className="absolute bottom-0 bg-CC flex w-full h-[75px] justify-between z-30 items-center px-[18px] text-white">
+            <div className=" absolute bottom-24">
+              <div className=" font-medium text-xs text-DD">
+                {post.createdAt}
+              </div>
+            </div>
+
             <div className=" flex items-center">
               {post.expectPrice !== undefined && (
-                <div>
+                <div className="w-[90px]">
                   <div className="text-[12px] text-translucent5">책정가격</div>
                   <div>{post.expectPrice.toLocaleString("ko-KR")}원</div>
                 </div>
               )}
-              <img className="p-2" src={rightTriangle} />
+              <img className=" px-1 mr-1 py-6" src={rightTriangle} />
               {post.userPrice !== undefined && (
-                <div className=" flex-col">
+                <div className="  w-[120px] flex-col">
                   <div className="text-[12px] text-translucent5">판매가격</div>
                   <div>{post.userPrice.toLocaleString("ko-KR")}원</div>
                 </div>
               )}
             </div>
 
-            <div className="flex mt-1">
-              <div className="  flex-col w-6 text-[10px] text-translucent3 mr-10  ">
+            <div className=" flex mt-1 w-[70px]">
+              <div className="  flex-col w-6 text-[10px] text-translucent3 mr-5  ">
                 <img onClick={onClickChatting} src={whiteChatting} />
                 <div>채팅</div>
               </div>
@@ -283,35 +283,3 @@ const PostDetail = () => {
 };
 
 export default PostDetail;
-
-const ToggleNav = styled.div`
-  width: 50px;
-  height: 80px;
-  position: absolute;
-  right: 10px;
-  top: 50px;
-  z-index: 999;
-`;
-const Button = styled.button`
-  width: 50px;
-  height: 40px;
-  margin-bottom: 3px;
-  border: 1px solid #ddd;
-  border-radius: 5px;
-  background-color: #fff;
-  &:hover {
-    background-color: red;
-  }
-`;
-
-const Arrow = styled.div`
-  margin-top: 20px;
-`;
-
-const TextDiv = styled.div`
-  font-size: 10px;
-`;
-
-const PriceDiv = styled.div`
-  font-size: 16px;
-`;

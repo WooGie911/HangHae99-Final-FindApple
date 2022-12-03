@@ -1,7 +1,6 @@
 import React, { useEffect } from "react";
 import { useDispatch, useSelector } from "react-redux";
 import { useNavigate } from "react-router-dom";
-import styled from "styled-components";
 import CommentCreate from "../../components/posts/CommentCreate";
 import CommentList from "../../components/posts/CommentList";
 import {
@@ -9,8 +8,8 @@ import {
   __deletePostComment,
   __getPostDetail,
 } from "../../redux/modules/PostDetailsSlice";
-import back from "../../assets/back.png";
 import Layout from "../../components/commons/Layout";
+import backArrow from "../../assets/backArrow.svg";
 
 const PostComment = () => {
   const navigate = useNavigate();
@@ -27,42 +26,28 @@ const PostComment = () => {
   return (
     <>
       <Layout>
-        <HeadContainer>
-          <div>
+        <div className="bg-white h-screen">
+          <div className=" flex relative items-center justify-center h-[60px] text-[18px] font-semibold border-b-[1px] border-D9 ">
             <img
+              className="h-6 w-6 absolute left-3"
               onClick={onClickHandler}
-              style={{ width: 25, height: 25 }}
-              src={back}
+              src={backArrow}
             />
-            <span>댓글</span>
+            <div>댓글</div>
           </div>
-        </HeadContainer>
-        <hr />
-        <CommentList
-          __deleteComment={__deletePostComment}
-          commentList={post.comments}
-        />
-        <CommentCreate
-          __addComment={__addPostComment}
-          __getDetail={__getPostDetail}
-        />
+
+          <CommentList
+            __deleteComment={__deletePostComment}
+            commentList={post.comments}
+          />
+          <CommentCreate
+            __addComment={__addPostComment}
+            __getDetail={__getPostDetail}
+          />
+        </div>
       </Layout>
     </>
   );
 };
 
 export default PostComment;
-const HeadContainer = styled.div`
-  display: flex;
-  align-items: center;
-  margin-right: 120px;
-  img {
-    float: left;
-    margin-right: 130px;
-  }
-  span {
-    /* text-align: center; */
-    font-size: 24px;
-    font-weight: bold;
-  }
-`;

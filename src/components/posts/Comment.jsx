@@ -1,7 +1,6 @@
 import React, { useState } from "react";
 import { useDispatch } from "react-redux";
-import styled from "styled-components";
-import threedots from "../../assets/threedots.png";
+import toggle from "../../assets/toggle.svg";
 
 const Comment = ({ comment, __deleteComment }) => {
   const dispatch = useDispatch();
@@ -21,83 +20,41 @@ const Comment = ({ comment, __deleteComment }) => {
     setEidtTg(newEdit);
   };
   return (
-    <div>
-      <StContainer>
-        <Buttons>
-          <div>
-            <ProfileImg>
-              <img src={comment.avatarUrl} />
-              <div>
-                <div>{comment.nickname} </div>
-                <Cmnt> {comment.comment}</Cmnt>
-              </div>
-            </ProfileImg>
+    <div className=" flex items-center h-20 px-[18px] ">
+      <div className=" flex  w-full items-center justify-between ">
+        <div className="flex items-center">
+          <div className=" p-3">
+            <img
+              className="w-[38px] h-[38px] rounded-full"
+              src={comment.avatarUrl}
+            />
           </div>
-          <Tgbutton src={threedots} onClick={editToggleHandler} />
-          {editTg.isEdit === true ? (
-            <Button onClick={() => onDeleteButton(comment.commentId)}>
-              삭제
-            </Button>
-          ) : null}
-        </Buttons>
-      </StContainer>
-      <hr />
+          <div className="flex-col text-[14px] font-semibold">
+            <div>{comment.nickname} </div>
+            <div className="ml-1 text-[13px] font-medium">
+              {" "}
+              {comment.comment}
+            </div>
+          </div>
+        </div>
+        <div className=" relative flex-col  ">
+          <div className=" flex justify-end">
+            <img src={toggle} onClick={editToggleHandler} />
+          </div>
+          <div>
+            {editTg.isEdit === true && (
+              <button
+                className="text-red h-5 w-7  relative right-0 bottom-0 text-xs"
+                onClick={() => onDeleteButton(comment.commentId)}
+              >
+                삭제
+              </button>
+            )}
+          </div>
+        </div>
+      </div>
     </div>
   );
 };
 
 export default Comment;
-// 전체 컨테이너
-const StContainer = styled.div`
-  width: 100%;
-  height: 50px;
-  position: relative;
-`;
-
-//삭제 토글
-const Buttons = styled.div`
-  display: flex;
-  justify-content: space-between;
-  width: 100%;
-  height: 40px;
-  div {
-    width: 300px;
-  }
-`;
-
-const Tgbutton = styled.img`
-  width: 23px;
-  height: 23px;
-`;
-
-const Button = styled.button`
-  position: absolute;
-  top: 40px;
-  right: 0px;
-  width: 50px;
-  height: 40px;
-  /* margin-bottom: 3px; */
-  border: 1px solid #ddd;
-  border-radius: 5px;
-  background-color: #fff;
-  &:hover {
-    background-color: red;
-  }
-`;
-
-const ProfileImg = styled.div`
-  display: flex;
-  padding: 5px;
-  div {
-    padding: 2px;
-  }
-  img {
-    width: 25px;
-    height: 25px;
-    border-radius: 50%;
-  }
-`;
-
-const Cmnt = styled.div`
-  font-size: 12px;
-`;

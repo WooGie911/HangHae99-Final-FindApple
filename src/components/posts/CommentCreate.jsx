@@ -1,9 +1,8 @@
 import React from "react";
 import { useDispatch } from "react-redux";
 import { useParams } from "react-router-dom";
-import styled from "styled-components";
-
 import useInput from "../../hook/useInput";
+import commentSubmit from "../../assets/commentSubmit.png";
 
 const CommentCreate = (props) => {
   const dispatch = useDispatch();
@@ -31,29 +30,27 @@ const CommentCreate = (props) => {
   };
 
   return (
-    <>
-      <CommentInput>
+    <div className="w-[375px] fixed bottom-0">
+      <div className="flex absolute  bottom-0 w-full py-3 px-[18px]">
         <input
-          placeholder="댓글 입력"
+          className="  h-[38px] w-full rounded-3xl px-3 text-[14px] text-C4 border-DD border-[1px]"
+          placeholder="댓글을 입력하세요"
           value={comments.comment || ""}
           name="comment"
           type="text"
           onChange={onChangeInputHandler}
           onKeyPress={keyPress}
         />
-      </CommentInput>
-    </>
+        <img
+          className=" absolute right-9 bottom-[22px]"
+          src={commentSubmit}
+          onClick={() => {
+            onClickAddButton();
+          }}
+        />
+      </div>
+    </div>
   );
 };
 
 export default CommentCreate;
-
-const CommentInput = styled.div`
-  position: fixed;
-  bottom: 10px;
-  input {
-    margin-left: 10px;
-    width: 330px;
-    height: 46px;
-  }
-`;

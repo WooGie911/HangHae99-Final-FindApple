@@ -4,14 +4,12 @@ import { __editPost } from "../../redux/modules/PostsSlice";
 import useInput from "../../hook/useInput";
 import useImageUpload from "../../hook/useImageUpload";
 import { useSelector } from "react-redux";
-
-import back from "../../assets/back.png";
 import styled from "styled-components";
 import { useNavigate, useParams } from "react-router-dom";
-import whitearrow from "../../assets/whitearrow.png";
-
 import Layout from "../../components/commons/Layout";
-import Footer from "../../components/commons/Footer";
+import backArrow from "../../assets/backArrow.svg";
+import blueCamera from "../../assets/blueCamera.png";
+import bottomArrow from "../../assets/bottomArrow.svg";
 
 const PostUpdate = () => {
   const dispatch = useDispatch();
@@ -64,65 +62,65 @@ const PostUpdate = () => {
   return (
     <>
       <Layout>
-        <FirstContainer>
-          <div>
+        <div className="bg-white h-screen">
+          <div className=" flex relative items-center justify-center h-[60px] text-[18px] font-semibold border-b-2 border-D9">
             <img
+              className="h-6 w-6 absolute left-3"
               onClick={() => {
                 navigate(`/PostDetail/${post.postId}`);
               }}
-              style={{ width: 25, height: 25 }}
-              src={back}
+              src={backArrow}
             />
+            <div>
+              <div>게시물 수정 </div>
+            </div>
           </div>
-          <div>상품 게시물 수정</div>
-          <EditButton onClick={updateSubmit}>완료</EditButton>
-        </FirstContainer>
-        <ImageWrapper>
-          <Stphotolabel>
+
+          <div className="h-[100px] p-[18px] flex border-b-[1px] border-D9">
             <label htmlFor="imgFile">
-              <PhotoButton
-                type="button"
+              <div
+                className="border-[1px] rounded-md w-16 h-16 flex items-center justify-center content-center text-xs text-CC cursor-pointer"
                 onClick={() => {
                   imgRef.current.click();
                 }}
               >
-                <CameraImg>
-                  <div>
-                    <img src="https://img.icons8.com/fluency-systems-regular/20/null/multiple-cameras.png" />
+                <div className="flex-col ">
+                  <div className="flex justify-center">
+                    <img src={blueCamera} />
                   </div>
                   <div>{fileUrls.length}/5</div>
-                </CameraImg>
-              </PhotoButton>
-            </label>
-
-            {fileUrls.length > 0 ? (
-              <>
-                <div className="preview" style={{ marginTop: "15px" }}>
-                  {
-                    /*previews*/
-                    fileUrls.map((val, i) => {
-                      return (
-                        <img
-                          src={val}
-                          key={i}
-                          style={{
-                            width: "50px",
-                            height: "50px",
-                            marginLeft: "5px",
-                          }}
-                        />
-                      );
-                    })
-                  }
                 </div>
-              </>
+              </div>
+            </label>
+            {fileUrls.length > 0 ? (
+              <div className="flex justify-between">
+                {
+                  /*previews*/
+                  fileUrls.map((val, i) => {
+                    return (
+                      <img
+                        className="h-16 w-16 object-cover ml-3 rounded-md"
+                        src={val}
+                        key={i}
+                      />
+                    );
+                  })
+                }
+              </div>
             ) : (
-              post.images &&
-              post.images.map((item, index) => {
-                return <Image src={item.imgUrl} key={index} />;
-              })
+              <div className="flex justify-between">
+                {post.images &&
+                  post.images.map((item, index) => {
+                    return (
+                      <img
+                        className="h-16 w-16 object-cover ml-3 rounded-md"
+                        src={item.imgUrl}
+                        key={index}
+                      />
+                    );
+                  })}
+              </div>
             )}
-
             <input
               type="file"
               style={{ display: "none" }}
@@ -133,53 +131,56 @@ const PostUpdate = () => {
               onChange={uploadHandle}
               ref={imgRef}
             />
-          </Stphotolabel>
-        </ImageWrapper>
-        <div>
-          <Title>
-            <div>{updateInput.title}</div>
-          </Title>
+          </div>
 
-          <Detail
-            onClick={() => {
-              navigate("/pricingtext", { state: post });
-            }}
-          >
-            <p5>상품 상세 정보</p5>
-            <Stdetailrightarrow
-              src={whitearrow}
-              style={{ width: "25px", height: "25px" }}
-            ></Stdetailrightarrow>
-          </Detail>
-
-          <PriceInput>
-            <TextPrice>판매가격</TextPrice>
-            <ExpectPrice>
+          <div className=" py-2 px-[18px] border-b-[1px] border-D9 font-semibold">
+            <div className=" h-16 flex items-center">
+              <div className="">{updateInput.title}</div>
+            </div>
+          </div>
+          <div className="  py-2 px-[18px] border-b-[1px] border-D9">
+            <div className="h-16 flex items-center justify-between">
+              {updateInput.expectPrice !== undefined && (
+                <div className="flex-col">
+                  <div className="text-xs text-DD">책정가격</div>
+                  <div className="text-CC font-semibold">
+                    {updateInput.expectPrice.toLocaleString("ko-KR")}원
+                  </div>
+                </div>
+              )}
+              <div
+                className="bg-C4 w-24 h-9 rounded-md text-xs text-white  flex justify-center items-center"
+                onClick={() => {
+                  navigate("/pricingtext", { state: post });
+                }}
+              >
+                <div> 상품 상세 정보</div>
+              </div>
+            </div>
+          </div>
+          <div className=" py-2 px-[18px] border-b-[1px] border-D9">
+            <div className="  h-16 flex items-center">
+              <div className="flex-col">
+                <div className="text-xs text-DD">판매가격</div>
+                <input
+                  className=" bg-transparent text-C4 font-semibold"
+                  onChange={updateInputHandle}
+                  name="userPrice"
+                  value={updateInput.userPrice || ""}
+                  type="text"
+                  placeholder="판매 가격을 입력해주세요."
+                />
+              </div>
+            </div>
+          </div>
+          <div className="  py-4 px-[18px] border-b-[1px] border-D9">
+            <div className=" h-60 flex-col ">
+              <div className=" w-24 h-9 rounded-md text-xs text-DD  flex justify-between p-3 items-center border-[1px] border-DD">
+                <div>판매중</div>
+                <img src={bottomArrow} />
+              </div>
               <input
-                onChange={updateInputHandle}
-                name="userPrice"
-                value={updateInput.userPrice || ""}
-                type="text"
-                placeholder="판매 가격을 입력해주세요."
-              />
-            </ExpectPrice>
-          </PriceInput>
-
-          <CalPrice>
-            {updateInput.expectPrice !== undefined && (
-              <>
-                <TextPrice>책정 가격</TextPrice>
-                <ExpectPrice>
-                  {updateInput.expectPrice.toLocaleString("ko-KR")}원
-                </ExpectPrice>
-              </>
-            )}
-          </CalPrice>
-
-          <EditText>
-            <div>상품설명</div>
-            <div>
-              <textarea
+                className="w-full py-3  break-words"
                 onChange={updateInputHandle}
                 name="content"
                 value={updateInput.content || ""}
@@ -187,9 +188,19 @@ const PostUpdate = () => {
                 placeholder="수정할 내용을 입력하세요."
               />
             </div>
-          </EditText>
+          </div>
+
+          <div className=" py-3 px-[18px] h-20 w-[375px] fixed bottom-0 text-white ">
+            <div
+              className="bg-CC w-full h-full rounded-md flex items-center justify-center"
+              onClick={() => {
+                updateSubmit();
+              }}
+            >
+              게시물 수정
+            </div>
+          </div>
         </div>
-        <Footer />
       </Layout>
     </>
   );

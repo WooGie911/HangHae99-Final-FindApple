@@ -3,7 +3,7 @@ import React from "react";
 import Comment from "./Comment";
 const CommentList = (props) => {
   return (
-    <>
+    <div className="pt-5">
       {props.commentList &&
         props.commentList.map((comment, index) => {
           return (
@@ -15,7 +15,7 @@ const CommentList = (props) => {
             </div>
           );
         })}
-    </>
+    </div>
   );
 };
 

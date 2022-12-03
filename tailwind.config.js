@@ -28,6 +28,8 @@ module.exports = {
       bb33: "#888888",
       bb22: "#BBBBBB",
       bb11: "#FBFBFB",
+      red: "red",
+      blue: "blue",
       beige: "beige",
       orange: "orange",
       gray: "Dgray",
@@ -38,6 +40,7 @@ module.exports = {
       OO: "#606060",
       BGC: "#F6F7FB",
       EB: "#EBEBEB",
+      C4: "#c4c4c4",
     },
 
     extend: {

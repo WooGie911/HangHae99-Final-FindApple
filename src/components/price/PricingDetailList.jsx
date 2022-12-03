@@ -1,8 +1,6 @@
 import React from "react";
-import { useSelector } from "react-redux";
 
-const PricingList = () => {
-  const { DetailPrice } = useSelector((state) => state.price);
+const PricingDetailList = ({ DetailPrice }) => {
   return (
     <>
       <div className=" font-semibold p-[18px] mt-5">
@@ -51,7 +49,7 @@ const PricingList = () => {
               </div>
               <div className="flex justify-between mt-2">
                 <span className="text-C4">맥북 상태</span>
-                <label>{DetailPrice.macbookState}</label>
+                <label>{DetailPrice.state}</label>
               </div>
               <div className="flex justify-between mt-2">
                 <span className="text-C4">애플케어 유무</span>
@@ -88,7 +86,7 @@ const PricingList = () => {
               </div>
               <div className="flex justify-between mt-2">
                 <span className="text-C4">아이폰 상태</span>
-                <label>{DetailPrice.iphoneState}</label>
+                <label>{DetailPrice.state}</label>
               </div>
               <div className="flex justify-between mt-2">
                 <span className="text-C4">애플케어 유무</span>
@@ -105,4 +103,4 @@ const PricingList = () => {
     </>
   );
 };
-export default PricingList;
+export default PricingDetailList;
