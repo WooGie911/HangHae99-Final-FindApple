@@ -97,7 +97,9 @@ const ObjectionDetail = () => {
               </span>
             </Span>
           </div>
+          {post.myIssue === true ?(<>
           <Tgbutton src={threedots} onClick={editToggleHandler} />
+          </>) : ""}
           {editTg.isEdit === true ? (
             <ToggleNav>
               <Button onClick={() => navigate(`/objectionupdate/${params.id}`)}>

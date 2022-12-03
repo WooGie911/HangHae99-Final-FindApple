@@ -4,6 +4,7 @@ import styled from "styled-components";
 import threedots from "../../assets/threedots.png";
 
 const Comment = ({ comment, __deleteComment }) => {
+  console.log("comment", comment);
   const dispatch = useDispatch();
   const onDeleteButton = (payload) => {
     if (window.confirm("정말 삭제하시겠습니까?")) {
@@ -33,7 +34,9 @@ const Comment = ({ comment, __deleteComment }) => {
               </div>
             </ProfileImg>
           </div>
+          {comment.myComment === true ?(<>
           <Tgbutton src={threedots} onClick={editToggleHandler} />
+          </>) : ""}
           {editTg.isEdit === true ? (
             <Button onClick={() => onDeleteButton(comment.commentId)}>
               삭제
