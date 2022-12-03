@@ -1,4 +1,4 @@
-import React, { useState } from "react";
+import React, { useEffect, useState } from "react";
 import { useNavigate } from "react-router-dom";
 import styled from "styled-components";
 import blackHome from "../../assets/blackHome.svg";
@@ -14,12 +14,12 @@ import { useDispatch, useSelector } from "react-redux";
 import { swichStepState } from "../../redux/modules/PriceSlice";
 import chat from "../../assets/chat.png";
 import ChatList from "../../pages/chatting/element/ChatList";
-import { swichFooterState } from "../../redux/modules/MypageSlice";
+import { swichFooterState } from "../../redux/modules/PostsSlice";
 
 const Footer = () => {
   const navigate = useNavigate();
   const dispatch = useDispatch();
-  const { footerState } = useSelector((state) => state.mypage);
+  const { footerState } = useSelector((state) => state.posts);
 
   const onClickPricingButton = () => {
     //가격책정 스토어 초기화
@@ -53,10 +53,14 @@ const Footer = () => {
   };
 
   const onClickHandler = (data) => {
+    console.log("footerState", footerState);
     dispatch(swichFooterState(data.state));
     navigate(`${data.navi}`);
   };
 
+  useEffect(() => {
+    console.log("footerState", footerState);
+  }, [footerState]);
   return (
     <div className="fixed bottom-0">
       <div className=" absolute right-0 bottom-[70px]">

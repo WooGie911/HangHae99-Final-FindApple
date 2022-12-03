@@ -55,7 +55,7 @@ const PostList = ({ posts, detail, __getDetail, state, setState }) => {
           posts.map((post, index) => {
             return (
               <div
-                className="bg-white flex p-[18px] border-b-[0.5px] border-BC"
+                className="bg-white flex p-[18px] border-b-[0.5px] border-D9"
                 key={index}
                 onClick={() => {
                   onClickHandler(post.postId);

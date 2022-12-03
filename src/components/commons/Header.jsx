@@ -1,10 +1,13 @@
 import React, { useState } from "react";
+import { useDispatch, useSelector } from "react-redux";
 import { useNavigate, useParams } from "react-router-dom";
+import { swichFooterState } from "../../redux/modules/PostsSlice";
 
 const Header = (props) => {
   const navigate = useNavigate();
   const params = useParams();
-  const [headerBarState, setHeaderBarState] = useState("all");
+  const dispatch = useDispatch();
+  const [headerBarState, setHeaderBarState] = useState(params.category);
   //카테고리별 이동 및 get 을 위한 state 변경
   const onClickCategoryHandler = (data) => {
     const paramObj = data === "all" ? data : `category/${data}`;
@@ -16,14 +19,18 @@ const Header = (props) => {
     setHeaderBarState(data);
     navigate(`${props.Navigate}/${data}/${params.sort}`);
   };
+  const onClickHomeHandler = () => {
+    dispatch(swichFooterState("Home"));
+    navigate("/main");
+  };
 
   return (
-    <div className="bg-CC w-full h-[49px] text-translucent ">
+    <div className="bg-CC w-full h-[49px] text-translucent5 ">
       <div className=" text-[14px] flex flex-row justify-between h-[45px] items-center">
         <div
           className=" w-1/4 cursor-pointer text-center"
           onClick={() => {
-            navigate("/main");
+            onClickHomeHandler();
           }}
         >
           HOME
@@ -91,7 +98,7 @@ const Header = (props) => {
       {headerBarState === "all" ? (
         <div className="h-1 flex  ">
           <div className="w-1/4" />
-          <div className="w-1/4 bg-translucent" />
+          <div className="w-1/4 bg-translucent5" />
           <div className="w-1/4 " />
           <div className="w-1/4 " />
         </div>
@@ -99,7 +106,7 @@ const Header = (props) => {
         <div className="h-1 flex  ">
           <div className="w-1/4" />
           <div className="w-1/4 " />
-          <div className="w-1/4 bg-translucent" />
+          <div className="w-1/4 bg-translucent5" />
           <div className="w-1/4 " />
         </div>
       ) : headerBarState === "iphone" ? (
@@ -107,11 +114,11 @@ const Header = (props) => {
           <div className="w-1/4" />
           <div className="w-1/4 " />
           <div className="w-1/4 " />
-          <div className="w-1/4 bg-translucent" />
+          <div className="w-1/4 bg-translucent5" />
         </div>
       ) : (
         <div className="h-1 flex  ">
-          <div className="w-1/4 bg-translucent" />
+          <div className="w-1/4 bg-translucent5" />
           <div className="w-1/4" />
           <div className="w-1/4 " />
           <div className="w-1/4 " />

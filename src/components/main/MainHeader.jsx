@@ -16,12 +16,14 @@ const MainHeader = (props) => {
       pageSize: 10,
       postSort: "postId",
     };
-    dispatch(initialHeaderState(initialObj));
+    dispatch(
+      initialHeaderState({ HeaderState: initialObj, footerState: "Search" })
+    );
     navigate(`${props.Navigate}/${data}/postId`);
   };
 
   return (
-    <div className="bg-CC w-full h-[49px] text-translucent ">
+    <div className="bg-CC w-full h-[49px] text-translucent5 ">
       <div className=" text-[14px] flex flex-row justify-between h-[45px] items-center">
         <div
           className="text-white w-1/4 cursor-pointer text-center"
@@ -57,7 +59,7 @@ const MainHeader = (props) => {
         </div>
       </div>
       <div className="h-1 flex  ">
-        <div className="w-1/4 bg-translucent" />
+        <div className="w-1/4 bg-translucent5" />
         <div className="w-1/4" />
         <div className="w-1/4 " />
         <div className="w-1/4 " />

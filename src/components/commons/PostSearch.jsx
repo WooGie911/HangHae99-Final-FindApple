@@ -50,7 +50,7 @@ const PostSearch = (props) => {
         }}
       />
 
-      <div className="bg-BC flex w-[314px] h-[38px] items-center ml-3 rounded-lg">
+      <div className="bg-D9 flex w-[314px] h-[38px] items-center ml-3 rounded-lg">
         <img
           className=" h-6 px-1"
           src={SearchIcon}

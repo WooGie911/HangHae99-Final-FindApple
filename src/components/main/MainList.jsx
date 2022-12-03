@@ -79,7 +79,7 @@ const MainList = () => {
         )}
         {headerBarState === "iphone" ? (
           <button
-            className="ml-2 DD-CC w-[86px] h-[23px]  text-white rounded-2xl border-[1px] border-DD"
+            className="ml-2 bg-DD w-[86px] h-[23px]  text-white rounded-2xl border-[1px] border-DD"
             onClick={() => {
               onClickCategoryHandler("iphone");
             }}

@@ -56,7 +56,7 @@ const Pricingfinal = () => {
             <StepDiv>
               <StepButton
                 onClick={() => {
-                  checkReally(`/pricingInput`);
+                  checkReally(`/pricingPage`);
                 }}
               >
                 <div>처음부터</div> 다시 입력하기

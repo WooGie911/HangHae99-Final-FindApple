@@ -22,7 +22,7 @@ const MyLike = () => {
   return (
     <div>
       <Layout>
-        <div className="bg-white flex relative items-center justify-center h-[60px] text-[18px] font-semibold border-b-[1px] border-BC">
+        <div className="bg-white flex relative items-center justify-center h-[60px] text-[18px] font-semibold border-b-[1px] border-D9">
           <img
             className="h-6 w-6 absolute  left-3"
             onClick={onClickHandler}

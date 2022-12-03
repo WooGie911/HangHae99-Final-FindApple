@@ -7,10 +7,9 @@ const PricingList = () => {
     <>
       <TopDiv>
         <TitleDiv>가격 책정 완료</TitleDiv>
-        {DetailPrice.getPrice !== undefined && DetailPrice.getPrice !== "" && (
+        {DetailPrice.getPrice && (
           <ContentDiv>
             {DetailPrice.getPrice.toLocaleString("ko-KR")}원
-            {/* {DetailPrice.getPrice}원 */}
           </ContentDiv>
         )}
       </TopDiv>

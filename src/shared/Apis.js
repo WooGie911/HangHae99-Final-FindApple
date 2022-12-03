@@ -14,6 +14,10 @@ const token = axios.create({
       localStorage.getItem("Access_Token") === undefined
         ? ""
         : localStorage.getItem("Access_Token"),
+    // Refresh_Token:
+    //   localStorage.getItem("Refresh_Token") === undefined
+    //     ? ""
+    //     : localStorage.getItem("Refresh_Token"),
   },
   withCredentials: true,
 });
@@ -28,6 +32,10 @@ const file = axios.create({
       localStorage.getItem("Access_Token") === undefined
         ? ""
         : localStorage.getItem("Access_Token"),
+    // Refresh_Token:
+    //   localStorage.getItem("Refresh_Token") === undefined
+    //     ? ""
+    //     : localStorage.getItem("Refresh_Token"),
   },
   withCredentials: true,
 });
@@ -55,7 +63,7 @@ export const Apis = {
       `/api/posts/${payload.paramObj}?page=${payload.pageNumber}&size=${payload.pageSize}&sort=${payload.postSort},DESC`
     ),
 
-  addPostAX: (payload) => token.post(`/api/posts`, payload),
+  addPostAX: (payload) => file.post(`/api/posts`, payload),
 
   deletePostAX: (payload) => token.delete(`/api/posts/${payload}`),
 
@@ -87,7 +95,7 @@ export const Apis = {
       `/api/issues/${payload.paramObj}?page=${payload.pageNumber}&size=${payload.pageSize}&sort=${payload.postSort},DESC`
     ),
 
-  addObjectionAX: (payload) => token.post(`/api/issues`, payload),
+  addObjectionAX: (payload) => file.post(`/api/issues`, payload),
 
   deleteObjectionAX: (payload) => token.delete(`/api/issues/${payload}`),
 

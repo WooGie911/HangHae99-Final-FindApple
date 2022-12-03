@@ -4,7 +4,8 @@ module.exports = {
   theme: {
     colors: {
       CC: "#3d6af2",
-      translucent: "rgba(255, 255, 255, 0.5)",
+      translucent5: "rgba(255, 255, 255, 0.5)",
+      translucent3: "rgba(255, 255, 255, 0.3)",
       transparent: "transparent",
       current: "currentColor",
       white: "#ffffff",
@@ -31,7 +32,7 @@ module.exports = {
       orange: "orange",
       gray: "Dgray",
       black: "black",
-      BC: "#D9D9D9",
+      D9: "#D9D9D9",
       HC: "D#F6F7FB",
       DD: "#8D8D8D",
       OO: "#606060",

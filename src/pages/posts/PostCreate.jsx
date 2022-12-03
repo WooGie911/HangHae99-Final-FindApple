@@ -1,7 +1,7 @@
 import React from "react";
 import PostsCreate from "../../components/commons/PostsCreate";
-import { __addPost } from "../../redux/modules/PostsSlice";
 import Layout from "../../components/commons/Layout";
+import { __addPost } from "../../redux/modules/PostsSlice";
 const PostCreate = () => {
   return (
     <>

@@ -90,9 +90,8 @@ const PriceSlice = createSlice({
     getList3: [],
     getList4: [],
     getList5: [],
+    DetailPrice: {},
   },
-
-  DetailPrice: {},
 
   reducers: {
     swichStepState(state, action) {

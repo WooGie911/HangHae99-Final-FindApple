@@ -44,14 +44,9 @@ const MypageSlice = createSlice({
     posts: [],
     objections: [],
     likes: [],
-    footerState: "Home",
   },
 
-  reducers: {
-    swichFooterState(state, action) {
-      state.footerState = action.payload;
-    },
-  },
+  reducers: {},
   extraReducers: {
     //__getMyPost
     [__getMyPost.pending]: (state) => {
@@ -91,7 +86,5 @@ const MypageSlice = createSlice({
     },
   },
 });
-
-export const { swichFooterState } = MypageSlice.actions;
 
 export default MypageSlice.reducer;
