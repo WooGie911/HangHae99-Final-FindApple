@@ -1,13 +1,10 @@
-import React, { useState, useEffect } from "react";
-import styled from "styled-components";
+import React, { useEffect } from "react";
 import { useDispatch } from "react-redux";
 import { useNavigate } from "react-router-dom";
 import { __UserProfile } from "../redux/modules/LoginSlice";
 import LOGO from "../assets/LOGO.svg";
 import bookmark from "../assets/bookmark.svg";
 import { initialHeaderState } from "../redux/modules/PostsSlice";
-import ChatList from "../pages/chatting/element/ChatList";
-
 import Layout from "../components/commons/Layout";
 import Slide from "../components/main/Slide";
 import MainHeader from "../components/main/MainHeader";
