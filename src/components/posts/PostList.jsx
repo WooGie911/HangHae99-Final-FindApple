@@ -69,16 +69,16 @@ const PostList = ({ posts, detail, __getDetail, state, setState }) => {
 
                 <div className=" w-full flex-col  ml-3 font-medium">
                   <div>
-                    <label>{post.title}</label>
+                    <label>{post?.title}</label>
                   </div>
                   <div className=" mt-1 text-base font-semibold">
-                    <label>{post.userPrice.toLocaleString("ko-KR")}원</label>
+                    <label>{post?.userPrice.toLocaleString("ko-KR")}원</label>
                   </div>
                   <div className="flex justify-between mt-4  text-xs font-normal">
-                    <div>{post.createdAt}</div>
+                    <div>{post?.createdAt}</div>
                     <div className="flex">
                       <img src={mainHeart} />
-                      <div>{post.likeCnt}</div>
+                      <div>{post?.likeCnt}</div>
                     </div>
                   </div>
                 </div>
