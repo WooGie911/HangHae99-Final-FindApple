@@ -18,7 +18,7 @@ import {
   __CartOutPost,
   __getPostDetail,
 } from "../redux/modules/PostDetailsSlice";
-import {__CreateRoom } from "../redux/modules/ChattingSlice";
+import { __CreateRoom } from "../redux/modules/ChattingSlice";
 import Layout from "../components/Layout";
 import back from "../assets/back.png";
 import chat from "../assets/chat.png";
@@ -28,7 +28,7 @@ const PostDetail = () => {
   const dispatch = useDispatch();
   const params = useParams();
   const { post } = useSelector((state) => state.details);
-  const postChat = useSelector((state) => state.chatting.createRoom)
+  const postChat = useSelector((state) => state.chatting.createRoom);
 
   //찜하기
   const onCartButton = (payload) => {
@@ -67,27 +67,27 @@ const PostDetail = () => {
     navigate(`/sellerpage/${post.memberId}`);
   };
 
-// 채팅방 개설
+  // 채팅방 개설
 
-  useEffect(()=>{
-    localStorage.setItem("roomId", postChat)
-  }, [postChat])
+  useEffect(() => {
+    localStorage.setItem("roomId", postChat);
+  }, [postChat]);
 
-const onClickChatting = () =>{
-  dispatch(__CreateRoom({
-    postId:post.postId,
-  }));
-  setTimeout(
-    function () {
+  const onClickChatting = () => {
+    dispatch(
+      __CreateRoom({
+        postId: post.postId,
+      })
+    );
+    setTimeout(
+      function () {
         // 만들어진 채팅방으로 이동하는 로직 => localStorage 활용한 방법 이용
         // 연결되었을 때 콜백함수 실행
         navigate(`/chatting/${localStorage.getItem("roomId")}`);
-    },
-    300 // 밀리초 간격으로 실행
-  );
-}
-
-
+      },
+      300 // 밀리초 간격으로 실행
+    );
+  };
 
   // 케러셀
 
@@ -234,7 +234,10 @@ const onClickChatting = () =>{
               <TextDiv>댓글</TextDiv>
             </div>
           </Price>
-          <ChatButton onClick={onClickChatting}><img src={chat}/>채팅</ChatButton>
+          <ChatButton onClick={onClickChatting}>
+            <img src={chat} />
+            채팅
+          </ChatButton>
         </White>
       </Layout>
     </>
@@ -432,11 +435,11 @@ const Models = styled.div`
 
 // 채팅 버튼
 const ChatButton = styled.button`
-width: 79px;
-height: 45px;
-background: #3D6AF2;
-border-radius: 30px;
-position : fixed;
-bottom: 170px;
-right : 25px;
-`
+  width: 79px;
+  height: 45px;
+  background: #3d6af2;
+  border-radius: 30px;
+  position: fixed;
+  bottom: 170px;
+  right: 25px;
+`;

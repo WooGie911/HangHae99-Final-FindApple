@@ -10,7 +10,7 @@ import {
 } from "../../redux/modules/ChattingSlice";
 import { v4 as uuidv4 } from "uuid";
 import back from "../../assets/back.png";
-import {ReactComponent as Send} from "../../assets/send.svg";
+import { ReactComponent as Send } from "../../assets/send.svg";
 
 function Chatting() {
   const sock = new SockJS(`${process.env.REACT_APP_SERVER}/api/ws/chat`);
@@ -136,7 +136,6 @@ function Chatting() {
     navigate(-1);
   };
 
-
   return (
     <StContainer>
       <HeadContainer>
@@ -151,54 +150,69 @@ function Chatting() {
         </span>
       </HeadContainer>
       <TitleContainer>
-      {listReducer.image !== undefined && (<>
-        <img src={listReducer.image.imgUrl} style={{ width: 44, height: 44 }} />
-              </>
-      )}
-      <div>
-      <div>
-        {listReducer.title}
-      </div>
-      <div>
-        {listReducer.price !== undefined && (<>
-        {listReducer.price.toLocaleString("ko-KR")}원
-        </>)}        
-      </div>
-      </div>
+        {listReducer.image !== undefined && (
+          <>
+            <img
+              src={listReducer.image.imgUrl}
+              style={{ width: 44, height: 44 }}
+            />
+          </>
+        )}
+        <div>
+          <div>{listReducer.title}</div>
+          <div>
+            {listReducer.price !== undefined && (
+              <>{listReducer.price.toLocaleString("ko-KR")}원</>
+            )}
+          </div>
+        </div>
       </TitleContainer>
       <ChatDiv>
         {listReducer.chatList !== undefined &&
           listReducer.chatList !== null &&
           listReducer.chatList.map((item) => {
             return (
-                <>
-                {listReducer.joinUserNickname === item.sender ?
-                (<ChatStyle key={uuidv4()} style={{textAlign:"right"}}>
-                  {/* 인라인 요소로 바로 우측 정렬 해결 */}
-                  <TimeDiv>
-                  <TimeSpan>{item.sendDate}</TimeSpan>
-                <JoinUserNickname>{item.message}</JoinUserNickname>
-                </TimeDiv>
-                </ChatStyle>) :
-                 
-                (<ChatStyle key={uuidv4()}>
-                   <TimeDiv>
-                    <PostUserNickname>{item.message}</PostUserNickname>
-                    <TimeSpan>{item.sendDate}</TimeSpan></TimeDiv>
-                </ChatStyle>)
-          }
+              <>
+                {listReducer.joinUserNickname === item.sender ? (
+                  <ChatStyle key={uuidv4()} style={{ textAlign: "right" }}>
+                    {/* 인라인 요소로 바로 우측 정렬 해결 */}
+                    <TimeDiv>
+                      <TimeSpan>{item.sendDate}</TimeSpan>
+                      <JoinUserNickname>{item.message}</JoinUserNickname>
+                    </TimeDiv>
+                  </ChatStyle>
+                ) : (
+                  <ChatStyle key={uuidv4()}>
+                    <TimeDiv>
+                      <PostUserNickname>{item.message}</PostUserNickname>
+                      <TimeSpan>{item.sendDate}</TimeSpan>
+                    </TimeDiv>
+                  </ChatStyle>
+                )}
               </>
             );
           })}
         <div ref={scrollRef}></div>
-        </ChatDiv>
-        <InputDiv>
-          <Input value={chatBody} onChange={inputHandler} onKeyPress={appKeyPress} placeholder="댓글을 입력하세요"/>
-                    {/* value를 줘야 사라진다 */}
-          <Send onClick={onSubmitHandler} style={{position:"fixed", left:"calc(50% + 140px)", transform:"translateX(-50%)", bottom:25}}/>
-                    {/* calc로 계산해서 반응형에 맞춰도 움직이지 않는 그림 만든다. svg는 컴포넌트처럼 임포트가 가능하다 */}
-        </InputDiv>
-
+      </ChatDiv>
+      <InputDiv>
+        <Input
+          value={chatBody}
+          onChange={inputHandler}
+          onKeyPress={appKeyPress}
+          placeholder="댓글을 입력하세요"
+        />
+        {/* value를 줘야 사라진다 */}
+        <Send
+          onClick={onSubmitHandler}
+          style={{
+            position: "fixed",
+            left: "calc(50% + 140px)",
+            transform: "translateX(-50%)",
+            bottom: 25,
+          }}
+        />
+        {/* calc로 계산해서 반응형에 맞춰도 움직이지 않는 그림 만든다. svg는 컴포넌트처럼 임포트가 가능하다 */}
+      </InputDiv>
     </StContainer>
   );
 }
@@ -245,7 +259,7 @@ const TitleContainer = styled.div`
   }
   display: flex;
 
-  div{
+  div {
     font-size: 16px;
     padding: 1.5px;
     margin-left: 1.5px;
@@ -254,68 +268,66 @@ const TitleContainer = styled.div`
 
 // chatting창 꾸미기
 
- //chat style
- const ChatStyle=styled.div`
- margin-top: 15px;
- margin-bottom : 15px;
- `
+//chat style
+const ChatStyle = styled.div`
+  margin-top: 15px;
+  margin-bottom: 15px;
+`;
 
-  //나 
-const JoinUserNickname=styled.span`
-padding : 7px;
-background: #3D6AF2;
-border-radius: 20px 20px 0px 20px;
-color: white;
-font-size: 14px;
-margin-top: 10px;
-display:inline-block;
-max-width: 250px;
-height: auto;
-white-space: pre-wrap;
-`
-  //상대방
-const PostUserNickname=styled.span`
-padding : 7px;
-background: #D9D9D9;
-border-radius: 20px 15px 15px 0px;
-font-size: 14px;
-margin-top: 10px;
-display:inline-block;
-max-width: 250px;
-height: auto;
-white-space: pre-wrap;
-`
+//나
+const JoinUserNickname = styled.span`
+  padding: 7px;
+  background: #3d6af2;
+  border-radius: 20px 20px 0px 20px;
+  color: white;
+  font-size: 14px;
+  margin-top: 10px;
+  display: inline-block;
+  max-width: 250px;
+  height: auto;
+  white-space: pre-wrap;
+`;
+//상대방
+const PostUserNickname = styled.span`
+  padding: 7px;
+  background: #d9d9d9;
+  border-radius: 20px 15px 15px 0px;
+  font-size: 14px;
+  margin-top: 10px;
+  display: inline-block;
+  max-width: 250px;
+  height: auto;
+  white-space: pre-wrap;
+`;
 
 // 시간
-const TimeDiv=styled.div`
-`
+const TimeDiv = styled.div``;
 //시간 상세
-const TimeSpan=styled.span`
-font-size: 10px;
-color: #c4c4c4;
-`
+const TimeSpan = styled.span`
+  font-size: 10px;
+  color: #c4c4c4;
+`;
 
 // input 창
-const InputDiv=styled.div`
-height: 50px;
-width: 100%;
-position:fixed;
-position:relative;
-bottom:20px;
-left:0;
-`
+const InputDiv = styled.div`
+  height: 50px;
+  width: 100%;
+  position: fixed;
+  position: relative;
+  bottom: 20px;
+  left: 0;
+`;
 
-const Input=styled.input`
-margin-top: 30px;
-width: 339px;
-height: 38px;
-background-color: transparent;
-border: 1px solid black;
-padding : 10px;
-position:fixed;
-bottom:15px;
-border-radius: 50px;
-left:50%;
-transform: translateX(-50%);
-
-`
+const Input = styled.input`
+  margin-top: 30px;
+  width: 339px;
+  height: 38px;
+  background-color: transparent;
+  border: 1px solid black;
+  padding: 10px;
+  position: fixed;
+  bottom: 15px;
+  border-radius: 50px;
+  left: 50%;
+  transform: translateX(-50%);
+`;
