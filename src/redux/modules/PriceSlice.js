@@ -31,10 +31,8 @@ export const __getPriceInfo = createAsyncThunk(
         ...payload,
         getList: data.data,
       };
-      console.log("겟 fulfil시", myPayload)
       return thunkAPI.fulfillWithValue(myPayload);
     } catch (error) {
-      console.log("겟 fulfil시 에러", error)
       return thunkAPI.rejectWithValue(error);
     }
   }
@@ -63,10 +61,8 @@ export const __checkPrice = createAsyncThunk(
         ...payload,
         data: data.data,
       };
-      console.log("체크 fulfil시", myPayload)
       return thunkAPI.fulfillWithValue(myPayload);
     } catch (error) {
-      console.log("체크 fulfil시 에러", error)
       return thunkAPI.rejectWithValue(error);
     }
   }
