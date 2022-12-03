@@ -61,12 +61,11 @@ const PostList = ({ posts, detail, __getDetail, state, setState }) => {
                   onClickHandler(post.postId);
                 }}
               >
-                {post?.images && (
+               
                   <img
                     className="object-cover  min-w-[84px] w-[84px] h-[84px]  rounded"
-                    src={post.images[0].imgUrl}
+                    src={post.images[0]?.imgUrl}
                   />
-                )}
 
                 <div className=" w-full flex-col  ml-3 font-medium">
                   <div>
