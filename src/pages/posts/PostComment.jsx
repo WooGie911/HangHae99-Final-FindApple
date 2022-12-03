@@ -21,7 +21,7 @@ const PostComment = () => {
     dispatch(__getPostDetail(post.postId));
   }, [post.updateComment]);
   const onClickHandler = () => {
-    navigate(-1);
+    navigate(`/PostDetail/${post.postId}`);
   };
 
   return (

@@ -68,7 +68,7 @@ const PostUpdate = () => {
           <div>
             <img
               onClick={() => {
-                navigate(-1);
+                navigate(`/PostDetail/${post.postId}`);
               }}
               style={{ width: 25, height: 25 }}
               src={back}

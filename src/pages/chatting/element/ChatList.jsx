@@ -10,6 +10,7 @@ const ChatList = () => {
   const dispatch = useDispatch();
   const navigate = useNavigate();
   const Room = useSelector((state) => state.chatting.roomList);
+  console.log(Room)
 
   useEffect(() => {
     dispatch(__getRoomList());
@@ -35,24 +36,73 @@ const ChatList = () => {
           Room.map((item, i) => {
             return (
               <div key={i}>
-                <span>{item.title}</span>
-                <span>
-                  <button onClick={() => onClickChatting(item)}>
-                    {item.roomId}번방
-                  </button>
-                </span>
+                {item.chatList.length > 0 ? (<>
+                <RoomList onClick={() => onClickChatting(item)}>
+                  <Profile>
+                <div><img src={item.postUserAvatarUrl} style={{ width: 44, height: 44, borderRadius:"50%"}}/></div>
+               <div>
+                
+               <div>{item.postUserNickname} <Time>{item.chatList[item.chatList.length-1].sendDate}</Time></div>
+                <Message>
+                {item.chatList[item.chatList.length-1].message}
+                {/* 대화의 맨 마지막만 가지고 오는 로직이면 위와 같이 진행하면 됨 */}
+                </Message>                
+                </div>
+                </Profile>
+                <SellImg>
+                {item.image !== undefined && (
+                <>
+                <img src={item.image.imgUrl} style={{ width: 44, height: 44}} />
+                </>)}
+                </SellImg>
+                </RoomList>
+                </>): null}
               </div>
             );
           })}
+
       </Div>
     </>
   );
 };
 
 export default ChatList;
-
+// 전체적인 레이아웃
 const Div = styled.div`
-  width: 360px;
-  height: 350px;
-  background-color: blueviolet;
+  width: 339px;
+  height: 376px;
+  border-radius: 5px;
+  background-color: white;
 `;
+
+const RoomList=styled.div`
+position: relative;
+height: 60px;
+border-bottom: 1px solid lightgrey;
+`
+
+// 왼쪽 프로필 사항
+const Profile=styled.div`
+display: flex;
+`
+
+// 폰트사이즈 조정
+const Time=styled.span`
+font-size: 10px;
+color: #c4c4c4;
+`
+
+const Message=styled.div`
+font-size: 12px;
+`
+
+// 오른쪽 판매 상품 사진
+const SellImg=styled.div`
+img{
+  border-radius: 5px;
+  position:absolute;
+  right: 25px;
+  margin-top: -35px;
+}
+
+`

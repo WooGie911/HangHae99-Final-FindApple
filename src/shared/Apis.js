@@ -2,40 +2,28 @@ import axios from "axios";
 
 const noToken = axios.create({
   baseURL: process.env.REACT_APP_SERVER,
-  //process.env.REACT_APP_URL,
   withCredentials: true,
 });
 
 const token = axios.create({
   baseURL: process.env.REACT_APP_SERVER,
-  //process.env.REACT_APP_URL,
   headers: {
     Access_Token:
       localStorage.getItem("Access_Token") === undefined
         ? ""
         : localStorage.getItem("Access_Token"),
-    // Refresh_Token:
-    //   localStorage.getItem("Refresh_Token") === undefined
-    //     ? ""
-    //     : localStorage.getItem("Refresh_Token"),
   },
   withCredentials: true,
 });
 
 const file = axios.create({
-  // 추후에 로컬에서 서버 주소로 변경해야 함
   baseURL: process.env.REACT_APP_SERVER,
-  //process.env.REACT_APP_URL,
   headers: {
     enctype: "multipart/form-data",
     Access_Token:
       localStorage.getItem("Access_Token") === undefined
         ? ""
         : localStorage.getItem("Access_Token"),
-    // Refresh_Token:
-    //   localStorage.getItem("Refresh_Token") === undefined
-    //     ? ""
-    //     : localStorage.getItem("Refresh_Token"),
   },
   withCredentials: true,
 });
@@ -133,8 +121,13 @@ export const Apis = {
 
   UserProfileAX: () => token.get(`/api/myinfo`),
 
-  UserProfileEditAX: (payload) => file.patch(`/api/myinfo/edit`, payload),
+  UserProfileEditAX: (payload) => token.patch(`/api/myinfo/edit`, payload),
 
-  // logoutAX: () => token.get(`/api/logout`),
+  // 채팅
+  CreateRoomAX: (payload) => token.post(`/api/chat/room`, payload),
+
+  GetRoomListAX: () => token.get(`/api/chat/roomList`),
+
+  GetInitialChatListAX: (payload) => token.post(`/api/chat/roomInfo`, payload),
 };
 export default Apis;

@@ -6,7 +6,6 @@ import styled from "styled-components";
 import useInput from "../../hook/useInput";
 import KakaoLogin from "../../components/login/KakaoLogin";
 import Layout from "../../components/commons/Layout";
-import LOGO from "../../assets/LOGO.svg";
 import LOGOWHITE from "../../assets/LOGOWHITE.svg";
 
 const SignIn = () => {
@@ -53,7 +52,10 @@ const SignIn = () => {
             value={input.password}
             onKeyPress={keyPress}
           />
-          <StButton style={{ color: "black" }} onClick={onSubmitHandler}>
+          <StButton
+            style={{ color: "black", fontFamily: "Pretendard-Regular" }}
+            onClick={onSubmitHandler}
+          >
             로그인
           </StButton>
           <br />
