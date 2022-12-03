@@ -123,17 +123,19 @@ const PostDetail = () => {
         <div className="bg-white h-[925px]">
           <div className=" relative flex-col h-[410px] w-[375px] z-10">
             <div className="bg-transparent flex relative h-[60px] items-center justify-center z-20">
-              <img className="h-5 w-5 absolute  left-3" src={blueBackArrow} />
+              <img className="h-5 w-5 absolute  left-3" src={blueBackArrow} onClick={() => navigate("/postread/all")} />
               <img
                 className="h-[18px] w-[18px] absolute left-10"
                 src={blueHome}
                 onClick={() => navigate("/main")}
               />
+              {post.myPost === true ?(<>
               <img
                 className="h-[18px] w-[18px] absolute right-4"
                 src={blueToggle}
                 onClick={editToggleHandler}
               />
+              </>) : ""}
             </div>
             {editTg.isEdit === true ? (
               <ToggleNav>
