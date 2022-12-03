@@ -48,6 +48,10 @@ const PostList = ({ posts, detail, __getDetail, state, setState }) => {
     setPage(0);
   }, [params]);
 
+  useEffect(() => {
+  console.log(posts)
+  }, [posts]);
+
   return (
     <>
       <div>
