@@ -8,8 +8,7 @@ export const __CreateRoom = createAsyncThunk(
   async (payload, thunkAPI) => {
     try {
       // const response = await axios.post(`${process.env.REACT_APP_SERVER}/api/chat/room`, payload.postId,
-      const response = await Apis.CreateRoomAX(
-        payload);
+      const response = await Apis.CreateRoomAX(payload);
       return thunkAPI.fulfillWithValue(response.data);
     } catch (error) {
       return thunkAPI.rejectWithValue(error.response.data);
