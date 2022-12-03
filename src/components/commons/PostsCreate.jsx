@@ -126,7 +126,7 @@ const PostsCreate = (props) => {
           </Stphotolabel>
           {fileUrls.length > 0 && (
             <>
-              <div className="preview" style={{ marginTop: "15px" }}>
+              <div className="preview" style={{ marginTop: "15px", display:"flex"}}>
                 {
                   /*previews*/
                   fileUrls.map((val, i) => {
