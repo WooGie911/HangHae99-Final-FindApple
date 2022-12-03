@@ -68,17 +68,12 @@ const PostsCreate = (props) => {
     if (files.length < 1) {
       return window.alert("사진을 입력하세요");
     }
-setTimeout(
-  function () {
+
     if (window.confirm("작성하시겠습니까?")) {
       dispatch(props.__addData(formData));
       navigate(`/${props.Navigate}`);
       window.location.reload(`/${props.Navigate}`);
     }
-  },
-  200
-)
-    
   };
   const onClickHandler = () => {
     navigate(-1);
