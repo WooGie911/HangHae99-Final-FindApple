@@ -2,13 +2,11 @@ import axios from "axios";
 
 const noToken = axios.create({
   baseURL: process.env.REACT_APP_SERVER,
-  //process.env.REACT_APP_URL,
   withCredentials: true,
 });
 
 const token = axios.create({
   baseURL: process.env.REACT_APP_SERVER,
-  //process.env.REACT_APP_URL,
   headers: {
     Access_Token:
       localStorage.getItem("Access_Token") === undefined
@@ -18,24 +16,8 @@ const token = axios.create({
   withCredentials: true,
 });
 
-// 임시(정수님 서버용)
-
-// const token2 = axios.create({
-//   baseURL: process.env.REACT_APP_Chatting_SERVER,
-//   //채팅용 서버,
-//   headers: {
-//     Access_Token:
-//       localStorage.getItem("Access_Token") === undefined
-//         ? ""
-//         : localStorage.getItem("Access_Token"),
-//   },
-//   withCredentials: true,
-// });
-
 const file = axios.create({
-  // 추후에 로컬에서 서버 주소로 변경해야 함
   baseURL: process.env.REACT_APP_SERVER,
-  //process.env.REACT_APP_URL,
   headers: {
     enctype: "multipart/form-data",
     Access_Token:
@@ -69,22 +51,24 @@ export const Apis = {
       `/api/posts/${payload.paramObj}?page=${payload.pageNumber}&size=${payload.pageSize}&sort=${payload.postSort},DESC`
     ),
 
-  addPostAX: (payload) => token.post(`/api/posts`, payload),
+  addPostAX: (payload) => file.post(`/api/posts`, payload),
 
   deletePostAX: (payload) => token.delete(`/api/posts/${payload}`),
 
-  editPostAX: (payload) => token.patch(`/api/posts/${payload.id}`),
+  editPostAX: (payload) =>
+    file.patch(`/api/posts/${payload.id}`, payload.formData),
 
   getPostDetailAX: (payload) => token.get(`/api/posts/detail/${payload}`),
 
-  addPostCommentAX: (payload) => token.post(`/api/posts/comment/${payload.id}`),
+  addPostCommentAX: (payload) =>
+    token.post(`/api/posts/comment/${payload.id}`, payload.comment),
 
   deletePostCommentAX: (payload) =>
     token.delete(`/api/posts/comment/${payload}`),
 
-  CartInPostAX: (payload) => token.post(`/api/posts/likes/${payload}`),
+  CartInPostAX: (payload) => token.post(`/api/post/likes/${payload}`, ""),
 
-  CartOutPostAX: (payload) => token.delete(`/api/posts/likes/${payload}`),
+  CartOutPostAX: (payload) => token.delete(`/api/post/likes/${payload}`),
 
   searchObjectionAX: (payload) =>
     token.get(
@@ -101,23 +85,24 @@ export const Apis = {
       `/api/issues/${payload.paramObj}?page=${payload.pageNumber}&size=${payload.pageSize}&sort=${payload.postSort},DESC`
     ),
 
-  addObjectionAX: (payload) => token.post(`/api/issues`, payload),
+  addObjectionAX: (payload) => file.post(`/api/issues`, payload),
 
   deleteObjectionAX: (payload) => token.delete(`/api/issues/${payload}`),
 
-  editObjectionAX: (payload) => token.patch(`/api/issues/${payload.id}`),
+  editObjectionAX: (payload) =>
+    token.patch(`/api/issues/${payload.id}`, payload.formData),
 
   getObjectionDetailAX: (payload) => token.get(`/api/issues/detail/${payload}`),
 
   addObjectionCommentAX: (payload) =>
-    token.post(`/api/issues/comment/${payload.id}`),
+    token.post(`/api/issues/comment/${payload.id}`, payload.comment),
 
   deleteObjectionCommentAX: (payload) =>
     token.delete(`/api/issues/comment/${payload}`),
 
-  CartInObjectionAX: (payload) => token.post(`/api/issues/likes/${payload}`),
+  CartInObjectionAX: (payload) => token.post(`/api/issue/likes/${payload}`),
 
-  CartOutObjectionAX: (payload) => token.delete(`/api/issues/likes/${payload}`),
+  CartOutObjectionAX: (payload) => token.delete(`/api/issue/likes/${payload}`),
 
   getMyPostAX: () => token.get(`/api/myinfo/post`),
 
@@ -137,14 +122,12 @@ export const Apis = {
   UserProfileAX: () => token.get(`/api/myinfo`),
 
   UserProfileEditAX: (payload) => token.patch(`/api/myinfo/edit`, payload),
-  
+
   // 채팅
   CreateRoomAX: (payload) => token.post(`/api/chat/room`, payload),
 
   GetRoomListAX: () => token.get(`/api/chat/roomList`),
 
   GetInitialChatListAX: (payload) => token.post(`/api/chat/roomInfo`, payload),
-
-  // logoutAX: () => token.get(`/api/logout`),
 };
 export default Apis;

@@ -2,8 +2,6 @@ import { createAsyncThunk, createSlice } from "@reduxjs/toolkit";
 
 import Apis from "../../shared/Apis";
 
-
-
 export const __getPostDetail = createAsyncThunk(
   "details/__getPostDetail",
   async (payload, thunkAPI) => {
@@ -20,7 +18,7 @@ export const __addPostComment = createAsyncThunk(
   "details/__addPostComment",
   async (payload, thunkAPI) => {
     try {
-      const data = await Apis.addPostCommentAX(payload.comment);
+      const data = await Apis.addPostCommentAX(payload);
       return thunkAPI.fulfillWithValue(data.data);
     } catch (error) {
       return thunkAPI.rejectWithValue(error);
@@ -47,7 +45,7 @@ export const __CartInPost = createAsyncThunk(
   "details/__CartInPost",
   async (payload, thunkAPI) => {
     try {
-      const data = await Apis.post(payload,"");
+      const data = await Apis.CartInPostAX(payload);
       console.log("response", data);
       if (data.data === "찜 성공") {
         console.log("찜 성공");

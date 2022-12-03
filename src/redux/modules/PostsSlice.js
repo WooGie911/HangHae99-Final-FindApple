@@ -2,8 +2,6 @@ import { createAsyncThunk, createSlice, current } from "@reduxjs/toolkit";
 import axios from "axios";
 import Apis from "../../shared/Apis";
 
-
-
 export const __searchPost = createAsyncThunk(
   "posts/__searchPost",
   async (payload, thunkAPI) => {
@@ -49,10 +47,9 @@ export const __addPost = createAsyncThunk(
   "posts/__addPost",
   async (payload, thunkAPI) => {
     try {
-      await Apis.addPostAX(payload)
-        .then((response) => {
-          return thunkAPI.fulfillWithValue(response.data.data);
-        });
+      await Apis.addPostAX(payload).then((response) => {
+        return thunkAPI.fulfillWithValue(response.data.data);
+      });
     } catch (error) {
       return thunkAPI.rejectWithValue(error);
     }
@@ -76,7 +73,7 @@ export const __editPost = createAsyncThunk(
   async (payload, thunkAPI) => {
     try {
       console.log(payload);
-      const data = await Apis.editPostAX(payload.formData);
+      const data = await Apis.editPostAX(payload);
       return thunkAPI.fulfillWithValue(data.data);
     } catch (error) {
       return thunkAPI.rejectWithValue(error);
@@ -97,10 +94,18 @@ const PostsSlice = createSlice({
       pageSize: 10,
       postSort: "postId",
     },
+    footerState: "Home",
   },
   reducers: {
     initialHeaderState(state, action) {
-      state.HeaderState = action.payload;
+      state.HeaderState = action.payload.HeaderState;
+      state.footerState = action.payload.footerState;
+    },
+    // swichHeaderBarState(state, action) {
+    //   state.headerBarState = action.payload;
+    // },
+    swichFooterState(state, action) {
+      state.footerState = action.payload;
     },
   },
   extraReducers: {
@@ -202,5 +207,6 @@ const PostsSlice = createSlice({
   },
 });
 
-export const { initialHeaderState } = PostsSlice.actions;
+export const { swichHeaderBarState, swichFooterState, initialHeaderState } =
+  PostsSlice.actions;
 export default PostsSlice.reducer;

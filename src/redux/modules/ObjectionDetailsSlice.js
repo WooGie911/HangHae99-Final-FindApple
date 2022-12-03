@@ -1,7 +1,6 @@
 import { createAsyncThunk, createSlice } from "@reduxjs/toolkit";
 import Apis from "../../shared/Apis";
 
-
 export const __getObjectionDetail = createAsyncThunk(
   "objectionDetails/__getObjectionDetail",
   async (payload, thunkAPI) => {
@@ -18,7 +17,7 @@ export const __addObjectionComment = createAsyncThunk(
   "objectionDetails/__addObjectionComment",
   async (payload, thunkAPI) => {
     try {
-      const data = await Apis.addObjectionCommentAX(payload.comment);
+      const data = await Apis.addObjectionCommentAX(payload);
       return thunkAPI.fulfillWithValue(data.data);
     } catch (error) {
       return thunkAPI.rejectWithValue(error);

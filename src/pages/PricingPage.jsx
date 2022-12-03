@@ -1,14 +1,15 @@
-import React, { useEffect, useState } from "react";
+import React, { useState } from "react";
 import { useDispatch, useSelector } from "react-redux";
 import { useNavigate } from "react-router-dom";
 import styled from "styled-components";
-import Layout from "../components/Layout";
-import PricingInput1 from "../components/PricingInput1";
-import PricingInput2 from "../components/PricingInput2";
-import PricingInput3 from "../components/PricingInput3";
-import PricingInput4 from "../components/PricingInput4";
-import PricingInput5 from "../components/PricingInput5";
+import Layout from "../components/commons/Layout";
+import PricingInput1 from "../components/price/PricingInput1";
+import PricingInput2 from "../components/price/PricingInput2";
+import PricingInput3 from "../components/price/PricingInput3";
+import PricingInput4 from "../components/price/PricingInput4";
+import PricingInput5 from "../components/price/PricingInput5";
 import { swichStepState, __getPriceInfo } from "../redux/modules/PriceSlice";
+import backArrow from "../assets/backArrow.svg";
 
 const PricingPage = () => {
   const navigate = useNavigate();
@@ -26,7 +27,11 @@ const PricingPage = () => {
       <Layout>
         <ContainerDiv>
           <TitleDiv>
-            {stepState !== 1 && <Backbutton onClick={BackFn}>〈</Backbutton>}
+            {stepState !== 1 && (
+              <Backbutton onClick={BackFn}>
+                <img src={backArrow} />
+              </Backbutton>
+            )}
             <Xbutton
               onClick={() => {
                 navigate("/main");

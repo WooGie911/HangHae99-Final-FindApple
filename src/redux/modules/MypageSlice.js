@@ -46,7 +46,7 @@ const MypageSlice = createSlice({
     likes: [],
   },
 
-  reducer: {},
+  reducers: {},
   extraReducers: {
     //__getMyPost
     [__getMyPost.pending]: (state) => {
