@@ -50,7 +50,10 @@ const ObjectionList = ({ posts, detail, __getDetail, state, setState }) => {
   useEffect(() => {
     setPage(0);
   }, [params]);
-
+  
+  useEffect(() => {
+    console.log(posts)
+    }, [posts]);
   return (
     <>
       <div>
