@@ -135,11 +135,13 @@ const PostDetail = () => {
               src={blueHome}
               onClick={() => onClickGoHome({ state: "Home", navi: "/main" })}
             />
-            <img
-              className="h-[18px] w-[18px] absolute right-4"
-              src={blueToggle}
-              onClick={editToggleHandler}
-            />
+            {post.myPost === true && (
+              <img
+                className="h-[18px] w-[18px] absolute right-4"
+                src={blueToggle}
+                onClick={editToggleHandler}
+              />
+            )}
           </div>
           {editTg.isEdit === true && (
             <div className=" absolute right-3 top-13 z-30 w-10">

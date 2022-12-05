@@ -162,6 +162,7 @@ const PostsSlice = createSlice({
     [__addPost.fulfilled]: (state, action) => {
       state.isLoading = false;
       state.posts.push(action.payload);
+      window.location.replace("/postread/all")
     },
     [__addPost.rejected]: (state, action) => {
       state.isLoading = false;

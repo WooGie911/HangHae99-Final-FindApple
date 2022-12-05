@@ -150,6 +150,8 @@ const ObjectionsSlice = createSlice({
     [__addObjection.fulfilled]: (state, action) => {
       state.isLoading = false;
       state.posts.push(action.payload);
+      window.location.replace("/objectionread/all")
+
     },
     [__addObjection.rejected]: (state, action) => {
       state.isLoading = false;

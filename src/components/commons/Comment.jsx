@@ -39,7 +39,9 @@ const Comment = ({ comment, __deleteComment }) => {
         </div>
         <div className=" relative flex-col  ">
           <div className=" flex justify-end">
-            <img src={toggle} onClick={editToggleHandler} />
+            {comment.myComment === true && (
+              <img src={toggle} onClick={editToggleHandler} />
+            )}
           </div>
           <div>
             {editTg.isEdit === true && (

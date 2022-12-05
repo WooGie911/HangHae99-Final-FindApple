@@ -4,7 +4,6 @@ import useInput from "../../hook/useInput";
 import useImgUpload from "../../hook/useImageUpload";
 import { useDispatch, useSelector } from "react-redux";
 import { useNavigate } from "react-router-dom";
-import whitearrow from "../../assets/whitearrow.png";
 import backArrow from "../../assets/backArrow.svg";
 import blueCamera from "../../assets/blueCamera.png";
 
@@ -71,8 +70,8 @@ const PostsCreate = (props) => {
 
     if (window.confirm("작성하시겠습니까?")) {
       dispatch(props.__addData(formData));
-      navigate(`/${props.Navigate}`);
-      window.location.reload(`/${props.Navigate}`);
+      // navigate(`/${props.Navigate}`);
+      // window.location.reload(`/${props.Navigate}`);
     }
   };
   const onClickHandler = () => {
