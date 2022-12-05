@@ -34,82 +34,59 @@ const SignIn = () => {
   };
   return (
     <Layout>
-      <StSignupBox>
-        <StLoginBox>
-          <Title src={LOGOWHITE}></Title>
-          <StInputBox
-            type="text"
-            name="email"
-            onChange={ChangeInputHandler}
-            placeholder="아이디 입력"
-            value={input.email}
-          />
-          <StInputBox
-            type="password"
-            name="password"
-            onChange={ChangeInputHandler}
-            placeholder="비밀번호 입력"
-            value={input.password}
-            onKeyPress={keyPress}
-          />
-          <StButton
-            style={{ color: "black", fontFamily: "Pretendard-Regular" }}
-            onClick={onSubmitHandler}
-          >
-            로그인
-          </StButton>
-          <br />
-          <div style={{ color: "white", fontSize: 12 }}>
-            회원이 아니신가요?
-            <A
+      <div className="flex justify-center items-center h-[100vh] bg-CC">
+        <div className="flex-col text-sm">
+          <div className="flex justify-center">
+            <img className="w-36 h-8 mb-28" src={LOGOWHITE} />
+          </div>
+          <div className="flex justify-center">
+            <input
+              className="outline-none bg-translucent2 placeholder-white w-[296px] h-9 border-transparent rounded-md p-2 mb-4"
+              type="text"
+              name="email"
+              onChange={ChangeInputHandler}
+              placeholder="아이디 입력"
+              value={input.email}
+            />
+          </div>
+          <div className="flex justify-center">
+            <input
+              className=" outline-none bg-translucent2 placeholder-white w-[296px] h-9 rounded-md p-2 mb-4"
+              type="password"
+              name="password"
+              onChange={ChangeInputHandler}
+              placeholder="비밀번호 입력"
+              value={input.password}
+              onKeyPress={keyPress}
+            />
+          </div>
+          <div className="flex justify-center">
+            <button
+              className=" w-[296px] h-9 bg-white rounded-md mt-4 font-semibold"
+              onClick={onSubmitHandler}
+            >
+              로그인
+            </button>
+          </div>
+          <div className="flex justify-center items-center text-xs text-white p-3 mb-3">
+            <div>회원이 아니신가요?</div>
+            <div
+              className="text-KY ml-2 cursor-pointer"
               onClick={() => {
                 navigate("/signup");
               }}
-              style={{ color: "white", fontSize: 12 }}
             >
               회원가입
-            </A>
+            </div>
           </div>
-          <br />
           <KakaoLogin />
-        </StLoginBox>
-      </StSignupBox>
+        </div>
+      </div>
     </Layout>
   );
 };
 
 export default SignIn;
-
-const StLoginBox = styled.div`
-  position: relative;
-  width: 375px;
-  height: 100vh;
-  background-color: #3d6af2;
-  display: flex;
-  justify-content: center;
-  align-items: center;
-  flex-direction: column;
-  top: 350px;
-  left: -13px;
-`;
-
-const StSignupBox = styled.div`
-  width: 400px;
-  margin-top: 30px;
-  height: 10vh;
-  background-color: white;
-  display: flex;
-  justify-content: center;
-  text-align: center;
-  align-items: center;
-`;
-
-const Title = styled.img`
-  position: relative;
-  top: -100px;
-  width: 143px;
-  height: 36px;
-`;
 
 const StInputBox = styled.input`
   width: 296px;

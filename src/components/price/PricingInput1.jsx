@@ -36,130 +36,98 @@ const PricingInput1 = ({ priceListState, setPriceListState, stepState }) => {
   };
 
   return (
-    <>
-      <ContentDiv>카테고리를 선택해주세요</ContentDiv>
+    <ul>
+      <div className="flex-col p-[18px]">
+        <div className="flex items-center w-full h-14 font-semibold">
+          카테고리를 선택해주세요
+        </div>
+        <ul className="text-DD flex mt-1">
+          {priceListState.category === "macbook" ? (
+            <li className="mr-3 flex">
+              <input
+                className="appearance-none peer"
+                type="radio"
+                id="category-macbook"
+                name="category"
+                value="macbook"
+                defaultChecked
+                onClick={onChangeHandler}
+              />
+              <label
+                className="flex items-center h-[38px] px-5 rounded-3xl border-DD border-[1px] peer-checked:border-CC peer-checked:bg-CC peer-checked:text-CC peer-checked:bg-opacity-50"
+                htmlFor="category-macbook"
+              >
+                macbook
+              </label>
+            </li>
+          ) : (
+            <li className="mr-3 flex">
+              <input
+                className="appearance-none peer"
+                type="radio"
+                id="category-macbook"
+                name="category"
+                value="macbook"
+                onClick={onChangeHandler}
+              />
+              <label
+                className="flex items-center h-[38px] px-5 rounded-3xl border-DD border-[1px] peer-checked:border-CC peer-checked:bg-CC peer-checked:text-CC peer-checked:bg-opacity-50"
+                htmlFor="category-macbook"
+              >
+                macbook
+              </label>
+            </li>
+          )}
+          {priceListState.category === "iphone" ? (
+            <li className="mr-3 flex">
+              <input
+                className="appearance-none peer"
+                type="radio"
+                id="category-iphone"
+                name="category"
+                value="iphone"
+                defaultChecked
+                onClick={onChangeHandler}
+              />
+              <label
+                className="flex items-center h-[38px] px-5 rounded-3xl border-DD border-[1px] peer-checked:border-CC peer-checked:bg-CC peer-checked:text-CC peer-checked:bg-opacity-50"
+                htmlFor="category-iphone"
+              >
+                iphone
+              </label>
+            </li>
+          ) : (
+            <li className="mr-3 flex">
+              <input
+                className="appearance-none peer"
+                type="radio"
+                id="category-iphone"
+                name="category"
+                value="iphone"
+                onClick={onChangeHandler}
+              />
+              <label
+                className="flex items-center h-[38px] px-5 rounded-3xl border-DD border-[1px] peer-checked:border-CC peer-checked:bg-CC peer-checked:text-CC peer-checked:bg-opacity-50"
+                htmlFor="category-iphone"
+              >
+                iphone
+              </label>
+            </li>
+          )}
+        </ul>
+      </div>
 
-      <CategoryDiv>
-        <SelectBox
-          defaultValue={priceListState.category}
-          type="radio"
-          name="category"
-          onChange={onChangeHandler}
-        >
-          <option value={"category"}>Category</option>
-          <option value={"macbook"}>macbook</option>
-          <option value={"iphone"}>iphone</option>
-        </SelectBox>
-      </CategoryDiv>
-
-      <StepDiv>
+      <div className="flex justify-center items-center absolute w-full bottom-14 p-5 ">
         <PricingStep stepState={stepState} />
-      </StepDiv>
-      <NextButton onClick={onSubmitHandler}>다음으로</NextButton>
-    </>
+      </div>
+      <button
+        className=" absolute bottom-0 w-full h-14 text-white bg-CC"
+        onClick={onSubmitHandler}
+      >
+        다음으로
+      </button>
+    </ul>
   );
 };
 
 export default PricingInput1;
-
-const RLDiv = styled.div`
-  .C02:checked {
-    .C01 {
-      border: 1px solid #949497;
-      background-color: #4f75ff;
-      color: #ff0000;
-    }
-  }
-`;
-const RadioInput = styled.input`
-  /* appearance: none; */
-  &:checked {
-    ${RLDiv} {
-      border: 1px solid #949497;
-      background-color: #4f75ff;
-      color: #ff0000;
-    }
-  }
-`;
-
-const RadioLabel = styled.label`
-  width: 100px;
-  height: 35px;
-  overflow: auto;
-  border: 1px solid #4f75ff;
-  border-radius: 50px;
-  font-size: 15px;
-  text-align: center;
-  display: flex;
-  align-items: center;
-  justify-content: center;
-  ${RadioInput}:checked {
-    border: 1px solid #949497;
-    background-color: #4f75ff;
-    color: #ff0000;
-  }
-`;
-
-const SelectBox = styled.select`
-  width: 330px;
-  height: 40px;
-  overflow: auto;
-  border: 1px solid #000000;
-  background-color: transparent;
-  border-radius: 50px;
-  font-size: 15px;
-`;
-const ContentDiv = styled.div`
-  display: flex;
-  flex-direction: column;
-  justify-content: center;
-  justify-items: center;
-  position: relative;
-  font-size: 15px;
-  font-weight: bold;
-  margin-top: 5px;
-  margin-left: 10px;
-  padding-left: 10px;
-  width: 100%;
-  height: 50px;
-  background-color: transparent;
-`;
-
-const CategoryDiv = styled.div`
-  display: flex;
-  flex-direction: column;
-  justify-content: center;
-  justify-items: center;
-  align-items: center;
-  position: relative;
-  font-family: "Inter";
-  font-style: normal;
-  font-weight: 600;
-  font-size: 16px;
-  line-height: 19px;
-  width: 100%;
-  height: 50px;
-`;
-
-const StepDiv = styled.div`
-  display: flex;
-  align-items: center;
-  justify-content: center;
-  justify-items: center;
-  position: absolute;
-  bottom: 50px;
-  width: 100%;
-  height: 56px;
-  border: none;
-  background-color: transparent;
-`;
-
-const NextButton = styled.button`
-  position: absolute;
-  bottom: 0px;
-  width: 100%;
-  height: 56px;
-  color: white;
-  border: none;
-  background-color: #4f75ff;
-`;

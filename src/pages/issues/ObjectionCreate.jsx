@@ -1,19 +1,17 @@
 import React from "react";
 import PostsCreate from "../../components/commons/PostsCreate";
 import { __addObjection } from "../../redux/modules/ObjectionsSlice";
-import Footer from "../../components/commons/Footer";
-import Layout from "../../components/commons/Layout";
+import Layout2 from "../../components/commons/Layout2";
 const ObjectionCreate = () => {
   return (
     <>
-      <Layout>
+      <Layout2>
         <PostsCreate
           postReqDto={"issuesRequestDto"}
           Navigate={"objectionread/all"}
           __addData={__addObjection}
         />
-        <Footer />
-      </Layout>
+      </Layout2>
     </>
   );
 };

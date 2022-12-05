@@ -2,32 +2,30 @@ import React, { useEffect, useState } from "react";
 import Slider from "react-slick";
 import "slick-carousel/slick/slick.css";
 import "slick-carousel/slick/slick-theme.css";
-import styled from "styled-components";
 import { useNavigate, useParams } from "react-router-dom";
 import { useDispatch, useSelector } from "react-redux";
 import { __deleteObjection } from "../../redux/modules/ObjectionsSlice";
-import photoIMG from "../../assets/photoIMG.png";
 import {
   __CartInObjection,
   __CartOutObjection,
   __getObjectionDetail,
 } from "../../redux/modules/ObjectionDetailsSlice";
-import Layout from "../../components/commons/Layout";
-import whitearrow from "../../assets/whitearrow.png";
-import back from "../../assets/back.png";
-import threedots from "../../assets/threedots.png";
-import blueheart from "../../assets/blueheart.png";
-import emptyheart from "../../assets/emptyheart.png";
-import home from "../../assets/home.png";
+import Layout2 from "../../components/commons/Layout2";
+import blueHeart from "../../assets/blueHeart.svg";
+import emptyHeart from "../../assets/emptyHeart.svg";
+import blueBackArrow from "../../assets/blueBackArrow.svg";
+import blueHome from "../../assets/blueHome.svg";
+import blueToggle from "../../assets/blueToggle.svg";
+import whiteComment from "../../assets/whiteComment.png";
+import rightTriangle from "../../assets/rightTriangle.svg";
 import { __CreateRoom } from "../../redux/modules/ChattingSlice";
-import chat from "../../assets/chat.png";
+import { swichFooterState } from "../../redux/modules/PostsSlice";
 
 const ObjectionDetail = () => {
   const navigate = useNavigate();
   const dispatch = useDispatch();
   const params = useParams();
   const { post } = useSelector((state) => state.objectionDetails);
-  const postChat = useSelector((state) => state.chatting.createRoom);
   console.log("이슈 포스트 뭐 들어왔나 변수명(id)", post);
   //찜하기
   const onCartButton = (payload) => {
@@ -44,6 +42,12 @@ const ObjectionDetail = () => {
       dispatch(__deleteObjection(payload));
       window.location.replace("/objectionread/all");
     }
+  };
+
+  //홈 이동
+  const onClickGoHome = (data) => {
+    dispatch(swichFooterState(data.state));
+    navigate(`${data.navi}`);
   };
 
   const [editTg, setEidtTg] = useState({
@@ -81,343 +85,162 @@ const ObjectionDetail = () => {
 
   return (
     <>
-      <Layout>
-        <EditHead>
-          <div>
-            <Span>
+      <Layout2>
+        <div className=" relative flex-col h-[410px] w-[375px] z-10">
+          <div className="bg-transparent flex relative h-[60px] items-center justify-center z-20">
+            <img
+              className="h-5 w-5 absolute  left-3"
+              src={blueBackArrow}
+              onClick={() => navigate(-1)}
+            />
+            <img
+              className="h-[18px] w-[18px] absolute left-10"
+              src={blueHome}
+              onClick={() => onClickGoHome({ state: "Home", navi: "/main" })}
+            />
+            {post.myIssue === true && (
               <img
-                onClick={() => {
-                  navigate("/objectionread/all");
-                }}
-                style={{ width: 25, height: 25 }}
-                src={back}
+                className="h-[18px] w-[18px] absolute right-4"
+                src={blueToggle}
+                onClick={editToggleHandler}
               />
-              <span onClick={() => navigate("/main")}>
-                <img src={home} />
-              </span>
-            </Span>
+            )}
           </div>
-          {post.myIssue === true ?(<>
-          <Tgbutton src={threedots} onClick={editToggleHandler} />
-          </>) : ""}
-          {editTg.isEdit === true ? (
-            <ToggleNav>
-              <Button onClick={() => navigate(`/objectionupdate/${params.id}`)}>
+          {editTg.isEdit === true && (
+            <div className=" absolute right-3 top-13 z-30 w-10">
+              <button
+                className=" bg-white w-12 h-10 rounded-lg"
+                onClick={() => navigate(`/objectionupdate/${params.id}`)}
+              >
                 수정
-              </Button>
-              <Button
+              </button>
+              <button
+                className=" bg-white w-12 h-10 rounded-lg mt-[1px]"
                 onClick={() => {
                   onDeleteHandler(params.id);
                 }}
               >
-                글삭제
-              </Button>
-            </ToggleNav>
-          ) : null}
-        </EditHead>
-        <div>
-          <Slider {...settings}>
-            {post.images !== undefined &&
-              post.images.map((item, index) => {
-                return <Image src={item.imgUrl} key={index} />;
-              })}
-          </Slider>
-        </div>
-        <WriterContainer>
-          <div>
-            <SellerProfile>
-              <div>
-                <img
-                  style={{
-                    width: 50,
-                    height: 50,
-                    borderRadius: "50%",
-                    float: "left",
-                  }}
-                  src={
-                    post.avatarUrl == (null || undefined)
-                      ? photoIMG
-                      : post.avatarUrl
-                  }
-                />
-              </div>
-              <Nickname onClick={onSellerPage}>{post.nickname}</Nickname>
-            </SellerProfile>
-          </div>
-          <Heart>
-            <ClickHeart onClick={() => onCartButton(post.issuesId)}>
-              {post.isLike ? <img src={blueheart} /> : <img src={emptyheart} />}{" "}
-            </ClickHeart>
-            <div>{post.likeCnt}</div>
-          </Heart>
-        </WriterContainer>
-
-        <White>
-          {post.options !== undefined && (
-            <>
-              <Models>
-                <span>{post.options.category}</span>{" "}
-                <span>{post.options.model}</span>{" "}
-                <span>{post.options.years}</span>{" "}
-                <span>{post.options.options}</span>{" "}
-              </Models>
-            </>
+                삭제
+              </button>
+            </div>
           )}
-          <Title>{post.title}</Title>
-          <div>{post.content}</div>
 
-          <Create>
-            <div> {post.createdAt}</div>
-          </Create>
-          <Detail
-            onClick={() => {
-              navigate("/pricingtext", { state: post });
-            }}
-          >
-            <p5>상품 상세 정보</p5>
-            <Stdetailrightarrow
-              src={whitearrow}
-              style={{ width: "25px", height: "25px" }}
-            ></Stdetailrightarrow>
-          </Detail>
+          <div className=" absolute top-0 z-0 w-full h-[446px]">
+            <Slider {...settings}>
+              {post.images !== undefined &&
+                post.images.map((item, index) => {
+                  return (
+                    <img
+                      className=" h-[446px] object-cover"
+                      src={item.imgUrl}
+                      key={index}
+                    />
+                  );
+                })}
+            </Slider>
+          </div>
 
-          <Price>
-            <div>
-              {post.expectPrice !== undefined && (
-                <>
-                  <TextDiv>책정가격</TextDiv>
-                  <PriceDiv>
-                    {post.expectPrice.toLocaleString("ko-KR")}원
-                  </PriceDiv>
-                </>
-              )}
+          {post.isLike ? (
+            <div className="bg-transparent flex-col absolute z-10 right-4 bottom-0">
+              <img
+                src={blueHeart}
+                onClick={() => onCartButton(post.issuesId)}
+              />
+              <div className="text-center text-sm text-CC">{post.likeCnt}</div>{" "}
             </div>
-            <Arrow>
-              {" "}
-              <img src="https://img.icons8.com/metro/15/null/long-arrow-right.png" />{" "}
-            </Arrow>
-            <div>
-              {post.userPrice !== undefined && (
-                <>
-                  <TextDiv>판매가격</TextDiv>
-                  <PriceDiv>
-                    {post.userPrice.toLocaleString("ko-KR")}원
-                  </PriceDiv>
-                </>
-              )}
+          ) : (
+            <div className="bg-transparent flex-col absolute z-10 right-4 bottom-0">
+              <img
+                src={emptyHeart}
+                onClick={() => onCartButton(post.issuesId)}
+              />
+              <div className="text-center text-sm text-white">
+                {post.likeCnt}
+              </div>
             </div>
-            <div>
+          )}
+        </div>
+        <div className="bg-white relative flex-col grow rounded-t-3xl z-30 mt-5 ">
+          <div className=" h-[77px]  rounded-t-3xl border-b-[1px] border-D9 flex p-[18px] justify-between">
+            <div
+              className="items-center flex cursor-pointer"
+              onClick={onSellerPage}
+            >
+              <img
+                className="w-[46px] h-[46px] rounded-full"
+                src={post.avatarUrl}
+              />
+              <div className="ml-2 text-sm font-semibold">{post.nickname}</div>
+            </div>
+            <button
+              className="bg-CC text-white text-sm p-3 rounded-md"
+              onClick={() => {
+                navigate("/pricingtext", { state: post });
+              }}
+            >
+              상품 상세 정보
+            </button>
+          </div>
+
+          <div className="  flex-col relative ">
+            {post.options !== undefined && (
+              <div className=" flex text-xs px-[18px] items-stretch my-3 opacity-50 text-CC">
+                <div className="p-1 bg-EB rounded-md mx-0.5">
+                  {post.options.category}
+                </div>
+                <div className="p-1 bg-EB rounded-md mx-0.5">
+                  {post.options.model}
+                </div>
+                <div className="p-1 bg-EB rounded-md mx-0.5">
+                  {post.options.years}
+                </div>
+                <div className="p-1 bg-EB rounded-md mx-0.5">
+                  {post.options.options}
+                </div>
+              </div>
+            )}
+            <div className="px-[18px] font-semibold">{post.title}</div>
+            <div className=" p-[18px] text-sm">{post.content}</div>
+            <div className=" min-h-96 h-96" />
+          </div>
+        </div>
+
+        <div className="absolute bottom-0 bg-CC flex w-full h-[75px] justify-between z-30 items-center px-[18px] text-white">
+          <div className=" absolute bottom-24">
+            <div className=" font-medium text-xs text-DD">{post.createdAt}</div>
+          </div>
+
+          <div className=" flex items-center">
+            {post.expectPrice !== undefined && (
+              <div className="w-[90px]">
+                <div className="text-[12px] text-translucent5">책정가격</div>
+                <div>{post.expectPrice.toLocaleString("ko-KR")}원</div>
+              </div>
+            )}
+            <img className=" px-1 mr-1 py-6" src={rightTriangle} />
+            {post.userPrice !== undefined && (
+              <div className="  w-[120px] flex-col">
+                <div className="text-[12px] text-translucent5">판매가격</div>
+                <div>{post.userPrice.toLocaleString("ko-KR")}원</div>
+              </div>
+            )}
+          </div>
+
+          <div className=" flex mt-1 w-[70px] justify-end">
+            <div className="  flex-col w-6 text-[10px] text-translucent3   ">
               <img
                 onClick={() => {
                   navigate(`/objectionComment/${params.id}`);
                 }}
-                src="https://img.icons8.com/ios/25/null/topic.png"
+                src={whiteComment}
               />
-              <TextDiv>댓글</TextDiv>
+              <div>댓글</div>
             </div>
-          </Price>
-        </White>
-      </Layout>
+          </div>
+        </div>
+      </Layout2>
     </>
   );
 };
 
 export default ObjectionDetail;
-
-// 수정 삭제 토글 및 뒤로가기
-const EditHead = styled.div`
-  position: relative;
-  display: flex;
-  justify-content: space-between;
-  padding: 10px;
-`;
-
-const Span = styled.span`
-  span {
-    margin-left: 10px;
-  }
-`;
-
-const Tgbutton = styled.img`
-  width: 23px;
-  height: 23px;
-`;
-const ToggleNav = styled.div`
-  width: 50px;
-  height: 80px;
-  position: absolute;
-  right: 10px;
-  top: 50px;
-  z-index: 999;
-`;
-const Button = styled.button`
-  width: 50px;
-  height: 40px;
-  margin-bottom: 3px;
-  border: 1px solid #ddd;
-  border-radius: 5px;
-  background-color: #fff;
-  &:hover {
-    background-color: red;
-  }
-`;
-
-// 이미지 크기 지정
-const Image = styled.img`
-  width: 300px;
-  height: 300px;
-  margin: auto;
-  margin-bottom: 20px;
-  display: block;
-`;
-
-// 물건 가격
-const Price = styled.div`
-  border-top: 1px solid #d9d9d9;
-  background-color: #3d6af2;
-  color: white;
-  width: 367px;
-  height: 86px;
-  position: fixed;
-  bottom: 15px;
-  display: flex;
-  justify-content: space-between;
-  div {
-    margin-right: 10px;
-    padding-top: 10px;
-  }
-  img {
-    filter: invert();
-  }
-`;
-
-const Arrow = styled.div`
-  margin-top: 20px;
-`;
-
-const TextDiv = styled.div`
-  font-size: 10px;
-`;
-
-const PriceDiv = styled.div`
-  font-size: 16px;
-`;
-
-// 글쓴이 정보 및 하트
-const WriterContainer = styled.div`
-  margin-top: 30px;
-  display: flex;
-  background-color: white;
-  border-radius: 15px 15px 0 0;
-  justify-content: space-between;
-  border-bottom: 0.5px solid lightgrey;
-  padding-bottom: 10px;
-`;
-
-// seller 프로필
-const SellerProfile = styled.div`
-  display: flex;
-`;
-
-const Nickname = styled.div`
-  cursor: pointer;
-  margin-top: 18px;
-  margin-left: 10px;
-`;
-
-// 흰배경
-const White = styled.div`
-  background: white;
-  height: 80vh;
-`;
-
-// 타이틀
-const Title = styled.div`
-  font-size: 18px;
-  font-weight: bold;
-  margin-bottom: 15px;
-`;
-
-// 상품 측정 정도 확인
-const Detail = styled.div`
-  background-color: #3d6af2;
-  cursor: pointer;
-  color: white;
-  position: fixed;
-  width: 343px;
-  height: 20px;
-  border-radius: 5px;
-  font-size: 14px;
-  font-weight: 550;
-  display: flex;
-  margin: auto;
-  margin-bottom: 20px;
-  bottom: 90px;
-  justify-content: space-between;
-  padding: 10px;
-`;
-
-const Stdetailrightarrow = styled.img`
-  position: relative;
-  top: 0px;
-  width: 25px;
-  height: 25px;
-`;
-
-// 찜하기 파트
-const Heart = styled.div`
-  display: flex;
-  flex-direction: column;
-  align-items: center;
-  font-size: 12px;
-  color: #606060;
-  width: 51px;
-  height: 50px;
-  position: relative;
-  right: 5px;
-  margin-top: 10px;
-  div {
-    font-size: 12px;
-    color: #606060;
-  }
-`;
-
-// 찜하기 버튼
-const ClickHeart = styled.div``;
-
-//생성시간
-const Create = styled.div`
-  margin-left: 5px;
-  font-size: 12px;
-  color: #606060;
-  width: 367px;
-  height: 86px;
-  position: fixed;
-  bottom: 90px;
-  display: flex;
-`;
-
-// 기종 설명
-const Models = styled.div`
-  font-size: 12px;
-  color: #000000;
-  margin-top: 20px;
-  margin-bottom: 10px;
-  span {
-    border: 0.5px solid #3d6af2;
-    color: #3d6af2;
-    border-radius: 5px;
-    padding: 3px;
-  }
-`;
-
-// 채팅 버튼
-const ChatButton = styled.button`
-  width: 79px;
-  height: 45px;
-  background: #3d6af2;
-  border-radius: 30px;
-  position: fixed;
-  bottom: 170px;
-  right: 25px;
-`;
