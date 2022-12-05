@@ -146,7 +146,7 @@ function Chatting() {
         />
         <span>
           {" "}
-          <div>{listReducer.postUserNickname}</div>
+          <div>{listReducer.joinUserNickname}, {listReducer.postUserNickname}</div>
         </span>
       </HeadContainer>
       <TitleContainer>
