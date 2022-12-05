@@ -59,7 +59,6 @@ const MypageUpdate = () => {
       new Blob([JSON.stringify(obj)], { type: "application/json" })
     );
     dispatch(__UserProfileEdit(formData));
-    window.location.replace("/mypage");
   };
 
   return (
