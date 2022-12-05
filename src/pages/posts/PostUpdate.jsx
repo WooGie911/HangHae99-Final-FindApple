@@ -73,10 +73,10 @@ const PostUpdate = () => {
             <div>게시물 수정 </div>
           </div>
         </div>
-
-        <div className="h-[100px] p-[18px] flex border-b-[1px] border-D9">
+        {/* <div className="h-[100px] p-[18px] flex border-b-[1px] border-D9 "> */}
+        <div className="h-[100px] p-15 flex border-b-[1px] border-D9 overflow-x-auto">
           <label htmlFor="imgFile">
-            <div
+            <button
               className="border-[1px] rounded-md w-16 h-16 flex items-center justify-center content-center text-xs text-CC cursor-pointer"
               onClick={() => {
                 imgRef.current.click();
@@ -88,7 +88,7 @@ const PostUpdate = () => {
                 </div>
                 <div>{fileUrls.length}/5</div>
               </div>
-            </div>
+            </button>
           </label>
           {fileUrls.length > 0 ? (
             <div className="flex justify-between">

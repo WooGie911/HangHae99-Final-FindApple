@@ -126,7 +126,9 @@ const PostDetail = () => {
             <img
               className="h-5 w-5 absolute  left-3"
               src={blueBackArrow}
-              onClick={() => navigate(-1)}
+              onClick={() =>
+                onClickGoHome({ state: "Search", navi: "/postread/all" })
+              }
             />
             <img
               className="h-[18px] w-[18px] absolute left-10"

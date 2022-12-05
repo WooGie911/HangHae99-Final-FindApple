@@ -68,9 +68,9 @@ const PricingInput4 = ({ priceListState, setPriceListState, stepState }) => {
           {getList4 &&
             getList4.map((list, index) => {
               return (
-                <div>
+                <div key={index}>
                   {priceListState.options == list ? (
-                    <li key={index} className="mr-3 flex">
+                    <li className="mr-3 flex">
                       <input
                         className="appearance-none peer"
                         type="radio"

@@ -43,9 +43,9 @@ const PricingInput2 = ({ priceListState, setPriceListState, stepState }) => {
           {getList2 &&
             getList2.map((list, index) => {
               return (
-                <div>
+                <div key={index}>
                   {priceListState.years === String(list) ? (
-                    <li key={index} className="flex">
+                    <li className="flex">
                       <input
                         className="appearance-none peer"
                         type="radio"

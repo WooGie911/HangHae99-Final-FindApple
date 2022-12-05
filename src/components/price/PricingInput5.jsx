@@ -157,9 +157,9 @@ const PricingInput5 = ({ priceListState, setPriceListState, stepState }) => {
                 {getList5.ram &&
                   getList5.ram.map((list, index) => {
                     return (
-                      <div>
+                      <div key={index}>
                         {priceListState.ram === list ? (
-                          <li key={index} className="mr-3 flex">
+                          <li className="mr-3 flex">
                             <input
                               className="appearance-none peer"
                               type="radio"
@@ -209,9 +209,9 @@ const PricingInput5 = ({ priceListState, setPriceListState, stepState }) => {
                   {getList5.storage &&
                     getList5.storage.map((list, index) => {
                       return (
-                        <div>
+                        <div key={index}>
                           {priceListState.storage === list ? (
-                            <li key={index} className="mr-3 flex">
+                            <li className="mr-3 flex">
                               <input
                                 className="appearance-none peer"
                                 type="radio"

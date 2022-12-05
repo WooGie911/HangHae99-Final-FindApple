@@ -91,6 +91,7 @@ const SellerPage = () => {
             </div>
           </div>
         )}
+        <div className="h-14" />
         <Footer />
       </Layout>
     </div>
