@@ -3,12 +3,12 @@ import { useDispatch } from "react-redux";
 import useInput from "../../hook/useInput";
 import { useSelector } from "react-redux";
 import { __editObjection } from "../../redux/modules/ObjectionsSlice";
-import Layout from "../../components/commons/Layout";
-import Footer from "../../components/commons/Footer";
+import Layout2 from "../../components/commons/Layout2";
 import { useNavigate, useParams } from "react-router-dom";
 import styled from "styled-components";
-import whitearrow from "../../assets/whitearrow.png";
-import back from "../../assets/back.png";
+import backArrow from "../../assets/backArrow.svg";
+import blueCamera from "../../assets/blueCamera.png";
+import bottomArrow from "../../assets/bottomArrow.svg";
 
 const ObjectionUpdate = () => {
   const dispatch = useDispatch();
@@ -36,79 +36,96 @@ const ObjectionUpdate = () => {
   };
   return (
     <>
-      <Layout>
-        <FirstContainer>
-          <div>
-            <img
-              onClick={() => {
-                navigate(`/objectionDetail/${post.issuesId}`);
-              }}
-              style={{ width: 25, height: 25 }}
-              src={back}
-            />
-          </div>
-          <div>상품 게시물 수정</div>
-          <EditButton onClick={updateSubmit}>완료</EditButton>
-        </FirstContainer>
-        <hr />
-        <ImageWrapper>
-          {post.images &&
-            post.images.map((item) => {
-              return <img src={item.imgUrl} />;
-            })}
-        </ImageWrapper>
-        <div>
-          <hr />
-          <TextDiv>{updateInput.title}</TextDiv>
-          <hr />
-          <Detail
+      <Layout2>
+        <div className=" flex relative items-center justify-center h-[60px] text-[18px] font-semibold border-b-2 border-D9">
+          <img
+            className="h-6 w-6 absolute left-3"
             onClick={() => {
-              navigate("/pricingtext", { state: post });
+              navigate(`/objectionDetail/${post.issuesId}`);
             }}
-          >
-            <p5>상품 상세 정보</p5>
-            <Stdetailrightarrow
-              src={whitearrow}
-              style={{ width: "25px", height: "25px" }}
-            ></Stdetailrightarrow>
-          </Detail>
-          <hr />
+            src={backArrow}
+          />
           <div>
-            {updateInput.expectPrice !== undefined && (
-              <>
-                <TextDiv>책정 가격</TextDiv>
-                <PriceDiv>
-                  {updateInput.expectPrice.toLocaleString("ko-KR")}
-                </PriceDiv>
-              </>
-            )}
+            <div>이의제기 수정 </div>
           </div>
-          <hr />
-          <PriceInput>
-            <div>판매 가격</div>
-            <input
-              onChange={updateInputHandle}
-              name="userPrice"
-              value={updateInput.userPrice || ""}
-              type="text"
-              placeholder="희망 가격을 입력해주세요."
-            />
-          </PriceInput>
+        </div>
 
-          <hr />
-          <EditText>
-            content :
-            <textarea
+        <div className="h-[100px] p-[18px] flex border-b-[1px] border-D9">
+          <div className="flex justify-between">
+            {post.images &&
+              post.images.map((item, index) => {
+                return (
+                  <img
+                    className="h-16 w-16 object-cover mr-3 rounded-md"
+                    src={item.imgUrl}
+                    key={index}
+                  />
+                );
+              })}
+          </div>
+        </div>
+
+        <div className=" py-2 px-[18px] border-b-[1px] border-D9 font-semibold">
+          <div className=" h-16 flex items-center">
+            <div className="">{updateInput.title}</div>
+          </div>
+        </div>
+        <div className="  py-2 px-[18px] border-b-[1px] border-D9">
+          <div className="h-16 flex items-center justify-between">
+            {updateInput.expectPrice !== undefined && (
+              <div className="flex-col">
+                <div className="text-xs text-DD">책정가격</div>
+                <div className="text-CC font-semibold">
+                  {updateInput.expectPrice.toLocaleString("ko-KR")}원
+                </div>
+              </div>
+            )}
+            <div
+              className="bg-C4 w-24 h-9 rounded-md text-xs text-white  flex justify-center items-center"
+              onClick={() => {
+                navigate("/pricingtext", { state: post });
+              }}
+            >
+              <div> 상품 상세 정보</div>
+            </div>
+          </div>
+        </div>
+
+        <div className=" py-2 px-[18px] border-b-[1px] border-D9">
+          <div className="  h-16 flex items-center">
+            <div className="flex-col">
+              <div className="text-xs text-DD">희망가격</div>
+              <div className=" bg-transparent text-C4 font-semibold">
+                {updateInput.userPrice}
+              </div>
+            </div>
+          </div>
+        </div>
+
+        <div className="  py-4 px-[18px] border-b-[1px] border-D9">
+          <div className=" h-60 flex-col ">
+            <input
+              className="w-full py-3  break-words"
               onChange={updateInputHandle}
               name="content"
               value={updateInput.content || ""}
               type="text"
               placeholder="수정할 내용을 입력하세요."
             />
-          </EditText>
+          </div>
         </div>
-        <Footer />
-      </Layout>
+
+        <div className=" py-3 px-[18px] h-20 w-[375px] fixed bottom-0 text-white ">
+          <div
+            className="bg-CC w-full h-full rounded-md flex items-center justify-center"
+            onClick={() => {
+              updateSubmit();
+            }}
+          >
+            이의제기 수정
+          </div>
+        </div>
+      </Layout2>
     </>
   );
 };

@@ -4,7 +4,6 @@ import { useNavigate } from "react-router-dom";
 import { __getMyObjection } from "../../redux/modules/MypageSlice";
 import Layout from "../../components/commons/Layout";
 import Footer from "../../components/commons/Footer";
-import styled from "styled-components";
 import backArrow from "../../assets/backArrow.svg";
 import mainHeart from "../../assets/mainHeart.svg";
 
@@ -31,7 +30,7 @@ const MyObjection = () => {
         <div>내 이의제기</div>
       </div>
 
-      <div className=" flex relative p-3 mt-5 ">
+      <div className=" p-3 mt-5 grid grid-cols-2">
         {objections &&
           objections.map((objection) => {
             return (
@@ -66,72 +65,3 @@ const MyObjection = () => {
 };
 
 export default MyObjection;
-const HeadContainer = styled.div`
-  display: flex;
-  justify-content: center;
-  justify-items: center;
-  align-items: center;
-  position: relative;
-  width: 100%;
-  height: 60px;
-  font-family: "Inter";
-  font-style: normal;
-  font-weight: bold;
-  font-size: 24px;
-  line-height: 22px;
-
-  img {
-    position: absolute;
-    left: 10px;
-  }
-`;
-
-// 아이템
-
-const PostList = styled.div`
-  position: relative;
-  width: 100%;
-  height: 80vh;
-  background-color: white;
-  border-radius: 5px 5px 0 0;
-  padding-bottom: 140px;
-`;
-
-const Posts = styled.div`
-  margin-bottom: 50px;
-  overflow: auto;
-`;
-
-const Div = styled.div`
-  height: 58px;
-  background-color: white;
-`;
-
-const SellerPost = styled.div`
-  float: left;
-  margin-left: 20px;
-  img {
-    margin: auto;
-    position: relative;
-    display: flex;
-    width: 160px;
-    height: 160px;
-    border-radius: 5px;
-  }
-`;
-
-// 타이틀 글자 줄이기
-const TitleEdit = styled.div`
-  font-size: 12px;
-`;
-//찜하기
-const LikeCnt = styled.div`
-  font-family: "Inter";
-  font-style: normal;
-  font-weight: 400;
-  font-size: 12px;
-  line-height: 15px;
-  /* identical to box height */
-
-  color: #595959;
-`;

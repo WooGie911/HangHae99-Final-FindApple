@@ -1,7 +1,6 @@
 import React, { useEffect } from "react";
 import { useDispatch, useSelector } from "react-redux";
 import { useNavigate } from "react-router-dom";
-import styled from "styled-components";
 import ObjectionCommentCreate from "../../components/issues/ObjectionCommentCreate";
 import ObjectionCommentList from "../../components/issues/ObjectionCommentList";
 import {
@@ -9,8 +8,8 @@ import {
   __deleteObjectionComment,
   __getObjectionDetail,
 } from "../../redux/modules/ObjectionDetailsSlice";
-import back from "../../assets/back.png";
-import Layout from "../../components/commons/Layout";
+import backArrow from "../../assets/backArrow.svg";
+import Layout2 from "../../components/commons/Layout2";
 
 const ObjectionComment = () => {
   const navigate = useNavigate();
@@ -27,18 +26,15 @@ const ObjectionComment = () => {
   };
   return (
     <>
-      <Layout>
-        <HeadContainer>
-          <div>
-            <img
-              onClick={onClickHandler}
-              style={{ width: 25, height: 25 }}
-              src={back}
-            />
-            <span>댓글</span>
-          </div>
-        </HeadContainer>
-        <hr />
+      <Layout2>
+        <div className=" flex relative items-center justify-center h-[60px] text-[18px] font-semibold border-b-[1px] border-D9 ">
+          <img
+            className="h-6 w-6 absolute left-3"
+            onClick={onClickHandler}
+            src={backArrow}
+          />
+          <div>댓글</div>
+        </div>
 
         <ObjectionCommentList
           List={post}
@@ -50,23 +46,9 @@ const ObjectionComment = () => {
           __addComment={__addObjectionComment}
           __getDetail={__getObjectionDetail}
         />
-      </Layout>
+      </Layout2>
     </>
   );
 };
 
 export default ObjectionComment;
-const HeadContainer = styled.div`
-  display: flex;
-  align-items: center;
-  margin-right: 120px;
-  img {
-    float: left;
-    margin-right: 130px;
-  }
-  span {
-    /* text-align: center; */
-    font-size: 24px;
-    font-weight: bold;
-  }
-`;

@@ -6,6 +6,8 @@ module.exports = {
       CC: "#3d6af2",
       translucent5: "rgba(255, 255, 255, 0.5)",
       translucent3: "rgba(255, 255, 255, 0.3)",
+      translucent2: "rgba(255, 255, 255, 0.2)",
+      translucent1: "rgba(255, 255, 255, 0.1)",
       transparent: "transparent",
       current: "currentColor",
       white: "#ffffff",
@@ -28,6 +30,8 @@ module.exports = {
       bb33: "#888888",
       bb22: "#BBBBBB",
       bb11: "#FBFBFB",
+      red: "red",
+      blue: "blue",
       beige: "beige",
       orange: "orange",
       gray: "Dgray",
@@ -38,6 +42,8 @@ module.exports = {
       OO: "#606060",
       BGC: "#F6F7FB",
       EB: "#EBEBEB",
+      C4: "#c4c4c4",
+      KY: "#FAE100",
     },
 
     extend: {

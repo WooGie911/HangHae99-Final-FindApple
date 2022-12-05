@@ -11,7 +11,7 @@ import MainHeader from "../components/main/MainHeader";
 import MainList from "../components/main/MainList";
 import Footer from "../components/commons/Footer";
 
-const Main = ({}) => {
+const Main = () => {
   const dispatch = useDispatch();
   const navigate = useNavigate();
 

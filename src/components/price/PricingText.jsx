@@ -1,9 +1,9 @@
 import React from "react";
 import { useLocation, useNavigate } from "react-router-dom";
 import { __getPriceInfo, __checkPrice } from "../../redux/modules/PriceSlice";
-import PricingList from "./PricingList";
-import styled from "styled-components";
+import PricingDetailList from "./PricingDetailList";
 import Layout from "../commons/Layout";
+import backArrow from "../../assets/backArrow.svg";
 
 const PricingText = () => {
   const state = useLocation();
@@ -12,52 +12,24 @@ const PricingText = () => {
   console.log("datdatadataa", data);
 
   return (
-    <>
-      <Layout>
-        <TitleDiv>
-          <Backbutton
-            onClick={() => {
-              navigate(-1);
-            }}
-          >
-            〈
-          </Backbutton>
-          <span>상품 상세 정보</span>
-        </TitleDiv>
-
+    <Layout>
+      <div className=" bg-white flex relative items-center justify-center h-[60px] text-[18px] font-semibold border-b-[1px] border-D9">
+        <img
+          className="h-6 w-6 absolute left-3"
+          onClick={() => {
+            navigate(-1);
+          }}
+          src={backArrow}
+        />
         <div>
-          <PricingList DetailPrice={data.options} />
+          <div>상품상세정보</div>
         </div>
-      </Layout>
-    </>
+      </div>
+      <div>
+        <PricingDetailList DetailPrice={data.options} />
+      </div>
+    </Layout>
   );
 };
 
 export default PricingText;
-
-const TitleDiv = styled.div`
-  display: flex;
-  justify-content: center;
-  justify-items: center;
-  align-items: center;
-  position: relative;
-  width: 100%;
-  height: 60px;
-  font-family: "Inter";
-  font-style: normal;
-  font-weight: 400;
-  font-size: 18px;
-  line-height: 22px;
-  font-weight: bold;
-  border-bottom: solid 1px gray;
-`;
-const Backbutton = styled.button`
-  position: absolute;
-  left: 0px;
-  width: 56px;
-  height: 100%;
-  font-size: 18px;
-  font-weight: bold;
-  border: none;
-  background-color: transparent;
-`;

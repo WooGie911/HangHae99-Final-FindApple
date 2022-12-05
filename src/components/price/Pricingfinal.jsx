@@ -1,10 +1,10 @@
 import React from "react";
 import Layout from "../commons/Layout";
-
 import { useNavigate } from "react-router-dom";
 import { __getPriceInfo, __checkPrice } from "../../redux/modules/PriceSlice";
 import PricingList from "./PricingList";
-import styled from "styled-components";
+import backArrow from "../../assets/backArrow.svg";
+import Xbutton from "../../assets/Xbutton.png";
 
 const Pricingfinal = () => {
   const navigate = useNavigate();
@@ -30,170 +30,57 @@ const Pricingfinal = () => {
   };
 
   return (
-    <>
-      <Layout>
-        <ContainerDiv>
-          <TitleDiv>
-            <Backbutton
-              onClick={() => {
-                navigate(`/pricingPage`);
-              }}
-            >
-              〈
-            </Backbutton>
-            <Xbutton
-              onClick={() => {
-                checkReally(`/main`);
-              }}
-            >
-              X
-            </Xbutton>
-            <span>가격책정</span>
-          </TitleDiv>
+    <Layout>
+      <div className=" bg-white flex relative items-center justify-center h-[60px] text-[18px] font-semibold border-b-[1px] border-D9">
+        <img
+          className="h-6 w-6 absolute left-3"
+          onClick={() => {
+            navigate(`/pricingPage`);
+          }}
+          src={backArrow}
+        />
+        <div>
+          <div>상품상세정보</div>
+        </div>
+        <img
+          className="  absolute right-4 cursor-pointer"
+          src={Xbutton}
+          onClick={() => checkReally(`/main`)}
+        />
+      </div>
 
-          <PricingList />
-          <Div>
-            <StepDiv>
-              <StepButton
-                onClick={() => {
-                  checkReally(`/pricingPage`);
-                }}
-              >
-                <div>처음부터</div> 다시 입력하기
-              </StepButton>
-            </StepDiv>
-            <BottomButtons>
-              <NextButton
-                onClick={() => {
-                  checkReally(`/postcreate`);
-                }}
-              >
-                상품 등록
-              </NextButton>
-              <NextButton
-                onClick={() => {
-                  checkReally(`/objectioncreate`);
-                }}
-              >
-                이의 제기
-              </NextButton>
-            </BottomButtons>
-          </Div>
-        </ContainerDiv>
-      </Layout>
-    </>
+      <PricingList />
+
+      <ul className=" py-10 flex justify-center">
+        <button
+          className=" flex w-40 h-9 border-C4 border-[1px] rounded-3xl text-xs justify-center items-center text-C4"
+          onClick={() => {
+            checkReally(`/pricingPage`);
+          }}
+        >
+          <div className="text-CC mr-1">처음부터</div> 다시 입력하기
+        </button>
+      </ul>
+      <ul className="flex justify-between px-[18px] py-3 absolute bottom-0 font-semibold w-full">
+        <button
+          className="w-40 h-14 bg-CC text-white rounded-md"
+          onClick={() => {
+            checkReally(`/postcreate`);
+          }}
+        >
+          상품 등록
+        </button>
+        <button
+          className="w-40 h-14 bg-white text-CC rounded-md border-CC border-[1px]"
+          onClick={() => {
+            checkReally(`/objectioncreate`);
+          }}
+        >
+          이의 제기
+        </button>
+      </ul>
+    </Layout>
   );
 };
 
 export default Pricingfinal;
-
-const Div = styled.div`
-  display: flex;
-  flex-direction: column;
-  position: relative;
-`;
-const ContainerDiv = styled.div`
-  display: flex;
-  position: relative;
-  flex-direction: column;
-  background-color: transparent;
-  width: 375px;
-  height: 100%;
-`;
-
-const TitleDiv = styled.div`
-  display: flex;
-  justify-content: center;
-  justify-items: center;
-  align-items: center;
-  position: relative;
-  width: 100%;
-  min-height: 60px;
-  font-family: "Inter";
-  font-style: normal;
-  font-weight: 400;
-  font-size: 18px;
-  line-height: 22px;
-  font-weight: bold;
-  border-bottom: solid 1px gray;
-`;
-
-const Backbutton = styled.button`
-  position: absolute;
-  left: 0px;
-  width: 56px;
-  height: 100%;
-  font-size: 18px;
-  font-weight: bold;
-  border: none;
-  background-color: transparent;
-`;
-
-const Xbutton = styled.button`
-  position: absolute;
-  right: 0px;
-  width: 56px;
-  height: 100%;
-  font-size: 18px;
-  font-weight: bold;
-  border: none;
-  background-color: transparent;
-`;
-
-const StepDiv = styled.div`
-  display: flex;
-  align-items: center;
-  justify-content: center;
-  justify-items: center;
-  position: relative;
-  margin: 30px 0;
-  width: 100%;
-  height: 56px;
-`;
-
-const StepButton = styled.button`
-  display: flex;
-  align-items: center;
-  justify-content: center;
-  justify-items: center;
-  font-family: "Inter";
-  font-style: normal;
-  font-weight: 600;
-  font-size: 12px;
-  line-height: 15px;
-  display: flex;
-  align-items: center;
-  text-align: center;
-  position: relative;
-  color: gray;
-  width: 155px;
-  height: 42px;
-  border: solid 1px gray;
-  border-radius: 20px;
-  background-color: transparent;
-  div {
-    color: #4f75ff;
-    padding: 5px;
-  }
-`;
-
-const BottomButtons = styled.div`
-  display: flex;
-  flex-direction: row;
-  position: relative;
-  justify-content: space-evenly;
-  bottom: 0px;
-  width: 100%;
-  height: 70px;
-  background-color: transparent;
-`;
-
-const NextButton = styled.button`
-  position: relative;
-  width: 168px;
-  height: 54px;
-  color: white;
-  border: none;
-  border-radius: 5px;
-  background-color: #4f75ff;
-`;

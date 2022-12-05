@@ -24,10 +24,10 @@ import Redirect from "../components/login/Redirect";
 import MyObjection from "../pages/mypage/MyObjection";
 import MyPost from "../pages/mypage/MyPost";
 import RedirectLogout from "../components/login/RedirectLogout";
-import Cover from "../pages/introduce/Cover";
-import Info1 from "../pages/introduce/Info1";
-import Info2 from "../pages/introduce/Info2";
-import Info3 from "../pages/introduce/Info3";
+import Splash from "../pages/onboarding/Splash";
+import Onboarding1 from "../pages/onboarding/Onboarding1";
+import Onboarding2 from "../pages/onboarding/Onboarding2";
+import Onboarding3 from "../pages/onboarding/Onboarding3";
 import Chatting from "../pages/chatting/Chatting";
 
 const Router = () => {
@@ -93,10 +93,10 @@ const Router = () => {
         <Route path="/pricingtext" element={<PricingText />} />
 
         {/*소개페이지 */}
-        <Route path="/" element={<Cover />} />
-        <Route path="/introduction1" element={<Info1 />} />
-        <Route path="/introduction2" element={<Info2 />} />
-        <Route path="/introduction3" element={<Info3 />} />
+        <Route path="/" element={<Splash />} />
+        <Route path="/onboarding1" element={<Onboarding1 />} />
+        <Route path="/onboarding2" element={<Onboarding2 />} />
+        <Route path="/onboarding3" element={<Onboarding3 />} />
 
         {/*채팅페이지 */}
         <Route path="/chatting/:roomId" element={<Chatting />} />

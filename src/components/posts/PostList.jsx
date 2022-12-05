@@ -53,7 +53,7 @@ const PostList = ({ posts, detail, __getDetail, state, setState }) => {
   }, [posts]);
 
   return (
-    <>
+    <div>
       <div>
         {posts.length > 0 &&
           posts.map((post, index) => {
@@ -92,7 +92,7 @@ const PostList = ({ posts, detail, __getDetail, state, setState }) => {
       </div>
       <div ref={ref}></div>
       <div className="h-16" />
-    </>
+    </div>
   );
 };
 
