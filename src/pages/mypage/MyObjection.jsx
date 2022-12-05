@@ -4,7 +4,6 @@ import { useNavigate } from "react-router-dom";
 import { __getMyObjection } from "../../redux/modules/MypageSlice";
 import Layout from "../../components/commons/Layout";
 import Footer from "../../components/commons/Footer";
-import styled from "styled-components";
 import backArrow from "../../assets/backArrow.svg";
 import mainHeart from "../../assets/mainHeart.svg";
 
@@ -31,7 +30,7 @@ const MyObjection = () => {
         <div>내 이의제기</div>
       </div>
 
-      <div className=" flex relative p-3 mt-5 ">
+      <div className=" p-3 mt-5 grid grid-cols-2">
         {objections &&
           objections.map((objection) => {
             return (

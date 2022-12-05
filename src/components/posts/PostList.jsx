@@ -49,7 +49,7 @@ const PostList = ({ posts, detail, __getDetail, state, setState }) => {
   }, [params]);
 
   return (
-    <>
+    <div>
       <div>
         {posts &&
           posts.map((post, index) => {
@@ -89,7 +89,7 @@ const PostList = ({ posts, detail, __getDetail, state, setState }) => {
       </div>
       <div ref={ref}></div>
       <div className="h-16" />
-    </>
+    </div>
   );
 };
 

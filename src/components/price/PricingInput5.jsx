@@ -3,9 +3,10 @@ import { useDispatch, useSelector } from "react-redux";
 import { useNavigate } from "react-router-dom";
 import styled from "styled-components";
 import { __checkPrice, __getPriceInfo } from "../../redux/modules/PriceSlice";
-import PriceStep5 from "../../assets/PriceStep5.svg";
 
-const PricingInput5 = ({ priceListState, setPriceListState }) => {
+import PricingStep from "./PricingStep";
+
+const PricingInput5 = ({ priceListState, setPriceListState, stepState }) => {
   const navigate = useNavigate();
   const dispatch = useDispatch();
   const { getList5 } = useSelector((state) => state.price);
@@ -143,53 +144,122 @@ const PricingInput5 = ({ priceListState, setPriceListState }) => {
   };
 
   return (
-    <>
+    <div>
       <div>
-        <div>
-          {priceListState.category === "macbook" ? (
-            <div>
-              <ContentDiv>램 메모리</ContentDiv>
-              <CategoryDiv>
-                <SelectBox
-                  defaultValue={priceListState.ram}
-                  name="ram"
-                  onChange={onChangeHandler}
-                >
-                  <option value={"ram"}> ram </option>
-                  {getList5.ram &&
-                    getList5.ram.map((list, index) => {
-                      return (
-                        <option key={index} value={list}>
-                          {" "}
-                          {list}{" "}
-                        </option>
-                      );
-                    })}
-                </SelectBox>
-              </CategoryDiv>
+        {priceListState.category === "macbook" ? (
+          <div>
+            <div className=" flex-col pt-[18px] px-[18px]">
+              <div className=" flex items-center w-full h-14 font-semibold ">
+                램 메모리
+              </div>
 
-              <ContentDiv>SSD 용량</ContentDiv>
-              <CategoryDiv>
-                <SelectBox
-                  defaultValue={priceListState.storage}
-                  name="storage"
-                  onChange={onChangeHandler}
-                >
-                  <option value={"storage"}>SSD 용량</option>
+              <ul className="text-DD flex mt-1  ">
+                {getList5.ram &&
+                  getList5.ram.map((list, index) => {
+                    return (
+                      <div>
+                        {priceListState.ram === list ? (
+                          <li key={index} className="mr-3 flex">
+                            <input
+                              className="appearance-none peer"
+                              type="radio"
+                              id={list}
+                              name="ram"
+                              value={list}
+                              onClick={onChangeHandler}
+                              defaultChecked
+                            />
+                            <label
+                              className="flex  items-center h-[38px] px-4 rounded-3xl border-DD border-[1px] peer-checked:border-CC peer-checked:bg-CC peer-checked:text-CC peer-checked:bg-opacity-50"
+                              htmlFor={list}
+                            >
+                              {list}
+                            </label>
+                          </li>
+                        ) : (
+                          <li key={index} className="mr-3 flex">
+                            <input
+                              className="appearance-none peer"
+                              type="radio"
+                              id={list}
+                              name="ram"
+                              value={list}
+                              onClick={onChangeHandler}
+                            />
+                            <label
+                              className="flex items-center h-[38px] px-4 rounded-3xl border-DD border-[1px] peer-checked:border-CC peer-checked:bg-CC peer-checked:text-CC peer-checked:bg-opacity-50"
+                              htmlFor={list}
+                            >
+                              {list}
+                            </label>
+                          </li>
+                        )}
+                      </div>
+                    );
+                  })}
+              </ul>
+            </div>
+
+            <div className=" flex-col px-[18px]">
+              <div className=" flex items-center w-full h-14 font-semibold ">
+                SSD 용량
+              </div>
+              <div className="  text-DD">
+                <ul className="text-DD flex mt-1 ">
                   {getList5.storage &&
                     getList5.storage.map((list, index) => {
                       return (
-                        <option key={index} value={list}>
-                          {" "}
-                          {list}{" "}
-                        </option>
+                        <div>
+                          {priceListState.storage === list ? (
+                            <li key={index} className="mr-3 flex">
+                              <input
+                                className="appearance-none peer"
+                                type="radio"
+                                id={list}
+                                name="storage"
+                                value={list}
+                                onClick={onChangeHandler}
+                                defaultChecked
+                              />
+                              <label
+                                className="flex  items-center h-[38px] px-4 rounded-3xl border-DD border-[1px] peer-checked:border-CC peer-checked:bg-CC peer-checked:text-CC peer-checked:bg-opacity-50"
+                                htmlFor={list}
+                              >
+                                {list}
+                              </label>
+                            </li>
+                          ) : (
+                            <li key={index} className="mr-3 flex">
+                              <input
+                                className="appearance-none peer"
+                                type="radio"
+                                id={list}
+                                name="storage"
+                                value={list}
+                                onClick={onChangeHandler}
+                              />
+                              <label
+                                className="flex items-center h-[38px] px-4 rounded-3xl border-DD border-[1px] peer-checked:border-CC peer-checked:bg-CC peer-checked:text-CC peer-checked:bg-opacity-50"
+                                htmlFor={list}
+                              >
+                                {list}
+                              </label>
+                            </li>
+                          )}
+                        </div>
                       );
                     })}
-                </SelectBox>
-              </CategoryDiv>
-              <ContentDiv>배터리 사이클</ContentDiv>
-              <CategoryDiv>
-                <PriceInput
+                </ul>
+              </div>
+            </div>
+
+            <div className=" flex-col px-[18px]">
+              <div className=" flex items-center w-full h-14 font-semibold ">
+                배터리 사이클
+              </div>
+              <div className="  mt-1 text-DD">
+                <input
+                  className="w-full h-[38px] px-3 rounded-3xl border-[1px] border-DD "
                   placeholder="배터리 사이클을 입력해주세요"
                   value={priceListState.batteryState || ""}
                   type="Number"
@@ -197,39 +267,256 @@ const PricingInput5 = ({ priceListState, setPriceListState }) => {
                   name="batteryState"
                   onChange={onChangeHandler}
                 />
-              </CategoryDiv>
-              <ContentDiv>맥북 상태</ContentDiv>
-              <CategoryDiv>
-                <SelectBox
-                  defaultValue={priceListState.macbookState}
-                  name="macbookState"
-                  onChange={onChangeHandler}
-                >
-                  <option value={"macbookState"}>맥북 상태</option>
-                  <option value={"Class A"}>A급</option>
-                  <option value={"Class B"}>B급</option>
-                  <option value={"Class C"}>C급</option>
-                </SelectBox>
-              </CategoryDiv>
+              </div>
             </div>
-          ) : (
-            <div>
-              <ContentDiv>아이폰 상태</ContentDiv>
-              <CategoryDiv>
-                <SelectBox
-                  defaultValue={priceListState.iphoneState}
-                  name="iphoneState"
-                  onChange={onChangeHandler}
-                >
-                  <option value={"iphoneState"}>아이폰 상태</option>
-                  <option value={"Class A"}>A급</option>
-                  <option value={"Class B"}>B급</option>
-                  <option value={"Class C"}>C급</option>
-                </SelectBox>
-              </CategoryDiv>
-              <ContentDiv>배터리 성능 최대치</ContentDiv>
-              <CategoryDiv>
-                <PriceInput
+
+            <div className=" flex-col px-[18px]">
+              <div className=" flex items-center w-full h-14 font-semibold ">
+                맥북 상태
+              </div>
+
+              <ul className="text-DD mt-1 flex">
+                {priceListState.macbookState === "Class A" ? (
+                  <li className="mr-3 flex">
+                    <input
+                      className="appearance-none peer"
+                      type="radio"
+                      id="macbookState-Class A"
+                      name="macbookState"
+                      value="Class A"
+                      defaultChecked
+                      onClick={onChangeHandler}
+                    />
+                    <label
+                      className="flex items-center h-[38px] px-4 rounded-3xl border-DD border-[1px] peer-checked:border-CC peer-checked:bg-CC peer-checked:text-CC peer-checked:bg-opacity-50"
+                      htmlFor="macbookState-Class A"
+                    >
+                      A급
+                    </label>
+                  </li>
+                ) : (
+                  <li className="mr-3 flex">
+                    <input
+                      className="appearance-none peer"
+                      type="radio"
+                      id="macbookState-Class A"
+                      name="macbookState"
+                      value="Class A"
+                      onClick={onChangeHandler}
+                    />
+                    <label
+                      className="flex items-center h-[38px] px-4 rounded-3xl border-DD border-[1px] peer-checked:border-CC peer-checked:bg-CC peer-checked:text-CC peer-checked:bg-opacity-50"
+                      htmlFor="macbookState-Class A"
+                    >
+                      A급
+                    </label>
+                  </li>
+                )}
+
+                {priceListState.macbookState === "Class B" ? (
+                  <li className="mr-3 flex">
+                    <input
+                      className="appearance-none peer"
+                      type="radio"
+                      id="macbookState-Class B"
+                      name="macbookState"
+                      value="Class B"
+                      defaultChecked
+                      onClick={onChangeHandler}
+                    />
+                    <label
+                      className="flex items-center h-[38px] px-4 rounded-3xl border-DD border-[1px] peer-checked:border-CC peer-checked:bg-CC peer-checked:text-CC peer-checked:bg-opacity-50"
+                      htmlFor="macbookState-Class B"
+                    >
+                      B급
+                    </label>
+                  </li>
+                ) : (
+                  <li className="mr-3 flex">
+                    <input
+                      className="appearance-none peer"
+                      type="radio"
+                      id="macbookState-Class B"
+                      name="macbookState"
+                      value="Class B"
+                      onClick={onChangeHandler}
+                    />
+                    <label
+                      className="flex items-center h-[38px] px-4 rounded-3xl border-DD border-[1px] peer-checked:border-CC peer-checked:bg-CC peer-checked:text-CC peer-checked:bg-opacity-50"
+                      htmlFor="macbookState-Class B"
+                    >
+                      B급
+                    </label>
+                  </li>
+                )}
+
+                {priceListState.macbookState === "Class C" ? (
+                  <li className="mr-3 flex">
+                    <input
+                      className="appearance-none peer"
+                      type="radio"
+                      id="macbookState-Class C"
+                      name="macbookState"
+                      value="Class C"
+                      defaultChecked
+                      onClick={onChangeHandler}
+                    />
+                    <label
+                      className="flex items-center h-[38px] px-4 rounded-3xl border-DD border-[1px] peer-checked:border-CC peer-checked:bg-CC peer-checked:text-CC peer-checked:bg-opacity-50"
+                      htmlFor="macbookState-Class C"
+                    >
+                      C급
+                    </label>
+                  </li>
+                ) : (
+                  <li className="mr-3 flex">
+                    <input
+                      className="appearance-none peer"
+                      type="radio"
+                      id="macbookState-Class C"
+                      name="macbookState"
+                      value="Class C"
+                      onClick={onChangeHandler}
+                    />
+                    <label
+                      className="flex items-center h-[38px] px-4 rounded-3xl border-DD border-[1px] peer-checked:border-CC peer-checked:bg-CC peer-checked:text-CC peer-checked:bg-opacity-50"
+                      htmlFor="macbookState-Class C"
+                    >
+                      C급
+                    </label>
+                  </li>
+                )}
+              </ul>
+            </div>
+          </div>
+        ) : (
+          <div>
+            <div className=" flex-col px-[18px]">
+              <div className=" flex items-center w-full h-14 font-semibold ">
+                아이폰 상태
+              </div>
+
+              <ul className="text-DD mt-1 flex">
+                {priceListState.iphoneState === "Class A" ? (
+                  <li className="mr-3 flex">
+                    <input
+                      className="appearance-none peer"
+                      type="radio"
+                      id="iphoneState-Class A"
+                      name="iphoneState"
+                      value="Class A"
+                      defaultChecked
+                      onClick={onChangeHandler}
+                    />
+                    <label
+                      className="flex items-center h-[38px] px-4 rounded-3xl border-DD border-[1px] peer-checked:border-CC peer-checked:bg-CC peer-checked:text-CC peer-checked:bg-opacity-50"
+                      htmlFor="iphoneState-Class A"
+                    >
+                      A급
+                    </label>
+                  </li>
+                ) : (
+                  <li className="mr-3 flex">
+                    <input
+                      className="appearance-none peer"
+                      type="radio"
+                      id="iphoneState-Class A"
+                      name="iphoneState"
+                      value="Class A"
+                      onClick={onChangeHandler}
+                    />
+                    <label
+                      className="flex items-center h-[38px] px-4 rounded-3xl border-DD border-[1px] peer-checked:border-CC peer-checked:bg-CC peer-checked:text-CC peer-checked:bg-opacity-50"
+                      htmlFor="iphoneState-Class A"
+                    >
+                      A급
+                    </label>
+                  </li>
+                )}
+
+                {priceListState.iphoneState === "Class B" ? (
+                  <li className="mr-3 flex">
+                    <input
+                      className="appearance-none peer"
+                      type="radio"
+                      id="iphoneState-Class B"
+                      name="iphoneState"
+                      value="Class B"
+                      defaultChecked
+                      onClick={onChangeHandler}
+                    />
+                    <label
+                      className="flex items-center h-[38px] px-4 rounded-3xl border-DD border-[1px] peer-checked:border-CC peer-checked:bg-CC peer-checked:text-CC peer-checked:bg-opacity-50"
+                      htmlFor="iphoneState-Class B"
+                    >
+                      B급
+                    </label>
+                  </li>
+                ) : (
+                  <li className="mr-3 flex">
+                    <input
+                      className="appearance-none peer"
+                      type="radio"
+                      id="iphoneState-Class B"
+                      name="iphoneState"
+                      value="Class B"
+                      onClick={onChangeHandler}
+                    />
+                    <label
+                      className="flex items-center h-[38px] px-4 rounded-3xl border-DD border-[1px] peer-checked:border-CC peer-checked:bg-CC peer-checked:text-CC peer-checked:bg-opacity-50"
+                      htmlFor="iphoneState-Class B"
+                    >
+                      B급
+                    </label>
+                  </li>
+                )}
+
+                {priceListState.iphoneState === "Class C" ? (
+                  <li className="mr-3 flex">
+                    <input
+                      className="appearance-none peer"
+                      type="radio"
+                      id="iphoneState-Class C"
+                      name="iphoneState"
+                      value="Class C"
+                      defaultChecked
+                      onClick={onChangeHandler}
+                    />
+                    <label
+                      className="flex items-center h-[38px] px-4 rounded-3xl border-DD border-[1px] peer-checked:border-CC peer-checked:bg-CC peer-checked:text-CC peer-checked:bg-opacity-50"
+                      htmlFor="iphoneState-Class C"
+                    >
+                      C급
+                    </label>
+                  </li>
+                ) : (
+                  <li className="mr-3 flex">
+                    <input
+                      className="appearance-none peer"
+                      type="radio"
+                      id="iphoneState-Class C"
+                      name="iphoneState"
+                      value="Class C"
+                      onClick={onChangeHandler}
+                    />
+                    <label
+                      className="flex items-center h-[38px] px-4 rounded-3xl border-DD border-[1px] peer-checked:border-CC peer-checked:bg-CC peer-checked:text-CC peer-checked:bg-opacity-50"
+                      htmlFor="iphoneState-Class C"
+                    >
+                      C급
+                    </label>
+                  </li>
+                )}
+              </ul>
+            </div>
+
+            <div className=" flex-col px-[18px]">
+              <div className=" flex items-center w-full h-14 font-semibold ">
+                배터리 성능 최대치
+              </div>
+              <div className="  mt-1 text-DD">
+                <input
+                  className="w-full h-[38px] px-3 rounded-3xl border-[1px] border-DD "
                   placeholder="0% ~ 100%"
                   value={priceListState.batteryState || ""}
                   type="Number"
@@ -238,210 +525,130 @@ const PricingInput5 = ({ priceListState, setPriceListState }) => {
                   name="batteryState"
                   onChange={onChangeHandler}
                 />
-              </CategoryDiv>
+              </div>
             </div>
-          )}
+          </div>
+        )}
 
-          <ContentDiv>애플케어 유무</ContentDiv>
-          <CategoryDiv>
-            <SelectBox
-              defaultValue={priceListState.careOX}
-              name="careOX"
-              onChange={onChangeHandler}
-            >
-              <option value={"careOX"}>애플케어 유무</option>
-              <option value={"O"}>있음</option>
-              <option value={"X"}>없음</option>
-            </SelectBox>
-          </CategoryDiv>
+        <div className=" flex-col px-[18px]">
+          <div className=" flex items-center w-full h-14 font-semibold ">
+            애플케어 유무
+          </div>
 
-          {priceListState.careOX === "O" && (
-            <>
-              <ContentDiv>애플케어 보증기간</ContentDiv>
-              <CategoryDiv>
-                <DateInput
+          <ul className="text-DD flex mt-1">
+            {priceListState.careOX === "O" ? (
+              <li className="mr-3 flex">
+                <input
+                  className="appearance-none peer"
+                  type="radio"
+                  id="careOX-O"
+                  name="careOX"
+                  value="O"
+                  defaultChecked
+                  onClick={onChangeHandler}
+                />
+                <label
+                  className="flex items-center h-[38px] px-5 rounded-3xl border-DD border-[1px] peer-checked:border-CC peer-checked:bg-CC peer-checked:text-CC peer-checked:bg-opacity-50"
+                  htmlFor="careOX-O"
+                >
+                  O
+                </label>
+              </li>
+            ) : (
+              <li className="mr-3 flex">
+                <input
+                  className="appearance-none peer"
+                  type="radio"
+                  id="careOX-O"
+                  name="careOX"
+                  value="O"
+                  onClick={onChangeHandler}
+                />
+                <label
+                  className="flex items-center h-[38px] px-5 rounded-3xl border-DD border-[1px] peer-checked:border-CC peer-checked:bg-CC peer-checked:text-CC peer-checked:bg-opacity-50"
+                  htmlFor="careOX-O"
+                >
+                  O
+                </label>
+              </li>
+            )}
+            {priceListState.careOX === "X" ? (
+              <li className="mr-3 flex">
+                <input
+                  className="appearance-none peer"
+                  type="radio"
+                  id="careOX-X"
+                  name="careOX"
+                  value="X"
+                  defaultChecked
+                  onClick={onChangeHandler}
+                />
+                <label
+                  className="flex items-center h-[38px] px-5 rounded-3xl border-DD border-[1px] peer-checked:border-CC peer-checked:bg-CC peer-checked:text-CC peer-checked:bg-opacity-50"
+                  htmlFor="careOX-X"
+                >
+                  X
+                </label>
+              </li>
+            ) : (
+              <li className="mr-3 flex">
+                <input
+                  className="appearance-none peer"
+                  type="radio"
+                  id="careOX-X"
+                  name="careOX"
+                  value="X"
+                  onClick={onChangeHandler}
+                />
+                <label
+                  className="flex items-center h-[38px] px-5 rounded-3xl border-DD border-[1px] peer-checked:border-CC peer-checked:bg-CC peer-checked:text-CC peer-checked:bg-opacity-50"
+                  htmlFor="careOX-X"
+                >
+                  X
+                </label>
+              </li>
+            )}
+          </ul>
+        </div>
+
+        {priceListState.careOX === "O" && (
+          <div>
+            <div className=" flex-col px-[18px]">
+              <div className=" flex items-center w-full h-14 font-semibold ">
+                애플케어 보증기간
+              </div>
+              <div className="  mt-1 text-DD">
+                <input
+                  className=" h-[38px] px-3 rounded-3xl border-[1px] border-DD "
                   placeholder="애플케어 보증기간"
                   type="date"
                   name="careDate"
                   onChange={onChangeHandler}
+                  defaultValue={priceListState.careDate}
                 />
-              </CategoryDiv>
-            </>
-          )}
-        </div>
-
-        <DDid />
-
-        <StepDiv>
-          <img src={PriceStep5} />
-        </StepDiv>
-
-        <NextButton onClick={onSubmitHandler}>다음으로</NextButton>
+              </div>
+            </div>
+          </div>
+        )}
       </div>
-    </>
+
+      <DDid />
+
+      <div className="flex justify-center items-center absolute w-full bottom-14 p-5 ">
+        <PricingStep stepState={stepState} />
+      </div>
+      <button
+        className=" absolute bottom-0 w-full h-14 text-white bg-CC"
+        onClick={onSubmitHandler}
+      >
+        가격책정
+      </button>
+    </div>
   );
 };
 
 export default PricingInput5;
 
-const RLDiv = styled.div`
-  .C02:checked {
-    .C01 {
-      border: 1px solid #949497;
-      background-color: #4f75ff;
-      color: #ff0000;
-    }
-  }
-`;
-
-const ContentDiv = styled.div`
-  display: flex;
-  flex-direction: column;
-  justify-content: center;
-  justify-items: center;
-  position: relative;
-  font-size: 15px;
-  font-weight: bold;
-  margin-top: 5px;
-  margin-left: 10px;
-  padding-left: 10px;
-  width: 100%;
-  height: 50px;
-  background-color: transparent;
-`;
-
-const SelectBox = styled.select`
-  width: 330px;
-  height: 40px;
-  overflow: auto;
-  border: 1px solid #000000;
-  background-color: transparent;
-  border-radius: 50px;
-  font-size: 15px;
-`;
-
-const ContainerDiv1 = styled.div`
-  display: flex;
-  position: relative;
-  flex-direction: column;
-  background-color: transparent;
-  height: 100%;
-  width: 375px;
-`;
-const Div = styled.div`
-  display: flex;
-  flex-direction: column;
-  height: 100%;
-`;
-
-const TitleDiv = styled.div`
-  display: flex;
-  justify-content: center;
-  justify-items: center;
-  align-items: center;
-  position: relative;
-  width: 100%;
-  height: 60px;
-  font-family: "Inter";
-  font-style: normal;
-  font-weight: 400;
-  font-size: 18px;
-  line-height: 22px;
-  font-weight: bold;
-  border-bottom: solid 1px gray;
-  /* background-color: blue; */
-`;
-
-const CategoryDiv = styled.div`
-  display: flex;
-  flex-direction: column;
-  justify-content: center;
-  justify-items: center;
-  align-items: center;
-  position: relative;
-  font-family: "Inter";
-  font-style: normal;
-  font-weight: 600;
-  font-size: 16px;
-  line-height: 19px;
-  width: 100%;
-  height: 50px;
-`;
-
-const PriceInput = styled.input`
-  position: absolute;
-  width: 330px;
-  height: 38px;
-  left: 19px;
-  font-family: "Inter";
-  font-style: normal;
-  font-weight: 400;
-  font-size: 14px;
-  line-height: 17px;
-  border: 1px solid #d9d9d9;
-  border-radius: 5px;
-  background-color: transparent;
-`;
-const DateInput = styled.input`
-  position: absolute;
-  width: 177px;
-  height: 38px;
-  left: 19px;
-  font-family: "Inter";
-  font-style: normal;
-  font-weight: 400;
-  font-size: 14px;
-  line-height: 17px;
-  border-radius: 50px;
-  border: 1px solid #c4c4c4;
-  background-color: transparent;
-`;
-
-const Backbutton = styled.button`
-  position: absolute;
-  left: 0px;
-  width: 56px;
-  height: 100%;
-  font-size: 18px;
-  font-weight: bold;
-  border: none;
-  background-color: transparent;
-`;
-
-const Xbutton = styled.button`
-  position: absolute;
-  right: 0px;
-  width: 56px;
-  height: 100%;
-  font-size: 18px;
-  font-weight: bold;
-  border: none;
-  background-color: transparent;
-`;
-
 const DDid = styled.div`
   height: 100px;
-`;
-
-const StepDiv = styled.div`
-  display: flex;
-  align-items: center;
-  justify-content: center;
-  justify-items: center;
-  position: absolute;
-  bottom: 50px;
-  width: 100%;
-  height: 56px;
-  border: none;
-  background-color: transparent;
-`;
-
-const NextButton = styled.button`
-  position: absolute;
-  bottom: 0px;
-  width: 100%;
-  height: 56px;
-  color: white;
-  border: none;
-  background-color: #4f75ff;
 `;

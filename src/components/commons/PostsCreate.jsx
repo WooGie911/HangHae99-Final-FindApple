@@ -5,6 +5,8 @@ import useImgUpload from "../../hook/useImageUpload";
 import { useDispatch, useSelector } from "react-redux";
 import { useNavigate } from "react-router-dom";
 import whitearrow from "../../assets/whitearrow.png";
+import backArrow from "../../assets/backArrow.svg";
+import blueCamera from "../../assets/blueCamera.png";
 
 const PostsCreate = (props) => {
   const dispatch = useDispatch();
@@ -19,8 +21,6 @@ const PostsCreate = (props) => {
 
   //이미지 업로드 훅
   const [files, fileUrls, uploadHandle] = useImgUpload(5, true, 1, 1000);
-  const [imgUrls, setImgUrls] = useState([]);
-  //이미지 업로드 인풋돔 선택 훅
   const imgRef = useRef();
 
   //submit
@@ -81,250 +81,135 @@ const PostsCreate = (props) => {
 
   return (
     <>
-      <Stcontainer>
-        <Stuploadbutton>
-          <div>
-            <div>
-              <img
-                onClick={onClickHandler}
-                style={{ width: 25, height: 25 }}
-                src="https://img.icons8.com/ios-glyphs/30/null/chevron-left.png"
-              />
-            </div>
-          </div>
-          <div>
-            <h3>상품등록</h3>
-          </div>
-          <div>
-            <span onClick={writeSubmit}>완료</span>
-          </div>
-        </Stuploadbutton>
-        <Stphotolabel htmlFor="imgFile">
-          <PhotoButton
-            type="button"
+      <div className=" flex relative items-center justify-center h-[60px] text-[18px] font-semibold border-b-2 border-D9">
+        <img
+          className="h-6 w-6 absolute left-3"
+          onClick={() => {
+            onClickHandler();
+          }}
+          src={backArrow}
+        />
+        <div>
+          <div>상품등록 </div>
+        </div>
+      </div>
+
+      <div className="h-[100px] p-[18px] flex border-b-[1px] border-D9">
+        <label htmlFor="imgFile">
+          <div
+            className="border-[1px] rounded-md w-16 h-16 flex items-center justify-center content-center text-xs text-CC cursor-pointer"
             onClick={() => {
               imgRef.current.click();
             }}
           >
-            <CameraImg>
-              <div>
-                <img src="https://img.icons8.com/fluency-systems-regular/20/null/multiple-cameras.png" />
+            <div className="flex-col ">
+              <div className="flex justify-center">
+                <img src={blueCamera} />
               </div>
               <div>{fileUrls.length}/5</div>
-            </CameraImg>
-          </PhotoButton>
-          <input
-            type="file"
-            style={{ display: "none" }}
-            accept="image/*"
-            id="imgFile"
-            name="imgFile"
-            multiple
-            onChange={uploadHandle}
-            ref={imgRef}
-          />
-          {fileUrls.length > 0 && (
-            <>
-              <div className="preview" style={{ marginTop: "15px" }}>
-                {
-                  /*previews*/
-                  fileUrls.map((val, i) => {
-                    return (
-                      <img
-                        src={val}
-                        key={i}
-                        style={{
-                          width: "50px",
-                          height: "50px",
-                          marginLeft: "5px",
-                        }}
-                      />
-                    );
-                  })
-                }
-              </div>
-            </>
-          )}
-        </Stphotolabel>
+            </div>
+          </div>
+        </label>
 
-        <div>
-          <Sttitleinput
+        <div className="flex justify-between">
+          {
+            /*previews*/
+            fileUrls.map((val, i) => {
+              return (
+                <img
+                  className="h-16 w-16 object-cover ml-3 rounded-md"
+                  src={val}
+                  key={i}
+                />
+              );
+            })
+          }
+        </div>
+        <input
+          type="file"
+          style={{ display: "none" }}
+          accept="image/*"
+          id="imgFile"
+          name="imgFile"
+          multiple
+          onChange={uploadHandle}
+          ref={imgRef}
+        />
+      </div>
+
+      <div className=" py-2 px-[18px] border-b-[1px] border-D9 font-semibold">
+        <div className=" h-16 flex items-center">
+          <input
+            className="w-full py-3  break-words"
             onChange={writeHandle}
             name="title"
             value={write.title || ""}
             type="text"
-            placeholder="글제목"
+            placeholder="글 제목을 입력하세요"
           />
         </div>
+      </div>
+      <div className="  py-2 px-[18px] border-b-[1px] border-D9">
+        <div className="h-16 flex items-center justify-between">
+          {DetailPrice.getPrice !== undefined && (
+            <div className="flex-col">
+              <div className="text-xs text-DD">책정가격</div>
+              <div className="text-CC font-semibold">
+                {DetailPrice.getPrice.toLocaleString("ko-KR")}원
+              </div>
+            </div>
+          )}
 
-        <Detail
+          <div
+            className="bg-C4 w-24 h-9 rounded-md text-xs text-white  flex justify-center items-center"
+            onClick={() => {
+              navigate("/pricingfinal");
+            }}
+          >
+            <div> 상품 상세 정보</div>
+          </div>
+        </div>
+      </div>
+
+      <div className=" py-2 px-[18px] border-b-[1px] border-D9">
+        <div className="  h-16 flex items-center">
+          <div className="flex-col">
+            <div className="text-xs text-DD">판매가격</div>
+            <input
+              className=" bg-transparent text-C4 font-semibold"
+              onChange={writeHandle}
+              name="userPrice"
+              value={write.userPrice || ""}
+              type="text"
+              placeholder="판매 가격을 입력해주세요."
+            />
+          </div>
+        </div>
+      </div>
+
+      <div className="  py-4 px-[18px] border-b-[1px] border-D9">
+        <input
+          className="w-full py-3  break-words"
+          onChange={writeHandle}
+          name="content"
+          value={write.content || ""}
+          type="text"
+          placeholder="상품설명을 작성해주세요."
+        />
+      </div>
+
+      <div className=" py-3 px-[18px] h-20 w-[375px] fixed bottom-0 text-white ">
+        <div
+          className="bg-CC w-full h-full rounded-md flex items-center justify-center"
           onClick={() => {
-            navigate("/pricingfinal");
+            writeSubmit();
           }}
         >
-          <p5>상품 상세 정보</p5>
-          <Stdetailrightarrow
-            src={whitearrow}
-            style={{ width: "25px", height: "25px" }}
-          ></Stdetailrightarrow>
-        </Detail>
-
-        <Price>
-          <p5>
-            {DetailPrice.getPrice !== undefined && (
-              <>
-                책정 가격{" "}
-                <div>{DetailPrice.getPrice.toLocaleString("ko-KR")}원</div>
-              </>
-            )}
-          </p5>
-        </Price>
-
-        <Stpriceinput
-          onChange={writeHandle}
-          name="userPrice"
-          value={write.userPrice || ""}
-          type="text"
-          placeholder="판매 가격"
-        />
-
-        <div>
-          <Stcontentinput
-            onChange={writeHandle}
-            name="content"
-            value={write.content || ""}
-            type="text"
-            placeholder="상품설명을 작성해주세요."
-          />
+          상품 등록
         </div>
-      </Stcontainer>
+      </div>
     </>
   );
 };
 
 export default PostsCreate;
-
-// 전체 페이지 레이아웃
-const Stcontainer = styled.div`
-  display: flex;
-  flex-direction: column;
-`;
-
-// 상품 가격 측정
-const Detail = styled.div`
-  background-color: #3d6af2;
-  color: white;
-  cursor: pointer;
-  width: 343px;
-  height: 20px;
-  border-radius: 5px;
-  font-size: 14px;
-  font-weight: 550;
-  display: flex;
-  margin: auto;
-  margin-bottom: 20px;
-  justify-content: space-between;
-  padding: 10px;
-`;
-// 가격 결정
-const Price = styled.div`
-  color: gray;
-  font-size: 15px;
-  width: 98.5%;
-  height: 60px;
-  border-top: 2px solid lightgrey;
-  border-bottom: 2px solid lightgrey;
-  font-size: 15px;
-  margin-bottom: 10px;
-  div {
-    color: #3d6af2;
-  }
-`;
-
-const Stpriceinput = styled.input`
-  border: none;
-  width: 97.5%;
-  height: 40px;
-  border-bottom: 2px solid lightgrey;
-  background-color: transparent;
-  margin-bottom: 10px;
-  font-size: 15px;
-`;
-
-const Stuploadbutton = styled.div`
-  display: flex;
-  justify-content: space-between;
-  border-bottom: 1px solid lightgrey;
-
-  img {
-    cursor: pointer;
-    margin-top: 15px;
-  }
-  span {
-    cursor: pointer;
-    position: relative;
-    top: 17px;
-
-    font-weight: 550;
-  }
-`;
-
-// 내용 입력
-const Stcontentinput = styled.textarea`
-  width: 97.5%;
-  height: 120px;
-  border: none;
-  background-color: transparent;
-  border-bottom: 2px solid lightgrey;
-  margin-bottom: 10px;
-  font-size: 15px;
-`;
-
-// 사진 업로드
-const PhotoButton = styled.button`
-  width: 50px;
-  height: 50px;
-  border-radius: 5px;
-  background-color: white;
-  margin: 10px;
-  border: 2px solid #3d6af2;
-  top: 25px;
-`;
-const CameraImg = styled.div`
-  display: flex;
-  align-items: center;
-  justify-content: center;
-  flex-direction: column;
-  padding-top: 5px;
-  cursor: pointer;
-  div {
-    border: #3d6af2;
-    color: #3d6af2;
-  }
-`;
-
-// 사진 업로드 관련인 듯
-const Stphotolabel = styled.label`
-  width: 98.5%;
-  height: 100px;
-  display: inline-block;
-  border-bottom: 2px solid lightgrey;
-  display: flex;
-  flex-direction: row;
-`;
-
-const Sttitleinput = styled.input`
-  width: 97.5%;
-  height: 40px;
-  border: none;
-  background-color: transparent;
-  border-bottom: 2px solid lightgrey;
-  margin-bottom: 10px;
-  font-size: 15px;
-`;
-const Stdetailrightarrow = styled.img`
-  position: relative;
-  top: 0px;
-  width: 25px;
-  height: 25px;
-`;

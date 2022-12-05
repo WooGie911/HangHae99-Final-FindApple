@@ -31,7 +31,7 @@ const MyLike = () => {
           <div>찜목록</div>
         </div>
 
-        <div className=" flex relative p-3 mt-5 ">
+        <div className=" p-3 mt-5 grid grid-cols-2">
           {likes &&
             likes.map((like) => {
               return (

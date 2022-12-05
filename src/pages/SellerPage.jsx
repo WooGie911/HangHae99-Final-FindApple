@@ -3,10 +3,10 @@ import { useSelector } from "react-redux";
 import { __getSellerinfo } from "../redux/modules/SellerSlice";
 import { useDispatch } from "react-redux";
 import { useParams, useNavigate } from "react-router-dom";
-import styled from "styled-components";
 import Layout from "../components/commons/Layout";
 import Footer from "../components/commons/Footer";
-import back from "../assets/back.png";
+import whiteX from "../assets/whiteX.png";
+import smallHeart from "../assets/smallHeart.png";
 
 const SellerPage = () => {
   const { myPostList, sellerInfoDto } = useSelector(
@@ -20,51 +20,76 @@ const SellerPage = () => {
   useEffect(() => {
     dispatch(__getSellerinfo(memberId));
   }, [memberId]);
-  const onClickHandler = () => {
-    navigate(-1);
-  };
+
   return (
     <div>
       <Layout>
-        <HeadContainer>
+        <div className="bg-CC text-white flex relative items-center justify-center h-[60px] text-[18px] font-semibold border-b-2 border-D9">
+          <img
+            className="h-6 w-6 absolute left-3 cursor-pointer"
+            onClick={() => {
+              navigate(-1);
+            }}
+            src={whiteX}
+          />
           <div>
-            <img
-              onClick={onClickHandler}
-              style={{ width: 25, height: 25 }}
-              src={back}
-            />
-            <span>프로필</span>
+            <div>프로필</div>
           </div>
-        </HeadContainer>
-        <hr />
+        </div>
+
         {sellerInfoDto !== undefined && (
-          <>
-            <SellerProfile>
-              <div>
-                <img src={sellerInfoDto.profileImg} />
+          <div className="flex-col relative">
+            <div className="  flex-col absolute top-16 left-[155px] z-20 ">
+              <div className="flex justify-center items-center">
+                <img
+                  className="w-16 h-16 rounded-full shadow-2xl "
+                  src={sellerInfoDto.profileImg}
+                />
               </div>
-              <Nickname>{sellerInfoDto.nickname}</Nickname>
-            </SellerProfile>
-            <PostList>
-              <Posts>
-                <Title>{sellerInfoDto.nickname}님의 판매상품</Title>
+              <div className=" h-10 font-semibold flex justify-center items-center">
+                {sellerInfoDto.nickname}
+              </div>
+            </div>
+            <div className=" h-24"></div>
+            <div className="bg-white h-24 rounded-t-3xl"></div>
+
+            <div className="bg-white">
+              <div className="flex px-[18px] py-2">
+                <div className=" font-semibold">{sellerInfoDto.nickname}</div>
+                님의 판매상품
+              </div>
+              <div className="px-[18]">
                 {myPostList.length > 0 && (
-                  <>
+                  <div className="grid grid-cols-2 gap-3 gap-y-5">
                     {myPostList.map((mypost) => {
                       return (
-                        <SellerPost key={mypost.postId}>
-                          <img src={mypost.images[0].imgUrl} />
-                          <PostPrice>{mypost.userPrice}원</PostPrice>
-                          <PostTitle>{mypost.title}</PostTitle>
-                          <LikeCnt>🤍{mypost.likeCnt}</LikeCnt>
-                        </SellerPost>
+                        <div className=" flex">
+                          <div className="  ml-3  flex-col" key={mypost.postId}>
+                            <img
+                              className="h-40 w-40"
+                              src={mypost.images[0].imgUrl}
+                            />
+
+                            <div className="font-semibold ">
+                              {mypost.userPrice.toLocaleString("ko-KR")}원
+                            </div>
+                            <div className="text-sm break-words w-40 text-OO">
+                              {mypost.title}
+                            </div>
+
+                            <div className="text-DD flex text-xs items-center">
+                              <img className="h-3" src={smallHeart} />
+                              {mypost.likeCnt}
+                            </div>
+                          </div>
+                        </div>
                       );
                     })}
-                  </>
+                  </div>
                 )}
-              </Posts>
-            </PostList>
-          </>
+              </div>
+            </div>
+          </div>
         )}
         <Footer />
       </Layout>
@@ -73,118 +98,3 @@ const SellerPage = () => {
 };
 
 export default SellerPage;
-
-//헤더
-const HeadContainer = styled.div`
-  display: flex;
-  align-items: center;
-  margin-right: 120px;
-  margin-bottom: 20px;
-  img {
-    float: left;
-    margin-right: 130px;
-  }
-  span {
-    /* text-align: center; */
-    font-size: 24px;
-    font-weight: bold;
-  }
-`;
-
-// 유저 정보
-const SellerProfile = styled.div`
-  position: absolute;
-  top: 110px;
-  z-index: 999;
-  left: 47%;
-  text-align: center;
-  img {
-    width: 50px;
-    height: 50px;
-    border-radius: 50%;
-  }
-`;
-const Nickname = styled.div`
-  font-style: normal;
-  font-weight: 600;
-  font-size: 16px;
-  line-height: 19px;
-
-  color: #000000;
-`;
-
-// 아이템
-const Title = styled.div`
-  margin-top: 15px;
-  margin-bottom: 20px;
-  margin-left: 15px;
-  font-family: "Inter";
-  font-style: normal;
-  font-weight: 600;
-  font-size: 14px;
-  line-height: 17px;
-  /* identical to box height */
-
-  color: #000000;
-`;
-
-const PostList = styled.div`
-  position: relative;
-  top: 70px;
-  width: 100%;
-  height: 80vh;
-  overflow: auto;
-  background-color: white;
-  border-radius: 5px 5px 0 0;
-  padding-bottom: 140px;
-`;
-
-const Posts = styled.div`
-  margin-bottom: 50px;
-`;
-
-const SellerPost = styled.div`
-  float: left;
-  margin-left: 20px;
-  img {
-    margin: auto;
-    position: relative;
-    display: flex;
-    width: 160px;
-    height: 160px;
-    border-radius: 5px;
-  }
-`;
-
-const PostTitle = styled.div`
-  font-family: "Inter";
-  font-style: normal;
-  font-weight: 500;
-  font-size: 16px;
-  line-height: 19px;
-
-  color: #000000;
-`;
-const PostPrice = styled.div`
-  width: 92px;
-  height: 17px;
-
-  font-family: "Inter";
-  font-style: normal;
-  font-weight: 500;
-  font-size: 14px;
-  line-height: 17px;
-
-  color: #000000;
-`;
-
-const LikeCnt = styled.div`
-  font-family: "Inter";
-  font-style: normal;
-  font-weight: 400;
-  font-size: 12px;
-  line-height: 15px;
-  /* identical to box height */
-
-  color: #595959;
-`;

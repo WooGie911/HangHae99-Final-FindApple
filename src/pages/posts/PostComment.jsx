@@ -8,7 +8,7 @@ import {
   __deletePostComment,
   __getPostDetail,
 } from "../../redux/modules/PostDetailsSlice";
-import Layout from "../../components/commons/Layout";
+import Layout2 from "../../components/commons/Layout2";
 import backArrow from "../../assets/backArrow.svg";
 
 const PostComment = () => {
@@ -25,27 +25,25 @@ const PostComment = () => {
 
   return (
     <>
-      <Layout>
-        <div className="bg-white h-screen">
-          <div className=" flex relative items-center justify-center h-[60px] text-[18px] font-semibold border-b-[1px] border-D9 ">
-            <img
-              className="h-6 w-6 absolute left-3"
-              onClick={onClickHandler}
-              src={backArrow}
-            />
-            <div>댓글</div>
-          </div>
-
-          <CommentList
-            __deleteComment={__deletePostComment}
-            commentList={post.comments}
+      <Layout2>
+        <div className=" flex relative items-center justify-center h-[60px] text-[18px] font-semibold border-b-[1px] border-D9 ">
+          <img
+            className="h-6 w-6 absolute left-3"
+            onClick={onClickHandler}
+            src={backArrow}
           />
-          <CommentCreate
-            __addComment={__addPostComment}
-            __getDetail={__getPostDetail}
-          />
+          <div>댓글</div>
         </div>
-      </Layout>
+
+        <CommentList
+          __deleteComment={__deletePostComment}
+          commentList={post.comments}
+        />
+        <CommentCreate
+          __addComment={__addPostComment}
+          __getDetail={__getPostDetail}
+        />
+      </Layout2>
     </>
   );
 };

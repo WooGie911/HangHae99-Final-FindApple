@@ -61,64 +61,55 @@ const MypageUpdate = () => {
   };
 
   return (
-    <div
-      style={{
-        display: "flex",
-        flexDirection: "column",
-        alignItems: "center",
-        justifyContent: "center",
-      }}
-    >
-      <Layout>
-        <div className=" flex relative items-center justify-center h-[60px] text-[18px] font-semibold ">
+    <Layout>
+      <div className=" flex relative items-center justify-center h-[60px] text-[18px] font-semibold ">
+        <img
+          className="h-6 w-6 absolute left-3"
+          onClick={onClickHandler}
+          src={backArrow}
+        />
+        <div>
+          <div>프로필 수정 </div>
+        </div>
+        <button onClick={nicknameEdit} className="  absolute right-4">
+          완료
+        </button>
+      </div>
+
+      <div className=" text-[14px] font-semibold">
+        <input
+          type="file"
+          accept="image/*"
+          onChange={handleImageUpload}
+          ref={imageUploader}
+          style={{
+            display: "none",
+          }}
+        />
+        <div className="flex justify-center items-center mt-5 p-3">
           <img
-            className="h-6 w-6 absolute left-3"
-            onClick={onClickHandler}
-            src={backArrow}
+            className=" w-[88px] h-[88px] rounded-full "
+            src={user.profileImg}
+            ref={uploadedImage}
+            onClick={onSubmitHandler}
           />
-          <div>
-            <div>프로필 수정 </div>
-          </div>
-          <button onClick={nicknameEdit} className="  absolute right-4">
-            완료
-          </button>
         </div>
 
-        <div className=" text-[14px] font-semibold">
+        <div className="text-center font-medium text-CC">
+          프로필 사진 바꾸기
+        </div>
+
+        <div className="ml-5 mb-2 mt-3">닉네임</div>
+        <div className="px-6">
           <input
-            type="file"
-            accept="image/*"
-            onChange={handleImageUpload}
-            ref={imageUploader}
-            style={{
-              display: "none",
-            }}
+            className="bg-transparent w-full pl-3 h-[38px] rounded border-C4 border-[1px]"
+            onChange={writeHandle}
+            name="nickname"
+            value={write.nickname || ""}
           />
-          <div className="flex justify-center items-center mt-5 p-3">
-            <img
-              className=" w-[88px] h-[88px] rounded-full "
-              src={user.profileImg}
-              ref={uploadedImage}
-              onClick={onSubmitHandler}
-            />
-          </div>
-
-          <div className="text-center font-medium text-CC">
-            프로필 사진 바꾸기
-          </div>
-
-          <div className="ml-5 mb-2 mt-3">닉네임</div>
-          <div className="px-6">
-            <input
-              className="bg-transparent w-full pl-3 h-[38px] rounded border-C4 border-[1px]"
-              onChange={writeHandle}
-              name="nickname"
-              value={write.nickname || ""}
-            />
-          </div>
         </div>
-      </Layout>
-    </div>
+      </div>
+    </Layout>
   );
 };
 
