@@ -200,14 +200,16 @@ const LoginSlice = createSlice({
       state.error = action.payload;
     },
     //__UserProfileEdit
-    [__UserProfile.pending]: (state) => {
+    [__UserProfileEdit.pending]: (state) => {
       state.isLoading = true;
     },
-    [__UserProfile.fulfilled]: (state, action) => {
+    [__UserProfileEdit.fulfilled]: (state, action) => {
       state.isLoading = false;
       state.user = action.payload;
+      window.location.replace("/mypage");
+    
     },
-    [__UserProfile.rejected]: (state, action) => {
+    [__UserProfileEdit.rejected]: (state, action) => {
       state.isLoading = false;
       state.error = action.payload;
     },
