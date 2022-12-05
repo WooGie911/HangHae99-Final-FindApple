@@ -51,12 +51,20 @@ const ChatList = () => {
                           />
                         </div>
                         <div>
+                        {item.nickname === item.postUserNickname ? (
                           <div>
-                            {item.postUserNickname}{" "}
+                            {item.joinUserNickname}{" "}
                             <Time>
                               {item.chatList[item.chatList.length - 1].sendDate}
                             </Time>
                           </div>
+                          ):(<div>
+                            {item.postUserNickname}{" "}
+                            <Time>
+                              {item.chatList[item.chatList.length - 1].sendDate}
+                            </Time>
+                          </div>                            
+                          )}
                           <Message>
                             {item.chatList[item.chatList.length - 1].message}
                             {/* 대화의 맨 마지막만 가지고 오는 로직이면 위와 같이 진행하면 됨 */}
@@ -91,6 +99,7 @@ const Div = styled.div`
   height: 376px;
   border-radius: 5px;
   background-color: white;
+  overflow:auto;
 `;
 
 const RoomList = styled.div`
