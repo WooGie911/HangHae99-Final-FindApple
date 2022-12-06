@@ -77,7 +77,9 @@ const ObjectionList = ({ posts, detail, __getDetail, state, setState }) => {
                     <label>{post?.title}</label>
                   </div>
                   <div className=" mt-1 text-base font-semibold">
+
                     <label>{post?.userPrice?.toLocaleString("ko-KR")}원</label>
+
                   </div>
                   <div className="flex justify-between mt-4  text-xs font-normal">
                     <div>{post?.createdAt}</div>
