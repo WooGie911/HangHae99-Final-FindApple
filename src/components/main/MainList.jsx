@@ -115,7 +115,7 @@ const MainList = () => {
 
                 <div className=" w-full flex-col  ml-3 font-semibold">
                   <div>
-                    <label>{post?.userPrice.toLocaleString("ko-KR")}원</label>
+                    <label>{post?.userPrice?.toLocaleString("ko-KR")}원</label>
                   </div>
                   <div className=" mt-1 text-sm font-medium">
                     <label>{post?.category}</label>
