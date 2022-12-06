@@ -41,7 +41,7 @@ const PricingInput3 = ({ priceListState, setPriceListState, stepState }) => {
         </div>
         <div className="text-DD mt-1">
           <select
-            className=" w-full h-[38px] px-3 rounded-3xl border-[1px] border-DD "
+            className=" w-full h-[38px] px-5 rounded-3xl border-[1px] border-DD "
             defaultValue={priceListState.model}
             name={"model"}
             onChange={onChangeHandler}
