@@ -22,7 +22,8 @@ const SignUp = () => {
   //커스텀훅 useInput 사용
   const [input, setInput, changeInputHandler] = useInput(initialstate);
   const emailCheckData = localStorage.getItem("emailCheckData");
-  const passwordCheck =  /^.*(?=^.{8,16}$)(?=.*\d)(?=.*[a-zA-Z])(?=.*[!@#$%^&+=]).*$/;
+  const passwordCheck =
+    /^.*(?=^.{8,16}$)(?=.*\d)(?=.*[a-zA-Z])(?=.*[!@#$%^&+=]).*$/;
 
   const SubmitHandler = (e) => {
     e.preventDefault();
@@ -32,7 +33,7 @@ const SignUp = () => {
       input.password === "" ||
       input.passwordCheck === ""
     ) {
-      return alert("입력을 확인하세요.");
+      return alert("입력을 확인해주세요.");
     }
 
     if (input.emailCheck !== emailCheckData) {
@@ -48,7 +49,7 @@ const SignUp = () => {
       password: input.password,
     };
 
-    if (window.confirm("가입하시겠습니까?")) {
+    if (window.confirm("회원가입하시겠습니까?")) {
       dispatch(__SignUp(AAA));
       setInput(initialstate);
     }
@@ -129,8 +130,10 @@ const SignUp = () => {
               onChange={changeInputHandler}
               placeholder="숫자, 영문, 특수문자 조합 최소 8자"
             />
-            {passwordCheck.test(input.password) === false &&(
-            <p className=" text-red text-xs mb-2">비밀번호를 양식에 맞게 입력해주세요</p>
+            {passwordCheck.test(input.password) === false && (
+              <p className=" text-red text-xs mb-2">
+                비밀번호를 양식에 맞게 입력해주세요
+              </p>
             )}
           </div>
 
@@ -143,11 +146,13 @@ const SignUp = () => {
               onChange={changeInputHandler}
               placeholder="비밀번호를 한번 더 입력해주세요"
             />
-            {(input.password) !== (input.passwordCheck) &&(
-              <p className=" text-red text-xs mb-2">비밀번호가 일치하지 않습니다.</p>
+            {input.password !== input.passwordCheck && (
+              <p className=" text-red text-xs mb-2">
+                비밀번호가 일치하지 않습니다.
+              </p>
             )}
           </div>
-          
+
           <div className="flex justify-center ">
             <button
               className=" w-[296px] h-9 bg-CC text-white rounded-md mt-28 text-sm"

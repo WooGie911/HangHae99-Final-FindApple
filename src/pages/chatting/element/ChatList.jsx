@@ -48,35 +48,39 @@ const ChatList = () => {
                         src={item.otherUserAvatarUrl}
                       />
 
-                      <div className=" ml -2 flex-col text-sm ">
-                        <div className="flex">
-                          {item.nickname === item.postUserNickname ? (
-                            <div className="font-semibold">
-                              {item.joinUserNickname}
+
+                        <div className=" ml -2 flex-col text-sm ">
+                          <div className="flex">
+                            {item.nickname === item.postUserNickname ? (
+                              <div className="font-semibold">
+                                {item.joinUserNickname}
+                              </div>
+                            ) : (
+                              <div className="font-semibold">
+                                {item.postUserNickname}
+                              </div>
+                            )}
+                            <div className="text-OO text-xs">
+                              {item.chatList[item.chatList.length - 1].sendDate}
                             </div>
-                          ) : (
-                            <div className="font-semibold">
-                              {item.postUserNickname}
-                            </div>
-                          )}
-                          <div className="text-OO text-xs">
-                            {item.chatList[item.chatList.length - 1].sendDate}
+                          </div>
+                          <div className="text-xs">
+                            {item.chatList[item.chatList.length - 1].message}
                           </div>
                         </div>
-                        <div className="text-xs">
-                          {item.chatList[item.chatList.length - 1].message}
-                        </div>
                       </div>
+
+                      {item.image !== undefined && (
+                        <img
+                          className="w-11 h-11 object-cover rounded-lg flex-shrink-0"
+                          src={item.image.imgUrl}
+                        />
+                      )}
                     </div>
-                    {item.image !== undefined && (
-                      <img
-                        className="w-11 h-11 object-cover rounded-lg flex-shrink-0"
-                        src={item.image.imgUrl}
-                      />
-                    )}
-                  </div>
-                )}
-              </div>
+                  )}
+                </div>
+                <hr className="last-of-type:hidden border-t-[0.5px] border-D9" />
+              </>
             );
           })}
       </div>
