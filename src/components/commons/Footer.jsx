@@ -72,9 +72,12 @@ const Footer = () => {
           <img src={chat} />
         </button>
         {isChatModal && (
-          <ModalWrap onClick={popupPostCode}>
+          <div
+            className="fixed top-0 left-0 bg-black bg-opacity-50 z-50 w-full h-full flex justify-center items-center"
+            onClick={popupPostCode}
+          >
             <ChatList />
-          </ModalWrap>
+          </div>
         )}
       </div>
 
@@ -175,7 +178,7 @@ const Footer = () => {
           </div>
         ) : (
           <div
-            className="cursor-pointer flex-1  justify-center"
+            className="cursor-pointer flex-1"
             onClick={() => onClickHandler({ state: "My", navi: "/mypage" })}
           >
             <div className="flex justify-center">
@@ -190,19 +193,3 @@ const Footer = () => {
 };
 
 export default Footer;
-
-// modal 닫기
-const ModalWrap = styled.div`
-  position: fixed;
-  bottom: 0;
-  left: 0;
-  width: 100%;
-  height: 100%;
-  background-color: rgba(0, 0, 0, 0.4);
-  display: flex;
-  justify-content: center;
-  align-items: center;
-  z-index: 998;
-  padding: 0 15px;
-  box-sizing: border-box;
-`;
