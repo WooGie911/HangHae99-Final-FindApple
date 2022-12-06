@@ -1,8 +1,8 @@
 import React, { useEffect, useState } from "react";
 import { useNavigate } from "react-router-dom";
 import styled from "styled-components";
-import blackHome from "../../assets/blackHome.svg";
-import blueHome from "../../assets/blueHome.svg";
+import blackHome from "../../assets/blackHome.png";
+import blueHome from "../../assets/blueHome.png";
 import blackSearch from "../../assets/blackSearch.svg";
 import blueSearch from "../../assets/blueSearch.svg";
 import bluePlus from "../../assets/bluePlus.svg";
@@ -61,15 +61,15 @@ const Footer = () => {
   useEffect(() => {
     console.log("footerState", footerState);
   }, [footerState]);
+
   return (
     <div className="fixed bottom-0">
-      <div className=" absolute right-0 bottom-[70px]">
+      <div className="px-[18px] absolute right-0 bottom-[70px]">
         <button
-          className="w-[79px] h-[45px] bg-CC flex relative items-center justify-center rounded-3xl"
+          className=" w-12 h-12 bg-CC flex relative items-center justify-center rounded-full"
           onClick={popupPostCode}
         >
           <img src={chat} />
-          <div className="ml-2 text-xs ">채팅</div>
         </button>
         {isChatModal && (
           <ModalWrap onClick={popupPostCode}>
@@ -80,46 +80,61 @@ const Footer = () => {
 
       <div className="bg-white w-[375px] max-w-full h-[58px] flex justify-between px-[18px] text-[10px] font-semibold items-center">
         {footerState !== "Home" ? (
-          <div onClick={() => onClickHandler({ state: "Home", navi: "/main" })}>
-            <img className="h-8 w-8" src={blackHome} />
-
+          <div
+            className="cursor-pointer flex-1"
+            onClick={() => onClickHandler({ state: "Home", navi: "/main" })}
+          >
+            <div className="flex justify-center">
+              <img className="h-8 w-8" src={blackHome} />
+            </div>
             <div className="text-center">홈</div>
           </div>
         ) : (
-          <div onClick={() => onClickHandler({ state: "Home", navi: "/main" })}>
-            <img className="h-8 w-8" src={blueHome} />
-
+          <div
+            className="cursor-pointer flex-1"
+            onClick={() => onClickHandler({ state: "Home", navi: "/main" })}
+          >
+            <div className="flex justify-center">
+              <img className="h-8 w-8" src={blueHome} />
+            </div>
             <div className="text-CC text-center">홈</div>
           </div>
         )}
 
         {footerState !== "Search" ? (
           <div
+            className="cursor-pointer flex-1"
             onClick={() =>
               onClickHandler({ state: "Search", navi: "/postread/all/postId" })
             }
           >
-            <img className="h-8 w-8" src={blackSearch} />
+            <div className="flex justify-center">
+              <img className="h-8 w-8" src={blackSearch} />
+            </div>
             <div className="text-center">검색</div>
           </div>
         ) : (
           <div
+            className="cursor-pointer flex-1"
             onClick={() =>
               onClickHandler({ state: "Search", navi: "/postread/all/postId" })
             }
           >
-            <img className="h-8 w-8" src={blueSearch} />
+            <div className="flex justify-center">
+              <img className="h-8 w-8" src={blueSearch} />
+            </div>
             <div className="text-CC text-center">검색</div>
           </div>
         )}
 
         <img
-          className=" cursor-pointer  rounded-full"
+          className=" cursor-pointer  rounded-full flex-1"
           src={bluePlus}
           onClick={() => onClickPricingButton()}
         />
         {footerState !== "Issue" ? (
           <div
+            className="cursor-pointer flex-1"
             onClick={() =>
               onClickHandler({
                 state: "Issue",
@@ -127,12 +142,14 @@ const Footer = () => {
               })
             }
           >
-            <img className=" ml-1  h-8 w-8" src={blackIssue} />
-
+            <div className="flex justify-center">
+              <img className=" ml-1  h-8 w-8" src={blackIssue} />
+            </div>
             <div className="text-center"> 이의제기 </div>
           </div>
         ) : (
           <div
+            className="cursor-pointer flex-1"
             onClick={() =>
               onClickHandler({
                 state: "Issue",
@@ -140,19 +157,30 @@ const Footer = () => {
               })
             }
           >
-            <img className=" ml-1  h-8 w-8" src={blueIssue} />
-
+            <div className="flex justify-center">
+              <img className=" ml-1  h-8 w-8" src={blueIssue} />
+            </div>
             <div className=" text-CC text-center"> 이의제기 </div>
           </div>
         )}
         {footerState !== "My" ? (
-          <div onClick={() => onClickHandler({ state: "My", navi: "/mypage" })}>
-            <img className="h-8 w-8" src={blackMy} />
+          <div
+            className="cursor-pointer flex-1"
+            onClick={() => onClickHandler({ state: "My", navi: "/mypage" })}
+          >
+            <div className="flex justify-center">
+              <img className="h-8 w-8" src={blackMy} />
+            </div>
             <div className="text-center ">내 정보</div>
           </div>
         ) : (
-          <div onClick={() => onClickHandler({ state: "My", navi: "/mypage" })}>
-            <img className="h-8 w-8" src={blueMy} />
+          <div
+            className="cursor-pointer flex-1  justify-center"
+            onClick={() => onClickHandler({ state: "My", navi: "/mypage" })}
+          >
+            <div className="flex justify-center">
+              <img className="h-8 w-8 " src={blueMy} />
+            </div>
             <div className="text-CC text-center ">내 정보</div>
           </div>
         )}

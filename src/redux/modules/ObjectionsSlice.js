@@ -19,9 +19,11 @@ export const __getAddObjection = createAsyncThunk(
     console.log("pay", payload);
     try {
       const data = await Apis.getAddObjectionAX(payload);
+      console.log("데이터 봐봐", data);
       const obj = {
         payload: payload.page,
         data: data.data.content,
+        totalElements: data.data.totalElements,
       };
       console.log(obj);
       return thunkAPI.fulfillWithValue(obj);
@@ -74,8 +76,8 @@ export const __editObjection = createAsyncThunk(
   async (payload, thunkAPI) => {
     try {
       const data = await Apis.editObjectionAX(payload);
-
-      return thunkAPI.fulfillWithValue(data.data.data);
+      const payloadData = { ...payload, data: data.data };
+      return thunkAPI.fulfillWithValue(payloadData);
     } catch (error) {
       return thunkAPI.rejectWithValue(error);
     }
@@ -120,8 +122,10 @@ const ObjectionsSlice = createSlice({
       if (action.payload.payload === 0) {
         state.posts.splice(0);
         state.posts.push(...action.payload.data);
+        state.postsCount = action.payload.totalElements;
       } else {
         state.posts.push(...action.payload.data);
+        state.postsCount = action.payload.totalElements;
       }
     },
     [__getAddObjection.rejected]: (state, action) => {
@@ -150,8 +154,7 @@ const ObjectionsSlice = createSlice({
     [__addObjection.fulfilled]: (state, action) => {
       state.isLoading = false;
       state.posts.push(action.payload);
-      window.location.replace("/objectionread/all")
-
+      window.location.replace("/objectionread/all");
     },
     [__addObjection.rejected]: (state, action) => {
       state.isLoading = false;
@@ -167,6 +170,7 @@ const ObjectionsSlice = createSlice({
       state.posts = state.posts.filter(
         (post) => post.issuesId !== action.payload
       );
+      window.location.replace("/objectionread/all");
     },
 
     [__deleteObjection.rejected]: (state, action) => {
@@ -181,14 +185,14 @@ const ObjectionsSlice = createSlice({
       state.isLoading = false;
 
       const indexId = state.posts.findIndex((post) => {
-        if (post.issuesId == action.payload.issuesId) {
+        if (post.issuesId == action.payload.data.issuesId) {
           return true;
         }
         return false;
       });
-      state.posts[indexId] = action.payload;
-
+      state.posts[indexId] = action.payload.data;
       state.posts = [...state.posts];
+      window.location.replace(`/ObjectionDetail/${action.payload.id}`);
     },
     [__editObjection.rejected]: (state, action) => {
       state.isLoading = false;

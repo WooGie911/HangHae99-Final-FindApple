@@ -36,11 +36,10 @@ const MainList = () => {
 
   return (
     <>
-      <div className="bg-transparent flex p-2 px-[18px] py-4 text-sm">
+      <div className=" justify-between  flex p-2 px-10 pt-4 text-sm">
         {headerBarState === "all" ? (
           <button
-            className="bg-DD w-[55px] h-[23px] text-white rounded-2xl border-[1px] border-DD"
-            src="https://img.icons8.com/external-regular-kawalan-studio/24/null/external-oval-shape-regular-kawalan-studio.png"
+            className=" flex-1 bg-DD w-[90px] h-[29px] text-white rounded-2xl border-[1px] border-DD"
             onClick={() => {
               onClickCategoryHandler("all");
             }}
@@ -49,8 +48,7 @@ const MainList = () => {
           </button>
         ) : (
           <button
-            className="bg-transparent w-[55px] h-[23px] text-DD rounded-2xl border-[1px] border-DD"
-            src="https://img.icons8.com/external-regular-kawalan-studio/24/null/external-oval-shape-regular-kawalan-studio.png"
+            className="flex-1  bg-C4 w-[90px] h-[29px] text-OO rounded-2xl border-[1px] border-DD"
             onClick={() => {
               onClickCategoryHandler("all");
             }}
@@ -60,7 +58,7 @@ const MainList = () => {
         )}
         {headerBarState === "macbook" ? (
           <button
-            className=" ml-2 bg-DD w-[86px] h-[23px]  text-white rounded-2xl border-[1px] border-DD"
+            className="flex-1  ml-2 bg-DD w-[90px] h-[29px]  text-white rounded-2xl border-[1px] border-DD"
             onClick={() => {
               onClickCategoryHandler("macbook");
             }}
@@ -69,7 +67,7 @@ const MainList = () => {
           </button>
         ) : (
           <button
-            className="ml-2 bg-transparent w-[86px] h-[23px] text-DD rounded-2xl border-[1px] border-DD"
+            className="flex-1  ml-2 bg-C4 w-[90px] h-[29px] text-OO rounded-2xl border-[1px] border-DD"
             onClick={() => {
               onClickCategoryHandler("macbook");
             }}
@@ -79,7 +77,7 @@ const MainList = () => {
         )}
         {headerBarState === "iphone" ? (
           <button
-            className="ml-2 bg-DD w-[86px] h-[23px]  text-white rounded-2xl border-[1px] border-DD"
+            className="flex-1  ml-2 bg-DD w-[90px] h-[29px]  text-white rounded-2xl border-[1px] border-DD"
             onClick={() => {
               onClickCategoryHandler("iphone");
             }}
@@ -88,7 +86,7 @@ const MainList = () => {
           </button>
         ) : (
           <button
-            className="ml-2 bg-transparent w-[86px] h-[23px] text-DD rounded-2xl border-[1px] border-DD"
+            className="flex-1  ml-2 bg-C4 w-[90px] h-[29px] text-OO rounded-2xl border-[1px] border-DD"
             onClick={() => {
               onClickCategoryHandler("iphone");
             }}

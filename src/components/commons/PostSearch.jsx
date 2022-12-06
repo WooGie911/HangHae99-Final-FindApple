@@ -1,9 +1,7 @@
 import React from "react";
 import useInput from "../../hook/useInput";
 import { useDispatch } from "react-redux";
-import styled from "styled-components";
-import { useNavigate, useParams } from "react-router-dom";
-import BackIcon from "../../assets/BackIcon.svg";
+import { useParams } from "react-router-dom";
 import SearchIcon from "../../assets/SearchIcon.svg";
 
 const PostSearch = (props) => {
@@ -11,7 +9,6 @@ const PostSearch = (props) => {
   const [search, setSearch, onChangeSearchHandler] = useInput(initialState);
   const dispatch = useDispatch();
   const params = useParams();
-  const navigate = useNavigate();
 
   const onClickSubmitButton = () => {
     if (search.searchContent.trim() === "") {
@@ -42,24 +39,16 @@ const PostSearch = (props) => {
   };
   return (
     <div className="bg-white w-full flex h-[60px] items-center relative px-[18px] text-BB">
-      <img
-        className=" h-6 w-6"
-        src={BackIcon}
-        onClick={() => {
-          navigate(-1);
-        }}
-      />
-
-      <div className="bg-D9 flex w-[314px] h-[38px] items-center ml-3 rounded-lg">
+      <div className="bg-D9 flex w-full h-[38px] items-center  rounded-lg">
         <img
-          className=" h-6 px-1"
+          className=" h-6 px-1 cursor-pointer"
           src={SearchIcon}
           onClick={() => {
             onClickSubmitButton();
           }}
         />
         <input
-          className="bg-transparent ml-1 w-full text-sm h-full rounded-r-lg "
+          className="bg-transparent ml-1 w-full text-sm h-full rounded-r-lg outline-none "
           placeholder="어떤걸 찾고 있나요?"
           value={search.searchContent || ""}
           name="searchContent"

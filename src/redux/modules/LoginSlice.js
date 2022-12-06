@@ -107,37 +107,11 @@ export const __UserProfileEdit = createAsyncThunk(
   "Login/__UserProfileEdit",
   async (payload, thunkAPI) => {
     try {
-      const data = await Apis.UserProfileEditAX(payload);
+      await Apis.UserProfileEditAX(payload);
     } catch (error) {
       return thunkAPI.rejectWithValue(error);
     }
   }
-  // );
-  // //로그아웃
-  // export const __logout = createAsyncThunk(
-  //   "Login/__logout",
-  //   async (payload, thunkAPI) => {
-  //     try {
-  //       await Apis
-  //         .logoutAX(payload)
-  //         .then((res) => {
-  //           if (res.data.statusCode === 200) {
-  //             localStorage.clear();
-  //             alert("로그아웃 되었습니다");
-  //             window.location.replace("/signin");
-  //           }
-  //         })
-  //         .catch((error) => {
-  //           if (error.response.data.statusCode === 400) {
-  //             localStorage.clear();
-  //             alert("로그아웃 되었습니다");
-  //             window.location.replace("/signin");
-  //           }
-  //         });
-  //     } catch (error) {
-  //       return thunkAPI.rejectWithValue(error);
-  //     }
-  //   }
 );
 
 const LoginSlice = createSlice({
@@ -207,7 +181,6 @@ const LoginSlice = createSlice({
       state.isLoading = false;
       state.user = action.payload;
       window.location.replace("/mypage");
-    
     },
     [__UserProfileEdit.rejected]: (state, action) => {
       state.isLoading = false;

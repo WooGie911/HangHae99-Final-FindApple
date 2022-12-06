@@ -63,7 +63,7 @@ const MypageUpdate = () => {
     <Layout>
       <div className=" flex relative items-center justify-center h-[60px] text-[18px] font-semibold ">
         <img
-          className="h-6 w-6 absolute left-3"
+          className="cursor-pointer h-6 w-6 absolute left-3"
           onClick={onClickHandler}
           src={backArrow}
         />
@@ -87,14 +87,17 @@ const MypageUpdate = () => {
         />
         <div className="flex justify-center items-center mt-5 p-3">
           <img
-            className=" w-[88px] h-[88px] rounded-full "
+            className="cursor-pointer w-[88px] h-[88px] rounded-full "
             src={user.profileImg}
             ref={uploadedImage}
             onClick={onSubmitHandler}
           />
         </div>
 
-        <div className="text-center font-medium text-CC">
+        <div
+          className="cursor-pointer text-center font-medium text-CC"
+          onClick={onSubmitHandler}
+        >
           프로필 사진 바꾸기
         </div>
 
