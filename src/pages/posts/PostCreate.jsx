@@ -9,6 +9,7 @@ const PostCreate = () => {
         postReqDto={"postReqDto"}
         Navigate={"postread/all"}
         __addData={__addPost}
+        post={"post"}
       />
     </Layout2>
   );
