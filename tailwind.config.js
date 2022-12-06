@@ -45,8 +45,15 @@ module.exports = {
       C4: "#c4c4c4",
       KY: "#FAE100",
     },
-
+    fontFamily: {
+      sans: ["Pretendard", "Pretendard Std Variable", "Pretendard Std"],
+      custom: ["Pretendard"],
+    },
     extend: {
+      fontFamily: {
+        sans: ["Pretendard", "Pretendard Std Variable", "Pretendard Std"],
+        custom: ["Pretendard"],
+      },
       fontSize: {
         p11: "11px",
         p12: "12px",
