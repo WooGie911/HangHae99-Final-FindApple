@@ -7,6 +7,7 @@ export const __emailCheck = createAsyncThunk(
     try {
       const data = await Apis.emailCheckAX(payload);
       localStorage.setItem("emailCheckData", data.data);
+      alert("인증번호가 발송되었습니다.");
       return thunkAPI.fulfillWithValue(data.data.data);
     } catch (error) {
       return thunkAPI.rejectWithValue(error);
@@ -46,14 +47,14 @@ export const __Signin = createAsyncThunk(
         window.localStorage.setItem("Access_Token", data.data.accessToken);
         window.localStorage.setItem("Refresh_Token", data.data.refreshToken);
         window.localStorage.setItem("SITE", "SITE");
-        alert("로그인 성공");
+        alert("환영합니다");
         window.location.replace("/main");
       }
       console.log(data);
       return thunkAPI.fulfillWithValue(data.data);
     } catch (error) {
       if (error.response.status >= 400 && error.response.status < 500) {
-        alert("로그인 실패");
+        alert("아이디 및 비밀번호를 확인해주세요 ");
       }
       if (error.response.status === 400) {
         //비밀번호 오류
@@ -76,10 +77,10 @@ export const __SignUp = createAsyncThunk(
 
       console.log("회원가입response", response);
       // alert(`${response.data.msg}`);
-      if (response.data == "Success") {
-        alert("회원가입 성공!");
-        window.location.replace("/signin");
-      }
+
+      alert("회원가입 성공!");
+      window.location.replace("/signin");
+
       return thunkAPI.fulfillWithValue(response.data);
     } catch (error) {
       if (error.response.data.message !== undefined) {
