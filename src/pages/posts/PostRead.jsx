@@ -2,7 +2,6 @@ import React, { useEffect, useState } from "react";
 import Header from "../../components/commons/Header";
 import PostList from "../../components/posts/PostList";
 import { useDispatch, useSelector } from "react-redux";
-import { useParams } from "react-router-dom";
 import { __getPost, __searchPost } from "../../redux/modules/PostsSlice";
 import PostSearch from "../../components/commons/PostSearch";
 import { __getPostDetail } from "../../redux/modules/PostDetailsSlice";
