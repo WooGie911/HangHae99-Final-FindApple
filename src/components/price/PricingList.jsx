@@ -51,7 +51,7 @@ const PricingList = () => {
               </div>
               <div className="flex justify-between mt-2">
                 <span className="text-OO font-medium">맥북 상태</span>
-                <label>{DetailPrice.state}</label>
+                <label>{DetailPrice.macbookState}</label>
               </div>
               <div className="flex justify-between mt-2">
                 <span className="text-OO font-medium">애플케어 유무</span>
@@ -88,7 +88,7 @@ const PricingList = () => {
               </div>
               <div className="flex justify-between mt-2">
                 <span className="text-OO font-medium">아이폰 상태</span>
-                <label>{DetailPrice.state}</label>
+                <label>{DetailPrice.iphoneState}</label>
               </div>
               <div className="flex justify-between mt-2">
                 <span className="text-OO font-medium">애플케어 유무</span>
