@@ -25,8 +25,8 @@ const Header = (props) => {
   };
 
   return (
-    <div className="bg-CC w-full h-[49px] text-translucent5 ">
-      <div className=" text-[14px] flex flex-row justify-between h-[45px] items-center">
+    <div className="bg-white w-full h-[49px] text-translucent5 border-t-[0.5px] border-b-[1px] border-D9">
+      <div className="text-CC text-opacity-50 font-semibold text-[14px] flex flex-row justify-between h-[45px] items-center">
         <div
           className=" w-1/4 cursor-pointer text-center"
           onClick={() => {
@@ -38,7 +38,7 @@ const Header = (props) => {
 
         {headerBarState === "all" ? (
           <div
-            className="text-white w-1/4 cursor-pointer text-center"
+            className="text-CC text-opacity-100 w-1/4 cursor-pointer text-center"
             onClick={() => {
               onClickCategoryHandler("all");
             }}
@@ -57,7 +57,7 @@ const Header = (props) => {
         )}
         {headerBarState === "macbook" ? (
           <div
-            className="text-white w-1/4 cursor-pointer text-center"
+            className="text-CC text-opacity-100 w-1/4 cursor-pointer text-center"
             onClick={() => {
               onClickCategoryHandler("macbook");
             }}
@@ -76,7 +76,7 @@ const Header = (props) => {
         )}
         {headerBarState === "iphone" ? (
           <div
-            className="text-white w-1/4 cursor-pointer text-center"
+            className="text-CC text-opacity-100 w-1/4 cursor-pointer text-center"
             onClick={() => {
               onClickCategoryHandler("iphone");
             }}
@@ -98,7 +98,7 @@ const Header = (props) => {
       {headerBarState === "all" ? (
         <div className="h-1 flex  ">
           <div className="w-1/4" />
-          <div className="w-1/4 bg-translucent5" />
+          <div className="w-1/4 bg-CC" />
           <div className="w-1/4 " />
           <div className="w-1/4 " />
         </div>
@@ -106,7 +106,7 @@ const Header = (props) => {
         <div className="h-1 flex  ">
           <div className="w-1/4" />
           <div className="w-1/4 " />
-          <div className="w-1/4 bg-translucent5" />
+          <div className="w-1/4 bg-CC" />
           <div className="w-1/4 " />
         </div>
       ) : headerBarState === "iphone" ? (
@@ -114,11 +114,11 @@ const Header = (props) => {
           <div className="w-1/4" />
           <div className="w-1/4 " />
           <div className="w-1/4 " />
-          <div className="w-1/4 bg-translucent5" />
+          <div className="w-1/4 bg-CC" />
         </div>
       ) : (
         <div className="h-1 flex  ">
-          <div className="w-1/4 bg-translucent5" />
+          <div className="w-1/4 bg-CC" />
           <div className="w-1/4" />
           <div className="w-1/4 " />
           <div className="w-1/4 " />

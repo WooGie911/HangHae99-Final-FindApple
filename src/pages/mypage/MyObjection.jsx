@@ -23,7 +23,7 @@ const MyObjection = () => {
     <Layout>
       <div className="bg-white flex relative items-center justify-center h-[60px] text-[18px] font-semibold border-b-[1px] border-D9">
         <img
-          className="h-6 w-6 absolute  left-3"
+          className="cursor-pointer h-6 w-6 absolute  left-3"
           onClick={onClickHandler}
           src={backArrow}
         />
@@ -35,7 +35,7 @@ const MyObjection = () => {
           objections.map((objection) => {
             return (
               <div
-                className="bg-white p-2 mx-1 mt-2 rounded-md drop-shadow-lg"
+                className="cursor-pointer bg-white p-2 mx-1 mt-2 rounded-md drop-shadow-lg"
                 key={objection.issuesId}
                 onClick={() => {
                   navigate(`/PostDetail/${objection.issuesId}`);

@@ -64,10 +64,10 @@ const Mypage = () => {
           <div className="bg-white p-2 font-semibold rounded-md">나의 활동</div>
           <div className="flex-col h-full content-center justify-center items-center p-1">
             <div className="bg-white flex relative p-1 my-3">
-              <img className="px-1 w-8" src={myPosts} />
+              <img className="px-1 w-8 " src={myPosts} />
               <div>내가 작성한 게시물</div>
               <img
-                className=" absolute right-0"
+                className=" absolute right-0 cursor-pointer"
                 onClick={mypost}
                 src={mypageArrow}
               />
@@ -77,7 +77,7 @@ const Mypage = () => {
               <img className="px-1 w-8" src={blackIssue} />
               <div>이의제기</div>
               <img
-                className=" absolute right-0"
+                className=" absolute right-0 cursor-pointer"
                 onClick={myobjection}
                 src={mypageArrow}
               />
@@ -87,7 +87,7 @@ const Mypage = () => {
               <img className="px-1 w-8" src={bookmark} />
               <div>찜목록</div>
               <img
-                className=" absolute right-0"
+                className=" absolute right-0 cursor-pointer"
                 onClick={mylike}
                 src={mypageArrow}
               />

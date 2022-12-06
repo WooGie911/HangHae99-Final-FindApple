@@ -34,10 +34,11 @@ const Main = () => {
   return (
     <>
       <Layout>
-        <div className="h-[60px] w-full flex justify-between items-center px-[18px]  bg-HC">
+        <div className="h-[60px] w-full flex justify-between items-center px-[18px] bg-white">
           <img src={LOGO} />
 
           <img
+            className=" cursor-pointer"
             src={bookmark}
             onClick={() => {
               navigate("/mylike");
@@ -47,20 +48,21 @@ const Main = () => {
 
         <MainHeader Navigate={"/postread"} />
 
-        <div className="bg-transparent py-[25px]">
-          <Slide />
-        </div>
+        <Slide />
 
         <div className=" flex justify-between mx-[18px] text-lg font-semibold">
           <div>회원님을 위한 추천상품!</div>
-          <button className=" text-xs font-medium" onClick={MoreSeeClick}>
+          <button
+            className="text-DD text-xs font-semibold"
+            onClick={MoreSeeClick}
+          >
             더보기 〉
           </button>
         </div>
 
         <MainList />
 
-        <div className="h-16" />
+        <div className="h-10" />
 
         <Footer />
       </Layout>

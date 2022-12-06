@@ -19,7 +19,7 @@ const PostsCreate = (props) => {
   });
 
   //이미지 업로드 훅
-  const [files, fileUrls, uploadHandle] = useImgUpload(5, true, 1, 1000);
+  const [files, fileUrls, uploadHandle] = useImgUpload(3, true, 1, 1000);
   const imgRef = useRef();
 
   //submit
@@ -93,7 +93,7 @@ const PostsCreate = (props) => {
         </div>
       </div>
 
-      <div className="h-[100px] p-15 flex border-b-[1px] border-D9  overflow-x-auto ">
+      <div className="h-[100px] p-[18px] flex border-b-[1px] border-D9   ">
         <label htmlFor="imgFile">
           <button
             className="border-[1px] rounded-md w-16 h-16 flex items-center justify-center content-center text-xs text-CC cursor-pointer"
@@ -105,7 +105,7 @@ const PostsCreate = (props) => {
               <div className="flex justify-center">
                 <img src={blueCamera} />
               </div>
-              <div>{fileUrls.length}/5</div>
+              <div>{fileUrls.length}/3</div>
             </div>
           </button>
         </label>
@@ -162,7 +162,7 @@ const PostsCreate = (props) => {
           <div
             className="bg-C4 w-24 h-9 rounded-md text-xs text-white  flex justify-center items-center"
             onClick={() => {
-              navigate("/pricingfinal");
+              navigate("/pricingfinal2");
             }}
           >
             <div> 상품 상세 정보</div>

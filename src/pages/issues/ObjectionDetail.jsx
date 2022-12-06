@@ -40,7 +40,7 @@ const ObjectionDetail = () => {
   const onDeleteHandler = (payload) => {
     if (window.confirm("정말 삭제하시겠습니까?")) {
       dispatch(__deleteObjection(payload));
-      window.location.replace("/objectionread/all");
+      // window.location.replace("/objectionread/all");
     }
   };
 
@@ -63,11 +63,7 @@ const ObjectionDetail = () => {
 
   useEffect(() => {
     dispatch(__getObjectionDetail(params.id));
-  }, [params]);
-
-  useEffect(() => {
-    dispatch(__getObjectionDetail(params.id));
-  }, [post.updateComment]);
+  }, [post.updateComment, params]);
 
   const onSellerPage = () => {
     navigate(`/sellerpage/${post.memberId}`);
