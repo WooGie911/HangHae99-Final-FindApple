@@ -11,6 +11,7 @@ import {
 import { v4 as uuidv4 } from "uuid";
 import back from "../../assets/back.png";
 import { ReactComponent as Send } from "../../assets/send.svg";
+import Layout2 from "../../components/commons/Layout2";
 
 function Chatting() {
   const sock = new SockJS(`${process.env.REACT_APP_SERVER}/api/ws/chat`);
@@ -133,83 +134,85 @@ function Chatting() {
   };
 
   return (
-    <StContainer>
-      <HeadContainer>
-        <img
-          onClick={onClickHandler}
-          style={{ width: 25, height: 25 }}
-          src={back}
-        />
-        <span>
-          {" "}
-          <div>{listReducer.otherNickname}</div>
-        </span>
-      </HeadContainer>
-      <TitleContainer>
-        {listReducer.image !== undefined && (
-          <>
-            <img
-              src={listReducer.image.imgUrl}
-              style={{ width: 44, height: 44 }}
-            />
-          </>
-        )}
-        <div>
-          <div>{listReducer.title}</div>
+    <Layout2>
+      <StContainer>
+        <HeadContainer>
+          <img
+            onClick={onClickHandler}
+            style={{ width: 25, height: 25 }}
+            src={back}
+          />
+          <span>
+            {" "}
+            <div>{listReducer.otherNickname}</div>
+          </span>
+        </HeadContainer>
+        <TitleContainer>
+          {listReducer.image !== undefined && (
+            <>
+              <img
+                src={listReducer.image.imgUrl}
+                style={{ width: 44, height: 44 }}
+              />
+            </>
+          )}
           <div>
-            {listReducer.price !== undefined && (
-              <>{listReducer.price.toLocaleString("ko-KR")}원</>
-            )}
+            <div>{listReducer.title}</div>
+            <div>
+              {listReducer.price !== undefined && (
+                <>{listReducer.price.toLocaleString("ko-KR")}원</>
+              )}
+            </div>
           </div>
-        </div>
-      </TitleContainer>
-      <ChatDiv>
-        {listReducer.chatList !== undefined &&
-          listReducer.chatList !== null &&
-          listReducer.chatList.map((item) => {
-            return (
-              <>
-                {listReducer.nickname === item.sender ? (
-                  <ChatStyle key={uuidv4()} style={{ textAlign: "right" }}>
-                    {/* 인라인 요소로 바로 우측 정렬 해결 */}
-                    <TimeDiv>
-                      <TimeSpan>{item.sendDate}</TimeSpan>
-                      <JoinUserNickname>{item.message}</JoinUserNickname>
-                    </TimeDiv>
-                  </ChatStyle>
-                ) : (
-                  <ChatStyle key={uuidv4()}>
-                    <TimeDiv>
-                      <PostUserNickname>{item.message}</PostUserNickname>
-                      <TimeSpan>{item.sendDate}</TimeSpan>
-                    </TimeDiv>
-                  </ChatStyle>
-                )}
-              </>
-            );
-          })}
-        <div ref={scrollRef}></div>
-      </ChatDiv>
-      <InputDiv>
-        <Input
-          value={chatBody}
-          onChange={inputHandler}
-          onKeyPress={appKeyPress}
-          placeholder="댓글을 입력하세요"
-        />
-        {/* value를 줘야 사라진다 */}
-        <Send
-          onClick={onSubmitHandler}
-          style={{
-            position: "fixed",
-            left: "calc(50% + 140px)",
-            transform: "translateX(-50%)",
-            bottom: 25,
-          }}
-        />
-        {/* calc로 계산해서 반응형에 맞춰도 움직이지 않는 그림 만든다. svg는 컴포넌트처럼 임포트가 가능하다 */}
-      </InputDiv>
-    </StContainer>
+        </TitleContainer>
+        <ChatDiv>
+          {listReducer.chatList !== undefined &&
+            listReducer.chatList !== null &&
+            listReducer.chatList.map((item) => {
+              return (
+                <>
+                  {listReducer.nickname === item.sender ? (
+                    <ChatStyle key={uuidv4()} style={{ textAlign: "right" }}>
+                      {/* 인라인 요소로 바로 우측 정렬 해결 */}
+                      <TimeDiv>
+                        <TimeSpan>{item.sendDate}</TimeSpan>
+                        <JoinUserNickname>{item.message}</JoinUserNickname>
+                      </TimeDiv>
+                    </ChatStyle>
+                  ) : (
+                    <ChatStyle key={uuidv4()}>
+                      <TimeDiv>
+                        <PostUserNickname>{item.message}</PostUserNickname>
+                        <TimeSpan>{item.sendDate}</TimeSpan>
+                      </TimeDiv>
+                    </ChatStyle>
+                  )}
+                </>
+              );
+            })}
+          <div ref={scrollRef}></div>
+        </ChatDiv>
+        <InputDiv>
+          <Input
+            value={chatBody}
+            onChange={inputHandler}
+            onKeyPress={appKeyPress}
+            placeholder="댓글을 입력하세요"
+          />
+          {/* value를 줘야 사라진다 */}
+          <Send
+            onClick={onSubmitHandler}
+            style={{
+              position: "fixed",
+              left: "calc(50% + 140px)",
+              transform: "translateX(-50%)",
+              bottom: 25,
+            }}
+          />
+          {/* calc로 계산해서 반응형에 맞춰도 움직이지 않는 그림 만든다. svg는 컴포넌트처럼 임포트가 가능하다 */}
+        </InputDiv>
+      </StContainer>
+    </Layout2>
   );
 }
 
