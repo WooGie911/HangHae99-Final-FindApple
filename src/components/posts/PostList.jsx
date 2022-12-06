@@ -55,8 +55,8 @@ const PostList = ({ posts, detail, __getDetail, state, setState }) => {
   return (
     <div>
       <div>
-        {posts.length > 0 &&
-          posts.map((post, index) => {
+        {posts?.length > 0 &&
+          posts?.map((post, index) => {
             return (
               <div
                 className="bg-white flex p-[18px] border-b-[0.5px] border-D9 cursor-pointer"
@@ -75,7 +75,7 @@ const PostList = ({ posts, detail, __getDetail, state, setState }) => {
                     <label>{post?.title}</label>
                   </div>
                   <div className=" mt-1 text-base font-semibold">
-                    <label>{post?.userPrice.toLocaleString("ko-KR")}원</label>
+                    <label>{post?.userPrice?.toLocaleString("ko-KR")}원</label>
                   </div>
                   <div className="flex justify-between mt-4  text-xs font-normal">
                     <div>{post?.createdAt}</div>

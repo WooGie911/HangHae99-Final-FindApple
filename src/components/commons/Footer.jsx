@@ -1,6 +1,5 @@
 import React, { useEffect, useState } from "react";
 import { useNavigate } from "react-router-dom";
-import styled from "styled-components";
 import blackHome from "../../assets/blackHome.png";
 import blueHome from "../../assets/blueHome.png";
 import blackSearch from "../../assets/blackSearch.svg";
