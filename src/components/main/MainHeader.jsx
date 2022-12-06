@@ -23,10 +23,10 @@ const MainHeader = (props) => {
   };
 
   return (
-    <div className="bg-CC w-full h-[49px] text-translucent5 ">
-      <div className=" text-[14px] flex flex-row justify-between h-[45px] items-center">
+    <div className="bg-white w-full h-[49px] text-translucent5 border-t-[0.5px] border-b-[1px] border-D9 ">
+      <div className="text-CC text-opacity-50 font-semibold text-[14px] flex flex-row justify-between h-[45px] items-center">
         <div
-          className="text-white w-1/4 cursor-pointer text-center"
+          className="text-CC text-opacity-100 w-1/4 cursor-pointer text-center"
           onClick={() => {
             navigate("/main");
           }}
@@ -59,7 +59,7 @@ const MainHeader = (props) => {
         </div>
       </div>
       <div className="h-1 flex  ">
-        <div className="w-1/4 bg-translucent5" />
+        <div className="w-1/4 bg-CC" />
         <div className="w-1/4" />
         <div className="w-1/4 " />
         <div className="w-1/4 " />

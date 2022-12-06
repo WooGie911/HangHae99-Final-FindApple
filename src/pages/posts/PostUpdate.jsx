@@ -14,7 +14,7 @@ const PostUpdate = () => {
   const dispatch = useDispatch();
   const navigate = useNavigate();
   const params = useParams();
-  const [files, fileUrls, uploadHandle] = useImageUpload(5, true, 1, 1000);
+  const [files, fileUrls, uploadHandle] = useImageUpload(3, true, 1, 1000);
   const imgRef = useRef();
   const { post } = useSelector((state) => state.details);
   const [updateInput, setUpdateInput, updateInputHandle] = useInput(post);
@@ -54,8 +54,8 @@ const PostUpdate = () => {
     //Api 날리기
     if (window.confirm("수정하시겠습니까?")) {
       dispatch(__editPost(obj));
-      navigate(`/PostDetail/${params.id}`);
-      window.location.reload(`/PostDetail/${params.id}`);
+      // navigate(`/PostDetail/${params.id}`);
+      // window.location.reload(`/PostDetail/${params.id}`);
     }
   };
   return (
@@ -73,8 +73,7 @@ const PostUpdate = () => {
             <div>게시물 수정 </div>
           </div>
         </div>
-        {/* <div className="h-[100px] p-[18px] flex border-b-[1px] border-D9 "> */}
-        <div className="h-[100px] p-15 flex border-b-[1px] border-D9 overflow-x-auto">
+        <div className="h-[100px] p-[18px] flex border-b-[1px] border-D9 ">
           <label htmlFor="imgFile">
             <button
               className="border-[1px] rounded-md w-16 h-16 flex items-center justify-center content-center text-xs text-CC cursor-pointer"
@@ -86,7 +85,7 @@ const PostUpdate = () => {
                 <div className="flex justify-center">
                   <img src={blueCamera} />
                 </div>
-                <div>{fileUrls.length}/5</div>
+                <div>{fileUrls.length}/3</div>
               </div>
             </button>
           </label>

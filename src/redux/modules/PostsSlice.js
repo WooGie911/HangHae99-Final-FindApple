@@ -1,5 +1,4 @@
-import { createAsyncThunk, createSlice, current } from "@reduxjs/toolkit";
-import axios from "axios";
+import { createAsyncThunk, createSlice } from "@reduxjs/toolkit";
 import Apis from "../../shared/Apis";
 
 export const __searchPost = createAsyncThunk(
@@ -20,9 +19,12 @@ export const __getAddPost = createAsyncThunk(
     console.log(payload);
     try {
       const data = await Apis.getAddPostAX(payload);
+      console.log("진짜아오 ", data);
+
       const obj = {
         payload: payload.page,
         data: data.data.content,
+        totalElements: data.data.totalElements,
       };
       return thunkAPI.fulfillWithValue(obj);
     } catch (error) {
@@ -74,7 +76,8 @@ export const __editPost = createAsyncThunk(
     try {
       console.log(payload);
       const data = await Apis.editPostAX(payload);
-      return thunkAPI.fulfillWithValue(data.data);
+      const payloadData = { ...payload, data: data.data };
+      return thunkAPI.fulfillWithValue(payloadData);
     } catch (error) {
       return thunkAPI.rejectWithValue(error);
     }
@@ -85,7 +88,6 @@ const PostsSlice = createSlice({
   name: "posts",
   initialState: {
     posts: [],
-
     postsCount: 0,
 
     HeaderState: {
@@ -101,9 +103,6 @@ const PostsSlice = createSlice({
       state.HeaderState = action.payload.HeaderState;
       state.footerState = action.payload.footerState;
     },
-    // swichHeaderBarState(state, action) {
-    //   state.headerBarState = action.payload;
-    // },
     swichFooterState(state, action) {
       state.footerState = action.payload;
     },
@@ -129,11 +128,19 @@ const PostsSlice = createSlice({
     },
     [__getAddPost.fulfilled]: (state, action) => {
       state.isLoading = false;
+      console.log("state.postsCount ", state.postsCount);
+      console.log(
+        "action.payload.totalElements ",
+        action.payload.totalElements
+      );
+
       if (action.payload.payload === 0) {
         state.posts.splice(0);
         state.posts.push(...action.payload.data);
+        state.postsCount = action.payload.totalElements;
       } else {
         state.posts.push(...action.payload.data);
+        state.postsCount = action.payload.totalElements;
       }
     },
     [__getAddPost.rejected]: (state, action) => {
@@ -162,7 +169,7 @@ const PostsSlice = createSlice({
     [__addPost.fulfilled]: (state, action) => {
       state.isLoading = false;
       state.posts.push(action.payload);
-      window.location.replace("/postread/all")
+      window.location.replace("/postread/all");
     },
     [__addPost.rejected]: (state, action) => {
       state.isLoading = false;
@@ -178,6 +185,7 @@ const PostsSlice = createSlice({
       state.posts = state.posts.filter(
         (post) => post.postId !== action.payload
       );
+      window.location.replace("/postread/all");
     },
 
     [__deletePost.rejected]: (state, action) => {
@@ -192,14 +200,14 @@ const PostsSlice = createSlice({
       state.isLoading = false;
 
       const paramId = state.posts.findIndex((post) => {
-        if (post.postId == action.payload.postId) {
+        if (post.postId == action.payload.data.postId) {
           return true;
         }
         return false;
       });
-      state.posts[paramId] = action.payload;
-
+      state.posts[paramId] = action.payload.data;
       state.posts = [...state.posts];
+      window.location.replace(`/PostDetail/${action.payload.id}`);
     },
     [__editPost.rejected]: (state, action) => {
       state.isLoading = false;

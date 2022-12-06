@@ -24,7 +24,7 @@ const MyLike = () => {
       <Layout>
         <div className="bg-white flex relative items-center justify-center h-[60px] text-[18px] font-semibold border-b-[1px] border-D9">
           <img
-            className="h-6 w-6 absolute  left-3"
+            className=" cursor-pointer h-6 w-6 absolute  left-3"
             onClick={onClickHandler}
             src={backArrow}
           />
@@ -36,7 +36,7 @@ const MyLike = () => {
             likes.map((like) => {
               return (
                 <div
-                  className="bg-white p-2 mx-1 mt-2 rounded-md drop-shadow-lg"
+                  className="bg-white cursor-pointer p-2 mx-1 mt-2 rounded-md drop-shadow-lg"
                   key={like.postId}
                   onClick={() => {
                     navigate(`/PostDetail/${like.postId}`);

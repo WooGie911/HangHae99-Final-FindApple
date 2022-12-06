@@ -46,7 +46,7 @@ const PostDetail = () => {
   const onDeleteHandler = (payload) => {
     if (window.confirm("정말 삭제하시겠습니까?")) {
       dispatch(__deletePost(payload));
-      window.location.replace("/postread/all");
+      // window.location.replace("/postread/all");
     }
   };
 

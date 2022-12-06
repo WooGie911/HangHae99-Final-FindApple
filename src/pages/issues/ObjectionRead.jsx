@@ -21,10 +21,10 @@ const ObjectionRead = () => {
   const { HeaderState } = useSelector((state) => state.objections);
   const [submitObj, setSubmitObj] = useState(HeaderState);
 
-  useEffect(() => {
-    dispatch(__getObjection(submitObj));
-    setSubmitObj({ ...submitObj, pageNumber: 0 });
-  }, [params]);
+  // useEffect(() => {
+  //   dispatch(__getObjection(submitObj));
+  //   setSubmitObj({ ...submitObj, pageNumber: 0 });
+  // }, [params]);
 
   return (
     <Layout>
