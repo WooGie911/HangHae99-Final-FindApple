@@ -36,18 +36,18 @@ const ChatList = () => {
           Room !== [] &&
           Room.map((item, i) => {
             return (
-              <>
-                <div className=" px-3 py-1  " key={i}>
-                  {item.chatList.length > 0 && (
-                    <div
-                      className="  flex justify-between items-center h-14 "
-                      onClick={() => onClickChatting(item)}
-                    >
-                      <div className="flex  items-center w-full">
-                        <img
-                          className="w-11 h-11 rounded-full object-cover flex-shrink-0"
-                          src={item.postUserAvatarUrl}
-                        />
+              <div className=" px-3 py-1 border-b-[0.5px] border-D9 " key={i}>
+                {item.chatList.length > 0 && (
+                  <div
+                    className="  flex justify-between items-center h-14 "
+                    onClick={() => onClickChatting(item)}
+                  >
+                    <div className="flex  items-center w-full">
+                      <img
+                        className="w-11 h-11 rounded-full object-cover flex-shrink-0"
+                        src={item.otherUserAvatarUrl}
+                      />
+
 
                         <div className=" ml -2 flex-col text-sm ">
                           <div className="flex">
