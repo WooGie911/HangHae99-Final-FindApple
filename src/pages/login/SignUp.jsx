@@ -22,7 +22,7 @@ const SignUp = () => {
   //커스텀훅 useInput 사용
   const [input, setInput, changeInputHandler] = useInput(initialstate);
   const emailCheckData = localStorage.getItem("emailCheckData");
-  const passwordCheck = /^(?=.*\d)(?=.*[a-zA-Z])[0-9a-zA-Z]{8,16}$/;
+  const passwordCheck =  /^.*(?=^.{8,16}$)(?=.*\d)(?=.*[a-zA-Z])(?=.*[!@#$%^&+=]).*$/;
 
   const SubmitHandler = (e) => {
     e.preventDefault();
