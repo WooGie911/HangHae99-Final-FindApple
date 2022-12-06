@@ -24,6 +24,12 @@ const PostRead = () => {
   useEffect(() => {
     dispatch(__getPost(submitObj));
     setSubmitObj({ ...submitObj, pageNumber: 0 });
+    if (!window.scrollY) return;
+    // 현재 위치가 이미 최상단일 경우 return, 아니라면 스크롤 최상단으로 이동
+    window.scrollTo({
+      top: 0,
+      behavior: "smooth",
+    });
   }, []);
 
   return (

@@ -40,7 +40,6 @@ const ObjectionDetail = () => {
   const onDeleteHandler = (payload) => {
     if (window.confirm("정말 삭제하시겠습니까?")) {
       dispatch(__deleteObjection(payload));
-      // window.location.replace("/objectionread/all");
     }
   };
 
@@ -78,6 +77,15 @@ const ObjectionDetail = () => {
     slidesToShow: 1,
     slidesToScroll: 1,
   };
+
+  useEffect(() => {
+    if (!window.scrollY) return;
+    // 현재 위치가 이미 최상단일 경우 return
+    window.scrollTo({
+      top: 0,
+      behavior: "smooth",
+    });
+  }, []);
 
   return (
     <>
