@@ -66,9 +66,9 @@ export const Apis = {
   deletePostCommentAX: (payload) =>
     token.delete(`/api/posts/comment/${payload}`),
 
-  CartInPostAX: (payload) => token.post(`/api/post/likes/${payload}`, ""),
+  CartInPostAX: (payload) => token.post(`/api/posts/likes/${payload}`, ""),
 
-  CartOutPostAX: (payload) => token.delete(`/api/post/likes/${payload}`),
+  CartOutPostAX: (payload) => token.delete(`/api/posts/likes/${payload}`),
 
   searchObjectionAX: (payload) =>
     token.get(
@@ -100,9 +100,9 @@ export const Apis = {
   deleteObjectionCommentAX: (payload) =>
     token.delete(`/api/issues/comment/${payload}`),
 
-  CartInObjectionAX: (payload) => token.post(`/api/issue/likes/${payload}`),
+  CartInObjectionAX: (payload) => token.post(`/api/issues/likes/${payload}`),
 
-  CartOutObjectionAX: (payload) => token.delete(`/api/issue/likes/${payload}`),
+  CartOutObjectionAX: (payload) => token.delete(`/api/issues/likes/${payload}`),
 
   getMyPostAX: () => token.get(`/api/myinfo/post`),
 
