@@ -97,34 +97,34 @@ const MainList = () => {
       </div>
       <div className="p-[18px]">
         {posts &&
-          posts.map((post, index) => {
+          posts?.map((post, index) => {
             return (
               <div
                 className="bg-white flex p-3 mb-3 rounded drop-shadow-xl"
                 key={index}
                 onClick={() => {
-                  onClickHandler(post.postId);
+                  onClickHandler(post?.postId);
                 }}
               >
-                {post.images && (
+                {post?.images && (
                   <img
                     className="object-cover  min-w-[84px] w-[84px] h-[84px]  rounded"
-                    src={post.images[0].imgUrl}
+                    src={post?.images[0].imgUrl}
                   />
                 )}
 
                 <div className=" w-full flex-col  ml-3 font-semibold">
                   <div>
-                    <label>{post.userPrice.toLocaleString("ko-KR")}원</label>
+                    <label>{post?.userPrice.toLocaleString("ko-KR")}원</label>
                   </div>
                   <div className=" mt-1 text-sm font-medium">
-                    <label>{post.category}</label>
+                    <label>{post?.category}</label>
                   </div>
                   <div className="flex justify-between mt-4  text-xs font-normal">
-                    <div>{post.createdAt}</div>
+                    <div>{post?.createdAt}</div>
                     <div className="flex">
                       <img src={mainHeart} />
-                      <div>{post.likeCnt}</div>
+                      <div>{post?.likeCnt}</div>
                     </div>
                   </div>
                 </div>
