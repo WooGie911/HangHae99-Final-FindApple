@@ -22,6 +22,7 @@ const SignUp = () => {
   //커스텀훅 useInput 사용
   const [input, setInput, changeInputHandler] = useInput(initialstate);
   const emailCheckData = localStorage.getItem("emailCheckData");
+  const passwordCheck = /^(?=.*\d)(?=.*[a-zA-Z])[0-9a-zA-Z]{8,16}$/;
 
   const SubmitHandler = (e) => {
     e.preventDefault();
@@ -119,27 +120,34 @@ const SignUp = () => {
             />
           </div>
           <div className="font-semibold mb-1">비밀번호</div>
-          <div className="flex justify-center ">
+          <div className="flex justify-center flex-col	">
             <input
-              className=" outline-none bg-white placeholder-C4 w-[296px] h-9 rounded-md p-2 mb-4 border-C4 border-[1px]"
+              className=" outline-none bg-white placeholder-C4 w-[296px] h-9 rounded-md p-2 mb-1 border-C4 border-[1px]"
               type="password"
               name="password"
               value={input.password}
               onChange={changeInputHandler}
               placeholder="숫자, 영문, 특수문자 조합 최소 8자"
             />
+            {passwordCheck.test(input.password) === false &&(
+            <p className=" text-red text-xs mb-2">비밀번호를 양식에 맞게 입력해주세요</p>
+            )}
           </div>
-          <div className="flex justify-center ">
+
+          <div className="flex justify-center flex-col	 ">
             <input
-              className=" outline-none bg-white placeholder-C4 w-[296px] h-9 rounded-md p-2 mb-4 border-C4 border-[1px]"
+              className=" outline-none bg-white placeholder-C4 w-[296px] h-9 rounded-md p-2 mb-1 border-C4 border-[1px]"
               type="password"
               name="passwordCheck"
               value={input.passwordCheck}
               onChange={changeInputHandler}
               placeholder="비밀번호를 한번 더 입력해주세요"
             />
+            {(input.password) !== (input.passwordCheck) &&(
+              <p className=" text-red text-xs mb-2">비밀번호가 일치하지 않습니다.</p>
+            )}
           </div>
-
+          
           <div className="flex justify-center ">
             <button
               className=" w-[296px] h-9 bg-CC text-white rounded-md mt-28 text-sm"
