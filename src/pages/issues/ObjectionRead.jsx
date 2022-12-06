@@ -1,6 +1,5 @@
-import React, { useEffect, useState } from "react";
-import { useDispatch, useSelector } from "react-redux";
-import { useParams } from "react-router-dom";
+import React, { useState } from "react";
+import { useSelector } from "react-redux";
 import {
   __getObjection,
   __searchObjection,
@@ -14,8 +13,6 @@ import SortBar from "../../components/commons/SortBar";
 import ObjectionList from "../../components/issues/ObjectionList";
 
 const ObjectionRead = () => {
-  const params = useParams();
-  const dispatch = useDispatch();
   const { posts } = useSelector((state) => state.objections);
   const { postsCount } = useSelector((state) => state.objections);
   const { HeaderState } = useSelector((state) => state.objections);
