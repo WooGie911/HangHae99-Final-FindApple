@@ -71,19 +71,22 @@ const PostDetail = () => {
 
   // 채팅방 개설
   const onClickChatting = () => {
-    dispatch(
-      __CreateRoom({
-        postId: post.postId,
-      })
-    );
-    setTimeout(
-      function () {
-        // 만들어진 채팅방으로 이동하는 로직 => localStorage 활용한 방법 이용
-        // 연결되었을 때 콜백함수 실행
-        navigate(`/chatting/${localStorage.getItem("roomId")}`);
-      },
-      300 // 밀리초 간격으로 실행
-    );
+    if(window.confirm("채팅방을 만드시겠습니까?")){
+      dispatch(
+        __CreateRoom({
+          postId: post.postId,
+        })
+      );
+      setTimeout(
+        function () {
+          // 만들어진 채팅방으로 이동하는 로직 => localStorage 활용한 방법 이용
+          // 연결되었을 때 콜백함수 실행
+          navigate(`/chatting/${localStorage.getItem("roomId")}`);
+        },
+        300 // 밀리초 간격으로 실행
+      );
+    }
+    
   };
 
   useEffect(() => {
