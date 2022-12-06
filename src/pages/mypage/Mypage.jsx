@@ -36,7 +36,13 @@ const Mypage = () => {
 
   return (
     <Layout>
-      <div className="flex justify-between items-center px-[18px] h-[76px]">
+      {/* <div className="w-full flex h-4">
+        <div className="w-1/4" />
+        <div className="w-1/4" />
+        <div className="w-1/4" />
+        <div className="w-1/4" />
+      </div> */}
+      <div className=" flex justify-between items-center px-[18px] h-[76px]">
         <div className="text-[18px] font-semibold">내 정보</div>
 
         <LogoutButton />

@@ -1,12 +1,10 @@
 import React, { useEffect } from "react";
-import styled from "styled-components";
 import { useDispatch, useSelector } from "react-redux";
-import { useNavigate, useParams } from "react-router-dom";
+import { useNavigate } from "react-router-dom";
 import { __getRoomList } from "../../../redux/modules/ChattingSlice";
 import { __getinitialChatList } from "../../../redux/modules/ChattingSlice";
 
 const ChatList = () => {
-  const { id } = useParams();
   const dispatch = useDispatch();
   const navigate = useNavigate();
   const Room = useSelector((state) => state.chatting.roomList);
@@ -29,106 +27,61 @@ const ChatList = () => {
   };
 
   return (
-    <>
-      <Div onClick={(e) => e.stopPropagation()}>
+    <div className=" w-[375px] px-4">
+      <div
+        className="bg-white rounded-lg "
+        onClick={(e) => e.stopPropagation()}
+      >
         {Room !== undefined &&
           Room !== [] &&
           Room.map((item, i) => {
             return (
-              <div key={i}>
-                {item.chatList.length > 0 ? (
-                  <>
-                    <RoomList onClick={() => onClickChatting(item)}>
-                      <Profile>
-                        <div>
-                          <img
-                            src={item.postUserAvatarUrl}
-                            style={{
-                              width: 44,
-                              height: 44,
-                              borderRadius: "50%",
-                            }}
-                          />
-                        </div>
-                        <div>
-                        {item.nickname === item.postUserNickname ? (
-                          <div>
-                            {item.joinUserNickname}{" "}
-                            <Time>
-                              {item.chatList[item.chatList.length - 1].sendDate}
-                            </Time>
-                          </div>
-                          ):(<div>
-                            {item.postUserNickname}{" "}
-                            <Time>
-                              {item.chatList[item.chatList.length - 1].sendDate}
-                            </Time>
-                          </div>                            
+              <div className=" px-3 py-1 border-b-[0.5px] border-D9 " key={i}>
+                {item.chatList.length > 0 && (
+                  <div
+                    className="  flex justify-between items-center h-14 "
+                    onClick={() => onClickChatting(item)}
+                  >
+                    <div className="flex  items-center w-full">
+                      <img
+                        className="w-11 h-11 rounded-full object-cover flex-shrink-0"
+                        src={item.postUserAvatarUrl}
+                      />
+
+                      <div className=" ml -2 flex-col text-sm ">
+                        <div className="flex">
+                          {item.nickname === item.postUserNickname ? (
+                            <div className="font-semibold">
+                              {item.joinUserNickname}
+                            </div>
+                          ) : (
+                            <div className="font-semibold">
+                              {item.postUserNickname}
+                            </div>
                           )}
-                          <Message>
-                            {item.chatList[item.chatList.length - 1].message}
-                            {/* 대화의 맨 마지막만 가지고 오는 로직이면 위와 같이 진행하면 됨 */}
-                          </Message>
+                          <div className="text-OO text-xs">
+                            {item.chatList[item.chatList.length - 1].sendDate}
+                          </div>
                         </div>
-                      </Profile>
-                      <SellImg>
-                        {item.image !== undefined && (
-                          <>
-                            <img
-                              src={item.image.imgUrl}
-                              style={{ width: 44, height: 44 }}
-                            />
-                          </>
-                        )}
-                      </SellImg>
-                    </RoomList>
-                  </>
-                ) : null}
+                        <div className="text-xs">
+                          {item.chatList[item.chatList.length - 1].message}
+                        </div>
+                      </div>
+                    </div>
+                    {item.image !== undefined && (
+                      <img
+                        className="w-11 h-11 object-cover rounded-lg flex-shrink-0"
+                        src={item.image.imgUrl}
+                      />
+                    )}
+                  </div>
+                )}
               </div>
             );
           })}
-      </Div>
-    </>
+      </div>
+    </div>
   );
 };
 
 export default ChatList;
-// 전체적인 레이아웃
-const Div = styled.div`
-  width: 339px;
-  height: 376px;
-  border-radius: 5px;
-  background-color: white;
-  overflow:auto;
-`;
-
-const RoomList = styled.div`
-  position: relative;
-  height: 60px;
-  border-bottom: 1px solid lightgrey;
-`;
-
-// 왼쪽 프로필 사항
-const Profile = styled.div`
-  display: flex;
-`;
-
-// 폰트사이즈 조정
-const Time = styled.span`
-  font-size: 10px;
-  color: #c4c4c4;
-`;
-
-const Message = styled.div`
-  font-size: 12px;
-`;
-
-// 오른쪽 판매 상품 사진
-const SellImg = styled.div`
-  img {
-    border-radius: 5px;
-    position: absolute;
-    right: 25px;
-    margin-top: -35px;
-  }
-`;

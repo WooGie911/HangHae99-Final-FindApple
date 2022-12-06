@@ -32,7 +32,7 @@ const Comment = ({ comment, __deleteComment, post }) => {
           </div>
           <div className="flex-col text-[14px] font-semibold">
             <div className="flex items-center">
-              {post.memberId === comment.memberId && (
+              {post?.memberId === comment.memberId && (
                 <div className="flex justify-center rounded-md w-11 h-4 bg-CC bg-opacity-50 text-CC text-xs">
                   작성자
                 </div>

@@ -2,10 +2,15 @@ import React from "react";
 import Slider from "react-slick";
 import "slick-carousel/slick/slick.css";
 import "slick-carousel/slick/slick-theme.css";
-import LOGOWHITE from "../../assets/LOGOWHITE.svg";
+import banner1 from "../../assets/banner1.png";
+import banner2 from "../../assets/banner2.png";
+import banner3 from "../../assets/banner3.png";
+import { useNavigate } from "react-router-dom";
 
 const Slide = () => {
-  var settings = {
+  const navigate = useNavigate();
+
+  const settings = {
     dots: true,
     infinite: true,
     speed: 500,
@@ -16,7 +21,7 @@ const Slide = () => {
         style={{
           width: "100%",
           position: "absolute",
-          bottom: "24px",
+          bottom: "10px",
           display: "flex",
           alignItems: "center",
           justifyContent: "center",
@@ -27,22 +32,37 @@ const Slide = () => {
     ),
   };
 
+  const onclickHandler = () => {
+    window.open(
+      "https://www.notion.so/FindApple-93cd2639427e42778be05137b44b9f44"
+    );
+  };
+
   return (
-    <div className="bg-CC w-full h-48 mb-5 ">
+    <div className="bg-CC w-full h-48 mb-7  ">
       <Slider {...settings}>
-        <div className="bg-transparent h-48 text-white p-4 ml-2">
-          <img className="w-2/5" src={LOGOWHITE} />
-          <div className="mt-3 ">애플 중고거래 파인드애플로 시작하세요!</div>
-          <div className="mt-3 text-sm ">
-            가격책정, 상품판매까지 할 수 있어요.
-          </div>
+        <div>
+          <img
+            className="w-full h-48"
+            src={banner1}
+            onClick={() => {
+              window.open(
+                "https://shine-industry-2cc.notion.site/FindApple-93cd2639427e42778be05137b44b9f44"
+              );
+            }}
+          />
         </div>
-        <div className="bg-transparent h-48 text-white p-6 mt-2 text-xl">
-          설문조사
-          <div className=" mt-2 text-base">참여시 경품을 드립니다!</div>
+        <div>
+          <img className="w-full h-48" src={banner2} />
         </div>
-        <div className="bg-transparent h-48 text-white p-6 mt-2 text-xl">
-          ????
+        <div>
+          <img
+            className="w-full h-48"
+            src={banner3}
+            onClick={() => {
+              window.open("https://forms.gle/47Ajypmv3kfY3AGM6");
+            }}
+          />
         </div>
       </Slider>
     </div>

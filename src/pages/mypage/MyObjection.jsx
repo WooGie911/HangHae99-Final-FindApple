@@ -38,7 +38,7 @@ const MyObjection = () => {
                 className="cursor-pointer bg-white p-2 mx-1 mt-2 rounded-md drop-shadow-lg"
                 key={objection.issuesId}
                 onClick={() => {
-                  navigate(`/PostDetail/${objection.issuesId}`);
+                  navigate(`/ObjectionDetail/${objection.issuesId}`);
                 }}
               >
                 <img
