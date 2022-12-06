@@ -34,7 +34,6 @@ export const __deletePostComment = createAsyncThunk(
       if (data.data === "Success") {
         return thunkAPI.fulfillWithValue(payload);
       }
-      console.log("삭제 성공 인데 메시지 이상? ");
     } catch (error) {
       return thunkAPI.rejectWithValue(error);
     }

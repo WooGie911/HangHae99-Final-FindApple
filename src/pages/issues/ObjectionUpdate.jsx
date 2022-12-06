@@ -31,8 +31,8 @@ const ObjectionUpdate = () => {
       formData: formData,
     };
     dispatch(__editObjection(obj));
-    navigate(`/objectionDetail/${params.id}`);
-    window.location.reload(`/objectionDetail/${params.id}`);
+    // navigate(`/objectionDetail/${params.id}`);
+    // window.location.reload(`/objectionDetail/${params.id}`);
   };
   return (
     <>

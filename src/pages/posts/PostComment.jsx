@@ -38,6 +38,7 @@ const PostComment = () => {
         <CommentList
           __deleteComment={__deletePostComment}
           commentList={post.comments}
+          post={post}
         />
         <CommentCreate
           __addComment={__addPostComment}

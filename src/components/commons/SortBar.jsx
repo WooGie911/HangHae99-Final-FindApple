@@ -23,10 +23,10 @@ const SortBar = (props) => {
 
   return (
     <div className="bg-white border-b-[3px] border-D9 h-10 font-semibold text-xs flex justify-between px-[18px] items-center">
-      <div className="h-[14px] ">전체 {props.postsCount}개</div>
+      <div className="h-[14px]">전체 {props.postsCount}개</div>
       {params.sort === props.postId ? (
         <div
-          className="flex"
+          className="flex cursor-pointer"
           onClick={() => {
             onClickSortHandler(props.postLikeCnt);
           }}
@@ -36,7 +36,7 @@ const SortBar = (props) => {
         </div>
       ) : (
         <div
-          className="flex"
+          className="flex cursor-pointer"
           onClick={() => {
             onClickSortHandler(props.postId);
           }}

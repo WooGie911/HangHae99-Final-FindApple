@@ -50,10 +50,10 @@ const ObjectionList = ({ posts, detail, __getDetail, state, setState }) => {
   useEffect(() => {
     setPage(0);
   }, [params]);
-  
+
   useEffect(() => {
-    console.log(posts)
-    }, [posts]);
+    console.log(posts);
+  }, [posts]);
   return (
     <>
       <div>
@@ -61,16 +61,16 @@ const ObjectionList = ({ posts, detail, __getDetail, state, setState }) => {
           posts.map((post, index) => {
             return (
               <div
-                className="bg-white flex p-[18px] border-b-[0.5px] border-D9"
+                className="bg-white flex p-[18px] border-b-[0.5px] border-D9 cursor-pointer"
                 key={index}
                 onClick={() => {
                   onClickHandler(post.issuesId);
                 }}
               >
-                  <img
-                    className="object-cover min-w-[84px] w-[84px] h-[84px] rounded"
-                    src={post?.images[0]?.imgUrl}
-                  />
+                <img
+                  className="object-cover min-w-[84px] w-[84px] h-[84px] rounded"
+                  src={post?.images[0]?.imgUrl}
+                />
 
                 <div className=" w-full flex-col  ml-3 font-medium">
                   <div>

@@ -10,6 +10,7 @@ const CommentList = (props) => {
             <div key={index}>
               <Comment
                 comment={comment}
+                post={props.post}
                 __deleteComment={props.__deleteComment}
               />
             </div>

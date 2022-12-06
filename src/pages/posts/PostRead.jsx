@@ -12,18 +12,21 @@ import SortBar from "../../components/commons/SortBar";
 import { __postList } from "../../redux/modules/PostsSlice";
 
 const PostRead = () => {
-  const params = useParams();
   const dispatch = useDispatch();
   const { posts } = useSelector((state) => state.posts);
   const { postsCount } = useSelector((state) => state.posts);
-  const { HeaderState } = useSelector((state) => state.posts);
-  const [submitObj, setSubmitObj] = useState(HeaderState);
+  const [submitObj, setSubmitObj] = useState({
+    paramObj: "all",
+    pageNumber: 0,
+    pageSize: 10,
+    postSort: "postId",
+  });
 
   console.log("postspostsposts", posts);
   useEffect(() => {
     dispatch(__getPost(submitObj));
     setSubmitObj({ ...submitObj, pageNumber: 0 });
-  }, [params]);
+  }, []);
 
   return (
     <Layout>

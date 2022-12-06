@@ -29,6 +29,7 @@ import Onboarding1 from "../pages/onboarding/Onboarding1";
 import Onboarding2 from "../pages/onboarding/Onboarding2";
 import Onboarding3 from "../pages/onboarding/Onboarding3";
 import Chatting from "../pages/chatting/Chatting";
+import Pricingfinal2 from "../components/price/Pricingfinal2";
 
 const Router = () => {
   return (
@@ -88,6 +89,7 @@ const Router = () => {
 
         {/*가격 결정 페이지 */}
         <Route path="/pricingfinal" element={<Pricingfinal />} />
+        <Route path="/pricingfinal2" element={<Pricingfinal2 />} />
 
         {/*상세내용 확인 페이지 */}
         <Route path="/pricingtext" element={<PricingText />} />
