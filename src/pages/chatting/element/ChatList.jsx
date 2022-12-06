@@ -36,6 +36,7 @@ const ChatList = () => {
           Room !== [] &&
           Room.map((item, i) => {
             return (
+              <>
               <div className=" px-3 py-1 border-b-[0.5px] border-D9 " key={i}>
                 {item.chatList.length > 0 && (
                   <div
