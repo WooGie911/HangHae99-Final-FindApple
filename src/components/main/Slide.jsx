@@ -5,11 +5,8 @@ import "slick-carousel/slick/slick-theme.css";
 import banner1 from "../../assets/banner1.png";
 import banner2 from "../../assets/banner2.png";
 import banner3 from "../../assets/banner3.png";
-import { useNavigate } from "react-router-dom";
 
 const Slide = () => {
-  const navigate = useNavigate();
-
   const settings = {
     dots: true,
     infinite: true,
@@ -32,18 +29,12 @@ const Slide = () => {
     ),
   };
 
-  const onclickHandler = () => {
-    window.open(
-      "https://www.notion.so/FindApple-93cd2639427e42778be05137b44b9f44"
-    );
-  };
-
   return (
     <div className="bg-CC w-full h-48 mb-7  ">
       <Slider {...settings}>
         <div>
           <img
-            className="w-full h-48"
+            className="w-full h-48 cursor-pointer"
             src={banner1}
             onClick={() => {
               window.open(
@@ -57,7 +48,7 @@ const Slide = () => {
         </div>
         <div>
           <img
-            className="w-full h-48"
+            className="w-full h-48 cursor-pointer"
             src={banner3}
             onClick={() => {
               window.open("https://forms.gle/47Ajypmv3kfY3AGM6");
