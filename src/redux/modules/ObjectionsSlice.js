@@ -16,16 +16,15 @@ export const __searchObjection = createAsyncThunk(
 export const __getAddObjection = createAsyncThunk(
   "objections/__getAddObjection",
   async (payload, thunkAPI) => {
-    console.log("pay", payload);
     try {
       const data = await Apis.getAddObjectionAX(payload);
-      console.log("데이터 봐봐", data);
+
       const obj = {
         payload: payload.page,
         data: data.data.content,
         totalElements: data.data.totalElements,
       };
-      console.log(obj);
+
       return thunkAPI.fulfillWithValue(obj);
     } catch (error) {
       return thunkAPI.rejectWithValue(error);
@@ -118,7 +117,7 @@ const ObjectionsSlice = createSlice({
     },
     [__getAddObjection.fulfilled]: (state, action) => {
       state.isLoading = false;
-      console.log(action.payload.data);
+
       if (action.payload.payload === 0) {
         state.posts.splice(0);
         state.posts.push(...action.payload.data);

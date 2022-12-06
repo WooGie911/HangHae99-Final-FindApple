@@ -20,7 +20,6 @@ function Chatting() {
   let roomId = Number(localStorage.getItem("roomId"));
   const listReducer = useSelector((state) => state.chatting.chatList);
   useEffect(() => {
-    console.log("listReducer", listReducer);
     if (roomId !== undefined) {
       dispatch(
         __getinitialChatList({
@@ -54,7 +53,6 @@ function Chatting() {
     try {
       ws.connect(headers, (frame) => {
         ws.subscribe(`/sub/${roomId}`, (response) => {
-          console.log("어떻게 나오는지", response);
           let data = JSON.parse(response.body);
           dispatch(chatList(data));
         });
@@ -90,9 +88,7 @@ function Chatting() {
 
         { Access_Token: localStorage.getItem("Access_Token") }
       );
-    } catch (e) {
-      console.log("연결구독해체 에러", e);
-    }
+    } catch (e) {}
   };
 
   const inputHandler = (e) => {

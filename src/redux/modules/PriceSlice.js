@@ -9,10 +9,6 @@ export const __getPriceInfo = createAsyncThunk(
   "price/__getPriceInfo",
   async (payload, thunkAPI) => {
     try {
-      // const data = await Apis.getPriceInfoAX(payload);
-      // console.log("겟프라이스인포", data);
-      // return thunkAPI.fulfillWithValue(data.data);
-
       let data = {};
       if (payload.API !== "") {
         data = await axios.get(

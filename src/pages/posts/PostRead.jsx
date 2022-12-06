@@ -21,7 +21,6 @@ const PostRead = () => {
     postSort: "postId",
   });
 
-  console.log("postspostsposts", posts);
   useEffect(() => {
     dispatch(__getPost(submitObj));
     setSubmitObj({ ...submitObj, pageNumber: 0 });

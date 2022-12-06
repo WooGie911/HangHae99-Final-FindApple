@@ -52,14 +52,11 @@ const Footer = () => {
   };
 
   const onClickHandler = (data) => {
-    console.log("footerState", footerState);
     dispatch(swichFooterState(data.state));
     navigate(`${data.navi}`);
   };
 
-  useEffect(() => {
-    console.log("footerState", footerState);
-  }, [footerState]);
+  useEffect(() => {}, [footerState]);
 
   return (
     <div className="fixed bottom-0">

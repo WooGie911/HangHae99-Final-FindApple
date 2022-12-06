@@ -3,7 +3,6 @@ import { useDispatch } from "react-redux";
 import toggle from "../../assets/toggle.svg";
 
 const Comment = ({ comment, __deleteComment, post }) => {
-  console.log("post", post);
   const dispatch = useDispatch();
   const onDeleteButton = (payload) => {
     if (window.confirm("정말 삭제하시겠습니까?")) {

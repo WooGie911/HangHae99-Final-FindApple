@@ -18,7 +18,7 @@ const PostUpdate = () => {
   const imgRef = useRef();
   const { post } = useSelector((state) => state.details);
   const [updateInput, setUpdateInput, updateInputHandle] = useInput(post);
-  console.log("이미지 왜안나와", post.images);
+
   const updateSubmit = () => {
     //request로 날릴 폼데이터
     const formData = new FormData();
@@ -38,7 +38,7 @@ const PostUpdate = () => {
       userPrice: updateInput.userPrice,
       content: updateInput.content,
     };
-    console.log("objectsobjectsobjects", objects);
+
     formData.append(
       "postReqDto",
       new Blob([JSON.stringify(objects)], { type: "application/json" })
@@ -47,7 +47,7 @@ const PostUpdate = () => {
       id: params.id,
       formData: formData,
     };
-    console.log("paramsparamsparams", params);
+
     if (files.length < 1) {
       return window.alert("사진을 입력하세요");
     }

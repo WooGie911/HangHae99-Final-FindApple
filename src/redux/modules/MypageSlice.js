@@ -30,7 +30,7 @@ export const __getMyLike = createAsyncThunk(
   async (payload, thunkAPI) => {
     try {
       const data = await Apis.getMyLikeAX();
-      console.log("마이라이크", data);
+
       return thunkAPI.fulfillWithValue(data.data.myLikesList);
     } catch (error) {
       return thunkAPI.rejectWithValue(error);

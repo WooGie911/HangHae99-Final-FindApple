@@ -14,7 +14,6 @@ const PricingInput3 = ({ priceListState, setPriceListState, stepState }) => {
       ...priceListState,
       [name]: value,
     });
-    console.log(priceListState);
   };
 
   const onSubmitHandler = (e) => {

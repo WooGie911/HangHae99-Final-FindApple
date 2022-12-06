@@ -10,7 +10,7 @@ import mainHeart from "../../assets/mainHeart.svg";
 
 const MyLike = () => {
   const { likes } = useSelector((state) => state.mypage);
-  console.log(likes);
+
   const navigate = useNavigate();
   const dispatch = useDispatch();
   useEffect(() => {

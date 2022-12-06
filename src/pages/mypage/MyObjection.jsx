@@ -9,7 +9,7 @@ import mainHeart from "../../assets/mainHeart.svg";
 
 const MyObjection = () => {
   const { objections } = useSelector((state) => state.mypage);
-  console.log(objections);
+
   const navigate = useNavigate();
 
   const dispatch = useDispatch();
