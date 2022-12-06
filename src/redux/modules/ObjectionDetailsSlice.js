@@ -31,10 +31,8 @@ export const __deleteObjectionComment = createAsyncThunk(
     try {
       const data = await Apis.deleteObjectionCommentAX(payload);
       if (data.data === "댓글 삭제 성공") {
-        console.log("삭제 성공");
         return thunkAPI.fulfillWithValue(payload);
       }
-      console.log("삭제 성공 인데 메시지 이상? ");
     } catch (error) {
       return thunkAPI.rejectWithValue(error);
     }
@@ -51,7 +49,6 @@ export const __CartInObjection = createAsyncThunk(
       }
       return thunkAPI.fulfillWithValue({ islike: false, count: -1 });
     } catch (error) {
-      console.log("error", error);
       return thunkAPI.rejectWithValue(error);
     }
   }
@@ -67,7 +64,6 @@ export const __CartOutObjection = createAsyncThunk(
       }
       return thunkAPI.fulfillWithValue({ islike: true, count: +1 });
     } catch (error) {
-      console.log("error", error);
       return thunkAPI.rejectWithValue(error);
     }
   }

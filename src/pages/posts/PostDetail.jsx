@@ -34,7 +34,6 @@ const PostDetail = () => {
 
   //찜하기
   const onCartButton = (payload) => {
-    console.log(post);
     {
       post.isLike
         ? dispatch(__CartOutPost(payload))
@@ -118,7 +117,6 @@ const PostDetail = () => {
 
   useEffect(() => {
     dispatch(__getPostDetail(params.id));
-    console.log("겟 포스트 디테일 내용", post);
   }, [params]);
 
   return (

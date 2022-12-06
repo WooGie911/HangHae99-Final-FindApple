@@ -17,7 +17,6 @@ const MainList = () => {
   const [submitOBJ, setSubmitOBJ] = useState(HeaderState);
   const [headerBarState, setHeaderBarState] = useState("all");
   const { posts } = useSelector((state) => state.posts);
-  console.log(posts);
 
   const onClickCategoryHandler = (data) => {
     setHeaderBarState(data);

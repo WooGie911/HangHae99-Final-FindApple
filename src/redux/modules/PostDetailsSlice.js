@@ -45,14 +45,12 @@ export const __CartInPost = createAsyncThunk(
   async (payload, thunkAPI) => {
     try {
       const data = await Apis.CartInPostAX(payload);
-      console.log("response", data);
+
       if (data.data === "찜 성공") {
-        console.log("찜 성공");
         return thunkAPI.fulfillWithValue({ islike: true, count: +1 });
       }
       return thunkAPI.fulfillWithValue({ islike: false, count: -1 });
     } catch (error) {
-      console.log("error", error);
       return thunkAPI.rejectWithValue(error);
     }
   }
@@ -68,7 +66,6 @@ export const __CartOutPost = createAsyncThunk(
       }
       return thunkAPI.fulfillWithValue({ islike: true, count: +1 });
     } catch (error) {
-      console.log("error", error);
       return thunkAPI.rejectWithValue(error);
     }
   }

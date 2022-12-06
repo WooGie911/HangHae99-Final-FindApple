@@ -16,10 +16,8 @@ export const __searchPost = createAsyncThunk(
 export const __getAddPost = createAsyncThunk(
   "posts/__getAddPost",
   async (payload, thunkAPI) => {
-    console.log(payload);
     try {
       const data = await Apis.getAddPostAX(payload);
-      console.log("진짜아오 ", data);
 
       const obj = {
         payload: payload.page,
@@ -74,7 +72,6 @@ export const __editPost = createAsyncThunk(
   "posts/__editPost",
   async (payload, thunkAPI) => {
     try {
-      console.log(payload);
       const data = await Apis.editPostAX(payload);
       const payloadData = { ...payload, data: data.data };
       return thunkAPI.fulfillWithValue(payloadData);
@@ -128,11 +125,6 @@ const PostsSlice = createSlice({
     },
     [__getAddPost.fulfilled]: (state, action) => {
       state.isLoading = false;
-      console.log("state.postsCount ", state.postsCount);
-      console.log(
-        "action.payload.totalElements ",
-        action.payload.totalElements
-      );
 
       if (action.payload.payload === 0) {
         state.posts.splice(0);

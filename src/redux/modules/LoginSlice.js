@@ -50,7 +50,7 @@ export const __Signin = createAsyncThunk(
         alert("환영합니다");
         window.location.replace("/main");
       }
-      console.log(data);
+
       return thunkAPI.fulfillWithValue(data.data);
     } catch (error) {
       if (error.response.status >= 400 && error.response.status < 500) {
@@ -72,10 +72,8 @@ export const __SignUp = createAsyncThunk(
   "Login/__SignUp",
   async (payload, thunkAPI) => {
     try {
-      console.log(payload);
       const response = await Apis.SignUpAX(payload);
 
-      console.log("회원가입response", response);
       // alert(`${response.data.msg}`);
 
       alert("회원가입 성공!");

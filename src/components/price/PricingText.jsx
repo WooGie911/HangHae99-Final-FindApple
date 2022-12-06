@@ -9,7 +9,6 @@ const PricingText = () => {
   const state = useLocation();
   const data = state.state;
   const navigate = useNavigate();
-  console.log("datdatadataa", data);
 
   return (
     <Layout>

@@ -15,7 +15,6 @@ const ObjectionComment = () => {
   const navigate = useNavigate();
   const dispatch = useDispatch();
   const { post } = useSelector((state) => state.objectionDetails);
-  console.log("이슈댓글 뭐들어오나", post);
 
   useEffect(() => {
     dispatch(__getObjectionDetail(post.issuesId));

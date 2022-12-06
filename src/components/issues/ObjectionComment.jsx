@@ -33,11 +33,19 @@ const ObjectionComment = ({ comment, __deleteComment }) => {
               </div>
             </ProfileImg>
           </div>
-          {comment.myComment === true ?(<>
-          {comment.myComment === true ?(<>
-          <Tgbutton src={threedots} onClick={editToggleHandler} />
-          </>) : ""}
-          </>) : ""}
+          {comment.myComment === true ? (
+            <>
+              {comment.myComment === true ? (
+                <>
+                  <Tgbutton src={threedots} onClick={editToggleHandler} />
+                </>
+              ) : (
+                ""
+              )}
+            </>
+          ) : (
+            ""
+          )}
           {editTg.isEdit === true ? (
             <Button onClick={() => onDeleteButton(comment.commentId)}>
               삭제

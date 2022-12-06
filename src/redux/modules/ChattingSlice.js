@@ -1,5 +1,4 @@
 import { createAsyncThunk, createSlice } from "@reduxjs/toolkit";
-import axios from "axios";
 import Apis from "../../shared/Apis";
 
 // 방만드는 코드
@@ -71,7 +70,7 @@ const chatSlice = createSlice({
     },
     [__CreateRoom.fulfilled]: (state, action) => {
       state.isLoading = false;
-      console.log("action", action.payload);
+
       state.createRoom = action.payload.roomId;
     },
     [__CreateRoom.rejected]: (state, action) => {

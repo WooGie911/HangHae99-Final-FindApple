@@ -26,7 +26,7 @@ const ObjectionDetail = () => {
   const dispatch = useDispatch();
   const params = useParams();
   const { post } = useSelector((state) => state.objectionDetails);
-  console.log("이슈 포스트 뭐 들어왔나 변수명(id)", post);
+
   //찜하기
   const onCartButton = (payload) => {
     {
