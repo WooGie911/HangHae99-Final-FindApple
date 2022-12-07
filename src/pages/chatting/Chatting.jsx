@@ -20,6 +20,7 @@ function Chatting() {
   const navigate = useNavigate();
   let roomId = Number(localStorage.getItem("roomId"));
   const listReducer = useSelector((state) => state.chatting.chatList);
+  console.log(listReducer);
   useEffect(() => {
     if (roomId !== undefined) {
       dispatch(
@@ -44,7 +45,7 @@ function Chatting() {
   const [chatBody, setChatBody] = useState("");
 
   const content = {
-    sender: listReducer.nickname,
+    sender: listReducer.senderId,
     message: chatBody,
   };
   let headers = {
@@ -171,7 +172,7 @@ function Chatting() {
             listReducer.chatList.map((item) => {
               return (
                 <>
-                  {listReducer.joinUserNickname === item.sender ? (
+                  {listReducer.senderId === item.sender ? (
                     <ChatStyle key={uuidv4()} style={{ textAlign: "right" }}>
                       {/* 인라인 요소로 바로 우측 정렬 해결 */}
                       <TimeDiv>
@@ -197,7 +198,8 @@ function Chatting() {
             value={chatBody}
             onChange={inputHandler}
             onKeyPress={appKeyPress}
-            placeholder="댓글을 입력하세요"
+            placeholder="채팅을 입력하세요(24자 내)"
+            maxLength="24"
           />
           {/* value를 줘야 사라진다 */}
           <Send

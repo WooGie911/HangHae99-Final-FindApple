@@ -160,7 +160,8 @@ const PostsCreate = (props) => {
             name="title"
             value={write.title || ""}
             type="text"
-            placeholder="글 제목을 입력하세요"
+            placeholder="글 제목을 입력하세요(20자 내)"
+            maxLength='20'
           />
         </div>
       </div>
@@ -196,7 +197,8 @@ const PostsCreate = (props) => {
                 name="userPrice"
                 value={write.userPrice || ""}
                 type="text"
-                placeholder="판매 가격을 입력해주세요."
+                placeholder="희망 가격을 입력해주세요."
+                maxLength='7'
               />
             </div>
           </div>
@@ -213,6 +215,7 @@ const PostsCreate = (props) => {
                 value={write.userPrice || ""}
                 type="text"
                 placeholder="희망 가격을 입력해주세요."
+                maxLength='7'
               />
             </div>
           </div>
@@ -220,13 +223,14 @@ const PostsCreate = (props) => {
       )}
 
       <div className="  py-4 px-[18px] border-b-[1px] border-D9">
-        <input
+        <textarea
           className="w-full py-3  break-words"
           onChange={writeHandle}
           name="content"
           value={write.content || ""}
           type="text"
-          placeholder="상품설명을 작성해주세요."
+          placeholder="상품설명을 작성해주세요.(200자 내)"
+          maxLength='200'          
         />
       </div>
 
