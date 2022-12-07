@@ -57,6 +57,7 @@ const MypageUpdate = () => {
       new Blob([JSON.stringify(obj)], { type: "application/json" })
     );
     dispatch(__UserProfileEdit(formData));
+    alert("변경이 완료되었습니다.")
   };
 
   return (
@@ -108,6 +109,8 @@ const MypageUpdate = () => {
             onChange={writeHandle}
             name="nickname"
             value={write.nickname || ""}
+            placeholder="20자 이내로 작성해주세요"
+            maxLength="20"
           />
         </div>
       </div>
