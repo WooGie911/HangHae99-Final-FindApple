@@ -48,9 +48,10 @@ const PostUpdate = () => {
       formData: formData,
     };
 
-    if (files.length < 1) {
-      return window.alert("사진을 입력하세요");
-    }
+    // if (files.length < 1) {
+    //   return window.alert("사진을 입력하세요");
+    // }
+    // UT 결과로 삭제
     //Api 날리기
     if (window.confirm("수정하시겠습니까?")) {
       dispatch(__editPost(obj));
@@ -166,6 +167,7 @@ const PostUpdate = () => {
                 value={updateInput.userPrice || ""}
                 type="text"
                 placeholder="판매 가격을 입력해주세요."
+                maxLength="7"
               />
             </div>
           </div>
@@ -176,13 +178,14 @@ const PostUpdate = () => {
               <div>판매중</div>
               <img src={bottomArrow} />
             </div>
-            <input
+            <textarea
               className="w-full py-3  break-words"
               onChange={updateInputHandle}
               name="content"
               value={updateInput.content || ""}
               type="text"
-              placeholder="수정할 내용을 입력하세요."
+              placeholder="수정할 내용을 입력하세요.(200자 내)"
+              maxLength="200"
             />
           </div>
         </div>
