@@ -8,7 +8,6 @@ const ChatList = () => {
   const dispatch = useDispatch();
   const navigate = useNavigate();
   const Room = useSelector((state) => state.chatting.roomList);
-  console.log(Room)
   useEffect(() => {
     dispatch(__getRoomList());
   }, []);
