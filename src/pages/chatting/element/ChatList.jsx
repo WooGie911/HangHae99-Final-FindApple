@@ -8,7 +8,7 @@ const ChatList = () => {
   const dispatch = useDispatch();
   const navigate = useNavigate();
   const Room = useSelector((state) => state.chatting.roomList);
-
+  console.log(Room)
   useEffect(() => {
     dispatch(__getRoomList());
   }, []);
@@ -36,8 +36,10 @@ const ChatList = () => {
           Room.map((item, i) => {
             return (
               <>
+                {item.chatList.length > 0 &&
+                (
                 <div className=" px-3 py-1 border-b-[0.5px] border-D9 " key={i}>
-                  {item.chatList.length > 0 && (
+
                     <div
                       className="  flex justify-between items-center h-14 "
                       onClick={() => onClickChatting(item)}
@@ -76,8 +78,8 @@ const ChatList = () => {
                         />
                       )}
                     </div>
-                  )}
                 </div>
+                )}
                 <hr className="last-of-type:hidden border-t-[0.5px] border-D9" />
               </>
             );
