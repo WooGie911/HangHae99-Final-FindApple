@@ -8,6 +8,7 @@ const ChatList = () => {
   const dispatch = useDispatch();
   const navigate = useNavigate();
   const Room = useSelector((state) => state.chatting.roomList);
+  console.log(Room);
   useEffect(() => {
     dispatch(__getRoomList());
   }, []);
@@ -50,15 +51,9 @@ const ChatList = () => {
                         />
                         <div className=" ml -2 flex-col text-sm ">
                           <div className="flex">
-                            {item.nickname === item.postUserNickname ? (
                               <div className="font-semibold">
-                                {item.joinUserNickname.length > 20 ? item.joinUserNickname.substring(0, 19) + '...' : item.joinUserNickname}
+                                {item.otherNickname.length > 10 ? item.otherNickname.substring(0, 9) + '...' : item.otherNickname}
                               </div>
-                            ) : (
-                              <div className="font-semibold">
-                                {item.postUserNickname.length > 20 ? item.postUserNickname.substring(0, 19) + '...' : item.postUserNickname}
-                              </div>
-                            )}
                             <div className="text-OO text-xs">
                               {item.chatList[item.chatList.length - 1].sendDate}
                             </div>
