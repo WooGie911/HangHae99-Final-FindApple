@@ -11,7 +11,8 @@ import blackMy from "../../assets/blackMy.svg";
 import blueMy from "../../assets/blueMy.svg";
 import { useDispatch, useSelector } from "react-redux";
 import { swichStepState } from "../../redux/modules/PriceSlice";
-import chat from "../../assets/chat.png";
+import blackChat from "../../assets/blackChat.png";
+import whiteChat from "../../assets/whiteChat.png";
 import ChatList from "../../pages/chatting/element/ChatList";
 import { swichFooterState } from "../../redux/modules/PostsSlice";
 
@@ -65,7 +66,7 @@ const Footer = () => {
           className=" w-12 h-12 bg-CC flex relative items-center justify-center rounded-full"
           onClick={popupPostCode}
         >
-          <img src={chat} />
+          <img src={whiteChat} />
         </button>
         {isChatModal && (
           <div

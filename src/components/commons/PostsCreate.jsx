@@ -1,5 +1,4 @@
-import React, { useRef, useState } from "react";
-import styled from "styled-components";
+import React, { useRef } from "react";
 import useInput from "../../hook/useInput";
 import useImgUpload from "../../hook/useImageUpload";
 import { useDispatch, useSelector } from "react-redux";
@@ -14,7 +13,7 @@ const PostsCreate = (props) => {
 
   const [write, setWrite, writeHandle] = useInput({
     title: "",
-    userprice: "",
+    userPrice: "",
     content: "",
   });
 
@@ -68,6 +67,23 @@ const PostsCreate = (props) => {
       return window.alert("사진을 입력하세요");
     }
 
+    if (write.title === "") {
+      return window.alert("제목을 입력하세요");
+    }
+    if (props.post === "post") {
+      if (write.userPrice === "") {
+        return window.alert("판매가격을 입력하세요");
+      }
+    } else {
+      if (write.userPrice === "") {
+        return window.alert("희망가격을 입력하세요");
+      }
+    }
+
+    if (write.content === "") {
+      return window.alert("상품설명을 입력하세요");
+    }
+
     if (window.confirm("작성하시겠습니까?")) {
       dispatch(props.__addData(formData));
       // navigate(`/${props.Navigate}`);
@@ -89,7 +105,7 @@ const PostsCreate = (props) => {
           src={backArrow}
         />
         <div>
-          <div>상품등록 </div>
+          {props.post === "post" ? <div>상품등록</div> : <div>이의제기</div>}
         </div>
       </div>
 
@@ -169,22 +185,39 @@ const PostsCreate = (props) => {
           </div>
         </div>
       </div>
-
-      <div className=" py-2 px-[18px] border-b-[1px] border-D9">
-        <div className="  h-16 flex items-center">
-          <div className="flex-col">
-            <div className="text-xs text-DD">판매가격</div>
-            <input
-              className=" bg-transparent text-C4 font-semibold"
-              onChange={writeHandle}
-              name="userPrice"
-              value={write.userPrice || ""}
-              type="text"
-              placeholder="판매 가격을 입력해주세요."
-            />
+      {props.post === "post" ? (
+        <div className=" py-2 px-[18px] border-b-[1px] border-D9">
+          <div className="  h-16 flex items-center">
+            <div className="flex-col">
+              <div className="text-xs text-DD">판매가격</div>
+              <input
+                className=" bg-transparent text-C4 font-semibold"
+                onChange={writeHandle}
+                name="userPrice"
+                value={write.userPrice || ""}
+                type="text"
+                placeholder="판매 가격을 입력해주세요."
+              />
+            </div>
           </div>
         </div>
-      </div>
+      ) : (
+        <div className=" py-2 px-[18px] border-b-[1px] border-D9">
+          <div className="  h-16 flex items-center">
+            <div className="flex-col">
+              <div className="text-xs text-DD">희망가격</div>
+              <input
+                className=" bg-transparent text-C4 font-semibold"
+                onChange={writeHandle}
+                name="userPrice"
+                value={write.userPrice || ""}
+                type="text"
+                placeholder="희망 가격을 입력해주세요."
+              />
+            </div>
+          </div>
+        </div>
+      )}
 
       <div className="  py-4 px-[18px] border-b-[1px] border-D9">
         <input
@@ -198,14 +231,25 @@ const PostsCreate = (props) => {
       </div>
 
       <div className=" py-3 px-[18px] h-20 w-[375px] fixed bottom-0 text-white ">
-        <div
-          className="bg-CC w-full h-full rounded-md flex items-center justify-center"
-          onClick={() => {
-            writeSubmit();
-          }}
-        >
-          상품 등록
-        </div>
+        {props.post === "post" ? (
+          <div
+            className="bg-CC w-full h-full rounded-md flex items-center justify-center"
+            onClick={() => {
+              writeSubmit();
+            }}
+          >
+            상품 등록
+          </div>
+        ) : (
+          <div
+            className="bg-CC w-full h-full rounded-md flex items-center justify-center"
+            onClick={() => {
+              writeSubmit();
+            }}
+          >
+            이의 제기
+          </div>
+        )}
       </div>
     </>
   );

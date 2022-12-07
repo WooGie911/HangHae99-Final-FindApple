@@ -37,7 +37,7 @@ const ChatList = () => {
               <>
                 {item.chatList.length > 0 &&
                 (
-                <div className=" px-3 py-1 border-b-[0.5px] border-D9 " key={i}>
+                <div className=" px-3 py-1 " key={i}>
 
                     <div
                       className="  flex justify-between items-center h-14 "
@@ -48,7 +48,6 @@ const ChatList = () => {
                           className="w-11 h-11 rounded-full object-cover flex-shrink-0"
                           src={item.otherUserAvatarUrl}
                         />
-
                         <div className=" ml -2 flex-col text-sm ">
                           <div className="flex">
                             {item.nickname === item.postUserNickname ? (

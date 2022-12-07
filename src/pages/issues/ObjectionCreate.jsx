@@ -10,6 +10,7 @@ const ObjectionCreate = () => {
           postReqDto={"issuesRequestDto"}
           Navigate={"objectionread/all"}
           __addData={__addObjection}
+          post={"objection"}
         />
       </Layout2>
     </>

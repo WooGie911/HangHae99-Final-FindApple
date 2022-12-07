@@ -11,6 +11,7 @@ import Header from "../../components/commons/Header";
 import { __getObjectionDetail } from "../../redux/modules/ObjectionDetailsSlice";
 import SortBar from "../../components/commons/SortBar";
 import ObjectionList from "../../components/issues/ObjectionList";
+import { useEffect } from "react";
 
 const ObjectionRead = () => {
   const { posts } = useSelector((state) => state.objections);
@@ -18,10 +19,14 @@ const ObjectionRead = () => {
   const { HeaderState } = useSelector((state) => state.objections);
   const [submitObj, setSubmitObj] = useState(HeaderState);
 
-  // useEffect(() => {
-  //   dispatch(__getObjection(submitObj));
-  //   setSubmitObj({ ...submitObj, pageNumber: 0 });
-  // }, [params]);
+  useEffect(() => {
+    if (!window.scrollY) return;
+    // 현재 위치가 이미 최상단일 경우 return
+    window.scrollTo({
+      top: 0,
+      behavior: "smooth",
+    });
+  }, []);
 
   return (
     <Layout>

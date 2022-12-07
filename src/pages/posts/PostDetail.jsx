@@ -70,7 +70,7 @@ const PostDetail = () => {
 
   // 채팅방 개설
   const onClickChatting = () => {
-    if(window.confirm("채팅방을 만드시겠습니까?")){
+    if (window.confirm("채팅방을 만드시겠습니까?")) {
       dispatch(
         __CreateRoom({
           postId: post.postId,
@@ -85,7 +85,6 @@ const PostDetail = () => {
         300 // 밀리초 간격으로 실행
       );
     }
-    
   };
 
   useEffect(() => {
@@ -118,6 +117,15 @@ const PostDetail = () => {
   useEffect(() => {
     dispatch(__getPostDetail(params.id));
   }, [params]);
+
+  useEffect(() => {
+    if (!window.scrollY) return;
+    // 현재 위치가 이미 최상단일 경우 return
+    window.scrollTo({
+      top: 0,
+      behavior: "smooth",
+    });
+  }, []);
 
   return (
     <>
