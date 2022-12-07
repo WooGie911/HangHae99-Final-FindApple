@@ -198,8 +198,8 @@ function Chatting() {
             value={chatBody}
             onChange={inputHandler}
             onKeyPress={appKeyPress}
-            placeholder="채팅을 입력하세요(24자 내)"
-            maxLength="24"
+            placeholder="채팅을 입력하세요(20자 내)"
+            maxLength="20"
           />
           {/* value를 줘야 사라진다 */}
           <Send

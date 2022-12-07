@@ -52,11 +52,11 @@ const ChatList = () => {
                           <div className="flex">
                             {item.nickname === item.postUserNickname ? (
                               <div className="font-semibold">
-                                {item.joinUserNickname}
+                                {item.joinUserNickname.length > 20 ? item.joinUserNickname.substring(0, 19) + '...' : item.joinUserNickname}
                               </div>
                             ) : (
                               <div className="font-semibold">
-                                {item.postUserNickname}
+                                {item.postUserNickname.length > 20 ? item.postUserNickname.substring(0, 19) + '...' : item.postUserNickname}
                               </div>
                             )}
                             <div className="text-OO text-xs">
@@ -64,7 +64,7 @@ const ChatList = () => {
                             </div>
                           </div>
                           <div className="text-xs">
-                            {item.chatList[item.chatList.length - 1].message}
+                            {item.chatList[item.chatList.length - 1].message.length > 20 ? item.chatList[item.chatList.length - 1].message.substring(0, 19) + '...' : item.chatList[item.chatList.length - 1].message}
                           </div>
                         </div>
                       </div>
