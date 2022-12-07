@@ -104,13 +104,14 @@ const ObjectionUpdate = () => {
 
         <div className="  py-4 px-[18px] border-b-[1px] border-D9">
           <div className=" h-60 flex-col ">
-            <input
+            <textarea
               className="w-full py-3  break-words"
               onChange={updateInputHandle}
               name="content"
               value={updateInput.content || ""}
               type="text"
-              placeholder="수정할 내용을 입력하세요."
+              placeholder="수정할 내용을 입력하세요.(200자 내)"
+              maxLength="200"
             />
           </div>
         </div>

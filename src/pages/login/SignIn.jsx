@@ -45,8 +45,9 @@ const SignIn = () => {
               type="text"
               name="email"
               onChange={ChangeInputHandler}
-              placeholder="아이디 입력"
+              placeholder="이메일 입력"
               value={input.email}
+              maxLength='320'
             />
           </div>
           <div className="flex justify-center">
@@ -57,6 +58,7 @@ const SignIn = () => {
               onChange={ChangeInputHandler}
               placeholder="비밀번호 입력"
               value={input.password}
+              maxLength='16'
               onKeyPress={keyPress}
             />
           </div>
