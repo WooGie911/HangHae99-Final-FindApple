@@ -171,7 +171,7 @@ function Chatting() {
             listReducer.chatList.map((item) => {
               return (
                 <>
-                  {listReducer.nickname === item.sender ? (
+                  {listReducer.joinUserNickname === item.sender ? (
                     <ChatStyle key={uuidv4()} style={{ textAlign: "right" }}>
                       {/* 인라인 요소로 바로 우측 정렬 해결 */}
                       <TimeDiv>
