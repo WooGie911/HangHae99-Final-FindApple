@@ -20,7 +20,6 @@ function Chatting() {
   const navigate = useNavigate();
   let roomId = Number(localStorage.getItem("roomId"));
   const listReducer = useSelector((state) => state.chatting.chatList);
-  console.log(listReducer);
   useEffect(() => {
     if (roomId !== undefined) {
       dispatch(
