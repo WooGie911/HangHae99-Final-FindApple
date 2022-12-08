@@ -13,7 +13,7 @@ const SignIn = () => {
     email: "",
     password: "",
   };
-
+  localStorage.clear()
   const dispatch = useDispatch();
   const navigate = useNavigate();
 
