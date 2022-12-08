@@ -70,7 +70,6 @@ const PostDetail = () => {
 
   // 채팅방 개설
   const onClickChatting = () => {
-    if (window.confirm("채팅방을 만드시겠습니까?")) {
       dispatch(
         __CreateRoom({
           postId: post.postId,
@@ -84,7 +83,7 @@ const PostDetail = () => {
         },
         300 // 밀리초 간격으로 실행
       );
-    }
+    
   };
 
   useEffect(() => {

@@ -8,7 +8,6 @@ const ChatList = () => {
   const dispatch = useDispatch();
   const navigate = useNavigate();
   const Room = useSelector((state) => state.chatting.roomList);
-
   useEffect(() => {
     dispatch(__getRoomList());
   }, []);
@@ -36,8 +35,10 @@ const ChatList = () => {
           Room.map((item, i) => {
             return (
               <>
+                {item.chatList.length > 0 &&
+                (
                 <div className=" px-3 py-1 " key={i}>
-                  {item.chatList.length > 0 && (
+
                     <div
                       className="  flex justify-between items-center h-14 "
                       onClick={() => onClickChatting(item)}
@@ -49,21 +50,15 @@ const ChatList = () => {
                         />
                         <div className=" ml -2 flex-col text-sm ">
                           <div className="flex">
-                            {item.nickname === item.postUserNickname ? (
                               <div className="font-semibold">
-                                {item.joinUserNickname}
+                                {item.otherNickname.length > 10 ? item.otherNickname.substring(0, 9) + '...' : item.otherNickname}
                               </div>
-                            ) : (
-                              <div className="font-semibold">
-                                {item.postUserNickname}
-                              </div>
-                            )}
                             <div className="text-OO text-xs">
                               {item.chatList[item.chatList.length - 1].sendDate}
                             </div>
                           </div>
                           <div className="text-xs">
-                            {item.chatList[item.chatList.length - 1].message}
+                            {item.chatList[item.chatList.length - 1].message.length > 20 ? item.chatList[item.chatList.length - 1].message.substring(0, 19) + '...' : item.chatList[item.chatList.length - 1].message}
                           </div>
                         </div>
                       </div>
@@ -75,8 +70,8 @@ const ChatList = () => {
                         />
                       )}
                     </div>
-                  )}
                 </div>
+                )}
                 <hr className="last-of-type:hidden border-t-[0.5px] border-D9" />
               </>
             );

@@ -33,12 +33,13 @@ const ObjectionCommentCreate = (props) => {
       <div className="flex absolute  bottom-0 w-full py-3 px-[18px]">
         <input
           className="  h-[38px] w-full rounded-3xl px-3 text-[14px] text-C4 border-DD border-[1px]"
-          placeholder="댓글을 입력하세요"
+          placeholder="24글자 이하로 작성해주세요"
           value={comments.comment || ""}
           name="comment"
           type="text"
           onChange={onChangeInputHandler}
           onKeyPress={keyPress}
+          maxLength='24'
         />
         <img
           className=" absolute right-9 bottom-[22px]"
