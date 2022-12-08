@@ -27,6 +27,7 @@ const PostDetail = () => {
   const params = useParams();
   const { post } = useSelector((state) => state.details);
   const postChat = useSelector((state) => state.chatting.createRoom);
+  console.log("post", post)
 
   const [editTg, setEidtTg] = useState({
     isEdit: false,
@@ -276,10 +277,12 @@ const PostDetail = () => {
           </div>
 
           <div className=" flex mt-1 w-[70px] justify-end">
+            {post.myPost !== true ? (
             <div className="  flex-col w-6 text-[10px] text-translucent3 mr-5  ">
               <img onClick={onClickChatting} src={whiteChatting} />
               <div>채팅</div>
             </div>
+            ) : ""}
             <div className="  flex-col w-6 text-[10px] text-translucent3   ">
               <img
                 onClick={() => {
