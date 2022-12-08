@@ -9,7 +9,14 @@ import { __getPostTime } from "../../redux/modules/PostsSlice";
 import { useInView } from "react-intersection-observer";
 import mainHeart from "../../assets/mainHeart.svg";
 
-const ObjectionList = ({ posts, detail, __getDetail, state, setState }) => {
+const ObjectionList = ({
+  posts,
+  detail,
+  __getDetail,
+  state,
+  setState,
+  search,
+}) => {
   const navigate = useNavigate();
   const dispatch = useDispatch();
   const params = useParams();
@@ -49,6 +56,7 @@ const ObjectionList = ({ posts, detail, __getDetail, state, setState }) => {
 
   useEffect(() => {
     setPage(0);
+    dispatch(search(""));
   }, [params]);
 
   return (

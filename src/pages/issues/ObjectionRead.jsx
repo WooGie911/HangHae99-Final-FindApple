@@ -20,6 +20,7 @@ const ObjectionRead = () => {
   const [submitObj, setSubmitObj] = useState(HeaderState);
 
   useEffect(() => {
+    setSubmitObj({ ...submitObj, pageNumber: 0 });
     if (!window.scrollY) return;
     // 현재 위치가 이미 최상단일 경우 return
     window.scrollTo({

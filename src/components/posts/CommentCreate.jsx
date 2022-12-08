@@ -40,7 +40,7 @@ const CommentCreate = (props) => {
           type="text"
           onChange={onChangeInputHandler}
           onKeyPress={keyPress}
-          maxLength='24'
+          maxLength="24"
         />
         <img
           className=" absolute right-9 bottom-[22px]"

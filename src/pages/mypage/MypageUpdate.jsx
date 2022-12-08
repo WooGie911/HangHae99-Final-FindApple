@@ -57,7 +57,7 @@ const MypageUpdate = () => {
       new Blob([JSON.stringify(obj)], { type: "application/json" })
     );
     dispatch(__UserProfileEdit(formData));
-    alert("변경이 완료되었습니다.")
+    alert("변경이 완료되었습니다.");
   };
 
   return (
