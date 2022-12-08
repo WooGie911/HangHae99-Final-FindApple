@@ -11,7 +11,6 @@ import blackMy from "../../assets/blackMy.svg";
 import blueMy from "../../assets/blueMy.svg";
 import { useDispatch, useSelector } from "react-redux";
 import { swichStepState } from "../../redux/modules/PriceSlice";
-import blackChat from "../../assets/blackChat.png";
 import whiteChat from "../../assets/whiteChat.png";
 import ChatList from "../../pages/chatting/element/ChatList";
 import { swichFooterState } from "../../redux/modules/PostsSlice";
@@ -60,7 +59,7 @@ const Footer = () => {
   useEffect(() => {}, [footerState]);
 
   return (
-    <div className="fixed bottom-0">
+    <div className="fixed bottom-0 ">
       <div className="px-[18px] absolute right-0 bottom-[70px]">
         <button
           className=" w-12 h-12 bg-CC flex relative items-center justify-center rounded-full"
@@ -132,6 +131,7 @@ const Footer = () => {
           src={bluePlus}
           onClick={() => onClickPricingButton()}
         />
+
         {footerState !== "Issue" ? (
           <div
             className="cursor-pointer flex-1"
@@ -163,6 +163,7 @@ const Footer = () => {
             <div className=" text-CC text-center"> 이의제기 </div>
           </div>
         )}
+
         {footerState !== "My" ? (
           <div
             className="cursor-pointer flex-1"

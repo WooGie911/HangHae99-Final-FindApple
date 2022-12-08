@@ -4,7 +4,6 @@ import { __getMyLike } from "../../redux/modules/MypageSlice";
 import { useNavigate } from "react-router-dom";
 import Layout from "../../components/commons/Layout";
 import Footer from "../../components/commons/Footer";
-import styled from "styled-components";
 import backArrow from "../../assets/backArrow.svg";
 import mainHeart from "../../assets/mainHeart.svg";
 
@@ -33,11 +32,11 @@ const MyLike = () => {
 
         <div className=" p-3 mt-5 grid grid-cols-2">
           {likes &&
-            likes.map((like) => {
+            likes.map((like, index) => {
               return (
                 <div
                   className="bg-white cursor-pointer p-2 mx-1 mt-2 rounded-md drop-shadow-lg"
-                  key={like.postId}
+                  key={index}
                   onClick={() => {
                     navigate(`/PostDetail/${like.postId}`);
                   }}
@@ -46,8 +45,10 @@ const MyLike = () => {
                     className="h-[150px] w-[150px] min-w-[150px] object-cover rounded-md  "
                     src={like.images[0].imgUrl}
                   />
-                  <div className=" p-1">
-                    <div>{like.userPrice.toLocaleString("ko-KR")}원</div>
+                  <div className=" p-1 flex-col justify-between content-between">
+                    <div className="font-semibold ">
+                      {like.userPrice.toLocaleString("ko-KR")}원
+                    </div>
                     <div className="text-sm  text-OO">{like.title}</div>
                     <div className="flex text-xs ">
                       <img src={mainHeart} />

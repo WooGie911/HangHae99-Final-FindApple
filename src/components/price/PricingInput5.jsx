@@ -148,12 +148,12 @@ const PricingInput5 = ({ priceListState, setPriceListState, stepState }) => {
       <div>
         {priceListState.category === "macbook" ? (
           <div>
-            <div className=" flex-col pt-[18px] px-[18px]">
-              <div className=" flex items-center w-full h-14 font-semibold ">
+            <div className=" flex-col pt-[18px] mt-1 px-[18px]">
+              <div className=" flex items-center w-full h-12 font-bold ">
                 램 메모리
               </div>
 
-              <ul className="text-DD flex mt-1  ">
+              <ul className="text-DD flex ">
                 {getList5.ram &&
                   getList5.ram.map((list, index) => {
                     return (
@@ -201,7 +201,7 @@ const PricingInput5 = ({ priceListState, setPriceListState, stepState }) => {
             </div>
 
             <div className=" flex-col px-[18px]">
-              <div className=" flex items-center w-full h-14 font-semibold ">
+              <div className=" flex items-center w-full h-12 mt-4 font-semibold ">
                 SSD 용량
               </div>
               <div className="  text-DD">

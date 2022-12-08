@@ -48,7 +48,9 @@ const MyPost = () => {
                   src={post.images[0].imgUrl}
                 />
                 <div className=" p-1">
-                  <div>{post.userPrice.toLocaleString("ko-KR")}원</div>
+                  <div className="font-semibold ">
+                    {post.userPrice.toLocaleString("ko-KR")}원
+                  </div>
                   <div className="text-sm  text-OO">{post.title}</div>
                   <div className="flex text-xs ">
                     <img src={mainHeart} />

@@ -54,11 +54,11 @@ const PricingInput4 = ({ priceListState, setPriceListState, stepState }) => {
     <div>
       <div className=" flex-col p-[18px]">
         {priceListState.category === "macbook" ? (
-          <div className=" flex items-center w-full h-14 font-semibold ">
+          <div className=" flex items-center w-full h-14 font-bold ">
             화면크기을 선택해주세요 (inch)
           </div>
         ) : (
-          <div className=" flex items-center w-full h-14 font-semibold ">
+          <div className=" flex items-center w-full h-14 font-bold ">
             용량을 선택해주세요
           </div>
         )}

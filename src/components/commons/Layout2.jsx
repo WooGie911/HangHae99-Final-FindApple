@@ -2,7 +2,7 @@ import React from "react";
 
 const Layout2 = ({ children }) => {
   return (
-    <div className="w-[375px] relative flex-col mx-auto min-h-[100vh] h-full bg-white">
+    <div className="w-full max-w-[375px] relative flex-col mx-auto h-[100vh] bg-white overflow-x-hidden  scrollbar-hide">
       {children}
     </div>
   );

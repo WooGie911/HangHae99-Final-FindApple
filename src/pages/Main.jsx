@@ -2,7 +2,7 @@ import React, { useEffect } from "react";
 import { useDispatch } from "react-redux";
 import { useNavigate } from "react-router-dom";
 import { __UserProfile } from "../redux/modules/LoginSlice";
-import LOGO from "../assets/LOGO.svg";
+import LOGO from "../assets/LOGO.png";
 import bookmark from "../assets/bookmark.svg";
 import { initialHeaderState } from "../redux/modules/PostsSlice";
 import Layout from "../components/commons/Layout";
@@ -41,41 +41,39 @@ const Main = () => {
   }, []);
 
   return (
-    <>
-      <Layout>
-        <div className="h-[60px] w-full flex justify-between items-center px-[18px] bg-white">
-          <img src={LOGO} />
+    <Layout>
+      <div className="bg-white h-[60px] w-full flex justify-between items-center px-[18px] ">
+        <img className=" w-28" src={LOGO} />
 
-          <img
-            className=" cursor-pointer"
-            src={bookmark}
-            onClick={() => {
-              navigate("/mylike");
-            }}
-          />
-        </div>
+        <img
+          className=" cursor-pointer"
+          src={bookmark}
+          onClick={() => {
+            navigate("/mylike");
+          }}
+        />
+      </div>
 
-        <MainHeader Navigate={"/postread"} />
+      <MainHeader Navigate={"/postread"} />
 
-        <Slide />
+      <Slide />
 
-        <div className=" flex justify-between mx-[18px] text-lg font-semibold">
-          <div>회원님을 위한 추천상품!</div>
-          <button
-            className="text-DD text-xs font-semibold"
-            onClick={MoreSeeClick}
-          >
-            더보기 〉
-          </button>
-        </div>
+      <div className=" flex justify-between mx-[18px] text-lg font-semibold">
+        <div>회원님을 위한 추천상품!</div>
+        <button
+          className="text-DD text-xs font-semibold"
+          onClick={MoreSeeClick}
+        >
+          더보기 〉
+        </button>
+      </div>
 
-        <MainList />
+      <MainList />
 
-        <div className="h-10" />
+      <div className="h-10" />
 
-        <Footer />
-      </Layout>
-    </>
+      <Footer />
+    </Layout>
   );
 };
 
