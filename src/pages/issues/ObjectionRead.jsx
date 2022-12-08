@@ -2,7 +2,7 @@ import React, { useState } from "react";
 import { useSelector } from "react-redux";
 import {
   __getObjection,
-  __searchObjection,
+  searchObjection,
 } from "../../redux/modules/ObjectionsSlice";
 import PostSearch from "../../components/commons/PostSearch";
 import Layout from "../../components/commons/Layout";
@@ -30,7 +30,7 @@ const ObjectionRead = () => {
 
   return (
     <Layout>
-      <PostSearch __search={__searchObjection} />
+      <PostSearch search={searchObjection} />
       <Header
         state={submitObj}
         setState={setSubmitObj}
@@ -46,6 +46,7 @@ const ObjectionRead = () => {
       />
 
       <ObjectionList
+        search={searchObjection}
         state={submitObj}
         setState={setSubmitObj}
         posts={posts}

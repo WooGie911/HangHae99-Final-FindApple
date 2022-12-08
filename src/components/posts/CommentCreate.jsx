@@ -18,10 +18,10 @@ const CommentCreate = (props) => {
     if (comments.comment.trim() === "") {
       return alert("댓글을 입력하세요.");
     }
-    if (window.confirm("작성하시겠습니까?")) {
-      dispatch(props.__addComment(Fdata));
-      setComments(initialState);
-    }
+    // if (window.confirm("작성하시겠습니까?")) {
+    dispatch(props.__addComment(Fdata));
+    setComments(initialState);
+    // }
   };
   const keyPress = (e) => {
     if (e.key === "Enter") {

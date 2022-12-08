@@ -21,7 +21,7 @@ const LogoutButton = () => {
         <KakaoLogout />
       ) : (
         <button
-          className="w-[70px] h-[25px] border-CC border-[1px] rounded text-[11px] font-medium text-CC"
+          className="w-14 h-[25px] border-CC border-[1px] rounded-2xl text-[11px] font-medium text-CC"
           onClick={onClickButton}
         >
           로그아웃

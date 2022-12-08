@@ -1,18 +1,21 @@
 import React, { useEffect, useState } from "react";
 import { useDispatch, useSelector } from "react-redux";
-import { useNavigate } from "react-router-dom";
+import { useNavigate, useParams } from "react-router-dom";
 import { __getPostDetail } from "../../redux/modules/PostDetailsSlice";
-import { __getPost } from "../../redux/modules/PostsSlice";
+import { searchPost, __getPost } from "../../redux/modules/PostsSlice";
 import mainHeart from "../../assets/mainHeart.svg";
 
 const MainList = () => {
   const navigate = useNavigate();
   const dispatch = useDispatch();
+  const params = useParams;
+
   const HeaderState = {
     paramObj: "all",
     pageNumber: 0,
     pageSize: 5,
     postSort: "postLikeCnt",
+    searchObj: "",
   };
   const [submitOBJ, setSubmitOBJ] = useState(HeaderState);
   const [headerBarState, setHeaderBarState] = useState("all");
@@ -33,12 +36,15 @@ const MainList = () => {
     dispatch(__getPost(submitOBJ));
   }, [submitOBJ]);
 
+  useEffect(() => {
+    dispatch(searchPost(""));
+  }, [params]);
   return (
     <>
       <div className=" justify-between  flex p-2 px-10 pt-4 text-sm">
         {headerBarState === "all" ? (
           <button
-            className=" flex-1 bg-DD w-[90px] h-[29px] text-white rounded-2xl border-[1px] border-DD"
+            className=" flex-1 bg-C4 w-[90px] h-[29px] text-white rounded-2xl "
             onClick={() => {
               onClickCategoryHandler("all");
             }}
@@ -47,7 +53,7 @@ const MainList = () => {
           </button>
         ) : (
           <button
-            className="flex-1  bg-C4 w-[90px] h-[29px] text-OO rounded-2xl border-[1px] border-DD"
+            className="flex-1  bg-DDD w-[90px] h-[29px] text-OO rounded-2xl "
             onClick={() => {
               onClickCategoryHandler("all");
             }}
@@ -57,7 +63,7 @@ const MainList = () => {
         )}
         {headerBarState === "macbook" ? (
           <button
-            className="flex-1  ml-2 bg-DD w-[90px] h-[29px]  text-white rounded-2xl border-[1px] border-DD"
+            className="flex-1  ml-2 bg-C4 w-[90px] h-[29px]  text-white rounded-2xl"
             onClick={() => {
               onClickCategoryHandler("macbook");
             }}
@@ -66,7 +72,7 @@ const MainList = () => {
           </button>
         ) : (
           <button
-            className="flex-1  ml-2 bg-C4 w-[90px] h-[29px] text-OO rounded-2xl border-[1px] border-DD"
+            className="flex-1  ml-2 bg-DDD w-[90px] h-[29px] text-OO rounded-2xl "
             onClick={() => {
               onClickCategoryHandler("macbook");
             }}
@@ -76,7 +82,7 @@ const MainList = () => {
         )}
         {headerBarState === "iphone" ? (
           <button
-            className="flex-1  ml-2 bg-DD w-[90px] h-[29px]  text-white rounded-2xl border-[1px] border-DD"
+            className="flex-1  ml-2 bg-C4 w-[90px] h-[29px]  text-white rounded-2xl "
             onClick={() => {
               onClickCategoryHandler("iphone");
             }}
@@ -85,7 +91,7 @@ const MainList = () => {
           </button>
         ) : (
           <button
-            className="flex-1  ml-2 bg-C4 w-[90px] h-[29px] text-OO rounded-2xl border-[1px] border-DD"
+            className="flex-1  ml-2 bg-DDD w-[90px] h-[29px] text-OO rounded-2xl "
             onClick={() => {
               onClickCategoryHandler("iphone");
             }}
@@ -116,14 +122,14 @@ const MainList = () => {
                   <div>
                     <label>{post?.userPrice?.toLocaleString("ko-KR")}원</label>
                   </div>
-                  <div className=" mt-1 text-sm font-medium">
+                  <div className="text-OO  text-sm font-medium">
                     <label>{post?.category}</label>
                   </div>
-                  <div className="flex justify-between mt-4  text-xs font-normal">
+                  <div className="flex justify-between mt-4 text-DD  text-xs font-normal">
                     <div>{post?.createdAt}</div>
                     <div className="flex">
                       <img src={mainHeart} />
-                      <div>{post?.likeCnt}</div>
+                      <div className=" ml-1">{post?.likeCnt}</div>
                     </div>
                   </div>
                 </div>

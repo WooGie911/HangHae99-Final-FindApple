@@ -35,7 +35,7 @@ const PricingInput3 = ({ priceListState, setPriceListState, stepState }) => {
   return (
     <div>
       <div className=" flex-col p-[18px]">
-        <div className=" flex items-center w-full h-14 font-semibold ">
+        <div className=" flex items-center w-full h-14 font-bold ">
           기종을 선택해주세요
         </div>
         <div className="text-DD mt-1">

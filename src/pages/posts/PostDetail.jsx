@@ -206,9 +206,7 @@ const PostDetail = () => {
                   onClick={() => onCartButton(post.postId)}
                 />
               </div>
-              <div className="text-center text-sm text-CC shadow-lg">
-                {post.likeCnt}
-              </div>
+              <div className="text-center text-sm text-CC ">{post.likeCnt}</div>
             </div>
           )}
         </div>
@@ -219,7 +217,7 @@ const PostDetail = () => {
               onClick={onSellerPage}
             >
               <img
-                className="w-[46px] h-[46px] rounded-full"
+                className="w-[46px] h-[46px] rounded-full object-cover"
                 src={post.avatarUrl}
               />
               <div className="ml-2 text-sm font-semibold">{post.nickname}</div>

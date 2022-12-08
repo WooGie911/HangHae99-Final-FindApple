@@ -38,17 +38,17 @@ export const Apis = {
 
   searchPostAX: (payload) =>
     token.get(
-      `/api/posts/${payload.paramObj}/${payload.searchObj}?page=${payload.pageNumber}&size=${payload.pageSize}&sort=${payload.postSort},DESC`
+      `/api/posts/${payload.paramObj}${payload.searchObj}?page=${payload.pageNumber}&size=${payload.pageSize}&sort=${payload.postSort},DESC`
     ),
 
   getAddPostAX: (payload) =>
     token.get(
-      `/api/posts/${payload.state.paramObj}?page=${payload.page}&size=${payload.state.pageSize}&sort=${payload.state.postSort},DESC`
+      `/api/posts/${payload.state.paramObj}${payload.searchObj}?page=${payload.page}&size=${payload.state.pageSize}&sort=${payload.state.postSort},DESC`
     ),
 
   getPostAX: (payload) =>
     token.get(
-      `/api/posts/${payload.paramObj}?page=${payload.pageNumber}&size=${payload.pageSize}&sort=${payload.postSort},DESC`
+      `/api/posts/${payload.paramObj}${payload.searchObj}?page=${payload.pageNumber}&size=${payload.pageSize}&sort=${payload.postSort},DESC`
     ),
 
   addPostAX: (payload) => file.post(`/api/posts`, payload),

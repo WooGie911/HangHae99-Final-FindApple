@@ -4,7 +4,7 @@ import { __SignUp, __emailCheck } from "../../redux/modules/LoginSlice";
 import { useNavigate } from "react-router-dom";
 import useInput from "../../hook/useInput";
 import Layout from "../../components/commons/Layout";
-import LOGO from "../../assets/LOGO.svg";
+import LOGO from "../../assets/LOGO.png";
 import backArrow from "../../assets/backArrow.svg";
 
 const SignUp = () => {
@@ -74,7 +74,7 @@ const SignUp = () => {
           }}
           src={backArrow}
         />
-        <img src={LOGO} />
+        <img className="w-28" src={LOGO} />
       </div>
       <div className="flex items-center h-[100vh] justify-center">
         <div className="flex-col text-xs">

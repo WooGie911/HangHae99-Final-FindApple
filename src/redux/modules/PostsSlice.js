@@ -1,26 +1,14 @@
 import { createAsyncThunk, createSlice } from "@reduxjs/toolkit";
 import Apis from "../../shared/Apis";
 
-export const __searchPost = createAsyncThunk(
-  "posts/__searchPost",
-  async (payload, thunkAPI) => {
-    try {
-      const data = await Apis.searchPostAX(payload);
-      return thunkAPI.fulfillWithValue(data.data.content);
-    } catch (error) {
-      return thunkAPI.rejectWithValue(error);
-    }
-  }
-);
-
 export const __getAddPost = createAsyncThunk(
   "posts/__getAddPost",
   async (payload, thunkAPI) => {
     try {
       const data = await Apis.getAddPostAX(payload);
-
+      console.log("payload겟애포", payload);
       const obj = {
-        payload: payload.page,
+        page: payload.page,
         data: data.data.content,
         totalElements: data.data.totalElements,
       };
@@ -35,6 +23,7 @@ export const __getPost = createAsyncThunk(
   "posts/__getPost",
   async (payload, thunkAPI) => {
     try {
+      console.log("겟포스트 되는감?", payload);
       const data = await Apis.getPostAX(payload);
       return thunkAPI.fulfillWithValue(data.data);
     } catch (error) {
@@ -94,6 +83,7 @@ const PostsSlice = createSlice({
       postSort: "postId",
     },
     footerState: "Home",
+    searchState: "",
   },
   reducers: {
     initialHeaderState(state, action) {
@@ -103,30 +93,20 @@ const PostsSlice = createSlice({
     swichFooterState(state, action) {
       state.footerState = action.payload;
     },
+    searchPost(state, action) {
+      state.searchState = action.payload;
+      state.HeaderState.pageNumber = 0;
+    },
   },
   extraReducers: {
-    //__searchPost
-    [__searchPost.pending]: (state) => {
-      state.isLoading = true;
-    },
-    [__searchPost.fulfilled]: (state, action) => {
-      state.isLoading = false;
-      state.posts = action.payload;
-    },
-    [__searchPost.rejected]: (state, action) => {
-      state.isLoading = false;
-      state.isSuccess = false;
-      state.error = action.payload;
-    },
-
     //__getAddPost
     [__getAddPost.pending]: (state) => {
       state.isLoading = true;
     },
     [__getAddPost.fulfilled]: (state, action) => {
       state.isLoading = false;
-
-      if (action.payload.payload === 0) {
+      console.log("겟애드포스트");
+      if (action.payload.page === 0) {
         state.posts.splice(0);
         state.posts.push(...action.payload.data);
         state.postsCount = action.payload.totalElements;
@@ -208,6 +188,10 @@ const PostsSlice = createSlice({
   },
 });
 
-export const { swichHeaderBarState, swichFooterState, initialHeaderState } =
-  PostsSlice.actions;
+export const {
+  searchPost,
+  swichHeaderBarState,
+  swichFooterState,
+  initialHeaderState,
+} = PostsSlice.actions;
 export default PostsSlice.reducer;

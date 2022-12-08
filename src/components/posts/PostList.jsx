@@ -1,4 +1,4 @@
-import { useDispatch } from "react-redux";
+import { useDispatch, useSelector } from "react-redux";
 import { __getAddPost, __getPost } from "../../redux/modules/PostsSlice";
 import { useNavigate, useParams } from "react-router-dom";
 import React, { useState, useEffect, useCallback } from "react";
@@ -6,10 +6,11 @@ import { __getPostTime } from "../../redux/modules/PostsSlice";
 import { useInView } from "react-intersection-observer";
 import mainHeart from "../../assets/mainHeart.svg";
 
-const PostList = ({ posts, detail, __getDetail, state, setState }) => {
+const PostList = ({ posts, detail, __getDetail, state, setState, search }) => {
   const navigate = useNavigate();
   const dispatch = useDispatch();
   const params = useParams();
+  const { searchState } = useSelector((state) => state.posts);
 
   const onClickHandler = (data) => {
     dispatch(__getDetail(data));
@@ -20,19 +21,29 @@ const PostList = ({ posts, detail, __getDetail, state, setState }) => {
   const [loading, setLoading] = useState(false);
   const [ref, inView] = useInView();
   /**  서버에서 아이템을 가지고 오는 함수 */
-  const obj = {
-    page: page,
-    state: state,
-  };
+
+  let searchObj = "";
+  if (searchState === "") {
+    searchObj = "";
+  } else {
+    searchObj = `/${searchState}`;
+  }
+
   const getItems = useCallback(async () => {
+    const obj = {
+      searchObj: searchObj,
+      page: page,
+      state: state,
+    };
     //의존하는 값(deps)들이 바뀌지 않는 한 기존 함수를 재사용할 수 있습니다.
     dispatch(__getAddPost(obj));
-  }, [page, params]);
+  }, [page, params, searchState]);
 
   // `getItems` 가 바뀔 때 마다 함수 실행
   useEffect(() => {
     getItems();
   }, [getItems]);
+
   useEffect(() => {
     setState({ ...state, pageNumber: page });
   }, [page]);
@@ -46,7 +57,13 @@ const PostList = ({ posts, detail, __getDetail, state, setState }) => {
 
   useEffect(() => {
     setPage(0);
+    dispatch(search(""));
   }, [params]);
+
+  useEffect(() => {
+    setPage(0);
+    console.log("searchState", searchState);
+  }, [searchState]);
 
   return (
     <div>
@@ -71,10 +88,9 @@ const PostList = ({ posts, detail, __getDetail, state, setState }) => {
                     <label>{post?.title}</label>
                   </div>
                   <div className=" mt-1 text-base font-semibold">
-                    {post.userPrice !== undefined &&(
-                    <label>{post?.userPrice.toLocaleString("ko-KR")}원</label>
+                    {post.userPrice !== undefined && (
+                      <label>{post?.userPrice.toLocaleString("ko-KR")}원</label>
                     )}
-
                   </div>
                   <div className="flex justify-between mt-4  text-xs font-normal">
                     <div>{post?.createdAt}</div>

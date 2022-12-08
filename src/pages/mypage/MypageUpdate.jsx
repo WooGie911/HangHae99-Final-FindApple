@@ -63,7 +63,7 @@ const MypageUpdate = () => {
     <Layout>
       <div className=" flex relative items-center justify-center h-[60px] text-[18px] font-semibold ">
         <img
-          className="cursor-pointer h-6 w-6 absolute left-3"
+          className="cursor-pointer h-6 w-6 absolute left-3 "
           onClick={onClickHandler}
           src={backArrow}
         />
@@ -87,7 +87,7 @@ const MypageUpdate = () => {
         />
         <div className="flex justify-center items-center mt-5 p-3">
           <img
-            className="cursor-pointer w-[88px] h-[88px] rounded-full "
+            className="cursor-pointer w-[88px] h-[88px] rounded-full object-cover"
             src={user.profileImg}
             ref={uploadedImage}
             onClick={onSubmitHandler}
