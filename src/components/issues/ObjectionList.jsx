@@ -1,4 +1,4 @@
-import { useDispatch } from "react-redux";
+import { useDispatch, useSelector } from "react-redux";
 import {
   __getPost,
   __getAddObjection,
@@ -20,6 +20,7 @@ const ObjectionList = ({
   const navigate = useNavigate();
   const dispatch = useDispatch();
   const params = useParams();
+  const { searchState } = useSelector((state) => state.objections);
 
   const onClickHandler = (data) => {
     dispatch(__getDetail(data));
@@ -29,20 +30,30 @@ const ObjectionList = ({
   const [page, setPage] = useState(0); //페이지수
   const [loading, setLoading] = useState(false);
   const [ref, inView] = useInView();
+
+  let searchObj = "";
+  if (searchState === "") {
+    searchObj = "";
+  } else {
+    searchObj = `/${searchState}`;
+  }
+
   /**  서버에서 아이템을 가지고 오는 함수 */
-  const obj = {
-    page: page,
-    state: state,
-  };
   const getItems = useCallback(async () => {
+    const obj = {
+      searchObj: searchObj,
+      page: page,
+      state: state,
+    };
     //의존하는 값(deps)들이 바뀌지 않는 한 기존 함수를 재사용할 수 있습니다.
     dispatch(__getAddObjection(obj));
-  }, [page, params]);
+  }, [page, params, searchState]);
 
   // `getItems` 가 바뀔 때 마다 함수 실행
   useEffect(() => {
     getItems();
   }, [getItems]);
+
   useEffect(() => {
     setState({ ...state, pageNumber: page });
   }, [page]);
@@ -58,6 +69,10 @@ const ObjectionList = ({
     setPage(0);
     dispatch(search(""));
   }, [params]);
+
+  useEffect(() => {
+    setPage(0);
+  }, [searchState]);
 
   return (
     <>

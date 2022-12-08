@@ -20,7 +20,6 @@ const PostList = ({ posts, detail, __getDetail, state, setState, search }) => {
   const [page, setPage] = useState(0); //페이지수
   const [loading, setLoading] = useState(false);
   const [ref, inView] = useInView();
-  /**  서버에서 아이템을 가지고 오는 함수 */
 
   let searchObj = "";
   if (searchState === "") {
@@ -29,6 +28,7 @@ const PostList = ({ posts, detail, __getDetail, state, setState, search }) => {
     searchObj = `/${searchState}`;
   }
 
+  /**  서버에서 아이템을 가지고 오는 함수 */
   const getItems = useCallback(async () => {
     const obj = {
       searchObj: searchObj,
