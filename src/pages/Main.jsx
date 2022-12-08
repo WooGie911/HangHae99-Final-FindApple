@@ -4,30 +4,22 @@ import { useNavigate } from "react-router-dom";
 import { __UserProfile } from "../redux/modules/LoginSlice";
 import LOGO from "../assets/LOGO.png";
 import bookmark from "../assets/bookmark.svg";
-import { initialHeaderState } from "../redux/modules/PostsSlice";
+import { swichFooterState } from "../redux/modules/PostsSlice";
 import Layout from "../components/commons/Layout";
 import Slide from "../components/main/Slide";
 import MainHeader from "../components/main/MainHeader";
 import MainList from "../components/main/MainList";
 import Footer from "../components/commons/Footer";
+import { useState } from "react";
 
 const Main = () => {
   const dispatch = useDispatch();
   const navigate = useNavigate();
+  const [headerBarState, setHeaderBarState] = useState("all");
 
   const MoreSeeClick = () => {
-    dispatch(
-      initialHeaderState({
-        HeaderState: {
-          paramObj: "all",
-          pageNumber: 0,
-          pageSize: 10,
-          postSort: "postLikeCnt",
-        },
-        footerState: "Search",
-      })
-    );
-    navigate("/postread/all/postLikeCnt");
+    dispatch(swichFooterState("Search"));
+    navigate(`/postread/${headerBarState}/postLikeCnt`);
   };
 
   useEffect(() => {
@@ -71,7 +63,10 @@ const Main = () => {
         </button>
       </div>
 
-      <MainList />
+      <MainList
+        headerBarState={headerBarState}
+        setHeaderBarState={setHeaderBarState}
+      />
 
       <div className="h-10" />
 

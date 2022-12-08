@@ -3,18 +3,18 @@ import useInput from "../../hook/useInput";
 import { useDispatch } from "react-redux";
 import SearchIcon from "../../assets/SearchIcon.svg";
 
-const PostSearch = (props) => {
+const Search = (props) => {
   const initialState = { searchContent: "" };
-  const [search, setSearch, onChangeSearchHandler] = useInput(initialState);
+  const [searchState, setSearchState, onChangeSearchHandler] =
+    useInput(initialState);
   const dispatch = useDispatch();
 
   const onClickSubmitButton = () => {
-    if (search.searchContent.trim() === "") {
+    if (searchState.searchContent.trim() === "") {
       return alert("검색어를 입력하세요.");
     }
-
-    dispatch(props.search(search.searchContent));
-    setSearch(initialState);
+    dispatch(props.search(searchState.searchContent));
+    setSearchState(initialState);
   };
 
   const keyPress = (e) => {
@@ -35,7 +35,7 @@ const PostSearch = (props) => {
         <input
           className="bg-transparent ml-1 w-full text-sm h-full rounded-r-lg outline-none "
           placeholder="어떤걸 찾고 있나요?"
-          value={search.searchContent || ""}
+          value={searchState.searchContent || ""}
           name="searchContent"
           type="text"
           onChange={onChangeSearchHandler}
@@ -46,4 +46,4 @@ const PostSearch = (props) => {
   );
 };
 
-export default PostSearch;
+export default Search;

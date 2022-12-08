@@ -5,13 +5,15 @@ export const __getAddObjection = createAsyncThunk(
   "objections/__getAddObjection",
   async (payload, thunkAPI) => {
     try {
+      console.log(payload);
       const data = await Apis.getAddObjectionAX(payload);
+      console.log("data", data);
       const obj = {
-        payload: payload.page,
+        getState: payload,
         data: data.data.content,
         totalElements: data.data.totalElements,
       };
-
+      console.log("dataobj", obj);
       return thunkAPI.fulfillWithValue(obj);
     } catch (error) {
       return thunkAPI.rejectWithValue(error);
@@ -74,8 +76,14 @@ const ObjectionsSlice = createSlice({
   name: "objections",
   initialState: {
     posts: [],
-
     postsCount: 0,
+    getState: {
+      categoryObj: "all",
+      pageNumberObj: 0,
+      pageSizeObj: 10,
+      sortObj: "issuesId",
+      searchObj: "",
+    },
 
     HeaderState: {
       paramObj: "all",
@@ -87,8 +95,7 @@ const ObjectionsSlice = createSlice({
   },
   reducers: {
     searchObjection(state, action) {
-      state.searchState = action.payload;
-      state.HeaderState.pageNumber = 0;
+      state.getState = { ...state.getState, searchObj: action.payload };
     },
   },
   extraReducers: {
@@ -98,14 +105,15 @@ const ObjectionsSlice = createSlice({
     },
     [__getAddObjection.fulfilled]: (state, action) => {
       state.isLoading = false;
-
-      if (action.payload.payload === 0) {
+      if (action.payload.getState.pageNumberObj === 0) {
         state.posts.splice(0);
         state.posts.push(...action.payload.data);
         state.postsCount = action.payload.totalElements;
+        state.getState = action.payload.getState;
       } else {
         state.posts.push(...action.payload.data);
         state.postsCount = action.payload.totalElements;
+        state.getState = action.payload.getState;
       }
     },
     [__getAddObjection.rejected]: (state, action) => {
