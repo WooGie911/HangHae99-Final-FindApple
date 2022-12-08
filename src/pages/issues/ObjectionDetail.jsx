@@ -69,13 +69,26 @@ const ObjectionDetail = () => {
   };
 
   // 케러셀
-
   const settings = {
     dots: true,
     infinite: true,
     speed: 500,
     slidesToShow: 1,
     slidesToScroll: 1,
+    appendDots: (dots) => (
+      <div
+        style={{
+          width: "100%",
+          position: "absolute",
+          bottom: "24px",
+          display: "flex",
+          alignItems: "center",
+          justifyContent: "center",
+        }}
+      >
+        <ul> {dots} </ul>
+      </div>
+    ),
   };
 
   useEffect(() => {
@@ -93,18 +106,18 @@ const ObjectionDetail = () => {
         <div className=" relative flex-col h-[410px] w-[375px] z-10">
           <div className="bg-transparent flex relative h-[60px] items-center justify-center z-20">
             <img
-              className="h-5 w-5 absolute  left-3"
+              className="h-[35px] w-[35px] absolute  left-3"
               src={blueBackArrow}
               onClick={() => navigate(-1)}
             />
             <img
-              className="h-[18px] w-[18px] absolute left-10"
+              className="h-[35px] w-[35px] absolute left-12"
               src={blueHome}
               onClick={() => onClickGoHome({ state: "Home", navi: "/main" })}
             />
             {post.myIssue === true && (
               <img
-                className="h-[18px] w-[18px] absolute right-4"
+                className="h-[28px] w-[28px] absolute right-0"
                 src={blueToggle}
                 onClick={editToggleHandler}
               />
@@ -145,66 +158,70 @@ const ObjectionDetail = () => {
           </div>
 
           {post.isLike ? (
-            <div className="bg-transparent flex-col absolute z-10 right-4 bottom-0">
-              <img
-                src={blueHeart}
-                onClick={() => onCartButton(post.issuesId)}
-              />
-              <div className="text-center text-sm text-CC">{post.likeCnt}</div>{" "}
+            <div className="bg-transparent flex-col  absolute z-10 right-4 bottom-0 ">
+              <div className="rounded-full bg-white border-CC border-[1px] flex justify-center items-center h-7 w-7">
+                <img
+                  className=" h-5 w-5 "
+                  src={blueHeart}
+                  onClick={() => onCartButton(post.issuesId)}
+                />
+              </div>
+              <div className="text-center text-sm text-CC">{post.likeCnt}</div>
             </div>
           ) : (
-            <div className="bg-transparent flex-col absolute z-10 right-4 bottom-0">
-              <img
-                src={emptyHeart}
-                onClick={() => onCartButton(post.issuesId)}
-              />
-              <div className="text-center text-sm text-white">
-                {post.likeCnt}
+            <div className="bg-transparent flex-col absolute z-10 right-4 bottom-0 ">
+              <div className="rounded-full bg-CC  flex justify-center items-center h-7 w-7">
+                <img
+                  className=" h-5 w-5 "
+                  src={emptyHeart}
+                  onClick={() => onCartButton(post.issuesId)}
+                />
               </div>
+              <div className="text-center text-sm text-CC ">{post.likeCnt}</div>
             </div>
           )}
         </div>
-        <div className="bg-white relative flex-col grow rounded-t-3xl z-30 mt-5 ">
-          <div className=" h-[77px]  rounded-t-3xl border-b-[1px] border-D9 flex p-[18px] justify-between">
+        <div className="bg-white relative flex-col grow rounded-t-3xl z-30 mt-5">
+          <div className=" h-[77px] rounded-t-3xl border-b-[1px] border-D9 flex p-[18px] justify-between">
             <div
               className="items-center flex cursor-pointer"
               onClick={onSellerPage}
             >
               <img
-                className="w-[46px] h-[46px] rounded-full"
+                className="w-[46px] h-[46px] rounded-full object-cover"
                 src={post.avatarUrl}
               />
               <div className="ml-2 text-sm font-semibold">{post.nickname}</div>
             </div>
-            <button
-              className="bg-CC text-white text-sm p-3 rounded-md"
+            <div
+              className="bg-CC text-white text-sm p-3 rounded-md cursor-pointer flex items-center "
               onClick={() => {
                 navigate("/pricingtext", { state: post });
               }}
             >
               상품 상세 정보
-            </button>
+            </div>
           </div>
 
           <div className="  flex-col relative ">
             {post.options !== undefined && (
-              <div className=" flex text-xs px-[18px] items-stretch my-3 opacity-50 text-CC">
-                <div className="p-1 bg-EB rounded-md mx-0.5">
+              <div className=" flex text-xs px-[18px] items-stretch my-3 text-CC mt-3">
+                <div className="p-1 px-2 bg-EB bg-opacity-50 rounded-xl mr-1">
                   {post.options.category}
                 </div>
-                <div className="p-1 bg-EB rounded-md mx-0.5">
+                <div className="p-1 px-2 bg-EB bg-opacity-50 rounded-xl mr-1">
                   {post.options.model}
                 </div>
-                <div className="p-1 bg-EB rounded-md mx-0.5">
+                <div className="p-1 px-2 bg-EB bg-opacity-50 rounded-xl mr-1">
                   {post.options.years}
                 </div>
-                <div className="p-1 bg-EB rounded-md mx-0.5">
+                <div className="p-1 px-2 bg-EB bg-opacity-50 rounded-xl mr-1">
                   {post.options.options}
                 </div>
               </div>
             )}
-            <div className="px-[18px] font-semibold">{post.title}</div>
-            <div className=" p-[18px] text-sm">{post.content}</div>
+            <div className="ml-1 px-[18px] font-semibold">{post.title}</div>
+            <div className="ml-1 p-[18px] text-sm">{post.content}</div>
             <div className=" min-h-96 h-96" />
           </div>
         </div>

@@ -18,7 +18,7 @@ const PostsCreate = (props) => {
   });
 
   //이미지 업로드 훅
-  const [files, fileUrls, uploadHandle] = useImgUpload(3, true, 1, 1000);
+  const [files, fileUrls, uploadHandle] = useImgUpload(3, true, 4, 1000);
   const imgRef = useRef();
 
   //submit
@@ -161,7 +161,7 @@ const PostsCreate = (props) => {
             value={write.title || ""}
             type="text"
             placeholder="글 제목을 입력하세요(20자 내)"
-            maxLength='20'
+            maxLength="20"
           />
         </div>
       </div>
@@ -198,7 +198,7 @@ const PostsCreate = (props) => {
                 value={write.userPrice || ""}
                 type="text"
                 placeholder="희망 가격을 입력해주세요."
-                maxLength='7'
+                maxLength="7"
               />
             </div>
           </div>
@@ -215,7 +215,7 @@ const PostsCreate = (props) => {
                 value={write.userPrice || ""}
                 type="text"
                 placeholder="희망 가격을 입력해주세요."
-                maxLength='7'
+                maxLength="7"
               />
             </div>
           </div>
@@ -230,7 +230,7 @@ const PostsCreate = (props) => {
           value={write.content || ""}
           type="text"
           placeholder="상품설명을 작성해주세요.(200자 내)"
-          maxLength='200'          
+          maxLength="200"
         />
       </div>
 

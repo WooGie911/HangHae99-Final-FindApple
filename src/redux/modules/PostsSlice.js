@@ -5,15 +5,12 @@ export const __getAddPost = createAsyncThunk(
   "posts/__getAddPost",
   async (payload, thunkAPI) => {
     try {
-      console.log(payload);
       const data = await Apis.getAddPostAX(payload);
-      console.log("data", data);
       const obj = {
         getState: payload,
         data: data.data.content,
         totalElements: data.data.totalElements,
       };
-      console.log("dataobj", obj);
       return thunkAPI.fulfillWithValue(obj);
     } catch (error) {
       return thunkAPI.rejectWithValue(error);

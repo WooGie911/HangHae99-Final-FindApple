@@ -65,7 +65,6 @@ const ObjectionList = ({
       sortObj: params.sort,
       searchObj: checkSearchObj,
     };
-    console.log("submitObj", submitObj);
     //의존하는 값(deps)들이 바뀌지 않는 한 기존 함수를 재사용할 수 있습니다.
     dispatch(__getPost(submitObj));
   }, [page, params, getState.searchObj]);

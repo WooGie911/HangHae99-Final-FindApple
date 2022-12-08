@@ -5,15 +5,12 @@ export const __getAddObjection = createAsyncThunk(
   "objections/__getAddObjection",
   async (payload, thunkAPI) => {
     try {
-      console.log(payload);
       const data = await Apis.getAddObjectionAX(payload);
-      console.log("data", data);
       const obj = {
         getState: payload,
         data: data.data.content,
         totalElements: data.data.totalElements,
       };
-      console.log("dataobj", obj);
       return thunkAPI.fulfillWithValue(obj);
     } catch (error) {
       return thunkAPI.rejectWithValue(error);

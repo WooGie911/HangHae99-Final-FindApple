@@ -4,7 +4,7 @@ import PostList from "../../components/posts/PostList";
 import { useSelector } from "react-redux";
 import { searchPost, __getAddPost } from "../../redux/modules/PostsSlice";
 import { __getPostDetail } from "../../redux/modules/PostDetailsSlice";
-import Layout from "../../components/commons/Layout";
+import Layout2 from "../../components/commons/Layout2";
 import Footer from "../../components/commons/Footer";
 import SortBar from "../../components/commons/SortBar";
 import { __postList } from "../../redux/modules/PostsSlice";
@@ -25,7 +25,7 @@ const PostRead = () => {
   }, []);
 
   return (
-    <Layout>
+    <Layout2>
       <Search search={searchPost} />
       <Header Navigate={"/postread"} />
       <SortBar
@@ -44,7 +44,7 @@ const PostRead = () => {
       />
 
       <Footer />
-    </Layout>
+    </Layout2>
   );
 };
 

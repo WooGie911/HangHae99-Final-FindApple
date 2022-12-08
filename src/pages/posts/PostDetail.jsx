@@ -186,7 +186,7 @@ const PostDetail = () => {
 
           {post.isLike ? (
             <div className="bg-transparent flex-col  absolute z-10 right-4 bottom-0 ">
-              <div className="rounded-full border-CC border-[1px] flex justify-center items-center h-7 w-7">
+              <div className="rounded-full bg-white border-CC border-[1px] flex justify-center items-center h-7 w-7">
                 <img
                   className=" h-5 w-5 "
                   src={blueHeart}
@@ -196,7 +196,7 @@ const PostDetail = () => {
               <div className="text-center text-sm text-CC">{post.likeCnt}</div>
             </div>
           ) : (
-            <div className="bg-transparent  flex-col absolute z-10 right-4 bottom-0 ">
+            <div className="bg-transparent flex-col absolute z-10 right-4 bottom-0 ">
               <div className="rounded-full bg-CC  flex justify-center items-center h-7 w-7">
                 <img
                   className=" h-5 w-5 "
@@ -209,7 +209,7 @@ const PostDetail = () => {
           )}
         </div>
         <div className="bg-white relative flex-col grow rounded-t-3xl z-30 mt-5">
-          <div className=" h-[77px]  rounded-t-3xl border-b-[1px] border-D9 flex p-[18px] justify-between">
+          <div className=" h-[77px] rounded-t-3xl border-b-[1px] border-D9 flex p-[18px] justify-between">
             <div
               className="items-center flex cursor-pointer"
               onClick={onSellerPage}
@@ -220,14 +220,14 @@ const PostDetail = () => {
               />
               <div className="ml-2 text-sm font-semibold">{post.nickname}</div>
             </div>
-            <button
-              className="bg-CC text-white text-sm p-3 rounded-md"
+            <div
+              className="bg-CC text-white text-sm p-3 rounded-md cursor-pointer flex items-center "
               onClick={() => {
                 navigate("/pricingtext", { state: post });
               }}
             >
               상품 상세 정보
-            </button>
+            </div>
           </div>
 
           <div className="flex-col relative ">
