@@ -27,7 +27,6 @@ const PostDetail = () => {
   const params = useParams();
   const { post } = useSelector((state) => state.details);
   const postChat = useSelector((state) => state.chatting.createRoom);
-  console.log("post", post)
 
   const [editTg, setEidtTg] = useState({
     isEdit: false,
@@ -71,20 +70,19 @@ const PostDetail = () => {
 
   // 채팅방 개설
   const onClickChatting = () => {
-      dispatch(
-        __CreateRoom({
-          postId: post.postId,
-        })
-      );
-      setTimeout(
-        function () {
-          // 만들어진 채팅방으로 이동하는 로직 => localStorage 활용한 방법 이용
-          // 연결되었을 때 콜백함수 실행
-          navigate(`/chatting/${localStorage.getItem("roomId")}`);
-        },
-        300 // 밀리초 간격으로 실행
-      );
-    
+    dispatch(
+      __CreateRoom({
+        postId: post.postId,
+      })
+    );
+    setTimeout(
+      function () {
+        // 만들어진 채팅방으로 이동하는 로직 => localStorage 활용한 방법 이용
+        // 연결되었을 때 콜백함수 실행
+        navigate(`/chatting/${localStorage.getItem("roomId")}`);
+      },
+      300 // 밀리초 간격으로 실행
+    );
   };
 
   useEffect(() => {
@@ -278,11 +276,13 @@ const PostDetail = () => {
 
           <div className=" flex mt-1 w-[70px] justify-end">
             {post.myPost !== true ? (
-            <div className="  flex-col w-6 text-[10px] text-translucent3 mr-5  ">
-              <img onClick={onClickChatting} src={whiteChatting} />
-              <div>채팅</div>
-            </div>
-            ) : ""}
+              <div className="  flex-col w-6 text-[10px] text-translucent3 mr-5  ">
+                <img onClick={onClickChatting} src={whiteChatting} />
+                <div>채팅</div>
+              </div>
+            ) : (
+              ""
+            )}
             <div className="  flex-col w-6 text-[10px] text-translucent3   ">
               <img
                 onClick={() => {
