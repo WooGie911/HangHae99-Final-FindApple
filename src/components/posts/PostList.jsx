@@ -62,7 +62,6 @@ const PostList = ({ posts, detail, __getDetail, state, setState, search }) => {
 
   useEffect(() => {
     setPage(0);
-    console.log("searchState", searchState);
   }, [searchState]);
 
   return (

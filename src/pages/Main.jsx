@@ -18,10 +18,13 @@ const Main = () => {
   const MoreSeeClick = () => {
     dispatch(
       initialHeaderState({
-        paramObj: "all",
-        pageNumber: 0,
-        pageSize: 10,
-        postSort: "postLikeCnt",
+        HeaderState: {
+          paramObj: "all",
+          pageNumber: 0,
+          pageSize: 10,
+          postSort: "postLikeCnt",
+        },
+        footerState: "Search",
       })
     );
     navigate("/postread/all/postLikeCnt");
