@@ -135,9 +135,10 @@ function Chatting() {
 
   return (
     <Layout2>
-      <StContainer>
-        <HeadContainer>
-          <img
+      <div className="h-full p-5 overflow-auto bg-orange	">
+        <div className="flex justify-center items-center relative w-full h-35 font-Inter not-italic	font-bold
+text-lg	leading-6	mb-5">
+          <img className="absolute left-0"
             onClick={onClickHandler}
             style={{ width: 25, height: 25 }}
             src={back}
@@ -146,8 +147,8 @@ function Chatting() {
             {" "}
             <div>{listReducer.otherNickname}</div>
           </span>
-        </HeadContainer>
-        <TitleContainer>
+        </div>
+        <div className=" w-full border-y-2 border-[#c4c4c4] flex items-center">
           {listReducer.image !== undefined && (
             <>
               <img
@@ -156,7 +157,7 @@ function Chatting() {
               />
             </>
           )}
-          <div>
+          <div className="text-base	p-1.5 ml-1.5">
             <div>{listReducer.title}</div>
             <div>
               {listReducer.price !== undefined && (
@@ -164,36 +165,37 @@ function Chatting() {
               )}
             </div>
           </div>
-        </TitleContainer>
-        <ChatDiv>
+        </div>
+        <div className="h-full">
           {listReducer.chatList !== undefined &&
             listReducer.chatList !== null &&
             listReducer.chatList.map((item) => {
               return (
                 <>
                   {listReducer.senderId === item.sender ? (
-                    <ChatStyle key={uuidv4()} style={{ textAlign: "right" }}>
+                    <div className="mt-15 mb-15" key={uuidv4()} style={{ textAlign: "right" }}>
                       {/* 인라인 요소로 바로 우측 정렬 해결 */}
-                      <TimeDiv>
-                        <TimeSpan>{item.sendDate}</TimeSpan>
-                        <JoinUserNickname>{item.message}</JoinUserNickname>
-                      </TimeDiv>
-                    </ChatStyle>
+                      <div>
+                        <span className="text-xs text-slate-300">{item.sendDate}</span>
+                        <div className="text-white p-[7px] bg-[#3d6af2] rounded-2xl text-sm	mt-[10px] inline-block	max-w-[250px] h-auto whitespace-pre">{item.message}</div>
+                      </div>
+                    </div>
                   ) : (
-                    <ChatStyle key={uuidv4()}>
-                      <TimeDiv>
-                        <PostUserNickname>{item.message}</PostUserNickname>
-                        <TimeSpan>{item.sendDate}</TimeSpan>
-                      </TimeDiv>
-                    </ChatStyle>
+                    <div key={uuidv4()}>
+                      <div className="mt-15 mb-15">
+                        <div className="text-black p-[7px] bg-[#d9d9d9] rounded-2xl text-sm	mt-[10px] inline-block	max-w-[250px] h-auto whitespace-pre">{item.message}</div>
+                        <span className="text-xs text-slate-300">{item.sendDate}</span>
+                      </div>
+                    </div>
                   )}
                 </>
               );
             })}
           <div ref={scrollRef}></div>
-        </ChatDiv>
-        <InputDiv>
-          <Input
+        </div>
+        <div className="w-[375px] fixed bottom-0">
+        <div className="flex absolute bottom-0 w-full py-3 px-[18px] mx-auto">
+          <input className="h-[38px] w-full rounded-3xl px-3 text-[14px] text-C4 border-DD border-[1px]"
             value={chatBody}
             onChange={inputHandler}
             onKeyPress={appKeyPress}
@@ -211,8 +213,9 @@ function Chatting() {
             }}
           />
           {/* calc로 계산해서 반응형에 맞춰도 움직이지 않는 그림 만든다. svg는 컴포넌트처럼 임포트가 가능하다 */}
-        </InputDiv>
-      </StContainer>
+        </div>
+      </div>
+      </div>
     </Layout2>
   );
 }
