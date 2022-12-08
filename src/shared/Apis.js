@@ -36,11 +36,6 @@ export const Apis = {
   checkPriceAX: (payload) =>
     token.post(`/api/price/${payload.category}`, payload.Data),
 
-  searchPostAX: (payload) =>
-    token.get(
-      `/api/posts/${payload.paramObj}${payload.searchObj}?page=${payload.pageNumber}&size=${payload.pageSize}&sort=${payload.postSort},DESC`
-    ),
-
   getAddPostAX: (payload) =>
     token.get(
       `/api/posts/${payload.state.paramObj}${payload.searchObj}?page=${payload.page}&size=${payload.state.pageSize}&sort=${payload.state.postSort},DESC`
@@ -70,14 +65,9 @@ export const Apis = {
 
   CartOutPostAX: (payload) => token.delete(`/api/posts/likes/${payload}`),
 
-  searchObjectionAX: (payload) =>
-    token.get(
-      `/api/issues/${payload.paramObj}/${payload.searchObj}?page=${payload.pageNumber}&size=${payload.pageSize}&sort=${payload.postSort},DESC`
-    ),
-
   getAddObjectionAX: (payload) =>
     token.get(
-      `/api/issues/${payload.state.paramObj}?page=${payload.page}&size=${payload.state.pageSize}&sort=${payload.state.postSort},DESC`
+      `/api/issues/${payload.state.paramObj}${payload.searchObj}?page=${payload.page}&size=${payload.state.pageSize}&sort=${payload.state.postSort},DESC`
     ),
 
   getObjectionAX: (payload) =>

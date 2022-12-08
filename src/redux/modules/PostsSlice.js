@@ -6,7 +6,6 @@ export const __getAddPost = createAsyncThunk(
   async (payload, thunkAPI) => {
     try {
       const data = await Apis.getAddPostAX(payload);
-      console.log("payload겟애포", payload);
       const obj = {
         page: payload.page,
         data: data.data.content,
@@ -23,7 +22,6 @@ export const __getPost = createAsyncThunk(
   "posts/__getPost",
   async (payload, thunkAPI) => {
     try {
-      console.log("겟포스트 되는감?", payload);
       const data = await Apis.getPostAX(payload);
       return thunkAPI.fulfillWithValue(data.data);
     } catch (error) {
@@ -105,7 +103,6 @@ const PostsSlice = createSlice({
     },
     [__getAddPost.fulfilled]: (state, action) => {
       state.isLoading = false;
-      console.log("겟애드포스트");
       if (action.payload.page === 0) {
         state.posts.splice(0);
         state.posts.push(...action.payload.data);

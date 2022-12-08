@@ -1,24 +1,11 @@
 import { createAsyncThunk, createSlice } from "@reduxjs/toolkit";
 import Apis from "../../shared/Apis";
 
-export const __searchObjection = createAsyncThunk(
-  "objections/__searchObjection",
-  async (payload, thunkAPI) => {
-    try {
-      const data = await Apis.searchObjectionAX(payload);
-      return thunkAPI.fulfillWithValue(data.data.content);
-    } catch (error) {
-      return thunkAPI.rejectWithValue(error);
-    }
-  }
-);
-
 export const __getAddObjection = createAsyncThunk(
   "objections/__getAddObjection",
   async (payload, thunkAPI) => {
     try {
       const data = await Apis.getAddObjectionAX(payload);
-
       const obj = {
         payload: payload.page,
         data: data.data.content,
@@ -105,18 +92,6 @@ const ObjectionsSlice = createSlice({
     },
   },
   extraReducers: {
-    //__searchObjection
-    [__searchObjection.pending]: (state) => {
-      state.isLoading = true;
-    },
-    [__searchObjection.fulfilled]: (state, action) => {
-      state.isLoading = false;
-      state.posts = action.payload;
-    },
-    [__searchObjection.rejected]: (state, action) => {
-      state.isLoading = false;
-      state.error = action.payload;
-    },
     //__getAddObjection
     [__getAddObjection.pending]: (state) => {
       state.isLoading = true;
