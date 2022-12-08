@@ -4,7 +4,7 @@ import {
   searchObjection,
   __getAddObjection,
 } from "../../redux/modules/ObjectionsSlice";
-import Layout from "../../components/commons/Layout";
+import Layout2 from "../../components/commons/Layout2";
 import Footer from "../../components/commons/Footer";
 import Header from "../../components/commons/Header";
 import { __getObjectionDetail } from "../../redux/modules/ObjectionDetailsSlice";
@@ -27,7 +27,7 @@ const ObjectionRead = () => {
   }, []);
 
   return (
-    <Layout>
+    <Layout2>
       <Search search={searchObjection} />
       <Header Navigate={"/objectionread"} />
       <SortBar
@@ -46,7 +46,7 @@ const ObjectionRead = () => {
       />
 
       <Footer />
-    </Layout>
+    </Layout2>
   );
 };
 
