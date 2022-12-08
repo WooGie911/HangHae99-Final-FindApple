@@ -38,7 +38,7 @@ export const Apis = {
 
   getAddPostAX: (payload) =>
     token.get(
-      `/api/posts/${payload.state.paramObj}${payload.searchObj}?page=${payload.page}&size=${payload.state.pageSize}&sort=${payload.state.postSort},DESC`
+      `/api/posts/${payload.categoryObj}${payload.searchObj}?page=${payload.pageNumberObj}&size=${payload.pageSizeObj}&sort=${payload.sortObj},DESC`
     ),
 
   getPostAX: (payload) =>
@@ -67,7 +67,7 @@ export const Apis = {
 
   getAddObjectionAX: (payload) =>
     token.get(
-      `/api/issues/${payload.state.paramObj}${payload.searchObj}?page=${payload.page}&size=${payload.state.pageSize}&sort=${payload.state.postSort},DESC`
+      `/api/issues/${payload.categoryObj}${payload.searchObj}?page=${payload.pageNumberObj}&size=${payload.pageSizeObj}&sort=${payload.sortObj},DESC`
     ),
 
   getObjectionAX: (payload) =>

@@ -1,7 +1,7 @@
 import React from "react";
 import { useDispatch } from "react-redux";
 import { useNavigate } from "react-router-dom";
-import { initialHeaderState } from "../../redux/modules/PostsSlice";
+import { swichFooterState } from "../../redux/modules/PostsSlice";
 
 const MainHeader = (props) => {
   const navigate = useNavigate();
@@ -9,16 +9,7 @@ const MainHeader = (props) => {
 
   //카테고리별 이동 및 get 을 위한 store 변경
   const onClickCategoryHandler = (data) => {
-    const paramObj = data === "all" ? data : `category/${data}`;
-    const initialObj = {
-      paramObj: paramObj,
-      pageNumber: 0,
-      pageSize: 10,
-      postSort: "postId",
-    };
-    dispatch(
-      initialHeaderState({ HeaderState: initialObj, footerState: "Search" })
-    );
+    dispatch(swichFooterState("Search"));
     navigate(`${props.Navigate}/${data}/postId`);
   };
 

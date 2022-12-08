@@ -5,26 +5,26 @@ import { __getPostDetail } from "../../redux/modules/PostDetailsSlice";
 import { searchPost, __getPost } from "../../redux/modules/PostsSlice";
 import mainHeart from "../../assets/mainHeart.svg";
 
-const MainList = () => {
+const MainList = ({ headerBarState, setHeaderBarState }) => {
   const navigate = useNavigate();
   const dispatch = useDispatch();
   const params = useParams;
 
-  const HeaderState = {
+  const initialState = {
     paramObj: "all",
     pageNumber: 0,
     pageSize: 5,
     postSort: "postLikeCnt",
     searchObj: "",
   };
-  const [submitOBJ, setSubmitOBJ] = useState(HeaderState);
-  const [headerBarState, setHeaderBarState] = useState("all");
+  const [submitState, setSubmitState] = useState(initialState);
+
   const { posts } = useSelector((state) => state.posts);
 
   const onClickCategoryHandler = (data) => {
     setHeaderBarState(data);
     const paramObj = data === "all" ? data : `category/${data}`;
-    setSubmitOBJ({ ...submitOBJ, paramObj: paramObj });
+    setSubmitState({ ...submitState, paramObj: paramObj });
   };
 
   const onClickHandler = (data) => {
@@ -33,8 +33,8 @@ const MainList = () => {
   };
 
   useEffect(() => {
-    dispatch(__getPost(submitOBJ));
-  }, [submitOBJ]);
+    dispatch(__getPost(submitState));
+  }, [submitState]);
 
   useEffect(() => {
     dispatch(searchPost(""));

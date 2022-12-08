@@ -1,16 +1,22 @@
-import { useDispatch, useSelector } from "react-redux";
-import { __getAddPost, __getPost } from "../../redux/modules/PostsSlice";
+import { useDispatch } from "react-redux";
+import { __getAddPost } from "../../redux/modules/PostsSlice";
 import { useNavigate, useParams } from "react-router-dom";
 import React, { useState, useEffect, useCallback } from "react";
 import { __getPostTime } from "../../redux/modules/PostsSlice";
 import { useInView } from "react-intersection-observer";
 import mainHeart from "../../assets/mainHeart.svg";
 
-const PostList = ({ posts, detail, __getDetail, state, setState, search }) => {
+const PostList = ({
+  posts,
+  detail,
+  __getDetail,
+  search,
+  getState,
+  __getPost,
+}) => {
   const navigate = useNavigate();
   const dispatch = useDispatch();
   const params = useParams();
-  const { searchState } = useSelector((state) => state.posts);
 
   const onClickHandler = (data) => {
     dispatch(__getDetail(data));
@@ -20,33 +26,6 @@ const PostList = ({ posts, detail, __getDetail, state, setState, search }) => {
   const [page, setPage] = useState(0); //페이지수
   const [loading, setLoading] = useState(false);
   const [ref, inView] = useInView();
-
-  let searchObj = "";
-  if (searchState === "") {
-    searchObj = "";
-  } else {
-    searchObj = `/${searchState}`;
-  }
-
-  /**  서버에서 아이템을 가지고 오는 함수 */
-  const getItems = useCallback(async () => {
-    const obj = {
-      searchObj: searchObj,
-      page: page,
-      state: state,
-    };
-    //의존하는 값(deps)들이 바뀌지 않는 한 기존 함수를 재사용할 수 있습니다.
-    dispatch(__getAddPost(obj));
-  }, [page, params, searchState]);
-
-  // `getItems` 가 바뀔 때 마다 함수 실행
-  useEffect(() => {
-    getItems();
-  }, [getItems]);
-
-  useEffect(() => {
-    setState({ ...state, pageNumber: page });
-  }, [page]);
 
   useEffect(() => {
     // 사용자가 마지막 요소를 보고 있고, 로딩 중이 아니라면
@@ -62,7 +41,36 @@ const PostList = ({ posts, detail, __getDetail, state, setState, search }) => {
 
   useEffect(() => {
     setPage(0);
-  }, [searchState]);
+  }, [getState.searchObj]);
+
+  /**  서버에서 아이템을 가지고 오는 함수 */
+  const getItems = useCallback(async () => {
+    const paramCategoryObj =
+      params.category === "all"
+        ? params.category
+        : `category/${params.category}`;
+
+    const searchString = getState.searchObj.replace("/", "");
+
+    const checkSearchObj =
+      searchString === "" ? searchString : `/${searchString}`;
+
+    const submitObj = {
+      categoryObj: paramCategoryObj,
+      pageNumberObj: page,
+      pageSizeObj: 10,
+      sortObj: params.sort,
+      searchObj: checkSearchObj,
+    };
+    console.log("submitObj", submitObj);
+    //의존하는 값(deps)들이 바뀌지 않는 한 기존 함수를 재사용할 수 있습니다.
+    dispatch(__getPost(submitObj));
+  }, [page, params, getState.searchObj]);
+
+  // `getItems` 가 바뀔 때 마다 함수 실행
+  useEffect(() => {
+    getItems();
+  }, [getItems]);
 
   return (
     <div>

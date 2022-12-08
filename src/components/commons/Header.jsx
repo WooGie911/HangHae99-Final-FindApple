@@ -1,5 +1,5 @@
-import React, { useState } from "react";
-import { useDispatch, useSelector } from "react-redux";
+import React from "react";
+import { useDispatch } from "react-redux";
 import { useNavigate, useParams } from "react-router-dom";
 import { swichFooterState } from "../../redux/modules/PostsSlice";
 
@@ -7,16 +7,9 @@ const Header = (props) => {
   const navigate = useNavigate();
   const params = useParams();
   const dispatch = useDispatch();
-  const [headerBarState, setHeaderBarState] = useState(params.category);
+
   //카테고리별 이동 및 get 을 위한 state 변경
   const onClickCategoryHandler = (data) => {
-    const paramObj = data === "all" ? data : `category/${data}`;
-    props.setState({
-      ...props.state,
-      paramObj: paramObj,
-      postSort: params.sort,
-    });
-    setHeaderBarState(data);
     navigate(`${props.Navigate}/${data}/${params.sort}`);
   };
   const onClickHomeHandler = () => {
@@ -36,7 +29,7 @@ const Header = (props) => {
           HOME
         </div>
 
-        {headerBarState === "all" ? (
+        {params.category === "all" ? (
           <div
             className="text-CC text-opacity-100 w-1/4 cursor-pointer text-center"
             onClick={() => {
@@ -55,7 +48,7 @@ const Header = (props) => {
             전체
           </div>
         )}
-        {headerBarState === "macbook" ? (
+        {params.category === "macbook" ? (
           <div
             className="text-CC text-opacity-100 w-1/4 cursor-pointer text-center"
             onClick={() => {
@@ -74,7 +67,7 @@ const Header = (props) => {
             MacBook
           </div>
         )}
-        {headerBarState === "iphone" ? (
+        {params.category === "iphone" ? (
           <div
             className="text-CC text-opacity-100 w-1/4 cursor-pointer text-center"
             onClick={() => {
@@ -95,21 +88,21 @@ const Header = (props) => {
         )}
       </div>
 
-      {headerBarState === "all" ? (
+      {params.category === "all" ? (
         <div className="h-1 flex  ">
           <div className="w-1/4" />
           <div className="w-1/4 bg-CC" />
           <div className="w-1/4 " />
           <div className="w-1/4 " />
         </div>
-      ) : headerBarState === "macbook" ? (
+      ) : params.category === "macbook" ? (
         <div className="h-1 flex  ">
           <div className="w-1/4" />
           <div className="w-1/4 " />
           <div className="w-1/4 bg-CC" />
           <div className="w-1/4 " />
         </div>
-      ) : headerBarState === "iphone" ? (
+      ) : params.category === "iphone" ? (
         <div className="h-1 flex  ">
           <div className="w-1/4" />
           <div className="w-1/4 " />

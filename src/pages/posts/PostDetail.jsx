@@ -134,7 +134,7 @@ const PostDetail = () => {
               className="h-[35px] w-[35px] absolute  left-3"
               src={blueBackArrow}
               onClick={() =>
-                onClickGoHome({ state: "Search", navi: "/postread/all" })
+                onClickGoHome({ state: "Search", navi: "/postread/all/postId" })
               }
             />
             <img
