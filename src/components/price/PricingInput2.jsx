@@ -34,7 +34,7 @@ const PricingInput2 = ({ priceListState, setPriceListState, stepState }) => {
   return (
     <div>
       <div className=" flex-col p-[18px] ">
-        <div className="  flex items-center w-full h-14 font-semibold">
+        <div className="  flex items-center w-full h-14 font-bold">
           출시년도를 선택해주세요
         </div>
         <ul className=" mt-1 text-DD grid grid-cols-4 gap-3 place-items-center">

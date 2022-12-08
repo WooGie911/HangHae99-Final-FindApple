@@ -44,6 +44,8 @@ module.exports = {
       EB: "#EBEBEB",
       C4: "#c4c4c4",
       KY: "#FAE100",
+
+      DDD: "#DDDDDD",
     },
     fontFamily: {
       sans: ["Pretendard", "Pretendard Std Variable", "Pretendard Std"],
@@ -68,5 +70,5 @@ module.exports = {
       },
     },
   },
-  plugins: [],
+  plugins: [require("tailwind-scrollbar-hide")],
 };

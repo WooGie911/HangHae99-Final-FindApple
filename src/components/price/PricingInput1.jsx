@@ -37,7 +37,7 @@ const PricingInput1 = ({ priceListState, setPriceListState, stepState }) => {
   return (
     <ul>
       <div className="flex-col p-[18px]">
-        <div className="flex items-center w-full h-14 font-semibold">
+        <div className="flex items-center w-full h-14 font-bold">
           카테고리를 선택해주세요
         </div>
         <ul className="text-DD flex mt-1">

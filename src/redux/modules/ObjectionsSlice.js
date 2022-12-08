@@ -96,8 +96,14 @@ const ObjectionsSlice = createSlice({
       pageSize: 10,
       postSort: "issuesId",
     },
+    searchState: "",
   },
-  reducers: {},
+  reducers: {
+    searchObjection(state, action) {
+      state.searchState = action.payload;
+      state.HeaderState.pageNumber = 0;
+    },
+  },
   extraReducers: {
     //__searchObjection
     [__searchObjection.pending]: (state) => {
@@ -199,5 +205,7 @@ const ObjectionsSlice = createSlice({
     },
   },
 });
+
+export const { searchObjection } = ObjectionsSlice.actions;
 
 export default ObjectionsSlice.reducer;

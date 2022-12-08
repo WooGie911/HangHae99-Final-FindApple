@@ -45,7 +45,9 @@ const SignIn = () => {
               type="text"
               name="email"
               onChange={ChangeInputHandler}
-              placeholder="이메일 입력"
+
+              placeholder="E-mail을 입력 해주세요"
+
               value={input.email}
               maxLength='320'
             />
@@ -56,7 +58,7 @@ const SignIn = () => {
               type="password"
               name="password"
               onChange={ChangeInputHandler}
-              placeholder="비밀번호 입력"
+              placeholder="PASSWORD를 입력 해주세요"
               value={input.password}
               maxLength='16'
               onKeyPress={keyPress}

@@ -2,7 +2,7 @@ import React, { useEffect, useState } from "react";
 import Header from "../../components/commons/Header";
 import PostList from "../../components/posts/PostList";
 import { useDispatch, useSelector } from "react-redux";
-import { __getPost, __searchPost } from "../../redux/modules/PostsSlice";
+import { searchPost, __getPost } from "../../redux/modules/PostsSlice";
 import PostSearch from "../../components/commons/PostSearch";
 import { __getPostDetail } from "../../redux/modules/PostDetailsSlice";
 import Layout from "../../components/commons/Layout";
@@ -14,11 +14,21 @@ const PostRead = () => {
   const dispatch = useDispatch();
   const { posts } = useSelector((state) => state.posts);
   const { postsCount } = useSelector((state) => state.posts);
+  const { searchState } = useSelector((state) => state.posts);
+
+  let searchObj = "";
+  if (searchState === "") {
+    searchObj = "";
+  } else {
+    searchObj = `/${searchState}`;
+  }
+
   const [submitObj, setSubmitObj] = useState({
     paramObj: "all",
     pageNumber: 0,
     pageSize: 10,
     postSort: "postId",
+    searchObj: searchObj,
   });
 
   useEffect(() => {
@@ -34,7 +44,7 @@ const PostRead = () => {
 
   return (
     <Layout>
-      <PostSearch __search={__searchPost} />
+      <PostSearch search={searchPost} />
       <Header
         state={submitObj}
         setState={setSubmitObj}
@@ -49,6 +59,7 @@ const PostRead = () => {
         postLikeCnt="postLikeCnt"
       />
       <PostList
+        search={searchPost}
         state={submitObj}
         setState={setSubmitObj}
         posts={posts}
