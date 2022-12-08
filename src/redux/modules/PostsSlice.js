@@ -5,12 +5,15 @@ export const __getAddPost = createAsyncThunk(
   "posts/__getAddPost",
   async (payload, thunkAPI) => {
     try {
+      console.log(payload);
       const data = await Apis.getAddPostAX(payload);
+      console.log("data", data);
       const obj = {
-        page: payload.page,
+        getState: payload,
         data: data.data.content,
         totalElements: data.data.totalElements,
       };
+      console.log("dataobj", obj);
       return thunkAPI.fulfillWithValue(obj);
     } catch (error) {
       return thunkAPI.rejectWithValue(error);
@@ -73,27 +76,22 @@ const PostsSlice = createSlice({
   initialState: {
     posts: [],
     postsCount: 0,
-
-    HeaderState: {
-      paramObj: "all",
-      pageNumber: 0,
-      pageSize: 10,
-      postSort: "postId",
-    },
     footerState: "Home",
-    searchState: "",
+    getState: {
+      categoryObj: "all",
+      pageNumberObj: 0,
+      pageSizeObj: 10,
+      sortObj: "postId",
+      searchObj: "",
+    },
   },
   reducers: {
-    initialHeaderState(state, action) {
-      state.HeaderState = action.payload.HeaderState;
-      state.footerState = action.payload.footerState;
-    },
     swichFooterState(state, action) {
       state.footerState = action.payload;
     },
+
     searchPost(state, action) {
-      state.searchState = action.payload;
-      state.HeaderState.pageNumber = 0;
+      state.getState = { ...state.getState, searchObj: action.payload };
     },
   },
   extraReducers: {
@@ -103,13 +101,15 @@ const PostsSlice = createSlice({
     },
     [__getAddPost.fulfilled]: (state, action) => {
       state.isLoading = false;
-      if (action.payload.page === 0) {
+      if (action.payload.getState.pageNumberObj === 0) {
         state.posts.splice(0);
         state.posts.push(...action.payload.data);
         state.postsCount = action.payload.totalElements;
+        state.getState = action.payload.getState;
       } else {
         state.posts.push(...action.payload.data);
         state.postsCount = action.payload.totalElements;
+        state.getState = action.payload.getState;
       }
     },
     [__getAddPost.rejected]: (state, action) => {

@@ -1,22 +1,13 @@
 import React from "react";
 import { useNavigate, useParams } from "react-router-dom";
 import swapoutline from "../../assets/swapoutline.png";
+
 const SortBar = (props) => {
   const navigate = useNavigate();
   const params = useParams();
 
   //정렬순 이동 및 get 을 위한 state 변경
   const onClickSortHandler = (data) => {
-    const paramObj =
-      params.category === "all"
-        ? params.category
-        : `category/${params.category}`;
-
-    props.setState({
-      ...props.state,
-      paramObj: paramObj,
-      postSort: data,
-    });
     navigate(`${props.Navigate}/${params.category}/${data}`);
   };
 
