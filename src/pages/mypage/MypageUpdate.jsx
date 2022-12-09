@@ -109,8 +109,8 @@ const MypageUpdate = () => {
             onChange={writeHandle}
             name="nickname"
             value={write.nickname || ""}
-            placeholder="20자 이내로 작성해주세요"
-            maxLength="20"
+            placeholder="10자 이내로 작성해주세요"
+            maxLength="10"
           />
         </div>
       </div>
