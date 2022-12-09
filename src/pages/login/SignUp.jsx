@@ -88,7 +88,7 @@ const SignUp = () => {
                 value={input.email}
                 onChange={changeInputHandler}
                 placeholder="Email"
-                maxLength='320'
+                maxLength="320"
               />
               <button
                 className="w-[100px] h-9 bg-CC rounded-md text-white "
@@ -107,7 +107,7 @@ const SignUp = () => {
                 value={input.emailCheck}
                 onChange={changeInputHandler}
                 placeholder="인증번호를 입력해주세요"
-                maxLength='8'
+                maxLength="8"
               />
             )}
           </div>
@@ -119,8 +119,8 @@ const SignUp = () => {
               name="nickname"
               value={input.nickname}
               onChange={changeInputHandler}
-              placeholder="숫자, 영문, 한글 조합 20자"
-              maxLength='20'
+              placeholder="숫자, 영문, 한글 조합 10자"
+              maxLength="10"
             />
           </div>
           <div className="font-semibold mb-1">비밀번호</div>
@@ -132,7 +132,7 @@ const SignUp = () => {
               value={input.password}
               onChange={changeInputHandler}
               placeholder="숫자, 영문, 특수문자 조합 최소 8자"
-              maxLength='16'
+              maxLength="16"
             />
             {passwordCheck.test(input.password) === false && (
               <p className=" text-red text-xs mb-2">
@@ -149,7 +149,7 @@ const SignUp = () => {
               value={input.passwordCheck}
               onChange={changeInputHandler}
               placeholder="비밀번호를 한번 더 입력해주세요"
-              maxLength='16'
+              maxLength="16"
             />
             {input.password !== input.passwordCheck && (
               <p className=" text-red text-xs mb-2">
