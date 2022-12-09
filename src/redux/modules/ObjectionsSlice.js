@@ -139,7 +139,7 @@ const ObjectionsSlice = createSlice({
     [__addObjection.fulfilled]: (state, action) => {
       state.isLoading = false;
       state.posts.push(action.payload);
-      window.location.replace("/objectionread/all");
+      window.location.replace("/objectionread/all/issuesId");
     },
     [__addObjection.rejected]: (state, action) => {
       state.isLoading = false;
@@ -155,7 +155,7 @@ const ObjectionsSlice = createSlice({
       state.posts = state.posts.filter(
         (post) => post.issuesId !== action.payload
       );
-      window.location.replace("/objectionread/all");
+      window.location.replace("/objectionread/all/issuesId");
     },
 
     [__deleteObjection.rejected]: (state, action) => {

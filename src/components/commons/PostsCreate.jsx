@@ -196,7 +196,7 @@ const PostsCreate = (props) => {
                 onChange={writeHandle}
                 name="userPrice"
                 value={write.userPrice || ""}
-                type="text"
+                type="number"
                 placeholder="희망 가격을 입력해주세요."
                 maxLength="7"
               />
@@ -213,7 +213,7 @@ const PostsCreate = (props) => {
                 onChange={writeHandle}
                 name="userPrice"
                 value={write.userPrice || ""}
-                type="text"
+                type="number"
                 placeholder="희망 가격을 입력해주세요."
                 maxLength="7"
               />

@@ -73,12 +73,7 @@ export const __SignUp = createAsyncThunk(
   async (payload, thunkAPI) => {
     try {
       const response = await Apis.SignUpAX(payload);
-
       // alert(`${response.data.msg}`);
-
-      alert("회원가입 성공!");
-      window.location.replace("/signin");
-
       return thunkAPI.fulfillWithValue(response.data);
     } catch (error) {
       if (error.response.data.message !== undefined) {
@@ -140,6 +135,8 @@ const LoginSlice = createSlice({
       state.isLoading = true;
     },
     [__SignUp.fulfilled]: (state, action) => {
+      alert("회원가입 성공!");
+      window.location.replace("/signin");
       state.isLoading = false;
       state.user = action.payload;
     },
