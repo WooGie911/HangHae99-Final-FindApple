@@ -43,11 +43,11 @@ const SellerPage = () => {
               <div className="flex justify-center items-center">
                 <img
                   className="w-16 h-16 rounded-full shadow-2xl "
-                  src={sellerInfoDto.profileImg}
+                  src={sellerInfoDto?.profileImg}
                 />
               </div>
               <div className=" h-10 font-semibold flex justify-center items-center">
-                {sellerInfoDto.nickname}
+                {sellerInfoDto?.nickname}
               </div>
             </div>
             <div className=" h-24"></div>
@@ -55,31 +55,34 @@ const SellerPage = () => {
 
             <div className="bg-white">
               <div className="flex px-[18px] py-2">
-                <div className=" font-semibold">{sellerInfoDto.nickname}</div>
+                <div className=" font-semibold">{sellerInfoDto?.nickname}</div>
                 님의 판매상품
               </div>
               <div className="px-[18]">
-                {myPostList.length > 0 && (
+                {myPostList?.length > 0 && (
                   <div className="grid grid-cols-2 gap-3 gap-y-5">
-                    {myPostList.map((mypost) => {
+                    {myPostList?.map((mypost) => {
                       return (
                         <div className=" flex">
-                          <div className="  ml-3  flex-col" key={mypost.postId}>
+                          <div
+                            className="  ml-3  flex-col"
+                            key={mypost?.postId}
+                          >
                             <img
                               className="h-40 w-40"
-                              src={mypost.images[0].imgUrl}
+                              src={mypost?.images[0]?.imgUrl}
                             />
 
                             <div className="font-semibold ">
-                              {mypost.userPrice.toLocaleString("ko-KR")}원
+                              {mypost?.userPrice.toLocaleString("ko-KR")}원
                             </div>
                             <div className="text-sm break-words w-40 text-OO">
-                              {mypost.title}
+                              {mypost?.title}
                             </div>
 
                             <div className="text-DD flex text-xs items-center">
                               <img className="h-3" src={smallHeart} />
-                              {mypost.likeCnt}
+                              {mypost?.likeCnt}
                             </div>
                           </div>
                         </div>
