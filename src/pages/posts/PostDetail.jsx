@@ -131,20 +131,20 @@ const PostDetail = () => {
         <div className=" relative flex-col h-[410px] w-[375px] z-10">
           <div className="bg-transparent flex relative h-[60px] items-center justify-center z-20">
             <img
-              className="h-[35px] w-[35px] absolute  left-3"
+              className="cursor-pointer h-[35px] w-[35px] absolute  left-3"
               src={blueBackArrow}
               onClick={() =>
                 onClickGoHome({ state: "Search", navi: "/postread/all/postId" })
               }
             />
             <img
-              className="h-[35px] w-[35px] absolute left-12"
+              className="cursor-pointer h-[35px] w-[35px] absolute left-12"
               src={blueHome}
               onClick={() => onClickGoHome({ state: "Home", navi: "/main" })}
             />
             {post.myPost === true && (
               <img
-                className="h-[28px] w-[28px] absolute right-0"
+                className="cursor-pointer h-[28px] w-[28px] absolute right-0"
                 src={blueToggle}
                 onClick={editToggleHandler}
               />
@@ -153,13 +153,13 @@ const PostDetail = () => {
           {editTg.isEdit === true && (
             <div className=" absolute right-3 top-13 z-30 w-10">
               <button
-                className=" bg-white w-12 h-10 rounded-lg"
+                className="cursor-pointer bg-white w-12 h-10 rounded-lg"
                 onClick={() => navigate(`/postupdate/${params.id}`)}
               >
                 수정
               </button>
               <button
-                className=" bg-white w-12 h-10 rounded-lg mt-[1px]"
+                className="cursor-pointer bg-white w-12 h-10 rounded-lg mt-[1px]"
                 onClick={() => {
                   onDeleteHandler(params.id);
                 }}
@@ -188,7 +188,7 @@ const PostDetail = () => {
             <div className="bg-transparent flex-col  absolute z-10 right-4 bottom-0 ">
               <div className="rounded-full bg-white border-CC border-[1px] flex justify-center items-center h-7 w-7">
                 <img
-                  className=" h-5 w-5 "
+                  className="cursor-pointer h-5 w-5 "
                   src={blueHeart}
                   onClick={() => onCartButton(post.postId)}
                 />
@@ -199,7 +199,7 @@ const PostDetail = () => {
             <div className="bg-transparent flex-col absolute z-10 right-4 bottom-0 ">
               <div className="rounded-full bg-CC  flex justify-center items-center h-7 w-7">
                 <img
-                  className=" h-5 w-5 "
+                  className="cursor-pointer h-5 w-5 "
                   src={emptyHeart}
                   onClick={() => onCartButton(post.postId)}
                 />
@@ -277,7 +277,11 @@ const PostDetail = () => {
           <div className=" flex mt-1 w-[70px] justify-end">
             {post.myPost !== true ? (
               <div className="  flex-col w-6 text-[10px] text-translucent3 mr-5  ">
-                <img onClick={onClickChatting} src={whiteChatting} />
+                <img
+                  className="cursor-pointer"
+                  onClick={onClickChatting}
+                  src={whiteChatting}
+                />
                 <div>채팅</div>
               </div>
             ) : (
@@ -285,6 +289,7 @@ const PostDetail = () => {
             )}
             <div className="  flex-col w-6 text-[10px] text-translucent3   ">
               <img
+                className="cursor-pointer"
                 onClick={() => {
                   navigate(`/postComment/${params.id}`);
                 }}

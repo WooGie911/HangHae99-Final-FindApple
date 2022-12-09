@@ -9,7 +9,7 @@ const KakaoLogin = () => {
 
   return (
     <div>
-      <a id="kakao-login-btn" onClick={handleLogin}>
+      <a className="cursor-pointer" id="kakao-login-btn" onClick={handleLogin}>
         <img src={KAKAOIMG} />
       </a>
       <p id="token-result"></p>

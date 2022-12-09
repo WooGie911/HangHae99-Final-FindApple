@@ -135,7 +135,7 @@ const PostsSlice = createSlice({
     [__addPost.fulfilled]: (state, action) => {
       state.isLoading = false;
       state.posts.push(action.payload);
-      window.location.replace("/postread/all");
+      window.location.replace("/postread/all/postId");
     },
     [__addPost.rejected]: (state, action) => {
       state.isLoading = false;
@@ -151,7 +151,7 @@ const PostsSlice = createSlice({
       state.posts = state.posts.filter(
         (post) => post.postId !== action.payload
       );
-      window.location.replace("/postread/all");
+      window.location.replace("/postread/all/postId");
     },
 
     [__deletePost.rejected]: (state, action) => {
