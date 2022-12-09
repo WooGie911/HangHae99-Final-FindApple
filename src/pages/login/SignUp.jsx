@@ -58,7 +58,16 @@ const SignUp = () => {
   const emailCheckHandler = () => {
     dispatch(__emailCheck({ email: input.email }));
     setEmailCheckTF(true);
+    alert("인증번호가 발송되었습니다. 이메일을 확인해주세요.")
   };
+
+  const emailCheckButton = () => {
+    if (input.emailCheck === emailCheckData) {
+      alert("인증되었습니다")
+    }else{
+      alert("인증번호를 다시 확인해주세요.")
+    }
+  }
 
   const onClickHandler = () => {
     navigate("/signin");
@@ -100,8 +109,9 @@ const SignUp = () => {
           </div>
           <div className="flex justify-center ">
             {emailCheckTF && (
+              <div>
               <input
-                className=" outline-none bg-white placeholder-C4 w-[296px] h-9 rounded-md p-2 mb-4 border-C4 border-[1px]"
+                className=" outline-none bg-white placeholder-C4 w-[240px] h-9 rounded-md p-2 mb-4 mr-[10px] border-C4 border-[1px]"
                 type="text"
                 name="emailCheck"
                 value={input.emailCheck}
@@ -109,6 +119,13 @@ const SignUp = () => {
                 placeholder="인증번호를 입력해주세요"
                 maxLength="8"
               />
+                <button
+                className="w-[50px] h-9 bg-CC rounded-md text-white "
+                onClick={emailCheckButton}
+              >
+                인증
+              </button>
+              </div>
             )}
           </div>
           <div className="font-semibold mb-1">닉네임</div>
@@ -131,7 +148,7 @@ const SignUp = () => {
               name="password"
               value={input.password}
               onChange={changeInputHandler}
-              placeholder="숫자, 영문, 특수문자 조합 최소 8자"
+              placeholder="숫자, 영문, 특수문자(!@#$%^&+=) 조합 최소 8자"
               maxLength="16"
             />
             {passwordCheck.test(input.password) === false && (

@@ -7,7 +7,6 @@ export const __emailCheck = createAsyncThunk(
     try {
       const data = await Apis.emailCheckAX(payload);
       localStorage.setItem("emailCheckData", data.data);
-      alert("인증번호가 발송되었습니다.");
       return thunkAPI.fulfillWithValue(data.data.data);
     } catch (error) {
       return thunkAPI.rejectWithValue(error);
