@@ -3,7 +3,7 @@ import { useDispatch, useSelector } from "react-redux";
 import { useNavigate, useParams } from "react-router-dom";
 import { __getPostDetail } from "../../redux/modules/PostDetailsSlice";
 import { searchPost, __getPost } from "../../redux/modules/PostsSlice";
-import mainHeart from "../../assets/mainHeart.svg";
+import bookmark8D from "../../assets/bookmark8D.png";
 
 const MainList = ({ headerBarState, setHeaderBarState }) => {
   const navigate = useNavigate();
@@ -127,9 +127,9 @@ const MainList = ({ headerBarState, setHeaderBarState }) => {
                   </div>
                   <div className="flex justify-between mt-4 text-DD  text-xs font-normal">
                     <div>{post?.createdAt}</div>
-                    <div className="flex">
-                      <img src={mainHeart} />
-                      <div className=" ml-1">{post?.likeCnt}</div>
+                    <div className="flex items-center">
+                      <img className="h-3" src={bookmark8D} />
+                      <div className="mx-[1px]">{post?.likeCnt}</div>
                     </div>
                   </div>
                 </div>

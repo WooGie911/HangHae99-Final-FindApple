@@ -31,7 +31,7 @@ const Header = (props) => {
 
         {params.category === "all" ? (
           <div
-            className="text-CC text-opacity-100 w-1/4 cursor-pointer text-center"
+            className="bg-F6 h-full items-center flex justify-center text-CC text-opacity-100 w-1/4 cursor-pointer text-center bg"
             onClick={() => {
               onClickCategoryHandler("all");
             }}
@@ -50,7 +50,7 @@ const Header = (props) => {
         )}
         {params.category === "macbook" ? (
           <div
-            className="text-CC text-opacity-100 w-1/4 cursor-pointer text-center"
+            className="bg-F6 h-full items-center flex justify-center text-CC text-opacity-100 w-1/4 cursor-pointer text-center bg"
             onClick={() => {
               onClickCategoryHandler("macbook");
             }}
@@ -69,7 +69,7 @@ const Header = (props) => {
         )}
         {params.category === "iphone" ? (
           <div
-            className="text-CC text-opacity-100 w-1/4 cursor-pointer text-center"
+            className="bg-F6 h-full items-center flex justify-center text-CC text-opacity-100 w-1/4 cursor-pointer text-center bg"
             onClick={() => {
               onClickCategoryHandler("iphone");
             }}

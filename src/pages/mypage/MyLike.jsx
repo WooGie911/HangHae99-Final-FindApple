@@ -5,7 +5,7 @@ import { useNavigate } from "react-router-dom";
 import Layout from "../../components/commons/Layout";
 import Footer from "../../components/commons/Footer";
 import backArrow from "../../assets/backArrow.svg";
-import mainHeart from "../../assets/mainHeart.svg";
+import bookmark8D from "../../assets/bookmark8D.png";
 
 const MyLike = () => {
   const { likes } = useSelector((state) => state.mypage);
@@ -50,9 +50,9 @@ const MyLike = () => {
                       {like.userPrice.toLocaleString("ko-KR")}원
                     </div>
                     <div className="text-sm  text-OO">{like.title}</div>
-                    <div className="flex text-xs ">
-                      <img src={mainHeart} />
-                      <div className="ml-1 text-DD">{like.likeCnt}</div>
+                    <div className="flex text-xs items-center">
+                      <img className="h-3" src={bookmark8D} />
+                      <div className="ml-[1px] text-DD">{like.likeCnt}</div>
                     </div>
                   </div>
                 </div>

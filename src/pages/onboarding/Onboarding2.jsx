@@ -3,12 +3,36 @@ import { useNavigate } from "react-router-dom";
 import Layout2 from "../../components/commons/Layout2";
 import IMG2 from "../../assets/IMG2.jpg";
 import STEP2 from "../../assets/2-3.svg";
+import nextArrow from "../../assets/nextArrow.png";
+import backArrow from "../../assets/backArrow.svg";
 
 const Onboarding2 = () => {
   const navigate = useNavigate();
+  const onClickHandler = (data) => {
+    navigate(data);
+  };
+
   return (
     <>
       <Layout2>
+        <div className="  flex relative items-center justify-between p-[18px] h-[60px] text-OO text-xs font-semibold border-b-[1px] border-D9 ">
+          <img
+            className="h-6 w-6  cursor-pointer"
+            onClick={() => {
+              onClickHandler("/onboarding1");
+            }}
+            src={backArrow}
+          />
+          <div
+            className=" flex items-center cursor-pointer"
+            onClick={() => {
+              onClickHandler("/signin");
+            }}
+          >
+            <div>건너뛰기</div>
+            <img className="h-4 " src={nextArrow} />
+          </div>
+        </div>
         <div className="flex justify-center items-center h-[100vh]">
           <ul className="flex-col ">
             <li className="flex-col text-2xl font-semibold mb-10">
