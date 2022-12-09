@@ -198,7 +198,7 @@ const PostsCreate = (props) => {
                 value={write.userPrice || ""}
                 type="number"
                 placeholder="희망 가격을 입력해주세요."
-                maxLength="7"
+                max="9999999"
               />
             </div>
           </div>
@@ -215,7 +215,7 @@ const PostsCreate = (props) => {
                 value={write.userPrice || ""}
                 type="number"
                 placeholder="희망 가격을 입력해주세요."
-                maxLength="7"
+                max="9999999"
               />
             </div>
           </div>
