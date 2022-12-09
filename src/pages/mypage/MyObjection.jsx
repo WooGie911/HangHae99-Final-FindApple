@@ -5,7 +5,7 @@ import { __getMyObjection } from "../../redux/modules/MypageSlice";
 import Layout from "../../components/commons/Layout";
 import Footer from "../../components/commons/Footer";
 import backArrow from "../../assets/backArrow.svg";
-import mainHeart from "../../assets/mainHeart.svg";
+import bookmark8D from "../../assets/bookmark8D.png";
 
 const MyObjection = () => {
   const { objections } = useSelector((state) => state.mypage);
@@ -48,9 +48,9 @@ const MyObjection = () => {
                 <div className=" p-1">
                   <div>{objection.expectPrice.toLocaleString("ko-KR")}원</div>
                   <div className="text-sm  text-OO">{objection.title}</div>
-                  <div className="flex text-xs ">
-                    <img src={mainHeart} />
-                    <div className="ml-1 text-DD">{objection.likeCnt}</div>
+                  <div className="flex text-xs items-center">
+                    <img className="h-3" src={bookmark8D} />
+                    <div className="ml-[1px] text-DD">{objection.likeCnt}</div>
                   </div>
                 </div>
               </div>

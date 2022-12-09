@@ -7,6 +7,7 @@ import Layout from "../components/commons/Layout";
 import Footer from "../components/commons/Footer";
 import whiteX from "../assets/whiteX.png";
 import smallHeart from "../assets/smallHeart.png";
+import bookmark8D from "../assets/bookmark8D.png";
 
 const SellerPage = () => {
   const { myPostList, sellerInfoDto } = useSelector(
@@ -38,19 +39,21 @@ const SellerPage = () => {
         </div>
 
         {sellerInfoDto !== undefined && (
-          <div className="flex-col relative">
-            <div className="  flex-col absolute top-16 left-[155px] z-20 ">
-              <div className="flex justify-center items-center">
-                <img
-                  className="w-16 h-16 rounded-full shadow-2xl "
-                  src={sellerInfoDto?.profileImg}
-                />
-              </div>
-              <div className=" h-10 font-semibold flex justify-center items-center">
-                {sellerInfoDto?.nickname}
+          <div className="   flex-col relative">
+            <div className="justify-center flex">
+              <div className="flex-col absolute top-16 z-20 ">
+                <div className="flex justify-center items-center">
+                  <img
+                    className="w-16 h-16 rounded-full shadow-2xl "
+                    src={sellerInfoDto?.profileImg}
+                  />
+                </div>
+                <div className=" h-10 font-semibold flex justify-center items-center">
+                  {sellerInfoDto?.nickname}
+                </div>
               </div>
             </div>
-            <div className=" h-24"></div>
+            <div className=" h-24" />
             <div className="bg-white h-24 rounded-t-3xl"></div>
 
             <div className="bg-white">
@@ -61,11 +64,11 @@ const SellerPage = () => {
               <div className="px-[18]">
                 {myPostList?.length > 0 && (
                   <div className="grid grid-cols-2 gap-3 gap-y-5">
-                    {myPostList?.map((mypost) => {
+                    {myPostList?.map((mypost, index) => {
                       return (
-                        <div className=" flex">
+                        <div className=" flex" key={index}>
                           <div
-                            className="  ml-3  flex-col"
+                            className="  ml-3  flex-col content-between justify-between place-content-between  "
                             key={mypost?.postId}
                           >
                             <img
@@ -74,15 +77,18 @@ const SellerPage = () => {
                             />
 
                             <div className="font-semibold ">
-                              {mypost?.userPrice.toLocaleString("ko-KR")}원
+                              {mypost?.userPrice?.toLocaleString("ko-KR")}원
                             </div>
                             <div className="text-sm break-words w-40 text-OO">
                               {mypost?.title}
                             </div>
 
-                            <div className="text-DD flex text-xs items-center">
-                              <img className="h-3" src={smallHeart} />
-                              {mypost?.likeCnt}
+                            <div className="flex">
+                              <div className="h-5" />
+                              <div className="text-DD flex text-xs items-center absolute bottom-[1px]">
+                                <img className="h-3" src={bookmark8D} />
+                                <div>{mypost?.likeCnt}</div>
+                              </div>
                             </div>
                           </div>
                         </div>

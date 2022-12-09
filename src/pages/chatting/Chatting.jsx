@@ -181,10 +181,10 @@ function Chatting() {
                   ) : (
                     <div key={uuidv4()}>
                       <div className=" flex justify-start" key={uuidv4()}>
-                        <div className="bg-D9 rounded-t-3xl rounded-br-3xl text-sm	mt-3">
+                        <div className="text-white p-2 bg-D9 rounded-t-3xl rounded-br-3xl text-sm	mt-3">
                           {item.message}
                         </div>
-                        <span className="text-[10px] text-C4 text-opacity-50 ">
+                        <span className="text-[10px] text-C4 text-opacity-50 flex items-end">
                           {item.sendDate}
                         </span>
                       </div>
