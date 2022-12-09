@@ -16,7 +16,6 @@ const PostsCreate = (props) => {
     userPrice: "",
     content: "",
   });
-  console.log(writeHandle)
 
   //이미지 업로드 훅
   const [files, fileUrls, uploadHandle] = useImgUpload(3, true, 4, 1000);
