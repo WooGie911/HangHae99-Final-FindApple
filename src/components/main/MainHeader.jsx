@@ -17,7 +17,7 @@ const MainHeader = (props) => {
     <div className="bg-white w-full h-[49px] text-translucent5 border-t-[0.5px] border-b-[1px] border-D9 ">
       <div className="text-CC text-opacity-50 font-semibold text-[14px] flex flex-row justify-between h-[45px] items-center">
         <div
-          className="text-CC text-opacity-100 w-1/4 cursor-pointer text-center"
+          className="bg-F6 h-full items-center flex justify-center text-CC text-opacity-100 w-1/4 cursor-pointer text-center"
           onClick={() => {
             navigate("/main");
           }}

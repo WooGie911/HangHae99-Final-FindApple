@@ -1,15 +1,33 @@
 import React from "react";
 import { useNavigate } from "react-router-dom";
-import styled from "styled-components";
 import Layout2 from "../../components/commons/Layout2";
 import IMG1 from "../../assets/IMG1.jpg";
 import STEP1 from "../../assets/1-3.svg";
+import nextArrow from "../../assets/nextArrow.png";
+import backArrow from "../../assets/backArrow.svg";
 
 const Onboarding1 = () => {
   const navigate = useNavigate();
+  // 뒤로가기
+  const onClickHandler = (data) => {
+    navigate(data);
+  };
+
   return (
     <>
       <Layout2>
+        <div className="  flex relative items-center justify-end p-[18px] h-[60px] text-OO text-xs font-semibold border-b-[1px] border-D9 ">
+          <div
+            className=" flex items-center cursor-pointer"
+            onClick={() => {
+              onClickHandler("/signin");
+            }}
+          >
+            <div>건너뛰기</div>
+            <img className="h-4 " src={nextArrow} />
+          </div>
+        </div>
+
         <div className="flex  justify-center items-center h-[100vh]">
           <ul className="flex-col ">
             <li className="flex-col text-2xl font-semibold mb-12">
@@ -18,7 +36,7 @@ const Onboarding1 = () => {
             </li>
             <li className="flex-col justify-center text-sm text-DD">
               <div className="flex justify-center">
-                파인드애플은{" "}
+                파인드애플은
                 <div className="text-CC">애플 중고 물품 가격을 산정</div>하고,
               </div>
               <div className="flex justify-center">
@@ -52,73 +70,3 @@ const Onboarding1 = () => {
 };
 
 export default Onboarding1;
-
-const BackDiv = styled.div`
-  display: flex;
-  position: relative;
-  align-items: center;
-  align-content: center;
-  justify-content: center;
-  flex-direction: column;
-  height: 100%;
-  min-height: 812px;
-  background-color: white;
-`;
-const TITLE = styled.div`
-  display: flex;
-  flex-direction: column;
-  align-items: center;
-  margin-bottom: 20px;
-
-  div {
-    margin-bottom: 3px;
-    font-family: "Noto Sans";
-    font-style: normal;
-    font-weight: 600;
-    font-size: 24px;
-    line-height: 30px;
-  }
-`;
-
-const CONTENT = styled.div`
-  display: flex;
-  flex-direction: column;
-  align-items: center;
-  position: relative;
-  z-index: 100;
-
-  div {
-    font-family: "Noto Sans";
-    font-style: normal;
-    font-weight: 400;
-    font-size: 14px;
-    line-height: 19px;
-    text-align: center;
-    color: #606060;
-    span {
-      color: #3d6af2;
-    }
-  }
-  img {
-    z-index: 0;
-  }
-`;
-const STEP = styled.img`
-  position: absolute;
-  bottom: 100px;
-`;
-
-const NextButton = styled.button`
-  position: absolute;
-  bottom: 0px;
-  width: 100%;
-  height: 56px;
-  color: white;
-  border: none;
-  font-family: "Noto Sans";
-  font-style: normal;
-  font-weight: 600;
-  font-size: 15px;
-  line-height: 20px;
-  background-color: #4f75ff;
-`;

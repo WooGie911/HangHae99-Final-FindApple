@@ -21,6 +21,9 @@ import {
   __getPostDetail,
 } from "../../redux/modules/PostDetailsSlice";
 
+import bookmarkD from "../../assets/bookmarkD.png";
+import bookmarkDwhite from "../../assets/bookmarkDwhite.png";
+
 const PostDetail = () => {
   const navigate = useNavigate();
   const dispatch = useDispatch();
@@ -185,22 +188,22 @@ const PostDetail = () => {
           </div>
 
           {post.isLike ? (
-            <div className="bg-transparent flex-col  absolute z-10 right-4 bottom-0 ">
-              <div className="rounded-full bg-white border-CC border-[1px] flex justify-center items-center h-7 w-7">
+            <div className="bg-F6 bg-opacity-50 rounded-full flex-col  absolute z-10 right-4 bottom-0 ">
+              <div className="rounded-full  bg-CC border-CC border-[1px] flex justify-center items-center h-7 w-7">
                 <img
                   className="cursor-pointer h-5 w-5 "
-                  src={blueHeart}
+                  src={bookmarkDwhite}
                   onClick={() => onCartButton(post.postId)}
                 />
               </div>
               <div className="text-center text-sm text-CC">{post.likeCnt}</div>
             </div>
           ) : (
-            <div className="bg-transparent flex-col absolute z-10 right-4 bottom-0 ">
-              <div className="rounded-full bg-CC  flex justify-center items-center h-7 w-7">
+            <div className="bg-F6 bg-opacity-50 rounded-full flex-col absolute z-10 right-4 bottom-0 ">
+              <div className="rounded-full bg-white  flex justify-center items-center h-7 w-7">
                 <img
                   className="cursor-pointer h-5 w-5 "
-                  src={emptyHeart}
+                  src={bookmarkD}
                   onClick={() => onCartButton(post.postId)}
                 />
               </div>

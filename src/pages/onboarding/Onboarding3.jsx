@@ -3,12 +3,27 @@ import { useNavigate } from "react-router-dom";
 import Layout2 from "../../components/commons/Layout2";
 import IMG3 from "../../assets/ThirdIMG.jpg";
 import STEP3 from "../../assets/3-3.svg";
+import nextArrow from "../../assets/nextArrow.png";
+import backArrow from "../../assets/backArrow.svg";
 
 const Onboarding3 = () => {
   const navigate = useNavigate();
+  const onClickHandler = (data) => {
+    navigate(data);
+  };
+
   return (
     <>
       <Layout2>
+        <div className="  flex relative items-center p-[18px] h-[60px] text-OO text-xs font-semibold border-b-[1px] border-D9 ">
+          <img
+            className="h-6 w-6  cursor-pointer"
+            onClick={() => {
+              onClickHandler("/onboarding2");
+            }}
+            src={backArrow}
+          />
+        </div>
         <div className="flex justify-center items-center h-[100vh]">
           <ul className="flex-col ">
             <li className="flex-col text-2xl font-semibold mb-10">

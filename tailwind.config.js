@@ -44,6 +44,7 @@ module.exports = {
       EB: "#EBEBEB",
       C4: "#c4c4c4",
       KY: "#FAE100",
+      F6: "#F6F7FB",
 
       DDD: "#DDDDDD",
     },

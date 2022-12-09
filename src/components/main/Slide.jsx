@@ -5,7 +5,7 @@ import "slick-carousel/slick/slick-theme.css";
 import banner1 from "../../assets/banner1.png";
 import banner2 from "../../assets/banner2.png";
 import banner3 from "../../assets/banner3.png";
-import "../../assets/css/slide.css"
+import "../../assets/css/slide.css";
 
 const Slide = () => {
   const settings = {
@@ -31,7 +31,7 @@ const Slide = () => {
   };
 
   return (
-    <div className="bg-CC w-full h-48 mb-7  ">
+    <div className="bg-CC w-full h-48 my-7  ">
       <Slider {...settings}>
         <div>
           <img

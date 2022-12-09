@@ -7,7 +7,7 @@ import { useNavigate, useParams } from "react-router-dom";
 import React, { useState, useEffect, useCallback } from "react";
 import { __getPostTime } from "../../redux/modules/PostsSlice";
 import { useInView } from "react-intersection-observer";
-import mainHeart from "../../assets/mainHeart.svg";
+import bookmark8D from "../../assets/bookmark8D.png";
 
 const ObjectionList = ({
   posts,
@@ -99,10 +99,10 @@ const ObjectionList = ({
                   <div className=" mt-1 text-base font-semibold">
                     <label>{post?.userPrice?.toLocaleString("ko-KR")}원</label>
                   </div>
-                  <div className="flex justify-between mt-4  text-xs font-normal">
+                  <div className="flex justify-between mt-4 text-DD  text-xs font-normal">
                     <div>{post?.createdAt}</div>
-                    <div className="flex">
-                      <img src={mainHeart} />
+                    <div className="flex items-center">
+                      <img className="h-3" src={bookmark8D} />
                       <div>{post?.likeCnt}</div>
                     </div>
                   </div>
