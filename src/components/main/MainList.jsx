@@ -114,7 +114,7 @@ const MainList = ({ headerBarState, setHeaderBarState }) => {
                 {post?.images && (
                   <img
                     className="object-cover  min-w-[84px] w-[84px] h-[84px]  rounded"
-                    src={post?.images[0].imgUrl}
+                    src={post?.images[0]?.imgUrl}
                   />
                 )}
 
