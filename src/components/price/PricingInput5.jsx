@@ -264,6 +264,7 @@ const PricingInput5 = ({ priceListState, setPriceListState, stepState }) => {
                   value={priceListState.batteryState || ""}
                   type="Number"
                   min="0"
+                  max="100"
                   name="batteryState"
                   onChange={onChangeHandler}
                 />

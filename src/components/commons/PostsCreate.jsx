@@ -70,6 +70,12 @@ const PostsCreate = (props) => {
     if (write.title === "") {
       return window.alert("제목을 입력하세요");
     }
+
+      // 돈 단위 alert
+      if (write.userPrice > 9999999) {
+        return window.alert("가격이 너무 높습니다.")
+      }
+
     if (props.post === "post") {
       if (write.userPrice === "") {
         return window.alert("판매가격을 입력하세요");
@@ -78,7 +84,7 @@ const PostsCreate = (props) => {
       if (write.userPrice === "") {
         return window.alert("희망가격을 입력하세요");
       }
-    }
+    } 
 
     if (write.content === "") {
       return window.alert("상품설명을 입력하세요");
@@ -89,6 +95,7 @@ const PostsCreate = (props) => {
       // navigate(`/${props.Navigate}`);
       // window.location.reload(`/${props.Navigate}`);
     }
+
   };
   const onClickHandler = () => {
     navigate(-1);
@@ -198,7 +205,7 @@ const PostsCreate = (props) => {
                 value={write.userPrice || ""}
                 type="number"
                 placeholder="희망 가격을 입력해주세요."
-                maxLength="7"
+                max="9999999"
               />
             </div>
           </div>
@@ -215,7 +222,7 @@ const PostsCreate = (props) => {
                 value={write.userPrice || ""}
                 type="number"
                 placeholder="희망 가격을 입력해주세요."
-                maxLength="7"
+                max="9999999"
               />
             </div>
           </div>
