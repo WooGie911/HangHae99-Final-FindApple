@@ -20,13 +20,13 @@ const PostComment = () => {
     dispatch(__getPostDetail(post.postId));
   }, [post.updateComment]);
   const onClickHandler = () => {
-    navigate(`/PostDetail/${post.postId}`);
+    navigate(-1);
   };
 
   return (
-    <>
-      <Layout2>
-        <div className=" flex relative items-center justify-center h-[60px] text-[18px] font-semibold border-b-[1px] border-D9 ">
+    <Layout2>
+      <div className=" fixed top-0 flex w-full max-w-[375px] bg-white ">
+        <div className="w-full flex relative items-center justify-center h-[60px] text-[18px] font-semibold border-b-[1px] border-D9 ">
           <img
             className="h-6 w-6 absolute left-3"
             onClick={onClickHandler}
@@ -34,18 +34,18 @@ const PostComment = () => {
           />
           <div>댓글</div>
         </div>
-
-        <CommentList
-          __deleteComment={__deletePostComment}
-          commentList={post.comments}
-          post={post}
-        />
-        <CommentCreate
-          __addComment={__addPostComment}
-          __getDetail={__getPostDetail}
-        />
-      </Layout2>
-    </>
+      </div>
+      <div className="h-9"></div>
+      <CommentList
+        __deleteComment={__deletePostComment}
+        commentList={post.comments}
+        post={post}
+      />
+      <CommentCreate
+        __addComment={__addPostComment}
+        __getDetail={__getPostDetail}
+      />
+    </Layout2>
   );
 };
 

@@ -1,6 +1,6 @@
 import React, { useRef } from "react";
 import useInput from "../../hook/useInput";
-import useImgUpload from "../../hook/useImageUpload";
+import useImageUpload from "../../hook/useImageUpload";
 import { useDispatch, useSelector } from "react-redux";
 import { useNavigate } from "react-router-dom";
 import backArrow from "../../assets/backArrow.svg";
@@ -18,7 +18,7 @@ const PostsCreate = (props) => {
   });
 
   //이미지 업로드 훅
-  const [files, fileUrls, uploadHandle] = useImgUpload(3, true, 4, 1000);
+  const [files, fileUrls, uploadHandle] = useImageUpload(3, true, 4, 1000);
   const imgRef = useRef();
 
   //submit
@@ -71,10 +71,10 @@ const PostsCreate = (props) => {
       return window.alert("제목을 입력하세요");
     }
 
-      // 돈 단위 alert
-      if (write.userPrice > 9999999) {
-        return window.alert("가격이 너무 높습니다.")
-      }
+    // 돈 단위 alert
+    if (write.userPrice > 9999999) {
+      return window.alert("가격이 너무 높습니다.");
+    }
 
     if (props.post === "post") {
       if (write.userPrice === "") {
@@ -84,7 +84,7 @@ const PostsCreate = (props) => {
       if (write.userPrice === "") {
         return window.alert("희망가격을 입력하세요");
       }
-    } 
+    }
 
     if (write.content === "") {
       return window.alert("상품설명을 입력하세요");
@@ -95,7 +95,6 @@ const PostsCreate = (props) => {
       // navigate(`/${props.Navigate}`);
       // window.location.reload(`/${props.Navigate}`);
     }
-
   };
   const onClickHandler = () => {
     navigate(-1);

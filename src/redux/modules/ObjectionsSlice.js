@@ -139,10 +139,12 @@ const ObjectionsSlice = createSlice({
     [__addObjection.fulfilled]: (state, action) => {
       state.isLoading = false;
       state.posts.push(action.payload);
+      alert("이의제기가 등록 되었습니다.");
       window.location.replace("/objectionread/all/issuesId");
     },
     [__addObjection.rejected]: (state, action) => {
       state.isLoading = false;
+      alert("이의제기에 실패했습니다.");
       state.error = action.payload;
     },
 
@@ -155,11 +157,13 @@ const ObjectionsSlice = createSlice({
       state.posts = state.posts.filter(
         (post) => post.issuesId !== action.payload
       );
+      alert("삭제되었습니다.");
       window.location.replace("/objectionread/all/issuesId");
     },
 
     [__deleteObjection.rejected]: (state, action) => {
       state.isLoading = false;
+      alert("삭제에 실패했습니다.");
       state.error = action.payload;
     },
     //__editObjection
@@ -177,10 +181,12 @@ const ObjectionsSlice = createSlice({
       });
       state.posts[indexId] = action.payload.data;
       state.posts = [...state.posts];
+      alert("수정되었습니다.");
       window.location.replace(`/ObjectionDetail/${action.payload.id}`);
     },
     [__editObjection.rejected]: (state, action) => {
       state.isLoading = false;
+      alert("수정에 실패했습니다.");
       state.error = action.payload;
     },
   },

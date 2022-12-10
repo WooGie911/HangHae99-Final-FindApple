@@ -3,7 +3,7 @@ import { useState } from "react";
 //이미지 압축
 import imageCompression from "browser-image-compression";
 
-const useImgUpload = (
+const useImageUpload = (
   limitCount = 0,
   isComp = false,
   imgMaxSize = 1,
@@ -83,4 +83,4 @@ const useImgUpload = (
   return [imgFiles, imgUrls, handler];
 };
 
-export default useImgUpload;
+export default useImageUpload;

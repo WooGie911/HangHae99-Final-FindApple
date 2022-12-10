@@ -21,19 +21,21 @@ const ObjectionComment = () => {
   }, [post.updateComment]);
 
   const onClickHandler = () => {
-    navigate(`/objectionDetail/${post.issuesId}`);
+    navigate(-1);
   };
   return (
     <Layout2>
-      <div className=" flex relative items-center justify-center h-[60px] text-[18px] font-semibold border-b-[1px] border-D9 ">
-        <img
-          className="h-6 w-6 absolute left-3 "
-          onClick={onClickHandler}
-          src={backArrow}
-        />
-        <div>댓글</div>
+      <div className=" fixed top-0 flex w-full max-w-[375px] bg-white ">
+        <div className="w-full flex relative items-center justify-center h-[60px] text-[18px] font-semibold border-b-[1px] border-D9 ">
+          <img
+            className="h-6 w-6 absolute left-3 "
+            onClick={onClickHandler}
+            src={backArrow}
+          />
+          <div>댓글</div>
+        </div>
       </div>
-
+      <div className="h-9"></div>
       <ObjectionCommentList
         List={post}
         deleteComment={__deleteObjectionComment}

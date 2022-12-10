@@ -175,10 +175,12 @@ const LoginSlice = createSlice({
     [__UserProfileEdit.fulfilled]: (state, action) => {
       state.isLoading = false;
       state.user = action.payload;
+      alert("프로필이 수정되었습니다.");
       window.location.replace("/mypage");
     },
     [__UserProfileEdit.rejected]: (state, action) => {
       state.isLoading = false;
+      alert("프로필 수정에 실패했습니다.");
       state.error = action.payload;
     },
   },

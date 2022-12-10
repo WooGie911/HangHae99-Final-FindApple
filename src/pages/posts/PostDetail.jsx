@@ -6,8 +6,6 @@ import { useNavigate, useParams } from "react-router-dom";
 import { useDispatch, useSelector } from "react-redux";
 import { swichFooterState, __deletePost } from "../../redux/modules/PostsSlice";
 import whiteChatting from "../../assets/whiteChatting.png";
-import blueHeart from "../../assets/blueHeart.svg";
-import emptyHeart from "../../assets/emptyHeart.svg";
 import blueBackArrow from "../../assets/blueBackArrow.svg";
 import blueHome from "../../assets/blueHome.svg";
 import blueToggle from "../../assets/blueToggle.svg";
@@ -20,7 +18,6 @@ import {
   __CartOutPost,
   __getPostDetail,
 } from "../../redux/modules/PostDetailsSlice";
-
 import bookmarkD from "../../assets/bookmarkD.png";
 import bookmarkDwhite from "../../assets/bookmarkDwhite.png";
 
@@ -48,7 +45,6 @@ const PostDetail = () => {
   const onDeleteHandler = (payload) => {
     if (window.confirm("정말 삭제하시겠습니까?")) {
       dispatch(__deletePost(payload));
-      // window.location.replace("/postread/all");
     }
   };
 
@@ -97,8 +93,11 @@ const PostDetail = () => {
     dots: true,
     infinite: true,
     speed: 500,
+    arrows: false,
     slidesToShow: 1,
     slidesToScroll: 1,
+    autoplay: true,
+    autoplaySpeed: 5000,
     appendDots: (dots) => (
       <div
         style={{
@@ -136,9 +135,7 @@ const PostDetail = () => {
             <img
               className="cursor-pointer h-[35px] w-[35px] absolute  left-3"
               src={blueBackArrow}
-              onClick={() =>
-                onClickGoHome({ state: "Search", navi: "/postread/all/postId" })
-              }
+              onClick={() => navigate(-1)}
             />
             <img
               className="cursor-pointer h-[35px] w-[35px] absolute left-12"
