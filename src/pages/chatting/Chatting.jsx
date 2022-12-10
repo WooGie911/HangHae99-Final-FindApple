@@ -136,30 +136,35 @@ function Chatting() {
   return (
     <Layout2>
       <div className="flex-col h-full">
-        <div className="  flex relative items-center justify-center h-[60px] text-[18px] font-semibold border-b-[1px] border-D9 ">
-          <img
-            className="h-6 w-6 absolute left-3 cursor-pointer"
-            onClick={onClickHandler}
-            src={backArrow}
-          />
-          <div>{listReducer.otherNickname}</div>
-        </div>
-        <div className="  flex relative h-20 items-center font-medium border-b-[1px] border-D9 px-[18px] ">
-          {listReducer.image !== undefined && (
-            <img
-              className="h-12 w-12 object-cover rounded-lg"
-              src={listReducer.image.imgUrl}
-            />
-          )}
-          <div className="	p-1.5 ml-1.5">
-            <div>{listReducer.title}</div>
-            <div>
-              {listReducer.price !== undefined && (
-                <>{listReducer.price.toLocaleString("ko-KR")}원</>
+        <div className=" fixed top-0 flex w-full max-w-[375px] bg-white  ">
+          <div className="flex-col h-full w-full">
+            <div className="  flex relative items-center justify-center h-[60px] text-[18px] font-semibold border-b-[1px] border-D9 ">
+              <img
+                className="h-6 w-6 absolute left-3 cursor-pointer"
+                onClick={onClickHandler}
+                src={backArrow}
+              />
+              <div>{listReducer.otherNickname}</div>
+            </div>
+            <div className="  flex relative h-20 items-center font-medium border-b-[1px] border-D9 px-[18px] ">
+              {listReducer.image !== undefined && (
+                <img
+                  className="h-12 w-12 object-cover rounded-lg"
+                  src={listReducer.image.imgUrl}
+                />
               )}
+              <div className="	p-1.5 ml-1.5">
+                <div>{listReducer.title}</div>
+                <div>
+                  {listReducer.price !== undefined && (
+                    <>{listReducer.price.toLocaleString("ko-KR")}원</>
+                  )}
+                </div>
+              </div>
             </div>
           </div>
         </div>
+        <div className="h-36"></div>
         <div className="px-[18px]">
           {listReducer.chatList !== undefined &&
             listReducer.chatList !== null &&
