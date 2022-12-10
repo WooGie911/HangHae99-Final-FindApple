@@ -39,7 +39,7 @@ const Slide = () => {
             src={banner1}
             onClick={() => {
               window.open(
-                "https://shine-industry-2cc.notion.site/FindApple-93cd2639427e42778be05137b44b9f44"
+                "https://lime-relation-3b0.notion.site/FindApple-c62a52f11ca249a09852f225c4cf887d"
               );
             }}
           />
