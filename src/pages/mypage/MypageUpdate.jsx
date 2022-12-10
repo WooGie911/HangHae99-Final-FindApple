@@ -1,4 +1,4 @@
-import React, { useState, useEffect } from "react";
+import React, { useState, useEffect, useRef } from "react";
 import { useNavigate } from "react-router-dom";
 import useInput from "../../hook/useInput";
 import { useDispatch } from "react-redux";
@@ -6,36 +6,20 @@ import { useSelector } from "react-redux";
 import { __UserProfileEdit } from "../../redux/modules/LoginSlice";
 import Layout from "../../components/commons/Layout";
 import backArrow from "../../assets/backArrow.svg";
+import useImageUpload from "../../hook/useImageUpload";
 
 const MypageUpdate = () => {
-  const uploadedImage = React.useRef(null);
-  const imageUploader = React.useRef(null);
-  const [photo, setPhoto] = useState(null);
-  // 사진을 저장하는 로직이 없었다.
   const navigate = useNavigate();
   const dispatch = useDispatch();
-  const onClickHandler = () => {
-    navigate("/mypage");
-  };
-
-  const handleImageUpload = (e) => {
-    const [file] = e.target.files;
-    if (file) {
-      const reader = new FileReader();
-      const { current } = uploadedImage;
-      current.file = file;
-      reader.onload = (e) => {
-        current.src = e.target.result;
-      };
-      reader.readAsDataURL(file);
-      setPhoto(file);
-    }
-  };
 
   const { user } = useSelector((state) => state.Login);
   const [write, setWrite, writeHandle] = useInput({
     nickname: user.nickname,
   });
+
+  //이미지 업로드 훅
+  const [files, fileUrls, uploadHandle] = useImageUpload(3, true, 4, 1000);
+  const imgRef = useRef();
 
   //get 해오기
   useEffect(() => {
@@ -43,12 +27,21 @@ const MypageUpdate = () => {
   }, [dispatch]);
 
   const onSubmitHandler = () => {
-    imageUploader.current.click();
+    imgRef.current.click();
   };
 
-  const nicknameEdit = () => {
+  const writeSubmit = () => {
     const formData = new FormData();
-    formData.append("image", photo);
+
+    //폼 데이터에 파일 담기
+    if (files.length > 0) {
+      files.forEach((file) => {
+        formData.append("image", file);
+      });
+    } else {
+      formData.append("image", null);
+    }
+
     const obj = {
       nickname: write.nickname,
     };
@@ -57,7 +50,10 @@ const MypageUpdate = () => {
       new Blob([JSON.stringify(obj)], { type: "application/json" })
     );
     dispatch(__UserProfileEdit(formData));
-    alert("변경이 완료되었습니다.");
+  };
+
+  const onClickHandler = () => {
+    navigate("/mypage");
   };
 
   return (
@@ -71,7 +67,7 @@ const MypageUpdate = () => {
         <div>
           <div>프로필 수정 </div>
         </div>
-        <button onClick={nicknameEdit} className="  absolute right-4">
+        <button onClick={writeSubmit} className="  absolute right-4">
           완료
         </button>
       </div>
@@ -80,28 +76,35 @@ const MypageUpdate = () => {
         <input
           type="file"
           accept="image/*"
-          onChange={handleImageUpload}
-          ref={imageUploader}
+          name="imgFile"
+          id="imgFile"
+          onChange={uploadHandle}
+          ref={imgRef}
           style={{
             display: "none",
           }}
         />
-        <div className="flex justify-center items-center mt-5 p-3">
-          <img
-            className="cursor-pointer w-[88px] h-[88px] rounded-full object-cover"
-            src={user.profileImg}
-            ref={uploadedImage}
-            onClick={onSubmitHandler}
-          />
-        </div>
+        <label htmlFor="imgFile">
+          <div className="flex justify-center items-center mt-5 p-3">
+            <button onClick={onSubmitHandler}>
+              {fileUrls.length > 0 ? (
+                <img
+                  className="cursor-pointer w-[88px] h-[88px] rounded-full object-cover"
+                  src={fileUrls}
+                />
+              ) : (
+                <img
+                  className="cursor-pointer w-[88px] h-[88px] rounded-full object-cover"
+                  src={user.profileImg}
+                />
+              )}
+            </button>
+          </div>
 
-        <div
-          className="cursor-pointer text-center font-medium text-CC"
-          onClick={onSubmitHandler}
-        >
-          프로필 사진 바꾸기
-        </div>
-
+          <div className="cursor-pointer text-center font-medium text-CC">
+            <button onClick={onSubmitHandler}>프로필 사진 바꾸기</button>
+          </div>
+        </label>
         <div className="ml-5 mb-2 mt-3">닉네임</div>
         <div className="px-6">
           <input

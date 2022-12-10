@@ -30,6 +30,7 @@ const PostUpdate = () => {
     } else {
       formData.append("multipartFiles", null);
     }
+
     // 폼 데이터에 글작성 데이터 넣기
     const objects = {
       title: updateInput.title,
@@ -48,15 +49,9 @@ const PostUpdate = () => {
       formData: formData,
     };
 
-    // if (files.length < 1) {
-    //   return window.alert("사진을 입력하세요");
-    // }
-    // UT 결과로 삭제
     //Api 날리기
     if (window.confirm("수정하시겠습니까?")) {
       dispatch(__editPost(obj));
-      // navigate(`/PostDetail/${params.id}`);
-      // window.location.reload(`/PostDetail/${params.id}`);
     }
   };
   return (
@@ -66,7 +61,7 @@ const PostUpdate = () => {
           <img
             className="h-6 w-6 absolute left-3"
             onClick={() => {
-              navigate(`/PostDetail/${post.postId}`);
+              navigate(-1);
             }}
             src={backArrow}
           />

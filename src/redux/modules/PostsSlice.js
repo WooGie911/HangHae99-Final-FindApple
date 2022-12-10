@@ -85,6 +85,7 @@ const PostsSlice = createSlice({
   reducers: {
     swichFooterState(state, action) {
       state.footerState = action.payload;
+      state.getState = { ...state.getState, pageNumberObj: 0 };
     },
 
     searchPost(state, action) {
@@ -135,10 +136,12 @@ const PostsSlice = createSlice({
     [__addPost.fulfilled]: (state, action) => {
       state.isLoading = false;
       state.posts.push(action.payload);
+      alert("게시물이 작성되었습니다.");
       window.location.replace("/postread/all/postId");
     },
     [__addPost.rejected]: (state, action) => {
       state.isLoading = false;
+      alert("게시물 작성에 실패했습니다.");
       state.error = action.payload;
     },
 
@@ -151,11 +154,13 @@ const PostsSlice = createSlice({
       state.posts = state.posts.filter(
         (post) => post.postId !== action.payload
       );
+      alert("게시물이 삭제되었습니다.");
       window.location.replace("/postread/all/postId");
     },
 
     [__deletePost.rejected]: (state, action) => {
       state.isLoading = false;
+      alert("게시물 삭제에 실패했습니다.");
       state.error = action.payload;
     },
     //__editPost
@@ -173,10 +178,12 @@ const PostsSlice = createSlice({
       });
       state.posts[paramId] = action.payload.data;
       state.posts = [...state.posts];
+      alert("게시물이 수정되었습니다.");
       window.location.replace(`/PostDetail/${action.payload.id}`);
     },
     [__editPost.rejected]: (state, action) => {
       state.isLoading = false;
+      alert("게시물 수정에 실패했습니다.");
       state.error = action.payload;
     },
   },

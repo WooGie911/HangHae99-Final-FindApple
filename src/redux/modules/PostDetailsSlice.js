@@ -100,10 +100,12 @@ const PostDetailSlice = createSlice({
       state.isLoading = false;
       state.post.comments.push(action.payload);
       state.post.updateComment = !state.post.updateComment;
+      alert("댓글이 등록 되었습니다.");
       state.post = { ...state.post };
     },
     [__addPostComment.rejected]: (state, action) => {
       state.isLoading = false;
+      alert("댓글 등록에 실패하였습니다.");
       state.error = action.payload;
     },
     //__deletePostComment
@@ -117,9 +119,11 @@ const PostDetailSlice = createSlice({
       );
       state.post.updateComment = !state.post.updateComment;
       state.post = { ...state.post };
+      alert("댓글이 삭제되었습니다.");
     },
     [__deletePostComment.rejected]: (state, action) => {
       state.isLoading = false;
+      alert("댓글 삭제에 실패하였습니다.");
       state.error = action.payload;
     },
 

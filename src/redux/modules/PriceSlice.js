@@ -1,6 +1,5 @@
 import { createAsyncThunk, createSlice } from "@reduxjs/toolkit";
 import axios from "axios";
-import Apis from "../../shared/Apis";
 
 const accessToken = localStorage.getItem("Access_Token");
 const refreshToken = localStorage.getItem("Refresh_Token");
@@ -38,9 +37,6 @@ export const __checkPrice = createAsyncThunk(
   "price/__checkPrice",
   async (payload, thunkAPI) => {
     try {
-      // const response = await Apis.checkPriceAX(payload);
-      // return thunkAPI.fulfillWithValue(response.data);
-
       const data = await axios.post(
         `${process.env.REACT_APP_SERVER}/api/price/${payload.category}`,
         payload.Data,
@@ -127,10 +123,12 @@ const PriceSlice = createSlice({
       state.isLoading = false;
       state.DetailPrice = action.payload.data;
       state.priceLists = action.payload.priceLists;
+      alert("가격이 책정 되었습니다.");
     },
     [__checkPrice.rejected]: (state, action) => {
       state.isLoading = false;
       state.error = action.payload;
+      alert("가격이 책정에 실패하였습니다.");
     },
   },
 });
