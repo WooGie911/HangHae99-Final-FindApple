@@ -99,10 +99,12 @@ const ObjectionDetailsSlice = createSlice({
       state.post.comments.push(action.payload);
       state.post.updateComment = !state.post.updateComment;
       state.post = { ...state.post };
+      alert("댓글이 등록 되었습니다.");
     },
     [__addObjectionComment.rejected]: (state, action) => {
       state.isLoading = false;
       state.error = action.payload;
+      alert("댓글 등록에 실패하였습니다.");
     },
     //__deleteObjectionComment
     [__deleteObjectionComment.pending]: (state) => {
@@ -113,9 +115,11 @@ const ObjectionDetailsSlice = createSlice({
       state.post.comments = state.post.comments.filter(
         (comment) => comment.commentId !== action.payload
       );
+      alert("댓글이 삭제되었습니다.");
     },
     [__deleteObjectionComment.rejected]: (state, action) => {
       state.isLoading = false;
+      alert("댓글 삭제에 실패하였습니다.");
       state.error = action.payload;
     },
 
