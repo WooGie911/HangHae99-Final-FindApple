@@ -111,7 +111,7 @@ export const Apis = {
 
   UserProfileAX: () => token.get(`/api/myinfo`),
 
-  UserProfileEditAX: (payload) => token.patch(`/api/myinfo/edit`, payload),
+  UserProfileEditAX: (payload) => file.patch(`/api/myinfo/edit`, payload),
 
   // 채팅
   CreateRoomAX: (payload) => token.post(`/api/chat/room`, payload),
