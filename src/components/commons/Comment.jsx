@@ -51,12 +51,29 @@ const Comment = ({ comment, __deleteComment, post }) => {
           </div>
           <div>
             {editTg.isEdit === true && (
-              <button
-                className="text-red h-5 w-7  relative right-0 bottom-0 text-xs"
-                onClick={() => onDeleteButton(comment.commentId)}
+              <div
+                className="fixed top-0 left-0 bg-black bg-opacity-50 z-20 w-full h-full flex justify-center items-center font-semibold"
+                onClick={editToggleHandler}
               >
-                삭제
-              </button>
+                <div className=" absolute bottom-0  z-30 w-full max-w-[375px] flex-col">
+                  <div className="w-full flex py-2 px-[18px]">
+                    <div
+                      className="hover:bg-CC cursor-pointer bg-white w-full h-14 rounded-lg flex justify-center items-center"
+                      onClick={() => onDeleteButton(comment.commentId)}
+                    >
+                      삭제
+                    </div>
+                  </div>
+                  <div className="w-full flex py-2 px-[18px]">
+                    <div
+                      className="hover:bg-black hover:text-white cursor-pointer bg-white w-full h-14 mb-2 rounded-lg flex justify-center items-center"
+                      onClick={editToggleHandler}
+                    >
+                      닫기
+                    </div>
+                  </div>
+                </div>
+              </div>
             )}
           </div>
         </div>
