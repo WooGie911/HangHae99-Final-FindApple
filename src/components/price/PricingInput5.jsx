@@ -632,11 +632,11 @@ const PricingInput5 = ({ priceListState, setPriceListState, stepState }) => {
         )}
       </div>
 
-      <div className="flex justify-center items-center fixed w-full bottom-14 p-5 ">
+      <div className="flex justify-center items-center fixed w-full max-w-[375px] bottom-14 p-5 ">
         <PricingStep stepState={stepState} />
       </div>
       <button
-        className=" fixed bottom-0 w-full h-14 text-white bg-CC"
+        className=" fixed bottom-0 w-full max-w-[375px] h-14 text-white bg-CC"
         onClick={onSubmitHandler}
       >
         가격책정
