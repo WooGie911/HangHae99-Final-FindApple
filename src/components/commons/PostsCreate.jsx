@@ -6,6 +6,8 @@ import { useNavigate } from "react-router-dom";
 import backArrow from "../../assets/backArrow.svg";
 import blueCamera from "../../assets/blueCamera.png";
 import Pricingfinal2 from "../price/Pricingfinal2";
+import Xbutton from "../../assets/Xbutton.png";
+import whiteXbutton from "../../assets/whiteXbutton.png";
 
 const PostsCreate = (props) => {
   const dispatch = useDispatch();
@@ -19,7 +21,13 @@ const PostsCreate = (props) => {
   });
 
   //이미지 업로드 훅
-  const [files, fileUrls, uploadHandle] = useImageUpload(3, true, 4, 1000);
+  const [files, fileUrls, uploadHandle, deleteHandler] = useImageUpload(
+    3,
+    true,
+    4,
+    1000,
+    false
+  );
   const imgRef = useRef();
 
   //상세보기 토글
@@ -143,11 +151,19 @@ const PostsCreate = (props) => {
             /*previews*/
             fileUrls.map((val, i) => {
               return (
-                <img
-                  className="h-16 w-16 object-cover ml-3 rounded-md"
-                  src={val}
-                  key={i}
-                />
+                <div className=" px-1 flex relative" key={i}>
+                  <img
+                    className="h-16 w-16 object-cover rounded-md"
+                    src={val.url}
+                  />
+                  <div>
+                    <img
+                      className="bg-CC rounded-full absolute top-[-9px] right-[-9px] mr-1 w-5"
+                      src={Xbutton}
+                      onClick={() => deleteHandler(val)}
+                    />
+                  </div>
+                </div>
               );
             })
           }

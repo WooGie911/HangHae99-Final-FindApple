@@ -7,7 +7,8 @@ const useImageUpload = (
   limitCount = 0,
   isComp = false,
   imgMaxSize = 1,
-  imgMaxWidthHeight = 1920
+  imgMaxWidthHeight = 1920,
+  reset = true
 ) => {
   //이미지 파일 & 프리뷰URL useState
   const [imgFiles, setImgFiles] = useState([]);
@@ -19,9 +20,10 @@ const useImageUpload = (
     const files = e.currentTarget.files;
 
     //state 초기화
-    setImgFiles([]);
-    setImgUrls([]);
-
+    if (reset === true) {
+      setImgFiles([]);
+      setImgUrls([]);
+    }
     //파일 갯수 제한
     if (limitCount > 0) {
       if ([...files].length > limitCount) {
@@ -62,7 +64,10 @@ const useImageUpload = (
             const reader = new FileReader(); // FileReader API로 이미지 인식
             reader.onload = () => {
               // 사진 올리고 나서 처리하는 event
-              setImgUrls((imgUrls) => [...imgUrls, reader.result]);
+              setImgUrls((imgUrls) => [
+                ...imgUrls,
+                { name: res.name, url: reader.result },
+              ]);
             };
             reader.readAsDataURL(res); //reader에게 file을 먼저 읽힘
           })
@@ -74,13 +79,20 @@ const useImageUpload = (
         const reader = new FileReader(); // FileReader API로 이미지 인식
         reader.onload = () => {
           // 사진 올리고 나서 처리하는 event
-          setImgUrls((imgUrls) => [...imgUrls, reader.result]);
+          setImgUrls((imgUrls) => [...imgUrls, { url: reader.result }]);
         };
         reader.readAsDataURL(file); //reader에게 file을 먼저 읽힘
       }
     });
   };
-  return [imgFiles, imgUrls, handler];
+
+  //이미지 삭제
+  const deleteHandler = (e) => {
+    setImgFiles(imgFiles.filter((item) => item.name !== e.name));
+    setImgUrls(imgUrls.filter((url) => url.url !== e.url));
+  };
+
+  return [imgFiles, imgUrls, handler, deleteHandler];
 };
 
 export default useImageUpload;
