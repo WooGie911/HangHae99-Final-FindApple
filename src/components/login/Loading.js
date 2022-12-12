@@ -1,5 +1,4 @@
 import React from "react";
-import styled from "styled-components";
 import Spinner from "../elements/Spinner.gif";
 
 //이 컴포넌트의 목적은 로딩 시, 사용자에게 빈 화면을 보여주지 않고
@@ -7,28 +6,13 @@ import Spinner from "../elements/Spinner.gif";
 
 export default () => {
   return (
-    <Background>
-      <LoadingText>잠시만 기다려 주세요.</LoadingText>
-      <img src={Spinner} alt="로딩중" width="5%" />
-    </Background>
+    <div className=" absolute w-full h-full top-0 left-0 flex justify-center items-center">
+      <div className="flex-col">
+        <div className="flex justify-center">잠시만 기다려 주세요.</div>
+        <div className="flex justify-center">
+          <img className="w-1/5" src={Spinner} alt="로딩중" />
+        </div>
+      </div>
+    </div>
   );
 };
-
-export const Background = styled.div`
-  position: absolute;
-  width: 100vw;
-  height: 100vh;
-  top: 0;
-  left: 0;
-  background: #ffffffb7;
-  z-index: 999;
-  display: flex;
-  flex-direction: column;
-  align-items: center;
-  justify-content: center;
-`;
-
-export const LoadingText = styled.div`
-  font: 1rem "Noto Sans KR";
-  text-align: center;
-`;

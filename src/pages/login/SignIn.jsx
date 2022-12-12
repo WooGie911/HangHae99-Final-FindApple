@@ -2,7 +2,6 @@ import React from "react";
 import { useDispatch } from "react-redux";
 import { __Signin } from "../../redux/modules/LoginSlice";
 import { useNavigate } from "react-router-dom";
-import styled from "styled-components";
 import useInput from "../../hook/useInput";
 import KakaoLogin from "../../components/login/KakaoLogin";
 import Layout from "../../components/commons/Layout";
@@ -89,46 +88,3 @@ const SignIn = () => {
 };
 
 export default SignIn;
-
-const StInputBox = styled.input`
-  width: 296px;
-  height: 38px;
-  margin-top: 10px;
-  background-color: #6488f5;
-
-  border: none;
-  border-radius: 5px;
-  box-shadow: 0px 6px 16px 0px rgba(0, 0, 0, 0.1);
-  &:focus,
-  &:active {
-    outline: none;
-  }
-  ::placeholder {
-    color: white;
-  }
-  padding-left: 10px;
-`;
-
-const StButton = styled.button`
-  width: 296px;
-  height: 38px;
-  margin-top: 30px;
-  border: none;
-  border-radius: 5px;
-  color: white;
-  font-family: "Noto Sans";
-  font-style: normal;
-  line-height: 18px;
-  font-weight: 600;
-  font-size: 13px;
-  background-color: ${({ username, password }) =>
-    username !== "" && password !== "" ? "white" : "#ececec"};
-  cursor: ${({ username, password }) =>
-    username !== "" && password !== "" ? "pointer" : null};
-`;
-
-const A = styled.a`
-  color: #2288ee;
-  margin-left: 10px;
-  cursor: pointer;
-`;
