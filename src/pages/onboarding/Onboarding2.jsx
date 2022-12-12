@@ -1,10 +1,10 @@
 import React from "react";
 import { useNavigate } from "react-router-dom";
 import Layout2 from "../../components/commons/Layout2";
-import IMG2 from "../../assets/IMG2.jpg";
-import STEP2 from "../../assets/2-3.svg";
-import nextArrow from "../../assets/nextArrow.png";
-import backArrow from "../../assets/backArrow.svg";
+import IMG2 from "../../assets/pictures/onboarding/IMG2.jpg";
+import STEP2 from "../../assets/pictures/onboarding/2-3.svg";
+import nextArrow from "../../assets/pictures/nextArrow.png";
+import backArrow from "../../assets/pictures/backArrow.svg";
 
 const Onboarding2 = () => {
   const navigate = useNavigate();

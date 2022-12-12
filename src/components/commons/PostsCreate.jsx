@@ -3,11 +3,10 @@ import useInput from "../../hook/useInput";
 import useImageUpload from "../../hook/useImageUpload";
 import { useDispatch, useSelector } from "react-redux";
 import { useNavigate } from "react-router-dom";
-import backArrow from "../../assets/backArrow.svg";
+import backArrow from "../../assets/pictures/backArrow.svg";
 import blueCamera from "../../assets/blueCamera.png";
 import Pricingfinal2 from "../price/Pricingfinal2";
-import Xbutton from "../../assets/Xbutton.png";
-import whiteXbutton from "../../assets/whiteXbutton.png";
+import whiteXbutton from "../../assets/pictures/whiteXbutton.png";
 
 const PostsCreate = (props) => {
   const dispatch = useDispatch();
@@ -158,8 +157,8 @@ const PostsCreate = (props) => {
                   />
                   <div>
                     <img
-                      className="bg-CC rounded-full absolute top-[-9px] right-[-9px] mr-1 w-5"
-                      src={Xbutton}
+                      className="bg-CC rounded-full absolute top-[-9px] right-[-9px] mr-1 w-4 cursor-pointer"
+                      src={whiteXbutton}
                       onClick={() => deleteHandler(val)}
                     />
                   </div>

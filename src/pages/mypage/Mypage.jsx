@@ -4,7 +4,7 @@ import { useNavigate, useParams } from "react-router-dom";
 import { useSelector } from "react-redux";
 import { __UserProfile } from "../../redux/modules/LoginSlice";
 import bookmark from "../../assets/bookmark.svg";
-import blackIssue from "../../assets/blackIssue.svg";
+import blackIssue from "../../assets/pictures/footer/blackIssue.svg";
 import myPosts from "../../assets/myPosts.svg";
 import LogoutButton from "../../components/login/LogoutButton";
 import Layout from "../../components/commons/Layout";

@@ -107,8 +107,8 @@ const PostList = ({
                   <div className="flex justify-between mt-4 text-DD  text-xs font-normal">
                     <div>{post?.createdAt}</div>
                     <div className="flex items-center">
-                      <img className="h-3" src={bookmark8D} />
-                      <div>{post?.likeCnt}</div>
+                      <img className="h-3 mr-1" src={bookmark8D} />
+                      <div className="mx-[1px]">{post?.likeCnt}</div>
                     </div>
                   </div>
                 </div>

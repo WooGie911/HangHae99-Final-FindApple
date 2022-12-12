@@ -5,7 +5,7 @@ import { useSelector } from "react-redux";
 import { __editObjection } from "../../redux/modules/ObjectionsSlice";
 import Layout2 from "../../components/commons/Layout2";
 import { useNavigate, useParams } from "react-router-dom";
-import backArrow from "../../assets/backArrow.svg";
+import backArrow from "../../assets/pictures/backArrow.svg";
 
 const ObjectionUpdate = () => {
   const dispatch = useDispatch();

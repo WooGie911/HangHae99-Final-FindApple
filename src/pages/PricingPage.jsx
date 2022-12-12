@@ -8,8 +8,8 @@ import PricingInput3 from "../components/price/PricingInput3";
 import PricingInput4 from "../components/price/PricingInput4";
 import PricingInput5 from "../components/price/PricingInput5";
 import { swichStepState, __getPriceInfo } from "../redux/modules/PriceSlice";
-import backArrow from "../assets/backArrow.svg";
 import Xbutton from "../assets/Xbutton.png";
+import backArrow from "../assets/pictures/backArrow.svg";
 
 const PricingPage = () => {
   const navigate = useNavigate();

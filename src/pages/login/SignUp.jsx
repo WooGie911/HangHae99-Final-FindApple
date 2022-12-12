@@ -5,7 +5,7 @@ import { useNavigate } from "react-router-dom";
 import useInput from "../../hook/useInput";
 import Layout from "../../components/commons/Layout";
 import LOGO from "../../assets/LOGO.png";
-import backArrow from "../../assets/backArrow.svg";
+import backArrow from "../../assets/pictures/backArrow.svg";
 
 const SignUp = () => {
   const dispatch = useDispatch();
@@ -58,7 +58,7 @@ const SignUp = () => {
   const emailCheckHandler = () => {
     dispatch(__emailCheck({ email: input.email }));
     setEmailCheckTF(true);
-    alert("인증번호가 발송되었습니다. 이메일을 확인해주세요.")
+    alert("인증번호가 발송되었습니다. 이메일을 확인해주세요.");
   };
 
   const onClickHandler = () => {
@@ -102,20 +102,20 @@ const SignUp = () => {
           <div className="flex justify-center ">
             {emailCheckTF && (
               <div>
-              <input
-                className=" outline-none bg-white placeholder-C4 w-[296px] h-9 rounded-md p-2 mb-1 mr-[10px] border-C4 border-[1px]"
-                type="text"
-                name="emailCheck"
-                value={input.emailCheck}
-                onChange={changeInputHandler}
-                placeholder="인증번호를 입력해주세요"
-                maxLength="8"
-              />
-              {input.emailCheck !== emailCheckData && (
-              <p className=" text-red text-xs mb-2">
-                인증번호를 알맞게 입력해주세요
-              </p>
-            )}
+                <input
+                  className=" outline-none bg-white placeholder-C4 w-[296px] h-9 rounded-md p-2 mb-1 mr-[10px] border-C4 border-[1px]"
+                  type="text"
+                  name="emailCheck"
+                  value={input.emailCheck}
+                  onChange={changeInputHandler}
+                  placeholder="인증번호를 입력해주세요"
+                  maxLength="8"
+                />
+                {input.emailCheck !== emailCheckData && (
+                  <p className=" text-red text-xs mb-2">
+                    인증번호를 알맞게 입력해주세요
+                  </p>
+                )}
               </div>
             )}
           </div>

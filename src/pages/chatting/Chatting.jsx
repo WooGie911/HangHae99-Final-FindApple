@@ -8,9 +8,9 @@ import {
   chatList,
 } from "../../redux/modules/ChattingSlice";
 import { v4 as uuidv4 } from "uuid";
-import backArrow from "../../assets/backArrow.svg";
 import { ReactComponent as Send } from "../../assets/send.svg";
 import Layout2 from "../../components/commons/Layout2";
+import backArrow from "../../assets/pictures/backArrow.svg";
 
 function Chatting() {
   const sock = new SockJS(`${process.env.REACT_APP_SERVER}/api/ws/chat`);
