@@ -44,7 +44,7 @@ const SellerPage = () => {
               <div className="flex-col absolute top-16 z-20 ">
                 <div className="flex justify-center items-center">
                   <img
-                    className="w-16 h-16 rounded-full shadow-2xl "
+                    className="w-16 h-16 rounded-full shadow-2xl object-cover"
                     src={sellerInfoDto?.profileImg}
                   />
                 </div>
@@ -72,7 +72,7 @@ const SellerPage = () => {
                             key={mypost?.postId}
                           >
                             <img
-                              className="h-40 w-40"
+                              className="h-40 w-40 object-cover"
                               src={mypost?.images[0]?.imgUrl}
                             />
 

@@ -27,7 +27,7 @@ const Comment = ({ comment, __deleteComment, post }) => {
         <div className="flex items-center">
           <div className=" p-3">
             <img
-              className="w-[38px] h-[38px] rounded-full"
+              className="w-[38px] h-[38px] rounded-full object-cover"
               src={comment.avatarUrl}
             />
           </div>
