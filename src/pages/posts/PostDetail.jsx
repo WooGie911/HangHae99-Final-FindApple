@@ -130,8 +130,8 @@ const PostDetail = () => {
   return (
     <>
       <Layout2>
-        <div className=" relative flex-col h-[410px] w-[375px] z-10">
-          <div className="bg-transparent flex relative h-[60px] items-center justify-center z-20">
+        <div className=" relative flex-col h-[410px] w-[375px]">
+          <div className="bg-white flex relative h-[60px] items-center justify-center z-10">
             <img
               className="cursor-pointer h-[35px] w-[35px] absolute  left-3"
               src={blueBackArrow}
@@ -151,21 +151,38 @@ const PostDetail = () => {
             )}
           </div>
           {editTg.isEdit === true && (
-            <div className=" absolute right-3 top-13 z-30 w-10">
-              <button
-                className="cursor-pointer bg-white w-12 h-10 rounded-lg"
-                onClick={() => navigate(`/postupdate/${params.id}`)}
-              >
-                수정
-              </button>
-              <button
-                className="cursor-pointer bg-white w-12 h-10 rounded-lg mt-[1px]"
-                onClick={() => {
-                  onDeleteHandler(params.id);
-                }}
-              >
-                삭제
-              </button>
+            <div
+              className="fixed top-0 left-0 bg-black bg-opacity-50 z-20 w-full h-full flex justify-center items-center font-semibold"
+              onClick={editToggleHandler}
+            >
+              <div className=" absolute bottom-0  z-30 w-full max-w-[375px] flex-col">
+                <div className="w-full flex px-[18px]">
+                  <div
+                    className="hover:bg-CC cursor-pointer bg-white w-full h-14 rounded-lg flex justify-center items-center"
+                    onClick={() => navigate(`/postupdate/${params.id}`)}
+                  >
+                    수정
+                  </div>
+                </div>
+                <div className="w-full flex py-2 px-[18px]">
+                  <div
+                    className="hover:bg-CC cursor-pointer bg-white w-full h-14 rounded-lg flex justify-center items-center"
+                    onClick={() => {
+                      onDeleteHandler(params.id);
+                    }}
+                  >
+                    삭제
+                  </div>
+                </div>
+                <div className="w-full flex bg-CC py-2 px-[18px]">
+                  <div
+                    className="hover:bg-black hover:text-white cursor-pointer bg-white w-full h-14 my-1 rounded-lg flex justify-center items-center"
+                    onClick={editToggleHandler}
+                  >
+                    닫기
+                  </div>
+                </div>
+              </div>
             </div>
           )}
 
@@ -208,7 +225,7 @@ const PostDetail = () => {
             </div>
           )}
         </div>
-        <div className="bg-white relative flex-col grow rounded-t-3xl z-30 mt-5">
+        <div className="bg-white relative flex-col grow rounded-t-3xl z-10 mt-5">
           <div className=" h-[77px] rounded-t-3xl border-b-[1px] border-D9 flex p-[18px] justify-between">
             <div
               className="items-center flex cursor-pointer"
@@ -253,7 +270,7 @@ const PostDetail = () => {
           </div>
         </div>
 
-        <div className="absolute bottom-0 bg-CC flex w-full h-[75px] justify-between z-30 items-center px-[18px] text-white">
+        <div className="absolute bottom-0 bg-CC flex w-full h-[75px] justify-between z-10 items-center px-[18px] text-white">
           <div className=" absolute bottom-24">
             <div className=" font-medium text-xs text-DD">{post.createdAt}</div>
           </div>
