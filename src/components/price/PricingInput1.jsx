@@ -1,6 +1,5 @@
 import React from "react";
 import { useDispatch } from "react-redux";
-import styled from "styled-components";
 import { __checkPrice, __getPriceInfo } from "../../redux/modules/PriceSlice";
 import PricingStep from "./PricingStep";
 

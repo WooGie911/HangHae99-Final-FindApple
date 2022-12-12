@@ -1,9 +1,7 @@
 import React from "react";
 import { useDispatch, useSelector } from "react-redux";
 import { useNavigate } from "react-router-dom";
-import styled from "styled-components";
 import { __checkPrice, __getPriceInfo } from "../../redux/modules/PriceSlice";
-
 import PricingStep from "./PricingStep";
 
 const PricingInput5 = ({ priceListState, setPriceListState, stepState }) => {
@@ -627,19 +625,18 @@ const PricingInput5 = ({ priceListState, setPriceListState, stepState }) => {
                   onChange={onChangeHandler}
                   defaultValue={priceListState.careDate}
                 />
+                <div className="h-28" />
               </div>
             </div>
           </div>
         )}
       </div>
 
-      <DDid />
-
-      <div className="flex justify-center items-center absolute w-full bottom-14 p-5 ">
+      <div className="flex justify-center items-center fixed w-full bottom-14 p-5 ">
         <PricingStep stepState={stepState} />
       </div>
       <button
-        className=" absolute bottom-0 w-full h-14 text-white bg-CC"
+        className=" fixed bottom-0 w-full h-14 text-white bg-CC"
         onClick={onSubmitHandler}
       >
         가격책정
@@ -649,7 +646,3 @@ const PricingInput5 = ({ priceListState, setPriceListState, stepState }) => {
 };
 
 export default PricingInput5;
-
-const DDid = styled.div`
-  height: 100px;
-`;

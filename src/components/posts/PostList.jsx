@@ -69,7 +69,6 @@ const PostList = ({
 
   // `getItems` 가 바뀔 때 마다 함수 실행
   useEffect(() => {
-    console.log(posts);
     getItems();
   }, [getItems]);
 
