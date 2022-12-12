@@ -18,6 +18,8 @@ const Comment = ({ comment, __deleteComment, post }) => {
       isEdit: !editTg.isEdit,
     };
     setEidtTg(newEdit);
+    console.log("post?.memberId", post?.memberId);
+    console.log("comment.commentId", comment.memberId);
   };
   return (
     <div className=" flex items-center h-20 px-[18px] ">
@@ -58,7 +60,7 @@ const Comment = ({ comment, __deleteComment, post }) => {
                 <div className=" absolute bottom-0  z-30 w-full max-w-[375px] flex-col">
                   <div className="w-full flex py-2 px-[18px]">
                     <div
-                      className="hover:bg-CC cursor-pointer bg-white w-full h-14 rounded-lg flex justify-center items-center"
+                      className="hover:bg-CC hover:text-white cursor-pointer bg-white w-full h-14 rounded-lg flex justify-center items-center"
                       onClick={() => onDeleteButton(comment.commentId)}
                     >
                       삭제

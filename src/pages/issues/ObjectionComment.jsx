@@ -37,7 +37,7 @@ const ObjectionComment = () => {
       </div>
       <div className="h-9"></div>
       <ObjectionCommentList
-        List={post}
+        post={post}
         deleteComment={__deleteObjectionComment}
         commentList={post.comments}
         __getDetail={__getObjectionDetail}
