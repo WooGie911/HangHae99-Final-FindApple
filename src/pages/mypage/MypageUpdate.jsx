@@ -5,8 +5,8 @@ import { useDispatch } from "react-redux";
 import { useSelector } from "react-redux";
 import { __UserProfileEdit } from "../../redux/modules/LoginSlice";
 import Layout from "../../components/commons/Layout";
-import backArrow from "../../assets/backArrow.svg";
 import useImageUpload from "../../hook/useImageUpload";
+import backArrow from "../../assets/pictures/backArrow.svg";
 
 const MypageUpdate = () => {
   const navigate = useNavigate();

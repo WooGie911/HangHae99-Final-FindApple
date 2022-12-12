@@ -8,8 +8,8 @@ import {
   __deleteObjectionComment,
   __getObjectionDetail,
 } from "../../redux/modules/ObjectionDetailsSlice";
-import backArrow from "../../assets/backArrow.svg";
 import Layout2 from "../../components/commons/Layout2";
+import backArrow from "../../assets/pictures/backArrow.svg";
 
 const ObjectionComment = () => {
   const navigate = useNavigate();
@@ -37,7 +37,7 @@ const ObjectionComment = () => {
       </div>
       <div className="h-9"></div>
       <ObjectionCommentList
-        List={post}
+        post={post}
         deleteComment={__deleteObjectionComment}
         commentList={post.comments}
         __getDetail={__getObjectionDetail}

@@ -3,7 +3,7 @@ import { useLocation, useNavigate } from "react-router-dom";
 import { __getPriceInfo, __checkPrice } from "../../redux/modules/PriceSlice";
 import PricingDetailList from "./PricingDetailList";
 import Layout from "../commons/Layout";
-import backArrow from "../../assets/backArrow.svg";
+import backArrow from "../../assets/pictures/backArrow.svg";
 
 const PricingText = () => {
   const state = useLocation();

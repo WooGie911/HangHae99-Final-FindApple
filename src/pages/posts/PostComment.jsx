@@ -9,7 +9,7 @@ import {
   __getPostDetail,
 } from "../../redux/modules/PostDetailsSlice";
 import Layout2 from "../../components/commons/Layout2";
-import backArrow from "../../assets/backArrow.svg";
+import backArrow from "../../assets/pictures/backArrow.svg";
 
 const PostComment = () => {
   const navigate = useNavigate();

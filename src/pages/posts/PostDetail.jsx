@@ -130,7 +130,7 @@ const PostDetail = () => {
   return (
     <>
       <Layout2>
-        <div className=" relative flex-col h-[410px] w-[375px]">
+        <div className=" relative flex-col h-[410px] w-[375px] ">
           <div className="bg-white flex relative h-[60px] items-center justify-center z-10">
             <img
               className="cursor-pointer h-[35px] w-[35px] absolute  left-3"

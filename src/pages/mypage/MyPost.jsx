@@ -4,8 +4,8 @@ import { __getMyPost } from "../../redux/modules/MypageSlice";
 import { useNavigate } from "react-router-dom";
 import Layout from "../../components/commons/Layout";
 import Footer from "../../components/commons/Footer";
-import backArrow from "../../assets/backArrow.svg";
 import bookmark8D from "../../assets/bookmark8D.png";
+import backArrow from "../../assets/pictures/backArrow.svg";
 
 const MyPost = () => {
   const { posts } = useSelector((state) => state.mypage);

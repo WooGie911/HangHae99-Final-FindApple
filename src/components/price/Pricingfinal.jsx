@@ -3,8 +3,8 @@ import Layout from "../commons/Layout";
 import { useNavigate } from "react-router-dom";
 import { __getPriceInfo, __checkPrice } from "../../redux/modules/PriceSlice";
 import PricingList from "./PricingList";
-import backArrow from "../../assets/backArrow.svg";
 import Xbutton from "../../assets/Xbutton.png";
+import backArrow from "../../assets/pictures/backArrow.svg";
 
 const Pricingfinal = () => {
   const navigate = useNavigate();

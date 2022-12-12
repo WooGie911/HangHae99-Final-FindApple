@@ -9,6 +9,7 @@ const ObjectionCommentList = (props) => {
           return (
             <div key={index}>
               <Comment
+                post={props.post}
                 comment={comment}
                 __deleteComment={props.deleteComment}
               />
