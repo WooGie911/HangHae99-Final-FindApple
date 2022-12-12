@@ -5,7 +5,7 @@ import { __getPriceInfo, __checkPrice } from "../../redux/modules/PriceSlice";
 import PricingList from "./PricingList";
 import Xbutton from "../../assets/Xbutton.png";
 
-const Pricingfinal2 = () => {
+const Pricingfinal2 = ({ setDetailToggle }) => {
   const navigate = useNavigate();
 
   return (
@@ -17,7 +17,7 @@ const Pricingfinal2 = () => {
         <img
           className="  absolute right-4 cursor-pointer"
           src={Xbutton}
-          onClick={() => navigate(-1)}
+          onClick={() => setDetailToggle(false)}
         />
       </div>
 

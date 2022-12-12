@@ -1,16 +1,19 @@
-import React, { useRef } from "react";
+import React, { useRef, useState } from "react";
 import useInput from "../../hook/useInput";
 import useImageUpload from "../../hook/useImageUpload";
 import { useDispatch, useSelector } from "react-redux";
 import { useNavigate } from "react-router-dom";
 import backArrow from "../../assets/backArrow.svg";
 import blueCamera from "../../assets/blueCamera.png";
+import Pricingfinal2 from "../price/Pricingfinal2";
+import Xbutton from "../../assets/Xbutton.png";
+import whiteXbutton from "../../assets/whiteXbutton.png";
 
 const PostsCreate = (props) => {
   const dispatch = useDispatch();
   const navigate = useNavigate();
   const { DetailPrice } = useSelector((state) => state.price);
-
+  const [detailToggle, setDetailToggle] = useState(false);
   const [write, setWrite, writeHandle] = useInput({
     title: "",
     userPrice: "",
@@ -18,8 +21,19 @@ const PostsCreate = (props) => {
   });
 
   //이미지 업로드 훅
-  const [files, fileUrls, uploadHandle] = useImageUpload(3, true, 4, 1000);
+  const [files, fileUrls, uploadHandle, deleteHandler] = useImageUpload(
+    3,
+    true,
+    4,
+    1000,
+    false
+  );
   const imgRef = useRef();
+
+  //상세보기 토글
+  const editToggleHandler = () => {
+    setDetailToggle(!detailToggle);
+  };
 
   //submit
   const writeSubmit = () => {
@@ -137,11 +151,19 @@ const PostsCreate = (props) => {
             /*previews*/
             fileUrls.map((val, i) => {
               return (
-                <img
-                  className="h-16 w-16 object-cover ml-3 rounded-md"
-                  src={val}
-                  key={i}
-                />
+                <div className=" px-1 flex relative" key={i}>
+                  <img
+                    className="h-16 w-16 object-cover rounded-md"
+                    src={val.url}
+                  />
+                  <div>
+                    <img
+                      className="bg-CC rounded-full absolute top-[-9px] right-[-9px] mr-1 w-5"
+                      src={Xbutton}
+                      onClick={() => deleteHandler(val)}
+                    />
+                  </div>
+                </div>
               );
             })
           }
@@ -184,9 +206,7 @@ const PostsCreate = (props) => {
 
           <div
             className="bg-C4 w-24 h-9 rounded-md text-xs text-white  flex justify-center items-center"
-            onClick={() => {
-              navigate("/pricingfinal2");
-            }}
+            onClick={editToggleHandler}
           >
             <div> 상품 상세 정보</div>
           </div>
@@ -261,6 +281,15 @@ const PostsCreate = (props) => {
           </div>
         )}
       </div>
+
+      {detailToggle && (
+        <div
+          className="fixed top-0 left-0 bg-black bg-opacity-50 z-20 w-full h-full "
+          onClick={editToggleHandler}
+        >
+          <Pricingfinal2 setDetailToggle={setDetailToggle} />
+        </div>
+      )}
     </>
   );
 };

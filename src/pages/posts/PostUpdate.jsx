@@ -9,12 +9,20 @@ import Layout2 from "../../components/commons/Layout2";
 import backArrow from "../../assets/backArrow.svg";
 import blueCamera from "../../assets/blueCamera.png";
 import bottomArrow from "../../assets/bottomArrow.svg";
+import Xbutton from "../../assets/Xbutton.png";
+import whiteXbutton from "../../assets/whiteXbutton.png";
 
 const PostUpdate = () => {
   const dispatch = useDispatch();
   const navigate = useNavigate();
   const params = useParams();
-  const [files, fileUrls, uploadHandle] = useImageUpload(3, true, 1, 1000);
+  const [files, fileUrls, uploadHandle, deleteHandler] = useImageUpload(
+    3,
+    true,
+    4,
+    1000,
+    false
+  );
   const imgRef = useRef();
   const { post } = useSelector((state) => state.details);
   const [updateInput, setUpdateInput, updateInputHandle] = useInput(post);
@@ -91,11 +99,19 @@ const PostUpdate = () => {
                 /*previews*/
                 fileUrls.map((val, i) => {
                   return (
-                    <img
-                      className="h-16 w-16 object-cover ml-3 rounded-md"
-                      src={val}
-                      key={i}
-                    />
+                    <div className=" px-1 flex relative" key={i}>
+                      <img
+                        className="h-16 w-16 object-cover rounded-md"
+                        src={val.url}
+                      />
+                      <div>
+                        <img
+                          className="bg-CC rounded-full absolute top-[-9px] right-[-9px] mr-1 w-5"
+                          src={Xbutton}
+                          onClick={() => deleteHandler(val)}
+                        />
+                      </div>
+                    </div>
                   );
                 })
               }
