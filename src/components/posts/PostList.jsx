@@ -69,13 +69,19 @@ const PostList = ({
 
   // `getItems` 가 바뀔 때 마다 함수 실행
   useEffect(() => {
+    console.log(posts);
     getItems();
   }, [getItems]);
 
   return (
     <div>
       <div>
-        {posts?.length > 0 &&
+        {posts?.length === 0 ? (
+          <div className=" flex justify-center items-center h-[80vh]  text-OO">
+            검색 결과가 없습니다
+          </div>
+        ) : (
+          posts?.length > 0 &&
           posts?.map((post, index) => {
             return (
               <div
@@ -109,7 +115,8 @@ const PostList = ({
                 </div>
               </div>
             );
-          })}
+          })
+        )}
       </div>
       <div ref={ref}></div>
       <div className="h-16" />

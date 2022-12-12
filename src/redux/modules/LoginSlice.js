@@ -55,13 +55,6 @@ export const __Signin = createAsyncThunk(
       if (error.response.status >= 400 && error.response.status < 500) {
         alert("아이디 및 비밀번호를 확인해주세요 ");
       }
-      if (error.response.status === 400) {
-        //비밀번호 오류
-        alert(`${error.response.data.field}가 ${error.response.data.message}`);
-      } else if (error.response.data.message !== undefined) {
-        //아이디 오류
-        alert(`${error.response.data.field} ${error.response.data.message}`);
-      }
       return thunkAPI.rejectWithValue(error);
     }
   }
@@ -72,13 +65,8 @@ export const __SignUp = createAsyncThunk(
   async (payload, thunkAPI) => {
     try {
       const response = await Apis.SignUpAX(payload);
-      // alert(`${response.data.msg}`);
       return thunkAPI.fulfillWithValue(response.data);
     } catch (error) {
-      if (error.response.data.message !== undefined) {
-        return window.alert(error.response.data.message);
-      }
-      window.alert(error.response.data[0].message);
       return thunkAPI.rejectWithValue(error);
     }
   }
@@ -142,6 +130,9 @@ const LoginSlice = createSlice({
     [__SignUp.rejected]: (state, action) => {
       state.isLoading = false;
       state.error = action.payload;
+      if (action.payload.response.data.message !== undefined) {
+        return window.alert(action.payload.response.data.message);
+      }
     },
     //__kakaoLogin
     [__kakaoLogin.pending]: (state) => {
