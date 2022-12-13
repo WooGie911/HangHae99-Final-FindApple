@@ -27,7 +27,6 @@ const PricingInput2 = ({ priceListState, setPriceListState, stepState }) => {
       API: `${priceListState.category}/${priceListState.years}`,
       priceLists: priceListState,
     };
-
     dispatch(__getPriceInfo(getInfo));
   };
 

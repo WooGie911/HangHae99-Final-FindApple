@@ -22,7 +22,7 @@ const PostsCreate = (props) => {
   //이미지 업로드 훅
   const [files, fileUrls, uploadHandle, deleteHandler] = useImageUpload(
     3,
-    true,
+    false,
     4,
     1000,
     false

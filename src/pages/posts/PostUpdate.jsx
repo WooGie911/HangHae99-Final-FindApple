@@ -17,7 +17,7 @@ const PostUpdate = () => {
   const params = useParams();
   const [files, fileUrls, uploadHandle, deleteHandler] = useImageUpload(
     3,
-    true,
+    false,
     4,
     1000,
     false
