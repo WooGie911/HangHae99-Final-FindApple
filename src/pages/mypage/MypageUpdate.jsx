@@ -18,7 +18,7 @@ const MypageUpdate = () => {
   });
 
   //이미지 업로드 훅
-  const [files, fileUrls, uploadHandle] = useImageUpload(3, false, 4, 1000);
+  const [files, fileUrls, uploadHandle] = useImageUpload(3, true, 4, 1000);
   const imgRef = useRef();
 
   //get 해오기
