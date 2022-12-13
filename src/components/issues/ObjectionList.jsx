@@ -1,4 +1,4 @@
-import { useDispatch, useSelector } from "react-redux";
+import { useDispatch } from "react-redux";
 import {
   __getPost,
   __getAddObjection,
@@ -7,7 +7,7 @@ import { useNavigate, useParams } from "react-router-dom";
 import React, { useState, useEffect, useCallback } from "react";
 import { __getPostTime } from "../../redux/modules/PostsSlice";
 import { useInView } from "react-intersection-observer";
-import bookmark8D from "../../assets/bookmark8D.png";
+import bookmark8D from "../../assets/pictures/bookmark8D.png";
 
 const ObjectionList = ({
   posts,

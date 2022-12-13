@@ -4,8 +4,8 @@ import { useNavigate } from "react-router-dom";
 import { __getMyObjection } from "../../redux/modules/MypageSlice";
 import Layout from "../../components/commons/Layout";
 import Footer from "../../components/commons/Footer";
-import bookmark8D from "../../assets/bookmark8D.png";
 import backArrow from "../../assets/pictures/backArrow.svg";
+import bookmark8D from "../../assets/pictures/bookmark8D.png";
 
 const MyObjection = () => {
   const { objections } = useSelector((state) => state.mypage);

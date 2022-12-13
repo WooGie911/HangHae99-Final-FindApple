@@ -4,13 +4,6 @@ import "slick-carousel/slick/slick.css";
 import "slick-carousel/slick/slick-theme.css";
 import { useNavigate, useParams } from "react-router-dom";
 import { useDispatch, useSelector } from "react-redux";
-import { swichFooterState, __deletePost } from "../../redux/modules/PostsSlice";
-import whiteChatting from "../../assets/whiteChatting.png";
-import blueBackArrow from "../../assets/blueBackArrow.svg";
-import blueHome from "../../assets/blueHome.svg";
-import blueToggle from "../../assets/blueToggle.svg";
-import whiteComment from "../../assets/whiteComment.png";
-import rightTriangle from "../../assets/rightTriangle.svg";
 import { __CreateRoom } from "../../redux/modules/ChattingSlice";
 import Layout2 from "../../components/commons/Layout2";
 import {
@@ -18,8 +11,15 @@ import {
   __CartOutPost,
   __getPostDetail,
 } from "../../redux/modules/PostDetailsSlice";
-import bookmarkD from "../../assets/bookmarkD.png";
-import bookmarkDwhite from "../../assets/bookmarkDwhite.png";
+import { swichFooterState, __deletePost } from "../../redux/modules/PostsSlice";
+import whiteChatting from "../../assets/pictures/detail/whiteChatting.png";
+import blueBackArrow from "../../assets/pictures/detail/blueBackArrow.svg";
+import blueHome from "../../assets/pictures/detail/blueHome.svg";
+import blueToggle from "../../assets/pictures/detail/blueToggle.svg";
+import whiteComment from "../../assets/pictures/detail/whiteComment.png";
+import rightTriangle from "../../assets/pictures/detail/rightTriangle.svg";
+import bookmarkD from "../../assets/pictures/detail/bookmarkD.png";
+import bookmarkDwhite from "../../assets/pictures/detail/bookmarkDwhite.png";
 
 const PostDetail = () => {
   const navigate = useNavigate();

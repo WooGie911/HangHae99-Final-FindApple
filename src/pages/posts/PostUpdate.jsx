@@ -7,9 +7,8 @@ import { useSelector } from "react-redux";
 import { useNavigate, useParams } from "react-router-dom";
 import Layout2 from "../../components/commons/Layout2";
 import backArrow from "../../assets/pictures/backArrow.svg";
-import blueCamera from "../../assets/blueCamera.png";
-import bottomArrow from "../../assets/bottomArrow.svg";
-import Xbutton from "../../assets/Xbutton.png";
+import blueCamera from "../../assets/pictures/blueCamera.png";
+import bottomArrow from "../../assets/pictures/bottomArrow.svg";
 import whiteXbutton from "../../assets/pictures/whiteXbutton.png";
 
 const PostUpdate = () => {

@@ -8,7 +8,7 @@ import {
   chatList,
 } from "../../redux/modules/ChattingSlice";
 import { v4 as uuidv4 } from "uuid";
-import { ReactComponent as Send } from "../../assets/send.svg";
+import { ReactComponent as Send } from "../../assets/pictures/send.svg";
 import Layout2 from "../../components/commons/Layout2";
 import backArrow from "../../assets/pictures/backArrow.svg";
 

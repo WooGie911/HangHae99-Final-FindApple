@@ -2,7 +2,7 @@ import React from "react";
 import { useDispatch } from "react-redux";
 import { useParams } from "react-router-dom";
 import useInput from "../../hook/useInput";
-import commentSubmit from "../../assets/commentSubmit.png";
+import commentSubmit from "../../assets/pictures/commentSubmit.png";
 
 const ObjectionCommentCreate = (props) => {
   const dispatch = useDispatch();
@@ -39,7 +39,7 @@ const ObjectionCommentCreate = (props) => {
           type="text"
           onChange={onChangeInputHandler}
           onKeyPress={keyPress}
-          maxLength='24'
+          maxLength="24"
         />
         <img
           className=" absolute right-9 bottom-[22px]"
