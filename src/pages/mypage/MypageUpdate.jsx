@@ -90,7 +90,7 @@ const MypageUpdate = () => {
               {fileUrls.length > 0 ? (
                 <img
                   className="cursor-pointer w-[88px] h-[88px] rounded-full object-cover"
-                  src={fileUrls}
+                  src={fileUrls[0].url}
                 />
               ) : (
                 <img
