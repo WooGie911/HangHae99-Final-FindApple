@@ -1,6 +1,6 @@
 import React, { useState } from "react";
 import { useNavigate, useParams } from "react-router-dom";
-import swapoutline from "../../assets/swapoutline.png";
+import swapoutline from "../../assets/pictures/swapoutline.svg";
 
 const SortBar = (props) => {
   const navigate = useNavigate();

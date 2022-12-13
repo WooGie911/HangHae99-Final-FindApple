@@ -8,7 +8,7 @@ import PricingInput3 from "../components/price/PricingInput3";
 import PricingInput4 from "../components/price/PricingInput4";
 import PricingInput5 from "../components/price/PricingInput5";
 import { swichStepState, __getPriceInfo } from "../redux/modules/PriceSlice";
-import Xbutton from "../assets/Xbutton.png";
+import Xbutton from "../assets/pictures/Xbutton.png";
 import backArrow from "../assets/pictures/backArrow.svg";
 
 const PricingPage = () => {

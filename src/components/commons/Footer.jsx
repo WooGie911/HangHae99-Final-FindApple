@@ -1,5 +1,9 @@
 import React, { useEffect, useState } from "react";
 import { useNavigate } from "react-router-dom";
+import { useDispatch, useSelector } from "react-redux";
+import ChatList from "../../pages/chatting/element/ChatList";
+import { swichFooterState } from "../../redux/modules/PostsSlice";
+import { swichStepState } from "../../redux/modules/PriceSlice";
 import blackHome from "../../assets/pictures/footer/blackHome.svg";
 import blueHome from "../../assets/pictures/footer/blueHome.svg";
 import blackSearch from "../../assets/pictures/footer/blackSearch.svg";
@@ -9,11 +13,7 @@ import blackIssue from "../../assets/pictures/footer/blackIssue.svg";
 import blueIssue from "../../assets/pictures/footer/blueIssue.svg";
 import blackMy from "../../assets/pictures/footer/blackMy.svg";
 import blueMy from "../../assets/pictures/footer/blueMy.svg";
-import { useDispatch, useSelector } from "react-redux";
-import { swichStepState } from "../../redux/modules/PriceSlice";
-import whiteChat from "../../assets/whiteChat.png";
-import ChatList from "../../pages/chatting/element/ChatList";
-import { swichFooterState } from "../../redux/modules/PostsSlice";
+import whiteChat from "../../assets/pictures/footer/whiteChat.png";
 
 const Footer = () => {
   const navigate = useNavigate();

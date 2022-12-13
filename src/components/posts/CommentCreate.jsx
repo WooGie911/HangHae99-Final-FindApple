@@ -2,7 +2,7 @@ import React from "react";
 import { useDispatch } from "react-redux";
 import { useParams } from "react-router-dom";
 import useInput from "../../hook/useInput";
-import commentSubmit from "../../assets/commentSubmit.png";
+import commentSubmit from "../../assets/pictures/commentSubmit.png";
 
 const CommentCreate = (props) => {
   const dispatch = useDispatch();

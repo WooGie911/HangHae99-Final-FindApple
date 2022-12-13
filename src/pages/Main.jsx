@@ -1,16 +1,15 @@
-import React, { useEffect } from "react";
+import React, { useEffect, useState } from "react";
 import { useDispatch } from "react-redux";
 import { useNavigate } from "react-router-dom";
 import { __UserProfile } from "../redux/modules/LoginSlice";
-import LOGO from "../assets/LOGO.png";
-import bookmark from "../assets/bookmark.svg";
+import LOGO from "../assets/pictures/LOGO.png";
+import bookmark from "../assets/pictures/bookmark.svg";
 import { swichFooterState } from "../redux/modules/PostsSlice";
 import Layout from "../components/commons/Layout";
 import Slide from "../components/main/Slide";
 import MainHeader from "../components/main/MainHeader";
 import MainList from "../components/main/MainList";
 import Footer from "../components/commons/Footer";
-import { useState } from "react";
 
 const Main = () => {
   const dispatch = useDispatch();

@@ -3,9 +3,9 @@ import useInput from "../../hook/useInput";
 import useImageUpload from "../../hook/useImageUpload";
 import { useDispatch, useSelector } from "react-redux";
 import { useNavigate } from "react-router-dom";
-import backArrow from "../../assets/pictures/backArrow.svg";
-import blueCamera from "../../assets/blueCamera.png";
 import Pricingfinal2 from "../price/Pricingfinal2";
+import backArrow from "../../assets/pictures/backArrow.svg";
+import blueCamera from "../../assets/pictures/blueCamera.png";
 import whiteXbutton from "../../assets/pictures/whiteXbutton.png";
 
 const PostsCreate = (props) => {

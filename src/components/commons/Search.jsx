@@ -1,7 +1,7 @@
 import React from "react";
 import useInput from "../../hook/useInput";
 import { useDispatch } from "react-redux";
-import SearchIcon from "../../assets/SearchIcon.svg";
+import SearchIcon from "../../assets/pictures/SearchIcon.svg";
 
 const Search = (props) => {
   const initialState = { searchContent: "" };

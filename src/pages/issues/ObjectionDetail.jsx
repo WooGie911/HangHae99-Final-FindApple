@@ -11,17 +11,15 @@ import {
   __getObjectionDetail,
 } from "../../redux/modules/ObjectionDetailsSlice";
 import Layout2 from "../../components/commons/Layout2";
-import blueHeart from "../../assets/blueHeart.svg";
-import emptyHeart from "../../assets/emptyHeart.svg";
-import blueBackArrow from "../../assets/blueBackArrow.svg";
-import blueHome from "../../assets/blueHome.svg";
-import blueToggle from "../../assets/blueToggle.svg";
-import whiteComment from "../../assets/whiteComment.png";
-import rightTriangle from "../../assets/rightTriangle.svg";
 import { __CreateRoom } from "../../redux/modules/ChattingSlice";
 import { swichFooterState } from "../../redux/modules/PostsSlice";
-import bookmarkD from "../../assets/bookmarkD.png";
-import bookmarkDwhite from "../../assets/bookmarkDwhite.png";
+import blueBackArrow from "../../assets/pictures/detail/blueBackArrow.svg";
+import blueHome from "../../assets/pictures/detail/blueHome.svg";
+import blueToggle from "../../assets/pictures/detail/blueToggle.svg";
+import whiteComment from "../../assets/pictures/detail/whiteComment.png";
+import rightTriangle from "../../assets/pictures/detail/rightTriangle.svg";
+import bookmarkD from "../../assets/pictures/detail/bookmarkD.png";
+import bookmarkDwhite from "../../assets/pictures/detail/bookmarkDwhite.png";
 
 const ObjectionDetail = () => {
   const navigate = useNavigate();

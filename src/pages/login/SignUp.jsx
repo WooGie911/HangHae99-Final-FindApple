@@ -4,7 +4,7 @@ import { __SignUp, __emailCheck } from "../../redux/modules/LoginSlice";
 import { useNavigate } from "react-router-dom";
 import useInput from "../../hook/useInput";
 import Layout from "../../components/commons/Layout";
-import LOGO from "../../assets/LOGO.png";
+import LOGO from "../../assets/pictures/LOGO.png";
 import backArrow from "../../assets/pictures/backArrow.svg";
 
 const SignUp = () => {

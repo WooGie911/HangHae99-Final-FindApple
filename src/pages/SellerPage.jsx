@@ -5,9 +5,8 @@ import { useDispatch } from "react-redux";
 import { useParams, useNavigate } from "react-router-dom";
 import Layout from "../components/commons/Layout";
 import Footer from "../components/commons/Footer";
-import whiteX from "../assets/whiteX.png";
-import smallHeart from "../assets/smallHeart.png";
-import bookmark8D from "../assets/bookmark8D.png";
+import whiteX from "../assets/pictures/whiteX.png";
+import bookmark8D from "../assets/pictures/bookmark8D.png";
 
 const SellerPage = () => {
   const { myPostList, sellerInfoDto } = useSelector(

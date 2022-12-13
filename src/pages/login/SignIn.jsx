@@ -5,7 +5,7 @@ import { useNavigate } from "react-router-dom";
 import useInput from "../../hook/useInput";
 import KakaoLogin from "../../components/login/KakaoLogin";
 import Layout from "../../components/commons/Layout";
-import LOGOWHITE from "../../assets/LOGOWHITE.svg";
+import LOGOWHITE from "../../assets/pictures/LOGOWHITE.svg";
 
 const SignIn = () => {
   const initialState = {

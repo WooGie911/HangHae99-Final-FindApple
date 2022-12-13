@@ -4,7 +4,7 @@ import { useNavigate, useParams } from "react-router-dom";
 import React, { useState, useEffect, useCallback } from "react";
 import { __getPostTime } from "../../redux/modules/PostsSlice";
 import { useInView } from "react-intersection-observer";
-import bookmark8D from "../../assets/bookmark8D.png";
+import bookmark8D from "../../assets/pictures/bookmark8D.png";
 
 const PostList = ({
   posts,

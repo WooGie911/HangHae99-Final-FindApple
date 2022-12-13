@@ -1,6 +1,6 @@
 import React, { useEffect } from "react";
 import Layout from "../../components/commons/Layout";
-import LOGOWHITE from "../../assets/LOGOWHITE.png";
+import LOGOWHITE from "../../assets/pictures/LOGOWHITE.png";
 import { useNavigate } from "react-router-dom";
 const Splash = () => {
   const navigate = useNavigate();

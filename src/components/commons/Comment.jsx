@@ -1,6 +1,6 @@
 import React, { useState } from "react";
 import { useDispatch } from "react-redux";
-import toggle from "../../assets/toggle.svg";
+import toggle from "../../assets/pictures/toggle.svg";
 
 const Comment = ({ comment, __deleteComment, post }) => {
   const dispatch = useDispatch();

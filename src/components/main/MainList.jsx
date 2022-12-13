@@ -3,7 +3,7 @@ import { useDispatch, useSelector } from "react-redux";
 import { useNavigate, useParams } from "react-router-dom";
 import { __getPostDetail } from "../../redux/modules/PostDetailsSlice";
 import { searchPost, __getPost } from "../../redux/modules/PostsSlice";
-import bookmark8D from "../../assets/bookmark8D.png";
+import bookmark8D from "../../assets/pictures/bookmark8D.png";
 
 const MainList = ({ headerBarState, setHeaderBarState }) => {
   const navigate = useNavigate();

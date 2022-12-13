@@ -1,6 +1,6 @@
 import React from "react";
 import { KAKAO_AUTH_URL } from "../elements/LoginKey";
-import KAKAOIMG from "../../assets/kakaologin.svg";
+import KAKAOIMG from "../../assets/pictures/kakaologin.svg";
 
 const KakaoLogin = () => {
   const handleLogin = () => {
