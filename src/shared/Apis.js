@@ -29,7 +29,7 @@ const file = axios.create({
 });
 
 export const Apis = {
-  getSellerInfoAX: (payload) => token.get(`api/myinfo/seller/${payload}`),
+  getSellerInfoAX: (payload) => token.get(`api/mypage/seller/${payload}`),
 
   getPriceInfoAX: (payload) => token.get(`/api/price/${payload}`),
 
@@ -94,11 +94,11 @@ export const Apis = {
 
   CartOutObjectionAX: (payload) => token.delete(`/api/issues/likes/${payload}`),
 
-  getMyPostAX: () => token.get(`/api/myinfo/post`),
+  getMyPostAX: () => token.get(`/api/mypage/posts`),
 
-  getMyObjectionAX: () => token.get(`/api/myinfo/issue`),
+  getMyObjectionAX: () => token.get(`/api/mypage/issues`),
 
-  getMyLikeAX: () => token.get(`/api/myinfo/likes`),
+  getMyLikeAX: () => token.get(`/api/mypage/likes`),
 
   emailCheckAX: (payload) =>
     token.post(`/api/member/signup/mail-confirm`, payload),
@@ -109,9 +109,9 @@ export const Apis = {
 
   SignUpAX: (payload) => noToken.post(`/api/member/signup`, payload),
 
-  UserProfileAX: () => token.get(`/api/myinfo`),
+  UserProfileAX: () => token.get(`/api/mypage`),
 
-  UserProfileEditAX: (payload) => file.patch(`/api/myinfo/edit`, payload),
+  UserProfileEditAX: (payload) => file.patch(`/api/mypage`, payload),
 
   // 채팅
   CreateRoomAX: (payload) => token.post(`/api/chat/room`, payload),
