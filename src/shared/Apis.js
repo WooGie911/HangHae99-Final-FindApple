@@ -114,10 +114,10 @@ export const Apis = {
   UserProfileEditAX: (payload) => file.patch(`/api/mypage`, payload),
 
   // 채팅
-  CreateRoomAX: (payload) => token.post(`/api/chat/room`, payload),
+  CreateRoomAX: (payload) => token.post(`/api/chat/createRoom`, payload),
 
   GetRoomListAX: () => token.get(`/api/chat/roomList`),
 
-  GetInitialChatListAX: (payload) => token.post(`/api/chat/roomInfo`, payload),
+  GetInitialChatListAX: (payload) => token.post(`/api/chat/joinRoom`, payload),
 };
 export default Apis;
