@@ -3,7 +3,7 @@ import { useDispatch } from "react-redux";
 import { useNavigate } from "react-router-dom";
 import { __UserProfile } from "../redux/modules/LoginSlice";
 import LOGO from "../assets/pictures/LOGO.png";
-import bookmark from "../assets/pictures/bookmark.svg";
+import bookmark from "../assets/pictures/mypage/bookmark.svg";
 import { swichFooterState } from "../redux/modules/PostsSlice";
 import Layout from "../components/commons/Layout";
 import Slide from "../components/main/Slide";
