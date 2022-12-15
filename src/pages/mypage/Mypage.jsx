@@ -3,13 +3,13 @@ import { useDispatch } from "react-redux";
 import { useNavigate, useParams } from "react-router-dom";
 import { useSelector } from "react-redux";
 import { __UserProfile } from "../../redux/modules/LoginSlice";
-import bookmark from "../../assets/pictures/bookmark.svg";
+import bookmark from "../../assets/pictures/mypage/bookmark.svg";
 import blackIssue from "../../assets/pictures/footer/blackIssue.svg";
-import myPosts from "../../assets/pictures/myPosts.svg";
+import myPosts from "../../assets/pictures/mypage/myPosts.svg";
 import LogoutButton from "../../components/login/LogoutButton";
 import Layout from "../../components/commons/Layout";
 import Footer from "../../components/commons/Footer";
-import mypageArrow from "../../assets/pictures/mypageArrow.svg";
+import mypageArrow from "../../assets/pictures/mypage/mypageArrow.svg";
 
 const Mypage = () => {
   const navigate = useNavigate();
