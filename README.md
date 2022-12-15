@@ -46,7 +46,7 @@
 
 ### 🛠 기술 아키텍쳐
 
-<a href="https://ibb.co/frJ6MRc"><img src="https://i.ibb.co/Yfgn29r/finalarc.png" alt="finalarc" border="0"></a></details>
+![finalarc](https://user-images.githubusercontent.com/70747064/207752611-102a2d71-5c1d-4745-a0d1-ba3a5f20cbf4.png)
 
 ## ⚙️ 개발환경 및 라이브러리
 <div><img src="https://img.shields.io/badge/HTML5-E34F26?style=flat-square&logo=HTML5&logoColor=white"/> <img src="https://img.shields.io/badge/CSS3-1572B6?style=flat-square&logo=CSS3&logoColor=white"/><img src="https://img.shields.io/badge/TailwindCSS-06B6D4?style=flat-square&logo=Tailwind-CSS&logoColor=white"/> <img src="https://img.shields.io/badge/JavaScript-F7DF1E?style=flat-square&logo=JavaScript&logoColor=black"/> <img src="https://img.shields.io/badge/React-61DAFB?style=flat-square&logo=React&logoColor=white"/> <img src="https://img.shields.io/badge/Redux-764ABC?style=flat-square&logo=Redux&logoColor=white"/><img src="https://img.shields.io/badge/Vercel-000000?style=flat-square&logo=Vercel&logoColor=white"/<img src="https://img.shields.io/badge/Git-F05032?style=for-the-badge&logo=Git&logoColor=white">
