@@ -18,8 +18,6 @@ const Comment = ({ comment, __deleteComment, post }) => {
       isEdit: !editTg.isEdit,
     };
     setEidtTg(newEdit);
-    console.log("post?.memberId", post?.memberId);
-    console.log("comment.commentId", comment.memberId);
   };
   return (
     <div className=" flex items-center h-20 px-[18px] ">
