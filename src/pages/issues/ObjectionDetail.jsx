@@ -135,7 +135,7 @@ const ObjectionDetail = () => {
                 <div className="w-full flex px-[18px]">
                   <div
                     className="hover:bg-CC cursor-pointer bg-white w-full h-14 rounded-lg flex justify-center items-center"
-                    onClick={() => navigate(`/postupdate/${params.id}`)}
+                    onClick={() => navigate(`/objectionupdate/${params.id}`)}
                   >
                     수정
                   </div>
